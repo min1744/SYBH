@@ -69,6 +69,30 @@ $(function() {
     });
 	
 	
+    $('#spon_btn').click(function(event){  //버튼을 클릭 했을시 popupOpen 함수 출력 
+        popupOpen();	//Popup Open 함수
+    });
+  
+	function popupOpen(){
+		var url= "./donation/donationPopup";    //팝업창 페이지 URL
+		var winWidth = 573;
+	    var winHeight = 800;
+	    var popupX = 700;
+	    console.log(popupX);
+	  	//&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+		 var popupY= 80;
+	 	 //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+popupX+", top="+popupY;    //팝업창 옵션(optoin)
+
+	  	//window.open('', '', 'status=no, height=300, width=200, left='+ popupX + ', top='+ popupY);
+	    
+	    window.open(url,"",popupOption, 'left='+ popupX + ', top='+ popupY);
+	    
+	}
+	
+	
+
+	
 }); 
 
 </script>
@@ -148,7 +172,7 @@ $(function() {
 		<p class="spon_num">1,000,000<span>원</span></p>
 		<p class="spon_title">후원자</p>
 		<p class="spon_num">140<span>명</span></p>
-		<button>후원하기</button>
+		<button id="spon_btn">후원하기</button>
 		
 	</div>
 	
@@ -270,12 +294,40 @@ $(function() {
 		</div>
 		
 		<div class="news_box">
-			<img alt="" src="">
-			<p>카테고리</p>
-			<p>글제목 글제목 글제목</p>
-			<p>2019-07-23</p>
+			<img alt="" src="./resources/images/news_1.jpg">
+			<div class="news_contents">
+				<p class="category">운동</p>
+				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
+				<p class="news_date">2019-07-23</p>
+			</div>
 		</div>
 		
+		<div class="news_box">
+			<img alt="" src="./resources/images/news_2.jpg">
+			<div class="news_contents">
+				<p class="category">운동</p>
+				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
+				<p class="news_date">2019-07-23</p>
+			</div>
+		</div>
+		
+		<div class="news_box">
+			<img alt="" src="./resources/images/news_3.jpg">
+			<div class="news_contents">
+				<p class="category">운동</p>
+				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
+				<p class="news_date">2019-07-23</p>
+			</div>
+		</div>
+		
+		<div class="news_box last_box">
+			<img alt="" src="./resources/images/news_4.jpg">
+			<div class="news_contents">
+				<p class="category">운동</p>
+				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
+				<p class="news_date">2019-07-23</p>
+			</div>
+		</div>
 		
 	</div>
 </div>
