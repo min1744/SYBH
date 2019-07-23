@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+
+
+#board {
+	
+	width: 1920px;
+	overflow: hidden;
+}
+
+
+
+#board_title {
+	
+	width: 100%;
+	overflow: hidden;
+	padding: 50px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+#board_title p {
+	
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 900;
+	letter-spacing: -1px;
+	
+}
+
+#board_box {
+	
+	width: 70%;
+	overflow: hidden;
+	position: relative;
+	margin: 80px auto;
+
+}
+
+
+
+#board_nav, #boardSelect {
+	
+	float: left;
+	overflow: hidden;
+}
+
+
+#board_nav {
+	
+	width: 15%;
+	margin-right: 5%;
+}
+
+
+#board_nav li {
+	
+	padding: 5%;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	letter-spacing: -1px;
+	
+}
+
+
+#board_nav li a {
+	
+	display: block;
+	padding: 5px 0;
+	color: #808080;
+	font-weight: 700;
+	
+}
+
+#board_nav li a:hover {
+	
+	color: #6bb5db;
+}
+
+
+#board_nav li:first-child {
+	
+	padding: 30px 0;
+	background-color: #153F91;
+	color: white;
+	font-size: 1.2em;
+	font-weight: 900;
+	border-bottom: none;
+}
+
+
+#boardSelect {
+	
+	width: 80%;
+	text-align: center;
+}
+
+.title {
+	
+	text-align: left;
+	padding-left: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 1.1em;
+	font-weight: 700;
+	letter-spacing: -1px;
+	border-top: 3px solid #153F91;
+	border-bottom: 1px solid #eee;
+}
+
+
+#sub {
+	
+	overflow: hidden;
+	border-bottom: 1px solid #ddd;
+}
+
+
+#sub li {
+	
+	float: left;
+	padding-left: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+
+#contents {
+	
+	overflow: hidden;
+	padding: 40px 0;
+	border-bottom: 1px solid #153F91;
+}
+
+
+
+
+#btn_box {
+	
+	width: 100%;
+	overflow: hidden;
+	margin: 30px 0;
+}
+
+
+
+#list {
+	
+	padding: 1% 2.2%;
+	border: none;
+	border-radius: 5px;
+	background-color: #153F91;
+	color: white;
+	font-weight: 700;
+	box-sizing: border-box;
+	text-align: center;
+	float: left;
+}
+
+
+
+#update {
+	
+	padding: 1% 2.2%;
+	border: none;
+	border-radius: 5px;
+	background-color: #153F91;
+	color: white;
+	font-weight: 700;
+	box-sizing: border-box;
+	text-align: center;
+	float: right;
+	margin-right: 5px;
+}
+
+
+#delete {
+	
+	padding: 1% 2.2%;
+	border: none;
+	border-radius: 5px;
+	background-color: #c60000;
+	color: white;
+	font-weight: 700;
+	box-sizing: border-box;
+	text-align: center;
+	float: right;
+}
+

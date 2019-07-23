@@ -1,0 +1,232 @@
+@charset "UTF-8";
+
+
+
+#board {
+	
+	width: 1920px;
+	overflow: hidden;
+}
+
+
+
+#board_title {
+	
+	width: 100%;
+	overflow: hidden;
+	padding: 50px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+#board_title p {
+	
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 900;
+	letter-spacing: -1px;
+	
+}
+
+#board_box {
+	
+	width: 70%;
+	overflow: hidden;
+	position: relative;
+	margin: 0 auto;
+	margin-bottom: 80px;
+
+}
+
+
+#write_btn {
+	
+	width: 70%;
+	text-align: right;
+	overflow: hidden;
+	margin: 10px auto;
+	padding: 2%;
+}
+
+
+
+#write {
+	
+	padding: 1% 2.2%;
+	border: none;
+	border-radius: 5px;
+	background-color: #153F91;
+	color: white;
+	font-weight: 700;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+
+#board_nav, #boardList {
+	
+	float: left;
+	overflow: hidden;
+}
+
+
+#board_nav {
+	
+	width: 15%;
+	margin-right: 2%;
+}
+
+
+#board_nav li {
+	
+	padding: 5%;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	letter-spacing: -1px;
+	
+}
+
+
+#board_nav li a {
+	
+	display: block;
+	padding: 5px 0;
+	color: #808080;
+	font-weight: 700;
+	
+}
+
+#board_nav li a:hover {
+	
+	color: #6bb5db;
+}
+
+
+#board_nav li:first-child {
+	
+	padding: 30px 0;
+	background-color: #153F91;
+	color: white;
+	font-size: 1.2em;
+	font-weight: 900;
+	border-bottom: none;
+}
+
+
+#boardList {
+	
+	width: 83%;
+	text-align: center;
+}
+
+
+
+#boardList table{
+	
+	width: 100%;
+	border-top: 3px solid #153F91;
+	border-bottom: 1px solid #153F91;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+#boardList table a {
+	
+	color: black;
+}
+
+#boardList table a:hover {
+	
+	color: #808080;
+}
+
+#boardList th {
+	
+	padding: 25px 0;
+	
+}
+
+#boardList td {
+	
+	padding: 20px 0;
+	border-top: 1px solid #ddd;
+}
+
+#boardList tr:last-child {
+	
+	border-bottom: none;
+}
+
+
+
+#paging {
+	
+	width: 60%;
+	margin: 40px auto;
+	overflow: hidden;
+	text-align: center;
+}
+
+
+#paging li {
+	
+	float: left;
+	overflow: hidden;
+	box-sizing: border-box;
+	margin-right: 5px;
+	padding: 5px 13px;
+	border: 1px solid #ddd;
+}
+
+
+#paging li:last-child {
+	
+	margin-right: 0;
+}
+
+
+#paging li a {
+	
+	display: block;
+	overflow: hidden;
+	color: #153F91;
+	font-size: 1em;
+	
+}
+
+
+
+
+#search_box {
+	
+	margin: 0 auto;
+}
+
+
+#select {
+	
+	padding: 7px 10px;
+	font-size: 1em;
+	letter-spacing: -1px;
+	margin-right: 5px;
+	vertical-align: middle;
+	
+}
+
+
+#search {
+	
+	width: 250px;
+	padding: 9px 10px;
+	margin-right: 5px;
+}
+
+
+#btn {
+	
+	padding: 12px 25px;
+	background-color: #153F91;
+	border-radius: 5px;
+	border: none;
+	color: white;
+	cursor: pointer;
+}

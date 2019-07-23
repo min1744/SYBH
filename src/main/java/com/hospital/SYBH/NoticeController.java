@@ -1,0 +1,112 @@
+package com.hospital.SYBH;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.hospital.board.BoardVO;
+import com.hospital.notice.NoticeService;
+import com.hospital.notice.NoticeVO;
+import com.hospital.util.PageMaker;
+
+
+//interceptor, 페이징처리(한페이지처리수), 상단고정 
+
+
+@Controller
+@RequestMapping(value = "/notice/")
+public class NoticeController {
+	@Inject 
+	private NoticeService noticeService;
+	
+	@ModelAttribute("board")
+	public String board() {
+		return "notice";
+	} 
+	
+	
+	//delete
+	@RequestMapping(value = "noticeDelete", method = RequestMethod.GET)
+	public String setDelete(int num, HttpSession session)throws Exception{
+		int result = noticeService.setDelete(num, session);
+		return "redirect:./noticeList";
+		
+	}
+	
+	
+	
+	//write
+	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
+	public String setWrite(NoticeVO noticeVO)throws Exception{
+		
+		return "board/boardWrite";
+		
+	}
+	
+	
+	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
+	public ModelAndView setWrite(BoardVO boardVO, HttpSession session)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = noticeService.setWrite(boardVO,session);
+		if(result>0) {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./noticeList");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+		
+	}
+	
+	
+	
+	//update
+	@RequestMapping(value = "noticeUpdate", method = RequestMethod.GET)
+	public ModelAndView setUpdate(int num)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = noticeService.getSelect(num);
+		NoticeVO noticeVO =  (NoticeVO)boardVO;
+		mv.addObject("vo", noticeVO);
+		mv.setViewName("board/boardUpdate");
+		return mv;
+	}
+	
+	
+	
+	
+	//select
+	@RequestMapping(value = "noticeSelect", method = RequestMethod.GET)
+	public ModelAndView getSelect()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		//BoardVO boardVO = noticeService.getSelect(num);
+		//mv.addObject("vo", boardVO);
+		mv.setViewName("board/boardSelect");
+		return mv;
+	}
+	
+	
+	
+	//list
+	@RequestMapping(value = "noticeList", method = RequestMethod.GET)
+	public ModelAndView getList(PageMaker pageMaker)throws Exception{
+		
+		//List<BoardVO> lists= noticeService.getList(pageMaker);
+		ModelAndView mv = new ModelAndView();
+		//mv.addObject("list", lists);
+		//mv.addObject("pager", pageMaker);
+		mv.setViewName("board/boardList");
+//		if(lists.size()>0) {
+//			throw new NullPointerException();
+//		}
+		return mv;
+	}
+}

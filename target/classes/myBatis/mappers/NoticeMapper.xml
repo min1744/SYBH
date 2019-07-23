@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="NoticeMapper">
+  
+  <insert id="setWrite" parameterType="BoardVO">
+  	insert into  notice values(#{num},#{title},#{writer},#{contents},sysdate,0)
+  </insert>
+  
+  <update id="setUpdate" parameterType="NoticeVO">
+  	update insert set title={title}, contents={contents} where num={num}  
+  </update>
+  
+  <delete id="setDelete" parameterType="Integer">
+  	delete notice where num=#{num}
+  </delete>
+  
+  <select id="getList" parameterType="PageMaker" resultType="NoticeVO">
+  	select * from 
+  	(select rownum r, n.* from
+  	(select * from notice
+  	where
+  	
+  <choose>
+  		<when test="kind = 1">
+  			where title
+  		</when>
+  		<when test="kind = 2">
+  			where writer
+  		</when>
+  		<otherwise>
+  			where contents
+  		</otherwise>
+   </choose>
+  	 	 like '%'|| #{search} || '%'
+  	 	 order by num desc) N)
+  	 	 where R between #{startRow} and#{lastRow}
+ 		 	 	  
+  
+  
+  </select>
+
+	<resultMap type="NoticeVO" id="notice">
+		<id property="num" column="num" />
+		<result property="title" column="title" />
+		<result property="writer" column="writer" />
+		<result property="contents" column="contents" />
+		<result property="reg_date" column="reg_date" />
+		<result property="hit" column="hit" />
+
+	</resultMap>
+  
+  <select id="getSelect" parameterType="NoticeVO" >
+  
+  
+  
+  </select>
+  
+  
+  
+  
+  <!-- search  -->
+  <select id="getCount" parameterType="PageMaker" resultType="Integer">
+  	select count(num) from notice
+  	<choose>
+  		<when test="kind=1">
+  			where title 		
+  		</when>
+  		<when test="kind=2">
+  			where writer
+  		</when>
+  		<otherwise>
+  			where contents
+  		</otherwise>
+  	</choose>
+	  like '%' || #{search} || '%'
+ </select>
+  
+  
+  
+  
+ </mapper>  

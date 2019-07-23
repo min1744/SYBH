@@ -1,0 +1,228 @@
+@charset "UTF-8";
+
+
+#board {
+	
+	width: 1920px;
+	overflow: hidden;
+}
+
+
+
+#board_title {
+	
+	width: 100%;
+	overflow: hidden;
+	padding: 50px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+#title {
+	
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 900;
+	letter-spacing: -1px;
+	
+}
+
+
+#sub_title {
+	
+	text-align: center;
+	font-size: 1em;
+	color: #808080;
+	letter-spacing: -1px;
+	margin-top: 5px;
+	
+}
+
+
+
+#join_box {
+	
+	width: 50%;
+	overflow: hidden;
+	margin: 80px auto;
+	
+}
+
+
+#join_form {
+	
+	width: 100%;
+	overflow: hidden;
+}
+
+
+#join_form p {
+	
+	text-align: right;
+	font-size: 0.9em;
+	letter-spacing: -1px;
+	margin-bottom: 10px;
+}
+
+
+#join_form p span {
+	
+	color: red;
+	margin-right: 5px;
+	font-weight: 700;
+	font-size: 1.1em;
+	padding-top: 3px;
+	vertical-align: middle;
+}
+
+
+
+
+
+#join_form table {
+	
+	width: 100%;
+	border-top: 2px solid #153f91;
+	overflow: hidden;
+	text-align: left;
+	border-collapse: collapse;
+}
+
+
+input[type="text"], input[type="password"] {
+	
+	height: 38px;
+	padding: 0 15px;
+	border: 1px solid #bfbfbf;
+	font-size: 1em;
+	color: #444;
+	width: 150px;
+	border-radius: 5px;
+}
+
+
+#overlap {
+	
+	height: 40px;
+	padding: 0 15px;
+	background-color: white;
+	border: 1px solid #bfbfbf;
+	border-radius: 5px;
+	font-size: 1em;
+	letter-spacing: -1px;
+	color: #808080;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+
+
+#join_form table tr th {
+	
+	padding: 25px 15px;
+}
+
+
+#join_form th, #join_form td {
+	
+	border-bottom: 1px solid #ddd;
+	
+}
+
+
+
+#join_form td {
+	
+	padding-left: 15px;
+	
+}
+
+
+#email_input {
+	
+	margin-bottom: 10px;
+	
+}
+
+
+.sub {
+	
+	font-size: 0.9em;
+	color: #153f91;
+	letter-spacing: -1px;
+	margin-left: 10px;
+	font-weight: 700;
+}
+
+
+.sub_2 {
+	
+	font-size: 0.9em;
+	color: #153f91;
+	letter-spacing: -1px;
+	font-weight: 700;
+	padding: 10px 0;
+}
+
+
+#join_form table tr th span {
+	
+	color: red;
+	font-weight: 700;
+	font-size: 1.1em;
+	vertical-align: sub;
+	padding-left: 5px;
+	
+}
+
+
+.common {
+	
+	padding: 0;
+	margin: 0 15px;
+	font-weight: 700;
+	color: black;
+}
+
+
+#age_td span{
+	
+	font-size: 1em;
+	letter-spacing: -1px;
+	padding-left: 5px;
+	
+}
+
+
+#age_td>span {
+	
+	margin-right: 20px;
+}
+
+
+
+
+#join_btn {
+	
+	margin: 0 auto;
+	text-align: center;
+}
+
+
+
+#join {
+	
+	padding: 2% 4.2%;
+	border: none;
+	border-radius: 5px;
+	font-size: 1.2em;
+	background-color: #153f91;
+	color: white;
+	font-weight: 700;
+	box-sizing: border-box;
+	text-align: center;
+	margin: 50px auto;
+	cursor: pointer;
+	
+}
+
+

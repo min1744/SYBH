@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- id, pw, name, res_reg_num, phone, email, gender, age, grade -->
+<mapper namespace="MemberMapper">
+	<sql id="search">
+		<choose>
+			<when test="kind == 2">ID</when>
+			<when test="kind == 3">RES_REG_NUM</when>
+			<when test="kind == 4">PHONE</when>
+			<when test="kind == 5">EMAIL</when>
+			<when test="kind == 6">GENDER</when>
+			<when test="kind == 7">AGE</when>
+			<!-- <when test="kind == 8">GRADE</when> -->
+			<otherwise>NAME</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 관리자를 제외한 필터링 된 회원의 숫자 -->
+	<select id="getTotalCount" parameterType="PageMaker" resultType="Integer">
+		SELECT COUNT(ID) FROM MEMBER WHERE GRADE != 0 AND
+		<include refid="search"/>
+		LIKE '%'||#{search}||'%'
+	</select>
+	
+	<!-- 회원 관리용 리스트 -->
+	<select id="getList" parameterType="PageMaker" resultType="MemberVO">
+		SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(SELECT * FROM MEMBER WHERE GRADE != 0 AND
+				<include refid="search"/>
+				LIKE '%'||#{search}||'%' ORDER BY NAME ASC)
+			M)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<!-- 회원 myPage -->
+	<select id="getSelect" parameterType="String" resultType="MemberVO">
+		SELECT * FROM MEMBER WHERE ID = #{id} AND GRADE != 0
+	</select>
+	
+	<!-- Login -->
+	<select id="getLogin" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
+	</select>
+	
+	<!-- id 찾기 -->
+	<select id="getId" parameterType="String" resultType="String">
+		SELECT ID FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<update id="setPwUpdate">
+		UPDATE MEMBER SET PW = #{pw} WHERE EMAIL = #{email}
+	</update>
+	
+	<!-- 회원가입 -->
+	<insert id="setWrite" parameterType="MemberVO">
+		INSERT INTO MEMBER VALUES(#{id}, #{pw}, #{name}, (SELECT CRYPTO_AES256.ENC_AES(#{RES_REG_NUM}) FROM MEMBER), #{phone}, #{email}, #{gender}, #{age}, 0)
+	</insert>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="setUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET PHONE = #{phone}, EMAIL = #{email} WHERE ID = #{id}
+	</update>
+	
+	<!-- 등급 수정 -->
+	<update id="setGradeUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET GRADE = #{grade} WHERE ID = #{id}
+	</update>
+	
+	<!-- 회원 관리(삭제) -->
+	<delete id="setDeletes" parameterType="List">
+		DELETE MEMBER WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="setDelete" parameterType="String">
+		DELETE MEMBER WHERE ID = #{id}
+	</delete>
+</mapper>
