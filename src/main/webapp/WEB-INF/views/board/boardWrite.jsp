@@ -58,9 +58,9 @@
 	</form>
 	</div>
 		
-	<!-- <div id="write_btn">
+	<div id="write_btn">
 	<a href="./noticeWrite" id="write">공지등록</a>
-	</div> -->
+	</div>
 	</div>
 </div>
 

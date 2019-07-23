@@ -54,10 +54,10 @@
 				<tbody>
 				<c:forEach items="${list}" var="vo">
 					<tr>
-						<td>${dto.num}</td>
-						<td><a href="./${board}Select?num=${dto.num}">${dto.title}</a></td>
-						<td>${dto.writer}</td>
-						<td>${dto.hit}</td>
+						<td>${vo.num}</td>
+						<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
+						<td>${vo.writer}</td>
+						<td>${vo.hit}</td>
 					</tr>
 						
 						
@@ -73,26 +73,42 @@
 			
 			
 			<div id="paging">
-				<ul>
-					<li><a href="">[이전]</a></li>
-					<li><a href="">1</a></li>
-					<li><a href="">2</a></li>
-					<li><a href="">3</a></li>
-					<li><a href="">4</a></li>
-					<li><a href="">5</a></li>
-					<li><a href="">6</a></li>
-					<li><a href="">7</a></li>
-					<li><a href="">8</a></li>
-					<li><a href="">9</a></li>
-					<li><a href="">10</a></li>
-					<li><a href="">[다음]</a></li>
+			<ul>
+				<c:if test="${pager.curBlock>1}">
+					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">[이전]</a></li>
+				</c:if>
+				<li>
+					<ul class="pagination">
+							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"	var="i">
+									<c:if test="${totalcount != 0 }">
+										<li><a href="./${board}List?curPage=${i}&kind=${pager.search.kind}&search=${pager.search.search}">${i}</a></li>
+									</c:if>
+							</c:forEach>
+								
+							<c:if test="${totalcount eq 0 }">
+									<li><a	href="./${board}List?curPage=1&kind=${pager.search.kind}&search=${pager.search.search}">1</a></li>	
+                            </c:if>
+			 	    </ul>
+				</li>
+				
+				
+				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					<li><a href="./${board}List?curPage=${i}&kind=${pager.kind}$search=${pager.search}">${i}</a></li>
+				</c:forEach>
+				
+				<c:if test="${pager.curBlock<pager.totalBlock}">
+					<li><a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">[다음]</a></li>
+				</c:if>
+				
+			
 				</ul>
 			</div>
 			
 			<div id="search_box">
 				<select name="kind" id="select">
 					<option value="1">제목</option>
-					<option value="2">내용</option>
+					<option value="2">작성자</option>
+					<option value="3">내용</option>
 				</select>
 				<input type="text" name="search" id="search">
 				<button id="btn">검색</button>

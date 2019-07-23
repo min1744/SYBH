@@ -6,12 +6,16 @@
   
   <mapper namespace="NoticeMapper">
   
-  <insert id="setWrite" parameterType="BoardVO">
-  	insert into  notice values(#{num},#{title},#{writer},#{contents},sysdate,0)
+  <insert id="setWrite" parameterType="NoticeVO">
+  <selectKey keyProperty="num" order="BEFORE" resultType="Integer">
+  		select notice_seq.nextval from dual
+  </selectKey>
+  
+  	insert into notice values(#{num},#{title},#{writer},#{contents},sysdate,0)
   </insert>
   
   <update id="setUpdate" parameterType="NoticeVO">
-  	update insert set title={title}, contents={contents} where num={num}  
+  	update notice set title={title}, contents={contents} where num=#{num}  
   </update>
   
   <delete id="setDelete" parameterType="Integer">
@@ -20,24 +24,23 @@
   
   <select id="getList" parameterType="PageMaker" resultType="NoticeVO">
   	select * from 
-  	(select rownum r, n.* from
+  	(select rownum R, N.* from
   	(select * from notice
   	where
-  	
   <choose>
   		<when test="kind = 1">
-  			where title
+  			title
   		</when>
   		<when test="kind = 2">
-  			where writer
+  			 writer
   		</when>
   		<otherwise>
-  			where contents
+  			 contents
   		</otherwise>
    </choose>
   	 	 like '%'|| #{search} || '%'
   	 	 order by num desc) N)
-  	 	 where R between #{startRow} and#{lastRow}
+  	 	 where R between #{startRow} and #{lastRow}
  		 	 	  
   
   

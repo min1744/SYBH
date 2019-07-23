@@ -58,6 +58,9 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		int result = noticeService.setWrite(boardVO,session);
 		if(result>0) {
+			mv.setViewName("redirect:./noticeList");
+			
+		}else {
 			mv.addObject("message", "Write Fail");
 			mv.addObject("path", "./noticeList");
 			mv.setViewName("common/messageMove");
@@ -99,14 +102,12 @@ public class NoticeController {
 	@RequestMapping(value = "noticeList", method = RequestMethod.GET)
 	public ModelAndView getList(PageMaker pageMaker)throws Exception{
 		
-		//List<BoardVO> lists= noticeService.getList(pageMaker);
+		List<BoardVO> lists= noticeService.getList(pageMaker);
 		ModelAndView mv = new ModelAndView();
-		//mv.addObject("list", lists);
-		//mv.addObject("pager", pageMaker);
+		mv.addObject("list", lists);
+		mv.addObject("pager", pageMaker);
 		mv.setViewName("board/boardList");
-//		if(lists.size()>0) {
-//			throw new NullPointerException();
-//		}
+//	
 		return mv;
 	}
 }

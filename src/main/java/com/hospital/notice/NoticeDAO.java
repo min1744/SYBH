@@ -42,7 +42,7 @@ public class NoticeDAO implements BoardDAO {
 	}
 	@Override
 	public List<BoardVO> getList(PageMaker pageMaker) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"getList", pageMaker);
+		return sqlSession.selectList(NAMESPACE+"getList", pageMaker);
 	}
 
 	/*
