@@ -50,7 +50,7 @@
 			<div id="agree_${i.count}">
 				<h2>이용약관</h2>
 				<div id="agree_${i.count}_box">
-					<c:import url="../common/agree${i.count}.jsp" />
+					<c:import url="../terms_and_conditions/agree${i.count}.jsp" />
 				</div>
 				<div id="agree_${i.count}_check">
 					<input type="checkbox" class="check">위 이용약관에 동의합니다.
