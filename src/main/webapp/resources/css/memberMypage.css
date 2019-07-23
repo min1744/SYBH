@@ -48,7 +48,7 @@
 #board_nav {
 	
 	width: 15%;
-	margin-right: 2%;
+	margin-right: 5%;
 }
 
 
@@ -88,10 +88,45 @@
 }
 
 
-#boardList {
+#myInfo {
 	
-	width: 83%;
+	width: 80%;
 	text-align: center;
+	overflow: hidden;
+	border-top: 2px solid #153F91;
+}
+
+#myInfo_list {
+	
+	
+	padding: 2%;
+	overflow: hidden;
+	box-sizing: border-box;
+	
 }
 
 
+#myInfo_list table {
+	
+	width: 100%;
+	overflow: hidden;
+	font-size: 1.2em;
+}
+
+
+#myInfo_list table th {
+	
+	padding: 25px 0;
+	width: 150px;
+	text-align: right;
+	color: #808080;
+}
+
+
+
+#myInfo_list table td {
+	
+	padding-left: 20px;
+	text-align: center;
+	width: 250px;
+}
