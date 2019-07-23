@@ -82,16 +82,23 @@ public class NoticeController {
 		mv.setViewName("board/boardUpdate");
 		return mv;
 	}
+	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
+	public ModelAndView setUpdate(BoardVO boardVO,HttpSession session)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = noticeService.setUpdate(boardVO, session);
+		mv.setViewName("redirect:./noticeList");
+		return mv; 
+	}
 	
 	
 	
 	
 	//select
 	@RequestMapping(value = "noticeSelect", method = RequestMethod.GET)
-	public ModelAndView getSelect()throws Exception{
+	public ModelAndView getSelect(int num)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		//BoardVO boardVO = noticeService.getSelect(num);
-		//mv.addObject("vo", boardVO);
+		BoardVO boardVO = noticeService.getSelect(num);
+		mv.addObject("vo", boardVO);
 		mv.setViewName("board/boardSelect");
 		return mv;
 	}
@@ -106,6 +113,7 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", lists);
 		mv.addObject("pager", pageMaker);
+		
 		mv.setViewName("board/boardList");
 //	
 		return mv;

@@ -1,6 +1,14 @@
 package com.hospital.util;
 
 public class PageMaker {
+	private int totalCount = 0;
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+
 	private int perPage=10;
 	private Integer curPage;
 	private String kind;//title, writer, contents
@@ -72,21 +80,22 @@ public class PageMaker {
 	}
 	
 	public void makePage(int totalCount) {
-		//1. ? „ì²? ê¸??˜ ê°??ˆ˜
-		//2. totalPage êµ¬í•˜ê¸?
+		this.totalCount = totalCount;
+		//1. ?ï¿½ï¿½ï¿½? ï¿½??ï¿½ï¿½ ï¿½??ï¿½ï¿½
+		//2. totalPage êµ¬í•˜ï¿½?
 		int totalPage=totalCount/perPage;
 		if(totalCount%perPage !=0) {
 			totalPage++;
 		}
 		
 		//3. totalBlock
-		int perBlock=5;
+		int perBlock=10;
 		this.totalBlock=totalPage/perBlock;
 		if(totalPage%perBlock !=0) {
 			this.totalBlock++;
 		}
 		
-		//4. curPageë¥? ?´?š©?•´?„œ curBlock
+		//4. curPageï¿½? ?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ curBlock
 		this.curBlock=curPage/perBlock;
 		if(this.curPage%perBlock !=0) {
 			curBlock++;
@@ -96,7 +105,7 @@ public class PageMaker {
 		this.startNum=(this.curBlock-1)*perBlock+1;
 		this.lastNum=this.curBlock*perBlock;
 		
-		//6. curBlock?´ totalBlock?¼?•Œ
+		//6. curBlock?ï¿½ï¿½ totalBlock?ï¿½ï¿½?ï¿½ï¿½
 		if(this.curBlock==totalBlock) {
 			this.lastNum=totalPage;
 		}

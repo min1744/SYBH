@@ -72,30 +72,25 @@
 			
 			
 			
-			<div id="paging">
+			<div id="paging" style="margin-left: 315px;">
 			<ul>
 				<c:if test="${pager.curBlock>1}">
 					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">[이전]</a></li>
 				</c:if>
-				<li>
-					<ul class="pagination">
-							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"	var="i">
-									<c:if test="${totalcount != 0 }">
-										<li><a href="./${board}List?curPage=${i}&kind=${pager.search.kind}&search=${pager.search.search}">${i}</a></li>
-									</c:if>
-							</c:forEach>
+				
+				
+				<c:choose>
+					<c:when test="${pager.totalCount == 0 }">
+						<li><a href="./${board}List?curPage=1&kind=${pager.kind}$search=${pager.search}">1</a></li>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+							<li><a href="./${board}List?curPage=${i}&kind=${pager.kind}$search=${pager.search}">${i}</a></li>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				
 								
-							<c:if test="${totalcount eq 0 }">
-									<li><a	href="./${board}List?curPage=1&kind=${pager.search.kind}&search=${pager.search.search}">1</a></li>	
-                            </c:if>
-			 	    </ul>
-				</li>
-				
-				
-				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-					<li><a href="./${board}List?curPage=${i}&kind=${pager.kind}$search=${pager.search}">${i}</a></li>
-				</c:forEach>
-				
 				<c:if test="${pager.curBlock<pager.totalBlock}">
 					<li><a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">[다음]</a></li>
 				</c:if>
