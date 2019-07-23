@@ -32,8 +32,23 @@ public class MemberDAO {
 	}
 	
 	//login
-	public MemberVO getLogin(MemberVO memberVO) throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getLogin", memberVO);
+	public MemberVO login(MemberVO memberVO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"login", memberVO);
+	}
+	
+	//id 찾기
+	public String getId(String email) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getId", email);
+	}
+	
+	//비밀번호 찾기
+	public int getPw(String email) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getPw", email);
+	}
+	
+	//비밀번호 분실로 인한 비밀번호 난수로 변경
+	public int setPwUpdate(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setPwUpdate", memberVO);
 	}
 	
 	//회원가입
@@ -47,7 +62,7 @@ public class MemberDAO {
 	}
 	
 	//회원 관리(삭제)
-	public int setDeletes(List<String> list) throws Exception{
+	public int setDelete(List<String> list) throws Exception{
 		return sqlSession.delete(NAMESPACE+"setDeletes", list);
 	}
 	
