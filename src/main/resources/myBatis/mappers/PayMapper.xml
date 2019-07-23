@@ -9,15 +9,11 @@
   	insert into pay values(pay_seq.nextval, #{id}, sysdate, #{price}, #{opt}, #{category})
   </insert>
   
-  <sql id="search">
-  	<choose>
-  		<when test="kind==1">ID</when>
-  	</choose>
-  </sql>
   
-  <!--한사람 모든 결제내역 수  -->
-  <select id="getOneTotalCount" parameterType="" resultType="Integer">
+  <!--한사람 모든 결제 수  -->
+  <select id="getOneTotalCount" parameterType="String" resultType="Integer">
   	select count(num) from pay where id=#{id}
+  	
   </select>
   
   <!--한사람의 모든 결제내역  -->
@@ -30,6 +26,7 @@
 				id
 			</when>  	
   		</choose>
+  		like '%' || #{search} || '%'
   		order by pay_date desc) P)
   		where R between #{startRow} and #{lastRow}
   </select>
@@ -39,9 +36,24 @@
   	select sum(price) from pay where category=1
   </select>
   
+  <!-- 관리자용 전체 건강검진 결제 수 -->
+  <select id="getAllTotalCount" resultType="Integer">
+  	select count(num) from pay where category=0
+  </select>
+  
   <!-- 관리자페이지용 전체 건강검진 결제내역  -->
   <select id="getAllList" parameterType="PageMaker" resultType="PayVO">
-  	select * from pay where category=0
+  	select * from
+  	(select rownum R, P.* from
+  	(select * from pay where category=0 and
+  	<choose>
+  		<when test="kind==1">
+  			id
+  		</when>
+  	</choose>
+  	like '%' || #{search} || '%'
+  	order by num desc) P)
+  	where R between #{startRow} and #{lastRow}
   </select>
   
   </mapper>
