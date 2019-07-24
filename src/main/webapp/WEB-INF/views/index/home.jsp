@@ -10,6 +10,8 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> 
 <link type="text/css" rel="stylesheet" href="./resources/css/jquery.bxslider.css" />
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9963d068218228f27bdac8c9618c4a07"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9963d068218228f27bdac8c9618c4a07&libraries=clusterer"></script>
 </head>
 
 <script type="text/javascript">
@@ -116,7 +118,32 @@ $(function() {
 	//$('#sponsor').load('./pay/donationTotal');
 	//$('#sponsor').load('./pay/donationPeopleTotal');
 	
-}); 
+	
+	//////////////////////////// 지도 API
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.556558, 126.919545), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	var iwContent = '<div style="padding:5px;">쌍용백병원</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	iwPosition = new kakao.maps.LatLng(37.556558, 126.919545), //인포윈도우 표시 위치입니다
+	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+	
+	//인포윈도우를 생성하고 지도에 표시합니다
+	var infowindow = new kakao.maps.InfoWindow({
+	map: map, // 인포윈도우가 표시될 지도
+	position : iwPosition, 
+	content : iwContent,
+	removable : iwRemoveable
+	});
+	  
+	//아래 코드는 인포윈도우를 지도에서 제거합니다
+	//infowindow.close();        
+	}); 
 
 </script>
 <body>
@@ -227,6 +254,8 @@ $(function() {
 <!-- header 끝 -->
 
 
+
+<!-- 플로팅 -->
 <div id="floatMenu">
 	
 	<div id="floating_img">
@@ -248,8 +277,17 @@ $(function() {
 		<a id="top" href="#">TOP<span>▲</span></a>
 	
 	</div>
+	
+	<div id="chat">
+		
+		<a href=""><img src="./resources/images/chat.png"></a>
+		
+	</div>
 
 </div>
+
+
+
 
 <div id="contents">
 
@@ -270,8 +308,8 @@ $(function() {
 			<div id="info">
 				<h2>진료안내</h2>
 				<div class="list_title">
-				<p>대표전화 1588-5700</p>
-				<p>암환자 상담 02-2072-0707</p>
+				<p>대표전화 <span>1588-5700</span></p>
+				<p>암환자 상담 <span>02-2072-0707</span></p>
 				</div>
 				<div class="list_btn">
 				<a href="" class="first_a">외래안내</a>
@@ -397,6 +435,31 @@ $(function() {
 		</div>
 		
 	</div>
+	
+	
+	
+</div>
+
+	<!-- 오시는 길 -->
+<div id="contents_3">
+	<div id="location_box">
+	
+		<div id="location_title">
+			<h3>오시는길</h3>
+		</div>
+		
+		<div id="map">
+		
+		
+		</div>
+		
+		<script type="text/javascript">
+		
+		
+		</script>
+	
+	
+	</div>
 </div>
 <!-- footer -->
 
@@ -428,8 +491,8 @@ $(function() {
 		
 		
 		<div id="company_info">
-			<p>서울특별시 강남구 일원로 81 (06351) 삼성서울병원 / 대표전화 : 1599-3114 / 사업자등록번호 : 213-82-05096 권오정<br>
-COPYRIGHT©1996-2015 BY SAMSUNG MEDICAL CENTER. ALL RIGHTS RESERVED.</p>
+			<p>서울특별시 마포구 월드컵북로 21 풍성빌딩 2,3,4층 쌍용백병원 / 대표전화 : 1599-3114 / 사업자등록번호 : 213-82-05096<br>
+COPYRIGHT©1996-2019 BY SSANGYONG MEDICAL CENTER. ALL RIGHTS RESERVED.</p>
 		</div>
 		
 	
