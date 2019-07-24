@@ -1,0 +1,132 @@
+@charset "UTF-8";
+
+
+
+#board {
+	
+	width: 1920px;
+	overflow: hidden;
+}
+
+
+
+#board_title {
+	
+	width: 100%;
+	overflow: hidden;
+	padding: 50px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+#board_title p {
+	
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 900;
+	letter-spacing: -1px;
+	
+}
+
+#board_box {
+	
+	width: 70%;
+	overflow: hidden;
+	position: relative;
+	margin: 80px auto;
+
+}
+
+
+
+#board_nav, #boardList {
+	
+	float: left;
+	overflow: hidden;
+}
+
+
+#board_nav {
+	
+	width: 15%;
+	margin-right: 5%;
+}
+
+
+#board_nav li {
+	
+	padding: 5%;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	letter-spacing: -1px;
+	
+}
+
+
+#board_nav li a {
+	
+	display: block;
+	padding: 5px 0;
+	color: #808080;
+	font-weight: 700;
+	
+}
+
+#board_nav li a:hover {
+	
+	color: #6bb5db;
+}
+
+
+#board_nav li:first-child {
+	
+	padding: 30px 0;
+	background-color: #153F91;
+	color: white;
+	font-size: 1.2em;
+	font-weight: 900;
+	border-bottom: none;
+}
+
+
+#myInfo {
+	
+	width: 80%;
+	text-align: center;
+	overflow: hidden;
+	border-top: 2px solid #153F91;
+}
+
+#myInfo_list {
+	
+	
+	padding: 2%;
+	overflow: hidden;
+	box-sizing: border-box;
+	
+}
+
+
+#myInfo_list table {
+	
+	width: 100%;
+	overflow: hidden;
+	font-size: 1.2em;
+}
+
+
+#myInfo_list table th {
+	
+	padding: 25px 0;
+	width: 150px;
+	text-align: right;
+	color: #808080;
+}
+
+
+
+#myInfo_list table td {
+	
+	padding-left: 20px;
+	text-align: center;
+	width: 250px;
+}

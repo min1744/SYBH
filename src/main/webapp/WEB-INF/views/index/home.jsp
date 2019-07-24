@@ -11,6 +11,8 @@
 <link type="text/css" rel="stylesheet" href="./resources/css/jquery.bxslider.css" />
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 </head>
+<!--재혁 후원  -->
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 
 $(function() {
@@ -68,6 +70,66 @@ $(function() {
         return false;
     });
 	
+	//////////////재혁 후원
+	 $("#check_modules").click(function () {
+			var IMP = window.IMP; 
+			IMP.init('imp95286508');
+			
+			IMP.request_pay({
+			pg: 'inicis',  //결제 방법 카카오페이 계좌입금 등 
+			pay_method: 'card', //결제 수단
+			merchant_uid: 'merchant_' + new Date().getTime(),
+			name: '쌍용UNICEF', //주문 창에서 보일 이름
+			amount: 1000,  //가격
+			//구매자 정보
+			buyer_email: 'cjh3576@naver.com', //세션에서 이메일 받기
+			buyer_name: '최재혁',
+			buyer_tel: '010-9964-4774',
+			buyer_addr: '주소',
+			m_redirect_url: '성공시 url'
+			}, function (rsp) {
+				console.log(rsp);
+				if (rsp.success) {
+					var msg = '결제가 완료되었습니다.';
+					msg += '고유ID : ' + rsp.imp_uid;
+					msg += '상점 거래ID : ' + rsp.merchant_uid;
+					msg += '결제 금액 : ' + rsp.paid_amount;
+					msg += '카드 승인번호 : ' + rsp.apply_num;
+					purchase();
+				} else {
+					var msg = '결제에 실패하였습니다.';
+					msg += rsp.error_msg;
+				}
+				alert(msg);
+			});
+		});
+	
+	
+	/////////////결제 끝
+	
+    $('#spon_btn').click(function(event){  //버튼을 클릭 했을시 popupOpen 함수 출력 
+        popupOpen();	//Popup Open 함수
+    });
+  
+	function popupOpen(){
+		var url= "./donation/donationPopup";    //팝업창 페이지 URL
+		var winWidth = 573;
+	    var winHeight = 800;
+	    var popupX = 700;
+	    console.log(popupX);
+	  	//&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+		 var popupY= 80;
+	 	 //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+popupX+", top="+popupY;    //팝업창 옵션(optoin)
+
+	  	//window.open('', '', 'status=no, height=300, width=200, left='+ popupX + ', top='+ popupY);
+	    
+	    window.open(url,"",popupOption, 'left='+ popupX + ', top='+ popupY);
+	    
+	}
+	
+	
+
 	
 }); 
 
@@ -86,7 +148,7 @@ $(function() {
 		<!-- header 메뉴 -->
 		<div id="header_menu">
 			<ul>
-				<li><a href="">진료예약/조회</a></li>
+				<li><a href="./reserve/reserveInfo">진료예약/조회</a></li>
 				<li><a href="">건강뉴스</a></li>
 				<li><a href="./notice/noticeList">병원안내</a></li>
 				<li><a href="">고객의 소리</a></li>
@@ -111,8 +173,8 @@ $(function() {
 <div id="sub_nav">
 	<div id="sub_nav_box">
 		<ul id="ul_1">
-			<li><a href="">일반진료 예약</a></li>
-			<li><a href="">건강검진 예약</a></li>
+			<li><a href="./reserve/reserveNomal">일반진료 예약</a></li>
+			<li><a href="./reserve/reserveMedical">건강검진 예약</a></li>
 		</ul>
 		<ul id="ul_2">
 			<li><a href="">질환 정보</a></li>
@@ -148,7 +210,7 @@ $(function() {
 		<p class="spon_num">1,000,000<span>원</span></p>
 		<p class="spon_title">후원자</p>
 		<p class="spon_num">140<span>명</span></p>
-		<button>후원하기</button>
+		<button id="spon_btn">후원하기</button>
 		
 	</div>
 	
@@ -195,8 +257,8 @@ $(function() {
 				<p>인터넷예약은 24시간 이용하실 수 있습니다.</p>
 				</div>
 				<div class="list_btn">
-				<a href="" class="first_a">진료예약안내</a>
-				<a href="">진료예약하기</a>
+				<a href="./reserve/reserveInfo" class="first_a">진료예약안내</a>
+				<a href="./reserve/reserveNomal">진료예약하기</a>
 				</div>
 			</div>
 			
@@ -270,12 +332,40 @@ $(function() {
 		</div>
 		
 		<div class="news_box">
-			<img alt="" src="">
-			<p>카테고리</p>
-			<p>글제목 글제목 글제목</p>
-			<p>2019-07-23</p>
+			<img alt="" src="./resources/images/news_1.jpg">
+			<div class="news_contents">
+				<p class="category">운동</p>
+				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
+				<p class="news_date">2019-07-23</p>
+			</div>
 		</div>
 		
+		<div class="news_box">
+			<img alt="" src="./resources/images/news_2.jpg">
+			<div class="news_contents">
+				<p class="category">운동</p>
+				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
+				<p class="news_date">2019-07-23</p>
+			</div>
+		</div>
+		
+		<div class="news_box">
+			<img alt="" src="./resources/images/news_3.jpg">
+			<div class="news_contents">
+				<p class="category">운동</p>
+				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
+				<p class="news_date">2019-07-23</p>
+			</div>
+		</div>
+		
+		<div class="news_box last_box">
+			<img alt="" src="./resources/images/news_4.jpg">
+			<div class="news_contents">
+				<p class="category">운동</p>
+				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
+				<p class="news_date">2019-07-23</p>
+			</div>
+		</div>
 		
 	</div>
 </div>

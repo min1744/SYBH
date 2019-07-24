@@ -1,27 +1,44 @@
 package com.hospital.member;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class MemberVO {
 	//아아디
+	@NotNull
+	@Size(min = 6, max = 10)
 	private String id;
 	//비밀번호
+	@NotNull
+	@Size(min = 10, max = 15)
 	private String pw;
 	//이름
+	@NotNull
+	@Size(min = 2, max = 8)
 	private String name;
 	//주민번호
+	@NotNull
 	private String res_reg_num;
 	//핸드폰번호
+	@NotNull
 	private String phone;
 	//이메일
+	@NotNull
 	private String email;
 	//성별
+	//1 : 남자
+	//2 : 여자
+	@NotNull
 	private String gender;
 	//나이
+	@NotNull
 	private int age;
 	//회원등급
-	//0 : user
-	//1 : admin
-	//2 : nurse
-	//3 : doctor
+	//1 : user
+	//2 : admin
+	//3 : nurse
+	//4 : doctor
+	@NotNull
 	private int grade;
 	
 	public String getId() {

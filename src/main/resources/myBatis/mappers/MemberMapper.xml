@@ -19,7 +19,7 @@
 	
 	<!-- 관리자를 제외한 필터링 된 회원의 숫자 -->
 	<select id="getTotalCount" parameterType="PageMaker" resultType="Integer">
-		SELECT COUNT(ID) FROM MEMBER WHERE GRADE != 0 AND
+		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 0 AND
 		<include refid="search"/>
 		LIKE '%'||#{search}||'%'
 	</select>
@@ -41,7 +41,7 @@
 	</select>
 	
 	<!-- Login -->
-	<select id="getLogin" parameterType="MemberVO" resultType="MemberVO">
+	<select id="login" parameterType="MemberVO" resultType="MemberVO">
 		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = #{pw}
 	</select>
 	
@@ -51,28 +51,52 @@
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
-	<update id="setPwUpdate">
+	<select id="getPw" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<!-- 비밀번호 분실로 인한 비밀번호 난수로 변경 -->
+	<update id="setPwUpdate" parameterType="MemberVO">
 		UPDATE MEMBER SET PW = #{pw} WHERE EMAIL = #{email}
 	</update>
 	
 	<!-- 회원가입 -->
 	<insert id="setWrite" parameterType="MemberVO">
-		INSERT INTO MEMBER VALUES(#{id}, #{pw}, #{name}, (SELECT CRYPTO_AES256.ENC_AES(#{RES_REG_NUM}) FROM MEMBER), #{phone}, #{email}, #{gender}, #{age}, 0)
+		<selectKey keyProperty="res_reg_num" order="BEFORE" resultType="String">
+			SELECT CRYPTO_AES256.ENC_AES(#{res_reg_num}) FROM MEMBER
+		</selectKey>
+		INSERT INTO MEMBER VALUES(
+			#{id},
+			#{pw},
+			#{name},
+			(#{res_reg_num}),
+			#{phone},
+			#{email},
+			#{gender},
+			#{age},
+			1
+		)
 	</insert>
 	
 	<!-- 회원 정보 수정 -->
 	<update id="setUpdate" parameterType="MemberVO">
-		UPDATE MEMBER SET PHONE = #{phone}, EMAIL = #{email} WHERE ID = #{id}
+		UPDATE MEMBER SET
+			PHONE = #{phone},
+			EMAIL = #{email}
+		WHERE ID = #{id}
 	</update>
 	
 	<!-- 등급 수정 -->
 	<update id="setGradeUpdate" parameterType="MemberVO">
-		UPDATE MEMBER SET GRADE = #{grade} WHERE ID = #{id}
+		UPDATE MEMBER
+		SET GRADE = #{grade}
+		WHERE ID = #{id}
 	</update>
 	
 	<!-- 회원 관리(삭제) -->
 	<delete id="setDeletes" parameterType="List">
-		DELETE MEMBER WHERE ID IN
+		DELETE MEMBER
+		WHERE ID IN
 		<foreach collection="list" item="item" open="(" separator=", " close=")">
 			#{item}
 		</foreach>
@@ -80,6 +104,7 @@
 	
 	<!-- 회원 탈퇴 -->
 	<delete id="setDelete" parameterType="String">
-		DELETE MEMBER WHERE ID = #{id}
+		DELETE MEMBER
+		WHERE ID = #{id}
 	</delete>
 </mapper>

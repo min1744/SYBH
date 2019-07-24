@@ -13,5 +13,6 @@
 		<typeAlias type="com.hospital.notice.NoticeVO" alias="NoticeVO" />
 		<typeAlias type="com.hospital.util.PageMaker" alias="PageMaker" />
 		<typeAlias type="com.hospital.member.MemberVO" alias="MemberVO" />
+		<typeAlias type="com.hospital.pay.PayVO" alias="PayVO"/>
 	</typeAliases>
 </configuration>
