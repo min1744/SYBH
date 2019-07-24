@@ -9,6 +9,46 @@
 <link href="../resources/css/donation.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> 
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
+<script type="text/javascript">
+	$(function(){
+		//////////////재혁 후원
+		 $("#check_modules").click(function () {
+				var IMP = window.IMP; 
+				IMP.init('imp95286508');
+				
+				IMP.request_pay({
+				pg: 'inicis',  //결제 방법 카카오페이 계좌입금 등 
+				pay_method: 'card', //결제 수단
+				merchant_uid: 'merchant_' + new Date().getTime(),
+				name: '쌍용UNICEF', //주문 창에서 보일 이름
+				amount: 1000,  //가격
+				//구매자 정보
+				buyer_email: 'cjh3576@naver.com', //세션에서 이메일 받기
+				buyer_name: '최재혁',
+				buyer_tel: '010-9964-4774',
+				buyer_addr: '주소',
+				m_redirect_url: '성공시 url'
+				}, function (rsp) {
+					console.log(rsp);
+					if (rsp.success) {
+						var msg = '결제가 완료되었습니다.';
+						msg += '고유ID : ' + rsp.imp_uid;
+						msg += '상점 거래ID : ' + rsp.merchant_uid;
+						msg += '결제 금액 : ' + rsp.paid_amount;
+						msg += '카드 승인번호 : ' + rsp.apply_num;
+						purchase();
+					} else {
+						var msg = '결제에 실패하였습니다.';
+						msg += rsp.error_msg;
+					}
+					alert(msg);
+				});
+			});
+		
+		
+		/////////////결제 끝
+	});
+</script>
 </head>
 <body>
 
