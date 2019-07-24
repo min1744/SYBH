@@ -2,8 +2,11 @@ package com.hospital.SYBH;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -58,15 +61,22 @@ public class MemberController {
 	public void memberAgree() throws Exception {}
 	
 	@RequestMapping(value = "memberJoin", method = RequestMethod.GET)
-	public void memberJoin() throws Exception {
-		
-	}
+	public void memberJoin(@ModelAttribute MemberVO memberVO) throws Exception {}
 	
 	@RequestMapping(value = "memberJoin", method = RequestMethod.POST)
-	public void memberJoin(MemberVO memberVO) throws Exception {
-		int result = memberService.setWrite(memberVO);
-		if(result > 0) {
-			
+	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult br, ModelAndView mv) throws Exception {
+		if(br.hasErrors()) {
+			mv.setViewName("member/memberJoin");
+		} else {
+			int result = memberService.setWrite(memberVO);
+			if(result > 0) {
+				mv.setViewName("member/memberLogin");
+			} else {
+				mv.addObject("message", "Login Fail");
+				mv.addObject("path", "../");
+				mv.setViewName("common/messageMove");
+			}
 		}
+		return mv;
 	}
 }
