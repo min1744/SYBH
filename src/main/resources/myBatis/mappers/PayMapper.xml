@@ -9,24 +9,34 @@
   	insert into pay values(pay_seq.nextval, #{id}, sysdate, #{price}, #{opt}, #{category})
   </insert>
   
-  <!--한사람 모든 결제내역 수  -->
-  <select id="getOneTotalCount" parameterType="PageMaker" resultType="Integer">
-  	select count(num) from pay where id=#{id}
+  
+
+  <!--한사람 모든 결제 갯수(건강검진 : 0, 후원 : 1)  -->
+  <select id="getOneTotalCount" parameterType="PayVO" resultType="Integer">
+
+  	select count(num) from pay where id=#{id} and category=#{category}
   	
   </select>
   
-  <!--한사람의 모든 결제내역  -->
-  <select id="getOneList" parameterType="PageMaker" resultType="PayVO">
+  <resultMap type="PayVO" id="payList">
+  	<id property="num" column="num"/>
+  	<result property="id" column="id"/>
+  	<result property="pay_date" column="pay_date"/>
+  	<result property="price" column="price"/>
+  	<result property="opt" column="opt"/>
+  	<result property="category" column="category"/>
+  	<result property="name" column="name"/>
+  </resultMap>
+  
+  <!--한사람의 모든 결제 내역 (건강검진 : 0, 후원 : 1) -->
+  <select id="getOneList" parameterType="PageMaker" resultMap="payList">
   	select * from
-  	(select rownum R, P.* from
-  	(select * from pay where id=#{id} and
-  		<choose>
-			<when test="kind==1">
-				id
-			</when>  	
-  		</choose>
-  		like '%' || #{search} || '%'
-  		order by pay_date desc) P)
+  	(select rownum R, Pay.* from
+  	(select P.*,M.name from pay P FULL JOIN member M 
+  	on(P.id = M.id)
+  	 where P.id= #{kind}
+		and P.category=#{search}
+  		order by P.pay_date desc) Pay)
   		where R between #{startRow} and #{lastRow}
   </select>
   

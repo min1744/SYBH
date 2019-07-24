@@ -19,9 +19,12 @@ public class PayService {
 	}
 	
 	//한사람 모든 결제 내역
-	public List<PayVO> getOneList(PageMaker pageMaker,String id) throws Exception{
+	public List<PayVO> getOneList(PageMaker pageMaker,PayVO payVO) throws Exception{
+		pageMaker.setKind(payVO.getId());
+		pageMaker.setSearch(Integer.toString(payVO.getCategory()));
+		
 		pageMaker.makeRow();
-		int totalCount = payDAO.getOneTotalCount(id);
+		int totalCount = payDAO.getOneTotalCount(payVO);
 		pageMaker.makePage(totalCount);
 		
 		List<PayVO> list = payDAO.getOneList(pageMaker);
