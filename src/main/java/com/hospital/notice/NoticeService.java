@@ -43,9 +43,10 @@ public class NoticeService implements BoardService {
 	@Override
 	public BoardVO getSelect(int num) throws Exception {
 		BoardVO boardVO = noticeDAO.getSelect(num);
+		noticeDAO.setHitUpdate(num);
 	    return boardVO;
 	}
-
+	
 	@Override
 	public List<BoardVO> getList(PageMaker pageMaker) throws Exception {
 		//startRow, lastRow

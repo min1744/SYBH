@@ -6,6 +6,22 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/boardSelect.css" rel="stylesheet">
+<script type="text/javascript">
+	$(function() {
+		
+		$("#delete").click(function() {
+			var result = confirm("삭제하시겠습니까?");
+			if(result){
+				location.href="./boardList";
+			}
+						
+		});
+	});
+
+
+
+
+</script>
 </head>
 <body>
 <!-- header 추가 -->
@@ -43,10 +59,10 @@
 			<div id="sub">
 				<ul>
 					<li>등록일</li>
-					<li>2019/07/21</li>
+					<li>${vo.reg_date}</li>
 					<li>│</li>
 					<li>조회수</li>
-					<li>192</li>
+					<li>${vo.hit}</li>
 				</ul>
 			</div>
 			
@@ -54,10 +70,10 @@
 			
 			
 			<div id="btn_box">
-				<a href="./noticeList" id="list">목록</a>
+				<a href="./${board}List" id="list">목록</a>
 				
-				<a href="./noticeDelete" id="delete">삭제</a>
-				<a href="./noticeUpdate" id="update">수정</a>
+				<a href="./${board}Delete?num=${vo.num}" id="delete">삭제</a>
+				<a href="./${board}Update?num=${vo.num}" id="update">수정</a>
 			</div>
 		
 		</div>
