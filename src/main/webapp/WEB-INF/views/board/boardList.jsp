@@ -13,7 +13,8 @@
 
 <div id="board">
 		<div id="board_title">
-			<p>공지사항</p>
+			<p id="title">공지사항</p>
+			<p id="sub_title">쌍용백병원의 새로운 소식을 알려드립니다.</p>
 		</div>
 	
 	<div id="write_btn">
@@ -45,10 +46,10 @@
 			<table>
 				<thead>
 					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성일</th>
-						<th>조회수</th>
+						<th style="width: 95px;">번호</th>
+						<th style="width: 510px;">제목</th>
+						<th style="width: 150px;">작성일</th>
+						<th style="width: 100px;">조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -56,7 +57,7 @@
 					<tr>
 						<td>${vo.num}</td>
 						<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
-						<td>${vo.writer}</td>
+						<td>${vo.reg_date}</td>
 						<td>${vo.hit}</td>
 					</tr>
 						
@@ -72,10 +73,10 @@
 			
 			
 			
-			<div id="paging" style="margin-left: 315px;">
+			<div id="paging">
 			<ul>
 				<c:if test="${pager.curBlock>1}">
-					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">[이전]</a></li>
+					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
 				</c:if>
 				
 				
@@ -92,7 +93,7 @@
 				
 								
 				<c:if test="${pager.curBlock<pager.totalBlock}">
-					<li><a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">[다음]</a></li>
+					<li><a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
 				</c:if>
 				
 			

@@ -134,7 +134,7 @@ $(function() {
 		<div id="header_menu">
 			<ul>
 				<li><a href="./reserve/reserveInfo">진료예약/조회</a></li>
-				<li><a href="">건강뉴스</a></li>
+				<li><a href="./news/newsAll">건강뉴스</a></li>
 				<li><a href="./notice/noticeList">병원안내</a></li>
 				<li><a href="">고객의 소리</a></li>
 				<li id="last_menu"><a href="">주말약국</a></li>			
@@ -165,7 +165,14 @@ $(function() {
 <!-- 서브메뉴 -->
 
 <div id="sub_nav">
-	<div id="sub_nav_box">
+<c:choose>
+	<c:when test="${not empty memberVO}">
+		<div id="sub_nav_box" style="padding-left: 820px;">
+	</c:when>
+	<c:otherwise>
+		<div id="sub_nav_box" style="padding-left: 845px;">
+	</c:otherwise>
+</c:choose>
 		<ul id="ul_1">
 			<li><a href="./reserve/reserveNomal">일반진료 예약</a></li>
 			<li><a href="./reserve/reserveMedical">건강검진 예약</a></li>
