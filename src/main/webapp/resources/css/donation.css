@@ -9,7 +9,10 @@ list-style: none;
 
 
 }
-
+body {
+	
+	overflow-x: auto; 
+}
 
 a {
 	

@@ -30,8 +30,18 @@ public class PayService {
 		
 	}
 	//후원 총금액
-	public int getSupportList() throws Exception{
-		return payDAO.getSupportList();
+	public int getDonationTotal() throws Exception{
+		return payDAO.getDonationTotal();
+	}
+	
+	//후원인 총 인원
+	public int getDonationPeopleTotal() throws Exception{
+		return payDAO.getDonationPeopleTotal();
+	}
+	
+	//후원 내역 전체인원
+	public List<PayVO> getDonationList() throws Exception{
+		return payDAO.getDonationList();
 	}
 	
 	//관리자용 전체 건강검진 결제내역

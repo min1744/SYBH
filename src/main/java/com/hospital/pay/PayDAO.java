@@ -31,8 +31,18 @@ public class PayDAO {
 	}
 	
 	//후원 총 금액
-	public int getSupportList() throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getSupportList");
+	public int getDonationTotal() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getDonationTotal");
+	}
+	
+	//후원인 총 인원
+	public int getDonationPeopleTotal() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getDonationPeopleTotal");
+	}
+	
+	//후원 내역 전체인원
+	public List<PayVO> getDonationList() throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getDonationList");
 	}
 
 	//관리자용 전체 건강검진 결제 수

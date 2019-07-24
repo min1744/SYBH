@@ -13,79 +13,97 @@
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 	$(function(){
-		//날짜
+		
+		
+		
+
+	//날짜
 		var date = new Date();
 		var year = date.getFullYear();
-		var month = new String(date.getMonth()+1);
+		var month = new String(date.getMonth() + 1);
 		var day = new String(date.getDate());
-		$('#date').append(year+" - "+month+" - "+day);
+		$('#date').append(year + " - " + month + " - " + day);
 		//회원정보
-		
-		var name= document.getElementById('name').value;
-		var tel = '${memberVO.phone}';
+
+		var name = '${memberVO.name}';
+		var phone = '${memberVO.phone}';
 		var email = '${memberVO.email}';
 		var opt = 'card';
-		var category=1;
+		var category = 1;
 		//////////////재혁 후원
-		 $(".check_modules").click(function () {
+		$(".check_modules").click(function() {
+			var check = $('.check').prop("checked");
+			if (check) {
 				var amount = document.getElementById('price').value;
-				var id = document.getElementById('id').value;
-				var IMP = window.IMP; 
+				var id = '${memberVO.id}';
+				var IMP = window.IMP;
 				IMP.init('imp95286508');
-				
+
 				IMP.request_pay({
-				pg: 'inicis',  //결제 방법 카카오페이 계좌입금 등 
-				pay_method: 'card', //결제 수단
-				merchant_uid: 'merchant_' + new Date().getTime(),
-				name: '쌍용백병원', //주문 창에서 보일 이름
-				amount: amount,  //가격
-				//구매자 정보
-				buyer_email: 'cjh3576@naver.com', //세션에서 이메일 받기
-				buyer_name: '최재혁',
-				buyer_tel: '010-9964-4774',
-				//buyer_addr: '주소',
-				m_redirect_url: '성공시 url'
-				}, function (rsp) {
+					pg : 'inicis', //결제 방법 카카오페이 계좌입금 등 
+					pay_method : 'card', //결제 수단
+					merchant_uid : 'merchant_' + new Date().getTime(),
+					name : '쌍용백병원', //주문 창에서 보일 이름
+					amount : amount, //가격
+					//구매자 정보
+					buyer_email : email, //세션에서 이메일 받기
+					buyer_name : name,
+					buyer_tel : phone,
+					//buyer_addr: '주소',
+					m_redirect_url : '성공시 url'
+				}, function(rsp) {
 					console.log(rsp);
 					if (rsp.success) {
-						var msg = '결제가 완료되었습니다.';
-						msg += '고유ID : ' + rsp.imp_uid;
-						msg += '상점 거래ID : ' + rsp.merchant_uid;
-						msg += '결제 금액 : ' + rsp.paid_amount;
-						msg += '카드 승인번호 : ' + rsp.apply_num;
+						var msg = '후원해주셔서 감사합니다.';
+						//msg += '고유ID : ' + rsp.imp_uid;
+						//msg += '상점 거래ID : ' + rsp.merchant_uid;
+						//msg += '결제 금액 : ' + rsp.paid_amount;
+						//msg += '카드 승인번호 : ' + rsp.apply_num;
 						purchase();
 					} else {
 						var msg = '결제에 실패하였습니다.';
-						msg += rsp.error_msg;
+						//msg += rsp.error_msg;
 					}
 					alert(msg);
 				});
-			});
-		
-		
+			} else {
+				alert('약관 동의를 해주세요');
+				return false;
+			}
+		});
+
 		/////////////결제 끝
-		function purchase(){
-			
+		function purchase() {
+
 			var amount = document.getElementById('price').value;
-			alert('id'+id);
 			$.ajax({
-				url: "../pay/donationWrite",
-				type: "POST",
-				data:{
-					id:'admin',
-					price:amount,
-					opt:opt,
-					category:category
+				url : "../pay/donationWrite",
+				type : "POST",
+				data : {
+					id : '${memberVO.id}',
+					price : amount,
+					opt : opt,
+					category : category
 				},
-				success:function(data){
-					alert('data:'+data);
+				success : function(data) {
+					console.log('data:' + data);
 					//댓글추가 후원자수 수정
-					
-					
+
 					location.reload();
 				}
 			}); //ajax
 		}
+		//후원인 총 인원
+		$.ajax({
+			url:"./donationPeopleTotal",
+			type:"GET",
+			success:function(data){
+				$('#people').html('후원자 <span>'+data+'</span>명');
+			}
+		}); //후원 총인원 끝
+		
+		//후원내역
+		
 	});
 </script>
 </head>
@@ -110,13 +128,13 @@
 					<table>
 						<tr>
 							<th >후원자ID</th>
-							<td id="id">${dto.id }admin</td>
+							<td id="id">${memberVO.id }</td>
 							<th>후원자 이름</th>
-							<td id="name">${dto.name }admin</td>
+							<td id="name">${memberVO.name }</td>
 						</tr>
 						<tr>
 							<th>후원자연락처</th>
-							<td id="phone">${dto.phone }010-9964-4774</td>
+							<td id="phone">${memberVO.phone }</td>
 							<th>후원날짜</th>
 							<td id="date"></td>
 						</tr>
@@ -125,7 +143,7 @@
 				
 				<div id="donation_price">
 					<span>후원금액</span>
-					<span><input type="text" name="price" id="price"></span>
+					<span><input type="text" name="price" id="price" placeholder="100원 이상부터 후원가능합니다"></span>
 					<span>원</span>
 				</div>
 				
@@ -166,34 +184,15 @@ Fax : 02-2072-4041
 		</div>
 		
 		<div id="comment_box">
-			<p>후원자<span>145</span>명</p>
+			<p id="people"></p>
 			<table>
+				<c:forEach items="${list}" var="list">
 				<tr>
-					<td class="comment_num">145</td>
-					<th>adm*** 님이 1,456,789원 후원하셨습니다.</th>
-					<td class="comment_date">2019-07-23</td>
+					<td class="comment_num">${list.num }</td>
+					<th>${list.id } 님이 ${list.price }원 후원하셨습니다.</th>
+					<td class="comment_date">${list.pay_date }</td>
 				</tr>
-				<tr>
-					<td class="comment_num">144</td>
-					<th>adm*** 님이 1,456,789원 후원하셨습니다.</th>
-					<td class="comment_date">2019-07-23</td>
-				</tr>
-				<tr>
-					<td class="comment_num">143</td>
-					<th>adm*** 님이 1,456,789원 후원하셨습니다.</th>
-					<td class="comment_date">2019-07-23</td>
-				</tr>
-				<tr>
-					<td class="comment_num">142</td>
-					<th>adm*** 님이 1,456,789원 후원하셨습니다.</th>
-					<td class="comment_date">2019-07-23</td>
-				</tr>
-				<tr>
-					<td class="comment_num">141</td>
-					<th>adm*** 님이 1,456,789원 후원하셨습니다.</th>
-					<td class="comment_date">2019-07-23</td>
-				</tr>
-			
+				</c:forEach>
 			</table>
 		</div>
 	
