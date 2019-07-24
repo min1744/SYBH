@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.hospital.util.PageMaker;
+
 @Repository
 public class PayDAO {
 	@Inject
@@ -24,7 +26,7 @@ public class PayDAO {
 	}
 	
 	//관리자페이지용 전체 건강검진 결제내역
-	public List<PayVO> getAllList() throws Exception{
+	public List<PayVO> getAllList(PageMaker pageMaker) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getAllList");
 	}
 }
