@@ -113,9 +113,9 @@ public class NoticeController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", lists);
 		mv.addObject("pager", pageMaker);
-		
+				
 		mv.setViewName("board/boardList");
-//	
+
 		return mv;
 	}
 }

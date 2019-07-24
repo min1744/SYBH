@@ -29,7 +29,7 @@
 		
 			<ul>
 				<li>병원안내</li>
-				<li><a href="./notice/noticeList">공지사항</a></li>
+				<li><a href="./noticeList">공지사항</a></li>
 				<li><a href="#">병원소개</a></li>
 				<li><a href="#">의료진 소개</a></li>
 				<li><a href="#">층별안내</a></li>
@@ -42,38 +42,36 @@
 		
 		
 		<div id="boardList">
-			
-			<table>
-				<thead>
-					<tr>
-						<th style="width: 95px;">번호</th>
-						<th style="width: 510px;">제목</th>
-						<th style="width: 150px;">작성일</th>
-						<th style="width: 100px;">조회수</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="${list}" var="vo">
-					<tr>
-						<td>${vo.num}</td>
-						<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
-						<td>${vo.reg_date}</td>
-						<td>${vo.hit}</td>
-					</tr>
-						
-						
-					</c:forEach>		
-				</tbody>
-			</table>
-			
-			
-			
-			
-			
-			
-			
-			
-			<div id="paging">
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 95px;">번호</th>
+							<th style="width: 510px;">제목</th>
+							<th style="width: 150px;">작성일</th>
+							<th style="width: 100Px;">조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="vo">
+							<tr>
+								<td>${vo.num}</td>
+								<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
+								<td>${vo.writer}</td>
+								<td>${vo.hit}</td>
+							</tr>
+						</c:forEach>
+						<!-- fix -->
+						<%-- <c:forEach items="${list2}" var="vo">
+							<tr id="position">
+							<td class="num" style="background-color: blue"></td>
+							<td class="title"><a href="./${board}Select?num=${vo.num}"></a></td>
+							<td class="date">${vo.reg_date}</td>
+							<td class="hit">${vo.hit}</td>
+							</tr>
+						</c:forEach> --%>
+					</tbody>
+				</table>
+				<div id="paging" style="margin-left: 315px;">
 			<ul>
 				<c:if test="${pager.curBlock>1}">
 					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
@@ -109,6 +107,7 @@
 				<input type="text" name="search" id="search">
 				<button id="btn">검색</button>
 			</div>
+			
 			
 		
 		</div>

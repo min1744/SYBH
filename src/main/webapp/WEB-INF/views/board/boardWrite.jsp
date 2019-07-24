@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -57,6 +57,12 @@
 			<input id="write" type="button" value="글등록">
 		</div>
 	</form>
+	</div>
+		
+	<p>상단고정!<input type="checkbox" id="fix" name="fix" value="1"></p>	
+		
+	<div id="write_btn">
+	<a href="./noticeWrite" id="write">공지등록</a>
 	</div>
 	</div>
 </div>

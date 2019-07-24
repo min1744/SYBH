@@ -11,7 +11,7 @@
   		select notice_seq.nextval from dual
   </selectKey>
   
-  	insert into notice values(#{num},#{title},#{writer},#{contents},sysdate,0)
+  	insert into notice values(#{num},#{title},#{writer},#{contents},sysdate,0,#{fix})
   </insert>
   
   <update id="setUpdate" parameterType="NoticeVO">
@@ -48,6 +48,8 @@
   	 	 where R between #{startRow} and #{lastRow}
   </select>
  
+
+    
   <!-- search  -->
   <select id="getCount" parameterType="PageMaker" resultType="Integer">
   	select count(num) from notice

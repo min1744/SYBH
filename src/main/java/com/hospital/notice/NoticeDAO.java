@@ -49,10 +49,10 @@ public class NoticeDAO implements BoardDAO {
 		return sqlSession.update(NAMESPACE+"setHitUpdate", num);
 	}
 
-	/*
-	 * public List<NoticeVO> getList2(PageMaker pageMaker) throws Exception{ return
-	 * sqlSession.selectOne(NAMESPACE+"getList2", pageMaker); }
-	 */
+	
+	public List<NoticeVO> getListFix(PageMaker pageMaker) throws Exception{ 
+		return sqlSession.selectOne(NAMESPACE+"getListFix", pageMaker); }
+	 
 	@Override
 	public int addHit() throws Exception {
 		// TODO Auto-generated method stub
