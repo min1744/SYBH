@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- header -->
 <div id="header">
 	<div id="header_box">
@@ -24,9 +25,18 @@
 		<!-- login / join -->
 		<div id="member">
 			<ul>
-				<li><a href="../member/memberLogin">로그인</a></li>
-				<li style="padding: 0 10px;">│<li>
-				<li><a href="../member/memberAgree">회원가입</a></li>
+				<c:choose>
+					<c:when test="${not empty memberVO}">
+						<li><a href="../member/memberLogout">로그아웃</a></li>
+						<li style="padding: 0 10px;">│<li>
+						<li><a href="../member/memberMyPage">마이페이지</a></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="../member/memberLogin">로그인</a></li>
+						<li style="padding: 0 10px;">│<li>
+						<li><a href="../member/memberAgree">회원가입</a></li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 		</div>

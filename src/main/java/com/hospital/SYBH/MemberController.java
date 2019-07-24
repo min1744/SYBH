@@ -18,7 +18,6 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
-	
 	//현아 작성 (마이페이지 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage() throws Exception {
@@ -30,7 +29,6 @@ public class MemberController {
 		
 	}
 	
-	
 	@RequestMapping(value = "memberLogin", method = RequestMethod.GET)
 	public void login() throws Exception {}
 	
@@ -39,10 +37,10 @@ public class MemberController {
 		memberVO = memberService.login(memberVO);
 		if(memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
-			mv.setViewName("index/home");
+			mv.setViewName("redirect:../");
 		} else {
 			mv.addObject("message", "로그인 실패하셨습니다.");
-			mv.addObject("path", "../index/home");
+			mv.addObject("path", "../");
 			mv.setViewName("common/messageMove");
 		}
 		
@@ -53,7 +51,7 @@ public class MemberController {
 	public String logOut(HttpSession session) throws Exception{
 		session.invalidate();
 		
-		return "redirect:../index/home";
+		return "redirect:../";
 	}
 	
 	@RequestMapping(value = "memberAgree", method = RequestMethod.GET)
