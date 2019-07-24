@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.pay.PayService;
@@ -19,19 +20,22 @@ public class PayController {
 	@Inject
 	private PayService payService;
 	
-	//결제 입력
-	@RequestMapping(value = "payWrite",method = RequestMethod.POST)
-	public ModelAndView setWrite(PayVO payVO)throws Exception{
+	@RequestMapping(value = "payPopup", method = RequestMethod.GET)
+	public ModelAndView popup() throws Exception {
+		
 		ModelAndView mv = new ModelAndView();
-		int result = payService.setWrite(payVO);
-		if(result>0) {
-			mv.setViewName("redirect:../");
-		}else {
-			mv.addObject("message","결제 실패");
-			mv.addObject("path","../");
-			mv.setViewName("common/messageMove");
-		}
+		mv.setViewName("pay/payPopup");
+		
 		return mv;
+	}
+	
+	
+	//결제 입력
+	@RequestMapping(value = "donationWrite",method = RequestMethod.POST)
+	@ResponseBody
+	public int setWrite(PayVO payVO)throws Exception{
+		
+		return payService.setWrite(payVO);
 	}
 	
 	//한사람 모든 결제 내역

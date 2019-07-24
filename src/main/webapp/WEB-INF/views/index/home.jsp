@@ -11,8 +11,7 @@
 <link type="text/css" rel="stylesheet" href="./resources/css/jquery.bxslider.css" />
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 </head>
-<!--재혁 후원  -->
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <script type="text/javascript">
 
 $(function() {
@@ -77,7 +76,7 @@ $(function() {
     });
   
 	function popupOpen(){
-		var url= "./donation/donationPopup";    //팝업창 페이지 URL
+		var url= "./pay/payPopup";    //팝업창 페이지 URL
 		var winWidth = 573;
 	    var winHeight = 800;
 	    var popupX = 700;

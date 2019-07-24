@@ -9,10 +9,27 @@
 <link href="../resources/css/donation.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> 
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
+<!--재혁 후원  -->
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 	$(function(){
+		//날짜
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = new String(date.getMonth()+1);
+		var day = new String(date.getDate());
+		$('#date').append(year+" - "+month+" - "+day);
+		//회원정보
+		
+		var name= document.getElementById('name').value;
+		var tel = '${memberVO.phone}';
+		var email = '${memberVO.email}';
+		var opt = 'card';
+		var category=1;
 		//////////////재혁 후원
-		 $("#check_modules").click(function () {
+		 $(".check_modules").click(function () {
+				var amount = document.getElementById('price').value;
+				var id = document.getElementById('id').value;
 				var IMP = window.IMP; 
 				IMP.init('imp95286508');
 				
@@ -20,13 +37,13 @@
 				pg: 'inicis',  //결제 방법 카카오페이 계좌입금 등 
 				pay_method: 'card', //결제 수단
 				merchant_uid: 'merchant_' + new Date().getTime(),
-				name: '쌍용UNICEF', //주문 창에서 보일 이름
-				amount: 1000,  //가격
+				name: '쌍용백병원', //주문 창에서 보일 이름
+				amount: amount,  //가격
 				//구매자 정보
 				buyer_email: 'cjh3576@naver.com', //세션에서 이메일 받기
 				buyer_name: '최재혁',
 				buyer_tel: '010-9964-4774',
-				buyer_addr: '주소',
+				//buyer_addr: '주소',
 				m_redirect_url: '성공시 url'
 				}, function (rsp) {
 					console.log(rsp);
@@ -47,6 +64,28 @@
 		
 		
 		/////////////결제 끝
+		function purchase(){
+			
+			var amount = document.getElementById('price').value;
+			alert('id'+id);
+			$.ajax({
+				url: "../pay/donationWrite",
+				type: "POST",
+				data:{
+					id:'admin',
+					price:amount,
+					opt:opt,
+					category:category
+				},
+				success:function(data){
+					alert('data:'+data);
+					//댓글추가 후원자수 수정
+					
+					
+					location.reload();
+				}
+			}); //ajax
+		}
 	});
 </script>
 </head>
@@ -70,23 +109,23 @@
 				<div id="donation_member">
 					<table>
 						<tr>
-							<th>후원자ID</th>
-							<td>admin</td>
+							<th >후원자ID</th>
+							<td id="id">${dto.id }admin</td>
 							<th>후원자 이름</th>
-							<td>admin</td>
+							<td id="name">${dto.name }admin</td>
 						</tr>
 						<tr>
 							<th>후원자연락처</th>
-							<td>010-1111-2222</td>
+							<td id="phone">${dto.phone }010-9964-4774</td>
 							<th>후원날짜</th>
-							<td>2019-07-23</td>
+							<td id="date"></td>
 						</tr>
 					</table>
 				</div>
 				
 				<div id="donation_price">
 					<span>후원금액</span>
-					<span><input type="text"></span>
+					<span><input type="text" name="price" id="price"></span>
 					<span>원</span>
 				</div>
 				
@@ -121,8 +160,7 @@ Fax : 02-2072-4041
 				</div>
 				</div>
 				
-				<a href="" id="donation_btn">후원하기</a>
-				
+				<div id="donation_btn" class="check_modules" style="cursor: pointer;">후원하기</div>
 			</div>
 			
 		</div>
