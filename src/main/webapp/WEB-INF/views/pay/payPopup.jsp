@@ -194,6 +194,22 @@ Fax : 02-2072-4041
 				</tr>
 				</c:forEach>
 			</table>
+			
+			<div id="paging">
+					
+					<ul>
+						<li><a href="" id="prev">◀</a></li>
+						<li><a href="">1</a></li>
+						<li><a href="">2</a></li>
+						<li><a href="">3</a></li>
+						<li><a href="">4</a></li>
+						<li><a href="">5</a></li>
+						<li><a href="" id="next">▶</a></li>
+					</ul>				
+				
+				</div>
+			
+			
 		</div>
 	
 	</div>

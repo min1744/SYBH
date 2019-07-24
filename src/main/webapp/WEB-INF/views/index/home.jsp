@@ -82,9 +82,9 @@ $(function() {
   
 	function popupOpen(){
 		var url= "./pay/payPopup";    //팝업창 페이지 URL
-		var winWidth = 573;
+		var winWidth = 1000;
 	    var winHeight = 800;
-	    var popupX = 700;
+	    var popupX = 400;
 	    console.log(popupX);
 	  	//&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
 		 var popupY= 80;
