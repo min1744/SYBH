@@ -15,5 +15,21 @@ public class NewsController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("news/newsAll");
 	}
+	
+	
+	@RequestMapping(value = "newsList", method = RequestMethod.GET)
+	public void getList() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("news/newsList");
+	}
+	
+	
+	@RequestMapping(value = "newsWrite", method = RequestMethod.GET)
+	public void setWrite() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("news/newsWrite");
+	}
 
 }

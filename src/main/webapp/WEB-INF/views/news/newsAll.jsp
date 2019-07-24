@@ -27,7 +27,7 @@
 			<div class="news_nav">
 			
 				<h3>질환 정보</h3>
-				<a href="">전체 목록 보기</a>
+				<a href="./newsList">전체 목록 보기</a>
 				
 			</div>
 			
@@ -68,7 +68,7 @@
 			<div class="news_nav">
 			
 				<h3>영양 정보</h3>
-				<a href="">전체 목록 보기</a>
+				<a href="./newsList">전체 목록 보기</a>
 				
 			</div>
 			
@@ -109,7 +109,7 @@
 			<div class="news_nav">
 			
 				<h3>운동 정보</h3>
-				<a href="">전체 목록 보기</a>
+				<a href="./newsList">전체 목록 보기</a>
 				
 			</div>
 			

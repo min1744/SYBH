@@ -11,7 +11,29 @@
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
 <script type="text/javascript">
 	$(function() {
-							
+		
+		
+		//file 추가
+		var count = 0;
+		
+		$('#add').click(function() {
+			if(count < 5) {
+				var result = '<input type="file" name="f1" class="form-control f1"><span style="cursor:pointer;" class="del">X</span>';
+				$('#files').append(result);
+				count++;
+			} else {
+				alert('첨부파일은 최대 5개까지만 가능합니다.');
+			}
+		});	
+		
+			$('#files').on('click', '.del', function() {
+				$(this).prev().remove();
+				$(this).remove();
+				count--;
+			});
+			
+			
+		//폼 검증				
 		$("#write").click(function() {
 			//다른 input들 검증
 			if($('#contents').summernote('isEmpty')) {
@@ -33,7 +55,7 @@
 
 <div id="board">
 		<div id="board_title">
-			<p>공지등록</p>
+			<p>뉴스 등록</p>
 		</div>
 	
 <div id="board_box">
@@ -52,15 +74,17 @@
 		  <span class="contents">글내용</span>
  		 <textarea class="form-control" rows="5" cols="15" id="contents" name="contents"></textarea>
 		</div>
-		
+		<div class="form-group" id="box">
+			<input type="button" id="add" value="ADD FILE" class="btn btn-primary">
+			<div id="files"></div>
+		</div>
 		<div id="write_btn">
-			<input id="write" type="button" value="글등록">
+			<input id="write" type="button" value="뉴스 등록">
 		</div>
 	</form>
 	</div>
 	</div>
 </div>
-
 
 <!-- footer 추가 -->
 <c:import url="../common/footer.jsp" />
