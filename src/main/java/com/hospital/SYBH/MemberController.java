@@ -1,5 +1,7 @@
 ﻿package com.hospital.SYBH;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.member.MemberService;
 import com.hospital.member.MemberVO;
+import com.hospital.pay.PayDAO;
+import com.hospital.pay.PayService;
+import com.hospital.pay.PayVO;
+import com.hospital.util.PageMaker;
 
 @Controller
 @RequestMapping("/member/")
@@ -17,6 +23,10 @@ public class MemberController {
 	
 	@Inject
 	private MemberService memberService;
+	@Inject
+	private PayService payService;
+	@Inject
+	private PayDAO payDAO;
 	
 	//현아 작성 (마이페이지 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
@@ -79,5 +89,24 @@ public class MemberController {
 		if(result > 0) {
 			
 		}
+	}
+	
+	//재혁 후원내역 작성
+	@RequestMapping(value="memberDonation", method = RequestMethod.GET)
+	public ModelAndView memberDonation(PageMaker pageMaker, PayVO payVO,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		payVO.setId(id);
+		payVO.setCategory(1);
+		List<PayVO> list =  payService.getOneList(pageMaker, payVO);
+		int totalCount = payDAO.getOneTotalCount(payVO);
+		mv.addObject("board", "Donation");
+		mv.addObject("what", "후원");
+		mv.addObject("list", list);
+		mv.addObject("pager", pageMaker);
+		mv.addObject("count",totalCount);
+		mv.setViewName("member/memberBreakdown");
+		return mv;
+		
 	}
 }

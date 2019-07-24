@@ -25,7 +25,7 @@
 				<li><a href="./memberUpdate">내정보 수정</a></li>
 				<li><a href="./memberBreakdown">진료예약 조회</a></li>
 				<li><a href="./memberBreakdown">건강검진 조회</a></li>
-				<li><a href="#" style="color:#6BB5DB;">후원내역 조회</a></li>
+				<li><a href="./memberDonation" style="color:#6BB5DB;">후원내역 조회</a></li>
 				<li><a href="./memberBreakdown">문의내역 조회</a></li>
 			</ul>
 		
@@ -35,7 +35,7 @@
 		
 			<div id="info_list">
 				
-				<p>총 게시물 : <span>1</span></p>
+				<p>총 게시물 : <span>${count }</span></p>
 			
 				<table>
 					<thead>
@@ -48,76 +48,15 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach items="${list }" var="list">
 						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
+							<td>${list.num }</td>
+							<td>${list.name }</td>
+							<td>${list.price }원</td>
+							<td>${list.pay_date }</td>
+							<td>${list.opt }</td>						
 						</tr>
-						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
-						</tr>
-						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
-						</tr>
-						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
-						</tr>
-						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
-						</tr>
-						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
-						</tr>
-						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
-						</tr>
-						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
-						</tr>
-						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
-						</tr>
-						<tr>
-							<td>145</td>
-							<td>admin</td>
-							<td>1,456,789원</td>
-							<td>2019-07-24-23:15:04</td>
-							<td>신용카드</td>						
-						</tr>
+						</c:forEach>
 						
 					</tbody>
 				</table>
@@ -125,18 +64,22 @@
 				<div id="paging">
 					
 					<ul>
-						<li><a href="" id="prev">◀</a></li>
-						<li><a href="">1</a></li>
-						<li><a href="">2</a></li>
-						<li><a href="">3</a></li>
-						<li><a href="">4</a></li>
-						<li><a href="">5</a></li>
-						<li><a href="">6</a></li>
-						<li><a href="">7</a></li>
-						<li><a href="">8</a></li>
-						<li><a href="">9</a></li>
-						<li><a href="">10</a></li>
-						<li><a href="" id="next">▶</a></li>
+						<c:if test="${pager.curBlock>1 }">
+						<li><a href="./member${board }?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+						</c:if>
+						<c:choose>
+							<c:when test="${pager.totalCount==0 }">
+								<li><a href="./member${board }?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
+							</c:when>
+							<c:otherwise>
+								<c:forEach begin="${pager.startNum }" end="${pager.lastNum }" var="i">
+									<li><a href="./member${board }?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${pager.curBlock<pager.totalBlock }">
+						<li><a href="./member${board }?curPage=${pager.lastNum+1 }&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+						</c:if>
 					</ul>				
 				
 				</div>
