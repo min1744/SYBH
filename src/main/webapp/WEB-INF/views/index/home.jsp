@@ -148,7 +148,7 @@ $(function() {
 		<!-- header 메뉴 -->
 		<div id="header_menu">
 			<ul>
-				<li><a href="">진료예약/조회</a></li>
+				<li><a href="./reserve/reserveInfo">진료예약/조회</a></li>
 				<li><a href="">건강뉴스</a></li>
 				<li><a href="./notice/noticeList">병원안내</a></li>
 				<li><a href="">고객의 소리</a></li>
@@ -173,8 +173,8 @@ $(function() {
 <div id="sub_nav">
 	<div id="sub_nav_box">
 		<ul id="ul_1">
-			<li><a href="">일반진료 예약</a></li>
-			<li><a href="">건강검진 예약</a></li>
+			<li><a href="./reserve/reserveNomal">일반진료 예약</a></li>
+			<li><a href="./reserve/reserveMedical">건강검진 예약</a></li>
 		</ul>
 		<ul id="ul_2">
 			<li><a href="">질환 정보</a></li>
@@ -257,8 +257,8 @@ $(function() {
 				<p>인터넷예약은 24시간 이용하실 수 있습니다.</p>
 				</div>
 				<div class="list_btn">
-				<a href="" class="first_a">진료예약안내</a>
-				<a href="">진료예약하기</a>
+				<a href="./reserve/reserveInfo" class="first_a">진료예약안내</a>
+				<a href="./reserve/reserveNomal">진료예약하기</a>
 				</div>
 			</div>
 			

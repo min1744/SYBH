@@ -18,6 +18,19 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
+	
+	//현아 작성 (마이페이지 jsp 잘 나오는지 테스트용)
+	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
+	public ModelAndView myPage() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberMyPage");
+		
+		return mv;
+		
+	}
+	
+	
 	@RequestMapping(value = "memberLogin", method = RequestMethod.GET)
 	public void login() throws Exception {}
 	
