@@ -8,14 +8,9 @@
   <insert id="setWrite" parameterType="PayVO">
   	insert into pay values(pay_seq.nextval, #{id}, sysdate, #{price}, #{opt}, #{category})
   </insert>
-  
-  
-
-  <!--한사람 모든 결제 수  -->
-  <select id="getOneTotalCount" parameterType="String" resultType="Integer">
-
+  <!--한사람 모든 결제내역 수  -->
+  <select id="getOneTotalCount" parameterType="PageMaker" resultType="Integer">
   	select count(num) from pay where id=#{id}
-  	
   </select>
   
   <!--한사람의 모든 결제내역  -->

@@ -19,24 +19,12 @@
 
 	<div id="board_box">
 	
+	<div id="info_box">	
 		
-		<div id="board_nav">
-		
-			<ul>
-				<li>마이 페이지</li>
-				<li><a href="#" style="color:#6BB5DB;">내 정보</a></li>
-				<li><a href="#">진료 예약/결제 조회</a></li>
-				<li><a href="#">건강검진 예약/결제 조회</a></li>
-				<li><a href="#">후원 내역 조회</a></li>
-				<li><a href="#">문의 내역</a></li>
-			</ul>
-		
-		</div>
-		
-		
+		<!-- 내정보 -->
 		<div id="myInfo">
-		
 			<div id="myInfo_list">
+				<h3>내 정보</h3>
 				<table>
 					<tr>
 						<th>아이디</th>
@@ -68,18 +56,80 @@
 					</tr>
 				</table>
 				
+				<div id="info_btn">
+					<a href="" id="memberUpdate">회원정보 수정</a>
+					<a href="" id="memberDelete">회원탈퇴</a>
+				</div>
+			</div>
+			
+			
+			<!-- 일반진료 -->
+			<div id="reserve_info" class="common_div">
+			
+				<h3>진료예약 조회</h3>
 				
-				<a href="" id="memberUpdate">회원정보 수정</a>
-				<a href="" id="memberDelete">회원탈퇴</a>
+				<p>온라인으로 진료 예약한 내역을<br>
+				확인하실 수 있습니다.</p>
+				
+				<div class="info_btn_2">
+					<a href="./memberBreakdown">조회하기</a>
+				</div>
+			</div>
+			
+			
+			<!-- 건강검진진료 -->
+			<div id="medical_info" class="common_div">
+			
+				<h3>건강검진 조회</h3>
+				
+				<p>온라인으로 건강검진 예약내역을<br>
+				확인하실 수 있습니다.</p>
+				
+				<div class="info_btn_2">
+					<a href="./memberBreakdown">조회하기</a>
+				</div>
+			</div>
+			
+			
+			<!-- 후원내역 -->
+			<div id="donation_info" class="common_div">
+			
+				<h3>후원내역 조회</h3>
+			
+				<p>쌍용백병원에 후원한 내역을<br>
+				확인하실 수 있습니다.</p>
+			
+				<div class="info_btn_2">
+					<a href="./memberBreakdown">조회하기</a>
+				</div>
+			</div>
+			
+			
+			<!-- 문의내역 -->
+			<div id="qna_info" class="common_div">
+			
+				<h3>문의내역 조회</h3>
+			
+				<p>내가 남긴 문의 내역을<br>
+				확인하실 수 있습니다.</p>
+			
+				<div class="info_btn_2">
+					<a href="./memberBreakdown">조회하기</a>
+				</div>
+			</div>
+			
+			
+			<!-- 대표전화 -->
+			<div id="main_info">
+			
+				<h3>대표전화</h3>
 			
 			</div>
-		
+			
+			</div>
 		</div>
-		
 	</div>
 </div>
-
-
 
 <!-- footer 추가 -->
 <c:import url="../common/footer.jsp" />

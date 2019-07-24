@@ -35,7 +35,6 @@ public class PayDAO {
 		return sqlSession.selectOne(NAMESPACE+"getSupportList");
 	}
 	
-
 	//관리자용 전체 건강검진 결제 수
 	public int getAllTotalCount() throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getAllTotalCount");
@@ -44,6 +43,5 @@ public class PayDAO {
 	//관리자페이지용 전체 건강검진 결제 내역
 	public List<PayVO> getAllList(PageMaker pageMaker) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getAllList",pageMaker);
-
 	}
 }
