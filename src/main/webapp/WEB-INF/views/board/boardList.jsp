@@ -28,7 +28,7 @@
 		
 			<ul>
 				<li>병원안내</li>
-				<li><a href="./notice/noticeList">공지사항</a></li>
+				<li><a href="./noticeList">공지사항</a></li>
 				<li><a href="#">병원소개</a></li>
 				<li><a href="#">의료진 소개</a></li>
 				<li><a href="#">층별안내</a></li>
@@ -41,38 +41,42 @@
 		
 		
 		<div id="boardList">
-			
-			<table>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<tbody>
-				<c:forEach items="${list}" var="vo">
-					<tr>
-						<td>${vo.num}</td>
-						<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
-						<td>${vo.writer}</td>
-						<td>${vo.hit}</td>
-					</tr>
-						
-						
-					</c:forEach>		
-				</tbody>
-			</table>
-			
-			
-			
-			
-			
-			
-			
-			
-			<div id="paging" style="margin-left: 315px;">
+
+				<table>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="vo">
+							<tr>
+								<td>${vo.num}</td>
+								<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
+								<td>${vo.writer}</td>
+								<td>${vo.hit}</td>
+							</tr>
+
+
+						</c:forEach>
+						<!-- fix -->
+						<%-- <c:forEach items="${list2}" var="vo">
+							<tr id="position">
+							<td class="num" style="background-color: blue"></td>
+							<td class="title"><a href="./${board}Select?num=${vo.num}"></a></td>
+							<td class="date">${vo.reg_date}</td>
+							<td class="hit">${vo.hit}</td>
+							
+							</tr>
+						</c:forEach> --%>
+
+					</tbody>
+				</table>
+
+				<div id="paging" style="margin-left: 315px;">
 			<ul>
 				<c:if test="${pager.curBlock>1}">
 					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">[이전]</a></li>
@@ -108,6 +112,7 @@
 				<input type="text" name="search" id="search">
 				<button id="btn">검색</button>
 			</div>
+			
 			
 		
 		</div>
