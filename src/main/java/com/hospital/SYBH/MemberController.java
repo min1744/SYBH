@@ -30,6 +30,17 @@ public class MemberController {
 		
 	}
 	
+	//현아 작성 (마이페이지 jsp 잘 나오는지 테스트용)
+	@RequestMapping(value = "memberBreakdown", method = RequestMethod.GET)
+	public ModelAndView memberBreakdown() throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberBreakdown");
+			
+		return mv;
+			
+	}
+	
 	
 	@RequestMapping(value = "memberLogin", method = RequestMethod.GET)
 	public void login() throws Exception {}

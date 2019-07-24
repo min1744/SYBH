@@ -21,6 +21,7 @@
 	
 	<div id="info_box">	
 		
+		<!-- 내정보 -->
 		<div id="myInfo">
 			<div id="myInfo_list">
 				<h3>내 정보</h3>
@@ -71,7 +72,7 @@
 				확인하실 수 있습니다.</p>
 				
 				<div class="info_btn_2">
-					<a href="">조회하기</a>
+					<a href="./memberBreakdown">조회하기</a>
 				</div>
 			</div>
 			
@@ -85,7 +86,7 @@
 				확인하실 수 있습니다.</p>
 				
 				<div class="info_btn_2">
-					<a href="">조회하기</a>
+					<a href="./memberBreakdown">조회하기</a>
 				</div>
 			</div>
 			
@@ -99,7 +100,7 @@
 				확인하실 수 있습니다.</p>
 			
 				<div class="info_btn_2">
-					<a href="">조회하기</a>
+					<a href="./memberBreakdown">조회하기</a>
 				</div>
 			</div>
 			
@@ -113,7 +114,7 @@
 				확인하실 수 있습니다.</p>
 			
 				<div class="info_btn_2">
-					<a href="">조회하기</a>
+					<a href="./memberBreakdown">조회하기</a>
 				</div>
 			</div>
 			
@@ -125,16 +126,10 @@
 			
 			</div>
 			
-			
+			</div>
 		</div>
 	</div>
-		
-		
-		
-	</div>
 </div>
-
-
 
 <!-- footer 추가 -->
 <c:import url="../common/footer.jsp" />
