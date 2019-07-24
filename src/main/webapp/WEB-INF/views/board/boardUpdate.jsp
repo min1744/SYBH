@@ -23,7 +23,6 @@
 			}
 		});
 			
-			
 		});
 </script>
 </head>
@@ -40,10 +39,11 @@
 <div id="board_box">
 	
 	<div id="form_box">
-		<form id="frm" action="./${board}Update" method="post" enctype="multipart/form-data">
+		<form id="frm" action="./${board}Update" method="post">
+		<input type="hidden" name="num" value="${vo.num}">
 		<div class="float">
 		 <span class="title">제목</span>
- 		 <input class="form-control" type="text" id="title" name="title">
+ 		 <input class="form-control" type="text" id="title" value="${vo.title}" name="title">
 		</div>
 		<div class="float">
 		 <span class="writer">작성자</span>
@@ -51,7 +51,7 @@
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">글내용</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="contents" name="contents"></textarea>
+ 		 <textarea class="form-control" rows="5" cols="15" id="contents" name="contents">${vo.contents}</textarea>
 		</div>
 		
 		<div id="write_btn">
@@ -60,9 +60,9 @@
 	</form>
 	</div>
 		
-	<!-- <div id="write_btn">
+	<div id="write_btn">
 	<a href="./noticeWrite" id="write">공지등록</a>
-	</div> -->
+	</div>
 	</div>
 </div>
 

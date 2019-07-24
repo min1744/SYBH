@@ -45,7 +45,9 @@ public class NoticeDAO implements BoardDAO {
 		return sqlSession.selectList(NAMESPACE+"getList", pageMaker);
 	}
 	
-	
+	public int setHitUpdate(int num)throws Exception{
+		return sqlSession.update(NAMESPACE+"setHitUpdate", num);
+	}
 
 	/*
 	 * public List<NoticeVO> getList2(PageMaker pageMaker) throws Exception{ return

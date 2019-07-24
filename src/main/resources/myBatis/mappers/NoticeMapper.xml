@@ -15,8 +15,13 @@
   </insert>
   
   <update id="setUpdate" parameterType="NoticeVO">
-  	update notice set title={title}, contents={contents} where num=#{num}  
+  	update notice set title=#{title}, contents=#{contents} where num=#{num}  
   </update>
+  
+  <update id="setHitUpdate" parameterType="Integer">
+  	update notice set hit=hit+1 where num=#{num}
+  </update>
+  
   
   <delete id="setDelete" parameterType="Integer">
   	delete notice where num=#{num}
@@ -41,30 +46,8 @@
   	 	 like '%'|| #{search} || '%'
   	 	 order by num desc) N)
   	 	 where R between #{startRow} and #{lastRow}
- 		 	 	  
-  
-  
   </select>
-
-	<resultMap type="NoticeVO" id="notice">
-		<id property="num" column="num" />
-		<result property="title" column="title" />
-		<result property="writer" column="writer" />
-		<result property="contents" column="contents" />
-		<result property="reg_date" column="reg_date" />
-		<result property="hit" column="hit" />
-
-	</resultMap>
-  
-  <select id="getSelect" parameterType="NoticeVO" >
-  
-  
-  
-  </select>
-  
-  
-  
-  
+ 
   <!-- search  -->
   <select id="getCount" parameterType="PageMaker" resultType="Integer">
   	select count(num) from notice
@@ -81,8 +64,17 @@
   	</choose>
 	  like '%' || #{search} || '%'
  </select>
+ 
+ <select id="getSelect" parameterType="Integer" resultMap="noticeResult">
+ 	select * from notice where num=#{num}
+  </select>
   
-  
-  
-  
- </mapper>  
+  <resultMap type="NoticeVO" id="noticeResult">
+  <id property="num" column="num"/>
+  <result property="title" column="title"/>
+  <result property="contents" column="contents"/>
+  <result property="reg_date" column="reg_date"/>
+  <result property="hit" column="hit"/>
+  </resultMap>
+   
+</mapper>  
