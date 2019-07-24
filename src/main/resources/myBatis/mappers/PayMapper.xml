@@ -16,7 +16,7 @@
   </sql>
   
   <!--한사람 모든 결제내역 수  -->
-  <select id="getOneTotalCount" parameterType="" resultType="Integer">
+  <select id="getOneTotalCount" parameterType="PageMaker" resultType="Integer">
   	select count(num) from pay where id=#{id}
   </select>
   
