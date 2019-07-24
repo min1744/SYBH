@@ -48,7 +48,15 @@
 	<div id="agree_box">
 		<c:forEach begin="1" end="3" step="1" varStatus="i">
 			<div id="agree_${i.count}">
+				<c:if test="${i.count eq 1}">
 				<h2>이용약관</h2>
+				</c:if>
+				<c:if test="${i.count eq 2}">
+				<h2>개인정보수집에 대한 동의</h2>
+				</c:if>
+				<c:if test="${i.count eq 3}">
+				<h2>동의거부시 불이익에 관한 사항</h2>
+				</c:if>
 				<div id="agree_${i.count}_box">
 					<c:import url="../terms_and_conditions/agree${i.count}.jsp" />
 				</div>
