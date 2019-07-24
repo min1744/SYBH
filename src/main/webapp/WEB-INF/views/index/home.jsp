@@ -71,8 +71,13 @@ $(function() {
 	
 
 	
-    $('#spon_btn').click(function(event){  //버튼을 클릭 했을시 popupOpen 함수 출력 
-        popupOpen();	//Popup Open 함수
+    $('#spon_btn').click(function(event){  //버튼을 클릭 했을시 popupOpen 함수 출력
+    	var memberVO = '${memberVO}';
+    	if(memberVO ==''){
+   		alert('로그인 후 사용가능합니다');
+    	}else{
+        popupOpen();//Popup Open 함수
+    	}
     });
   
 	function popupOpen(){
@@ -91,9 +96,25 @@ $(function() {
 	    window.open(url,"",popupOption, 'left='+ popupX + ', top='+ popupY);
 	    
 	}
+	//재혁 후원총금액
+	$.ajax({
+		url:"./pay/donationTotal",
+		type: "GET",
+		success:function(data){
+			$('#donation').html(data+'<span>원</span>');
+		}
+	});
+	//재혁 후원인 총 인원
+	$.ajax({
+		url:"./pay/donationPeopleTotal",
+		type:"GET",
+		success:function(data){
+			$('#people').html(data+'<span>명</span>');
+		}
+	});
 	
-	
-
+	//$('#sponsor').load('./pay/donationTotal');
+	//$('#sponsor').load('./pay/donationPeopleTotal');
 	
 }); 
 
@@ -208,9 +229,9 @@ $(function() {
 	<div id="sponsor">
 		
 		<p class="spon_title">모인금액</p>
-		<p class="spon_num">1,000,000<span>원</span></p>
+		<p class="spon_num" id="donation"></p>
 		<p class="spon_title">후원자</p>
-		<p class="spon_num">140<span>명</span></p>
+		<p class="spon_num" id="people"></p>
 		<button id="spon_btn">후원하기</button>
 		
 	</div>
