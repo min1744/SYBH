@@ -36,7 +36,7 @@ public class MemberService {
 	public int getPw(String email) throws Exception{
 		int result = memberDAO.getPw(email);
 		MemberVO memberVO = new MemberVO();
-		memberVO.setEmail(email);
+		//memberVO.setEmail(email);
 		memberVO.setPw(UUID.randomUUID().toString());
 		if(result > 0) {
 			result = memberDAO.setPwUpdate(memberVO);
@@ -51,8 +51,6 @@ public class MemberService {
 	}
 	
 	public int setUpdate(MemberVO memberVO) throws Exception{
-		
-		
-		return 0;
+		return memberDAO.setUpdate(memberVO);
 	}
 }
