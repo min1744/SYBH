@@ -33,7 +33,7 @@
 			
 			<div class="news_contents">
 				
-				<a href="" class="news">
+				<a href="./newsSelect" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_all_1.jpg">
 					</div>
@@ -42,7 +42,7 @@
 					<p class="news_date">2019-07-24</p>
 				</a>
 				
-				<a href="" class="news">
+				<a href="./newsSelect" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_all_2.jpg">
 					</div>
@@ -51,7 +51,7 @@
 					<p class="news_date">2019-07-24</p>
 				</a>
 				
-				<a href="" class="news last_box">
+				<a href="./newsSelect" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_all_3.jpg">
 					</div>
@@ -74,7 +74,7 @@
 			
 			<div class="news_contents">
 				
-				<a href="" class="news">
+				<a href="./newsSelect" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_health_1.jpg">
 					</div>
@@ -83,7 +83,7 @@
 					<p class="news_date">2019-07-24</p>
 				</a>
 				
-				<a href="" class="news">
+				<a href="./newsSelect" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_health_2.jpg">
 					</div>
@@ -92,7 +92,7 @@
 					<p class="news_date">2019-07-24</p>
 				</a>
 				
-				<a href="" class="news last_box">
+				<a href="./newsSelect" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_health_3.jpg">
 					</div>
@@ -115,7 +115,7 @@
 			
 			<div class="news_contents">
 				
-				<a href="" class="news">
+				<a href="./newsSelect" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_1.jpg">
 					</div>
@@ -124,7 +124,7 @@
 					<p class="news_date">2019-07-24</p>
 				</a>
 				
-				<a href="" class="news">
+				<a href="./newsSelect" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_2.jpg">
 					</div>
@@ -133,7 +133,7 @@
 					<p class="news_date">2019-07-24</p>
 				</a>
 				
-				<a href="" class="news last_box">
+				<a href="./newsSelect" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_3.jpg">
 					</div>
