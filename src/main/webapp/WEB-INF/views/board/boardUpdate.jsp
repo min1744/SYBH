@@ -41,9 +41,10 @@
 	
 	<div id="form_box">
 		<form id="frm" action="./${board}Update" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="num" value="${vo.num}">
 		<div class="float">
 		 <span class="title">제목</span>
- 		 <input class="form-control" type="text" id="title" name="title">
+ 		 <input class="form-control" type="text" id="title" value="${vo.title}" name="title">
 		</div>
 		<div class="float">
 		 <span class="writer">작성자</span>
@@ -60,9 +61,9 @@
 	</form>
 	</div>
 		
-	<!-- <div id="write_btn">
+	<div id="write_btn">
 	<a href="./noticeWrite" id="write">공지등록</a>
-	</div> -->
+	</div>
 	</div>
 </div>
 
