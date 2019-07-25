@@ -198,13 +198,22 @@ Fax : 02-2072-4041
 			<div id="paging">
 					
 					<ul>
-						<li><a href="" id="prev">◀</a></li>
-						<li><a href="">1</a></li>
-						<li><a href="">2</a></li>
-						<li><a href="">3</a></li>
-						<li><a href="">4</a></li>
-						<li><a href="">5</a></li>
-						<li><a href="" id="next">▶</a></li>
+						<c:if test="${pager.curBlock>1 }">
+							<li><a href="./payPopup?curpage=${pager.startNum-1}&search=${pager.search}" id="prev">◀</a></li>
+						</c:if>
+						<c:choose>
+							<c:when test="${pager.totalCount==0}">
+								<li><a href="./payPopup?curPage=1&search=${pager.search}">1</a></li>
+							</c:when>
+							<c:otherwise>
+								<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+									<li><a href="./payPopup?curPage=${i}&search=${pager.search}">${i}</a></li>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${pager.curBlock<pager.totalBlock }">
+						<li><a href="./payPopup?curPage=${pager.lastNum+1}&search=${pager.search}" id="next">▶</a></li>
+						</c:if>
 					</ul>				
 				
 				</div>

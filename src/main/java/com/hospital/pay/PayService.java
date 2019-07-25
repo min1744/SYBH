@@ -42,19 +42,16 @@ public class PayService {
 		return payDAO.getDonationPeopleTotal();
 	}
 	
-	//후원 내역 전체인원
-	public List<PayVO> getDonationList() throws Exception{
-		return payDAO.getDonationList();
+	//모든 결제내역 (건강검진 : 0, 후원 : 1)
+	public List<PayVO> getAllList(PageMaker pageMaker,PayVO payVO) throws Exception{
+		pageMaker.setSearch(Integer.toString(payVO.getCategory()));
+		pageMaker.setPerPage(5);
+		pageMaker.makeRow();
+		int totalCount = payDAO.getAllTotalCount(payVO);
+		pageMaker.makePage(totalCount);
+		
+		return payDAO.getAllList(pageMaker);
 	}
 	
-	//관리자용 전체 건강검진 결제내역
-	public List<PayVO> getAllList(PageMaker pageMaker) throws Exception{
-		pageMaker.makeRow();
-		List<PayVO> list = payDAO.getAllList(pageMaker);
-		
-		int totalCount = payDAO.getAllTotalCount();
-		pageMaker.makePage(totalCount);
-		return list;
-	}
 	
 }

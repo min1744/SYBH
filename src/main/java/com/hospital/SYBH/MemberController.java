@@ -95,7 +95,14 @@ public class MemberController {
 	@RequestMapping(value="memberDonation", method = RequestMethod.GET)
 	public ModelAndView memberDonation(PageMaker pageMaker, PayVO payVO,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		String id="";
+		try {
+			id = ((MemberVO)session.getAttribute("memberVO")).getId();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		payVO.setId(id);
 		payVO.setCategory(1);
 		List<PayVO> list =  payService.getOneList(pageMaker, payVO);

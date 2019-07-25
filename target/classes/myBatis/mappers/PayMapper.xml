@@ -40,39 +40,35 @@
   		where R between #{startRow} and #{lastRow}
   </select>
   
+  <!--home.jsp 전용 -->
+  <!-- 후원 총 인원 -->
+  <select id="getDonationPeopleTotal" resultType="Integer">
+  	select count(num) from pay where category=1
+  </select>
+  
   <!-- 후원 총금액  -->
   <select id="getDonationTotal" resultType="Integer">
   	select sum(price) from pay where category=1
   </select>
   
-  <!--후원인 총 인원  -->
-  <select id="getDonationPeopleTotal" resultType="Integer">
-  	select count(num) from pay where category=1
+  <!--home.jsp 끝  -->
+  
+  <!--모든사람 결제 갯수  (건강검진 : 0, 후원 : 1) -->
+  <select id="getAllTotalCount" parameterType="PayVO" resultType="Integer">
+  	select count(num) from pay where category=#{category}
   </select>
   
-  <!--후원 내역 전체인원  -->
-  <select id="getDonationList" resultType="payVO">
-  	select * from pay where category=1 order by num desc
-  </select>
   
-  <!-- 관리자용 전체 건강검진 결제 수 -->
-  <select id="getAllTotalCount" resultType="Integer">
-  	select count(num) from pay where category=0
-  </select>
-  
-  <!-- 관리자페이지용 전체 건강검진 결제내역  -->
-  <select id="getAllList" parameterType="PageMaker" resultType="PayVO">
+  <!--모든사람 결제 내역 (건강검진 : 0, 후원 : 1)  -->
+  <select id="getAllList" parameterType="PageMaker" resultMap="payList">
   	select * from
-  	(select rownum R, P.* from
-  	(select * from pay where category=0 and
-  	<choose>
-  		<when test="kind==1">
-  			id
-  		</when>
-  	</choose>
-  	like '%' || #{search} || '%'
-  	order by num desc) P)
+  	(select rownum R, Pay.* from
+  	(select P.*, M.name from pay P FULL JOIN member M
+  	on(P.id = M.id)
+  	where P.category = #{search} order by P.num desc) Pay)
   	where R between #{startRow} and #{lastRow}
   </select>
   
+
+
   </mapper>

@@ -30,5 +30,22 @@
 			<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
 		</bean>
 		
+		<!--트랜잭션 관리  -->
+		<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="txManager">
+			<property name="dataSource" ref="dataSource"></property>
+		</bean>
+		
+		<!--트랜잭션 advice 설정  -->
+		<tx:advice id="txAdvice" transaction-manager="txManager">
+			<tx:attributes>
+				<tx:method name="*" rollback-for="Exception"/>
+			</tx:attributes>
+		</tx:advice>
+		
+		<!--pointcut 설정  -->
+		<aop:config>
+			<aop:pointcut expression="execution(* com.hospital..*Service.set*(..))" id="requiredTx"/>
+			<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx"/>
+		</aop:config>
 
 </beans>

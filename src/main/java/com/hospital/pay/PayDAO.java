@@ -40,18 +40,15 @@ public class PayDAO {
 		return sqlSession.selectOne(NAMESPACE+"getDonationPeopleTotal");
 	}
 	
-	//후원 내역 전체인원
-	public List<PayVO> getDonationList() throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getDonationList");
-	}
-
-	//관리자용 전체 건강검진 결제 수
-	public int getAllTotalCount() throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getAllTotalCount");
+	//모든사람 결제 갯수(건강검진 : 0, 후원 : 1)
+	public int getAllTotalCount(PayVO payVO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getAllTotalCount",payVO );
 	}
 	
-	//관리자페이지용 전체 건강검진 결제 내역
+	//모든사람 결제내역 (건강검진 : 0, 후원 : 1)
 	public List<PayVO> getAllList(PageMaker pageMaker) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getAllList",pageMaker);
 	}
+
+	
 }

@@ -22,12 +22,15 @@ public class PayController {
 	private PayService payService;
 	
 	@RequestMapping(value = "payPopup", method = RequestMethod.GET)
-	public ModelAndView popup() throws Exception {
-		
+	public ModelAndView popup(PageMaker pageMaker,PayVO payVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("pay/payPopup");
-		List<PayVO> list =  payService.getDonationList();
+		payVO.setCategory(1);
+		
+		
+		List<PayVO> list =  payService.getAllList(pageMaker, payVO);
 		mv.addObject("list", list);
+		mv.setViewName("pay/payPopup");
+		mv.addObject("pager", pageMaker);
 		
 		return mv;
 	}
@@ -67,12 +70,5 @@ public class PayController {
 		return payService.getDonationPeopleTotal();
 	}
 	
-	//후원 내역 전체인원
-	@RequestMapping(value = "donationList", method = RequestMethod.GET)
-	public ModelAndView donationList() throws Exception{
-		ModelAndView mv = new ModelAndView();
-		List<PayVO> list =  payService.getDonationList();
-		mv.addObject("list", list);
-		return mv;
-	}
+
 }
