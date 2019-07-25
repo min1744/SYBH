@@ -122,10 +122,10 @@ $(function() {
 				</tr>
 			</tbody>
 		</table>
+		</form:form>
 		<div id="join_btn">
 			<button id="join">가입완료</button>
 		</div>
-		</form:form>
 	</div>
 </div>
 <!-- footer 추가 -->
