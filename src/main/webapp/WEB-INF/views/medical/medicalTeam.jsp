@@ -12,6 +12,7 @@
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
 
+
 <div id="board">
 		<div id="board_title">
 			<p id="title">의료진</p>
@@ -167,8 +168,8 @@
 	        </div>
 	        <div class="modal-body">
 	        	<div class="modal_title_box">
-		        	<p class="modal_med_office">이비인후과</p>
-		        	<h2 class="modal_pro_field">최익수 교수</h2>
+		        	<p class="modal_med_office_title">이비인후과</p>
+		        	<h2 class="modal_med_office">최익수 교수</h2>
 		        </div>
 	        		<hr>
 				
@@ -177,11 +178,11 @@
 				</div>
 				
 				<div class="modal_info">
-					<p>전문분야<br>
-					<span>부비동염, 안면 성형, 수면 무호흡, 후각·미각질환</span>
-					</p>
-					<a href="">진료예약</a>
+					<h3 class="modal_pro_field_title">전문분야</h3>
+					<p class="modal_pro_field">부비동염, 안면 성형, 수면 무호흡, 후각·미각질환</p>
 				</div>	
+				
+				<a href="../reserve/reserveNomal" id="reserve_btn">진료예약</a>
 				
 				<div class="modal_career">
 					
@@ -202,9 +203,6 @@
 				</div>          
 	          
 	          
-	        </div>
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
 	      </div>
     	</div>
