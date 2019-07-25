@@ -229,7 +229,7 @@ $(function() {
 		<ul id="ul_3">
 			<li><a href="./notice/noticeList">공지사항</a></li>
 			<li><a href="">병원소개</a></li>
-			<li><a href="">의료진 소개</a></li>
+			<li><a href="./medical/medicalTeamList">의료진 소개</a></li>
 			<li><a href="">층별 안내</a></li>
 			<li><a href="">오시는 길</a></li>
 		</ul>

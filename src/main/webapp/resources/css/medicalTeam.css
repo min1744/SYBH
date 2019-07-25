@@ -1,0 +1,390 @@
+@charset "UTF-8";
+
+
+
+#board {
+	
+	width: 1920px;
+	overflow: hidden;
+}
+
+
+
+#board_title {
+	
+	width: 100%;
+	overflow: hidden;
+	padding: 50px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+#title {
+	
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 900;
+	letter-spacing: -1px;
+	
+}
+
+
+#sub_title {
+	
+	text-align: center;
+	font-size: 1em;
+	color: #808080;
+	letter-spacing: -1px;
+	margin-top: 5px;
+	
+}
+
+#board_box {
+	
+	width: 60%;
+	overflow: hidden;
+	position: relative;
+	margin: 80px auto;
+
+}
+
+
+
+#board_nav, #doctorList {
+	
+	float: left;
+	overflow: hidden;
+}
+
+
+#board_nav {
+	
+	width: 15%;
+	margin-right: 5%;
+}
+
+
+#board_nav li {
+	
+	padding: 5%;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	letter-spacing: -1px;
+	
+}
+
+
+#board_nav li a {
+	
+	display: block;
+	padding: 5px 0;
+	color: #808080;
+	font-weight: 700;
+	
+}
+
+#board_nav li a:hover {
+	
+	color: #6bb5db;
+}
+
+
+#board_nav li:first-child {
+	
+	padding: 30px 0;
+	background-color: #153F91;
+	color: white;
+	font-size: 1.2em;
+	font-weight: 900;
+	border-bottom: none;
+}
+
+
+#doctorList {
+	
+	width: 80%;
+	text-align: center;
+}
+
+
+
+
+#doctor_search {
+	
+	width: 100%;
+	padding: 2.6%;
+	overflow: hidden;
+	background-color: #dbedf7;
+	box-sizing: border-box;
+}
+
+
+#select_box {
+	
+	padding: 1%;
+	text-align: left;
+	width: 120px;
+	border: 1px solid #a2d0ea;
+	box-sizing: border-box;
+	color: #808080;
+}
+
+
+
+#search {
+	
+	width: 250px;
+	padding: 1.1%;
+	border: 1px solid #a2d0ea;
+	box-sizing: border-box;
+	color: #808080;
+	
+}
+
+
+#search::placeholder {
+	
+	color: #b4b4b4;
+}
+
+
+#search_btn {
+	
+	width: 80px;
+	padding: 1.1%;
+	margin-left: -5px;
+	box-sizing: border-box;
+	color: white;
+	background-color: #153F91;
+	border: 1px solid #153F91;
+	cursor: pointer;
+}
+
+
+
+#doctor_select {
+	
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	margin: 40px auto;
+	
+}
+
+
+#doctor_select h3:before {
+	
+	content: "";
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin-bottom: 9px;
+	background-color: #153F91;
+	
+}
+
+
+#doctor_select h3 {
+	
+	font-weight: 700;
+	font-size: 1.3em;
+	letter-spacing: -1px;
+	margin-bottom: 30px;
+	
+}
+
+
+#doctor_select li {
+	
+	float: left;
+	width: 20%;
+	overflow: hidden;
+	text-align: center;
+	letter-spacing: -1px;
+	font-weight: 700;
+}
+
+
+
+#doctor_select li a {
+	
+	color: #808080;
+	
+}
+
+#doctor_select li a {
+	
+	color: #808080;
+	width: 100%;
+	overflow: hidden;
+	padding: 15px 20px;
+	display: inline-block;
+	border-left: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	box-sizing: border-box;
+	
+}
+
+#last_li {
+	
+	border-right: 1px solid #ddd;
+}
+
+#doctor_select li a:hover {
+	
+	background-color: #153F91;
+	color: white;
+	border-left: 1px solid #153F91;
+	border-top: 1px solid #153F91;
+	border-bottom: 1px solid #153F91;
+	
+}
+
+
+
+
+#doctor_list {
+	
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	margin: 80px auto;
+	
+}
+
+
+#doctor_list h3:before {
+	
+	content: "";
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin-bottom: 9px;
+	background-color: #153F91;
+	
+}
+
+
+#doctor_list h3 {
+	
+	font-weight: 700;
+	font-size: 1.3em;
+	letter-spacing: -1px;
+	margin-bottom: 30px;
+	
+}
+
+
+#doctor_list hr {
+	
+	border: 1px solid #153F91;
+	
+}
+
+
+.list {
+	
+	width: 100%;
+	border-bottom: 1px solid #c1c1c1;
+	overflow: hidden;
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+
+.list_profile {
+	
+	max-width: 170px;
+	height: 190px;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.list_profile img {
+	
+	width: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+}
+
+
+
+.list_profile, .list_info, .list_btn {
+	
+	float: left;
+	
+}
+
+
+.list_info {
+	
+	width: 540px;
+	margin: 0 20px;
+}
+
+
+.name {
+	
+	
+	letter-spacing: -1px;
+	font-weight: 700;
+	margin-bottom: 15px;
+}
+
+
+
+.med_office, .pro_field {
+	
+	letter-spacing: -1px;
+	font-size: 0.9em;
+	font-weight: 700;
+	margin-right: 10px;
+	display: inline-block;
+	
+}
+
+.list_info span {
+	
+	font-weight: 500;
+	text-align: left;
+	letter-spacing: -1px;
+	font-size: 0.9em;
+	color: #808080;
+}
+
+
+
+.list_btn a {
+	
+	display: block;
+	padding: 15px 50px;
+	border: 1px solid #ddd;
+	letter-spacing: -1px;
+	color: #808080;
+	text-align: center;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+
+.list_btn a:hover {
+	
+	background-color: #808080;
+	border: 1px solid #808080;
+	color: white;
+}
+
+
+.list_btn>a:first-child {
+	
+	border: 1px solid #153F91; 
+	color: #153F91;"
+	
+}
+
+
+.list_btn>a:first-child:hover {
+	
+	background-color: #153F91;
+	border: 1px solid #153F91;
+	color: white;
+}
