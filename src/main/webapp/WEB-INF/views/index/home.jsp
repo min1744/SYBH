@@ -174,7 +174,7 @@ $(function() {
 				<c:choose>
 					<c:when test="${not empty memberVO}">
 						<c:choose>	
-							<c:when test="${memberVO.id eq 'admin'}">
+							<c:when test="${memberVO.grade eq '2'}">
 								<li><a href="./member/memberLogout">로그아웃</a></li>
 								<li style="padding: 0 10px;">│<li>
 								<li><a href="./admin/adminIndex" target="_blank">관리자페이지</a></li>
@@ -205,7 +205,7 @@ $(function() {
 	<c:choose>
 		<c:when test="${not empty memberVO}">
 			<c:choose>
-				<c:when test="${memberVO.id eq 'admin'}">
+				<c:when test="${memberVO.grade eq '2'}">
 					<div id="sub_nav_box" style="padding-left: 810px;">
 				</c:when>
 				<c:otherwise>
