@@ -37,18 +37,18 @@ public class MemberVOValidate implements Validator {
 		int gender = memberVO.getGender();
 		int age = memberVO.getAge();
 		
-		boolean checkId = Pattern.matches("^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$", id);
-		boolean checkPw = Pattern.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{10,15}$", pw);
-		boolean checkName = Pattern.matches("^(?=.*[ㄱ-ㅎ가-힇a-zA-Z]).{2,17}$", name);
+		boolean checkId = Pattern.matches("/^[a-zA-Z0-9]{6,12}$/", id);
+		boolean checkPw = Pattern.matches("/^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W)[a-zA-Z\\d\\W]{10,15}$/", pw);
+		boolean checkName = Pattern.matches("/^[가-힣a-zA-Z]*$/", name);
 		boolean checkRes_reg_num1 = Pattern.matches("^(?=.*[0-9]).{6,6}$", res_reg_num1);
 		boolean checkRes_reg_num2 = Pattern.matches("^(?=.*[0-9]).{7,7}$", res_reg_num2);
-		boolean checkPhone1 = Pattern.matches("^(?=.*[0-9]).{3,4}$", phone1);
-		boolean checkPhone2 = Pattern.matches("^(?=.*[0-9]).{3,5}$", phone2);
-		boolean checkPhone3 = Pattern.matches("^(?=.*[0-9]).{4,4}$", phone3);
-		boolean checkEmail1 = Pattern.matches("^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$", email1);
-		boolean checkEmail2 = Pattern.matches("^(?=.*[a-z])(?=.*[.]).{8,12}$", email2);
-		boolean checkGender = Pattern.matches("^(?=.*[1-2]).{1,1}$", gender+"");
-		boolean checkAge = Pattern.matches("/^[0-9]+$/", age+"");
+		boolean checkPhone1 = Pattern.matches("/^[\\d]{3,4}$/", phone1);
+		boolean checkPhone2 = Pattern.matches("/^[\\d]{3,5}$/", phone2);
+		boolean checkPhone3 = Pattern.matches("/^[\\d]{4,4}$/", phone3);
+		boolean checkEmail1 = Pattern.matches("/^[a-zA-Z0-9]{6,20}$/", email1);
+		boolean checkEmail2 = Pattern.matches("/^(?=.*[a-z])(?=.*[.]){6,12}$/", email2);
+		boolean checkGender = Pattern.matches("/^[1-2]+$/", gender+"");
+		boolean checkAge = Pattern.matches("/^[\\d]{0,3}$/", age+"");
 		
 		//id
 		if(checkId) {
