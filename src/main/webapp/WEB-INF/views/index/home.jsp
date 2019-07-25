@@ -71,7 +71,8 @@ $(function() {
         return false;
     });
 	
-
+	
+	///////////////////////////////////////
 	
     $('#spon_btn').click(function(event){  //버튼을 클릭 했을시 popupOpen 함수 출력
     	var memberVO = '${memberVO}';
@@ -87,7 +88,6 @@ $(function() {
 		var winWidth = 1000;
 	    var winHeight = 800;
 	    var popupX = 400;
-	    console.log(popupX);
 	  	//&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
 		 var popupY= 80;
 	 	 //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
@@ -173,9 +173,18 @@ $(function() {
 			<ul>
 				<c:choose>
 					<c:when test="${not empty memberVO}">
-						<li><a href="./member/memberLogout">로그아웃</a></li>
-						<li style="padding: 0 10px;">│<li>
-						<li><a href="./member/memberMyPage">마이페이지</a></li>
+						<c:choose>	
+							<c:when test="${memberVO.id eq 'admin'}">
+								<li><a href="./member/memberLogout">로그아웃</a></li>
+								<li style="padding: 0 10px;">│<li>
+								<li><a href="./admin/adminIndex" target="_blank">관리자페이지</a></li>
+							</c:when>
+							<c:otherwise>
+							<li><a href="./member/memberLogout">로그아웃</a></li>
+							<li style="padding: 0 10px;">│<li>
+							<li><a href="./member/memberMyPage">마이페이지</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:when>
 					<c:otherwise>
 						<li><a href="./member/memberLogin">로그인</a></li>
@@ -192,14 +201,22 @@ $(function() {
 <!-- 서브메뉴 -->
 
 <div id="sub_nav">
-<c:choose>
-	<c:when test="${not empty memberVO}">
-		<div id="sub_nav_box" style="padding-left: 820px;">
-	</c:when>
-	<c:otherwise>
-		<div id="sub_nav_box" style="padding-left: 845px;">
-	</c:otherwise>
-</c:choose>
+
+	<c:choose>
+		<c:when test="${not empty memberVO}">
+			<c:choose>
+				<c:when test="${memberVO.id eq 'admin'}">
+					<div id="sub_nav_box" style="padding-left: 810px;">
+				</c:when>
+				<c:otherwise>
+				<div id="sub_nav_box" style="padding-left: 820px;">
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+			<div id="sub_nav_box" style="padding-left: 845px;">
+		</c:otherwise>
+	</c:choose>
 		<ul id="ul_1">
 			<li><a href="./reserve/reserveNomal">일반진료 예약</a></li>
 			<li><a href="./reserve/reserveMedical">건강검진 예약</a></li>
@@ -212,7 +229,7 @@ $(function() {
 		<ul id="ul_3">
 			<li><a href="./notice/noticeList">공지사항</a></li>
 			<li><a href="">병원소개</a></li>
-			<li><a href="">의료진 소개</a></li>
+			<li><a href="./medical/medicalTeamList">의료진 소개</a></li>
 			<li><a href="">층별 안내</a></li>
 			<li><a href="">오시는 길</a></li>
 		</ul>

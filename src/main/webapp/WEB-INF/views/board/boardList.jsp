@@ -31,7 +31,7 @@
 				<li>병원안내</li>
 				<li><a href="./noticeList">공지사항</a></li>
 				<li><a href="#">병원소개</a></li>
-				<li><a href="#">의료진 소개</a></li>
+				<li><a href="../medical/medicalTeamList">의료진 소개</a></li>
 				<li><a href="#">층별안내</a></li>
 				<li><a href="#">오시는 길</a></li>
 				
@@ -71,7 +71,7 @@
 						</c:forEach> --%>
 					</tbody>
 				</table>
-				<div id="paging" style="margin-left: 315px;">
+				<div id="paging">
 			<ul>
 				<c:if test="${pager.curBlock>1}">
 					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>

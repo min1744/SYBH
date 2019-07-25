@@ -37,6 +37,7 @@
 	<context:component-scan base-package="com.hospital.util" />
 	<context:component-scan base-package="com.hospital.member" />
 	<context:component-scan base-package="com.hospital.pay"/>
+	<context:component-scan base-package="com.hospital.medicalTeam"/>
 	
 	<beans:import resource="classpath:/spring/*"/>
 </beans:beans>
