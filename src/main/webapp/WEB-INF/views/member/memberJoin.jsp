@@ -75,7 +75,7 @@ $(function() {
 				</tr>
 				<tr>
 					<th>주민등록번호<span>*</span></th>
-					<td><form:input path="res_reg_num1" cssClass="empty_check"/><span class="common">-</span><form:input path="res_reg_num2" cssClass="empty_check"/></td>
+					<td><form:input path="res_reg_num1" cssClass="empty_check"/><span class="common">-</span><form:password path="res_reg_num2" cssClass="empty_check"/></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -114,7 +114,7 @@ $(function() {
 				</tr>
 				<tr>
 					<th>나이<span>*</span></th>
-					<td><input type="number" name="age" class="empty_check"></td>
+					<td><form:input path="age" cssClass="empty_check"/></td>
 				</tr>
 				<tr>
 					<td></td>

@@ -48,7 +48,7 @@ public class MemberVOValidate implements Validator {
 		boolean checkEmail1 = Pattern.matches("^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$", email1);
 		boolean checkEmail2 = Pattern.matches("^(?=.*[a-z])(?=.*[.]).{8,12}$", email2);
 		boolean checkGender = Pattern.matches("^(?=.*[1-2]).{1,1}$", gender+"");
-		boolean checkAge = Pattern.matches("^(?=.*[0-9]).{1,3}$", age+"");
+		boolean checkAge = Pattern.matches("/^[0-9]+$/", age+"");
 		
 		//id
 		if(checkId) {

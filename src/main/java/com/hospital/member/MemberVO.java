@@ -29,7 +29,7 @@ public class MemberVO {
 	@NotBlank
 	@Size(min = 7, max = 7)
 	private String res_reg_num2;
-	private String res_reg_num = res_reg_num1 + "-" + res_reg_num2;
+	private String res_reg_num;
 	//핸드폰번호
 	@NotBlank
 	@Size(min = 3, max = 4)
@@ -40,7 +40,7 @@ public class MemberVO {
 	@NotBlank
 	@Size(min = 4, max = 4)
 	private String phone3;
-	private String phone = phone1 + "-" + phone2 + "-" + phone3;
+	private String phone;
 	//이메일
 	@NotBlank
 	@Size(min = 6, max = 12)
@@ -48,19 +48,15 @@ public class MemberVO {
 	@NotBlank
 	@Size(min = 8, max = 12)
 	private String email2;
-	private String email = email1 + "@" + email2;
+	private String email;
 	//성별
 	//1 : 남자
 	//2 : 여자
-	//@NotBlank
-	//@NotEmpty
 	@NotNull
 	@Min(value = 1)
 	@Max(value = 2)
 	private int gender;
 	//나이
-	//@NotBlank
-	//@NotEmpty
 	@NotNull
 	@Min(value = 0)
 	@Max(value = 120)
@@ -70,22 +66,11 @@ public class MemberVO {
 	//2 : admin
 	//3 : nurse
 	//4 : doctor
-	//@NotBlank
-	//@NotEmpty
 	@NotNull
 	@Min(value = 1)
 	@Max(value = 2)
 	private int grade;
 	
-	public String getRes_reg_num() {
-		return res_reg_num;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public String getEmail() {
-		return email;
-	}
 	public String getId() {
 		return id;
 	}
@@ -122,6 +107,12 @@ public class MemberVO {
 	public void setRes_reg_num2(String res_reg_num2) {
 		this.res_reg_num2 = res_reg_num2;
 	}
+	public String getRes_reg_num() {
+		return res_reg_num;
+	}
+	public void setRes_reg_num(String res_reg_num) {
+		this.res_reg_num = res_reg_num;
+	}
 	public String getPhone1() {
 		return phone1;
 	}
@@ -140,6 +131,12 @@ public class MemberVO {
 	public void setPhone3(String phone3) {
 		this.phone3 = phone3;
 	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getEmail1() {
 		return email1;
 	}
@@ -151,6 +148,12 @@ public class MemberVO {
 	}
 	public void setEmail2(String email2) {
 		this.email2 = email2;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public int getGender() {
 		return gender;
