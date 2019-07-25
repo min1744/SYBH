@@ -10,6 +10,17 @@ public class PayVO {
 	private String opt;
 	//결제 카테고리 0 : 건강검진 , 1 : 후원  
 	private int category;
+	
+	private String name;
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getNum() {
 		return num;
 	}

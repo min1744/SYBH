@@ -60,9 +60,9 @@
 			<li><a href="../reserve/reserveMedical">건강검진 예약</a></li>
 		</ul>
 		<ul id="ul_2">
-			<li><a href="">질환 정보</a></li>
-			<li><a href="">영양 정보</a></li>
-			<li><a href="">운동 정보</a></li>
+			<li><a href="../news/newsList">질환 정보</a></li>
+			<li><a href="../news/newsList">영양 정보</a></li>
+			<li><a href="../news/newsList">운동 정보</a></li>
 		</ul>
 		<ul id="ul_3">
 			<li><a href="../notice/noticeList">공지사항</a></li>

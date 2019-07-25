@@ -3,6 +3,7 @@ package com.hospital.SYBH;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,9 +42,10 @@ public class PayController {
 	}
 	
 	//한사람 모든 결제 내역
-	public ModelAndView getOneList(PageMaker pageMaker,String id) throws Exception{
+	public ModelAndView getOneList(PageMaker pageMaker,PayVO payVO, HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		List<PayVO> list = payService.getOneList(pageMaker, id);
+		
+		List<PayVO> list = payService.getOneList(pageMaker, payVO);
 		
 		mv.addObject("list",list);
 		mv.addObject("pager",pageMaker);

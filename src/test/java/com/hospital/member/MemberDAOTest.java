@@ -19,10 +19,10 @@ public class MemberDAOTest extends AbstractTest {
 		memberVO.setId("admin");
 		memberVO.setPw("admin");
 		memberVO.setName("admin");
-		memberVO.setRes_reg_num("941231-1234567");
-		memberVO.setPhone("010-1234-5678");
-		memberVO.setEmail("admin123@gmail.com");
-		memberVO.setGender("1");
+		//memberVO.setRes_reg_num("941231-1234567");
+		//memberVO.setPhone("010-1234-5678");
+		//memberVO.setEmail("admin123@gmail.com");
+		memberVO.setGender(1);
 		memberVO.setAge(26);
 		assertEquals(1, memberDAO.setWrite(memberVO));
 	}

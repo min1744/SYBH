@@ -30,8 +30,8 @@
 		
 		
 		<div id="company_info">
-			<p>서울특별시 강남구 일원로 81 (06351) 삼성서울병원 / 대표전화 : 1599-3114 / 사업자등록번호 : 213-82-05096 권오정<br>
-COPYRIGHT©1996-2015 BY SAMSUNG MEDICAL CENTER. ALL RIGHTS RESERVED.</p>
+			<p>서울특별시 마포구 월드컵북로 21 풍성빌딩 2,3,4층 쌍용백병원 / 대표전화 : 1599-3114 / 사업자등록번호 : 213-82-05096<br>
+COPYRIGHT©1996-2019 BY SSANGYONG MEDICAL CENTER. ALL RIGHTS RESERVED.</p>
 		</div>
 		
 	

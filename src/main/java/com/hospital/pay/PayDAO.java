@@ -21,8 +21,8 @@ public class PayDAO {
 	}
 	
 	//한사람 모든 결제 수
-	public int getOneTotalCount(String id)throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getOneTotalCount",id);
+	public int getOneTotalCount(PayVO payVO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getOneTotalCount", payVO);
 	}
 	
 	//한사람 모든 결제 내역

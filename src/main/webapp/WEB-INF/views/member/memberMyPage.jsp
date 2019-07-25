@@ -28,31 +28,36 @@
 				<table>
 					<tr>
 						<th>아이디</th>
-						<td>admin</td>
+						<td>${memberVO.id }</td>
 					</tr>
 					<tr>
 						<th>이름</th>
-						<td>admin</td>
+						<td>${memberVO.name }</td>
 					</tr>
 					<tr>
 						<th>주민등록번호</th>
-						<td>000000-0000000</td>
+						<td>${memberVO.res_reg_num }</td>
 					</tr>
 					<tr>
 						<th>핸드폰 번호</th>
-						<td>010-1111-2222</td>
+						<td>${memberVO.phone }</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td>admin@naver.com</td>
+						<td>${memberVO.email }</td>
 					</tr>
 					<tr>
 						<th>성별</th>
-						<td>뭘까</td>
+						<td>
+						<c:choose>
+							<c:when test="${memberVO.gender eq 1}">남자</c:when>
+							<c:otherwise>여자</c:otherwise>
+						</c:choose>
+						</td>
 					</tr>
 					<tr>
 						<th>나이</th>
-						<td>100세</td>
+						<td>${memberVO.age }세</td>
 					</tr>
 				</table>
 				
@@ -100,7 +105,7 @@
 				확인하실 수 있습니다.</p>
 			
 				<div class="info_btn_2">
-					<a href="./memberBreakdown">조회하기</a>
+					<a href="./memberDonation">조회하기</a>
 				</div>
 			</div>
 			
