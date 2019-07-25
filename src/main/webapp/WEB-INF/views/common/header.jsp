@@ -29,21 +29,21 @@
 					<c:when test="${not empty memberVO}">
 						<c:choose>	
 							<c:when test="${memberVO.id eq 'admin'}">
-								<li><a href="./member/memberLogout">로그아웃</a></li>
+								<li><a href="../member/memberLogout">로그아웃</a></li>
 								<li style="padding: 0 10px;">│<li>
-								<li><a href="./admin/adminIndex" target="_blank">관리자페이지</a></li>
+								<li><a href="../admin/adminIndex" target="_blank">관리자페이지</a></li>
 							</c:when>
 							<c:otherwise>
-							<li><a href="./member/memberLogout">로그아웃</a></li>
+							<li><a href="../member/memberLogout">로그아웃</a></li>
 							<li style="padding: 0 10px;">│<li>
-							<li><a href="./member/memberMyPage">마이페이지</a></li>
+							<li><a href="../member/memberMyPage">마이페이지</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:otherwise>
-						<li><a href="./member/memberLogin">로그인</a></li>
+						<li><a href="../member/memberLogin">로그인</a></li>
 						<li style="padding: 0 10px;">│<li>
-						<li><a href="./member/memberAgree">회원가입</a></li>
+						<li><a href="../member/memberAgree">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
