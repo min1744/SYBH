@@ -99,7 +99,7 @@ public class MemberController {
 		//} else {
 			int result = memberService.setWrite(memberVO);
 			if(result > 0) {
-				mv.setViewName("member/memberLogin");
+				mv.setViewName("redirect:./memberLogin");
 			} else {
 				mv.addObject("message", "Login Fail");
 				mv.addObject("path", "../");

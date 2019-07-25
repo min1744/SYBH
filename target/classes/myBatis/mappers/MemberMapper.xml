@@ -76,10 +76,10 @@
 	</insert>
 	
 	<!-- 비밀번호, 주민등록번호 암호화 -->
-	<update id="setEncryption" parameterType="String">
+	<update id="setEncryption" parameterType="MemberVO">
 		UPDATE MEMBER
-		SET PW = CRYPTO_AES256.ENC_AES(#{pw}),
-		RES_REG_NUM = CRYPTO_AES256.ENC_AES(#{res_reg_num})
+		SET PW LIKE CRYPTO_AES256.ENC_AES(#{pw}),
+		RES_REG_NUM LIKE CRYPTO_AES256.ENC_AES(#{res_reg_num})
 		WHERE ID LIKE #{id}
 	</update>
 	

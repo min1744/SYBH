@@ -79,7 +79,7 @@ public class MemberService {
 		if(result < 1) {
 			throw new Exception();
 		}
-		result = memberDAO.setEncryption(memberVO.getId());
+		result = memberDAO.setEncryption(memberVO);
 		
 		return result;
 	}
