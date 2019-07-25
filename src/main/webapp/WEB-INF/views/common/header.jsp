@@ -27,14 +27,23 @@
 			<ul>
 				<c:choose>
 					<c:when test="${not empty memberVO}">
-						<li><a href="../member/memberLogout">로그아웃</a></li>
-						<li style="padding: 0 10px;">│<li>
-						<li><a href="../member/memberMyPage">마이페이지</a></li>
+						<c:choose>	
+							<c:when test="${memberVO.id eq 'admin'}">
+								<li><a href="./member/memberLogout">로그아웃</a></li>
+								<li style="padding: 0 10px;">│<li>
+								<li><a href="./admin/adminIndex" target="_blank">관리자페이지</a></li>
+							</c:when>
+							<c:otherwise>
+							<li><a href="./member/memberLogout">로그아웃</a></li>
+							<li style="padding: 0 10px;">│<li>
+							<li><a href="./member/memberMyPage">마이페이지</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:when>
 					<c:otherwise>
-						<li><a href="../member/memberLogin">로그인</a></li>
+						<li><a href="./member/memberLogin">로그인</a></li>
 						<li style="padding: 0 10px;">│<li>
-						<li><a href="../member/memberAgree">회원가입</a></li>
+						<li><a href="./member/memberAgree">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -48,13 +57,20 @@
 <div id="sub_nav">
 
 <c:choose>
-	<c:when test="${not empty memberVO}">
-		<div id="sub_nav_box" style="padding-left: 820px;">
-	</c:when>
-	<c:otherwise>
-		<div id="sub_nav_box" style="padding-left: 845px;">
-	</c:otherwise>
-</c:choose>
+		<c:when test="${not empty memberVO}">
+			<c:choose>
+				<c:when test="${memberVO.id eq 'admin'}">
+					<div id="sub_nav_box" style="padding-left: 810px;">
+				</c:when>
+				<c:otherwise>
+				<div id="sub_nav_box" style="padding-left: 820px;">
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+			<div id="sub_nav_box" style="padding-left: 845px;">
+		</c:otherwise>
+	</c:choose>
 		<ul id="ul_1">
 			<li><a href="../reserve/reserveNomal">일반진료 예약</a></li>
 			<li><a href="../reserve/reserveMedical">건강검진 예약</a></li>

@@ -71,7 +71,7 @@
 						</c:forEach> --%>
 					</tbody>
 				</table>
-				<div id="paging" style="margin-left: 315px;">
+				<div id="paging">
 			<ul>
 				<c:if test="${pager.curBlock>1}">
 					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
