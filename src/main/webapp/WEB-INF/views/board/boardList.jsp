@@ -61,14 +61,14 @@
 							</tr>
 						</c:forEach>
 						<!-- fix -->
-						<%-- <c:forEach items="${list2}" var="vo">
+					   <c:forEach items="${list2}" var="vo">
 							<tr id="position">
-							<td class="num" style="background-color: blue"></td>
-							<td class="title"><a href="./${board}Select?num=${vo.num}"></a></td>
+							<td class="num"><img src="../images/notice_icon.png"></td>
+							<td class="title"><a href="./${board}Select?num=${vo.num}"></a>${vo.title}</td>
 							<td class="date">${vo.reg_date}</td>
 							<td class="hit">${vo.hit}</td>
 							</tr>
-						</c:forEach> --%>
+						</c:forEach> 
 					</tbody>
 				</table>
 				<div id="paging" style="margin-left: 315px;">
@@ -84,7 +84,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-							<li><a href="./${board}List?curPage=${i}&kind=${pager.kind}$search=${pager.search}">${i}</a></li>
+							<li><a href="./${board}List?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>

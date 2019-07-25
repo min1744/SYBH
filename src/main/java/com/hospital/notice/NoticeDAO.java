@@ -24,9 +24,9 @@ public class NoticeDAO implements BoardDAO {
 	public int getTotalCount(PageMaker pageMaker) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getCount", pageMaker);
 	}
-	@Override
-	public int setWrite(BoardVO boardVO) throws Exception {
-		return sqlSession.insert(NAMESPACE+"setWrite", boardVO);
+	
+	public int setWrite(NoticeVO noticeVO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setWrite", noticeVO);
 	}
 	@Override
 	public int setUpdate(BoardVO boardVO) throws Exception {
@@ -55,6 +55,12 @@ public class NoticeDAO implements BoardDAO {
 	 
 	@Override
 	public int addHit() throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setWrite(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}

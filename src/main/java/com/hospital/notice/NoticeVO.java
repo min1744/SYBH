@@ -1,18 +1,21 @@
 package com.hospital.notice;
 
-import java.sql.Date;
+
 
 import com.hospital.board.BoardVO;
 
 public class NoticeVO extends BoardVO {
 	
-	private String fix;
+	private int fix;
 
-	public String getFix() {
+	public int getFix() {
 		return fix;
 	}
 
-	public void setFix(String fix) {
+	public void setFix(int fix) {
 		this.fix = fix;
 	}
+	
+	
+	
 }

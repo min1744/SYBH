@@ -3,6 +3,7 @@ package com.hospital.SYBH;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.naming.NoInitialContextException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -48,15 +49,15 @@ public class NoticeController {
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
 	public String setWrite(NoticeVO noticeVO)throws Exception{
 		
-		return "board/boardWrite";
+	return "board/boardWrite";
 		
 	}
 	
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView setWrite(BoardVO boardVO, HttpSession session)throws Exception{
+	public ModelAndView setWrite(NoticeVO noticeVO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = noticeService.setWrite(boardVO,session);
+		int result = noticeService.setWrite(noticeVO,session);
 		if(result>0) {
 			mv.setViewName("redirect:./noticeList");
 			
@@ -110,6 +111,7 @@ public class NoticeController {
 	public ModelAndView getList(PageMaker pageMaker)throws Exception{
 		
 		List<BoardVO> lists= noticeService.getList(pageMaker);
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", lists);
 		mv.addObject("pager", pageMaker);

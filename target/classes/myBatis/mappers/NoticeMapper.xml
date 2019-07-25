@@ -27,11 +27,12 @@
   	delete notice where num=#{num}
   </delete>
   
+  <!-- list -->
   <select id="getList" parameterType="PageMaker" resultType="NoticeVO">
   	select * from 
   	(select rownum R, N.* from
   	(select * from notice
-  	where
+  	where  
   <choose>
   		<when test="kind = 1">
   			title
@@ -39,14 +40,25 @@
   		<when test="kind = 2">
   			 writer
   		</when>
+  		
   		<otherwise>
   			 contents
   		</otherwise>
    </choose>
+   		
   	 	 like '%'|| #{search} || '%'
-  	 	 order by num desc) N)
+  	 	 order by fix,num desc) N)
   	 	 where R between #{startRow} and #{lastRow}
   </select>
+  
+  <!-- list2 -->
+  <select id="getListFix" parameterType="PageMaker" resultType="NoticeVO">
+  	select * from notice
+  	where fix='1' order by num desc 
+  
+  </select>
+  
+  
  
 
     
