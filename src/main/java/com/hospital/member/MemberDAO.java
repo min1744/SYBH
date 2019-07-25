@@ -56,6 +56,11 @@ public class MemberDAO {
 		return sqlSession.insert(NAMESPACE+"setWrite", memberVO);
 	}
 	
+	//암호화
+	public int setEncryption(String id) throws Exception{
+		return sqlSession.update(NAMESPACE+"setEncryption", id);
+	}
+	
 	//회원 정보 수정
 	public int setUpdate(MemberVO memberVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate", memberVO);
