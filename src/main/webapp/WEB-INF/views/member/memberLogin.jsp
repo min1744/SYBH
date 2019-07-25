@@ -29,7 +29,7 @@
 				<button id="login">로그인</button>
 			</form>
 			<ul>
-				<li><a href="">아이디/비밀번호 찾기</a></li>
+				<li><a href="./memberFind">아이디/비밀번호 찾기</a></li>
 				<li style="margin: 0 10px;">│</li>
 				<li><a href="./memberAgree">회원가입</a></li>
 			</ul>
