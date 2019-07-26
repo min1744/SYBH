@@ -24,6 +24,64 @@ $(function() {
 			alert('내용을 모두 입력해주세요.');
 		}
 	});
+	
+	//id체크
+	$('#id').blur(function() {
+		//아이디 체크하는 표현식
+		var checkId=/^(?=.*[a-zA-Z])(?=.*[0-9]){6,12}$/;
+		if(checkId){
+			var id = $('#id').val();
+			$.ajax({
+				url:"../ajax/memberIdCheck",
+				type:"POST",
+				data:{
+					id:id
+				},
+				success:function(data){
+					data = data.trim();
+					if(data == '1'){
+						$('#id_result').html('존재하는 아이디입니다.');
+						$('#id_result').css("color", "red");
+					} else{
+						$('#id_result').html('사용 가능한 아이디입니다.');
+						$('#id_result').css("color", "blue");
+					}
+				}
+			});
+		} else {
+			$('#id_result').html('잘못된 형식의 아이디입니다.');
+			$('#id_result').css("color", "red");
+		}
+		
+		//표현식에 위배되는 경우
+		if(!idReg2.test($('#id').val())){
+			$('#id_text').html('영문자로 시작하는 6~12자의 영문 혹은 숫자여야 합니다.');
+			$('#id_result').html('');
+		}else{
+			
+			//표현식에 위배되지 않는경우
+			if(!idReg.test($('#id').val())){
+				alert('영문자로 시작하는 6~12자의 영문 혹은 숫자여야 합니다.');			
+				$('#id_text').html('최소 6자리이상');
+				$('#id_result').html('');
+			}else{
+				var id = $('#id').val();
+				
+				//get방식으로 보내서 아이디 중복확인하는 코드
+				$.get("./memberIdCheck?id="+id, function(data) {
+					var data = data.trim();
+					if(data == 1){
+						$('#id_result').html('존재하는 아이디입니다.');
+						$('#id_result').css("color", "red");
+						$('#id').val("").focus();
+					} else {
+						$('#id_result').html('사용할 수 있는 아이디입니다.');
+						$('#id_result').css("color", "blue");
+					}
+				})
+			}
+		}
+	});
 });
 </script>
 </head>
@@ -52,7 +110,7 @@ $(function() {
 				</tr>
 				<tr>
 					<th>비밀번호<span>*</span></th>
-					<td><form:password path="pw" cssClass="empty_check"/><span class="sub">영문 대문자, 영문 소문자, 숫자, 특수문자(!@#$%^*+=-) 4가지 조합으로 10~15자 이여야 합니다.</span></td>
+					<td><form:password path="pw" cssClass="empty_check"/><span class="sub">영어, 숫자, 특수문자(!@#$%^*+=-) 3가지 조합으로 10~15자 이여야 합니다.</span></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -123,10 +181,10 @@ $(function() {
 				</tr>
 			</tbody>
 		</table>
+		</form:form>
 		<div id="join_btn">
 			<button id="join">가입완료</button>
 		</div>
-		</form:form>
 	</div>
 </div>
 <!-- footer 추가 -->

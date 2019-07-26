@@ -16,6 +16,11 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	private static final String NAMESPACE="MemberMapper.";
 	
+	//id 중복확인
+	
+	
+	//email 중복확인
+	
 	//totalCount
 	public int getTotalCount(PageMaker pageMaker) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pageMaker);

@@ -4,57 +4,70 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 public class MemberVO {
 	//아아디
 	@NotBlank
 	@Size(min = 6, max = 12)
+	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$")
 	private String id;
 	//비밀번호
 	@NotBlank
 	@Size(min = 10, max = 15)
+	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{10,15}$")
 	private String pw;
 	@NotBlank
 	@Size(min = 10, max = 15)
+	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{10,15}$")
 	private String pw2;
 	//이름
 	@NotBlank
 	@Size(min = 1, max = 17)
+	@Pattern(regexp = "^(?=.*[a-zA-Z가-힣]).{1,17}$")
 	private String name;
 	//주민번호
 	@NotBlank
 	@Size(min = 6, max = 6)
+	@Pattern(regexp = "^(?=.*[0-9]).{6,6}$")
 	private String res_reg_num1;
 	@NotBlank
 	@Size(min = 7, max = 7)
+	@Pattern(regexp = "^(?=.*[0-9]).{7,7}$")
 	private String res_reg_num2;
 	private String res_reg_num;
 	//핸드폰번호
 	@NotBlank
 	@Size(min = 3, max = 4)
+	@Pattern(regexp = "^(?=.*[0-9]).{3,4}$")
 	private String phone1;
 	@NotBlank
 	@Size(min = 3, max = 5)
+	@Pattern(regexp = "^(?=.*[0-9]).{3,5}$")
 	private String phone2;
 	@NotBlank
 	@Size(min = 4, max = 4)
+	@Pattern(regexp = "^(?=.*[0-9]).{4,4}$")
 	private String phone3;
 	private String phone;
 	//이메일
 	@NotBlank
 	@Size(min = 6, max = 12)
+	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$")
 	private String email1;
 	@NotBlank
 	@Size(min = 8, max = 12)
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[.]).{8,12}$")
 	private String email2;
 	private String email;
 	//성별
 	//1 : 남자
 	//2 : 여자
 	@NotNull
-	@Min(value = 1)
-	@Max(value = 2)
+	@Range(min = 1, max = 2)
 	private int gender;
 	//나이
 	@NotNull
@@ -64,11 +77,6 @@ public class MemberVO {
 	//회원등급
 	//1 : user
 	//2 : admin
-	//3 : nurse
-	//4 : doctor
-	@NotNull
-	@Min(value = 1)
-	@Max(value = 2)
 	private int grade;
 	
 	public String getId() {

@@ -19,7 +19,6 @@ import com.hospital.pay.PayDAO;
 import com.hospital.pay.PayService;
 import com.hospital.pay.PayVO;
 import com.hospital.util.PageMaker;
-import com.hospital.validator.MemberVOValidate;
 
 @Controller
 @RequestMapping("/member/")
@@ -31,8 +30,6 @@ public class MemberController {
 	private PayService payService;
 	@Inject
 	private PayDAO payDAO;
-	@Inject
-	private MemberVOValidate memberVOValidate;
 	
 	//현아 작성 (마이페이지 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
@@ -93,10 +90,9 @@ public class MemberController {
 	
 	@RequestMapping(value = "memberJoin", method = RequestMethod.POST)
 	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult br, ModelAndView mv) throws Exception {
-		/*memberVOValidate.validate(memberVO, br);
 		if(br.hasErrors()) {
 			mv.setViewName("member/memberJoin");
-		} else {*/
+		} else {
 			int result = memberService.setWrite(memberVO);
 			if(result > 0) {
 				mv.setViewName("redirect:./memberLogin");
@@ -105,8 +101,13 @@ public class MemberController {
 				mv.addObject("path", "../");
 				mv.setViewName("common/messageMove");
 			}
-		//}
+		}
 		return mv;
+	}
+	
+	@RequestMapping(value = "memberIdCheck", method = RequestMethod.GET)
+	public void memberIdCheck(String id) throws Exception{
+		
 	}
 	
 	//재혁 후원내역 작성
