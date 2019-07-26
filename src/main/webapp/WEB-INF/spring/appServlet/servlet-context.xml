@@ -43,14 +43,7 @@
 		</interceptor>
 		
 		<!-- 진우 인터셉터  -->
-		<interceptor>
-			<mapping path="/notice/*"/>
-			<beans:bean class="com.hospital.interceptor.NoticeInterceptor"/>
-		</interceptor>
-		<interceptor>
-			<mapping path="/notice/noticeUpdate"/>
-			<beans:bean class="com.hospital.interceptor.NoticeUpdateInterceptor"/>
-		</interceptor>
+		
 		<!-- 현아  인터셉터 -->
 		
 		<!-- 민근 인터셉터 -->
