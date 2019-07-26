@@ -50,22 +50,16 @@
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">글내용</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="contents" name="contents"></textarea>
+		<textarea class="form-control" rows="5" cols="15" id="contents" name="contents"></textarea>
 		</div>
 		
 		<div id="write_btn">
 			<input id="write" type="button" value="글등록">
 		</div>
-		<p>상단고정!<input type="checkbox" id="fix" name="fix" value="1"></p>	
+		<p>공지사항 고정<input type="checkbox" id="fix" name="fix" value="1"></p>	
 	</form>
 	</div>
-		
-	
-		
-	<div id="write_btn">
-	<a href="./noticeWrite" id="write">공지등록</a>
-	</div>
-	</div>
+				
 </div>
 
 
