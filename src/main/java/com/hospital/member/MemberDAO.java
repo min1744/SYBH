@@ -56,14 +56,19 @@ public class MemberDAO {
 		return sqlSession.insert(NAMESPACE+"setWrite", memberVO);
 	}
 	
-	//암호화
-	public int setEncryption(MemberVO memberVO) throws Exception{
-		return sqlSession.update(NAMESPACE+"setEncryption", memberVO);
-	}
-	
 	//회원 정보 수정
 	public int setUpdate(MemberVO memberVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate", memberVO);
+	}
+	
+	//주민등록번호 복호화
+	public String setResDecryption(String res_reg_num) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"setResDecryption", res_reg_num);
+	}
+	
+	//등급 수정
+	public int setGradeUpdate(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setGradeUpdate", memberVO);
 	}
 	
 	//회원 관리(삭제)

@@ -26,7 +26,12 @@ public class MemberService {
 	}
 	
 	public MemberVO login(MemberVO memberVO) throws Exception{
-		return memberDAO.login(memberVO);
+		memberVO = memberDAO.login(memberVO);
+		//주민등록번호 복호화
+		String res_reg_num_dec = memberDAO.setResDecryption(memberVO.getRes_reg_num());
+		memberVO.setRes_reg_num(res_reg_num_dec);
+		
+		return memberVO;
 	}
 	
 	public String getId(MemberVO memberVO) throws Exception{
@@ -67,7 +72,7 @@ public class MemberService {
 		String phone2 = memberVO.getPhone2();
 		String phone3 = memberVO.getPhone3();
 		if(phone1 != null && phone2 != null && phone3 != null) {
-			memberVO.setPhone(phone1 + phone2 + "-" + phone3);
+			memberVO.setPhone(phone1 + "-" + phone2 + "-" + phone3);
 		}
 		
 		String email1 = memberVO.getEmail1();
@@ -75,18 +80,8 @@ public class MemberService {
 		if(email1 != null && email2 != null) {
 			memberVO.setEmail(email1 + "@" + email2);
 		}
-		int result = memberDAO.setWrite(memberVO);
-		if(result < 1) {
-			throw new Exception();
-		}
-		System.out.println("주민번호 : "+memberVO.getRes_reg_num());
-		System.out.println("pw : "+memberVO.getPw());
-		System.out.println("id : "+memberVO.getId());
-		result = memberDAO.setEncryption(memberVO);
-		System.out.println("===============");
-		System.out.println("주민번호 : "+memberVO.getRes_reg_num());
-		System.out.println("pw : "+memberVO.getPw());
-		return result;
+		
+		return memberDAO.setWrite(memberVO);
 	}
 	
 	public int setUpdate(MemberVO memberVO) throws Exception{

@@ -93,10 +93,10 @@ public class MemberController {
 	
 	@RequestMapping(value = "memberJoin", method = RequestMethod.POST)
 	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult br, ModelAndView mv) throws Exception {
-		memberVOValidate.validate(memberVO, br);
+		/*memberVOValidate.validate(memberVO, br);
 		if(br.hasErrors()) {
 			mv.setViewName("member/memberJoin");
-		} else {
+		} else {*/
 			int result = memberService.setWrite(memberVO);
 			if(result > 0) {
 				mv.setViewName("redirect:./memberLogin");
@@ -105,7 +105,7 @@ public class MemberController {
 				mv.addObject("path", "../");
 				mv.setViewName("common/messageMove");
 			}
-		}
+		//}
 		return mv;
 	}
 	

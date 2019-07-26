@@ -42,7 +42,7 @@
 	
 	<!-- Login -->
 	<select id="login" parameterType="MemberVO" resultType="MemberVO">
-		SELECT * FROM MEMBER WHERE ID LIKE #{id} AND PW LIKE CRYPTO_AES256.DEC_AES(#{pw})
+		SELECT * FROM MEMBER WHERE ID LIKE #{id} AND PW LIKE CRYPTO_AES256.ENC_AES(#{pw})
 	</select>
 	
 	<!-- id 찾기 -->
@@ -60,13 +60,13 @@
 		UPDATE MEMBER SET PW LIKE #{pw} WHERE EMAIL LIKE #{email}
 	</update>
 	
-	<!-- 회원가입 -->
+	<!-- 회원가입(비밀번호, 주민등록번호 AES256 암호화) -->
 	<insert id="setWrite" parameterType="MemberVO">
 		INSERT INTO MEMBER VALUES(
 			#{id},
-			#{pw},
+			CRYPTO_AES256.ENC_AES(#{pw}),
 			#{name},
-			#{res_reg_num},
+			CRYPTO_AES256.ENC_AES(#{res_reg_num}),
 			#{phone},
 			#{email},
 			#{gender},
@@ -75,21 +75,14 @@
 		)
 	</insert>
 	
-	<!-- 비밀번호, 주민등록번호 암호화 -->
-	<update id="setEncryption" parameterType="MemberVO">
-		UPDATE MEMBER
-		SET PW LIKE CRYPTO_AES256.ENC_AES(#{pw}),
-		RES_REG_NUM LIKE CRYPTO_AES256.ENC_AES(#{res_reg_num})
-		WHERE ID LIKE #{id}
+	<update id="setUpdate" parameterType="MemberVO">
+		UPDATE MEMBER SET NAME = #{name} WHERE ID LIKE #{id} AND PW LIKE #{pw}
 	</update>
 	
-	<!-- 회원 정보 수정 -->
-	<update id="setUpdate" parameterType="MemberVO">
-		UPDATE MEMBER SET
-			PHONE LIKE #{phone},
-			EMAIL LIKE #{email}
-		WHERE ID LIKE #{id}
-	</update>
+	<!-- 주민등록번호 AES256 복호화 -->
+	<select id="setResDecryption" parameterType="String" resultType="String">
+		SELECT DISTINCT RPAD(SUBSTR(CRYPTO_AES256.DEC_AES(#{res_reg_num}), 1, 8), 14, '*') FROM MEMBER
+	</select>
 	
 	<!-- 등급 수정 -->
 	<update id="setGradeUpdate" parameterType="MemberVO">
