@@ -39,7 +39,7 @@
 <div id="board_box">
 	
 	<div id="form_box">
-		<form id="frm" action="./${board}Write" method="post" enctype="multipart/form-data">
+		<form id="frm" action="./${board}Write" method="post">
 		<div class="float">
 		 <span class="title">제목</span>
  		 <input class="form-control" type="text" id="title" name="title">
@@ -56,10 +56,11 @@
 		<div id="write_btn">
 			<input id="write" type="button" value="글등록">
 		</div>
+		<p>상단고정!<input type="checkbox" id="fix" name="fix" value="1"></p>	
 	</form>
 	</div>
 		
-	<p>상단고정!<input type="checkbox" id="fix" name="fix" value="1"></p>	
+	
 		
 	<div id="write_btn">
 	<a href="./noticeWrite" id="write">공지등록</a>
