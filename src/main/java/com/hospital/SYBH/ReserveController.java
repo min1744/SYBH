@@ -38,14 +38,5 @@ public class ReserveController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "reserveCal", method = RequestMethod.GET)
-	public ModelAndView getCal() throws Exception {
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("reserve/reserveCal");
-		
-		return mv;
-	}
-	
 	
 }
