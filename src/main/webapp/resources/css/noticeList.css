@@ -138,33 +138,71 @@
 	border-bottom: 1px solid #153F91;
 	overflow: hidden;
 	box-sizing: border-box;
+	border-collapse: collapse;
 }
 
-#boardList table a {
+.position_2 a {
 	
 	color: black;
 }
 
 #boardList table a:hover {
 	
-	color: #808080;
+	color: #153F91;
 }
+
+.position {
+	
+	background-color: #f6f6f6;
+	height: 60px;
+}
+
+
+.title {
+	
+	font-weight: 700;
+}
+
+.title a {
+	
+	color: #153F91;
+}
+
+.position td {
+	
+	border-top: 1px solid #ddd;
+	font-weight: 500;
+}
+
+.position img {
+	
+	width: 25px;
+	vertical-align: middle;
+}
+
 
 #boardList th {
 	
-	padding: 25px 0;
+	padding: 15px 0;
 	
 }
 
-#boardList td {
+.position_2 td {
 	
-	padding: 20px 0;
+	padding: 15px 0;
 	border-top: 1px solid #ddd;
 }
 
 #boardList tr:last-child {
 	
 	border-bottom: none;
+}
+
+
+.date, .hit, .num {
+	
+	font-size: 0.9em;
+	color: #808080;
 }
 
 
