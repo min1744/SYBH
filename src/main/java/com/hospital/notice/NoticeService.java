@@ -57,12 +57,16 @@ public class NoticeService implements BoardService {
 		//startRow, lastRow
 		pageMaker.makeRow();
 		List<BoardVO> list = noticeDAO.getList(pageMaker);
-		List<NoticeVO> list2 = noticeDAO.getListFix(pageMaker);
+		
 		
 		//페이징
 		int totalCount = noticeDAO.getTotalCount(pageMaker);
 		pageMaker.makePage(totalCount);
 		return list;
+	}
+	
+	public List<NoticeVO> getList2() throws Exception{
+		return noticeDAO.getListFix();
 	}
 
 

@@ -111,13 +111,18 @@ public class NoticeController {
 	public ModelAndView getList(PageMaker pageMaker)throws Exception{
 		
 		List<BoardVO> lists= noticeService.getList(pageMaker);
-		
+		List<NoticeVO> list2= noticeService.getList2();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", lists);
+		mv.addObject("list2", list2);
 		mv.addObject("pager", pageMaker);
 				
 		mv.setViewName("board/boardList");
 
 		return mv;
 	}
+	
+
+
+	
 }

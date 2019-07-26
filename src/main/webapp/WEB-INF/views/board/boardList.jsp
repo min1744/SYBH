@@ -52,26 +52,26 @@
 						</tr>
 					</thead>
 					<tbody>
+						<!-- fix -->
+					    <c:forEach items="${list2}" var="vo">
+							<tr id="position">
+							<td class="num"><img src="../resources/images/notice_icon.png"></td>
+							<td class="title"><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
+							<td class="date">${vo.reg_date}</td>
+							<td class="hit">${vo.hit}</td>
+							</tr>
+						</c:forEach>  
 						<c:forEach items="${list}" var="vo">
 							<tr>
 								<td>${vo.num}</td>
 								<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
-								<td>${vo.writer}</td>
+								<td>${vo.reg_date}</td>
 								<td>${vo.hit}</td>
 							</tr>
 						</c:forEach>
-						<!-- fix -->
-					   <c:forEach items="${list2}" var="vo">
-							<tr id="position">
-							<td class="num"><img src="../images/notice_icon.png"></td>
-							<td class="title"><a href="./${board}Select?num=${vo.num}"></a>${vo.title}</td>
-							<td class="date">${vo.reg_date}</td>
-							<td class="hit">${vo.hit}</td>
-							</tr>
-						</c:forEach> 
 					</tbody>
 				</table>
-				<div id="paging" style="margin-left: 315px;">
+				<div id="paging">
 			<ul>
 				<c:if test="${pager.curBlock>1}">
 					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>

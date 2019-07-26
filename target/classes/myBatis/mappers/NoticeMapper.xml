@@ -32,7 +32,8 @@
   	select * from 
   	(select rownum R, N.* from
   	(select * from notice
-  	where  
+  	where fix != 1 and
+  	
   <choose>
   		<when test="kind = 1">
   			title
@@ -52,9 +53,8 @@
   </select>
   
   <!-- list2 -->
-  <select id="getListFix" parameterType="PageMaker" resultType="NoticeVO">
-  	select * from notice
-  	where fix='1' order by num desc 
+  <select id="getFixedList" resultType="NoticeVO">
+  	select * from notice where fix=1 order by num desc
   
   </select>
   
