@@ -6,10 +6,12 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/medicalTeam.css" rel="stylesheet">
+<c:import url="../temp/boot.jsp" />
 </head>
 <body>
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
+
 
 <div id="board">
 		<div id="board_title">
@@ -71,20 +73,38 @@
 					
 					<div class="list_btn">
 						<a href="">진료예약</a>
-						<a href="">의료진소개</a>
+						<a href="" data-toggle="modal" data-target="#myModal_1">의료진소개</a>
 						<a href="">진료일정표</a>
 					</div>
 				</div>
 				<!-- --------------------------- -->
 				<div class="list">
 					<div class="list_profile">
-						<img alt="" src="../resources/images/01_1.jpg">
+						<img alt="" src="../resources/images/01_2.jpg">
 					</div>
 					
 					<div class="list_info">
-						<h2 class="name">최익수 교수</h2>
+						<h2 class="name">김진 교수</h2>
 						<p class="med_office">진료과</p><span>이비인후과</span><br>
-						<p class="pro_field">전문분야</p><span>부비동염, 안면 성형, 수면 무호흡, 후각·미각질환</span>
+						<p class="pro_field">전문분야</p><span>안면신경마비, 안면마비 후유증, 난청, 중이염</span>
+					</div>
+					
+					<div class="list_btn">
+						<a href="">진료예약</a>
+						<a href="" data-toggle="modal" data-target="#myModal_2">의료진소개</a>
+						<a href="">진료일정표</a>
+					</div>
+				</div>
+				<!-- --------------------------- -->
+				<div class="list">
+					<div class="list_profile">
+						<img alt="" src="../resources/images/01_3.jpg">
+					</div>
+					
+					<div class="list_info">
+						<h2 class="name">소윤경 교수</h2>
+						<p class="med_office">진료과</p><span>이비인후과</span><br>
+						<p class="pro_field">전문분야</p><span>갑상선암, 음성질환, 경부 종물/종양</span>
 					</div>
 					
 					<div class="list_btn">
@@ -96,13 +116,13 @@
 				<!-- --------------------------- -->
 				<div class="list">
 					<div class="list_profile">
-						<img alt="" src="../resources/images/01_1.jpg">
+						<img alt="" src="../resources/images/01_4.jpg">
 					</div>
 					
 					<div class="list_info">
-						<h2 class="name">최익수 교수</h2>
+						<h2 class="name">조재근 교수</h2>
 						<p class="med_office">진료과</p><span>이비인후과</span><br>
-						<p class="pro_field">전문분야</p><span>부비동염, 안면 성형, 수면 무호흡, 후각·미각질환</span>
+						<p class="pro_field">전문분야</p><span>두경부암, 안면마비 재건, 갑상선암, 경부종물/종양</span>
 					</div>
 					
 					<div class="list_btn">
@@ -114,31 +134,13 @@
 				<!-- --------------------------- -->
 				<div class="list">
 					<div class="list_profile">
-						<img alt="" src="../resources/images/01_1.jpg">
+						<img alt="" src="../resources/images/01_5.jpg">
 					</div>
 					
 					<div class="list_info">
-						<h2 class="name">최익수 교수</h2>
+						<h2 class="name">이전미 교수</h2>
 						<p class="med_office">진료과</p><span>이비인후과</span><br>
-						<p class="pro_field">전문분야</p><span>부비동염, 안면 성형, 수면 무호흡, 후각·미각질환</span>
-					</div>
-					
-					<div class="list_btn">
-						<a href="">진료예약</a>
-						<a href="">의료진소개</a>
-						<a href="">진료일정표</a>
-					</div>
-				</div>
-				<!-- --------------------------- -->
-				<div class="list">
-					<div class="list_profile">
-						<img alt="" src="../resources/images/01_1.jpg">
-					</div>
-					
-					<div class="list_info">
-						<h2 class="name">최익수 교수</h2>
-						<p class="med_office">진료과</p><span>이비인후과</span><br>
-						<p class="pro_field">전문분야</p><span>부비동염, 안면 성형, 수면 무호흡, 후각·미각질환</span>
+						<p class="pro_field">전문분야</p><span>이과(난청, 어지럼증, 이명, 급성 안면마비)</span>
 					</div>
 					
 					<div class="list_btn">
@@ -151,6 +153,64 @@
 			
 			
 			</div>
+			
+			
+	<!-- 모달창 -->
+	<!-- 나중에 foreach로 id 뒤 숫자 varstatus 값으로 구분 -->
+	  <div class="modal fade" id="myModal_1" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">의료진 소개</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<div class="modal_title_box">
+		        	<p class="modal_med_office_title">이비인후과</p>
+		        	<h2 class="modal_med_office">최익수 교수</h2>
+		        </div>
+	        		<hr>
+				
+				<div class="modal_profile">
+					<img alt="" src="../resources/images/01_1.jpg">
+				</div>
+				
+				<div class="modal_info">
+					<h3 class="modal_pro_field_title">전문분야</h3>
+					<p class="modal_pro_field">부비동염, 안면 성형, 수면 무호흡, 후각·미각질환</p>
+				</div>	
+				
+				<a href="../reserve/reserveNomal" id="reserve_btn">진료예약</a>
+				
+				<div class="modal_career">
+					
+					<div class="career">
+						<h3>경력</h3>
+						<ul>
+							<li>이비인후과 전문의/의학박사</li>
+						</ul>
+					</div>
+					
+					<div class="major_act">
+						<h3>주요활동</h3>
+						<ul>
+							<li>세계안면마비학회 회원</li>
+						</ul>
+					</div>
+				
+				</div>          
+	          
+	          
+	        </div>
+	      </div>
+    	</div>
+ 	 </div>
+ 	 <!-- ---------- -->
+ 	 
+			
+			
 		</div>
 		
 	</div>

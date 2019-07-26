@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-
-
 #board {
 	
 	width: 1920px;
@@ -340,6 +338,7 @@
 	font-weight: 700;
 	margin-right: 10px;
 	display: inline-block;
+	width: 60px;
 	
 }
 
@@ -388,3 +387,96 @@
 	border: 1px solid #153F91;
 	color: white;
 }
+
+
+.modal_profile {
+	
+	width: 250px;
+	border: 1px solid #ddd;
+	overflow: hidden;
+	float: left;
+}
+
+.modal_profile img {
+	
+	width: 100%;
+	box-sizing: border-box;
+}
+
+
+.modal-body hr {
+	
+	margin: 20px 0;
+	border: 1px solid #153F91;
+}
+
+
+.modal_med_office_title {
+	
+	color: #808080;
+	font-size: 1.3em;
+	letter-spacing: -1px;
+	
+}
+
+
+.modal_med_office {
+	
+	font-size: 2em;
+	letter-spacing: -2px;
+}
+
+
+.modal_info, .modal_career {
+	
+	float: left;
+}
+
+
+.modal_info {
+	
+	padding: 1% 3%;
+}
+
+
+#reserve_btn {
+	
+	display: block;
+	padding: 15px 50px;
+	background-color: #153F91;
+	color: white;
+	font-weight: 700;
+	float: right;
+	font-size: 1.2em;
+}
+
+
+.modal_pro_field_title {
+	
+	color: #000000;
+	font-size: 1.2em;
+	letter-spacing: -1px;
+	font-weight: 900;
+	
+	
+}
+
+.modal_pro_field {
+	
+	letter-spacing: -1px;
+	font-size: 1em;
+	color: #808080;
+	
+}
+
+
+
+
+.modal_career {
+	
+	clear: both;
+}
+
+
+
+

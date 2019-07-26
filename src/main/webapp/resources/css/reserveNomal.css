@@ -18,7 +18,8 @@
 	border-bottom: 1px solid #ddd;
 }
 
-#board_title p {
+
+#title {
 	
 	text-align: center;
 	font-size: 1.5em;
@@ -27,9 +28,20 @@
 	
 }
 
+
+#sub_title {
+	
+	text-align: center;
+	font-size: 1em;
+	color: #808080;
+	letter-spacing: -1px;
+	margin-top: 5px;
+	
+}
+
 #board_box {
 	
-	width: 70%;
+	width: 60%;
 	overflow: hidden;
 	position: relative;
 	margin: 80px auto;
@@ -38,7 +50,7 @@
 
 
 
-#board_nav, #boardList {
+#board_nav, #doctorList {
 	
 	float: left;
 	overflow: hidden;
@@ -48,7 +60,7 @@
 #board_nav {
 	
 	width: 15%;
-	margin-right: 2%;
+	margin-right: 5%;
 }
 
 
@@ -88,10 +100,331 @@
 }
 
 
-#boardList {
+#doctorList {
 	
-	width: 83%;
+	width: 80%;
 	text-align: center;
 }
 
+
+
+
+#office_select {
+	
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	margin-bottom: 40px;
+	
+}
+
+
+#office_select h3:before {
+	
+	content: "";
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin-bottom: 9px;
+	background-color: #153F91;
+	
+}
+
+
+#office_select h3 {
+	
+	font-weight: 700;
+	font-size: 1.3em;
+	letter-spacing: -1px;
+	margin-bottom: 30px;
+	
+}
+
+
+#office_select li {
+	
+	float: left;
+	width: 20%;
+	overflow: hidden;
+	text-align: center;
+	letter-spacing: -1px;
+	font-weight: 700;
+}
+
+
+
+#office_select li a {
+	
+	color: #808080;
+	
+}
+
+#office_select li a {
+	
+	color: #808080;
+	width: 100%;
+	overflow: hidden;
+	padding: 15px 20px;
+	display: inline-block;
+	border-left: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	box-sizing: border-box;
+	
+}
+
+#last_li {
+	
+	border-right: 1px solid #ddd;
+}
+
+#office_select li a:hover {
+	
+	background-color: #153F91;
+	color: white;
+	border-left: 1px solid #153F91;
+	border-top: 1px solid #153F91;
+	border-bottom: 1px solid #153F91;
+	
+}
+
+
+
+
+#doctor_list {
+	
+	width: 60%;
+	overflow: hidden;
+	text-align: left;
+	margin: 40px auto;
+	float:left;
+	margin-right: 5%;
+	
+}
+
+
+#doctor_list h3:before {
+	
+	content: "";
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin-bottom: 9px;
+	background-color: #153F91;
+	
+}
+
+
+#doctor_list h3 {
+	
+	font-weight: 700;
+	font-size: 1.3em;
+	letter-spacing: -1px;
+	margin-bottom: 15px;
+	
+}
+
+
+#doctor_select {
+	
+	width: 100%;
+	overflow: hidden;
+	border-top: 2px solid #153F91;
+}
+
+
+
+#user_info {
+	
+	width: 35%;
+	overflow: hidden;
+	text-align: left;
+	margin: 40px auto;
+	float:left;
+	
+}
+
+
+#user_info h3:before {
+	
+	content: "";
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin-bottom: 9px;
+	background-color: #153F91;
+	
+}
+
+
+#user_info h3 {
+	
+	font-weight: 700;
+	font-size: 1.3em;
+	letter-spacing: -1px;
+	margin-bottom: 15px;
+	
+}
+
+
+
+/* 의사 리스트 */
+
+
+
+.list {
+	
+	width: 100%;
+	border-bottom: 1px solid #c1c1c1;
+	overflow: hidden;
+	padding-top: 25px;
+	padding-bottom: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	box-sizing: border-box;
+}
+
+.list_profile {
+	
+	max-width: 100px;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.list_profile img {
+	
+	width: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+}
+
+
+
+.list_profile, .list_info {
+	
+	float: left;
+	
+}
+
+
+.list_info {
+	
+	width: 280px;
+	margin: 0 20px;
+}
+
+
+.name {
+	
+	font-size: 1.3em;
+	letter-spacing: -1px;
+	font-weight: 700;
+	margin-bottom: 15px;
+}
+
+
+
+.med_office, .pro_field {
+	
+	letter-spacing: -1px;
+	font-size: 0.9em;
+	font-weight: 700;
+	margin-right: 10px;
+	display: inline-block;
+	width: 60px;
+	vertical-align: top;
+	margin-bottom: 5px;
+	
+}
+
+.list_info span {
+	
+	font-weight: 500;
+	text-align: left;
+	letter-spacing: -1px;
+	font-size: 0.9em;
+	color: #808080;
+	display: inline-block;
+	width: 210px;
+}
+
+
+
+.list_btn {
+	
+	float: right;
+}
+
+
+
+.select_btn {
+	
+	display: block;
+	padding: 8px 40px;
+	border: 1px solid #ddd;
+	letter-spacing: -1px;
+	color: #808080;
+	text-align: center;
+	font-weight: 700;
+	margin-bottom: 10px;
+	border: 1px solid #153F91; 
+	color: #153F91;
+	background-color: white;
+	cursor: pointer;
+	font-size: 0.9em;
+}
+
+
+.select_btn:hover {
+	
+	background-color: #153F91;
+	border: 1px solid #153F91;
+	color: white;
+}
+
+
+.select_btn:active {
+	
+	background-color: #153F91;
+	border: 1px solid #153F91;
+	color: white;
+}
+
+
+
+
+
+.info_btn {
+	
+	display: block;
+	padding: 8px 20.5px;
+	border: 1px solid #ddd;
+	letter-spacing: -1px;
+	color: #808080;
+	text-align: center;
+	font-weight: 700;
+	margin-bottom: 10px;
+	border: 1px solid #808080; 
+	color: #808080;
+	background-color: white;
+	cursor: pointer;
+	font-size: 0.9em;
+}
+
+
+.info_btn:hover {
+	
+	background-color: #808080;
+	border: 1px solid #808080;
+	color: white;
+}
+
+
+.info_btn:active {
+	
+	background-color: #808080;
+	border: 1px solid #808080;
+	color: white;
+}
 

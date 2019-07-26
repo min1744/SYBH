@@ -1,6 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+
+<a id="top_btn" href="#">
+	<img src="../resources/images/top.png">
+</a>
+
+<script>
+
+$(function() {
+	$(window).scroll(function() {
+	    if ($(this).scrollTop() > 400) {
+	        $('#top_btn').fadeIn();
+	    } else {
+	        $('#top_btn').fadeOut();
+	    }
+	});
+	
+	$("#top_btn").click(function() {
+	    $('html, body').animate({
+	        scrollTop : 0
+	    }, 400);
+	    return false;
+	});
+});
+
+
+</script>
+
 <!-- header -->
 <div id="header">
 	<div id="header_box">
@@ -28,22 +57,22 @@
 				<c:choose>
 					<c:when test="${not empty memberVO}">
 						<c:choose>	
-							<c:when test="${memberVO.id eq 'admin'}">
-								<li><a href="./member/memberLogout">로그아웃</a></li>
+							<c:when test="${memberVO.grade eq '2'}">
+								<li><a href="../member/memberLogout">로그아웃</a></li>
 								<li style="padding: 0 10px;">│<li>
-								<li><a href="./admin/adminIndex" target="_blank">관리자페이지</a></li>
+								<li><a href="../admin/adminIndex" target="_blank">관리자페이지</a></li>
 							</c:when>
 							<c:otherwise>
-							<li><a href="./member/memberLogout">로그아웃</a></li>
+							<li><a href="../member/memberLogout">로그아웃</a></li>
 							<li style="padding: 0 10px;">│<li>
-							<li><a href="./member/memberMyPage">마이페이지</a></li>
+							<li><a href="../member/memberMyPage">마이페이지</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:otherwise>
-						<li><a href="./member/memberLogin">로그인</a></li>
+						<li><a href="../member/memberLogin">로그인</a></li>
 						<li style="padding: 0 10px;">│<li>
-						<li><a href="./member/memberAgree">회원가입</a></li>
+						<li><a href="../member/memberAgree">회원가입</a></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -59,7 +88,7 @@
 <c:choose>
 		<c:when test="${not empty memberVO}">
 			<c:choose>
-				<c:when test="${memberVO.id eq 'admin'}">
+				<c:when test="${memberVO.grade eq '2'}">
 					<div id="sub_nav_box" style="padding-left: 810px;">
 				</c:when>
 				<c:otherwise>
