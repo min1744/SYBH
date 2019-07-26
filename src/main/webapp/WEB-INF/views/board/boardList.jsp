@@ -31,7 +31,7 @@
 				<li>병원안내</li>
 				<li><a href="./noticeList">공지사항</a></li>
 				<li><a href="#">병원소개</a></li>
-				<li><a href="../medical/medicalTeamList">의료진 소개</a></li>
+				<li><a href="#">의료진 소개</a></li>
 				<li><a href="#">층별안내</a></li>
 				<li><a href="#">오시는 길</a></li>
 				
@@ -56,7 +56,7 @@
 					    <c:forEach items="${list2}" var="vo">
 							<tr id="position">
 							<td class="num"><img src="../resources/images/notice_icon.png"></td>
-							<td class="title"><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
+							<td class="title"><a href="./${board}Select?num=${vo.num}">${vo.title}</a>	</td>
 							<td class="date">${vo.reg_date}</td>
 							<td class="hit">${vo.hit}</td>
 							</tr>

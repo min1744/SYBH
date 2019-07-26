@@ -7,11 +7,11 @@ import javax.naming.NoInitialContextException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.board.BoardVO;
@@ -35,6 +35,7 @@ public class NoticeController {
 	} 
 	
 	
+	
 	//delete
 	@RequestMapping(value = "noticeDelete", method = RequestMethod.GET)
 	public String setDelete(int num, HttpSession session)throws Exception{
@@ -56,6 +57,7 @@ public class NoticeController {
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
 	public ModelAndView setWrite(NoticeVO noticeVO, HttpSession session)throws Exception{
+		System.out.println();
 		ModelAndView mv = new ModelAndView();
 		int result = noticeService.setWrite(noticeVO,session);
 		if(result>0) {
