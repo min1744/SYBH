@@ -14,6 +14,7 @@ public class MemberService {
 	@Inject
 	private MemberDAO memberDAO;
 	
+	//Admin페이지 List
 	public List<MemberVO> getList(PageMaker pageMaker) throws Exception{
 		pageMaker.makeRow();
 		pageMaker.makePage(memberDAO.getTotalCount(pageMaker));
@@ -21,10 +22,12 @@ public class MemberService {
 		return memberDAO.getList(pageMaker);
 	}
 	
+	//myPage
 	public MemberVO getSelect(String id) throws Exception{
 		return memberDAO.getSelect(id);
 	}
 	
+	//login
 	public MemberVO login(MemberVO memberVO) throws Exception{
 		memberVO = memberDAO.login(memberVO);
 		//주민등록번호 복호화
@@ -34,6 +37,7 @@ public class MemberService {
 		return memberVO;
 	}
 	
+	//아이디 찾기
 	public String getId(MemberVO memberVO) throws Exception{
 		String email1 = memberVO.getEmail1();
 		String email2 = memberVO.getEmail2();
@@ -44,23 +48,19 @@ public class MemberService {
 		return memberDAO.getId(email);
 	}
 	
-	public int getPw(String email) throws Exception{
-		int result = memberDAO.getPw(email);
-		MemberVO memberVO = new MemberVO();
+	//비밀번호 찾기
+	public String getPw(MemberVO memberVO) throws Exception{
 		String email1 = memberVO.getEmail1();
 		String email2 = memberVO.getEmail2();
+		String email = null;
 		if(email1 != null && email2 != null) {
-			memberVO.setEmail(email1 + "@" + email2);
+			email = email1 + "@" + email2;
 		}
-		memberVO.setPw(UUID.randomUUID().toString());
-		if(result > 0) {
-			result = memberDAO.setPwUpdate(memberVO);
-		} else {
-			
-		}
-		return 0;
+		
+		return memberDAO.getPw(email);
 	}
 	
+	//회원가입
 	public int setWrite(MemberVO memberVO) throws Exception{
 		String res_reg_num1 = memberVO.getRes_reg_num1();
 		String res_reg_num2 = memberVO.getRes_reg_num2();
@@ -84,7 +84,20 @@ public class MemberService {
 		return memberDAO.setWrite(memberVO);
 	}
 	
-	public int setUpdate(MemberVO memberVO) throws Exception{
-		return memberDAO.setUpdate(memberVO);
+	//아이디 중복확인
+	public int getIdDuplication(String id) throws Exception{
+		return memberDAO.getIdDuplication(id);
+	}
+	
+	//이메일 중복확인
+	public int getEmailDuplication(MemberVO memberVO) throws Exception{
+		String email1 = memberVO.getEmail1();
+		String email2 = memberVO.getEmail2();
+		String email = null;
+		if(email1 != null && email2 != null) {
+			email = email1 + "@" + email2;
+		}
+		
+		return memberDAO.getEmailDuplication(email);
 	}
 }

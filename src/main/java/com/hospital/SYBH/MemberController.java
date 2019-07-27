@@ -110,6 +110,24 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping(value = "memberIdCheck", method = RequestMethod.POST)
+	public ModelAndView memberIdCheck(String id, ModelAndView mv) throws Exception{
+		int result = memberService.getIdDuplication(id);
+		mv.addObject("result", result);
+		mv.setViewName("common/message");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberEmailCheck", method = RequestMethod.POST)
+	public ModelAndView memberEmailCheck(MemberVO memberVO, ModelAndView mv) throws Exception{
+		int result = memberService.getEmailDuplication(memberVO);
+		mv.addObject("result", result);
+		mv.setViewName("common/message");
+		
+		return mv;
+	}
+	
 	//재혁 후원내역 작성
 	@RequestMapping(value="memberDonation", method = RequestMethod.GET)
 	public ModelAndView memberDonation(PageMaker pageMaker, PayVO payVO,HttpSession session) throws Exception{
