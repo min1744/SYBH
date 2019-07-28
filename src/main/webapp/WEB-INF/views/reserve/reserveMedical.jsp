@@ -33,9 +33,33 @@
 		</div>
 		
 		
-		<div id="boardList">
-		
-		
+		<div id="doctorList">
+			
+			<div id="office_select">
+				<h3>검진 선택</h3>
+				<ul>
+					<li>
+					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
+					<input type="radio" name="a">기존 종합검진(여)
+					</li>
+					<li>
+					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
+					<input type="radio" name="a">기존 종합검진(여)
+					</li>
+					<li>
+					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
+					<input type="radio" name="a">기존 종합검진(여)
+					</li>
+					<li>
+					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
+					<input type="radio" name="a">기존 종합검진(여)
+					</li>
+					<li id="last_li">
+					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
+					<input type="radio" name="a">기존 종합검진(여)
+					</li>
+				</ul>
+			</div>
 		</div>
 		
 	</div>
