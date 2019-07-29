@@ -23,6 +23,20 @@
 			
 			
 	});
+	<c:if test="${fix>4}">
+	$(function() {
+	$("#fix").click(function() {
+		var result = confirm("고정 게시글은 최대 3개만 가능합니다");
+		if(result){
+			location.href="./boardWrite";
+		}
+	});
+});	
+		
+</c:if>	
+	
+	
+	
 </script>
 </head>
 <body>
@@ -57,7 +71,12 @@
 			<input id="write" type="button" value="글등록">
 		</div>
 		<p>공지사항 고정<input type="checkbox" id="fix" name="fix" value="1"></p>	
+		
+	
+	
 	</form>
+	
+	
 	</div>
 				
 </div>

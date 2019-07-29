@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.board.BoardVO;
+import com.hospital.notice.NoticeDAO;
 import com.hospital.notice.NoticeService;
 import com.hospital.notice.NoticeVO;
 import com.hospital.util.PageMaker;
@@ -44,20 +45,30 @@ public class NoticeController {
 		
 	}
 	
-	
-	
-	//write
-	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
-	public String setWrite(NoticeVO noticeVO)throws Exception{
+	/*
+	 * //write
+	 * 
+	 * @RequestMapping(value = "noticeWrite", method = RequestMethod.GET) public
+	 * ModelAndView setWrite(HttpSession session)throws Exception{ ModelAndView mv =
+	 * new ModelAndView(); int result = noticeService.fixCount(session);
+	 * mv.addObject("result", result); mv.setViewName("board/boardWrite");
+	 * 
+	 * return mv; }
+	 */
 		
-	return "board/boardWrite";
+	
+	 //write
+	  
+	  @RequestMapping(value = "noticeWrite", method = RequestMethod.GET) public
+	  String setWrite(NoticeVO noticeVO)throws Exception{
+	  
+	  return "board/boardWrite";
+	  
+	  }
+	 
 		
-	}
-	
-	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
 	public ModelAndView setWrite(NoticeVO noticeVO, HttpSession session)throws Exception{
-		System.out.println();
 		ModelAndView mv = new ModelAndView();
 		int result = noticeService.setWrite(noticeVO,session);
 		if(result>0) {

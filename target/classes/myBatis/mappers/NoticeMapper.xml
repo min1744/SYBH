@@ -58,10 +58,10 @@
   
   </select>
   
-  
- 
-
-    
+  <!-- fixcount  -->
+ <select id="fixCount" parameterType="Integer" resultType="Integer">
+	select count(fix) from notice where fix=#{fix}
+  </select>
   <!-- search  -->
   <select id="getCount" parameterType="PageMaker" resultType="Integer">
   	select count(num) from notice
