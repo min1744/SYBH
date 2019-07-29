@@ -46,7 +46,7 @@ $(function() {
 				<li><a href="../reserve/reserveInfo">진료예약/조회</a></li>
 				<li><a href="../news/newsAll">건강뉴스</a></li>
 				<li><a href="../notice/noticeList">병원안내</a></li>
-				<li><a href="">고객의 소리</a></li>
+				<li><a href="../qna/qnaList">고객의 소리</a></li>
 				<li id="last_menu"><a href="">주말약국</a></li>			
 			</ul>
 		</div>

@@ -54,7 +54,7 @@
 					<tbody>
 						<!-- fix -->
 					    <c:forEach items="${list2}" var="vo">
-							<tr id="position">
+							<tr class="position">
 							<td class="num"><img src="../resources/images/notice_icon.png"></td>
 							<td class="title"><a href="./${board}Select?num=${vo.num}">${vo.title}</a>	</td>
 							<td class="date">${vo.reg_date}</td>
@@ -62,11 +62,11 @@
 							</tr>
 						</c:forEach>  
 						<c:forEach items="${list}" var="vo">
-							<tr>
-								<td>${vo.num}</td>
+							<tr class="position_2">
+								<td class="num">${vo.num}</td>
 								<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
-								<td>${vo.reg_date}</td>
-								<td>${vo.hit}</td>
+								<td class="date">${vo.reg_date}</td>
+								<td class="hit">${vo.hit}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
