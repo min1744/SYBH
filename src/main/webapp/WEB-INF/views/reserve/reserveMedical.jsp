@@ -39,24 +39,33 @@
 				<h3>검진 선택</h3>
 				<ul>
 					<li>
-					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
-					<input type="radio" name="a">기존 종합검진(여)
+					<img alt="" src="../resources/images/stethoscope.png">
+					<p><input type="radio" name="a" checked="checked">기본 종합검진(남)<br></p>
+					<input type="radio" name="a">기본 종합검진(여)
 					</li>
 					<li>
-					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
-					<input type="radio" name="a">기존 종합검진(여)
+					<img alt="" src="../resources/images/hug.png">
+					<input type="radio" name="a">쌍용 플래티넘(남)<br>
+					<input type="radio" name="a">쌍용 플래티넘(여)<br>
+					<input type="radio" name="a">러브 패키지(남)<br>
+					<input type="radio" name="a">러브 패키지(여)<br>
 					</li>
 					<li>
-					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
-					<input type="radio" name="a">기존 종합검진(여)
+					<img alt="" src="../resources/images/heart.png">
+					<input type="radio" name="a">심장 정밀검진 1<br>
+					<input type="radio" name="a">심장 정밀검진 2<br>
+					<input type="radio" name="a">심장 정밀검진 3<br>
 					</li>
 					<li>
-					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
-					<input type="radio" name="a">기존 종합검진(여)
+					<img alt="" src="../resources/images/microscope.png">
+					<input type="radio" name="a">소화기 정밀검진<br>
+					<input type="radio" name="a">폐 정밀검진<br>
+					<input type="radio" name="a">뇌 정밀검진<br>
 					</li>
 					<li id="last_li">
-					<input type="radio" name="a" checked="checked">기존 종합검진(남)<br>
-					<input type="radio" name="a">기존 종합검진(여)
+					<img alt="" src="../resources/images/hospital-bed.png">
+					<input type="radio" name="a">숙박 검진(남)<br>
+					<input type="radio" name="a">숙박 검진(여)
 					</li>
 				</ul>
 			</div>

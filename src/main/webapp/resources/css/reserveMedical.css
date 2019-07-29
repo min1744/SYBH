@@ -111,21 +111,40 @@
 
 #office_select li {
 	float: left;
+	width: 20%;
 	overflow: hidden;
 	text-align: center;
+	height: 210px;
+	box-sizing: border-box;
 	letter-spacing: -1px;
 	font-size: 0.9em;
-	padding: 15px 37.2px;
+	padding: 15px 0;
 	display: inline-block;
 	border-left: 1px solid #ddd;
 	border-top: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
+	color: #808080;
 }
+
+
+#office_select li img {
+	
+	width: 60px;
+	margin: 0 auto;
+	padding-bottom: 15px;
+	display: block;
+	text-align: center;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
 
 
 #office_select li input {
 	
 	display: inline-block;
+	margin-right: 5px;
+	margin-bottom: 10px;
 	
 	
 }
