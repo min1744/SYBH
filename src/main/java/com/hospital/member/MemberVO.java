@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Range;
 public class MemberVO {
 	//아아디
 	@NotBlank
-	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$")
+	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$")
 	private String id;
 	//비밀번호
 	@NotBlank
@@ -36,10 +36,10 @@ public class MemberVO {
 	private String res_reg_num;
 	//핸드폰번호
 	@NotBlank
-	@Pattern(regexp = "^(?=.*[0-9]).{3,4}$")
+	@Pattern(regexp = "^(?=.*[0-9]).{3,3}$")
 	private String phone1;
 	@NotBlank
-	@Pattern(regexp = "^(?=.*[0-9]).{3,5}$")
+	@Pattern(regexp = "^(?=.*[0-9]).{3,4}$")
 	private String phone2;
 	@NotBlank
 	@Pattern(regexp = "^(?=.*[0-9]).{4,4}$")
@@ -47,7 +47,7 @@ public class MemberVO {
 	private String phone;
 	//이메일
 	@NotBlank
-	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9]).{6,12}$")
+	@Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$")
 	private String email1;
 	@NotBlank
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[.]).{8,12}$")
