@@ -103,6 +103,8 @@ $(function() {
 		url:"./pay/donationTotal",
 		type: "GET",
 		success:function(data){
+			data = data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
 			$('#donation').html(data+'<span>원</span>');
 		}
 	});
