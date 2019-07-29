@@ -16,6 +16,16 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	private static final String NAMESPACE="MemberMapper.";
 	
+	//id 중복확인
+	public int getIdDuplication(String id) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getIdDuplication", id);
+	}
+	
+	//email 중복확인
+	public int getEmailDuplication(String email) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getEmailDuplication", email);
+	}
+	
 	//totalCount
 	public int getTotalCount(PageMaker pageMaker) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pageMaker);
@@ -36,19 +46,24 @@ public class MemberDAO {
 		return sqlSession.selectOne(NAMESPACE+"login", memberVO);
 	}
 	
-	//id 찾기
+	//비밀번호 분실로 인한 비밀번호 난수로 변경
+	public int setPwUpdate(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setPwUpdate", memberVO);
+	}
+	
+	//아이디 찾기
 	public String getId(String email) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getId", email);
 	}
 	
 	//비밀번호 찾기
-	public int getPw(String email) throws Exception{
+	public String getPw(String email) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getPw", email);
 	}
 	
-	//비밀번호 분실로 인한 비밀번호 난수로 변경
-	public int setPwUpdate(MemberVO memberVO) throws Exception{
-		return sqlSession.update(NAMESPACE+"setPwUpdate", memberVO);
+	//비밀번호 변경
+	public int setPw(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setPw", memberVO);
 	}
 	
 	//회원가입

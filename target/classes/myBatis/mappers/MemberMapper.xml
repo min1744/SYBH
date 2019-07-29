@@ -17,6 +17,16 @@
 		</choose>
 	</sql>
 	
+	<!-- id 중복확인 -->
+	<select id="getIdDuplication" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE ID = #{id}
+	</select>
+	
+	<!-- email 중복확인 -->
+	<select id="getEmailDuplication" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
 	<!-- 관리자를 제외한 필터링 된 회원의 숫자 -->
 	<select id="getTotalCount" parameterType="PageMaker" resultType="Integer">
 		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 0 AND
@@ -45,19 +55,24 @@
 		SELECT * FROM MEMBER WHERE ID LIKE #{id} AND PW LIKE CRYPTO_AES256.ENC_AES(#{pw})
 	</select>
 	
-	<!-- id 찾기 -->
+	<!-- 아이디 찾기 -->
 	<select id="getId" parameterType="String" resultType="String">
 		SELECT ID FROM MEMBER WHERE EMAIL LIKE #{email}
-	</select>
-	
-	<!-- 비밀번호 찾기 -->
-	<select id="getPw" parameterType="String" resultType="Integer">
-		SELECT COUNT(*) FROM MEMBER WHERE EMAIL LIKE #{email}
 	</select>
 	
 	<!-- 비밀번호 분실로 인한 비밀번호 난수로 변경 -->
 	<update id="setPwUpdate" parameterType="MemberVO">
 		UPDATE MEMBER SET PW LIKE #{pw} WHERE EMAIL LIKE #{email}
+	</update>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="getPw" parameterType="String" resultType="String">
+		SELECT PW FROM MEMBER WHERE EMAIL LIKE #{email}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="setPw" parameterType="MemberVO">
+		UPDATE MEMBER SET PW = CRYPTO_AES256.ENC_AES(#{pw}) WHERE ID LIKE #{id}
 	</update>
 	
 	<!-- 회원가입(비밀번호, 주민등록번호 AES256 암호화) -->
