@@ -20,11 +20,22 @@ public class NoticeService implements BoardService {
 	@Inject
 	private NoticeDAO noticeDAO;
 	
+	public int fixCount(NoticeVO noticeVO, HttpSession session) throws Exception{
+		int result = noticeDAO.fixCount(noticeVO.getFix());
+		int check = 0;
+		if(result <4) {
+			check = 1;
+		}
+				
+		return check;
+	}
+	
 
 	public int setWrite(NoticeVO noticeVO, HttpSession session) throws Exception {
 		int result = noticeDAO.setWrite(noticeVO);
 		if(noticeVO.getFix() != 1 ) {
 			noticeVO.setFix(0);
+			
 		}
 		
 		
