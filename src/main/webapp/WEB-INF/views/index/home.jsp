@@ -103,7 +103,8 @@ $(function() {
 		url:"./pay/donationTotal",
 		type: "GET",
 		success:function(data){
-			$('#donation').html(data+'<span>원</span>');
+				var data1 = data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); //콤마계산 //현아추가
+				$('#donation').html(data1+'<span>원</span>');
 		}
 	});
 	//재혁 후원인 총 인원
