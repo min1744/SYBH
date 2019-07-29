@@ -116,23 +116,36 @@
 					$('#reserve_ok').show();
 				});
 	        	
-	        	$('#reserve_ok').click(function() {
-	        		
-					var result = confirm('예약하시겠습니까?');
+	        var name = '';
+	        var med_office='';
+			/* 재혁 */
+			$('.select_btn').click(function(){
+				
+				var index = $(this).attr('data-num');
+				//의사 이름 불러오기
+				name = $("#name"+index).attr('title');
+				$('#doc').html(name);
+				//진료과 불러오기
+				med_office = $('#med'+index).attr('title');
+				$('#off').html(med_office);
+				
+			});
+			$('#reserve_ok').click(function() {
+        		
+        		
+				var result = confirm('[예약정보]\n 환자명 : ${memberVO.name}\n 병원/진료과 : '+name+'\n 의료진 : '+med_office+'\n 예약하시겠습니까?');
+				
+				if(result) {
+					location.href="#";
 					
-					if(result) {
-						location.href="#";
-						
-					} else {
-						
-					}
+				} else {
 					
-				});
-	        	
+				}
+				
+			});	
 	        	
 	        	
 			});
-		
 </script>
 </head>
 <body>
@@ -167,11 +180,11 @@
 			<div id="office_select">
 				<h3>진료과목 선택</h3>
 				<ul>
-					<li><a href="">이비인후과</a></li>
-					<li><a href="">외과</a></li>
-					<li><a href="">비뇨의학과</a></li>
-					<li><a href="">내과</a></li>
-					<li><a href="" id="last_li">신경외과</a></li>	
+					<li><a href="./reserveNomal?mid=1">이비인후과</a></li>
+					<li><a href="./reserveNomal?mid=2">외과</a></li>
+					<li><a href="./reserveNomal?mid=3">비뇨의학과</a></li>
+					<li><a href="./reserveNomal?mid=4">내과</a></li>
+					<li><a href="./reserveNomal?mid=5" id="last_li">신경외과</a></li>	
 				</ul>
 			</div>
 			
@@ -181,90 +194,25 @@
 				<div id="doctor_select">
 				
 					<!-- 의사 리스트 시작 -->
-					<div class="list">
+					<c:forEach items="${list }" var="list" varStatus="i">
+					<div class="list" id="list${i}">
 						<div class="list_profile">
-							<img alt="" src="../resources/images/01_1.jpg">
+							<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
 						</div>
 						
 						<div class="list_info">
-							<h2 class="name">최익수 교수</h2>
-							<p class="med_office">진료과</p><span>이비인후과</span><br>
-							<p class="pro_field">전문분야</p><span>부비동염, 안면 성형, 수면 무호흡, 후각·미각질환</span>
+							<h2 class="name" id="name${i.index}"  title="${list.name}">${list.name }</h2>
+							<p class="med_office" id="med${i.index}" title="${list.med_office }">진료과</p><span>${list.med_office}</span><br>
+							<p class="pro_field">전문분야</p><span>${list.pro_field }</span>
 						</div>
 						
 						<div class="list_btn">
-							<button class="select_btn">선택</button>
-							<button class="info_btn" data-toggle="modal" data-target="#myModal_1">의료진 소개</button>
+							<button class="select_btn" id="medic_select" data-num="${i.index }">선택</button>
+							<button class="info_btn" data-toggle="modal" data-target="#myModal_${i.index+1}">의료진 소개</button>
 						</div>
 					</div>
-					<!-- --------------------------- -->
-					<div class="list">
-						<div class="list_profile">
-							<img alt="" src="../resources/images/01_2.jpg">
-						</div>
-						
-						<div class="list_info">
-							<h2 class="name">김진 교수</h2>
-							<p class="med_office">진료과</p><span>이비인후과</span><br>
-							<p class="pro_field">전문분야</p><span>안면신경마비, 안면마비 후유증, 난청, 중이염</span>
-						</div>
-						
-						<div class="list_btn">
-							<button class="select_btn">선택</button>
-							<button class="info_btn">의료진 소개</button>
-						</div>
-					</div>
-					<!-- --------------------------- -->
-					<div class="list">
-						<div class="list_profile">
-							<img alt="" src="../resources/images/01_3.jpg">
-						</div>
-						
-						<div class="list_info">
-							<h2 class="name">소윤경 교수</h2>
-							<p class="med_office">진료과</p><span>이비인후과</span><br>
-							<p class="pro_field">전문분야</p><span>갑상선암, 음성질환, 경부 종물/종양</span>
-						</div>
-						
-						<div class="list_btn">
-							<button class="select_btn">선택</button>
-							<button class="info_btn">의료진 소개</button>
-						</div>
-					</div>
-					<!-- --------------------------- -->
-					<div class="list">
-						<div class="list_profile">
-							<img alt="" src="../resources/images/01_4.jpg">
-						</div>
-						
-						<div class="list_info">
-							<h2 class="name">조재근 교수</h2>
-							<p class="med_office">진료과</p><span>이비인후과</span><br>
-							<p class="pro_field">전문분야</p><span>두경부암, 안면마비 재건, 갑상선암, 경부종물/종양</span>
-						</div>
-						
-						<div class="list_btn">
-							<button class="select_btn">선택</button>
-							<button class="info_btn">의료진 소개</button>
-						</div>
-					</div>
-					<!-- --------------------------- -->
-					<div class="list">
-						<div class="list_profile">
-							<img alt="" src="../resources/images/01_5.jpg">
-						</div>
-						
-						<div class="list_info">
-							<h2 class="name">이전미 교수</h2>
-							<p class="med_office">진료과</p><span>이비인후과</span><br>
-							<p class="pro_field">전문분야</p><span>이과(난청, 어지럼증, 이명, 급성 안면마비)</span>
-						</div>
-						
-						<div class="list_btn">
-							<button class="select_btn">선택</button>
-							<button class="info_btn">의료진 소개</button>
-						</div>
-					</div>
+					</c:forEach>
+					
 					<!-- --------------------------- -->
 				
 				</div>
@@ -275,10 +223,10 @@
 				<h3>진료 환자 정보</h3>
 				
 				<div id="user_info_box">
-					<p class="user_name">환자명 : </p><span>admin</span><br>
-					<p>병원/진료과 : </p><span>이비인후과</span><br>
-					<p>의료진 : </p><span>최익수</span><br>
-					<p>진료일시 :</p><span>2019-08-29 09:45</span><br>
+					<p class="user_name">환자명 : </p><span>${memberVO.name}</span><br>
+					<p id="user_office">병원/진료과 : </p><span id="off"></span><br>
+					<p id="user_doctor">의료진 : </p><span id="doc"></span><br>
+					<p id="user_date">진료일시 :</p><span>2019-08-29 09:45</span><br>
 											
 				</div>
 				
@@ -345,7 +293,8 @@
 
 <!-- 모달창 -->
 	<!-- 나중에 foreach로 id 뒤 숫자 varstatus 값으로 구분 -->
-	  <div class="modal fade" id="myModal_1" role="dialog">
+	<c:forEach items="${list}" var="list" varStatus="i">
+	  <div class="modal fade" id="myModal_${i.index+1}" role="dialog">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
@@ -356,18 +305,18 @@
 	        </div>
 	        <div class="modal-body">
 	        	<div class="modal_title_box">
-		        	<p class="modal_med_office_title">이비인후과</p>
-		        	<h2 class="modal_med_office">최익수 교수</h2>
+		        	<p class="modal_med_office_title">${list.med_office}</p>
+		        	<h2 class="modal_med_office">${list.name } 교수</h2>
 		        </div>
 	        		<hr>
 				
 				<div class="modal_profile">
-					<img alt="" src="../resources/images/01_1.jpg">
+					<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
 				</div>
 				
 				<div class="modal_info">
 					<h3 class="modal_pro_field_title">전문분야</h3>
-					<p class="modal_pro_field">부비동염, 안면 성형, 수면 무호흡, 후각·미각질환</p>
+					<p class="modal_pro_field">${list.pro_field }</p>
 				</div>	
 				
 				<a href="../reserve/reserveNomal" id="reserve_btn">진료예약</a>
@@ -377,14 +326,18 @@
 					<div class="career">
 						<h3>경력</h3>
 						<ul>
-							<li>이비인후과 전문의/의학박사</li>
+							<c:forTokens items="${list.career }" delims="," var="item">
+								<li>· ${item }</li>
+							</c:forTokens>
 						</ul>
 					</div>
 					
 					<div class="major_act">
 						<h3>주요활동</h3>
 						<ul>
-							<li>세계안면마비학회 회원</li>
+							<c:forTokens items="${list.major_act}" delims="," var="item2">
+								<li>· ${item2}</li>
+							</c:forTokens>
 						</ul>
 					</div>
 				
@@ -395,6 +348,7 @@
 	      </div>
     	</div>
  	 </div>
+ 	 </c:forEach>
  	 <!-- ---------- -->
 
 <!-- footer 추가 -->
