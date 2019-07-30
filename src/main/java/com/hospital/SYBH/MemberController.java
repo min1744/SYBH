@@ -49,12 +49,19 @@ public class MemberController {
 	}
 	
 	//현아 작성 (아이디/비번찾기 jsp 잘 나오는지 테스트용)
-		@RequestMapping(value = "memberFind", method = RequestMethod.GET)
-		public ModelAndView memberFind() throws Exception {
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("member/memberFind");
-			return mv;
-		}
+	@RequestMapping(value = "memberIdFind", method = RequestMethod.GET)
+	public ModelAndView memberIdFind() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberIdFind");
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberPwFind", method = RequestMethod.GET)
+	public ModelAndView memberPwFind() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("member/memberPwFind");
+		return mv;
+	}
 	
 	
 	@RequestMapping(value = "memberLogin", method = RequestMethod.GET)
@@ -68,7 +75,7 @@ public class MemberController {
 			mv.setViewName("redirect:../");
 		} else {
 			mv.addObject("message", "로그인 실패하셨습니다.");
-			mv.addObject("path", "../");
+			mv.addObject("path", "../member/memberLogin");
 			mv.setViewName("common/messageMove");
 		}
 		

@@ -27,11 +27,8 @@ $(function() {
 	var alertName = false;
 	var alertRes1 = false;
 	var alertRes2 = false;
-	var alertPhone1 = false;
-	var alertPhone2 = false;
-	var alertPhone3 = false;
-	var alertEmail1 = false;
-	var alertEmail2 = false;
+	var alertPhone = false;
+	var alertEmail = false;
 	var alertAge = false;
 	
 	//id expression rationnelle & duplication check
@@ -119,79 +116,79 @@ $(function() {
 		var res_reg_num1 = $(this).val();
 		var res_reg_num2 = $('#res_reg_num2').val();
 		//주민등록번호 : ABCDEF-GHIJKLM
-		//M = (11 - ((2×A + 3×B + 4×C + 5×D + 6×E + 7×F + 8×G + 9×H + 2×I + 3×J + 4×K + 5×L) % 11)) % 11
+		//M = (11 - ((2×A + 3×B + 4×C + 5×D + 6×E + 7×F + 8×G + 9×H + 2×I + 3×J + 4×K + 5×L) % 11)) % 10
 		var checkRes_reg_num = false;
 		var l1 = res_reg_num1.length;
 		var l2 = res_reg_num2.length;
 		var front = 0;
 		var back = 0;
-		if(l1 == 6){
-			if(checkRes_reg_num1.test(res_reg_num1) && checkRes_reg_num2.test(res_reg_num2)){
-				//주민번호에 따른 gender selected & age put
-				var gender = res_reg_num2.substring(0, 1)*1;
-				var birthYear = res_reg_num1.substring(0, 2)*1;
-				var now = new Date();
-				if(gender == 1 || gender == 2){
-					//1900년대 출생 남녀
-					birthYear = birthYear + 1900;
-				} else if(gender == 3 || gender == 4){
-					//2000년대 출생 남녀
-					birthYear = birthYear + 2000;
-				} else if(gender == 9 || gender == 0){
-					//1800년대 출생 남녀
-					birthYear = birthYear + 1800;
-				}
-				//나머지는 외국인
-				//5,6 : 1900년대 출생 외국인
-				//7,8 : 2000년대 출생 외국인
-				
-				var age = now.getFullYear()*1 - birthYear + 1;
-				if(age >= 0 && age <= 120){
-					$('#age').val(age);
-					$('#age_result').html('');
-					alertAge = true;
-				} else if(age > 120){
-					$('#age_result').html('120살 이하가 아닙니다.');
-					$('#age_result').css("color", "red");
-					alertAge = false;
+		if(checkRes_reg_num1.test(res_reg_num1) && checkRes_reg_num2.test(res_reg_num2)){
+			//주민번호에 따른 gender selected & age put
+			var gender = res_reg_num2.substring(0, 1)*1;
+			var birthYear = res_reg_num1.substring(0, 2)*1;
+			var now = new Date();
+			if(gender == 1 || gender == 2){
+				//1900년대 출생 남녀
+				birthYear = birthYear + 1900;
+			} else if(gender == 3 || gender == 4){
+				//2000년대 출생 남녀
+				birthYear = birthYear + 2000;
+			} else if(gender == 9 || gender == 0){
+				//1800년대 출생 남녀
+				birthYear = birthYear + 1800;
+			}
+			//나머지는 외국인
+			//5,6 : 1900년대 출생 외국인
+			//7,8 : 2000년대 출생 외국인
+			
+			var age = now.getFullYear()*1 - birthYear + 1;
+			if(age >= 0 && age <= 120){
+				$('#age').val(age);
+				$('#age_result').html('');
+				alertAge = true;
+			} else if(age > 120){
+				$('#age_result').html('120살 이하가 아닙니다.');
+				$('#age_result').css("color", "red");
+				alertAge = false;
+			} else {
+				$('#age_result').html('잘못된 나이입니다.');
+				$('#age_result').css("color", "red");
+				alertAge = false;
+			}
+			//res_reg_num1 calculation
+			for(var i = 0; i < l1; i++){
+				var front_value_of_index = res_reg_num1.substring(i, i+1)*1;
+				var f = front_value_of_index * (i+2);
+				front += f;
+			}
+			//res_reg_num2 calculation
+			for(var i = 0; i < l2-1; i++){
+				var back_value_of_index = res_reg_num2.substring(i, i+1)*1;
+				var b = 0;
+				if(i > 1){
+					b = back_value_of_index * i;
 				} else {
-					$('#age_result').html('잘못된 나이입니다.');
-					$('#age_result').css("color", "red");
-					alertAge = false;
+					b = back_value_of_index * (i+8);
 				}
-				//res_reg_num1 calculation
-				for(var i = 0; i < l1; i++){
-					var front_value_of_index = res_reg_num1.substring(i, i+1)*1;
-					var f = front_value_of_index * (i+2);
-					front += f;
-				}
-				//res_reg_num2 calculation
-				for(var i = 0; i < l2-1; i++){
-					var back_value_of_index = res_reg_num2.substring(i, i+1)*1;
-					var b = 0;
-					if(i > 1){
-						b = back_value_of_index * i;
-					} else {
-						b = back_value_of_index * (i+8);
-					}
-					back += b;
-				}
-				//주민등록번호 체계 및 유효성 검사
-				var result = 11-((front + back)%11)%10;
-				var end = res_reg_num2.substring(6, 7)*1;
-				if(result == end){
-					$('#res_reg_num_result').html('');
-					alertRes1 = true;
-				} else {
-					$('#res_reg_num_result').html('잘못된 형식의 주민등록번호입니다.');
-					$('#res_reg_num_result').css("color", "red");
-					alertRes1 = false;
-				}
+				back += b;
+			}
+			//주민등록번호 체계 및 유효성 검사
+			var result = 11-((front + back)%11)%10;
+			var end = res_reg_num2.substring(6, 7)*1;
+			if(result == end){
+				$('#res_reg_num_result').html('');
+				alertRes1 = true;
 			} else {
 				$('#res_reg_num_result').html('잘못된 형식의 주민등록번호입니다.');
 				$('#res_reg_num_result').css("color", "red");
 				alertRes1 = false;
 			}
+		} else if(res_reg_num1 != '' && res_reg_num2 != '') {
+			$('#res_reg_num_result').html('잘못된 형식의 주민등록번호입니다.');
+			$('#res_reg_num_result').css("color", "red");
+			alertRes1 = false;
+		}
+		if(l1 == 6){
 			$('#res_reg_num2').focus();
 		}
 	});
@@ -205,7 +202,7 @@ $(function() {
 		var res_reg_num2 = $(this).val();
 		if(checkRes_reg_num1.test(res_reg_num1) && checkRes_reg_num2.test(res_reg_num2)){
 			//주민등록번호 : ABCDEF-GHIJKLM
-			//M = (11 - ((2×A + 3×B + 4×C + 5×D + 6×E + 7×F + 8×G + 9×H + 2×I + 3×J + 4×K + 5×L) % 11)) % 11
+			//M = (11 - ((2×A + 3×B + 4×C + 5×D + 6×E + 7×F + 8×G + 9×H + 2×I + 3×J + 4×K + 5×L) % 11)) % 10
 			var checkRes_reg_num = false;
 			var l1 = res_reg_num1.length;
 			var l2 = res_reg_num2.length;
@@ -217,7 +214,7 @@ $(function() {
 				var gender = res_reg_num2.substring(0, 1)*1;
 				var birthYear = res_reg_num1.substring(0, 2)*1;
 				var now = new Date();
-				if(gender/2 == 0){
+				if(gender%2 == 0){
 					$('#woman').prop("checked", "checked");
 				} else {
 					$('#man').prop("checked", "checked");
@@ -281,7 +278,7 @@ $(function() {
 					alertRes2 = false;
 				}
 			}
-		} else {
+		} else if(res_reg_num1 != '' && res_reg_num2 != '') {
 			$('#res_reg_num_result').html('잘못된 형식의 주민등록번호입니다.');
 			$('#res_reg_num_result').css("color", "red");
 			alertRes2 = false;
@@ -293,15 +290,15 @@ $(function() {
 		var phone1 = $(this).val();
 		var phone2 = $('#phone2').val();
 		var phone3 = $('#phone3').val();
+		if(checkPhone1.test(phone1) && checkPhone2.test(phone2) && checkPhone3.test(phone3)){
+			$('#phone_result').html('');
+			alertPhone = true;
+		} else {
+			$('#phone_result').html('잘못된 형식의 번호입니다.');
+			$('#phone_result').css("color", "red");
+			alertPhone = false;
+		}
 		if(phone1.length == 3){
-			if(checkPhone1.test(phone1) && checkPhone2.test(phone2) && checkPhone3.test(phone3)){
-				$('#phone_result').html('');
-				alertPhone1 = true;
-			} else {
-				$('#phone_result').html('잘못된 형식의 번호입니다.');
-				$('#phone_result').css("color", "red");
-				alertPhone1 = false;
-			}
 			$('#phone2').focus();
 		}
 	});
@@ -311,18 +308,16 @@ $(function() {
 		var phone1 = $('#phone1').val();
 		var phone2 = $(this).val();
 		var phone3 = $('#phone3').val();
-		if(phone2.length > 2){
-			if(checkPhone1.test(phone1) && checkPhone2.test(phone2) && checkPhone3.test(phone3)){
-				$('#phone_result').html('');
-				alertPhone2 = true;
-			} else {
-				$('#phone_result').html('잘못된 형식의 번호입니다.');
-				$('#phone_result').css("color", "red");
-				alertPhone2 = false;
-			}
-			if(phone2.length == 4){
-				$('#phone3').focus();
-			}
+		if(checkPhone1.test(phone1) && checkPhone2.test(phone2) && checkPhone3.test(phone3)){
+			$('#phone_result').html('');
+			alertPhone = true;
+		} else {
+			$('#phone_result').html('잘못된 형식의 번호입니다.');
+			$('#phone_result').css("color", "red");
+			alertPhone = false;
+		}
+		if(phone2.length == 4){
+			$('#phone3').focus();
 		}
 	});
 	
@@ -333,11 +328,11 @@ $(function() {
 		var phone3 = $(this).val();
 		if(checkPhone1.test(phone1) && checkPhone2.test(phone2) && checkPhone3.test(phone3)){
 			$('#phone_result').html('');
-			alertPhone3 = true;
+			alertPhone = true;
 		} else {
 			$('#phone_result').html('잘못된 형식의 번호입니다.');
 			$('#phone_result').css("color", "red");
-			alertPhone3 = false;
+			alertPhone = false;
 		}
 	});
 	
@@ -358,18 +353,18 @@ $(function() {
 					if(data == '1'){
 						$('#email_result').html('존재하는 이메일입니다.');
 						$('#email_result').css("color", "red");
-						alertEmail1 = false;
+						alertEmail = false;
 					} else{
 						$('#email_result').html('사용 가능한 이메일입니다.');
 						$('#email_result').css("color", "blue");
-						alertEmail1 = true;
+						alertEmail = true;
 					}
 				}
 			});
 		} else {
 			$('#email_result').html('잘못된 형식의 이메일입니다.');
 			$('#email_result').css("color", "red");
-			alertEmail1 = false;
+			alertEmail = false;
 		}
 	});
 	
@@ -391,18 +386,18 @@ $(function() {
 					if(data == '1'){
 						$('#email_result').html('존재하는 이메일입니다.');
 						$('#email_result').css("color", "red");
-						alertEmail2 = false;
+						alertEmail = false;
 					} else{
 						$('#email_result').html('사용 가능한 이메일입니다.');
 						$('#email_result').css("color", "blue");
-						alertEmail2 = true;
+						alertEmail = true;
 					}
 				}
 			});
 		} else {
 			$('#email_result').html('잘못된 형식의 이메일입니다.');
 			$('#email_result').css("color", "red");
-			alertEmail2 = false;
+			alertEmail = false;
 		}
 	});
 	
@@ -425,9 +420,9 @@ $(function() {
 			alert('이름을 확인해주세요.');
 		} else if(alertRes1 == false || alertRes2 == false){
 			alert('주민등록번호를 확인해주세요.');
-		} else if(alertPhone1 == false || alertPhone2 == false || alertPhone3 == false){
+		} else if(alertPhone == false){
 			alert('핸드폰 번호를 확인해주세요.');
-		} else if(alertEmail1 == false || alertEmail2 == false){
+		} else if(alertEmail == false){
 			alert('이메일을 확인해주세요.')
 		} else if(alertAge == false){
 			alert('나이를 확인해주세요. 주민등록번호가 잘못되었습니다.');
