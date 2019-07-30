@@ -12,7 +12,10 @@ public class MedicalTeamService {
 	public MedicalTeamDAO medicalTeamDAO;
 	
 	//list
-	public List<MedicalTeamVO> getList(int mid) throws Exception{
+	public List<MedicalTeamVO> getList(Integer mid) throws Exception{
+		if(mid ==null) {
+			mid=1;
+		}
 		return medicalTeamDAO.getList(mid);
 	}
 }
