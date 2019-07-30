@@ -78,6 +78,7 @@ $(function() {
     	var memberVO = '${memberVO}';
     	if(memberVO ==''){
    		alert('로그인 후 사용가능합니다');
+   		location.href="./member/memberLogin";
     	}else{
         popupOpen();//Popup Open 함수
     	}

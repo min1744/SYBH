@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,12 @@
 		var year = date.getFullYear();
 		var month = new String(date.getMonth() + 1);
 		var day = new String(date.getDate());
+		if(month <10){
+			month = "0"+month;
+		}
+		if (day<10) {
+			day = "0"+day;
+		}
 		$('#date').append(year + " - " + month + " - " + day);
 		//회원정보
 
@@ -32,6 +39,11 @@
 		var category = 1;
 		//////////////재혁 후원
 		$(".check_modules").click(function() {
+			var price = document.getElementById('price').value;
+			if(price<100){
+				alert('100원 이상부터 후원 가능합니다.');
+				return false;
+			}
 			var check = $('.check').prop("checked");
 			if (check) {
 				var amount = document.getElementById('price').value;
@@ -68,7 +80,7 @@
 				});
 			
 			
-			}
+			}//if문 긑
 			else {
 				alert('약관 동의를 해주세요');
 				return false;
@@ -192,7 +204,9 @@ Fax : 02-2072-4041
 				<c:forEach items="${list}" var="list">
 				<tr>
 					<td class="comment_num">${list.num }</td>
-					<th>${list.id } 님이 ${list.price }원 후원하셨습니다.</th>
+					<th>${list.id } 님이
+					 <fmt:formatNumber value="${list.price}" pattern="#,###"/> 
+					 원 후원하셨습니다.</th>
 					<td class="comment_date">${list.pay_date }</td>
 				</tr>
 				</c:forEach>
