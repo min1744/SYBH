@@ -60,7 +60,11 @@
   
   <!-- fixcount  -->
  <select id="fixCount" resultType="Integer">
+<<<<<<< HEAD
 	select count(fix) from notice
+=======
+	select count(fix) from notice where fix=1
+>>>>>>> 0730am
   </select>
   <!-- search  -->
   <select id="getCount" parameterType="PageMaker" resultType="Integer">

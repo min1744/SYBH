@@ -48,19 +48,34 @@ public class NoticeController {
 	
 	  //write
 	  
+<<<<<<< HEAD
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
 	public ModelAndView setWrite() throws Exception{ 
 		ModelAndView mv = new ModelAndView(); 
 		int result = noticeService.fixCount();
 		mv.addObject("result", result);
+=======
+	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET) 
+	public ModelAndView setWrite()throws Exception{ 
+		ModelAndView mv = new ModelAndView(); 
+		int result = noticeService.fixCount();
+		mv.addObject("result", result); 
+>>>>>>> 0730am
 		mv.setViewName("board/boardWrite");
 
 		return mv; 
 	}
+<<<<<<< HEAD
+=======
 	 
 		
-	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
-	public ModelAndView setWrite(NoticeVO noticeVO, HttpSession session)throws Exception{
+	
+	
+>>>>>>> 0730am
+	 
+		
+	  @RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
+	  public ModelAndView setWrite(NoticeVO noticeVO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = noticeService.setWrite(noticeVO,session);
 		if(result>0) {

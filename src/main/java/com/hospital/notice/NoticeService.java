@@ -22,12 +22,16 @@ public class NoticeService implements BoardService {
 	
 	public int fixCount() throws Exception{
 		int result = noticeDAO.fixCount();
+<<<<<<< HEAD
 		int check = 0;
 		if(result < 4) {
 			check = 1;
 		}
 				
 		return check;
+=======
+		return result;
+>>>>>>> 0730am
 	}
 	
 

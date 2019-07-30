@@ -10,6 +10,7 @@
 <c:import url="../temp/summernote.jsp" />
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
 	$(function() {
 		//form empty check
 		$("#write").click(function() {
@@ -28,6 +29,27 @@
 		});
 	}
 	
+=======
+$(function() {
+	$("#write").click(function() {
+	//다른 input들 검증
+	if($('#contents').summernote('isEmpty')) {
+		alert('Empty');
+	} else {
+		if($('#fix').prop("checked")){
+			var fixCount = $('#fixCount').val();
+			if(fixCount > 2){
+				alert('상단고정은 최대 3개까지가능합니다');
+			} else {
+				$('#frm').submit();	
+			}
+		} else {
+			$('#frm').submit();	
+		}	
+	}
+	});
+});
+>>>>>>> 0730am
 </script>
 </head>
 <body>
@@ -36,6 +58,7 @@
 <input type="hidden" value="${result}" id="fixCount">
 
 
+<<<<<<< HEAD
 
 	<div id="board_title">
 		<p>공지등록</p>
@@ -78,5 +101,47 @@
 
 	<!-- footer 추가 -->
 	<c:import url="../common/footer.jsp" />
+=======
+<input type="hidden" id="fixCount" value="${result}">
+<div id="board">
+		<div id="board_title">
+			<p>공지등록</p>
+		</div>
+	
+<div id="board_box">
+	
+	<div id="form_box">
+		<form id="frm" action="./${board}Write" method="post">
+		<div class="float">
+		 <span class="title">제목</span>
+ 		 <input class="form-control" type="text" id="title" name="title">
+		</div>
+		<div class="float">
+		 <span class="writer">작성자</span>
+ 		 <input class="form-control" type="text" id="writer" name="writer" value="admin" readonly>
+		</div>
+		<div class="form-group" id="contents_box">
+		  <span class="contents">글내용</span>
+		<textarea class="form-control" rows="5" cols="15" id="contents" name="contents"></textarea>
+		</div>
+		
+		<div id="write_btn">
+			<input id="write" type="button" value="글등록">
+		</div>
+		<p>공지사항 고정<input type="checkbox" id="fix" name="fix" value="1"></p>	
+		
+	
+	
+	</form>
+	
+	
+		</div>
+				
+	</div>
+</div>
+
+<!-- footer 추가 -->
+<c:import url="../common/footer.jsp" />
+>>>>>>> 0730am
 </body>
 </html>
