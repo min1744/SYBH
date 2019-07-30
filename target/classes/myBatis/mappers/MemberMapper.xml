@@ -19,12 +19,12 @@
 	
 	<!-- id 중복확인 -->
 	<select id="getIdDuplication" parameterType="String" resultType="Integer">
-		SELECT COUNT(*) FROM MEMBER WHERE ID = #{id}
+		SELECT COUNT(*) FROM MEMBER WHERE ID LIKE #{id}
 	</select>
 	
 	<!-- email 중복확인 -->
 	<select id="getEmailDuplication" parameterType="String" resultType="Integer">
-		SELECT COUNT(*) FROM MEMBER WHERE EMAIL = #{email}
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL LIKE #{email}
 	</select>
 	
 	<!-- 관리자를 제외한 필터링 된 회원의 숫자 -->
