@@ -6,8 +6,26 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberLogin.css" rel="stylesheet">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		//id - enter event
+		$('#id').keypress(function(event) {
+			if(event.which == 13){
+				$('#login').click();
+				return false;
+			}
+		});
+		
+		//pw - enter event
+		$('#pw').keypress(function(event) {
+			if(event.which == 13){
+				$('#login').click();
+				return false;
+			}
+		});
+		
+		//login form check
 		$('#login').click(function() {
 			var id = $('#id').val();
 			var pw = $('#pw').val();
