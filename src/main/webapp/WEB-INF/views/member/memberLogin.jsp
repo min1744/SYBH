@@ -6,15 +6,25 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberLogin.css" rel="stylesheet">
+<script type="text/javascript">
+	$(function() {
+		$('#login').click(function() {
+			var id = $('#id').val();
+			var pw = $('#pw').val();
+			if(id == ''){
+				alert('아이디를 입력해주세요.');
+			} else if(pw == ''){
+				alert('비밀번호를 입력해주세요.')
+			} else {
+				$('#form').submit();
+			}
+		});
+	});
+</script>
 </head>
 <body>
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
-<div id="board">
-		<!-- <div id="board_title">
-			<p>로그인</p>
-		</div> -->
-</div>
 <div id="login_box">
 	<div id="log">
 		<div id="log_title">
@@ -23,14 +33,16 @@
 			<p id="sub_title">쌍용백병원 홈페이지 회원 서비스는<br>로그인 후 이용하실 수 있습니다.</p>
 		</div>
 		<div id="login_form">
-			<form action="./memberLogin" method="post">
+			<form action="./memberLogin" method="post" id="form">
 				<input type="text" name="id" id="id" placeholder="아이디">
 				<input type="password" name="pw" id="pw" placeholder="비밀번호">
-				<button id="login">로그인</button>
 			</form>
+			<button id="login">로그인</button>
 			<ul>
-				<li><a href="./memberFind">아이디/비밀번호 찾기</a></li>
-				<li style="margin: 0 10px;">│</li>
+				<li><a href="./memberIdFind">아이디</a></li>
+				<li>/</li>
+				<li><a href="./memberPwFind">비밀번호 찾기</a></li>
+				<li style="margin: 0 5px;">│</li>
 				<li><a href="./memberAgree">회원가입</a></li>
 			</ul>
 			<button id="naver">네이버 아이디로 로그인</button>

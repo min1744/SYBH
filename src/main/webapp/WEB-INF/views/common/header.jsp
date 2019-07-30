@@ -55,7 +55,7 @@ $(function() {
 		<div id="member">
 			<ul>
 				<c:choose>
-					<c:when test="${not empty memberVO}">
+					<c:when test="${not empty memberVO.id}">
 						<c:choose>	
 							<c:when test="${memberVO.grade eq '2'}">
 								<li><a href="../member/memberLogout">로그아웃</a></li>

@@ -1,7 +1,6 @@
 package com.hospital.member;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -31,8 +30,10 @@ public class MemberService {
 	public MemberVO login(MemberVO memberVO) throws Exception{
 		memberVO = memberDAO.login(memberVO);
 		//주민등록번호 복호화
-		String res_reg_num_dec = memberDAO.setResDecryption(memberVO.getRes_reg_num());
-		memberVO.setRes_reg_num(res_reg_num_dec);
+		if(memberVO != null) {
+			String res_reg_num_dec = memberDAO.setResDecryption(memberVO.getRes_reg_num());
+			memberVO.setRes_reg_num(res_reg_num_dec);
+		}
 		
 		return memberVO;
 	}

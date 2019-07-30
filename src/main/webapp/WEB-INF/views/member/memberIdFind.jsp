@@ -19,12 +19,12 @@
 	<div id="find">
 		<div id="find_title">
 			<img alt="" src="../resources/images/user.png">
-			<p id="main_title">아이디/비밀번호 찾기</p>
-			<p id="sub_title">아이디나 비밀번호를 잊으셨습니까?</p>
+			<p id="main_title">아이디 찾기</p>
+			<p id="sub_title">아이디를 잊으셨습니까?</p>
 		</div>
 		<div id="find_form">
-				<input type="email" name="email" id="email" placeholder="이메일을 입력하세요">
-				<button id="submit">인증메일 보내기</button>
+			<input type="email" name="email" id="email" placeholder="이메일을 입력하세요">
+			<button id="submit">인증메일 보내기</button>
 		</div>
 	</div>
 </div>
