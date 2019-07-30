@@ -17,25 +17,18 @@
 			if($('#contents').summernote('isEmpty')) {
 				alert('Empty');
 			} else {
-				$('#frm').submit();				
+				$('#frm').submit();	
+				
+			//Write fix	
+			}if($('#fix').count.result > 4){
+				var fix = 1;
+				alert('fix is full');
 			}
 		});
 			
 			
 	});
-	<c:if test="${fix>4}">
-	$(function() {
-	$("#fix").click(function() {
-		var result = confirm("고정 게시글은 최대 3개만 가능합니다");
-		if(result){
-			location.href="./boardWrite";
-		}
-	});
-});	
-		
-</c:if>	
-	
-	
+			
 	
 </script>
 </head>
@@ -77,10 +70,10 @@
 	</form>
 	
 	
-	</div>
+		</div>
 				
+	</div>
 </div>
-
 
 <!-- footer 추가 -->
 <c:import url="../common/footer.jsp" />
