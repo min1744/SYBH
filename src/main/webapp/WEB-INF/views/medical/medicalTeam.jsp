@@ -61,7 +61,7 @@
 				
 				<!-- 의사 리스트 시작 -->
 				<c:forEach items="${list }" var="list" varStatus="i">
-				<div class="list">
+				<div class="list" id="list${i }">
 					<div class="list_profile">
 						<img alt="" src="../resources/images/01_${i.index+1}.jpg">
 					</div>
@@ -73,7 +73,7 @@
 					
 					<div class="list_btn">
 						<a href="">진료예약</a>
-						<a href="" data-toggle="modal" data-target="#myModal_1">의료진소개</a>
+						<a href="" data-toggle="modal" data-target="#myModal_${i.index+1}">의료진소개</a>
 						<a href="">진료일정표</a>
 					</div>
 				</div>
@@ -87,8 +87,8 @@
 			
 	<!-- 모달창 -->
 	<!-- 나중에 foreach로 id 뒤 숫자 varstatus 값으로 구분 -->
-	<c:forEach items="${list }" var="list" varStatus="i">
-	  <div class="modal fade" id="myModal_${i.index+1 }" role="dialog">
+	<c:forEach items="${list}" var="list" varStatus="i">
+	  <div class="modal fade" id="myModal_${i.index+1}" role="dialog">
 	    <div class="modal-dialog">
 	    
 	      <!-- Modal content-->
