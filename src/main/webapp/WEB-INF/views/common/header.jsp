@@ -86,7 +86,7 @@ $(function() {
 <div id="sub_nav">
 
 <c:choose>
-		<c:when test="${not empty memberVO}">
+		<c:when test="${not empty memberVO.id}">
 			<c:choose>
 				<c:when test="${memberVO.grade eq '2'}">
 					<div id="sub_nav_box" style="padding-left: 810px;">
@@ -111,9 +111,9 @@ $(function() {
 		</ul>
 		<ul id="ul_3">
 			<li><a href="../notice/noticeList">공지사항</a></li>
-			<li><a href="">병원소개</a></li>
+			<li><a href="../hospital/hospitalInfo">병원소개</a></li>
 			<li><a href="../medical/medicalTeamList">의료진 소개</a></li>
-			<li><a href="">층별 안내</a></li>
+			<li><a href="../hospital/floorInfo">층별 안내</a></li>
 			<li><a href="">오시는 길</a></li>
 		</ul>
 		<ul id="ul_4">

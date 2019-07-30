@@ -103,82 +103,95 @@
 	
 	width: 80%;
 	overflow: hidden;
-	text-align: center;
 }
 
 
-#introduce_box {
+#floor_info h3:before {
 	
-	width: 100%;
-	overflow: hidden;
-	letter-spacing: -1px;
-}
-
-#introduce_box img {
+	content: "";
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin-bottom: 9px;
+	background-color: #153F91;
 	
-	margin-bottom: 30px;
-}
-
-
-#introduce_box p {
-	
-	line-height: 35px;
 }
 
 
-
-
-#top_title {
+#floor_info h3 {
 	
-	font-size: 1.1em;
-	color: #153F91;
 	font-weight: 700;
+	font-size: 1.3em;
+	letter-spacing: -1px;
+	margin-bottom: 30px;
+	
 }
 
 
-
-
-#sub_introduce {
+#floor, #amenities {
 	
-	width: 100%;
-	overflow: hidden;
-	margin: 40px auto;
+	width: 49.5%;
+	height: 70px;
+	border: none;
+	background-color: #153F91;
+	cursor: pointer;
+	color: white;
+	letter-spacing: -1px;
+	font-weight: 700;
+	font-size: 1.1em;
+	margin-bottom: 40px;
 }
 
-
-#sub_introduce table {
+#floor_info table {
 	
 	width: 100%;
-	overflow: hidden;
 	border-top: 2px solid #153F91;
+	overflow: hidden;
 	letter-spacing: -1px;
 	border-collapse: collapse;
+	margin: 40px 0;
 }
 
 
-#sub_introduce th {
+#floor_info table th {
 	
 	width: 200px;
+	text-align: center;
+	font-weight: 700;
+	padding: 20px 0;
+	background-color: #f5f5f5;
 	border-bottom: 1px solid #ddd;
 }
 
 
-#sub_introduce td {
+#floor_info table td {
 	
-	text-align: left;
 	border-bottom: 1px solid #ddd;
-	padding-bottom: 40px;
 }
 
 
-#sub_introduce td h4 {
+#floor_info ul li {
 	
-	padding: 30px 0;
-}
-
-
-#sub_introduce td p {
-	
+	float: left;
 	color: #808080;
-	font-size: 0.9em;
+	position: relative;
+	padding: 0 20px;
+}
+
+
+#floor_info ul li:first-child:before {
+	
+	display: none;
+}
+
+
+#floor_info ul li:before {
+	
+	content: '';
+	position: absolute;
+	top: 8px;
+	left: 0px;
+	width: 1px;
+	height: 13px;
+	background-color: #808080;
 }

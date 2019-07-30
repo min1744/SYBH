@@ -27,6 +27,7 @@ public class MedicalTeamController {
 		}
 		List<MedicalTeamVO> list = medicalTeamService.getList(mid);
 		mv.addObject("list",list);
+		mv.addObject("mid",mid);
 		
 		mv.setViewName("medical/medicalTeam");
 		

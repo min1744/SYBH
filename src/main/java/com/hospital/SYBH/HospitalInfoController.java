@@ -17,5 +17,15 @@ public class HospitalInfoController {
 		
 		return mv;
 	}
+	
+	
+	@RequestMapping(value = "floorlInfo", method = RequestMethod.GET)
+	public ModelAndView floorInfo() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hospital/floorlInfo");
+		
+		return mv;
+	}
 
 }
