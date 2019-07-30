@@ -10,12 +10,12 @@
 	
 	$(function() {
 		$('#btn').click(function() {
-			var result = confirm('예약하시겠습니까?');
+			var result = confirm('[검진명]-[검진금액] 으로 예약하시겠습니까?');
 			if(result) {
 				
+				location.href="./medicalConfirm";
 				
 			} else {
-				
 				
 			}
 		});

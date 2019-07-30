@@ -5,6 +5,7 @@
 #board {
 	
 	width: 1920px;
+	min-height: 750px;
 	overflow: hidden;
 }
 
@@ -143,7 +144,7 @@
 
 #info_list table tbody {
 	
-	border-bottom: 2px solid #153F91;
+	border-bottom: 1px solid #153F91;
 }
 
 

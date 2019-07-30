@@ -77,7 +77,7 @@
 				확인하실 수 있습니다.</p>
 				
 				<div class="info_btn_2">
-					<a href="./memberBreakdown">조회하기</a>
+					<a href="./memberNomal">조회하기</a>
 				</div>
 			</div>
 			
@@ -91,7 +91,7 @@
 				확인하실 수 있습니다.</p>
 				
 				<div class="info_btn_2">
-					<a href="./memberBreakdown">조회하기</a>
+					<a href="./memberMedical">조회하기</a>
 				</div>
 			</div>
 			
