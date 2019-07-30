@@ -10,26 +10,25 @@
 <c:import url="../temp/summernote.jsp" />
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
 <script type="text/javascript">
-	$(function() {
-							
-		$("#write").click(function() {
-			//다른 input들 검증
-			if($('#contents').summernote('isEmpty')) {
-				alert('Empty');
+$(function() {
+	$("#write").click(function() {
+	//다른 input들 검증
+	if($('#contents').summernote('isEmpty')) {
+		alert('Empty');
+	} else {
+		if($('#fix').prop("checked")){
+			var fixCount = $('#fixCount').val();
+			if(fixCount > 2){
+				alert('상단고정은 최대 3개까지가능합니다');
 			} else {
 				$('#frm').submit();	
-				
-			//Write fix	
-			}if($('#fix').count.result > 4){
-				var fix = 1;
-				alert('fix is full');
 			}
-		});
-			
-			
+		} else {
+			$('#frm').submit();	
+		}	
+	}
 	});
-			
-	
+});
 </script>
 </head>
 <body>
@@ -37,7 +36,7 @@
 <c:import url="../common/header.jsp" />
 
 
-
+<input type="hidden" id="fixCount" value="${result}">
 <div id="board">
 		<div id="board_title">
 			<p>공지등록</p>

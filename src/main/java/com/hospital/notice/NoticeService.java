@@ -22,12 +22,7 @@ public class NoticeService implements BoardService {
 	
 	public int fixCount() throws Exception{
 		int result = noticeDAO.fixCount();
-		int check = 0;
-		if(result <4) {
-			check = 1;
-		}
-				
-		return check;
+		return result;
 	}
 	
 

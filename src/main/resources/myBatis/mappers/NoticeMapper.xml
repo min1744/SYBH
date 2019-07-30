@@ -59,7 +59,7 @@
   </select>
   
   <!-- fixcount  -->
- <select id="fixCount" parameterType="Integer" resultType="Integer">
+ <select id="fixCount" resultType="Integer">
 	select count(fix) from notice where fix=1
   </select>
   <!-- search  -->
