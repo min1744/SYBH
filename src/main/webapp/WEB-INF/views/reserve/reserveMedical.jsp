@@ -121,7 +121,7 @@
 		</div>
 			
 			<div id="reserve_btn">
-				<button id="btn">건강검진 예약</button>
+				<button id="btn">다음단계</button>
 			</div>
 			
 			

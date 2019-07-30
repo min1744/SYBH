@@ -1,0 +1,377 @@
+@charset "UTF-8";
+
+
+
+#board {
+	
+	width: 1920px;
+	overflow: hidden;
+}
+
+
+
+#board_title {
+	
+	width: 100%;
+	overflow: hidden;
+	padding: 50px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+#board_title p {
+	
+	text-align: center;
+	font-size: 1.5em;
+	font-weight: 900;
+	letter-spacing: -1px;
+	
+}
+
+#board_box {
+	
+	width: 60%;
+	overflow: hidden;
+	position: relative;
+	margin: 80px auto;
+
+}
+
+
+
+#board_nav, #boardList {
+	
+	float: left;
+	overflow: hidden;
+}
+
+
+#board_nav {
+	
+	width: 15%;
+	margin-right: 5%;
+}
+
+
+#board_nav li {
+	
+	padding: 5%;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	letter-spacing: -1px;
+	
+}
+
+
+#board_nav li a {
+	
+	display: block;
+	padding: 5px 0;
+	color: #808080;
+	font-weight: 700;
+	
+}
+
+#board_nav li a:hover {
+	
+	color: #6bb5db;
+}
+
+
+#board_nav li:first-child {
+	
+	padding: 30px 0;
+	background-color: #153F91;
+	color: white;
+	font-size: 1.2em;
+	font-weight: 900;
+	border-bottom: none;
+}
+
+
+
+#confirmList {
+	width: 80%;
+	text-align: center;
+	float: left;
+}
+
+
+#confirm_title {
+	
+	width: 100%;
+	overflow: hidden;
+	padding: 2%;
+	background-color: #f8f8f8;
+	letter-spacing: -1px;
+	
+}
+
+
+#confirm_title span {
+	
+	font-size: 1.1em;
+}
+
+
+#title {
+	
+	color: #153F91;
+	font-weight: 700;
+	padding-left: 10px;
+	
+}
+
+.sub_title {
+	
+	color: #808080;
+	font-size: 0.9em;
+	margin-top: 5px;
+	
+}
+
+.sub_title>img {
+	
+	vertical-align: sub;
+	padding-right: 5px;
+	
+}
+
+
+#left {
+	
+	float: left;
+	font-size: 0.85em;
+	color: #808080;
+	letter-spacing: -1px;
+	
+}
+
+#left>img {
+	
+	vertical-align: sub;
+	padding-right: 5px;
+	
+}
+
+#right {
+	
+	float: right;
+}
+
+
+
+#user_info {
+	
+	width: 100%;
+	margin: 40px auto;
+	overflow: hidden;
+	text-align: left;
+	letter-spacing: -1px;
+}
+
+
+
+
+#user_info>table {
+	
+	border-top: 2px solid #153F91;
+	margin: 15px auto;
+	width: 100%;
+	overflow: hidden;
+	border-collapse: collapse;
+	border-bottom: 2px solid #ddd;
+}
+
+
+#user_info>table th {
+	
+	width: 150px;
+	padding: 25px 15px;
+	background-color: #f8f8f8;
+	color: #153F91;
+	border-bottom: 1px solid #eee;
+}
+
+
+.td_border {
+	
+	width: 450px;
+	color: #808080;
+	padding-left: 15px;
+	border-bottom: 1px solid #eee;
+}
+
+
+.price {
+	
+	font-weight: 500;
+	color: #153F91;
+}
+
+
+/*캘린더*/
+
+
+#cal_box {
+	width: 100%;
+	box-sizing: border-box;
+	overflow: hidden;
+	padding: 20px 0;
+}
+
+
+#cal_box>table {
+	
+	width: 100%;
+	text-align: center;
+	
+}
+
+
+#cal_box>table thead {
+	
+	display: inherit;
+	margin: 0 auto;
+	margin-bottom: 10px;
+}
+
+#cal_box>table tbody {
+	
+	display: inherit;
+	font-weight: 500;
+}
+
+
+#cal_box>table tbody td {
+	
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+#cal_box label img {
+	
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.tr td {
+	
+	width: 50px;
+	line-height: 35px;
+	text-align: center;
+	border-radius: 8px; /*모서리 둥글게*/
+}
+
+
+#tbCalendarYM {
+	
+	padding: 0 40px;
+	font-weight: 700;
+	color: #153F91;
+}
+
+
+.select_date {
+	
+	text-align: center;
+	color: #808080;
+}
+
+.select_date span {
+	
+	font-weight: 700;
+	color: #153F91;
+	display: block;
+	font-size: 1.2em;
+	
+}
+
+
+
+#agree_box {
+	
+	width: 100%;
+	margin: 40px auto;
+	overflow: hidden;
+	letter-spacing: -1px;
+}
+
+
+#agree_box h3 {
+	
+	text-align: left;
+}
+
+#agree_box table {
+	
+	border-top: 2px solid #153F91;
+	margin: 15px auto;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	border-collapse: collapse;
+	border-bottom: 2px solid #ddd;
+}
+
+
+#agree_box table th {
+	
+	padding: 25px 15px;
+	background-color: #f8f8f8;
+	color: #153F91;
+	border-bottom: 1px solid #ddd;
+}
+
+
+.td_border_2 {
+	
+	color: #808080;
+	border-bottom: 1px solid #eee;
+	padding: 25px 0; 
+	font-size: 0.9em;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+
+
+#agree_box label {
+	
+	letter-spacing: -1px;
+	color: #153F91;
+	cursor: pointer;
+	font-weight: 700;
+}
+
+
+#page_btn {
+	
+	margin-top: 80px;
+}
+
+
+#prev {
+	
+	background-color: #808080;
+	margin-right: 15px;
+	color: white;
+	border: none;
+	padding: 2% 6%;
+	letter-spacing: -1px;
+	cursor: pointer;
+	font-size: 1.1em;
+	box-sizing: border-box;
+}
+
+#pay {
+	
+	background-color: #153f91;
+	width: 150px;
+	color: white;
+	border: none;
+	padding: 2%;
+	letter-spacing: -1px;
+	cursor: pointer;
+	font-size: 1.1em;
+	box-sizing: border-box;
+}
