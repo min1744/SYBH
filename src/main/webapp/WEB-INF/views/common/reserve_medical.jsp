@@ -19,7 +19,7 @@
 					
 					<div class="info">
 						<img alt="" src="../resources/images/banking.png">
-						<p>500,000원</p>
+						<p id="price" title="500000">500,000원</p>
 					</div>
 				
 					<div class="info_contents">
@@ -88,7 +88,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>500,000원</p>
+					<p id="price" title="500000">500,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -163,7 +163,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>900,000원</p>
+					<p id="price" title="900000">900,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -241,7 +241,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>900,000원</p>
+					<p id="price" title="900000">900,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -323,7 +323,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>700,000원</p>
+					<p id="price" title="700000">700,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -399,7 +399,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>700,000원</p>
+					<p id="price" title="700000">700,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -478,7 +478,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>850,000원</p>
+					<p id="price" title="850000">850,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -558,7 +558,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>1,050,000원</p>
+					<p id="price" title="1050000">1,050,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -636,7 +636,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>600,000원</p>
+					<p id="price" title="600000">600,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -690,7 +690,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>700,000원</p>
+					<p id="price" title="700000">700,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -769,7 +769,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>650,000원</p>
+					<p id="price" title="650000">650,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -848,7 +848,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>1,350,000원</p>
+					<p id="price" title="1350000">1,350,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -934,7 +934,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>2,500,000원</p>
+					<p id="price" title="2500000">2,500,000원</p>
 				</div>
 			
 				<div class="info_contents">
@@ -1020,7 +1020,7 @@
 				
 				<div class="info">
 					<img alt="" src="../resources/images/banking.png">
-					<p>2,500,000원</p>
+					<p id="price" title="2500000">2,500,000원</p>
 				</div>
 			
 				<div class="info_contents">
