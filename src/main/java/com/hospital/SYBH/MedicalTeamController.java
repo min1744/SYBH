@@ -1,6 +1,8 @@
 package com.hospital.SYBH;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.medicalTeam.MedicalTeamService;
+import com.hospital.medicalTeam.MedicalTeamVO;
 
 @Controller
 @RequestMapping("/medical/")
@@ -17,9 +20,13 @@ public class MedicalTeamController {
 	public MedicalTeamService medicalTeamService;
 	
 	@RequestMapping(value = "medicalTeamList", method = RequestMethod.GET)
-	public ModelAndView getList(int mid) throws Exception {
+	public ModelAndView getList(Integer mid) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+		if(mid ==null) {
+			mid = 1;
+		}
+		List<MedicalTeamVO> list = medicalTeamService.getList(mid);
+		mv.addObject("list",list);
 		
 		mv.setViewName("medical/medicalTeam");
 		
