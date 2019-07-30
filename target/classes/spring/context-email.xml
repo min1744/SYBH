@@ -3,12 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
-	  <!-- Gmail -->
-  	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<!-- Gmail -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="alsrms1744@gmail.com" />
-		<property name="password" value="" />
+		<property name="username" value="${email.id}" />
+		<property name="password" value="${email.pw}" />
 		<property name="javaMailProperties">
 		<props>
 			<prop key="mail.smtp.auth">true</prop>

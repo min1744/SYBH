@@ -39,24 +39,23 @@ public class MemberService {
 	}
 	
 	//아이디 찾기
-	public String getId(MemberVO memberVO) throws Exception{
-		String email1 = memberVO.getEmail1();
-		String email2 = memberVO.getEmail2();
-		String email = null;
-		if(email1 != null && email2 != null) {
-			email = email1 + "@" + email2;
+	public MailVO getId(String email) throws Exception{
+		String id = memberDAO.getId(email);
+		MailVO mailVO = null;
+		if(id != null) {
+			mailVO = new MailVO();
+			mailVO.setSetFrom("쌍용백병원(SYBH)");//보내는 사람
+			mailVO.setToMail(email);//받는 사람의 이메일
+			mailVO.setTitle("안녕하세요, 쌍용백병원입니다.");//메일 제목
+			mailVO.setContents("귀하의 아이디는 "+id+"입니다.");//메일 내용
 		}
-		return memberDAO.getId(email);
+		
+		return mailVO;
 	}
 	
 	//비밀번호 찾기
-	public String getPw(MemberVO memberVO) throws Exception{
-		String email1 = memberVO.getEmail1();
-		String email2 = memberVO.getEmail2();
-		String email = null;
-		if(email1 != null && email2 != null) {
-			email = email1 + "@" + email2;
-		}
+	public String getPw(String email) throws Exception{
+		
 		
 		return memberDAO.getPw(email);
 	}

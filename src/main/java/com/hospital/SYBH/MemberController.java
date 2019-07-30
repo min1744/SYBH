@@ -3,9 +3,13 @@
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hospital.member.MailVO;
 import com.hospital.member.MemberService;
 import com.hospital.member.MemberVO;
 import com.hospital.pay.PayDAO;
@@ -30,6 +35,8 @@ public class MemberController {
 	private PayService payService;
 	@Inject
 	private PayDAO payDAO;
+	@Inject
+	private JavaMailSender mailSender;
 	
 	//현아 작성 (마이페이지 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
@@ -61,17 +68,40 @@ public class MemberController {
 	
 	//현아 작성 (아이디/비번찾기 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberIdFind", method = RequestMethod.GET)
-	public ModelAndView memberIdFind() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/memberIdFind");
+	public String memberIdFind() throws Exception {
+		return "member/memberIdFind";
+	}
+	
+	@RequestMapping(value = "memberIdFind", method = RequestMethod.POST)
+	public ModelAndView memberIdFind(ModelAndView mv, String email) throws Exception{
+		MailVO mailVO = memberService.getId(email);
+		if(mailVO != null) {
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+				
+				messageHelper.setFrom(mailVO.getSetFrom()); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setTo(mailVO.getToMail()); // 받는사람 이메일
+				messageHelper.setSubject(mailVO.getTitle()); // 메일제목은 생략이 가능하다
+				messageHelper.setText(mailVO.getContents()); // 메일 내용
+				
+				mailSender.send(message);
+				
+				mv.setViewName("member/memberLogin");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		} else {
+			mv.addObject("message", "존재하지 않는 이메일입니다.");
+			mv.addObject("path", "member/memberIdFind");
+			mv.setViewName("common/messageMove");
+		}
 		return mv;
 	}
 	
 	@RequestMapping(value = "memberPwFind", method = RequestMethod.GET)
-	public ModelAndView memberPwFind() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/memberPwFind");
-		return mv;
+	public String memberPwFind() throws Exception {
+		return "member/memberPwFind";
 	}
 	
 	
