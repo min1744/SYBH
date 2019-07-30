@@ -66,7 +66,10 @@
 					}
 					alert(msg);
 				});
-			} else {
+			
+			
+			}
+			else {
 				alert('약관 동의를 해주세요');
 				return false;
 			}
