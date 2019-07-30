@@ -20,10 +20,10 @@ public class NoticeService implements BoardService {
 	@Inject
 	private NoticeDAO noticeDAO;
 	
-	public int fixCount(NoticeVO noticeVO, HttpSession session) throws Exception{
-		int result = noticeDAO.fixCount(noticeVO.getFix());
+	public int fixCount() throws Exception{
+		int result = noticeDAO.fixCount();
 		int check = 0;
-		if(result <4) {
+		if(result < 4) {
 			check = 1;
 		}
 				
@@ -86,8 +86,9 @@ public class NoticeService implements BoardService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
+
+
 	
 	
 	

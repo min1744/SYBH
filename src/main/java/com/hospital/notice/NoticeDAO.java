@@ -54,8 +54,8 @@ public class NoticeDAO implements BoardDAO {
 		return sqlSession.selectList(NAMESPACE+"getFixedList") ;
 	}
 	
-	public int fixCount(int fix)throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"fixCount", fix);
+	public int fixCount()throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"fixCount");
 	}
 	
 	 
