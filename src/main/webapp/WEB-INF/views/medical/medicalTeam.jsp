@@ -56,11 +56,13 @@
 			</div>
 			
 			<div id="doctor_list">
-				<h3>이비인후과</h3>
+				<c:forEach items="${list }" var="list" varStatus="i">
+				<c:if test="${i.index eq 0 }">
+				<h3>${list.med_office}</h3>
+				</c:if>
 				<hr>
 				
 				<!-- 의사 리스트 시작 -->
-				<c:forEach items="${list }" var="list" varStatus="i">
 				<div class="list" id="list${i }">
 					<div class="list_profile">
 						<c:choose>
