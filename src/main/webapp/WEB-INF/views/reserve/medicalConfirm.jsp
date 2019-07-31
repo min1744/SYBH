@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,12 +103,17 @@ var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 tod
    $(function() {
 	   
 		$('#pay').click(function() {
-			var result = confirm('예약하시겠습니까?');
-			if(result) {
-				
-				
-			} else {
-				
+			var c = $('#check').prop("checked");
+			if(c){
+				var result = confirm('예약하시겠습니까?');
+				if(result) {
+					
+					
+				} else {
+					
+				}
+			}else{
+				alert('약관 동의를 해주세요');
 			}
 		});
    
@@ -147,7 +153,7 @@ var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 tod
 		<div id="confirmList">
 		
 			<div id="confirm_title">
-				<span>[선택하신 검진프로그램]</span><span id="title">기본 종합검진(여)</span>
+				<span>[선택하신 검진프로그램]</span><span id="title">${param.check }</span>
 				<p class="sub_title"><img src="../resources/images/info.png">건강검진은 본인만 예약이 가능하며, 대리 예약은 불가능합니다.</p>				
 			</div>
 			
@@ -157,15 +163,15 @@ var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 tod
 				
 					<tr>
 						<th>예약자 성함</th>
-						<td class="td_border" colspan="2">홍길동</td>
+						<td class="td_border" colspan="2">${memberVO.name }</td>
 					</tr>
 					<tr>
 						<th>예약자 연락처</th>
-						<td class="td_border" colspan="2">010-1111-1111</td>
+						<td class="td_border" colspan="2">${memberVO.phone }</td>
 					</tr>
 					<tr>
 						<th>예약자 이메일</th>
-						<td class="td_border" colspan="2">aaa@naver.com</td>
+						<td class="td_border" colspan="2">${memberVO.email }</td>
 					</tr>
 					<tr>
 						<th>희망 예약일</th>
@@ -201,12 +207,16 @@ var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 tod
 					</tr>
 					<tr>
 						<th>선택된 검진</th>
-						<td class="td_border" colspan="2">기본 종합검진(여) <span class="price">(500,000원)</span></td>
+						<td class="td_border" colspan="2">${param.check } 
+						<span class="price">
+						<fmt:formatNumber value="${param.price }" pattern="#,###" />원
+						</span></td>
 					</tr>
 					<tr>
 						<th>최종 검진 비용</th>
 						<td style="font-size: 1.2em; font-weight: 700; color:  #153F91;" class="td_border" colspan="2">
-						500,000원</td>
+						<fmt:formatNumber value="${param.price }" pattern="#,###" />원
+						</td>
 					</tr>
 				
 				</table>

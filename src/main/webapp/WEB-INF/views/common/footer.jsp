@@ -10,7 +10,7 @@
 	
 		<div id="footer_nav">
 			<ul>
-				<li><a href="">병원소개</a></li>
+				<li><a href="../hospital/hospitalInfo">병원소개</a></li>
 				<li>│</li>
 				<li><a href="">회원약관</a></li>
 				<li>│</li>
