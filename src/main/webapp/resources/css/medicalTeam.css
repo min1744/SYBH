@@ -273,10 +273,17 @@
 }
 
 
-#doctor_list hr {
+#doctor_list>hr:first-of-type {
 	
+	display: block;
 	border: 1px solid #153F91;
 	
+}
+
+
+#doctor_list>hr {
+	
+	display: none;
 }
 
 

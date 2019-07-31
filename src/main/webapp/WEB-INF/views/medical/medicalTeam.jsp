@@ -60,7 +60,7 @@
 				<c:if test="${i.index eq 0 }">
 				<h3>${list.med_office}</h3>
 				</c:if>
-				<hr>
+				<hr class="hr1">
 				
 				<!-- 의사 리스트 시작 -->
 				<div class="list" id="list${i }">
