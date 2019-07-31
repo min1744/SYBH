@@ -35,7 +35,7 @@ $(function() {
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
 
-
+<input type="hidden" id="fixCount" value="${result}">
 <div id="board">
 		<div id="board_title">
 			<p>공지수정</p>
@@ -62,12 +62,11 @@ $(function() {
 		<div id="write_btn">
 			<input id="write" type="button" value="글수정">
 		</div>
+		<p>공지사항 고정<input type="checkbox" id="fix" name="fix" value="1"></p>
 	</form>
 	</div>
 		
-	<div id="write_btn">
-	<a href="./noticeWrite" id="write">공지등록</a>
-	</div>
+	
 	</div>
 </div>
 

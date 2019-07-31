@@ -364,32 +364,15 @@ $(function() {
 				<h3><a href="./notice/noticeList">더보기 +</a></h3>
 				<div id="notice_box">
 					<table>
+					<tbody>
+					<c:forEach items="${list}" var="vo">
 						<tr>
-							<td class="num">100</td>
-							<td><a href="">공지병원정보시스템이 업그레이드 되었습니다</a></td>
-							<td class="sysdate">2019-07-23</td>
+							<td class="num">${vo.num}</td>
+							<td><a href="./notice/noticeSelect?num=${vo.num}">${vo.title}</a></td>
+							<td class="sysdate">${vo.reg_date}</td>
 						</tr>
-						<tr>
-							<td class="num">99</td>
-							<td><a href="">공지2019년 06월 01일(토) 서버점검 안내</a></td>
-							<td class="sysdate">2019-07-23</td>
-						</tr>
-						<tr>
-							<td class="num">98</td>
-							<td><a href="">공지2019년 05월 26일(일) 서버점검 안내</a></td>
-							<td class="sysdate">2019-07-23</td>
-						</tr>
-						<tr>
-							<td class="num">97</td>
-							<td><a href="">공지제6회 강북삼성병원 소화기 심포지엄</a></td>
-							<td class="sysdate">2019-07-23</td>
-						</tr>
-						<tr>
-							<td class="num">96</td>
-							<td><a href="">공지2019년 4월 9일 서버점검 안내</a></td>
-							<td class="sysdate">2019-07-23</td>
-						</tr>
-						
+					</c:forEach>	
+					</tbody>
 					</table>
 				</div>
 			</div>

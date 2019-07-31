@@ -24,6 +24,12 @@ public class PageMaker {
 	private int startNum;
 	private int lastNum;
 
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public void setLastRow(int lastRow) {
+		this.lastRow = lastRow;
+	}
 	public void setPerPage(int perPage) {
 		this.perPage = perPage;
 	}
