@@ -10,19 +10,37 @@
 <script type="text/javascript">
 	
 	$(function() {
-
 		$('#btn').click(function() {
-			var result = confirm('[검진명]-[검진금액] 으로 예약하시겠습니까?');
+			var check =  $("input[name='a']:checked").attr('title');
+			var price = $('#price').attr('title');
+			price = price.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			var result = confirm('['+check+']-['+price+'원] 으로 예약하시겠습니까?');
+			price = $('#price').attr('title');
+			
+			
 			if(result) {
 				
-				location.href="./medicalConfirm";
-				
+				//location.href="./medicalConfirm?check="+check+"&price="+price;
+				post({'check':check,'price':price});
 			} else {
 				
 			}
 		});
-
-		
+		//post방식으로 넘기기
+		function post(params){
+			var form = document.createElement("form");
+			form.setAttribute("method","POST");
+			form.setAttribute("action","./medicalConfirm");
+			for(var key in params){
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type","hidden");
+				hiddenField.setAttribute("name",key);
+				hiddenField.setAttribute("value",params[key]);
+				form.appendChild(hiddenField);
+			}
+			document.body.appendChild(form);
+			form.submit();
+		}
 		//////////// radio 체크시 하단 내용 변경 코드
 		for(var i = 1; i < 15; i++) {
 			
@@ -34,7 +52,7 @@
 			
 			$('#check'+i).click(function() {
 				$('.change_box').html(eval("$(div"+$(this).val()+").css('display', 'block')"));
-				price = $('#price').attr('title');
+				
 			});
 			
 		}
