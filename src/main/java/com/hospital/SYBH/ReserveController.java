@@ -54,7 +54,7 @@ public class ReserveController {
 	}
 	
 	
-	@RequestMapping(value = "medicalConfirm", method = RequestMethod.GET)
+	@RequestMapping(value = "medicalConfirm", method = RequestMethod.POST)
 	public ModelAndView medicalConfirm() throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
