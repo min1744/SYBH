@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -42,6 +43,20 @@ public class MemberService {
 			memberVO.setRes_reg_num(res_reg_num_dec);
 		}
 		
+		return memberVO;
+	}
+	
+	//reLogin
+	public MemberVO reLogin(MemberVO memberVO, HttpSession session) throws Exception{
+		memberVO = memberDAO.login(memberVO);
+		String dbId = memberVO.getId();
+		String sessionId = ((MemberVO)session.getAttribute("memberVO")).getId();
+		//주민등록번호 복호화
+		if(dbId.equals(sessionId)) {
+			String res_reg_num_dec = memberDAO.setResDecryption(memberVO.getRes_reg_num());
+			memberVO.setRes_reg_num(res_reg_num_dec);
+		}
+
 		return memberVO;
 	}
 	
@@ -91,7 +106,7 @@ public class MemberService {
 			mailVO.setSetFrom("alsrms1744@gmail.com");//보내는 사람
 			mailVO.setToMail(email);//받는 사람의 이메일
 			mailVO.setTitle("[SYBH]안녕하세요, 쌍용백병원입니다.");//메일 제목
-			mailVO.setContents("귀하의 임시비밀번호는 "+pw+"입니다. 비밀번호를 마이페이지에서 변경해주시기 바랍니다.");//메일 내용
+			mailVO.setContents("귀하의 비밀번호가 임시비밀번호로 변경되었습니다. 임시비밀번호는 "+pw+"입니다. 비밀번호를 마이페이지에서 변경해주시기 바랍니다.");//메일 내용
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
