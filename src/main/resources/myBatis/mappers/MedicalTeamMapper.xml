@@ -4,11 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="MedicalTeamMapper">
-	<select id="getList" resultType="MedicalTeamVO" parameterType="Integer" >
-		select * from medicalteam where mid=#{mid}
-	</select>
+<select id="getList" resultType="MedicalTeamVO" parameterType="Integer">
+	select * from medicalteam where mid=#{mid}
+</select>
 
-	
 
 
 
