@@ -27,8 +27,8 @@
 				<li><a href="../notice/noticeList">공지사항</a></li>
 				<li><a href="../hospital/hospitalInfo">병원소개</a></li>
 				<li><a href="#" style="color:#6bb5db;">의료진 소개</a></li>
-				<li><a href="../hospital/floorlInfo">층별안내</a></li>
-				<li><a href="#">오시는 길</a></li>
+				<li><a href="../hospital/floorInfo">층별안내</a></li>
+				<li><a href="../hospital/location">오시는 길</a></li>
 			</ul>
 		</div>
 		

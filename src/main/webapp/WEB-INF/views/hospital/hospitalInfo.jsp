@@ -29,7 +29,7 @@
 				<li><a href="#" style="color:#6BB5DB;">병원소개</a></li>
 				<li><a href="../medical/medicalTeamList">의료진 소개</a></li>
 				<li><a href="./floorInfo">층별안내</a></li>
-				<li><a href="#">오시는 길</a></li>
+				<li><a href="./location">오시는 길</a></li>
 				
 			
 			</ul>
