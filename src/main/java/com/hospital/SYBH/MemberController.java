@@ -3,9 +3,13 @@
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hospital.member.MailVO;
 import com.hospital.member.MemberService;
 import com.hospital.member.MemberVO;
 import com.hospital.pay.PayDAO;
@@ -61,16 +66,40 @@ public class MemberController {
 	
 	//현아 작성 (아이디/비번찾기 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberIdFind", method = RequestMethod.GET)
-	public ModelAndView memberIdFind() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/memberIdFind");
+	public String memberIdFind() throws Exception {
+		return "member/memberIdFind";
+	}
+	
+	@RequestMapping(value = "memberIdFind", method = RequestMethod.POST)
+	public ModelAndView memberIdFind(ModelAndView mv, String email) throws Exception{
+		MailVO mailVO = memberService.getId(email);
+		if(mailVO != null) {
+			mv.setViewName("member/memberLogin");
+		} else {
+			mv.addObject("message", "존재하지 않는 이메일입니다.");
+			mv.addObject("path", "member/memberIdFind");
+			mv.setViewName("common/messageMove");
+		}
+		
 		return mv;
 	}
 	
 	@RequestMapping(value = "memberPwFind", method = RequestMethod.GET)
-	public ModelAndView memberPwFind() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/memberPwFind");
+	public String memberPwFind() throws Exception {
+		return "member/memberPwFind";
+	}
+	
+	@RequestMapping(value = "memberPwFind", method = RequestMethod.POST)
+	public ModelAndView memberPwFind(ModelAndView mv, String email) throws Exception{
+		MailVO mailVO = memberService.getPw(email);
+		if(mailVO != null) {
+			mv.setViewName("member/memberLogin");
+		} else {
+			mv.addObject("message", "존재하지 않는 이메일입니다.");
+			mv.addObject("path", "member/memberPwFind");
+			mv.setViewName("common/messageMove");
+		}
+		
 		return mv;
 	}
 	
@@ -123,11 +152,6 @@ public class MemberController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "memberIdCheck", method = RequestMethod.GET)
-	public void memberIdCheck(String id) throws Exception{
-		
-	}
-	
 	@RequestMapping(value = "memberIdCheck", method = RequestMethod.POST)
 	public ModelAndView memberIdCheck(String id, ModelAndView mv) throws Exception{
 		int result = memberService.getIdDuplication(id);
@@ -169,6 +193,21 @@ public class MemberController {
 		mv.addObject("count",totalCount);
 		mv.setViewName("member/memberBreakdown");
 		return mv;
+	}
+	
+	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
+	public ModelAndView memberDelete(String id, HttpSession session, ModelAndView mv) throws Exception{
+		System.out.println("id : "+id);
+		int result = memberService.setDelete(id);
+		if(result > 0) {
+			mv.setViewName("redirect:../");
+			session.invalidate();
+		} else {
+			mv.addObject("message", "회원탈퇴를 실패하였습니다.");
+			mv.addObject("path", "../member/memberMyPage");
+			mv.setViewName("common/messageMove");
+		}
 		
+		return mv;
 	}
 }

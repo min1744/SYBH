@@ -57,17 +57,20 @@
 	
 	<!-- 아이디 찾기 -->
 	<select id="getId" parameterType="String" resultType="String">
-		SELECT ID FROM MEMBER WHERE EMAIL LIKE #{email}
+		SELECT RPAD(SUBSTR(ID, 1, 4), LENGTH(ID), '*') FROM MEMBER WHERE EMAIL LIKE #{email}
 	</select>
 	
 	<!-- 비밀번호 분실로 인한 비밀번호 난수로 변경 -->
 	<update id="setPwUpdate" parameterType="MemberVO">
-		UPDATE MEMBER SET PW LIKE #{pw} WHERE EMAIL LIKE #{email}
+		<selectKey keyProperty="pw" order="BEFORE" resultType="String">
+			SELECT DISTINCT CRYPTO_AES256.ENC_AES(#{pw}) FROM MEMBER WHERE EMAIL LIKE #{email}
+		</selectKey>
+		UPDATE MEMBER SET PW = #{pw} WHERE EMAIL LIKE #{email}
 	</update>
 	
 	<!-- 비밀번호 찾기 -->
 	<select id="getPw" parameterType="String" resultType="String">
-		SELECT PW FROM MEMBER WHERE EMAIL LIKE #{email}
+		SELECT DISTINCT CRYPTO_AES256.DEC_AES(PW) FROM MEMBER WHERE EMAIL LIKE #{email}
 	</select>
 	
 	<!-- 비밀번호 변경 -->
@@ -117,7 +120,6 @@
 	
 	<!-- 회원 탈퇴 -->
 	<delete id="setDelete" parameterType="String">
-		DELETE MEMBER
-		WHERE ID LIKE #{id}
+		DELETE MEMBER WHERE ID LIKE #{id}
 	</delete>
 </mapper>

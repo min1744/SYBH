@@ -6,6 +6,7 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberFind.css" rel="stylesheet">
+<script type="text/javascript" src="../resources/js/memberFind.js"></script>
 </head>
 <body>
 <!-- header 추가 -->
@@ -23,7 +24,9 @@
 			<p id="sub_title">아이디를 잊으셨습니까?</p>
 		</div>
 		<div id="find_form">
-			<input type="email" name="email" id="email" placeholder="이메일을 입력하세요">
+			<form action="./memberIdFind" method="post" id="form">
+				<input type="email" name="email" id="email" placeholder="이메일을 입력하세요">
+			</form>
 			<button id="submit">인증메일 보내기</button>
 		</div>
 	</div>

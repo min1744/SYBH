@@ -6,6 +6,17 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberMypage.css" rel="stylesheet">
+<script type="text/javascript">
+$(function() {
+	$("#memberDelete").click(function() {
+		var id = $('#id').text();
+		var result = confirm("정말 회원탈퇴 하시겠습니까?");
+		if(result){
+			location.href = "./memberDelete?id="+id;
+		}
+	});
+});
+</script>
 </head>
 <body>
 <!-- header 추가 -->
@@ -28,23 +39,23 @@
 				<table>
 					<tr>
 						<th>아이디</th>
-						<td>${memberVO.id }</td>
+						<td id="id">${memberVO.id}</td>
 					</tr>
 					<tr>
 						<th>이름</th>
-						<td>${memberVO.name }</td>
+						<td>${memberVO.name}</td>
 					</tr>
 					<tr>
 						<th>주민등록번호</th>
-						<td>${memberVO.res_reg_num }</td>
+						<td>${memberVO.res_reg_num}</td>
 					</tr>
 					<tr>
 						<th>핸드폰 번호</th>
-						<td>${memberVO.phone }</td>
+						<td>${memberVO.phone}</td>
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td>${memberVO.email }</td>
+						<td>${memberVO.email}</td>
 					</tr>
 					<tr>
 						<th>성별</th>
@@ -57,13 +68,13 @@
 					</tr>
 					<tr>
 						<th>나이</th>
-						<td>${memberVO.age }세</td>
+						<td>${memberVO.age}세</td>
 					</tr>
 				</table>
 				
 				<div id="info_btn">
-					<a href="" id="memberUpdate">회원정보 수정</a>
-					<a href="" id="memberDelete">회원탈퇴</a>
+					<button id="memberUpdate">회원정보 수정</button>
+					<button id="memberDelete">회원탈퇴</button>
 				</div>
 			</div>
 			

@@ -62,8 +62,6 @@ public class FileSaver {
 		return fileSystemName;
 	}
 
-	//Spring_ex10_board 예제와 달리 return을 int가 아닌 boolean타입으로 설정했으니 주의할 것!
-	//file이 정상적으로 삭제 시 true 
 	public boolean deleteFile(String realPath, String fname) throws Exception{
 		File file = new File(realPath, fname);
 		boolean result=false;
