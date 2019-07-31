@@ -114,7 +114,7 @@ $(function() {
 			<li><a href="../hospital/hospitalInfo">병원소개</a></li>
 			<li><a href="../medical/medicalTeamList">의료진 소개</a></li>
 			<li><a href="../hospital/floorInfo">층별 안내</a></li>
-			<li><a href="">오시는 길</a></li>
+			<li><a href="../hospital/location">오시는 길</a></li>
 		</ul>
 		<ul id="ul_4">
 			<li><a href="">건의합니다</a></li>
