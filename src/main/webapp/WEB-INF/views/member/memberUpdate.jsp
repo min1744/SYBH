@@ -15,8 +15,8 @@
 	<c:import url="../common/header.jsp" />
 	<div id="board">
 		<div id="board_title">
-			<p id="title">회원가입</p>
-			<p id="sub_title">회원가입을 하시면 다양한 서비스를 편리하게 이용하실 수 있습니다.</p>
+			<p id="title">회원정보 수정</p>
+			<p id="sub_title">회원정보 수정을 통해 아이디를 제외한 내 정보를 변경할 수 있습니다.</p>
 		</div>
 	</div>
 	<div id="join_box">
@@ -27,7 +27,7 @@
 			<tbody>
 				<tr>
 					<th>아이디(ID)<span>*</span></th>
-					<td><input type="text" id="id" class="empty_check" readonly="readonly" value="${memberVO.id}"><span class="sub">영문 + 숫자 혼용 6~20자</span></td>
+					<td><form:input path="id" readonly="true"/><span class="sub">영문 + 숫자 혼용 6~20자</span></td>
 				</tr>
 				<tr>
 					<td></td>

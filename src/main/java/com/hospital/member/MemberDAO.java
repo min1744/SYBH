@@ -80,6 +80,11 @@ public class MemberDAO {
 	public String setResDecryption(String res_reg_num) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"setResDecryption", res_reg_num);
 	}
+
+	//주민등록번호 뒷자리 *변환
+	public String setUpdateRes(String res_reg_num) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"setUpdateRes", res_reg_num);
+	}
 	
 	//등급 수정
 	public int setGradeUpdate(MemberVO memberVO) throws Exception{

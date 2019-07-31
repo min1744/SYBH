@@ -39,11 +39,6 @@
 		});
 	});
 </script>
-<style type="text/css">
-#a{
-	margin-bottom: 
-}
-</style>
 </head>
 <body>
 <!-- header 추가 -->

@@ -216,8 +216,8 @@ public class MemberController {
 	public void memberReLogin() throws Exception{}
 	
 	@RequestMapping(value = "memberReLogin", method = RequestMethod.POST)
-	public ModelAndView memberReLogin(MemberVO memberVO, HttpSession session, ModelAndView mv) throws Exception{
-		memberVO = memberService.reLogin(memberVO, session);
+	public ModelAndView memberReLogin(MemberVO memberVO, ModelAndView mv) throws Exception{
+		memberVO = memberService.reLogin(memberVO);
 		if(memberVO != null) {
 			mv.setViewName("member/memberUpdate");
 		} else {

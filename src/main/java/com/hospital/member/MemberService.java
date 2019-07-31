@@ -31,7 +31,18 @@ public class MemberService {
 	
 	//myPage
 	public MemberVO getSelect(String id) throws Exception{
-		return memberDAO.getSelect(id);
+		MemberVO memberVO = memberDAO.getSelect(id);
+		if(memberVO != null) {
+			String res_reg_num = memberDAO.setResDecryption(memberVO.getRes_reg_num());
+			String [] res = res_reg_num.split("-");
+			memberVO.setRes_reg_num1(res[0]);
+			memberVO.setRes_reg_num1(res[1]);
+			res = memberVO.getEmail().split("@");
+			memberVO.setEmail1(res[0]);
+			memberVO.setEmail2(res[1]);
+		}
+		
+		return memberVO;
 	}
 	
 	//login
@@ -39,7 +50,8 @@ public class MemberService {
 		memberVO = memberDAO.login(memberVO);
 		//주민등록번호 복호화
 		if(memberVO != null) {
-			String res_reg_num_dec = memberDAO.setResDecryption(memberVO.getRes_reg_num());
+			String res_reg_num = memberDAO.setResDecryption(memberVO.getRes_reg_num());
+			String res_reg_num_dec = memberDAO.setUpdateRes(res_reg_num);
 			memberVO.setRes_reg_num(res_reg_num_dec);
 		}
 		
@@ -47,13 +59,12 @@ public class MemberService {
 	}
 	
 	//reLogin
-	public MemberVO reLogin(MemberVO memberVO, HttpSession session) throws Exception{
+	public MemberVO reLogin(MemberVO memberVO) throws Exception{
 		memberVO = memberDAO.login(memberVO);
-		String dbId = memberVO.getId();
-		String sessionId = ((MemberVO)session.getAttribute("memberVO")).getId();
-		//주민등록번호 복호화
-		if(dbId.equals(sessionId)) {
-			String res_reg_num_dec = memberDAO.setResDecryption(memberVO.getRes_reg_num());
+		if(memberVO != null) {
+			//주민등록번호 복호화
+			String res_reg_num = memberDAO.setResDecryption(memberVO.getRes_reg_num());
+			String res_reg_num_dec = memberDAO.setUpdateRes(res_reg_num);
 			memberVO.setRes_reg_num(res_reg_num_dec);
 		}
 
