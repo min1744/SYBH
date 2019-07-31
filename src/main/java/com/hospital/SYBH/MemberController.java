@@ -35,8 +35,6 @@ public class MemberController {
 	private PayService payService;
 	@Inject
 	private PayDAO payDAO;
-	@Inject
-	private JavaMailSender mailSender;
 	
 	//현아 작성 (마이페이지 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
@@ -76,21 +74,7 @@ public class MemberController {
 	public ModelAndView memberIdFind(ModelAndView mv, String email) throws Exception{
 		MailVO mailVO = memberService.getId(email);
 		if(mailVO != null) {
-			try {
-				MimeMessage message = mailSender.createMimeMessage();
-				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-				
-				messageHelper.setFrom(mailVO.getSetFrom()); // 보내는사람 생략하면 정상작동을 안함
-				messageHelper.setTo(mailVO.getToMail()); // 받는사람 이메일
-				messageHelper.setSubject(mailVO.getTitle()); // 메일제목은 생략이 가능하다
-				messageHelper.setText(mailVO.getContents()); // 메일 내용
-				
-				mailSender.send(message);
-				
-				mv.setViewName("member/memberLogin");
-			} catch (Exception e) {
-				System.out.println(e);
-			}
+			mv.setViewName("member/memberLogin");
 		} else {
 			mv.addObject("message", "존재하지 않는 이메일입니다.");
 			mv.addObject("path", "member/memberIdFind");

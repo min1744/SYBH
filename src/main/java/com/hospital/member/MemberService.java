@@ -3,7 +3,10 @@ package com.hospital.member;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.hospital.util.PageMaker;
@@ -12,6 +15,8 @@ import com.hospital.util.PageMaker;
 public class MemberService {
 	@Inject
 	private MemberDAO memberDAO;
+	@Inject
+	private JavaMailSender mailSender;
 	
 	//Admin페이지 List
 	public List<MemberVO> getList(PageMaker pageMaker) throws Exception{
@@ -46,8 +51,23 @@ public class MemberService {
 			mailVO = new MailVO();
 			mailVO.setSetFrom("쌍용백병원(SYBH)");//보내는 사람
 			mailVO.setToMail(email);//받는 사람의 이메일
-			mailVO.setTitle("안녕하세요, 쌍용백병원입니다.");//메일 제목
+			mailVO.setTitle("[SYBH]안녕하세요, 쌍용백병원입니다.");//메일 제목
 			mailVO.setContents("귀하의 아이디는 "+id+"입니다.");//메일 내용
+			
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+				
+				messageHelper.setFrom(mailVO.getSetFrom()); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setTo(mailVO.getToMail()); // 받는사람 이메일
+				messageHelper.setSubject(mailVO.getTitle()); // 메일제목은 생략이 가능하다
+				messageHelper.setText(mailVO.getContents()); // 메일 내용
+				
+				mailSender.send(message);
+				
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		}
 		
 		return mailVO;
