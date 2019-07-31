@@ -41,7 +41,10 @@
 			<mapping path="/pay/payPopup"/>
 			<beans:bean class="com.hospital.interceptor.PayPopupInterceptor"/>
 		</interceptor>
-		
+		<interceptor>
+			<mapping path="/reserve/*"/>
+			<beans:bean class="com.hospital.interceptor.ReserveInterceptor"/>
+		</interceptor>
 		<!-- 진우 인터셉터  -->
 		
 		<!-- 현아  인터셉터 -->
