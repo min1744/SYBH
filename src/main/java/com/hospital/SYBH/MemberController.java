@@ -196,7 +196,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
-	public ModelAndView memberDelete(String id, HttpSession session, ModelAndView mv) throws Exception{
+	public ModelAndView memberDelete(HttpSession session, ModelAndView mv) throws Exception{
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
 		System.out.println("id : "+id);
 		int result = memberService.setDelete(id);
 		if(result > 0) {
@@ -207,6 +208,45 @@ public class MemberController {
 			mv.addObject("path", "../member/memberMyPage");
 			mv.setViewName("common/messageMove");
 		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberReLogin", method = RequestMethod.GET)
+	public void memberReLogin() throws Exception{}
+	
+	@RequestMapping(value = "memberReLogin", method = RequestMethod.POST)
+	public ModelAndView memberReLogin(MemberVO memberVO, HttpSession session, ModelAndView mv) throws Exception{
+		memberVO = memberService.reLogin(memberVO, session);
+		if(memberVO != null) {
+			mv.setViewName("member/memberUpdate");
+		} else {
+			mv.addObject("message", "로그인 실패하셨습니다.");
+			mv.addObject("path", "../member/memberReLogin");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
+	public ModelAndView memberUpdate(String id, ModelAndView mv) throws Exception{
+		MemberVO memberVO = memberService.getSelect(id);
+		if(memberVO != null) {
+			mv.addObject("memberVO", memberVO);
+			mv.setViewName("member/memberUpdate");
+		} else {
+			mv.addObject("message", "데이터를 불러오지 못했습니다.");
+			mv.addObject("path", "../member/memberReLogin");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
+	public ModelAndView memberUpdate(MemberVO memberVO, ModelAndView mv) throws Exception{
+		
 		
 		return mv;
 	}

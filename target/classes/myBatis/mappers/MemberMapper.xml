@@ -94,7 +94,7 @@
 	</insert>
 	
 	<update id="setUpdate" parameterType="MemberVO">
-		UPDATE MEMBER SET NAME = #{name} WHERE ID LIKE #{id} AND PW LIKE #{pw}
+		UPDATE MEMBER SET PW = CRYPTO_AES256.ENC_AES(#{pw}), NAME = #{name} WHERE ID LIKE #{id}
 	</update>
 	
 	<!-- 주민등록번호 AES256 복호화 -->
