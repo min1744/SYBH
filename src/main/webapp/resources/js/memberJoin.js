@@ -101,22 +101,24 @@ $(function() {
 		}
 	});
 	
+	var check = false;
 	//res_reg_num1 expression rationnelle check && gender selected & age put
 	$('#res_reg_num1').keyup(function() {
 		var res_reg_num1 = $(this).val();
 		var res_reg_num2 = $('#res_reg_num2').val();
 		//주민등록번호 : ABCDEF-GHIJKLM
 		//M = (11 - ((2×A + 3×B + 4×C + 5×D + 6×E + 7×F + 8×G + 9×H + 2×I + 3×J + 4×K + 5×L) % 11)) % 10
-		var checkRes_reg_num = false;
 		var l1 = res_reg_num1.length;
 		var l2 = res_reg_num2.length;
 		var front = 0;
 		var back = 0;
 		if(checkRes_reg_num1.test(res_reg_num1) && checkRes_reg_num2.test(res_reg_num2)){
-			//주민번호에 따른 gender selected & age put
-			var gender = res_reg_num2.substring(0, 1)*1;
 			var birthYear = res_reg_num1.substring(0, 2)*1;
+			var birthMonth = res_reg_num1.substring(2, 4)*1;
+			var birthDate = res_reg_num1.substring(4, 6)*1;
+			var gender = res_reg_num2.substring(0, 1)*1;
 			var now = new Date();
+			//gender selected
 			if(gender == 1 || gender == 2){
 				//1900년대 출생 남녀
 				birthYear = birthYear + 1900;
@@ -131,6 +133,7 @@ $(function() {
 			//5,6 : 1900년대 출생 외국인
 			//7,8 : 2000년대 출생 외국인
 			
+			//age put
 			var age = now.getFullYear()*1 - birthYear + 1;
 			if(age >= 0 && age <= 120){
 				$('#age').val(age);
@@ -144,6 +147,40 @@ $(function() {
 				$('#age_result').html('잘못된 나이입니다.');
 				$('#age_result').css("color", "red");
 				alertAge = false;
+			}
+			
+			if(birthMonth > 0 && birthMonth < 13){// 1~12월
+				if(birthMonth == 1 && birthMonth == 3 && birthMonth == 5 && birthMonth == 7 && birthMonth == 8 && birthMonth == 10 && birthMonth == 12){
+					if(birthDate > 0 && birthDate < 32){
+						check = true;
+					} else {
+						check = false;
+					}
+				} else {
+					if(birthMonth == 2){ //2월생
+						if(birthYear%4 == 0 && birthYear%100 != 0){ //윤년 계산
+							if(birthDate > 0 && birthDate < 30){
+								check = true;
+							} else {
+								check = false;
+							}
+						} else {
+							if(birthDate > 0 && birthDate < 29){
+								check = true;
+							} else {
+								check = false;
+							}
+						}
+					} else {
+						if(birthDate > 0 && birthDate < 31){
+							check = true;
+						} else {
+							check = false;
+						}
+					}
+				}
+			} else {
+				check = false;
 			}
 			//res_reg_num1 calculation
 			for(var i = 0; i < l1; i++){
@@ -165,7 +202,7 @@ $(function() {
 			//주민등록번호 체계 및 유효성 검사
 			var result = 11-((front + back)%11)%10;
 			var end = res_reg_num2.substring(6, 7)*1;
-			if(result == end){
+			if(result == end && check){
 				$('#res_reg_num_result').html('');
 				alertRes1 = true;
 			} else {
@@ -173,7 +210,7 @@ $(function() {
 				$('#res_reg_num_result').css("color", "red");
 				alertRes1 = false;
 			}
-		} else if(res_reg_num1 != '' && res_reg_num2 != '') {
+		} else {
 			$('#res_reg_num_result').html('잘못된 형식의 주민등록번호입니다.');
 			$('#res_reg_num_result').css("color", "red");
 			alertRes1 = false;
@@ -193,7 +230,6 @@ $(function() {
 		if(checkRes_reg_num1.test(res_reg_num1) && checkRes_reg_num2.test(res_reg_num2)){
 			//주민등록번호 : ABCDEF-GHIJKLM
 			//M = (11 - ((2×A + 3×B + 4×C + 5×D + 6×E + 7×F + 8×G + 9×H + 2×I + 3×J + 4×K + 5×L) % 11)) % 10
-			var checkRes_reg_num = false;
 			var l1 = res_reg_num1.length;
 			var l2 = res_reg_num2.length;
 			var location = res_reg_num2.substring(1, 3)*1;
@@ -258,7 +294,7 @@ $(function() {
 				//주민등록번호 체계 및 유효성 검사
 				var result = 11-((front + back)%11)%10;
 				var end = res_reg_num2.substring(6, 7)*1;
-				if(result == end){
+				if(result == end && check){
 					$('#res_reg_num_result').html('');
 					alertRes1 = true;
 					alertRes2 = true;
@@ -268,10 +304,10 @@ $(function() {
 					alertRes2 = false;
 				}
 			}
-		} else if(res_reg_num1 != '' && res_reg_num2 != '') {
+		} else {
 			$('#res_reg_num_result').html('잘못된 형식의 주민등록번호입니다.');
 			$('#res_reg_num_result').css("color", "red");
-			alertRes2 = false;
+			alertRes1 = false;
 		}
 	});
 	
@@ -397,94 +433,6 @@ $(function() {
 		$('.empty_check').each(function() {
 			if($(this).val()==''){
 				emptyCheck = false;
-			}
-		});
-		
-		//id - enter event
-		$('#id').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//pw - enter event
-		$('#pw').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//pw2 - enter event
-		$('#pw2').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//name - enter event
-		$('#name').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//res_reg_num1 - enter event
-		$('#res_reg_num1').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//res_reg_num2 - enter event
-		$('#res_reg_num2').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//phone1 - enter event
-		$('#phone1').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//phone2 - enter event
-		$('#phone2').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//phone3 - enter event
-		$('#phone3').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//email1 - enter event
-		$('#email1').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
-			}
-		});
-		
-		//email2 - enter event
-		$('#email2').keypress(function(event) {
-			if(event.which == 13){
-				$('#join').click();
-				return false;
 			}
 		});
 		

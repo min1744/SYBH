@@ -80,12 +80,27 @@ public class MemberController {
 			mv.addObject("path", "member/memberIdFind");
 			mv.setViewName("common/messageMove");
 		}
+		
 		return mv;
 	}
 	
 	@RequestMapping(value = "memberPwFind", method = RequestMethod.GET)
 	public String memberPwFind() throws Exception {
 		return "member/memberPwFind";
+	}
+	
+	@RequestMapping(value = "memberPwFind", method = RequestMethod.POST)
+	public ModelAndView memberPwFind(ModelAndView mv, String email) throws Exception{
+		MailVO mailVO = memberService.getPw(email);
+		if(mailVO != null) {
+			mv.setViewName("member/memberLogin");
+		} else {
+			mv.addObject("message", "존재하지 않는 이메일입니다.");
+			mv.addObject("path", "member/memberPwFind");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
 	}
 	
 	
@@ -137,11 +152,6 @@ public class MemberController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "memberIdCheck", method = RequestMethod.GET)
-	public void memberIdCheck(String id) throws Exception{
-		
-	}
-	
 	@RequestMapping(value = "memberIdCheck", method = RequestMethod.POST)
 	public ModelAndView memberIdCheck(String id, ModelAndView mv) throws Exception{
 		int result = memberService.getIdDuplication(id);
@@ -152,12 +162,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberEmailCheck", method = RequestMethod.POST)
-	public ModelAndView memberEmailCheck(MemberVO memberVO, ModelAndView mv) throws Exception{
+	public void memberEmailCheck(MemberVO memberVO, ModelAndView mv) throws Exception{
 		int result = memberService.getEmailDuplication(memberVO);
 		mv.addObject("result", result);
 		mv.setViewName("common/message");
-		
-		return mv;
 	}
 	
 	//재혁 후원내역 작성
@@ -183,6 +191,21 @@ public class MemberController {
 		mv.addObject("count",totalCount);
 		mv.setViewName("member/memberBreakdown");
 		return mv;
+	}
+	
+	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
+	public ModelAndView memberDelete(String id, HttpSession session, ModelAndView mv) throws Exception{
+		System.out.println("id : "+id);
+		int result = memberService.setDelete(id);
+		if(result > 0) {
+			mv.setViewName("redirect:../");
+			session.invalidate();
+		} else {
+			mv.addObject("message", "회원탈퇴를 실패하였습니다.");
+			mv.addObject("path", "../member/memberMyPage");
+			mv.setViewName("common/messageMove");
+		}
 		
+		return mv;
 	}
 }

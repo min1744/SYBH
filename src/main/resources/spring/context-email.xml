@@ -16,4 +16,22 @@
 		</props>
 		</property>
 	</bean>
+	
+	<!-- naver mail -->
+	<!-- <bean class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		p:host="smtp.naver.com"
+		p:port="465"
+		p:username="${email.id}"
+		p:password="${email.id}">
+		<property name="javaMailProperties">
+		<props>
+			<prop key="mail.smtp.starttls.enable">true</prop>
+			<prop key="mail.smtp.auth">true</prop>
+			<prop key="mail.smtps.ssl.checkserveridentity">true</prop>
+			<prop key="mail.smtps.ssl.trust">*</prop>
+			<prop key="mail.debug">true</prop>
+			<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+		</props>
+		</property>
+	</bean> -->
 </beans>
