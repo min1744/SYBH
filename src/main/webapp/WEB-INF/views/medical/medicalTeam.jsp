@@ -47,11 +47,43 @@
 			<div id="doctor_select">
 				<h3>진료과목 선택</h3>
 				<ul>
-					<li><a href="./medicalTeamList?mid=1">이비인후과</a></li>
-					<li><a href="./medicalTeamList?mid=2">외과</a></li>
-					<li><a href="./medicalTeamList?mid=3">비뇨의학과</a></li>
-					<li><a href="./medicalTeamList?mid=4">내과</a></li>
-					<li><a href="./medicalTeamList?mid=5" id="last_li">신경외과</a></li>	
+					<c:choose>
+								<c:when test="${mid eq '1'}">
+									<li><a href="./medicalTeamList?mid=1" class="mid" style="color: white;">이비인후과</a></li>
+									<li><a href="./medicalTeamList?mid=2">외과</a></li>
+									<li><a href="./medicalTeamList?mid=3">비뇨의학과</a></li>
+									<li><a href="./medicalTeamList?mid=4">내과</a></li>
+									<li><a href="./medicalTeamList?mid=5" id="last_li">신경외과</a></li>	
+								</c:when>
+								<c:when test="${mid eq '2'}">
+									<li><a href="./medicalTeamList?mid=1">이비인후과</a></li>
+									<li><a href="./medicalTeamList?mid=2" class="mid" style="color: white;">외과</a></li>
+									<li><a href="./medicalTeamList?mid=3">비뇨의학과</a></li>
+									<li><a href="./medicalTeamList?mid=4">내과</a></li>
+									<li><a href="./medicalTeamList?mid=5" id="last_li">신경외과</a></li>
+								</c:when>
+								<c:when test="${mid eq '3'}">
+									<li><a href="./medicalTeamList?mid=1">이비인후과</a></li>
+									<li><a href="./medicalTeamList?mid=2">외과</a></li>
+									<li><a href="./medicalTeamList?mid=3" class="mid" style="color: white;">비뇨의학과</a></li>
+									<li><a href="./medicalTeamList?mid=4">내과</a></li>
+									<li><a href="./medicalTeamList?mid=5" id="last_li">신경외과</a></li>
+								</c:when>
+								<c:when test="${mid eq '4'}">
+									<li><a href="./medicalTeamList?mid=1">이비인후과</a></li>
+									<li><a href="./medicalTeamList?mid=2">외과</a></li>
+									<li><a href="./medicalTeamList?mid=3">비뇨의학과</a></li>
+									<li><a href="./medicalTeamList?mid=4" class="mid" style="color: white;">내과</a></li>
+									<li><a href="./medicalTeamList?mid=5" id="last_li">신경외과</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="./medicalTeamList?mid=1">이비인후과</a></li>
+									<li><a href="./medicalTeamList?mid=2">외과</a></li>
+									<li><a href="./medicalTeamList?mid=3">비뇨의학과</a></li>
+									<li><a href="./medicalTeamList?mid=4">내과</a></li>
+									<li><a href="./medicalTeamList?mid=5" id="last_li" class="mid" style="color: white;">신경외과</a></li>
+								</c:otherwise>
+							</c:choose>
 				</ul>
 			</div>
 			

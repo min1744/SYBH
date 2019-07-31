@@ -199,26 +199,29 @@
 	text-align: center;
 	letter-spacing: -1px;
 	font-weight: 700;
+	border-left: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 }
 
 
-
-#doctor_select li a {
+.mid {
 	
-	color: #808080;
+	background-color: #153F91;
+	color: white;
+	border: 1px solid #153F91;
+	box-sizing: border-box;
 	
 }
+
+
 
 #doctor_select li a {
 	
 	color: #808080;
 	width: 100%;
-	overflow: hidden;
 	padding: 15px 20px;
 	display: inline-block;
-	border-left: 1px solid #ddd;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
 	box-sizing: border-box;
 	
 }
@@ -232,11 +235,15 @@
 	
 	background-color: #153F91;
 	color: white;
-	border-left: 1px solid #153F91;
-	border-top: 1px solid #153F91;
-	border-bottom: 1px solid #153F91;
+	width: 100%;
+	padding: 15px 20px;
+	display: inline-block;
+	border: 1px solid #153F91;
+	box-sizing: border-box;
 	
 }
+
+
 
 
 
@@ -396,6 +403,11 @@
 }
 
 
+
+
+
+/* 모달창 */
+
 .modal_profile {
 	
 	width: 250px;
@@ -482,8 +494,48 @@
 .modal_career {
 	
 	clear: both;
+	width: 100%;
+	overflow: hidden;
+	margin: 40px 0;
+	
+}
+
+.career h3, .major_act h3 {
+	
+	color: black;
+	font-weight: 900;
+	margin-bottom: 10px;
 }
 
 
+.career {
+	
+	padding-left: 20px;
+}
 
+
+.career, .major_act {
+	
+	float: left;
+	letter-spacing: -1px;
+	color: #808080;
+	width: 46%;
+}
+
+
+.career:before, .major_act:before {
+	
+	content: '';
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin-bottom: 9px;
+	background-color: #153F91;
+}
+
+
+.major_act {
+	
+	margin-left: 70px;
+}
 
