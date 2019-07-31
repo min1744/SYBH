@@ -41,11 +41,11 @@
 		
 			<ul>
 				<li>병원안내</li>
-				<li><a href="#">공지사항</a></li>
-				<li><a href="#">병원소개</a></li>
-				<li><a href="#">의료진 소개</a></li>
-				<li><a href="#">층별안내</a></li>
-				<li><a href="#">오시는 길</a></li>
+				<li><a href="./noticeList">공지사항</a></li>
+				<li><a href="../hospital/hospitalInfo">병원소개</a></li>
+				<li><a href="../medical/medicalTeamList">의료진 소개</a></li>
+				<li><a href="../hospital/floorInfo">층별안내</a></li>
+				<li><a href="../hospital/location">오시는 길</a></li>
 				
 			
 			</ul>
