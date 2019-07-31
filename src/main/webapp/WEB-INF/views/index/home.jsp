@@ -270,18 +270,27 @@ $(function() {
 	
 	<div id="chat">
 		
-		<a href=""><img src="./resources/images/chat.png"></a>
+		<img src="./resources/images/chat.png">
 		
 	</div>
+	<!--1대1 대화  -->
 	<script type="text/javascript">
-		tocplusTop=95
-		tocplusLeft=55
-		tocplusWidth=310
-		tocplusHeight=140
-		tocplusFrameColor="orange"
-		tocplusUserName="Guest"
-	</script> 
-	<script type="text/javascript" src="http://tocplus007.com:80/chatLoader.do?userId=test_ko"></script>
+	
+		tocplusTop=500;
+		tocplusLeft=50;
+		tocplusMinimizedImage='http://kr02.tocplus007.com/img/minimized_ko.gif'; //최소화 아이콘
+		tocplusAwayImage="";//'상담원부재중그림';
+		tocplusHAlign='right';
+		tocplusWidth=180;
+		tocplusHeight=220;
+		tocplusUserName='${memberVO.name}';
+		tocplusFrameColor='#153f91';
+		tocplusFloatingWindow=true;
+		var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+		document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr03.tocplus007.com/chatLoader.do?userId=hospital' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+	
+	</script>
+	
 </div>
 
 
