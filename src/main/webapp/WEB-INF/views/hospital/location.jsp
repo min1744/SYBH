@@ -6,6 +6,28 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/location.css" rel="stylesheet">
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	//Default Action
+	$(".tab_content").hide(); //Hide all content
+	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
+	$(".tab_content:first").show(); //Show first tab content
+	
+	//On Click Event
+	$("ul.tabs li").click(function() {
+		$("ul.tabs li").removeClass("active"); //Remove any "active" class
+		$(this).addClass("active"); //Add "active" class to selected tab
+		$(".tab_content").hide(); //Hide all tab content
+		var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+		$(activeTab).show(); //Fade in the active content
+		return false;
+	});
+
+});
+
+</script>
 </head>
 <body>
 <!-- header 추가 -->
@@ -123,8 +145,134 @@
 		
 			
 			<!-- 대중교통 -->
+			<div id="transport">
 			
+				<div id="transport_box">
+				    <ul class="tabs">
+				        <li><a href="#tab1" class="t_btn">버스 이용시</a></li>
+				        <li><a href="#tab2" class="t_btn">지하철 이용시</a></li>
+				       
+				    </ul>
+				    <div class="tab_container">
+				    
+				    	<!-- tab1 -->
+				        <div id="tab1" class="tab_content">
+				        	<div class="tab_img">
+				        	<img alt="버스" src="../resources/images/bus.png">
+				        	</div>
+				        	
+				        <div class="trans_info">
+				        	<h3>서서울농협홍대역점 하차<br>(14-181)</h3>
+				        	
+				        	<div class="trans_list">
+				        		<ul>
+				        			<li>
+				        				<span class="bus1">
+				        					일반버스
+				        				</span>
+				        				7016, 7711, 7737
+				        			</li>
+				        		</ul>
+				        	</div>
+				        </div>
+				        <hr>
+				        <div class="trans_info">
+				        	<h3>신한은행서교동금융센터점 하차<br>(14-921)</h3>
+				        	
+				        	<div class="trans_list">
+				        		<ul>
+									<li>
+				        				<span class="bus2">
+				        					마을버스
+				        				</span>
+				        				마포09
+				        			</li>				        			
+				        		</ul>
+				        	</div>
+				        </div>
+				         <hr>
+				        <div class="trans_info">
+				        	<h3>서울도시가스마포사옥<br>(14-192)</h3>
+				        	
+				        	<div class="trans_list">
+				        		<ul>
+				        			<li>
+				        				<span class="bus1">
+				        					일반버스
+				        				</span>
+				        				7016, 7711, 7737
+				        			</li>
+									<li>
+				        				<span class="bus2">
+				        					마을버스
+				        				</span>
+				        				마포06
+				        			</li>				        			
+				        		</ul>
+				        	</div>
+				        </div>
+				        <hr>
+				        <div class="trans_info">
+				        	<h3>동교로사거리 하차<br>(14-182)</h3>
+				        	
+				        	<div class="trans_list">
+				        		<ul>
+				        			<li>
+				        				<span class="bus1">
+				        					일반버스
+				        				</span>
+				        				7016, 7711, 7737
+				        			</li>
+									<li>
+				        				<span class="bus2">
+				        					마을버스
+				        				</span>
+				        				마포06, 마포09
+				        			</li>				        			
+				        		</ul>
+				        	</div>
+				        </div>
+				        	
+				        </div>
+				        
+				        <!-- tab2 -->
+				        <div id="tab2" class="tab_content">
+				        	<div class="tab_img2">
+				        	<img alt="지하철" src="../resources/images/subway.png">
+				        	</div>
+				        	
+				        <div class="trans_info">
+				        	<h3 class="sub1">2호선 홍대입구역</h3>
+				        	
+				        	<div class="trans_list">
+				        		<ul>
+				        			<li>
+				        				1번 출구 도보 5분 거리
+				        			</li>
+				        		</ul>
+				        	</div>
+				        </div>
+				        <hr>
+				        <div class="trans_info">
+				        	<h3 class="sub2">경의중앙선 홍대입구역</h3>
+				        	
+				        	<div class="trans_list">
+				        		<ul>
+									<li>
+				        				3번출구 도보 9분
+				        			</li>				        			
+				        		</ul>
+				        	</div>
+				        </div>
+				        
+				        </div>
+				       
+				    </div>
+				</div>
 			
+			</div>
+			
+			</div>
 		
 		</div>
 		
