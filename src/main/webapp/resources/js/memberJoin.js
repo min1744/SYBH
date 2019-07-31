@@ -101,7 +101,6 @@ $(function() {
 		}
 	});
 	
-	var check = false;
 	//res_reg_num1 expression rationnelle check && gender selected & age put
 	$('#res_reg_num1').keyup(function() {
 		var res_reg_num1 = $(this).val();
@@ -118,6 +117,7 @@ $(function() {
 			var birthDate = res_reg_num1.substring(4, 6)*1;
 			var gender = res_reg_num2.substring(0, 1)*1;
 			var now = new Date();
+			var check = false;
 			//gender selected
 			if(gender == 1 || gender == 2){
 				//1900년대 출생 남녀
@@ -205,6 +205,7 @@ $(function() {
 			if(result == end && check){
 				$('#res_reg_num_result').html('');
 				alertRes1 = true;
+				alertRes2 = true;
 			} else {
 				$('#res_reg_num_result').html('잘못된 형식의 주민등록번호입니다.');
 				$('#res_reg_num_result').css("color", "red");
@@ -294,7 +295,7 @@ $(function() {
 				//주민등록번호 체계 및 유효성 검사
 				var result = 11-((front + back)%11)%10;
 				var end = res_reg_num2.substring(6, 7)*1;
-				if(result == end && check){
+				if(result == end){
 					$('#res_reg_num_result').html('');
 					alertRes1 = true;
 					alertRes2 = true;

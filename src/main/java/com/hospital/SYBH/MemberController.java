@@ -162,10 +162,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberEmailCheck", method = RequestMethod.POST)
-	public void memberEmailCheck(MemberVO memberVO, ModelAndView mv) throws Exception{
+	public ModelAndView memberEmailCheck(MemberVO memberVO, ModelAndView mv) throws Exception{
 		int result = memberService.getEmailDuplication(memberVO);
 		mv.addObject("result", result);
 		mv.setViewName("common/message");
+		
+		return mv;
 	}
 	
 	//재혁 후원내역 작성

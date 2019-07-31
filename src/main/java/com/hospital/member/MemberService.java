@@ -136,43 +136,24 @@ public class MemberService {
 			throw new Exception();
 		}
 		
-		int result = memberDAO.getIdDuplication(memberVO.getId());
-		if(result < 1) {
-			throw new Exception();
-		}
-		
-		result = memberDAO.getEmailDuplication(memberVO.getEmail());
-		if(result < 1) {
-			throw new Exception();
-		}
-		
 		return memberDAO.setWrite(memberVO);
 	}
 	
-	//check ID duplication
+	//아이디 중복확인
 	public int getIdDuplication(String id) throws Exception{
-		int result = memberDAO.getIdDuplication(id);
-		if(result < 1) {
-			throw new Exception();
-		}
-		
-		return result;
+		return memberDAO.getIdDuplication(id);
 	}
 	
-	//check Email
+	//이메일 중복확인
 	public int getEmailDuplication(MemberVO memberVO) throws Exception{
-		int result = 0;
-		if(memberVO.getEmail1() != null && memberVO.getEmail2() != null) {
-			String email = memberVO.getEmail1() + "@" + memberVO.getEmail2();
-			result = memberDAO.getEmailDuplication(email);
-		} else {
-			throw new Exception();
-		}
-		if(result < 1) {
-			throw new Exception();
+		String email1 = memberVO.getEmail1();
+		String email2 = memberVO.getEmail2();
+		String email = null;
+		if(email1 != null && email2 != null) {
+			email = email1 + "@" + email2;
 		}
 		
-		return result;
+		return memberDAO.getEmailDuplication(email);
 	}
 	
 	//회원 탈퇴
