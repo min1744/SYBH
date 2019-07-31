@@ -25,9 +25,9 @@
 			<ul>
 				<li>병원안내</li>
 				<li><a href="../notice/noticeList">공지사항</a></li>
-				<li><a href="#">병원소개</a></li>
+				<li><a href="../hospital/hospitalInfo">병원소개</a></li>
 				<li><a href="#" style="color:#6bb5db;">의료진 소개</a></li>
-				<li><a href="#">층별안내</a></li>
+				<li><a href="../hospital/floorlInfo">층별안내</a></li>
 				<li><a href="#">오시는 길</a></li>
 			</ul>
 		</div>
@@ -63,7 +63,23 @@
 				<c:forEach items="${list }" var="list" varStatus="i">
 				<div class="list" id="list${i }">
 					<div class="list_profile">
-						<img alt="" src="../resources/images/01_${i.index+1}.jpg">
+						<c:choose>
+								<c:when test="${mid eq '1'}">
+									<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
+								</c:when>
+								<c:when test="${mid eq '2'}">
+									<img alt="" src="../resources/images/02_${i.index+1 }.jpg">
+								</c:when>
+								<c:when test="${mid eq '3'}">
+									<img alt="" src="../resources/images/03_${i.index+1 }.jpg">
+								</c:when>
+								<c:when test="${mid eq '4'}">
+									<img alt="" src="../resources/images/04_${i.index+1 }.jpg">
+								</c:when>
+								<c:otherwise>
+									<img alt="" src="../resources/images/05_${i.index+1 }.jpg">
+								</c:otherwise>
+							</c:choose>
 					</div>
 					<div class="list_info">
 						<h2 class="name">${list.name } 교수</h2>

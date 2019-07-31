@@ -43,34 +43,10 @@
 	width: 60%;
 	overflow: hidden;
 	position: relative;
-	margin: 0 auto;
-	margin-bottom: 80px;
+	margin: 80px auto;
 
 }
 
-
-#write_btn {
-	
-	width: 60%;
-	text-align: right;
-	overflow: hidden;
-	margin: 10px auto;
-	padding: 2%;
-}
-
-
-
-#write {
-	
-	padding: 1% 2.2%;
-	border: none;
-	border-radius: 5px;
-	background-color: #153F91;
-	color: white;
-	font-weight: 700;
-	box-sizing: border-box;
-	text-align: center;
-}
 
 
 #board_nav, #boardList {
@@ -126,7 +102,83 @@
 #boardList {
 	
 	width: 80%;
+	overflow: hidden;
 	text-align: center;
 }
 
 
+#introduce_box {
+	
+	width: 100%;
+	overflow: hidden;
+	letter-spacing: -1px;
+}
+
+#introduce_box img {
+	
+	margin-bottom: 30px;
+}
+
+
+#introduce_box p {
+	
+	line-height: 35px;
+}
+
+
+
+
+#top_title {
+	
+	font-size: 1.1em;
+	color: #153F91;
+	font-weight: 700;
+}
+
+
+
+
+#sub_introduce {
+	
+	width: 100%;
+	overflow: hidden;
+	margin: 40px auto;
+}
+
+
+#sub_introduce table {
+	
+	width: 100%;
+	overflow: hidden;
+	border-top: 2px solid #153F91;
+	letter-spacing: -1px;
+	border-collapse: collapse;
+}
+
+
+#sub_introduce th {
+	
+	width: 200px;
+	border-bottom: 1px solid #ddd;
+}
+
+
+#sub_introduce td {
+	
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 40px;
+}
+
+
+#sub_introduce td h4 {
+	
+	padding: 30px 0;
+}
+
+
+#sub_introduce td p {
+	
+	color: #808080;
+	font-size: 0.9em;
+}
