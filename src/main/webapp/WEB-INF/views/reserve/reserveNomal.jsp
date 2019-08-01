@@ -169,7 +169,7 @@
 				<li><a href="./reserveInfo">예약안내</a></li>
 				<li><a href="#" style="color:#6BB5DB;">일반진료 예약</a></li>
 				<li><a href="./reserveMedical">건강검진 예약</a></li>
-				<li><a href="#">진료 예약 조회</a></li>
+				<li><a href="../member/memberNomal">진료 예약 조회</a></li>
 			</ul>
 		
 		</div>

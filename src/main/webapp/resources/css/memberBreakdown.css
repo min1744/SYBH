@@ -30,7 +30,7 @@
 
 #board_box {
 	
-	width: 70%;
+	width: 60%;
 	overflow: hidden;
 	position: relative;
 	margin: 80px auto;
@@ -44,7 +44,7 @@
 	float: left;
 	overflow: hidden;
 	width: 15%;
-	margin-right: 2%;
+	margin-right: 5%;
 }
 
 
