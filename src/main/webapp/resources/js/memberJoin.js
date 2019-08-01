@@ -11,15 +11,15 @@ $(function() {
 	var checkEmail1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/;
 	var checkEmail2 = /^(?=.*[a-z])(?=.*[.]).{8,12}$/;
 	
-	var alertId = false;
-	var alertPw1 = false;
-	var alertPw2 = false;
-	var alertName = false;
-	var alertRes1 = false;
-	var alertRes2 = false;
-	var alertPhone = false;
-	var alertEmail = false;
-	var alertAge = false;
+	var alertId = true;
+	var alertPw1 = true;
+	var alertPw2 = true;
+	var alertName = true;
+	var alertRes1 = true;
+	var alertRes2 = true;
+	var alertPhone = true;
+	var alertEmail = true;
+	var alertAge = true;
 	
 	//id expression rationnelle & duplication check
 	$('#id').keyup(function() {

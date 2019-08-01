@@ -51,7 +51,7 @@
 			<p id="sub_title">회원정보 수정은 아이디와 비밀번호를<br>확인 후 진행할 수 있습니다.</p>
 		</div>
 		<div id="login_form">
-			<form action="./memberReLogin" method="post" id="form">
+			<form action="./memberUpdate" method="post" id="form">
 				<input type="text" name="id" id="id" placeholder="아이디">
 				<input type="password" name="pw" id="pw" placeholder="비밀번호">
 			</form>

@@ -97,12 +97,9 @@
 	<update id="setUpdate" parameterType="MemberVO">
 		UPDATE MEMBER
 			SET PW = CRYPTO_AES256.ENC_AES(#{pw}),
-			NAME = #{name},
-			RES_REG_NUM = CRYPTO_AES256.ENC_AES(#{res_reg_num}),
 			PHONE = #{phone},
 			EMAIL = #{email},
-			GENDER = #{gender},
-			AGE = #{age}
+			GENDER = #{gender}
 		WHERE ID LIKE #{id}
 	</update>
 	

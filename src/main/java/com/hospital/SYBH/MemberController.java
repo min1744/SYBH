@@ -38,9 +38,17 @@ public class MemberController {
 	
 	//현아 작성 (마이페이지 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
-	public ModelAndView myPage() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("member/memberMyPage");
+	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		MemberVO memberVO = memberService.getSelect(id);
+		if(memberVO != null) {
+			mv.addObject("memberVO", memberVO);
+			mv.setViewName("member/memberMyPage");
+		} else {
+			mv.addObject("message", "정보가 없습니다.");
+			mv.addObject("path", "redirect:../");
+			mv.setViewName("common/messageMove");
+		}
 		return mv;
 	}
 	
@@ -198,7 +206,6 @@ public class MemberController {
 	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
 	public ModelAndView memberDelete(HttpSession session, ModelAndView mv) throws Exception{
 		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
-		System.out.println("id : "+id);
 		int result = memberService.setDelete(id);
 		if(result > 0) {
 			mv.setViewName("redirect:../");
@@ -215,10 +222,11 @@ public class MemberController {
 	@RequestMapping(value = "memberReLogin", method = RequestMethod.GET)
 	public void memberReLogin() throws Exception{}
 	
-	@RequestMapping(value = "memberReLogin", method = RequestMethod.POST)
-	public ModelAndView memberReLogin(MemberVO memberVO, ModelAndView mv) throws Exception{
-		memberVO = memberService.reLogin(memberVO);
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
+	public ModelAndView memberUpdate(MemberVO memberVO, HttpSession session, ModelAndView mv) throws Exception{
+		memberVO = memberService.reLogin(memberVO, session);
 		if(memberVO != null) {
+			mv.addObject("memberVO", memberVO);
 			mv.setViewName("member/memberUpdate");
 		} else {
 			mv.addObject("message", "로그인 실패하셨습니다.");
@@ -229,24 +237,16 @@ public class MemberController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
-	public ModelAndView memberUpdate(String id, ModelAndView mv) throws Exception{
-		MemberVO memberVO = memberService.getSelect(id);
-		if(memberVO != null) {
-			mv.addObject("memberVO", memberVO);
-			mv.setViewName("member/memberUpdate");
+	@RequestMapping(value = "memberSetUpdate", method = RequestMethod.POST)
+	public ModelAndView memberUpdate(MemberVO memberVO, ModelAndView mv) throws Exception{
+		int result = memberService.setUpdate(memberVO);
+		if(result > 0) {
+			mv.setViewName("redirect:./memberMyPage");
 		} else {
-			mv.addObject("message", "데이터를 불러오지 못했습니다.");
-			mv.addObject("path", "../member/memberReLogin");
+			mv.addObject("message", "정보수정을 실패하였습니다.");
+			mv.addObject("path", "./memberUpdate");
 			mv.setViewName("common/messageMove");
 		}
-		
-		return mv;
-	}
-	
-	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
-	public ModelAndView memberUpdate(MemberVO memberVO, ModelAndView mv) throws Exception{
-		
 		
 		return mv;
 	}
