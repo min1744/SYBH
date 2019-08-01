@@ -319,8 +319,8 @@ $(function() {
 				<p>암환자 상담 <span>02-2072-0707</span></p>
 				</div>
 				<div class="list_btn">
-				<a href="" class="first_a">외래안내</a>
-				<a href="">외래시간표</a>
+				<a href="" class="first_a btn_a">외래안내</a>
+				<a href="" class="btn_a">외래시간표</a>
 				</div>
 			</div>
 			
@@ -331,8 +331,8 @@ $(function() {
 				<p>인터넷예약은 24시간 이용하실 수 있습니다.</p>
 				</div>
 				<div class="list_btn">
-				<a href="./reserve/reserveInfo" class="first_a">진료예약안내</a>
-				<a href="./reserve/reserveNomal">진료예약하기</a>
+				<a href="./reserve/reserveInfo" class="first_a btn_b">진료예약안내</a>
+				<a href="./reserve/reserveNomal" class="btn_b">진료예약하기</a>
 				</div>
 			</div>
 			
@@ -372,8 +372,8 @@ $(function() {
 				<p>건의하고자 하는 사항을 등록하실 수 있습니다.</p>
 				</div>
 				<div class="list_btn">
-				<a href="" class="first_a">건의합니다</a>
-				<a href="">칭찬합니다</a>
+				<a href="" class="first_a btn_a">건의합니다</a>
+				<a href="" class="btn_a">칭찬합니다</a>
 				</div>
 			</div>
 			
@@ -386,6 +386,7 @@ $(function() {
 	
 		<div id="health_title">
 			<h3>건강뉴스</h3>
+			<p class="sub_h3">질병, 영양, 운동, 생활 속 관리 등 건강에 대한 모든 것</p>
 		</div>
 		
 		<div class="news_box">
@@ -436,6 +437,7 @@ $(function() {
 	
 		<div id="location_title">
 			<h3>오시는길</h3>
+			<p class="sub_h3">쌍용백병원으로 오시는 길을 알려드립니다.</p>
 		</div>
 		
 		<div id="map">

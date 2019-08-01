@@ -647,10 +647,18 @@ a:active {
 
 
 
-.list_btn a:hover {
+.btn_a:hover {
 	
 	background-color: white;
 	color: #153f91;
+	font-weight: 700;
+}
+
+.btn_b:hover {
+	
+	background-color: white;
+	color: #409dd0;
+	font-weight: 700;
 }
 
 
@@ -714,6 +722,16 @@ a:active {
 	text-align: center;
 	font-size: 1.5em;
 	font-weight: 900;
+}
+
+
+.sub_h3 {
+	
+	font-size: 1em;
+	letter-spacing: -1px;
+	color: #808080;
+	margin: 15px 0 50px 0;
+	text-align: center;
 }
 
 

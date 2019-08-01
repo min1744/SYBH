@@ -7,6 +7,29 @@
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/medicalTeam.css" rel="stylesheet">
 <c:import url="../temp/boot.jsp" />
+<script type="text/javascript">
+
+function formatDate(date) { 
+       var mymonth = date.getMonth()+1; 
+       var myweekday = date.getDate(); 
+       return (mymonth + "/" + myweekday); 
+} 
+
+function printWeek() { 
+       var now = new Date(); 
+       var nowDayOfWeek = now.getDay(); 
+       var nowDay = now.getDate(); 
+       var nowMonth = now.getMonth(); 
+       var nowYear = now.getYear(); 
+       nowYear += (nowYear < 2000) ? 1900 : 0; 
+       var weekStartDate = new Date(nowYear, nowMonth, nowDay - nowDayOfWeek);
+       console.log(nowDay - nowDayOfWeek);
+       
+       var weekEndDate = new Date(nowYear, nowMonth, nowDay + (6 - nowDayOfWeek)); 
+       document.write("이번주는 :  " + formatDate(weekStartDate) + " - " + formatDate(weekEndDate)); 
+} 
+</script> 
+
 </head>
 <body>
 <!-- header 추가 -->
@@ -153,18 +176,26 @@
 		        	<h2 class="modal_med_office">${list.name } 교수</h2>
 		        </div>
 	        		<hr>
-				
+				<!-- 교수 프로필 -->
 				<div class="modal_profile">
 					<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
 				</div>
 				
+				<!-- 진료과목 -->
 				<div class="modal_info">
 					<h3 class="modal_pro_field_title">전문분야</h3>
 					<p class="modal_pro_field">${list.pro_field }</p>
 				</div>	
 				
+				<!-- 진료예약 버튼 -->
 				<a href="../reserve/reserveNomal" id="reserve_btn">진료예약</a>
 				
+				
+				<!-- 진료 스케줄 -->
+				<div id="modal_cal">
+				</div>
+				
+				<!-- 경력/활동 -->
 				<div class="modal_career">
 					
 					<div class="career">
@@ -184,10 +215,7 @@
 							</c:forTokens>
 						</ul>
 					</div>
-				
 				</div>          
-	          
-	          
 	        </div>
 	      </div>
     	</div>
