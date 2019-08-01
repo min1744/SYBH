@@ -22,8 +22,7 @@ public class ReserveInterceptor extends HandlerInterceptorAdapter{
 		}else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인 후 사용가능합니다.');</script>");
-			response.sendRedirect("../member/memberLogin");
+			out.println("<script>alert('로그인 후 사용가능합니다.'); location.href='../member/memberLogin';</script>");
 			out.flush();
 		}
 		
