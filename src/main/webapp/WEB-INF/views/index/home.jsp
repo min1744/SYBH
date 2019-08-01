@@ -248,7 +248,7 @@ $(function() {
 <!-- 플로팅 -->
 <div id="floatMenu">
 	
-	<div id="floating_img">
+	<!-- <div id="floating_img">
 		<img src="./resources/images/nav_img.png">
 	</div>
 	
@@ -272,11 +272,11 @@ $(function() {
 		
 		<img src="./resources/images/chat.png">
 		
-	</div>
+	</div> -->
 	<!--1대1 대화  -->
 	<script type="text/javascript">
 	
-		tocplusTop=500;
+		tocplusTop=550;
 		tocplusLeft=50;
 		tocplusMinimizedImage='http://kr02.tocplus007.com/img/minimized_ko.gif'; //최소화 아이콘
 		tocplusAwayImage="";//'상담원부재중그림';
@@ -490,5 +490,27 @@ COPYRIGHT©1996-2019 BY SSANGYONG MEDICAL CENTER. ALL RIGHTS RESERVED.</p>
 </div>
 
 <!-- footer 끝 -->
+
+
+<div id="footer_fix">
+	
+	<div id="fix_box">
+		<img src="./resources/images/nav_img.png">
+		<span class="spon_title" id="s_title">쌍용백병원 후원하기</span>
+		
+		<ul>
+			<li class="spon_title">모인금액</li>
+			<li class="spon_num" id="donation"></li>
+			<li class="spon_title">후원자</li>
+			<li class="spon_num" id="people"></li>
+		
+		</ul>
+		
+			<button id="spon_btn">후원하기</button>
+		
+	</div>
+	
+	
+</div>
 </body>
 </html>
