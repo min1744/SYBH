@@ -17,7 +17,7 @@
 		this.element = element;
 		this.$element = $(element);
 
-		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'en', weekStart : 0, shortTime : false, 'cancelText' : 'Cancel', 'okText' : 'OK' };
+		this.params = { date : true, time : true, format : 'YYYY-MM-DD', minDate : null, maxDate : null, currentDate : null, lang : 'ko', weekStart : 0, shortTime : false, 'cancelText' : '취소', 'okText' : '선택' };
 		this.params = $.fn.extend(this.params, options);
 
 		this.name = "dtp_" + this.setName();
@@ -217,11 +217,11 @@
 										//년 시작
 										'<div>' +
 											'<div class="left center p10">' +
-												'<a href="javascript:void(0);" class="dtp-select-year-before"><i class="material-icons">chevron_left</i></a>' +
+												/*'<a href="javascript:void(0);" class="dtp-select-year-before"><i class="material-icons">chevron_left</i></a>' +*/
 											'</div>' +
 											'<div class="dtp-actual-year p80">2014</div>' +
 											'<div class="right center p10">' +
-												'<a href="javascript:void(0);" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>' +
+												/*'<a href="javascript:void(0);" class="dtp-select-year-after"><i class="material-icons">chevron_right</i></a>' +*/
 											'</div>' +
 											'<div class="clearfix"></div>' +
 										'</div>' + //년 끝
@@ -238,7 +238,7 @@
 											'</div>' + //월 끝
 											
 											
-											'<div class="dtp-actual-num">13</div>' + //일 표시
+											/*'<div class="dtp-actual-num">13</div>' + *///일 표시
 										'</div>' +
 										'<div class="dtp-time hidden">' +
 											'<div class="dtp-actual-maxtime">23:55</div>' +
@@ -262,7 +262,7 @@
 									'</div>' +
 									'<div class="dtp-buttons">' +
 										'<button class="dtp-btn-ok btn btn-flat" id="ok">' + this.params.okText + '</button>' +
-										'<button class="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
+										'<button class="dtp-btn-cancel btn btn-flat" id="cancle">' + this.params.cancelText + '</button>' +
 										'<div class="clearfix"></div>' +
 									'</div>' +
 								'</div>' +
@@ -663,7 +663,8 @@
 		{
 			var _template = "";
 
-			_template += '<div class="dtp-picker-month">' + date.locale(this.params.lang).format('MMMM YYYY') + '</div>';
+			
+			_template += '<div class="dtp-picker-month">' + date.locale(this.params.lang).format('YYYY년 MMMM') + '</div>';
 			_template += '<table class="table dtp-picker-days"><thead>';
 			for(var i = 0; i < calendar.week.length; i++)
 			{

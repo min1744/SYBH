@@ -287,6 +287,21 @@
 }
 
 
+.floating-label {
+	
+	font-size: 0.9em;
+	margin-top: 10px;
+}
+
+.floating-label:before {
+	
+	content: url("../images/info.png");
+	display: inline;
+	vertical-align: sub;
+	margin-right: 5px;
+}
+
+
 
 #agree_box {
 	

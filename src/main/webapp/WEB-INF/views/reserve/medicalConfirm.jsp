@@ -70,7 +70,7 @@
 				<li><a href="./reserveInfo">예약안내</a></li>
 				<li><a href="./reserveNomal">일반진료 예약</a></li>
 				<li><a href="#" style="color:#6BB5DB;">건강검진 예약</a></li>
-				<li><a href="./memberMypage">진료 예약 조회</a></li>
+				<li><a href="../member/memberNomal">진료 예약 조회</a></li>
 			</ul>
 		
 		</div>
@@ -166,9 +166,9 @@
 					<tr>
 						<th>선택된 검진</th>
 						<td class="td_border" colspan="2">${param.check } 
-						<span class="price">
-						<fmt:formatNumber value="${param.price }" pattern="#,###" />원
-						</span></td>
+						<span class="price">(
+						<fmt:formatNumber value="${param.price }" pattern="#,###" />&nbsp;원
+						)</span></td>
 					</tr>
 					<tr>
 						<th>최종 검진 비용</th>
