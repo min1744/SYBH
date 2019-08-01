@@ -117,19 +117,10 @@
 #info_btn {
 	
 	text-align: center;
+	margin-top: 20px;
 }
 
 
-#info_btn a {
-	
-	display: inline-block;
-	padding: 10px 15px;
-	font-size: 1em;
-	letter-spacing: -1px;
-	margin-top: 30px;
-	margin-bottom: 20px;
-
-}
 
 #memberUpdate {
 	
@@ -137,6 +128,10 @@
 	border-radius: 5px;
 	background-color: #153F91; 
 	color: white;
+	cursor: pointer;
+	width: 100px;
+	letter-spacing: -1px;
+	padding: 3%;
 }
 
 
@@ -146,6 +141,10 @@
 	border-radius: 5px;
 	background-color: #b70000; 
 	color: white;
+	cursor: pointer;
+	width: 100px;
+	letter-spacing: -1px;
+	padding: 3%;
 	
 }
 
