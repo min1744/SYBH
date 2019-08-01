@@ -200,7 +200,7 @@ $(function() {
 				back += b;
 			}
 			//주민등록번호 체계 및 유효성 검사
-			var result = 11-((front + back)%11)%10;
+			var result = (11-(front + back)%11)%10;
 			var end = res_reg_num2.substring(6, 7)*1;
 			if(result == end && check){
 				$('#res_reg_num_result').html('');
@@ -293,7 +293,7 @@ $(function() {
 					back += b;
 				}
 				//주민등록번호 체계 및 유효성 검사
-				var result = 11-((front + back)%11)%10;
+				var result = (11-(front + back)%11)%10;
 				var end = res_reg_num2.substring(6, 7)*1;
 				if(result == end){
 					$('#res_reg_num_result').html('');
@@ -308,7 +308,10 @@ $(function() {
 		} else {
 			$('#res_reg_num_result').html('잘못된 형식의 주민등록번호입니다.');
 			$('#res_reg_num_result').css("color", "red");
-			alertRes1 = false;
+			alertRes2 = false;
+		}
+		if(l2 == 7){
+			$('#phone1').focus();
 		}
 	});
 	
@@ -360,6 +363,9 @@ $(function() {
 			$('#phone_result').html('잘못된 형식의 번호입니다.');
 			$('#phone_result').css("color", "red");
 			alertPhone = false;
+		}
+		if(phone3.length == 4){
+			$('#email1').focus();
 		}
 	});
 	
@@ -454,6 +460,10 @@ $(function() {
 		} else if(alertAge == false){
 			alert('나이를 확인해주세요. 주민등록번호가 잘못되었습니다.');
 		} else {
+			alert("회원가입 되었습니다. 이메일 인증 후 사용 가능합니다.");
+			window.open('', '_self', ''); // 브라우저창 닫기
+			/* window.close(); // 브라우저 창 닫기 */
+			self.location = '../';
 			$("#form").submit();
 		}
 	});

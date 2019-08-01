@@ -11,15 +11,17 @@ import javax.validation.Valid;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hospital.member.MailVO;
 import com.hospital.member.MemberService;
 import com.hospital.member.MemberVO;
+import com.hospital.member.mail.MailVO;
 import com.hospital.pay.PayDAO;
 import com.hospital.pay.PayService;
 import com.hospital.pay.PayVO;
@@ -74,9 +76,7 @@ public class MemberController {
 	
 	//현아 작성 (아이디/비번찾기 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberIdFind", method = RequestMethod.GET)
-	public String memberIdFind() throws Exception {
-		return "member/memberIdFind";
-	}
+	public void memberIdFind() throws Exception {}
 	
 	@RequestMapping(value = "memberIdFind", method = RequestMethod.POST)
 	public ModelAndView memberIdFind(ModelAndView mv, String email) throws Exception{
@@ -93,9 +93,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberPwFind", method = RequestMethod.GET)
-	public String memberPwFind() throws Exception {
-		return "member/memberPwFind";
-	}
+	public void memberPwFind() throws Exception {}
 	
 	@RequestMapping(value = "memberPwFind", method = RequestMethod.POST)
 	public ModelAndView memberPwFind(ModelAndView mv, String email) throws Exception{
@@ -110,7 +108,6 @@ public class MemberController {
 		
 		return mv;
 	}
-	
 	
 	@RequestMapping(value = "memberLogin", method = RequestMethod.GET)
 	public void login() throws Exception {}
@@ -143,13 +140,17 @@ public class MemberController {
 	@RequestMapping(value = "memberJoin", method = RequestMethod.GET)
 	public void memberJoin(@ModelAttribute MemberVO memberVO) throws Exception {}
 	
+	//회원 가입시 이메일 인증코드를 생성
+	//이 인증 코드는 후에 다른 컨트롤러에서 처리를 받아 회원 상태를 활성화
+	//(/register 로 매핑되는 컨트롤러에서 등록한 ID는 authStatus[로그인 가능 유 무] 가 활성화 되지 않은 상태)
 	@RequestMapping(value = "memberJoin", method = RequestMethod.POST)
-	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult br, ModelAndView mv) throws Exception {
+	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult br, RedirectAttributes rttr, ModelAndView mv) throws Exception {
 		if(br.hasErrors()) {
 			mv.setViewName("member/memberJoin");
 		} else {
 			int result = memberService.setWrite(memberVO);
 			if(result > 0) {
+				rttr.addFlashAttribute("authmsg" , "가입 시 사용한 이메일로 인증해주세요.");
 				mv.setViewName("redirect:./memberLogin");
 			} else {
 				mv.addObject("message", "Login Fail");
@@ -157,6 +158,22 @@ public class MemberController {
 				mv.setViewName("common/messageMove");
 			}
 		}
+		return mv;
+	}
+	
+	//사용자가 인증을 확인하였을 때 서버에서 요청받을 컨트롤러를 생성
+	@RequestMapping(value = "emailConfirm", method = RequestMethod.GET)
+	public ModelAndView emailConfirm(String email, ModelAndView mv) throws Exception { // 이메일인증
+		int result = memberService.userAuth(email);
+		if(result > 0) {
+			mv.addObject("email", email);
+			mv.setViewName("member/emailConfirm");
+		} else {
+			mv.addObject("message", "이메일이 확인되지 않았습니다.");
+			mv.addObject("path", "redirect:../");
+			mv.setViewName("common/messageMove");
+		}
+
 		return mv;
 	}
 	

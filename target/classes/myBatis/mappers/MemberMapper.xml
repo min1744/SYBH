@@ -19,12 +19,12 @@
 	
 	<!-- id 중복확인 -->
 	<select id="getIdDuplication" parameterType="String" resultType="Integer">
-		SELECT COUNT(*) FROM MEMBER WHERE ID LIKE #{id}
+		SELECT COUNT(*) FROM MEMBER WHERE ID = #{id}
 	</select>
 	
 	<!-- email 중복확인 -->
 	<select id="getEmailDuplication" parameterType="String" resultType="Integer">
-		SELECT COUNT(*) FROM MEMBER WHERE EMAIL LIKE #{email}
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL = #{email}
 	</select>
 	
 	<!-- 관리자를 제외한 필터링 된 회원의 숫자 -->
@@ -47,7 +47,7 @@
 	
 	<!-- 회원 myPage -->
 	<select id="getSelect" parameterType="String" resultType="MemberVO">
-		SELECT * FROM MEMBER WHERE ID LIKE #{id} AND GRADE != 2
+		SELECT * FROM MEMBER WHERE ID = #{id} AND GRADE != 2
 	</select>
 	
 	<!-- Login -->
@@ -57,30 +57,31 @@
 	
 	<!-- 아이디 찾기 -->
 	<select id="getId" parameterType="String" resultType="String">
-		SELECT RPAD(SUBSTR(ID, 1, 4), LENGTH(ID), '*') FROM MEMBER WHERE EMAIL LIKE #{email}
+		SELECT RPAD(SUBSTR(ID, 1, 4), LENGTH(ID), '*') FROM MEMBER WHERE EMAIL = #{email}
 	</select>
 	
 	<!-- 비밀번호 분실로 인한 비밀번호 난수로 변경 -->
 	<update id="setPwUpdate" parameterType="MemberVO">
 		<selectKey keyProperty="pw" order="BEFORE" resultType="String">
-			SELECT DISTINCT CRYPTO_AES256.ENC_AES(#{pw}) FROM MEMBER WHERE EMAIL LIKE #{email}
+			SELECT DISTINCT CRYPTO_AES256.ENC_AES(#{pw}) FROM MEMBER WHERE EMAIL = #{email}
 		</selectKey>
-		UPDATE MEMBER SET PW = #{pw} WHERE EMAIL LIKE #{email}
+		UPDATE MEMBER SET PW = #{pw} WHERE EMAIL = #{email}
 	</update>
 	
 	<!-- 비밀번호 찾기 -->
 	<select id="getPw" parameterType="String" resultType="String">
-		SELECT DISTINCT CRYPTO_AES256.DEC_AES(PW) FROM MEMBER WHERE EMAIL LIKE #{email}
+		SELECT DISTINCT CRYPTO_AES256.DEC_AES(PW) FROM MEMBER WHERE EMAIL = #{email}
 	</select>
 	
 	<!-- 비밀번호 변경 -->
 	<update id="setPw" parameterType="MemberVO">
-		UPDATE MEMBER SET PW = CRYPTO_AES256.ENC_AES(#{pw}) WHERE ID LIKE #{id}
+		UPDATE MEMBER SET PW = CRYPTO_AES256.ENC_AES(#{pw}) WHERE ID = #{id}
 	</update>
 	
 	<!-- 회원가입(비밀번호, 주민등록번호 AES256 암호화) -->
 	<insert id="setWrite" parameterType="MemberVO">
-		INSERT INTO MEMBER VALUES(
+		INSERT INTO MEMBER (ID, PW, NAME, RES_REG_NUM, PHONE, EMAIL, GENDER, AGE, GRADE, AUTHSTAUS)
+		VALUES(
 			#{id},
 			CRYPTO_AES256.ENC_AES(#{pw}),
 			#{name},
@@ -89,7 +90,8 @@
 			#{email},
 			#{gender},
 			#{age},
-			1
+			1,
+			0
 		)
 	</insert>
 	
@@ -100,7 +102,7 @@
 			PHONE = #{phone},
 			EMAIL = #{email},
 			GENDER = #{gender}
-		WHERE ID LIKE #{id}
+		WHERE ID = #{id}
 	</update>
 	
 	<!-- 주민등록번호 AES256 복호화 -->
@@ -117,7 +119,7 @@
 	<update id="setGradeUpdate" parameterType="MemberVO">
 		UPDATE MEMBER
 		SET GRADE = #{grade}
-		WHERE ID LIKE #{id}
+		WHERE ID = #{id}
 	</update>
 	
 	<!-- 회원 관리(삭제) -->
@@ -131,6 +133,14 @@
 	
 	<!-- 회원 탈퇴 -->
 	<delete id="setDelete" parameterType="String">
-		DELETE MEMBER WHERE ID LIKE #{id}
+		DELETE MEMBER WHERE ID = #{id}
 	</delete>
+	
+	<update id="createAuthKey" parameterType="MemberVO">
+		UPDATE MEMBER SET AUTHCODE = #{authCode} WHERE EMAIL = #{email}
+	</update>
+	
+	<update id="userAuth" parameterType="String">
+		UPDATE MEMBER SET AUTHSTAUS = 1 WHERE EMAIL = #{email}
+	</update>
 </mapper>

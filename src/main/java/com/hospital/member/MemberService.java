@@ -11,9 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.hospital.member.mail.MailHandler;
+import com.hospital.member.mail.MailVO;
+import com.hospital.member.mail.TempKey;
 import com.hospital.util.PageMaker;
 
+@Transactional
 @Service
 public class MemberService {
 	@Inject
@@ -116,12 +121,12 @@ public class MemberService {
 			mailVO = new MailVO();
 			mailVO.setSetFrom("alsrms1744@gmail.com");//보내는 사람
 			mailVO.setToMail(email);//받는 사람의 이메일
-			mailVO.setTitle("[SYBH]안녕하세요, 쌍용백병원입니다.");//메일 제목
-			mailVO.setContents("귀하의 아이디는 "+id+"입니다.");//메일 내용
+			mailVO.setTitle("[SYBH](아이디 찾기)안녕하세요, 쌍용백병원입니다.");//메일 제목
+			mailVO.setContents("<h3>귀하의 아이디는 </h3><h1>"+id+"</h1><h3>입니다.</h3>");//메일 내용
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-				messageHelper.setFrom(mailVO.getSetFrom()); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setFrom(mailVO.getSetFrom(), "[SYBH]쌍용백병원"); // 보내는사람 생략하면 정상작동을 안함
 				messageHelper.setTo(mailVO.getToMail()); // 받는사람 이메일
 				messageHelper.setSubject(mailVO.getTitle()); // 메일제목은 생략이 가능하다
 				messageHelper.setText(mailVO.getContents()); // 메일 내용
@@ -152,12 +157,12 @@ public class MemberService {
 			mailVO = new MailVO();
 			mailVO.setSetFrom("alsrms1744@gmail.com");//보내는 사람
 			mailVO.setToMail(email);//받는 사람의 이메일
-			mailVO.setTitle("[SYBH]안녕하세요, 쌍용백병원입니다.");//메일 제목
-			mailVO.setContents("귀하의 비밀번호가 임시비밀번호로 변경되었습니다. 임시비밀번호는 "+pw+"입니다. 비밀번호를 마이페이지에서 변경해주시기 바랍니다.");//메일 내용
+			mailVO.setTitle("[SYBH](비밀번호 찾기)안녕하세요, 쌍용백병원입니다.");//메일 제목
+			mailVO.setContents("<h3>귀하의 비밀번호가 임시비밀번호로 변경되었습니다. 임시비밀번호는 </h3><h1>"+pw+"</h1><h3>입니다.</h3><br><h3>비밀번호를 마이페이지에서 변경해주시기 바랍니다.</h3>");//메일 내용
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-				messageHelper.setFrom(mailVO.getSetFrom()); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setFrom(mailVO.getSetFrom(), "[SYBH]쌍용백병원"); // 보내는사람 생략하면 정상작동을 안함
 				messageHelper.setTo(mailVO.getToMail()); // 받는사람 이메일
 				messageHelper.setSubject(mailVO.getTitle()); // 메일제목은 생략이 가능하다
 				messageHelper.setText(mailVO.getContents()); // 메일 내용
@@ -198,7 +203,33 @@ public class MemberService {
 			throw new Exception();
 		}
 		
-		return memberDAO.setWrite(memberVO);
+		int result = memberDAO.setWrite(memberVO);
+		if(result < 1) {
+			throw new Exception();
+		}
+		
+		String key = new TempKey().getKey(50, false); // 인증키 생성
+		System.out.println("key : "+key);
+		System.out.println("email : "+memberVO.getEmail());
+		memberVO.setAuthCode(key);
+		memberVO.setEmail(memberVO.getEmail());
+		result = memberDAO.createAuthKey(memberVO); // 인증키 DB저장
+		if(result < 1) {
+			throw new Exception();
+		}
+
+		MailHandler sendMail = new MailHandler(mailSender);
+		sendMail.setSubject("[SYBH](이메일 인증)안녕하세요, 쌍용백병원입니다.");
+		sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>").append("<a href='/localhost/user/emailConfirm?email=").append(memberVO.getEmail()).append("&key=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
+		sendMail.setFrom("alsrms1744@gmail.com", "[SYBH]쌍용백병원");
+		sendMail.setTo(memberVO.getEmail());
+		sendMail.send();
+		
+		return result;
+	}
+	
+	public int userAuth(String email) throws Exception {
+		return memberDAO.userAuth(email);
 	}
 	
 	//아이디 중복확인
