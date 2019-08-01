@@ -1,0 +1,31 @@
+package com.hospital.checkup;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.hospital.util.PageMaker;
+
+@Service
+public class CheckUpService {
+	@Inject
+	private CheckUpDAO checkUpDAO;
+	
+	//건강검진 입력
+	public int setWrite(CheckUpVO checkUpVO) throws Exception{
+		return checkUpDAO.setWrite(checkUpVO);
+	}
+	
+	//건강검진 리스트
+	public List<CheckUpVO> getOneList(PageMaker pageMaker,CheckUpVO checkUpVO) throws Exception{
+		pageMaker.makeRow();
+		int totalCount = checkUpDAO.getOneTotalCount(checkUpVO);
+		pageMaker.makePage(totalCount);
+		
+		List<CheckUpVO> list = checkUpDAO.getOneList(pageMaker);
+		
+		return list;
+	}
+}

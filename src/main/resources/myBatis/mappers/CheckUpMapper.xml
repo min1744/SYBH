@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="CheckUpMapper">
+  
+  <!--  건강검진 입력  -->
+  <insert id="setWrite" parameterType="CheckUpVO">
+  	insert into checkup values(checkup_seq.nextval, #{id},#{contents},#{check_date},#{check_status})
+  </insert>
+
+  <!--한사람 모든 건강검진 갯수  -->
+  <select id="getOneTotalCount" parameterType="CheckUpVO" resultType="Integer">
+  	select count(num) from checkup where id=#{id}
+  </select>
+  
+ <!--  <resultMap type="CheckUpVO" id="checkUpList">
+  	<id property="num" column="num"/>
+  	<result property="id" column="id"/>
+  	<result property="contents" column="contents"/>
+  	<result property="check_date" column="check_date"/>
+  	<result property="check_status" column="check_status"/>
+  	<result property="pay_date" column="pay_date"/>
+  	<result property="opt" column="opt"/>
+  	<result property="price" column="price"/>
+  </resultMap> -->
+  
+  <!--건강검진 내역  -->
+  <select id="getOneList" parameterType="PageMaker" resultType="CheckUpVO">
+  	select * from
+  	(select rownum R, Ch.* from
+  	(select C.*, P.pay_date, P.opt, P.price from checkup C FULL JOIN pay P
+  	on (C.id = P.id)
+  	 order by C.num desc) Ch)
+  	where R between #{startRow} and #{lastRow}
+  </select>
+  
+  
+  
+
+
+  </mapper>

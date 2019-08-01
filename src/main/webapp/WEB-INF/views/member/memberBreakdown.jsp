@@ -143,16 +143,18 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${list}" var="list" varStatus="i">
 						<tr>
-							<td>1</td>
-							<td>홍길동</td>
-							<td>숙박검진(남)</td>
-							<td>2019-08-01</td>
-							<td>2,500,000원</td>
-							<td>검진완료</td><!-- 검진날짜가 지나야 검진완료 떠야함 -->
-							<td>2019-07-31</td>	
-							<td>card</td>						
+							<td>${list.num }</td>
+							<td>${memberVO.name }</td>
+							<td>${list.contents }</td>
+							<td>${list.check_date}</td>
+							<td>${list.price }</td>
+							<td>${list.check_status}</td><!-- 검진날짜가 지나야 검진완료 떠야함 -->
+							<td>${list.pay_date }</td>	
+							<td>${list.opt }</td>						
 						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div id="paging">
