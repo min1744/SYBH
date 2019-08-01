@@ -48,6 +48,7 @@ public class MemberService {
 	//login
 	public MemberVO login(MemberVO memberVO) throws Exception{
 		memberVO = memberDAO.login(memberVO);
+		
 		//주민등록번호 복호화
 		if(memberVO != null) {
 			String res_reg_num = memberDAO.setResDecryption(memberVO.getRes_reg_num());

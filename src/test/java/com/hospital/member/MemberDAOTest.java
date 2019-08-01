@@ -2,6 +2,8 @@ package com.hospital.member;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -13,7 +15,7 @@ public class MemberDAOTest extends AbstractTest {
 	@Inject
 	private MemberDAO memberDAO;
 	
-	@Test
+	//@Test
 	public void setWrite() throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId("admin");
@@ -27,8 +29,18 @@ public class MemberDAOTest extends AbstractTest {
 		assertEquals(1, memberDAO.setWrite(memberVO));
 	}
 	
-	@Test
+	//@Test
 	public void setDelete() throws Exception{
 		assertEquals(1, memberDAO.setDelete("iu"));
+	}
+	
+	@Test
+	public void login() throws Exception{
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("min1744");
+		memberVO.setPw("bong1017$$");
+		memberVO = memberDAO.login(memberVO);
+		System.out.println(memberVO.getId());
+		System.out.println(memberVO.getPw());
 	}
 }
