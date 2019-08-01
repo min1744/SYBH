@@ -1,4 +1,4 @@
-package com.hospital.member;
+package com.hospital.member.mail;
 
 public class MailVO {
 	private String setFrom;

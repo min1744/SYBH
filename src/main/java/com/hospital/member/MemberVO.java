@@ -68,6 +68,8 @@ public class MemberVO {
 	//1 : user
 	//2 : admin
 	private int grade;
+	private String authCode;
+	private String authStatus;
 	
 	public String getId() {
 		return id;
@@ -170,5 +172,17 @@ public class MemberVO {
 	}
 	public void setGrade(int grade) {
 		this.grade = grade;
+	}
+	public String getAuthCode() {
+		return authCode;
+	}
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
+	}
+	public String getAuthStatus() {
+		return authStatus;
+	}
+	public void setAuthStatus(String authStatus) {
+		this.authStatus = authStatus;
 	}
 }

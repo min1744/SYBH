@@ -71,6 +71,14 @@ public class MemberDAO {
 		return sqlSession.insert(NAMESPACE+"setWrite", memberVO);
 	}
 	
+	public int createAuthKey(MemberVO memberVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"createAuthKey", memberVO);
+	}
+	
+	public int userAuth(String email) throws Exception {
+		return sqlSession.update(NAMESPACE + "userAuth", email);
+	}
+	
 	//회원 정보 수정
 	public int setUpdate(MemberVO memberVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate", memberVO);
