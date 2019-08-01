@@ -16,18 +16,18 @@
 	<div id="board">
 		<div id="board_title">
 			<p id="title">회원정보 수정</p>
-			<p id="sub_title">회원정보 수정을 통해 아이디를 제외한 내 정보를 변경할 수 있습니다.</p>
+			<p id="sub_title">회원정보 수정을 통해 내 정보를 변경할 수 있습니다.</p>
 		</div>
 	</div>
 	<div id="join_box">
 	<div id="join_form">
-		<p><span>*</span>표기 항목은 필수 입력 항목 입니다.</p>
-		<form:form commandName="memberVO" id="form">
+		<p><span>*</span>표기 항목을 수정할 수 있습니다. 그 외의 정보수정을 희망할 경우 대표전화로 연락해주시기 바랍니다.</p>
+		<form:form commandName="memberVO" id="form" action="./memberSetUpdate">
 		<table>
 			<tbody>
 				<tr>
-					<th>아이디(ID)<span>*</span></th>
-					<td><form:input path="id" readonly="true"/><span class="sub">영문 + 숫자 혼용 6~20자</span></td>
+					<th>아이디(ID)</th>
+					<td><form:input path="id" value="${memberVO.id}" cssClass="empty_check" readonly="true"/><span class="sub">영문 + 숫자 혼용 6~20자</span></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -50,19 +50,19 @@
 					<td><div><form:errors path="pw2"/></div><div id="pw2_result"></div></td>
 				</tr>
 				<tr>
-					<th>성명(한글)<span>*</span></th>
-					<td><form:input path="name" id="name" cssClass="empty_check" value="${memberVO.name}"/></td>
+					<th>성명(한글)</th>
+					<td><form:input path="name" value="${memberVO.name}" cssClass="empty_check" readonly="true"/></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td><div><form:errors path="name"/></div><div id="name_result"></div></td>
 				</tr>
 				<tr>
-					<th>주민등록번호<span>*</span></th>
+					<th>주민등록번호</th>
 					<td>
-						<form:input path="res_reg_num1" id="res_reg_num1" cssClass="empty_check" value="${memberVO.res_reg_num1}"/>
+						<form:input path="res_reg_num1" value="${memberVO.res_reg_num1}" cssClass="empty_check" readonly="true"/>
 						<span class="common">-</span>
-						<form:password path="res_reg_num2" id="res_reg_num2" cssClass="empty_check" value="${memberVO.res_reg_num2}"/>
+						<form:password path="res_reg_num2" value="${memberVO.res_reg_num2}" cssClass="empty_check" readonly="true"/>
 					</td>
 				</tr>
 				<tr>
@@ -106,7 +106,7 @@
 					<td><div><form:errors path="gender"/></div><div id="gender_result"></div></td>
 				</tr>
 				<tr>
-					<th>나이<span>*</span></th>
+					<th>나이</th>
 					<td><form:input path="age" id="age" cssClass="empty_check" readonly="true"/></td>
 				</tr>
 				<tr>
@@ -117,7 +117,7 @@
 		</table>
 		</form:form>
 		<div id="join_btn">
-			<button id="join">가입완료</button>
+			<button id="join">수정완료</button>
 		</div>
 	</div>
 </div>

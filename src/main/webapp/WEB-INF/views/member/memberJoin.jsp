@@ -98,7 +98,7 @@
 					<td><div><form:errors path="gender"/></div><div id="gender_result"></div></td>
 				</tr>
 				<tr>
-					<th>나이<span>*</span></th>
+					<th>나이</th>
 					<td><form:input path="age" id="age" cssClass="empty_check" readonly="true"/></td>
 				</tr>
 				<tr>
