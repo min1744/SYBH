@@ -126,7 +126,7 @@ public class MemberService {
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-				messageHelper.setFrom(mailVO.getSetFrom(), "[SYBH]쌍용백병원"); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setFrom(mailVO.getSetFrom(), "쌍용백병원(SYBH)"); // 보내는사람 생략하면 정상작동을 안함
 				messageHelper.setTo(mailVO.getToMail()); // 받는사람 이메일
 				messageHelper.setSubject(mailVO.getTitle()); // 메일제목은 생략이 가능하다
 				messageHelper.setText(mailVO.getContents()); // 메일 내용
@@ -162,7 +162,7 @@ public class MemberService {
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-				messageHelper.setFrom(mailVO.getSetFrom(), "[SYBH]쌍용백병원"); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setFrom(mailVO.getSetFrom(), "쌍용백병원(SYBH)"); // 보내는사람 생략하면 정상작동을 안함
 				messageHelper.setTo(mailVO.getToMail()); // 받는사람 이메일
 				messageHelper.setSubject(mailVO.getTitle()); // 메일제목은 생략이 가능하다
 				messageHelper.setText(mailVO.getContents()); // 메일 내용
@@ -220,8 +220,8 @@ public class MemberService {
 
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[SYBH](이메일 인증)안녕하세요, 쌍용백병원입니다.");
-		sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>").append("<a href='/localhost/user/emailConfirm?email=").append(memberVO.getEmail()).append("&key=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
-		sendMail.setFrom("alsrms1744@gmail.com", "[SYBH]쌍용백병원");
+		sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>").append("<a href='/localhost/member/emailConfirm?email=").append(memberVO.getEmail()).append("&key=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
+		sendMail.setFrom("alsrms1744@gmail.com", "쌍용백병원(SYBH)");
 		sendMail.setTo(memberVO.getEmail());
 		sendMail.send();
 		

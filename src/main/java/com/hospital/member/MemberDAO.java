@@ -71,10 +71,12 @@ public class MemberDAO {
 		return sqlSession.insert(NAMESPACE+"setWrite", memberVO);
 	}
 	
+	//이메일 인증키 update
 	public int createAuthKey(MemberVO memberVO) throws Exception {
 		return sqlSession.update(NAMESPACE+"createAuthKey", memberVO);
 	}
 	
+	//이메일 인증 확인
 	public int userAuth(String email) throws Exception {
 		return sqlSession.update(NAMESPACE + "userAuth", email);
 	}
@@ -82,6 +84,11 @@ public class MemberDAO {
 	//회원 정보 수정
 	public int setUpdate(MemberVO memberVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate", memberVO);
+	}
+	
+	//회원정보 수정으로 인한 이메일 재인증 요구
+	public int setStatusInit(String email) throws Exception{
+		return sqlSession.update(NAMESPACE+"setStatusInit", email);
 	}
 	
 	//주민등록번호 복호화

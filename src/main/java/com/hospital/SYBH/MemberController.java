@@ -38,7 +38,6 @@ public class MemberController {
 	@Inject
 	private PayDAO payDAO;
 	
-	//현아 작성 (마이페이지 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
 		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
@@ -56,8 +55,7 @@ public class MemberController {
 	
 	//현아 작성 (일반 진료 예약내역 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberNomal", method = RequestMethod.GET)
-	public ModelAndView memberNomal() throws Exception {
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView memberNomal(ModelAndView mv) throws Exception {
 		mv.addObject("board", "nomal");
 		mv.setViewName("member/memberBreakdown");
 		return mv;
@@ -66,15 +64,13 @@ public class MemberController {
 	
 	//현아 작성 (건강검진 예약내역 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberMedical", method = RequestMethod.GET)
-	public ModelAndView memberMedical() throws Exception {
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView memberMedical(ModelAndView mv) throws Exception {
 		mv.addObject("board", "medical");
 		mv.setViewName("member/memberBreakdown");
 		return mv;
 				
 	}
 	
-	//현아 작성 (아이디/비번찾기 jsp 잘 나오는지 테스트용)
 	@RequestMapping(value = "memberIdFind", method = RequestMethod.GET)
 	public void memberIdFind() throws Exception {}
 	
