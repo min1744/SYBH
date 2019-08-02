@@ -80,7 +80,8 @@ public class MemberService {
 	}
 	
 	//회원정보 수정
-	public int setUpdate(MemberVO memberVO) throws Exception{
+	public int setUpdate(MemberVO memberVO, HttpSession session) throws Exception{
+		int result = 0;
 		String res_reg_num1 = memberVO.getRes_reg_num1();
 		String res_reg_num2 = memberVO.getRes_reg_num2();
 		if(res_reg_num1 != null && res_reg_num2 != null) {
@@ -106,10 +107,36 @@ public class MemberService {
 			throw new Exception();
 		}
 		
-		int result = memberDAO.setUpdate(memberVO);
+		result = memberDAO.setUpdate(memberVO);
 		if(result < 1) {
 			throw new Exception();
 		}
+		
+		String email = ((MemberVO)session.getAttribute("memberVO")).getEmail();
+		if(!email.equals(memberVO.getEmail())) {
+			//이메일 변경 시 다시 이메일 인증을 받도록 설정
+			result = memberDAO.setStatusInit(memberVO.getId());
+			if(result < 1) {
+				throw new Exception();
+			}
+			String key = new TempKey().getKey(50, false); // 인증키 생성
+			System.out.println("key : "+key);
+			System.out.println("email : "+memberVO.getEmail());
+			memberVO.setAuthCode(key);
+			memberVO.setEmail(memberVO.getEmail());
+			result = memberDAO.createAuthKey(memberVO); // 인증키 DB저장
+			if(result < 1) {
+				throw new Exception();
+			}
+
+			MailHandler sendMail = new MailHandler(mailSender);
+			sendMail.setSubject("[SYBH](이메일 인증)안녕하세요, 쌍용백병원입니다.");
+			sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://localhost/SYBH/member/memberEmailConfirm?email=").append(memberVO.getEmail()).append("&authCode=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
+			sendMail.setFrom("alsrms1744@gmail.com", "쌍용백병원(SYBH)");
+			sendMail.setTo(memberVO.getEmail());
+			sendMail.send();
+		}
+		
 		return result;
 	}
 	
@@ -220,7 +247,7 @@ public class MemberService {
 
 		MailHandler sendMail = new MailHandler(mailSender);
 		sendMail.setSubject("[SYBH](이메일 인증)안녕하세요, 쌍용백병원입니다.");
-		sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>").append("<a href='/localhost/member/emailConfirm?email=").append(memberVO.getEmail()).append("&key=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
+		sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>").append("<a href='http://localhost/SYBH/member/memberEmailConfirm?email=").append(memberVO.getEmail()).append("&authCode=").append(key).append("' target='_blenk'>이메일 인증 확인</a>").toString());
 		sendMail.setFrom("alsrms1744@gmail.com", "쌍용백병원(SYBH)");
 		sendMail.setTo(memberVO.getEmail());
 		sendMail.send();
@@ -228,6 +255,7 @@ public class MemberService {
 		return result;
 	}
 	
+	//이메일 인증 확인
 	public int userAuth(String email) throws Exception {
 		return memberDAO.userAuth(email);
 	}

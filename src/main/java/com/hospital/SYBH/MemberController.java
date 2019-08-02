@@ -155,13 +155,12 @@ public class MemberController {
 	//이 인증 코드는 후에 다른 컨트롤러에서 처리를 받아 회원 상태를 활성화
 	//(/register 로 매핑되는 컨트롤러에서 등록한 ID는 authStatus[로그인 가능 유 무] 가 활성화 되지 않은 상태)
 	@RequestMapping(value = "memberJoin", method = RequestMethod.POST)
-	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult br, RedirectAttributes rttr, ModelAndView mv) throws Exception {
+	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult br, ModelAndView mv) throws Exception {
 		if(br.hasErrors()) {
 			mv.setViewName("member/memberJoin");
 		} else {
 			int result = memberService.setWrite(memberVO);
 			if(result > 0) {
-				rttr.addFlashAttribute("authmsg" , "가입 시 사용한 이메일로 인증해주세요.");
 				mv.setViewName("redirect:./memberLogin");
 			} else {
 				mv.addObject("message", "Login Fail");
@@ -169,22 +168,6 @@ public class MemberController {
 				mv.setViewName("common/messageMove");
 			}
 		}
-		return mv;
-	}
-	
-	//사용자가 인증을 확인하였을 때 서버에서 요청받을 컨트롤러를 생성
-	@RequestMapping(value = "emailConfirm", method = RequestMethod.GET)
-	public ModelAndView emailConfirm(String email, ModelAndView mv) throws Exception { // 이메일인증
-		int result = memberService.userAuth(email);
-		if(result > 0) {
-			mv.addObject("email", email);
-			mv.setViewName("member/emailConfirm");
-		} else {
-			mv.addObject("message", "이메일이 확인되지 않았습니다.");
-			mv.addObject("path", "redirect:../");
-			mv.setViewName("common/messageMove");
-		}
-
 		return mv;
 	}
 	
@@ -268,13 +251,30 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberSetUpdate", method = RequestMethod.POST)
-	public ModelAndView memberUpdate(MemberVO memberVO, ModelAndView mv) throws Exception{
-		int result = memberService.setUpdate(memberVO);
+	public ModelAndView memberSetUpdate(@Valid MemberVO memberVO, HttpSession session, ModelAndView mv) throws Exception{
+		int result = memberService.setUpdate(memberVO, session);
 		if(result > 0) {
 			mv.setViewName("redirect:./memberMyPage");
 		} else {
 			mv.addObject("message", "정보수정을 실패하였습니다.");
 			mv.addObject("path", "./memberUpdate");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+	}
+	
+	//사용자가 인증을 확인하였을 때 서버에서 요청받을 컨트롤러를 생성
+	@RequestMapping(value = "memberEmailConfirm", method = RequestMethod.GET)
+	public ModelAndView memberEmailConfirm(MemberVO memberVO, ModelAndView mv) throws Exception{
+		int result = memberService.userAuth(memberVO.getEmail());
+		if(result > 0) {
+			mv.addObject("email", memberVO.getEmail());
+			mv.addObject("authCode", memberVO.getAuthCode());
+			mv.setViewName("member/memberEmailConfirm");
+		} else {
+			mv.addObject("message", "이메일 인증을 실패하셨습니다.");
+			mv.addObject("path", "redirect:../");
 			mv.setViewName("common/messageMove");
 		}
 		

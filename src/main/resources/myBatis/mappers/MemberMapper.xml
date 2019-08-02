@@ -107,7 +107,7 @@
 	
 	<!-- 회원정보 수정으로 인한 이메일 인증 재요구 -->
 	<update id="setStatusInit" parameterType="String">
-		UPDATE MEMBER SET AUTHSTAUS = 0 WHERE EMAIL = #{email}
+		UPDATE MEMBER SET AUTHSTAUS = 0 WHERE ID = #{id}
 	</update>
 	
 	<!-- 주민등록번호 AES256 복호화 -->
