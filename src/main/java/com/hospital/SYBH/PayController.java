@@ -36,7 +36,7 @@ public class PayController {
 	}
 	
 	
-	//결제 입력
+	//결제 입력 (건강검진 : 0, 후원 : 1)
 	@RequestMapping(value = "donationWrite",method = RequestMethod.POST)
 	@ResponseBody
 	public int setWrite(PayVO payVO)throws Exception{

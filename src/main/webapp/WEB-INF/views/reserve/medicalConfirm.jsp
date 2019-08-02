@@ -19,30 +19,137 @@
 <script type="text/javascript" src="../resources/js/material.min.js"></script>
 <script type="text/javascript" src="../resources/js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../resources/js/bootstrap-material-datetimepicker.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
-////////////////////////////////////
-
-
-///////////////////////////////////
-   
-   
    $(function() {
+	var date = new Date(); 
+	var year = date.getFullYear(); 
+	var month = new String(date.getMonth()+1); 
+	var day = new String(date.getDate()); 
+	
+	// 한자리수일 경우 0을 채워준다. 
+	if(month.length == 1){ 
+	  month = "0" + month; 
+	} 
+	if(day.length == 1){ 
+	  day = "0" + day; 
+	} 
+	var today = year+"-"+month+"-"+day;
+	
+	
 	   
+	   
+	   	var name = '${memberVO.name}';
+		var phone = '${memberVO.phone}';
+		var email = '${memberVO.email}';
+		var opt = 'card';
+		var category = 0;
+		var check_date ='';
 		$('#pay').click(function() {
 			var c = $('#check').prop("checked");
-			if(c){
+			var pay = $('#date').val();
+			check_date = $('#date').val();
+			
+			if(pay ==''){
+				alert('날짜를 선택해주세요');
+				$('#date').focus();
+				return false;
+			}
+			if(today>check_date){
+				alert(today+' 이후로 선택 가능합니다');
+				return false;
+			}
+			else if(!c){
+				alert('약관 동의를 해주세요');
+				return false;
+			}else{
 				var result = confirm('예약하시겠습니까?');
 				if(result) {
-					
+					var amount = '${param.price}';
+					var id = '${memberVO.id}';
+					var IMP = window.IMP;
+					IMP.init('imp95286508');
+
+					IMP.request_pay({
+						pg : 'kakaopay', //결제 방법 카카오페이 계좌입금 등 
+						pay_method : 'card', //결제 수단
+						merchant_uid : 'merchant_' + new Date().getTime(),
+						name : '쌍용백병원 건강검진', //주문 창에서 보일 이름
+						amount : amount, //가격
+						//구매자 정보
+						buyer_email : email, //세션에서 이메일 받기
+						buyer_name : name,
+						buyer_tel : phone,
+						//buyer_addr: '주소',
+						m_redirect_url : '성공시 url'
+					}, function(rsp) {
+						console.log(rsp);
+						if (rsp.success) {
+							var msg = '예약이 완료 되었습니다.';
+							//msg += '고유ID : ' + rsp.imp_uid;
+							//msg += '상점 거래ID : ' + rsp.merchant_uid;
+							//msg += '결제 금액 : ' + rsp.paid_amount;
+							//msg += '카드 승인번호 : ' + rsp.apply_num;
+							purchase();
+						} else {
+							var msg = '예약에 실패하였습니다.';
+							//msg += rsp.error_msg;
+						}
+						alert(msg);
+					});
 					
 				} else {
+					alert('예약이 취소 되었습니다');
+				}
+			}//else
+		}); //pay 클릭시
+		
+		
+		//결제 테이블 등록
+		function purchase(){
+			var amount = '${param.price}';
+			$.ajax({
+				url : "../pay/donationWrite",
+				type : "POST",
+				data : {
+					id : '${memberVO.id}',
+					price : amount,
+					opt : opt,
+					category : category
+				},
+				success : function(data) {
+					//성공시 진료예약 테이블 등록
+				check();
 					
 				}
-			}else{
-				alert('약관 동의를 해주세요');
-			}
-		});
-   
+			}); //ajax
+		} //결제 테이블 등록 끝
+		
+   		
+		//진료내역 테이블 등록
+   		function check(){
+			var id = '${memberVO.id}';
+			var contents = '${param.check}';
+			
+			$.ajax({
+				url : "../checkup/checkUpWrite",
+				type : "POST",
+				data : {
+					id : id,
+					contents : contents,
+					check_date : check_date
+				},
+				success:function(data){
+					if(data=='1'){
+						location.href='../member/memberMedical';
+					}
+				}
+			});
+		}
+		
+   		
+   		//진료내역 테이블 등록 끝
+   		
    });
    
    
@@ -104,11 +211,11 @@
 						<td class="td_border">
 			<!-- 달력 시작  -->
 				<div id="cal_box">
-								<div class="col-md-6">
-									<div class="form-control-wrapper">
-										<input type="text" id="date" class="form-control floating-label" placeholder="날짜를 선택하세요">
-									</div>
-								</div>
+					<div class="col-md-6">
+						<div class="form-control-wrapper">
+							<input type="text" id="date" class="form-control floating-label" placeholder="날짜를 선택하세요">
+						</div>
+					</div>
 				</div>
 			<!-- 달력 끝 -->
 			

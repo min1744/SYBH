@@ -19,6 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import com.hospital.checkup.CheckUpDAO;
+import com.hospital.checkup.CheckUpService;
+import com.hospital.checkup.CheckUpVO;
 import com.hospital.member.MemberService;
 import com.hospital.member.MemberVO;
 import com.hospital.member.mail.MailVO;
@@ -37,6 +41,10 @@ public class MemberController {
 	private PayService payService;
 	@Inject
 	private PayDAO payDAO;
+	@Inject
+	private CheckUpService checkUpService;
+	@Inject
+	private CheckUpDAO checkUpDAO;
 	
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
@@ -62,13 +70,20 @@ public class MemberController {
 			
 	}
 	
-	//현아 작성 (건강검진 예약내역 jsp 잘 나오는지 테스트용)
+	//건강검진 예약내역
 	@RequestMapping(value = "memberMedical", method = RequestMethod.GET)
-	public ModelAndView memberMedical(ModelAndView mv) throws Exception {
-		mv.addObject("board", "medical");
+	public ModelAndView getOneList(PageMaker pageMaker, CheckUpVO checkUpVO,HttpSession session)throws Exception {
+		ModelAndView mv = new ModelAndView();
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		checkUpVO.setId(id);
+		List<CheckUpVO> list = checkUpService.getOneList(pageMaker, checkUpVO);
+		int totalCount = checkUpDAO.getOneTotalCount(checkUpVO);
+		mv.addObject("list",list);
+		mv.addObject("pager",pageMaker);
+		mv.addObject("count",totalCount);
+		mv.addObject("board", "Medical");
 		mv.setViewName("member/memberBreakdown");
 		return mv;
-				
 	}
 	
 	@RequestMapping(value = "memberIdFind", method = RequestMethod.GET)
@@ -215,6 +230,8 @@ public class MemberController {
 		mv.setViewName("member/memberBreakdown");
 		return mv;
 	}
+	
+	
 	
 	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
 	public ModelAndView memberDelete(HttpSession session, ModelAndView mv) throws Exception{

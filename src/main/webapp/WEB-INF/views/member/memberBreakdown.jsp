@@ -7,6 +7,7 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberBreakdown.css" rel="stylesheet">
+
 </head>
 <body>
 <!-- header 추가 -->
@@ -125,9 +126,9 @@
 				
 				</div>
 				</c:when>
-				<c:when test="${board eq 'medical'}">
+				<c:when test="${board eq 'Medical'}">
 				<!-- 건강검진 예약 내역 -->
-				<p>총 게시물 : <span>0</span></p>
+				<p>총 게시물 : <span>${count}</span></p>
 			
 				<table>
 					<thead>
@@ -143,16 +144,26 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${list}" var="list" varStatus="i">
 						<tr>
-							<td>1</td>
-							<td>홍길동</td>
-							<td>숙박검진(남)</td>
-							<td>2019-08-01</td>
-							<td>2,500,000원</td>
-							<td>검진완료</td><!-- 검진날짜가 지나야 검진완료 떠야함 -->
-							<td>2019-07-31</td>	
-							<td>card</td>						
+							<td>${list.num }</td>
+							<td>${memberVO.name }</td>
+							<td>${list.contents }</td>
+							<td id="check_date${i.index}" class="check" >${list.check_date}</td>
+							<td>${list.price }</td>
+							
+							<!-- 검진날짜가 지나야 검진완료 떠야함 -->
+							<td id="check_status" class="check_status">
+							<c:choose>
+								<c:when test="${list.check_status eq 0 }">예약대기</c:when>
+								<c:when test="${list.check_status eq 1 }">예약취소</c:when>
+								<c:when test="${list.check_status eq 2 }">검진완료</c:when>
+							</c:choose>
+							</td>
+							<td>${list.pay_date }</td>	
+							<td>${list.opt }</td>						
 						</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div id="paging">
@@ -176,6 +187,43 @@
 					</ul>				
 				
 				</div>
+				<script type="text/javascript">
+					//한자리수일 경우 0을 채워준다. 
+					$(function(){
+					var date = new Date(); 
+					var year = date.getFullYear(); 
+					var month = new String(date.getMonth()+1); 
+					var day = new String(date.getDate()); 	
+						
+					if(month.length == 1){ 
+					  month = "0" + month; 
+					} 
+					if(day.length == 1){ 
+					  day = "0" + day; 
+					} 
+					var today = year+"-"+month+"-"+day; //오늘날짜
+					$(".check").each(function(){
+						var num = $(this).prev().prev().prev().text();
+						var check_date = $(this).text();
+						var check_status = $(this).next().next().text().match('예약대기');
+						if(today>check_date && check_status =='예약대기' ){
+							$.ajax({
+								url:"../checkup/checkUpUpdate",
+								type:"POST",
+								data:{
+									num : num,
+									check_status : 2
+								},success : function(data){
+									location.reload();
+								}
+							});//ajax문
+						}//if문	
+					});//each문
+					
+					});
+					
+					
+				</script>
 				</c:when>
 				<c:otherwise>
 				<!-- 후원내역 -->
