@@ -78,6 +78,7 @@ $(function() {
 			$('#pw2_result').html('비밀번호가 일치합니다.');
 			$('#pw2_result').css("color", "blue");
 			alertPw2 = true;
+			$('#name').focus();
 		} else {
 			$('#pw2_result').html('비밀번호가 일치하지 않습니다.');
 			$('#pw2_result').css("color", "red");
@@ -88,10 +89,7 @@ $(function() {
 	//name expression rationnelle check
 	$('#name').keyup(function() {
 		var name = $(this).val();
-		if(checkEngName.test(name)){
-			$('#name_result').html('');
-			alertName = true;
-		} else if(checkKorName.test(name)){
+		if(checkEngName.test(name) || checkKorName.test(name)){
 			$('#name_result').html('');
 			alertName = true;
 		} else {
@@ -406,7 +404,27 @@ $(function() {
 		var email1 = $('#email1').val();
 		var email2 = $('#email2').val();
 		var extension = email2.substring(email2.lastIndexOf('.')+1);
+		var check = false;
 		if((checkEmail1.test(email1) && checkEmail2.test(email2)) && (extension == 'com' || extension == 'kr' || extension == 'net')){
+			check = true;
+			if(extension == 'kr'){
+				extension = email2.substring(email2.indexOf('.')+1, email2.lastIndexOf('.'));
+				var kr = ['co', 'pe', 'or', 'ne', 'go', 're', 'ac', 'hs', 'ms', 'es', 'sc'];
+				for(var i = 0; i < kr.length; i++){
+					check = false;
+					if(extension == kr[i]){
+						check = true;
+						break;
+					} else {
+						check = false;
+					}
+				}
+			}
+		} else {
+			check = false;
+		}
+		
+		if(check){
 			$.ajax({
 				url:"./memberEmailCheck",
 				type:"POST",
@@ -460,11 +478,111 @@ $(function() {
 		} else if(alertAge == false){
 			alert('나이를 확인해주세요. 주민등록번호가 잘못되었습니다.');
 		} else {
-			alert("회원가입 되었습니다. 이메일 인증 후 사용 가능합니다.");
-			window.open('', '_self', ''); // 브라우저창 닫기
-			/* window.close(); // 브라우저 창 닫기 */
-			self.location = '../';
-			$("#form").submit();
+			var email2 = $('#email2').val();
+			var site = null;
+			if(email2 == 'naver.com'){
+				//naver
+				site = 'https://nid.naver.com/nidlogin.login?url=http%3A%2F%2Fmail.naver.com%2F';
+			} else if(email2 == 'gmail.com'){
+				//google
+				site = 'https://www.google.com/intl/ko/gmail/about/#';
+			} else if(email2 == 'hanmail.net'){
+				//daum
+				site = 'https://mail.daum.net/login?url=https%3A%2F%2Fmail.daum.net%2F';
+			} else if(email2 == 'empal.com'){
+				//엠팔
+				site = 'http://home.mail.nate.com/login/login.html?s=mail&redirect=http%3A%2F%2Fmail3.nate.com%2F';
+			} else if(email2 == 'hotmail.com'){
+				//SN
+				site = 'http://www.hotmail.com/';
+			} else if(email2 == 'yahoo.co.kr' || email == 'yahoo.com'){
+				//yahoo
+				site = 'https://overview.mail.yahoo.com/';
+			} else if(email2 == 'hanmir.com' && email2 == 'paran.com'){
+				//2004년 7월 17일 한미르는 파란닷컴에 합병
+				//인증불가?
+				site = null;
+			} else if(email2 == 'hitel.net'){
+				//하이텔
+				//인증 불가?
+				//site = 'http://himail.hitel.net/';
+				site = null;
+			} else if(email2 == 'kebi.com'){
+				//깨비메일
+				//인증불가?
+				//site = 'http://mail.kebi.com/';
+				site = null;
+			} else if(email2 == 'netian.com'){
+				//네띠앙
+				site = 'https://www.netian.com/usr/com/index.vw';
+			} else if(email2 == 'nate.com'){
+				//네이트
+				site = 'http://home.mail.nate.com/login/login.html?s=mail&redirect=http%3A%2F%2Fmail3.nate.com%2F';
+			} else if(email2 == 'dreamwiz.com'){
+				//드림위즈
+				//2019년7월30일부로 서비스 종료
+				//site = 'https://uid.dreamwiz.com/login/?::GET::https://nmail.dreamwiz.com/nmail';
+				site = null;
+			} else if(email2 == 'orgio.net'){
+				//오르지오
+				//인증불가?
+				//site = 'http://www.orgio.net/';
+				site = null;
+			} else if(email2 == 'korea.com'){
+				//코리아닷컴
+				site = 'http://www.korea.com';
+			} else if(email2 == 'wail.co.kr'){
+				//W@IL
+				//인증 불가?
+				//site = 'http://www.wail.co.kr/';
+				site = null;
+			} else if(email2 == 'lycos.co.kr'){
+				//라이코스
+				site = 'http://www.lycos.co.kr/';
+			} else if(email2 == 'chol.com'){
+				//천리안
+				site = 'http://www.chol.com';
+			} else if(email2 == 'intizen.com'){
+				//인티즌
+				//인증 불가?
+				//site = 'http://www.intizen.com';
+				site = null;
+			} else if(email2 == 'freechal.com'){
+				//프리챌
+				//인증불가?
+				//site = 'http://www.freechal.com/';
+				site = null;
+			} else if(email2 == 'teramail.com'){
+				//테라메일
+				site = 'http://www.teramail.com';
+			} else if(email2 == 'metq.com'){
+				//메트큐
+				//인증불가?
+				//site = 'http://metq.com';
+				site = null;
+			}
+			
+			if(site == null){
+				alert("존재하지 않거나 서비스 종료된 메일입니다.");
+			} else {
+				var originEmail = '${memberVO.email}';
+				var updateEmail = null;
+				if(originEmail != null){
+					alert("회원정보가 수정되었습니다.");
+					var email1 = $('#email1').val();
+					var email2 = $('#email2').val();
+					updateEmail = email1 + "@" + email2;
+					if(originEmail != updateEmail){
+						alert("이메일 변경 - 인증을 다시 해주시기 바랍니다.");
+					}
+				} else {
+					alert("회원가입 되었습니다. 이메일 인증 후 사용 가능합니다.");
+				}
+				if(!originEmail != updateEmail){
+					window.open(site, 'newWindow');//브라우저 새 창 열기
+					$("#form").submit();
+				}
+			}
 		}
 	});
 });

@@ -87,8 +87,8 @@ public class MemberDAO {
 	}
 	
 	//회원정보 수정으로 인한 이메일 재인증 요구
-	public int setStatusInit(String email) throws Exception{
-		return sqlSession.update(NAMESPACE+"setStatusInit", email);
+	public int setStatusInit(String id) throws Exception{
+		return sqlSession.update(NAMESPACE+"setStatusInit", id);
 	}
 	
 	//주민등록번호 복호화
