@@ -8,8 +8,6 @@
   <insert id="setWrite" parameterType="PayVO">
   	insert into pay values(pay_seq.nextval, #{id}, sysdate, #{price}, #{opt}, #{category})
   </insert>
-  
-  
 
   <!--한사람 모든 결제 갯수(건강검진 : 0, 후원 : 1)  -->
   <select id="getOneTotalCount" parameterType="PayVO" resultType="Integer">

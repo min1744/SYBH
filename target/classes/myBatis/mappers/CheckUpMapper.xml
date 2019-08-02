@@ -6,7 +6,10 @@
   
   <!--  건강검진 입력  -->
   <insert id="setWrite" parameterType="CheckUpVO">
-  	insert into checkup values(checkup_seq.nextval, #{id},#{contents},#{check_date},#{check_status})
+  	<selectKey order="BEFORE" resultType="Integer">
+  		select pay_seq.nextval from dual
+  	</selectKey>
+  	insert into checkup values(pay_seq.nextval, #{id},#{contents},#{check_date},#{check_status})
   </insert>
 
   <!--한사람 모든 건강검진 갯수  -->
@@ -14,7 +17,7 @@
   	select count(num) from checkup where id=#{id}
   </select>
   
- <!--  <resultMap type="CheckUpVO" id="checkUpList">
+  <resultMap type="CheckUpVO" id="checkUpList">
   	<id property="num" column="num"/>
   	<result property="id" column="id"/>
   	<result property="contents" column="contents"/>
@@ -23,19 +26,24 @@
   	<result property="pay_date" column="pay_date"/>
   	<result property="opt" column="opt"/>
   	<result property="price" column="price"/>
-  </resultMap> -->
+  </resultMap> 
   
-  <!--건강검진 내역  -->
-  <select id="getOneList" parameterType="PageMaker" resultType="CheckUpVO">
+  <!-- 건강검진 내역 --> 
+  <select id="getOneList" parameterType="PageMaker" resultMap="checkUpList">
   	select * from
   	(select rownum R, Ch.* from
-  	(select C.*, P.pay_date, P.opt, P.price from checkup C FULL JOIN pay P
-  	on (C.id = P.id)
-  	 order by C.num desc) Ch)
+  	(select C.*, P.pay_date, P.opt, P.price from checkup C 
+  	FULL JOIN pay P	on (C.id = P.id)
+  	where C.id=#{kind} and P.category=0 and (C.num-1) = P.num
+  	order by C.num desc) Ch)
   	where R between #{startRow} and #{lastRow}
   </select>
-  
-  
+   
+
+  <!--업뎃  -->
+  <update id="setUpdate" parameterType="CheckUpVO">
+  	update checkup set check_status=#{check_status} where num=#{num}
+  </update>
   
 
 

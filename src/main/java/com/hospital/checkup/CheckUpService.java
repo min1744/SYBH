@@ -20,6 +20,8 @@ public class CheckUpService {
 	
 	//건강검진 리스트
 	public List<CheckUpVO> getOneList(PageMaker pageMaker,CheckUpVO checkUpVO) throws Exception{
+		pageMaker.setKind(checkUpVO.getId());
+		
 		pageMaker.makeRow();
 		int totalCount = checkUpDAO.getOneTotalCount(checkUpVO);
 		pageMaker.makePage(totalCount);
@@ -27,5 +29,9 @@ public class CheckUpService {
 		List<CheckUpVO> list = checkUpDAO.getOneList(pageMaker);
 		
 		return list;
+	}
+	//예약상태 업뎃
+	public int setUpdate(CheckUpVO checkUpVO)throws Exception{
+		return checkUpDAO.setUpdate(checkUpVO);
 	}
 }

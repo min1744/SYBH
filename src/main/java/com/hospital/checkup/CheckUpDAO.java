@@ -29,4 +29,9 @@ public class CheckUpDAO {
 	public List<CheckUpVO> getOneList(PageMaker pageMaker) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getOneList",pageMaker);
 	}
+	
+	//예약상태 업뎃
+	public int setUpdate(CheckUpVO checkUpVO)throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpdate",checkUpVO);
+	}
 }

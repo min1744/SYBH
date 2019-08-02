@@ -29,15 +29,10 @@ public class CheckUpController {
 		return checkUpService.setWrite(checkUpVO);
 	}
 	
-	//한사람 건강검진 내역
-	public ModelAndView getOneList(PageMaker pageMaker, CheckUpVO checkUpVO)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		List<CheckUpVO> list = checkUpService.getOneList(pageMaker, checkUpVO);
-		int totalCount = checkUpDAO.getOneTotalCount(checkUpVO);
-		mv.addObject("list",list);
-		mv.addObject("count",totalCount);
-		
-		return mv;
-		
+	//마이페이지, 시간 경과 후 
+	@RequestMapping(value = "checkUpUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public int setUpdate(CheckUpVO checkUpVO)throws Exception{
+		return checkUpService.setUpdate(checkUpVO);
 	}
 }

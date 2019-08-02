@@ -21,13 +21,24 @@
 <script type="text/javascript" src="../resources/js/bootstrap-material-datetimepicker.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
-////////////////////////////////////
-
-
-///////////////////////////////////
-   
-   
    $(function() {
+	var date = new Date(); 
+	var year = date.getFullYear(); 
+	var month = new String(date.getMonth()+1); 
+	var day = new String(date.getDate()); 
+	
+	// 한자리수일 경우 0을 채워준다. 
+	if(month.length == 1){ 
+	  month = "0" + month; 
+	} 
+	if(day.length == 1){ 
+	  day = "0" + day; 
+	} 
+	var today = year+"-"+month+"-"+day;
+	
+	
+	   
+	   
 	   	var name = '${memberVO.name}';
 		var phone = '${memberVO.phone}';
 		var email = '${memberVO.email}';
@@ -38,9 +49,14 @@
 			var c = $('#check').prop("checked");
 			var pay = $('#date').val();
 			check_date = $('#date').val();
+			
 			if(pay ==''){
 				alert('날짜를 선택해주세요');
 				$('#date').focus();
+				return false;
+			}
+			if(today>check_date){
+				alert(today+' 이후로 선택 가능합니다');
 				return false;
 			}
 			else if(!c){
@@ -133,6 +149,7 @@
 		
    		
    		//진료내역 테이블 등록 끝
+   		
    });
    
    

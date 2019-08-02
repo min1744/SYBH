@@ -69,16 +69,18 @@ public class MemberController {
 			
 	}
 	
-	//현아 작성 (건강검진 예약내역 jsp 잘 나오는지 테스트용)
+	//건강검진 예약내역
 	@RequestMapping(value = "memberMedical", method = RequestMethod.GET)
-	public ModelAndView getOneList(PageMaker pageMaker, CheckUpVO checkUpVO)throws Exception {
+	public ModelAndView getOneList(PageMaker pageMaker, CheckUpVO checkUpVO,HttpSession session)throws Exception {
 		ModelAndView mv = new ModelAndView();
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		checkUpVO.setId(id);
 		List<CheckUpVO> list = checkUpService.getOneList(pageMaker, checkUpVO);
 		int totalCount = checkUpDAO.getOneTotalCount(checkUpVO);
 		mv.addObject("list",list);
 		mv.addObject("pager",pageMaker);
 		mv.addObject("count",totalCount);
-		mv.addObject("board", "medical");
+		mv.addObject("board", "Medical");
 		mv.setViewName("member/memberBreakdown");
 		return mv;
 	}
