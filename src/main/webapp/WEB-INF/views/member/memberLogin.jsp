@@ -37,12 +37,39 @@
 				$('#form').submit();
 			}
 		});
+		
+		//reCaptcha
+		$("#test_btn").click(function() {
+            $.ajax({
+                url: '/reCAptcha/VerifyRecaptcha',
+                type: 'post',
+                data: {
+                    recaptcha: $("#g-recaptcha-response").val()
+                },
+                success: function(data) {
+                    switch (data) {
+                        case 0:
+                            alert("자동 가입 방지 봇 통과");
+                            break;
+
+                        case 1:
+                            alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
+                            break;
+
+                        default:
+                            alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
+                            break;
+                    }
+                }
+            });
+        });
 	});
 </script>
 </head>
 <body>
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
+
 <div id="login_box">
 	<div id="log">
 		<div id="log_title">
@@ -56,7 +83,11 @@
 				<input type="password" name="pw" id="pw" placeholder="비밀번호">
 			</form>
 			<button id="login">로그인</button>
-			<ul>
+				<!--여기에 div 추가 -->
+				<!-- <button id="test_btn">테스트 버튼</button> -->
+				<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+				<!-- 여기에 스크립트 추가 -->
+				<ul>
 				<li><a href="./memberIdFind">아이디</a></li>
 				<li>/</li>
 				<li><a href="./memberPwFind">비밀번호 찾기</a></li>
