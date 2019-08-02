@@ -21,7 +21,7 @@ public class CheckUpService {
 	//건강검진 리스트
 	public List<CheckUpVO> getOneList(PageMaker pageMaker,CheckUpVO checkUpVO) throws Exception{
 		pageMaker.setKind(checkUpVO.getId());
-		
+		pageMaker.setPerPage(5);
 		pageMaker.makeRow();
 		int totalCount = checkUpDAO.getOneTotalCount(checkUpVO);
 		pageMaker.makePage(totalCount);
