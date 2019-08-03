@@ -4,14 +4,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-html {
-  font-family: sans-serif;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-}
-body {
-  margin: 0;
-}
+
 article,
 aside,
 details,
@@ -42,7 +35,6 @@ audio:not([controls]) {
 template {
   display: none;
 }
-
 abbr[title] {
   border-bottom: 1px dotted;
 }
@@ -76,9 +68,6 @@ sup {
 }
 sub {
   bottom: -.25em;
-}
-img {
-  border: 0;
 }
 svg:not(:root) {
   overflow: hidden;
@@ -205,13 +194,6 @@ th {
   }
   thead {
     display: table-header-group;
-  }
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-  img {
-    max-width: 100% !important;
   }
   p,
   h2,
@@ -1050,26 +1032,8 @@ th {
 .glyphicon-menu-up:before {
   content: "\e260";
 }
-* {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-*:before,
-*:after {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-html {
-
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
 figure {
   margin: 0;
-}
-img {
-  vertical-align: middle;
 }
 .img-responsive,
 .thumbnail > img,
@@ -1120,77 +1084,6 @@ img {
 }
 [role="button"] {
   cursor: pointer;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  font-family: inherit;
-  color: inherit;
-}
-h1 small,
-h2 small,
-h3 small,
-h4 small,
-h5 small,
-h6 small,
-.h1 small,
-.h2 small,
-.h3 small,
-.h4 small,
-.h5 small,
-.h6 small,
-h1 .small,
-h2 .small,
-h3 .small,
-h4 .small,
-h5 .small,
-h6 .small,
-.h1 .small,
-.h2 .small,
-.h3 .small,
-.h4 .small,
-.h5 .small,
-.h6 .small {
-  font-weight: normal;
-  line-height: 1;
-  color: #777;
-}
-h1 small,
-.h1 small,
-h2 small,
-.h2 small,
-h3 small,
-.h3 small,
-h1 .small,
-.h1 .small,
-h2 .small,
-.h2 .small,
-h3 .small,
-.h3 .small {
-  font-size: 65%;
-}
-h4 small,
-.h4 small,
-h5 small,
-.h5 small,
-h6 small,
-.h6 small,
-h4 .small,
-.h4 .small,
-h5 .small,
-.h5 .small,
-h6 .small,
-.h6 .small {
-  font-size: 75%;
 }
 
 .lead {
@@ -2411,6 +2304,7 @@ input[type="search"] {
 }
 input[type="radio"],
 input[type="checkbox"] {
+  margin: 4px 0 0;
   margin-top: 1px \9;
   line-height: normal;
 }
@@ -3903,9 +3797,6 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin: 9px 0;
   overflow: hidden;
   background-color: #e5e5e5;
-}
-.nav > li > a > img {
-  max-width: none;
 }
 .nav-tabs {
   border-bottom: 1px solid #ddd;
@@ -5841,11 +5732,6 @@ button.close {
   margin: 0;
   line-height: 1.42857143;
 }
-.modal-body {
-  position: relative;
-  padding: 2% 5%;
-  overflow: hidden;
-}
 .modal-footer {
   padding: 15px;
   text-align: right;
@@ -5870,8 +5756,8 @@ button.close {
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 1080px;
-    height: 900px;
+    width: 950px;
+    height: 830px;
     overflow-x: hidden;
     overflow-y: auto;
     margin: 30px auto;
@@ -6151,10 +6037,6 @@ button.close {
   -webkit-transition: .6s ease-in-out left;
        -o-transition: .6s ease-in-out left;
           transition: .6s ease-in-out left;
-}
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
-  line-height: 1;
 }
 @media all and (transform-3d), (-webkit-transform-3d) {
   .carousel-inner > .item {
