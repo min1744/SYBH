@@ -244,3 +244,117 @@
 
 /* 댓글 */
 
+#comment_box {
+	
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	
+}
+
+
+#comment {
+	
+	width: 100%;
+	overflow: hidden;
+	letter-spacing: -1px;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 30px;
+
+}
+
+#c_top {
+	
+	width: 100%;
+	margin: 15px 0;
+	overflow: hidden;
+}
+
+
+#c_count_title {
+	
+	font-size: 1em;
+	color: #808080;
+}
+
+
+#c_count {
+	
+	font-size: 1.2em;
+	color: #153F91;
+	font-weight: 700;
+	margin-left: 5px;
+}
+
+
+#c_write_box {
+	
+	width: 85%;
+	background-color: white;
+	border: 1px solid #ddd;
+	float: left;
+	margin-right: 3%;
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 15px 20px;
+}
+
+#c_btn {
+	
+	float: left;
+	width: 12%;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+
+
+#comment_btn {
+	
+	width: 100%;
+	border: none;
+	padding: 15% 4%;
+	border-radius: 5px;
+	background-color: #153F91;
+	color: white;
+	font-size: 1em;
+	font-weight: 700;
+	box-sizing: border-box;
+	text-align: center;
+	cursor: pointer;
+	
+}
+
+
+#c_writer {
+	
+	color: #2f2f2f;
+	font-weight: 500;
+}
+
+#c_write_box textarea {
+	
+	background-color: rgba(255,255,255,.001);
+	width: 100%;
+	border: none;
+	margin-top: 10px;
+	color: #808080;
+	display: block;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 1;
+	padding: 6px 0 0;
+	padding-right: 16px;
+	line-height: 18px;
+	-webkit-appearance: none;
+	vertical-align: top;
+	resize: none;
+	box-sizing: border-box;
+}
+
+
+#c_write_box textarea::placeholder {
+	
+	color: #bcbcbc;
+}
+

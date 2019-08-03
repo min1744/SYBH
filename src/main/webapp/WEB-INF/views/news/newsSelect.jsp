@@ -98,6 +98,30 @@
 			
 			</div>
 			
+			<!-- 댓글 -->
+			<div id="comment_box">
+			
+				<div id="comment">
+					<div id="c_top">
+						<span id="c_count_title">전체댓글</span><span id="c_count">1,000</span>
+					</div>
+					
+					<div id="c_write_box">
+					
+						<p id="c_writer">hhhh</p>
+						<textarea placeholder="주제와 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다.">
+						</textarea>
+					</div>
+					
+					<div id="c_btn">
+						<button id="comment_btn">등록</button>
+					</div>
+					
+				</div>
+			
+			
+			</div>
+			<!-- 댓글 끝 -->
 			
 			<div id="btn_box">
 				<a href="./newsList" id="list">목록</a>
