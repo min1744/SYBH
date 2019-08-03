@@ -1071,3 +1071,119 @@ a:active {
 	
 }
 
+
+
+
+/* 개인정보처리방침 */
+
+
+.modal-body {
+	
+	padding: 5% 10%;
+	overflow: hidden;
+	letter-spacing: -1px;
+	font-size: 0.9em;
+}
+
+
+.modal-body h3 {
+	
+	color: #153f91;
+	text-align: center;
+	font-size: 1.5em;
+	margin-bottom: 20px;
+}
+
+
+
+.modal-body p {
+	
+	color: #808080;
+	
+}
+
+
+
+.box-privacy {
+	
+	width:100%; 
+	padding:40px 0; 
+	margin-top:10px; 
+	font-size:14px; 
+	color:#808080;
+	
+}
+
+
+.box-privacy ol {
+	
+	float: left;
+	width: 47%;
+}
+
+.box-privacy ol li:first-child {
+	
+	margin-top: 0;
+}
+
+
+.box-privacy ol li:last-child {
+	
+	margin-bottom: 40px;
+}
+
+
+.box-privacy ol li {
+	
+	margin-top: 20px;
+}
+
+
+.pd-l40 {
+	
+	padding-left: 40px;
+}
+
+
+.box-privacy:after {
+	
+	display: block;
+	content: '';
+	width: 100%;
+	height: 1px;
+	margin-top: 50px;
+	background-color: #ddd;
+	clear: both;
+}
+
+
+
+
+.privacy_contents {
+	
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	margin-top: 40px;
+}
+
+
+.privacy_contents h4 {
+	
+	font-size: 1.5em;
+	color: #153f91;
+	margin-bottom: 15px;
+}
+
+
+.privacy_contents p {
+	
+	color: #808080;
+	margin-bottom: 40px;
+}
+
+
+.privacy_contents span {
+	
+	font-weight: 700;
+}

@@ -141,6 +141,7 @@
 	padding-bottom: 40px;
 	border-bottom: 1px solid #153F91;
 	clear: both;
+	text-align: left;
 }
 
 
@@ -238,4 +239,8 @@
 	text-align: center;
 	float: right;
 }
+
+ 
+
+/* 댓글 */
 
