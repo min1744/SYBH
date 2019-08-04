@@ -116,6 +116,7 @@
 			</tbody>
 		</table>
 		</form:form>
+		<input type="hidden" id="originEmail" value="${memberVO.email}">
 		<div id="join_btn">
 			<button id="join">수정완료</button>
 		</div>

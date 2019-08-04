@@ -108,6 +108,7 @@
 			</tbody>
 		</table>
 		</form:form>
+		<input type="hidden" id="originEmail">
 		<div id="join_btn">
 			<button id="join">가입완료</button>
 		</div>

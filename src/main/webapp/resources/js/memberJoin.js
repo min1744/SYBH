@@ -565,9 +565,9 @@ $(function() {
 			if(site == null){
 				alert("존재하지 않거나 서비스 종료된 메일입니다.");
 			} else {
-				var originEmail = '${memberVO.email}';
+				var originEmail = $('#originEmail').val();
 				var updateEmail = null;
-				if(originEmail != null){
+				if(originEmail != ''){
 					alert("회원정보가 수정되었습니다.");
 					var email1 = $('#email1').val();
 					var email2 = $('#email2').val();

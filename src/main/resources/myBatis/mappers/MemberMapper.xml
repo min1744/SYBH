@@ -80,7 +80,7 @@
 	
 	<!-- 회원가입(비밀번호, 주민등록번호 AES256 암호화) -->
 	<insert id="setWrite" parameterType="MemberVO">
-		INSERT INTO MEMBER (ID, PW, NAME, RES_REG_NUM, PHONE, EMAIL, GENDER, AGE, GRADE, AUTHSTAUS)
+		INSERT INTO MEMBER
 		VALUES(
 			#{id},
 			CRYPTO_AES256.ENC_AES(#{pw}),
@@ -91,6 +91,7 @@
 			#{gender},
 			#{age},
 			1,
+			0,
 			0
 		)
 	</insert>
