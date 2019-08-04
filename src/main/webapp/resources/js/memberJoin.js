@@ -5,8 +5,8 @@ $(function() {
 	var checkKorName = /^(?=.*[가-힇]).{1,17}$/;
 	var checkRes_reg_num1 = /^(?=.*[0-9]).{6,6}$/;
 	var checkRes_reg_num2 = /^(?=.*[0-9]).{7,7}$/;
-	var checkPhone1 = /^(?=.*[0-9]).{3,3}$/;
-	var checkPhone2 = /^(?=.*[0-9]).{3,4}$/;
+	var checkPhone1 = /^(?=.*[0-1]).{3,3}$/;
+	var checkPhone2 = /^(?=.*[0-9]).{4,4}$/;
 	var checkPhone3 = /^(?=.*[0-9]).{4,4}$/;
 	var checkEmail1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/;
 	var checkEmail2 = /^(?=.*[a-z])(?=.*[.]).{8,12}$/;
@@ -318,7 +318,18 @@ $(function() {
 		var phone1 = $(this).val();
 		var phone2 = $('#phone2').val();
 		var phone3 = $('#phone3').val();
+		var checkFront = false;
 		if(checkPhone1.test(phone1) && checkPhone2.test(phone2) && checkPhone3.test(phone3)){
+			if(phone1 == '010'){
+				checkFront = true;
+			} else {
+				checkFront = false;
+			}
+		} else {
+			checkFront = false;
+		}
+		
+		if(checkFront){
 			$('#phone_result').html('');
 			alertPhone = true;
 		} else {
@@ -326,6 +337,7 @@ $(function() {
 			$('#phone_result').css("color", "red");
 			alertPhone = false;
 		}
+		
 		if(phone1.length == 3){
 			$('#phone2').focus();
 		}
@@ -344,6 +356,7 @@ $(function() {
 			$('#phone_result').css("color", "red");
 			alertPhone = false;
 		}
+		
 		if(phone2.length == 4){
 			$('#phone3').focus();
 		}
@@ -362,6 +375,7 @@ $(function() {
 			$('#phone_result').css("color", "red");
 			alertPhone = false;
 		}
+		
 		if(phone3.length == 4){
 			$('#email1').focus();
 		}
