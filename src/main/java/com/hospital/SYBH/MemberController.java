@@ -283,20 +283,24 @@ public class MemberController {
 		return mv;
 	}
 	
-    @ResponseBody
     @RequestMapping(value = "VerifyRecaptcha", method = RequestMethod.POST)
-    public int VerifyRecaptcha(HttpServletRequest request) {
-        VerifyRecaptcha.setSecretKey("6Le79LAUAAAAANChaX-nAZlGIPMa6gPhTnq4mX6K");
-        String gRecaptchaResponse = request.getParameter("recaptcha");
-        System.out.println(gRecaptchaResponse);
-        //0 = 성공, 1 = 실패, -1 = 오류
+    public ModelAndView VerifyRecaptcha(String recaptcha, ModelAndView mv) throws Exception {
+    	int result = 0;
+        VerifyRecaptcha.setSecretKey("6LeDI7EUAAAAAOl-nsomoO5UGCFyfw6_mYexVvex");
+        System.out.println(recaptcha);
+        //0 = 오류, 1 = 성공, 2 = 실패
         try {
-            if(VerifyRecaptcha.verify(gRecaptchaResponse))
-                return 0;
-            else return 1;
+            if(VerifyRecaptcha.verify(recaptcha)) {
+            	result = 1;
+            } else {
+            	result = 2;
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return -1;
         }
+        mv.addObject("result", result);
+        mv.setViewName("common/message");
+        
+        return mv;
     }
 }

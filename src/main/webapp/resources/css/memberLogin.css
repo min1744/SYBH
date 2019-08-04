@@ -199,9 +199,6 @@
 	
 }
 
-
-
-
-
-
-
+.g-recaptcha:first-child{
+	margin: 0 auto;
+}
