@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,6 +31,7 @@ import com.hospital.pay.PayDAO;
 import com.hospital.pay.PayService;
 import com.hospital.pay.PayVO;
 import com.hospital.util.PageMaker;
+import com.hospital.member.captcha.VerifyRecaptcha;
 
 @Controller
 @RequestMapping("/member/")
@@ -280,4 +282,25 @@ public class MemberController {
 		
 		return mv;
 	}
+	
+    @RequestMapping(value = "VerifyRecaptcha", method = RequestMethod.POST)
+    public ModelAndView VerifyRecaptcha(String recaptcha, ModelAndView mv) throws Exception {
+    	int result = 0;
+        VerifyRecaptcha.setSecretKey("6LeDI7EUAAAAAOl-nsomoO5UGCFyfw6_mYexVvex");
+        System.out.println(recaptcha);
+        //0 = 오류, 1 = 성공, 2 = 실패
+        try {
+            if(VerifyRecaptcha.verify(recaptcha)) {
+            	result = 1;
+            } else {
+            	result = 2;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mv.addObject("result", result);
+        mv.setViewName("common/message");
+        
+        return mv;
+    }
 }
