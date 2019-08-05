@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="QnACommentsMapper">
+  
+  <!-- write -->
+  <insert id="setWrite" parameterType="QnACommentsVO">
+  <selectKey keyProperty="qcnum" order="BEFORE" resultType="Integer">
+  		select QnaComments_SEQ.nextval from dual
+  </selectKey>
+  	insert into QnaComments values(#{qcnum}, 41, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0)
+  </insert>
+  
+  
+    <!-- list -->
+  <select id="getList" parameterType="PageMaker" resultType="QnACommentsVO">
+	select * from
+	(select rownum R, C.* from
+	(select * from QnAComments where num=41 order by qcnum desc) C)
+	where R between #{startRow} and #{lastRow}
+  </select>
+  
+  <!-- totalCount -->
+  <select id="getCount" resultType="Integer">
+  	select count(num) from QnaComments where num=41
+  </select>
+  
+</mapper>  

@@ -77,6 +77,11 @@
 				<form action="./memberLogin" method="post" id="form">
 					<input type="text" name="id" id="id" placeholder="아이디">
 					<input type="password" name="pw" id="pw" placeholder="비밀번호">
+					<div id="remember_box">
+						<input type="checkbox" name="remember" id="remember"
+						style="display: inline-block;">
+						<label for="remember">아이디 저장</label>
+					</div>
 				</form>
 				<button id="login">로그인</button>
 				<div class="g-recaptcha" data-sitekey="6LeDI7EUAAAAAGkmcXlqsEb9zLw7i7ShMS0eAI8B"></div>

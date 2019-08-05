@@ -52,7 +52,7 @@
 					<tbody>
 							<tr class="position_2">
 								<td class="num">1</td>
-								<td><a href="./qnaSelect?num=1">타이틀타이틀타이틀</a></td>
+								<td><a href="./qnaSelect?num=41">타이틀타이틀타이틀</a></td>
 								<td class="date">2019-07-26</td>
 								<td class="hit">0</td>
 							</tr>
