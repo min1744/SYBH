@@ -146,9 +146,8 @@ $(function() {
 	});
 	  
 	//아래 코드는 인포윈도우를 지도에서 제거합니다
-	//infowindow.close();        
-	}); 
-
+	//infowindow.close();
+}); 
 </script>
 <body>
 <!-- header -->
@@ -184,7 +183,9 @@ $(function() {
 								<li><a href="./admin/adminIndex" target="_blank">관리자페이지</a></li>
 							</c:when>
 							<c:otherwise>
-							<li><a href="./member/memberLogout">로그아웃</a></li>
+							<!-- 민근 : 일반로그아웃과 KAKAO로그아웃의 구별 -->
+							<!-- variety : member / kakao -->
+							<li><a href="./member/${variety}Logout">로그아웃</a></li>
 							<li style="padding: 0 10px;">│<li>
 							<li><a href="./member/memberMyPage">마이페이지</a></li>
 							</c:otherwise>

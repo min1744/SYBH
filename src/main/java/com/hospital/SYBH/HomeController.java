@@ -1,16 +1,11 @@
 package com.hospital.SYBH;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,31 +14,24 @@ import com.hospital.board.BoardVO;
 import com.hospital.notice.NoticeService;
 import com.hospital.util.PageMaker;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class HomeController {
 	@Inject
 	private NoticeService noticeService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	//진우 : noticeList
+	//민근 : variety(member or kakao)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(Locale locale,ModelAndView mv) throws Exception{
+	public ModelAndView home(ModelAndView mv, HttpSession session) throws Exception{
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCurPage(1);
 		pageMaker.setPerPage(5);
 		List<BoardVO> indexlist= noticeService.getList(pageMaker);
-		mv.addObject("list",indexlist );
+		String variety = (String)session.getAttribute("variety");
+		mv.addObject("list", indexlist);
+		mv.addObject("variety", variety);
 		mv.setViewName("index/home");
 		
 		return mv;
 	}
-	
-	
-	
 }
