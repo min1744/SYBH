@@ -58,12 +58,23 @@ $(function() {
 		  <span class="contents">글내용</span>
  		 <textarea class="form-control" rows="5" cols="15" id="contents" name="contents">${vo.contents}</textarea>
 		</div>
+		<div class="form-group" id="fix_box">
+		 <img src="../resources/images/info.png" id="fix_info_1">
+		 <label for="fix" class="contents">공지사항 고정</label>
+		 <input type="checkbox" id="fix" name="fix" value="1">
+		 <img alt="상단고정은 최대 3개까지가능합니다" src="../resources/images/fix_info.png" id="fix_info">
+		</div>
+		<!-- <p>공지사항 고정<input type="checkbox" id="fix" name="fix" value="1"></p> -->
 		
 		<div id="write_btn">
 			<input id="write" type="button" value="글수정">
 		</div>
-		<p>공지사항 고정<input type="checkbox" id="fix" name="fix" value="1"></p>
+	
+	
 	</form>
+	
+	
+	
 	</div>
 		
 	
