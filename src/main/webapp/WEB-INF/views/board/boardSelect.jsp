@@ -41,7 +41,7 @@
 		
 			<ul>
 				<li>병원안내</li>
-				<li><a href="./noticeList">공지사항</a></li>
+				<li><a href="./noticeList" style="color:#6bb5db;">공지사항</a></li>
 				<li><a href="../hospital/hospitalInfo">병원소개</a></li>
 				<li><a href="../medical/medicalTeamList">의료진 소개</a></li>
 				<li><a href="../hospital/floorInfo">층별안내</a></li>

@@ -23,5 +23,17 @@ public class QnaController {
 		return mv;
 		
 	}
+	
+	
+	//현아 작성 (qnaSelect jsp 테스트)
+		@RequestMapping(value = "qnaSelect", method = RequestMethod.GET)
+		public ModelAndView getSelect() throws Exception {
+			
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("qna/qnaSelect");
+			
+			return mv;
+			
+		}
 
 }
