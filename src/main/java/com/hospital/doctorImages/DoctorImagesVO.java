@@ -1,4 +1,4 @@
-package com.hospital.file;
+package com.hospital.doctorImages;
 
 public class DoctorImagesVO {
 	private int fnum;

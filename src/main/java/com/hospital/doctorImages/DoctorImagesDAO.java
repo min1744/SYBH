@@ -1,4 +1,4 @@
-package com.hospital.file;
+package com.hospital.doctorImages;
 
 import javax.inject.Inject;
 
