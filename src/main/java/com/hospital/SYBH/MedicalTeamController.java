@@ -35,4 +35,17 @@ public class MedicalTeamController {
 		
 	}
 	
+	@RequestMapping(value="medicalTeamSearch", method = RequestMethod.GET)
+	public ModelAndView getSearch(String name) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		if(name==null) {
+			name = "";
+		}
+		List<MedicalTeamVO> list = medicalTeamService.getSearch(name);
+		mv.addObject("list",list);
+			
+		mv.setViewName("medical/medicalTeam");
+		return mv;
+	}
+	
 }

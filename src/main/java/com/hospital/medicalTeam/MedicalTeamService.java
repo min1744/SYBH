@@ -18,4 +18,9 @@ public class MedicalTeamService {
 		}
 		return medicalTeamDAO.getList(mid);
 	}
+	
+	//search
+	public List<MedicalTeamVO> getSearch(String name) throws Exception{
+		return medicalTeamDAO.getSearch(name);
+	}
 }

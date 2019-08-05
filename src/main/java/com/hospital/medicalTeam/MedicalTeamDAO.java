@@ -17,5 +17,10 @@ public class MedicalTeamDAO {
 	public List<MedicalTeamVO> getList(int mid) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getList", mid);
 	}
+	
+	//search
+	public List<MedicalTeamVO> getSearch(String name) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getSearch",name);
+	}
 
 }
