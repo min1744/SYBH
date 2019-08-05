@@ -37,7 +37,7 @@
 			} else if (pw == '') {
 				alert('비밀번호를 입력해주세요.')
 			} else {
-				$.ajax({
+				/*$.ajax({
 					url : './VerifyRecaptcha',
 					type : 'POST',
 					data : {
@@ -53,7 +53,8 @@
 							alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
 						}
 					}
-				});
+				});*/
+				$('#form').submit();
 			}
 		});
 	});
