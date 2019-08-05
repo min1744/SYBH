@@ -28,16 +28,15 @@ public class NoticeDAO implements BoardDAO {
 	public int setWrite(NoticeVO noticeVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setWrite", noticeVO);
 	}
-	@Override
-	public int setUpdate(BoardVO boardVO) throws Exception {
-		return sqlSession.update(NAMESPACE+"setUpdate", boardVO);
+	public int setUpdate(NoticeVO noticeVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setUpdate", noticeVO);
 	}
 	@Override
 	public int setDelete(int num) throws Exception {
 		return sqlSession.delete(NAMESPACE+"setDelete", num);
 	}
 	@Override
-	public BoardVO getSelect(int num) throws Exception {
+	public NoticeVO getSelect(int num) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getSelect", num);
 	}
 	@Override
@@ -67,6 +66,12 @@ public class NoticeDAO implements BoardDAO {
 
 	@Override
 	public int setWrite(BoardVO boardVO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setUpdate(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}

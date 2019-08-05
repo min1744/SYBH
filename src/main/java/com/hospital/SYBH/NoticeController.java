@@ -47,23 +47,14 @@ public class NoticeController {
 	
 	
 	  //write
-	  
-
-
-
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET) 
 	public ModelAndView setWrite()throws Exception{ 
 		ModelAndView mv = new ModelAndView(); 
 		int result = noticeService.fixCount();
 		mv.addObject("result", result); 
-
 		mv.setViewName("board/boardWrite");
-
 		return mv; 
 	}
-
-	 
-		
 	  @RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
 	  public ModelAndView setWrite(NoticeVO noticeVO, HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -76,27 +67,25 @@ public class NoticeController {
 			mv.addObject("path", "./noticeList");
 			mv.setViewName("common/messageMove");
 		}
-		
 		return mv;
-		
 	}
-	
-	
 	
 	//update
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.GET)
 	public ModelAndView setUpdate(int num)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		BoardVO boardVO = noticeService.getSelect(num);
-		NoticeVO noticeVO =  (NoticeVO)boardVO;
+		NoticeVO noticeVO = noticeService.getSelect(num);
+		int result = noticeService.fixCount();
 		mv.addObject("vo", noticeVO);
+		mv.addObject("result", result );
 		mv.setViewName("board/boardUpdate");
 		return mv;
 	}
+	
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public ModelAndView setUpdate(BoardVO boardVO,HttpSession session)throws Exception{
+	public ModelAndView setUpdate(NoticeVO noticeVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = noticeService.setUpdate(boardVO, session);
+		int result = noticeService.setUpdate(noticeVO);
 		mv.setViewName("redirect:./noticeList");
 		return mv; 
 	}
