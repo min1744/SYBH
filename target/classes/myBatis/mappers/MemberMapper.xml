@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- id, pw, name, res_reg_num, phone, email, gender, age, grade -->
+<mapper namespace="MemberMapper">
+	<sql id="kind">
+		<choose>
+			<when test="kind == 2">ID</when>
+			<when test="kind == 3">RES_REG_NUM</when>
+			<when test="kind == 4">PHONE</when>
+			<when test="kind == 5">EMAIL</when>
+			<when test="kind == 6">GENDER</when>
+			<when test="kind == 7">AGE</when>
+			<!-- <when test="kind == 8">GRADE</when> -->
+			<otherwise>NAME</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- id 중복확인 -->
+	<select id="getIdDuplication" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE ID = #{id}
+	</select>
+	
+	<!-- email 중복확인 -->
+	<select id="getEmailDuplication" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<!-- 관리자를 제외한 필터링 된 회원의 숫자 -->
+	<select id="getTotalCount" parameterType="PageMaker" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 0 AND
+		<include refid="kind"/>
+		LIKE '%'||#{search}||'%'
+	</select>
+	
+	<!-- 회원 관리용 리스트 -->
+	<select id="getList" parameterType="PageMaker" resultType="MemberVO">
+		SELECT * FROM
+			(SELECT ROWNUM R, M.* FROM
+				(SELECT * FROM MEMBER WHERE GRADE != 0 AND
+				<include refid="kind"/>
+				LIKE '%'||#{search}||'%' ORDER BY NAME ASC)
+			M)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+	</select>
+	
+	<!-- 회원 myPage -->
+	<select id="getSelect" parameterType="String" resultType="MemberVO">
+		SELECT * FROM MEMBER WHERE ID = #{id} AND GRADE != 2
+	</select>
+	
+	<!-- Login -->
+	<select id="login" parameterType="MemberVO" resultType="MemberVO">
+		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = CRYPTO_AES256.ENC_AES(#{pw})
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="getId" parameterType="String" resultType="String">
+		SELECT RPAD(SUBSTR(ID, 1, 4), LENGTH(ID), '*') FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<!-- 비밀번호 분실로 인한 비밀번호 난수로 변경 -->
+	<update id="setPwUpdate" parameterType="MemberVO">
+		<selectKey keyProperty="pw" order="BEFORE" resultType="String">
+			SELECT DISTINCT CRYPTO_AES256.ENC_AES(#{pw}) FROM MEMBER WHERE EMAIL = #{email}
+		</selectKey>
+		UPDATE MEMBER SET PW = #{pw} WHERE EMAIL = #{email}
+	</update>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="getPw" parameterType="String" resultType="String">
+		SELECT DISTINCT CRYPTO_AES256.DEC_AES(PW) FROM MEMBER WHERE EMAIL = #{email}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="setPw" parameterType="MemberVO">
+		UPDATE MEMBER SET PW = CRYPTO_AES256.ENC_AES(#{pw}) WHERE ID = #{id}
+	</update>
+	
+	<!-- 회원가입(비밀번호, 주민등록번호 AES256 암호화) -->
+	<insert id="setWrite" parameterType="MemberVO">
+		INSERT INTO MEMBER
+		VALUES(
+			#{id},
+			CRYPTO_AES256.ENC_AES(#{pw}),
+			#{name},
+			CRYPTO_AES256.ENC_AES(#{res_reg_num}),
+			#{phone},
+			#{email},
+			#{gender},
+			#{age},
+			1,
+			0,
+			0
+		)
+	</insert>
+	
+	<!-- 회원정보 수정 -->
+	<update id="setUpdate" parameterType="MemberVO">
+		UPDATE MEMBER
+			SET PW = CRYPTO_AES256.ENC_AES(#{pw}),
+			PHONE = #{phone},
+			EMAIL = #{email},
+			GENDER = #{gender}
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 회원정보 수정으로 인한 이메일 인증 재요구 -->
+	<update id="setStatusInit" parameterType="String">
+		UPDATE MEMBER SET AUTHSTAUS = 0 WHERE ID = #{id}
+	</update>
+	
+	<!-- 주민등록번호 AES256 복호화 -->
+	<select id="setResDecryption" parameterType="String" resultType="String">
+		SELECT DISTINCT CRYPTO_AES256.DEC_AES(#{res_reg_num}) FROM MEMBER
+	</select>
+	
+	<!-- 주민등록번호 뒷자리 *변환 (memberMyPage에 보여줄 용도) -->
+	<select id="setUpdateRes" parameterType="String" resultType="String">
+		SELECT DISTINCT RPAD(SUBSTR(#{res_reg_num}, 1, 8), 14, '*') FROM MEMBER
+	</select>
+	
+	<!-- 등급 수정 -->
+	<update id="setGradeUpdate" parameterType="MemberVO">
+		UPDATE MEMBER
+		SET GRADE = #{grade}
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 회원 관리(삭제) -->
+	<delete id="setDeletes" parameterType="List">
+		DELETE MEMBER
+		WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="setDelete" parameterType="String">
+		DELETE MEMBER WHERE ID = #{id}
+	</delete>
+	
+	<!-- 이메일 인증키 update -->
+	<update id="createAuthKey" parameterType="MemberVO">
+		UPDATE MEMBER SET AUTHCODE = #{authCode} WHERE EMAIL = #{email}
+	</update>
+	
+	<!-- 이메일 인증 완료 -->
+	<update id="userAuth" parameterType="String">
+		UPDATE MEMBER SET AUTHSTAUS = 1 WHERE EMAIL = #{email}
+	</update>
+</mapper>

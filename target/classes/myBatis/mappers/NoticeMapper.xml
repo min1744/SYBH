@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="NoticeMapper">
+  
+  <insert id="setWrite" parameterType="NoticeVO">
+  <selectKey keyProperty="num" order="BEFORE" resultType="Integer">
+  		select notice_seq.nextval from dual
+  </selectKey>
+  
+  	insert into notice values(#{num},#{title},#{writer},#{contents},sysdate,0,#{fix})
+  </insert>
+  
+  <update id="setUpdate" parameterType="NoticeVO">
+  	update notice set title=#{title}, contents=#{contents} where num=#{num}  
+  </update>
+  
+  <update id="setHitUpdate" parameterType="Integer">
+  	update notice set hit=hit+1 where num=#{num}
+  </update>
+  
+  
+  <delete id="setDelete" parameterType="Integer">
+  	delete notice where num=#{num}
+  </delete>
+  
+  <!-- list -->
+  <select id="getList" parameterType="PageMaker" resultType="NoticeVO">
+  	select * from 
+  	(select rownum R, N.* from
+  	(select * from notice
+  	where fix != 1 and
+  	
+  <choose>
+  		<when test="kind = 1">
+  			title
+  		</when>
+  		<when test="kind = 2">
+  			 writer
+  		</when>
+  		
+  		<otherwise>
+  			 contents
+  		</otherwise>
+   </choose>
+   		
+  	 	 like '%'|| #{search} || '%'
+  	 	 order by fix,num desc) N)
+  	 	 where R between #{startRow} and #{lastRow}
+  </select>
+  
+  <!-- list2 -->
+  <select id="getFixedList" resultType="NoticeVO">
+  	select * from notice where fix=1 order by num desc
+  
+  </select>
+  
+  <!-- fixcount  -->
+ <select id="fixCount" resultType="Integer">
+select count(fix) from notice where fix=1
+ </select>
+  <!-- search  -->
+  <select id="getCount" parameterType="PageMaker" resultType="Integer">
+  	select count(num) from notice
+  	<choose>
+  		<when test="kind=1">
+  			where title 		
+  		</when>
+  		<when test="kind=2">
+  			where writer
+  		</when>
+  		<otherwise>
+  			where contents
+  		</otherwise>
+  	</choose>
+	  like '%' || #{search} || '%'
+ </select>
+ 
+ <select id="getSelect" parameterType="Integer" resultMap="noticeResult">
+ 	select * from notice where num=#{num}
+  </select>
+  
+  <resultMap type="NoticeVO" id="noticeResult">
+  <id property="num" column="num"/>
+  <result property="title" column="title"/>
+  <result property="contents" column="contents"/>
+  <result property="reg_date" column="reg_date"/>
+  <result property="hit" column="hit"/>
+  </resultMap>
+   
+</mapper>  

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="PayMapper">
+  <!--결제 카테고리 0 : 건강검진 , 1 : 후원  -->
+  <!--결제 입력  -->
+  <insert id="setWrite" parameterType="PayVO">
+  	insert into pay values(pay_seq.nextval, #{id}, sysdate, #{price}, #{opt}, #{category})
+  </insert>
+
+  <!--한사람 모든 결제 갯수(건강검진 : 0, 후원 : 1)  -->
+  <select id="getOneTotalCount" parameterType="PayVO" resultType="Integer">
+
+  	select count(num) from pay where id=#{id} and category=#{category}
+  	
+  </select>
+  
+  <resultMap type="PayVO" id="payList">
+  	<id property="num" column="num"/>
+  	<result property="id" column="id"/>
+  	<result property="pay_date" column="pay_date"/>
+  	<result property="price" column="price"/>
+  	<result property="opt" column="opt"/>
+  	<result property="category" column="category"/>
+  	<result property="name" column="name"/>
+  </resultMap>
+  
+  <!--한사람의 모든 결제 내역 (건강검진 : 0, 후원 : 1) -->
+  <select id="getOneList" parameterType="PageMaker" resultMap="payList">
+  	select * from
+  	(select rownum R, Pay.* from
+  	(select P.*,M.name from pay P FULL JOIN member M 
+  	on(P.id = M.id)
+  	 where P.id= #{kind}
+		and P.category=#{search}
+  		order by P.pay_date desc) Pay)
+  		where R between #{startRow} and #{lastRow}
+  </select>
+  
+  <!--home.jsp 전용 -->
+  <!-- 후원 총 인원 -->
+  <select id="getDonationPeopleTotal" resultType="Integer">
+  	select count(num) from pay where category=1
+  </select>
+  
+  <!-- 후원 총금액  -->
+  <select id="getDonationTotal" resultType="Integer">
+  	select sum(price) from pay where category=1
+  </select>
+  
+  <!--home.jsp 끝  -->
+  
+  <!--모든사람 결제 갯수  (건강검진 : 0, 후원 : 1) -->
+  <select id="getAllTotalCount" parameterType="PayVO" resultType="Integer">
+  	select count(num) from pay where category=#{category}
+  </select>
+  
+  
+  <!--모든사람 결제 내역 (건강검진 : 0, 후원 : 1)  -->
+  <select id="getAllList" parameterType="PageMaker" resultMap="payList">
+  	select * from
+  	(select rownum R, Pay.* from
+  	(select P.*, M.name from pay P FULL JOIN member M
+  	on(P.id = M.id)
+  	where P.category = #{search} order by P.num desc) Pay)
+  	where R between #{startRow} and #{lastRow}
+  </select>
+  
+
+
+  </mapper>
