@@ -32,10 +32,7 @@ public class NoticeService implements BoardService {
 		int result = noticeDAO.setWrite(noticeVO);
 		if(noticeVO.getFix() != 1 ) {
 			noticeVO.setFix(0);
-			
 		}
-		
-		
 		return result;
 	}
 
@@ -46,18 +43,19 @@ public class NoticeService implements BoardService {
 		return result;
 	}
 
-	@Override
-	public int setUpdate(BoardVO boardVO, HttpSession session) throws Exception {
-		int result = noticeDAO.setUpdate(boardVO);
-		
+	public int setUpdate(NoticeVO noticeVO) throws Exception {
+		int result = noticeDAO.setUpdate(noticeVO);
+		if(noticeVO.getFix() != 1 ) {
+			noticeVO.setFix(0);
+		}
 		return result;
 	}
 
 	@Override
-	public BoardVO getSelect(int num) throws Exception {
-		BoardVO boardVO = noticeDAO.getSelect(num);
+	public NoticeVO getSelect(int num) throws Exception {
+		NoticeVO noticeVO = noticeDAO.getSelect(num);
 		noticeDAO.setHitUpdate(num);
-	    return boardVO;
+	    return noticeVO;
 	}
 	
 	@Override
@@ -80,6 +78,13 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int setWrite(BoardVO boardDTO, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public int setUpdate(BoardVO boardDTO, HttpSession session) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}

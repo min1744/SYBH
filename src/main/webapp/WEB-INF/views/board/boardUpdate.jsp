@@ -18,6 +18,7 @@ $(function() {
 	} else {
 		if($('#fix').prop("checked")){
 			var fixCount = $('#fixCount').val();
+								
 			if(fixCount > 2){
 				alert('상단고정은 최대 3개까지가능합니다');
 			} else {
@@ -64,8 +65,7 @@ $(function() {
 		 <input type="checkbox" id="fix" name="fix" value="1">
 		 <img alt="상단고정은 최대 3개까지가능합니다" src="../resources/images/fix_info.png" id="fix_info">
 		</div>
-		<!-- <p>공지사항 고정<input type="checkbox" id="fix" name="fix" value="1"></p> -->
-		
+			
 		<div id="write_btn">
 			<input id="write" type="button" value="글수정">
 		</div>

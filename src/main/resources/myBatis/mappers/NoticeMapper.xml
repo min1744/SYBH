@@ -15,7 +15,7 @@
   </insert>
   
   <update id="setUpdate" parameterType="NoticeVO">
-  	update notice set title=#{title}, contents=#{contents} where num=#{num}  
+  	update notice set title=#{title}, contents=#{contents}, fix=#{fix} where num=#{num}  
   </update>
   
   <update id="setHitUpdate" parameterType="Integer">
