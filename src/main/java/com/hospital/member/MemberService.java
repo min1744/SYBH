@@ -22,6 +22,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hospital.member.kakao.KakaoMemberVO;
 import com.hospital.member.mail.MailHandler;
 import com.hospital.member.mail.MailVO;
 import com.hospital.member.mail.TempKey;
@@ -295,29 +296,29 @@ public class MemberService {
 		return result;
 	}
 	
-	//탈퇴
-	public void kakaoDelete(MemberVO memberVO) throws Exception{
+	//kakao 탈퇴
+	public void kakaoDelete(KakaoMemberVO kakaoMemberVO) throws Exception{
 		URL url = null;
 		HttpURLConnection con = null;
 		String header = "Bearer ";
 		String kakaoUrl="https://kapi.kakao.com/v1/user/unlink";
-		header += memberVO.getAccess_token();
+		header += kakaoMemberVO.getAccess_token();
 		
 		url = new URL(kakaoUrl);
 		con = (HttpURLConnection)url.openConnection();
 		con.setRequestMethod("GET");
 		con.addRequestProperty("Authorization", header);
 		System.out.println(con.getResponseCode());
-		System.out.println(memberVO.getAccess_token());
+		System.out.println(kakaoMemberVO.getAccess_token());
 	}
 
 	//로그아웃(token 해제)
-	public void kakaoLogout(MemberVO memberVO) throws Exception{
+	public void kakaoLogout(KakaoMemberVO kakaoMemberVO) throws Exception{
 		URL url = null;
 		HttpURLConnection con = null;
 		String header = "Bearer ";
 		String kakaoUrl="https://kapi.kakao.com/v1/user/logout";
-		header += memberVO.getAccess_token();
+		header += kakaoMemberVO.getAccess_token();
 
 		url = new URL(kakaoUrl);
 		con = (HttpURLConnection)url.openConnection();
@@ -326,7 +327,7 @@ public class MemberService {
 	}
 
 	//로그인 성공 시 사용자 정보를 가져오기
-	public HashMap<String, Object> getInfo(String access_token) throws Exception{
+	public KakaoMemberVO getInfo(String access_token) throws Exception{
 		URL url=null;
 		HttpURLConnection con = null;
 		String header="Bearer ";
@@ -341,58 +342,65 @@ public class MemberService {
 		//java코드가 왔다갔다 하기 때문에 socket 연결
 		int resultCode = con.getResponseCode();
 		BufferedReader br= null;
-		MemberVO memberVO = null;
-		HashMap<String, Object> map = null;
+		KakaoMemberVO kakaoMemberVO = null;
 		if(resultCode==200) {
 			//즉, byte가 이동하므로 String 타입으로 변환
 			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			memberVO = new MemberVO();
-
 			String resultMessage=null;
 			//문자열을 합치는 역할
 			StringBuffer sb = new StringBuffer();
 			while((resultMessage=br.readLine()) != null) {
 				sb.append(resultMessage);
 			}
-			JSONParser jsonParser = new JSONParser();
-			JSONObject js = (JSONObject)jsonParser.parse(sb.toString());
-			JSONObject js_properties = (JSONObject)js.get("properties");
-			JSONObject js_kakao_account = (JSONObject)js.get("kakao_account");
-			
-			memberVO.setId(js.get("id").toString());
-			memberVO.setName(js_properties.get("nickname").toString());
-			memberVO.setEmail(js_kakao_account.get("email").toString());
-			memberVO.setRes_reg_num("**"+js_kakao_account.get("birthday").toString()+"-*******");
-			String gender = js_kakao_account.get("gender").toString();
-			if(gender.equals("male")) {
-				memberVO.setGender(1);
-			} else if(gender.equals("female")) {
-				memberVO.setGender(2);
-			} else {
-				memberVO.setGender(0);
+			try {
+				JSONParser jsonParser = new JSONParser();
+				JSONObject js = (JSONObject)jsonParser.parse(sb.toString());
+				JSONObject js_properties = (JSONObject)js.get("properties");
+				JSONObject js_kakao_account = (JSONObject)js.get("kakao_account");
+				
+				kakaoMemberVO = new KakaoMemberVO();
+				kakaoMemberVO.setId(js.get("id").toString());
+				kakaoMemberVO.setName(js_properties.get("nickname").toString());
+				kakaoMemberVO.setEmail(js_kakao_account.get("email").toString());
+				String birthday = js_kakao_account.get("birthday").toString();
+				String birthMonth = birthday.substring(0, 2);
+				String birthDate = birthday.substring(2, 4);
+				kakaoMemberVO.setBirthday(birthMonth+"월"+birthDate+"일");
+				String gender = js_kakao_account.get("gender").toString();
+				if(gender.equals("male")) {
+					gender = "남자";
+				} else {
+					gender = "여자";
+				}
+				kakaoMemberVO.setGender(gender);
+				String age_range = js_kakao_account.get("age_range").toString();
+				String first = age_range.substring(0, 1);
+				if(!first.equals("0")) {
+					age_range = first+"0대";
+				} else {
+					age_range = "유아∙어린이";
+				}
+				kakaoMemberVO.setAge_range(age_range);
+				kakaoMemberVO.setAccess_token(access_token);
+				/*Set set = js_kakao_account.keySet();
+				Iterator iterator = set.iterator();
+				while(iterator.hasNext()){
+					String key = (String)iterator.next();
+					System.out.println("jsEmail hashMap Key : " + key);
+				}*/
+				
+				//System.out.println("birthday : "+js_kakao_account.get("birthday").toString());
+				//System.out.println("gender : "+js_kakao_account.get("gender").toString());
+				//System.out.println("age_range : "+js_kakao_account.get("age_range").toString());
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e);
 			}
-			String age_range = js_kakao_account.get("age_range").toString();
-			
-			/*Set set = js_kakao_account.keySet();
-			Iterator iterator = set.iterator();
-			while(iterator.hasNext()){
-				String key = (String)iterator.next();
-				System.out.println("jsEmail hashMap Key : " + key);
-			}*/
-			
-			//System.out.println("birthday : "+js_kakao_account.get("birthday").toString());
-			//System.out.println("gender : "+js_kakao_account.get("gender").toString());
-			//System.out.println("age_range : "+js_kakao_account.get("age_range").toString());
-			memberVO.setAccess_token(access_token);
-			
-			map = new HashMap<String, Object>();
-			map.put("memberVO", memberVO);
-			map.put("age_range", age_range);
 		}else {
 			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		}
 		br.close();
 
-		return map;
+		return kakaoMemberVO;
 	}
 }

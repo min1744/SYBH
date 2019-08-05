@@ -25,6 +25,7 @@ import com.hospital.pay.PayService;
 import com.hospital.pay.PayVO;
 import com.hospital.util.PageMaker;
 import com.hospital.member.captcha.VerifyRecaptcha;
+import com.hospital.member.kakao.KakaoMemberVO;
 
 @Controller
 @RequestMapping("/member/")
@@ -43,14 +44,14 @@ public class MemberController {
 	
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
-		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
-		MemberVO memberVO2 = memberService.getSelect(memberVO.getId());
-		if(memberVO2 != null) {
-			mv.addObject("memberVO", memberVO2);
+		KakaoMemberVO kakaoMemberVO = (KakaoMemberVO)session.getAttribute("memberVO");
+		MemberVO memberVO = memberService.getSelect(kakaoMemberVO.getId());
+		if(memberVO != null) {
+			mv.addObject("memberVO", memberVO);
 			mv.addObject("variety", "member");
 			mv.setViewName("member/memberMyPage");
-		} else if(memberVO != null) {
-			mv.addObject("memberVO", memberVO);
+		} else if(kakaoMemberVO != null) {
+			mv.addObject("memberVO", kakaoMemberVO);
 			mv.addObject("variety", "kakao");
 			mv.setViewName("member/memberMyPage");
 		} else {

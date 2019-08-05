@@ -70,15 +70,7 @@ public class MemberVO {
 	private int grade;
 	private String authCode;
 	private String authStatus;
-	//54자리의 대소문자 영어와 숫자, _
-	private String access_token;
 	
-	public String getAccess_token() {
-		return access_token;
-	}
-	public void setAccess_token(String access_token) {
-		this.access_token = access_token;
-	}
 	public String getId() {
 		return id;
 	}
