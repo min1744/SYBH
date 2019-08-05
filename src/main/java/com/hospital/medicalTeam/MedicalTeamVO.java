@@ -1,5 +1,7 @@
 package com.hospital.medicalTeam;
 
+import com.hospital.doctorImages.DoctorImagesVO;
+
 public class MedicalTeamVO {
 	private int num;
 	private String name;
@@ -8,6 +10,15 @@ public class MedicalTeamVO {
 	private String career;
 	private String major_act;
 	private int mid;
+	private DoctorImagesVO doctorImagesVO;
+	
+	
+	public DoctorImagesVO getDoctorImagesVO() {
+		return doctorImagesVO;
+	}
+	public void setDoctorImagesVO(DoctorImagesVO doctorImagesVO) {
+		this.doctorImagesVO = doctorImagesVO;
+	}
 	public int getNum() {
 		return num;
 	}

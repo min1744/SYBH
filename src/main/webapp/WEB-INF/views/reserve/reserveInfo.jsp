@@ -42,7 +42,9 @@
 				예약하시겠어요?</p>
 				</div>
 				<div id="search_box">
-					<input type="text" placeholder="의료진 검색하기"><button>검색</button>
+					<form action="../medical/medicalTeamSearch">
+					<input type="text" name="name" placeholder="의료진 검색하기"><button>검색</button>
+					</form>
 				</div>
 			
 			</div>

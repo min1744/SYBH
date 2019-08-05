@@ -197,23 +197,7 @@
 					<c:forEach items="${list }" var="list" varStatus="i">
 					<div class="list" id="list${i}">
 						<div class="list_profile">
-							<c:choose>
-								<c:when test="${mid eq '1'}">
-									<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
-								</c:when>
-								<c:when test="${mid eq '2'}">
-									<img alt="" src="../resources/images/02_${i.index+1 }.jpg">
-								</c:when>
-								<c:when test="${mid eq '3'}">
-									<img alt="" src="../resources/images/03_${i.index+1 }.jpg">
-								</c:when>
-								<c:when test="${mid eq '4'}">
-									<img alt="" src="../resources/images/04_${i.index+1 }.jpg">
-								</c:when>
-								<c:otherwise>
-									<img alt="" src="../resources/images/05_${i.index+1 }.jpg">
-								</c:otherwise>
-							</c:choose>
+							<img alt="" src="../resources/images/${list.doctorImagesVO.fname}">
 						</div>
 						
 						<div class="list_info">
@@ -327,23 +311,7 @@
 	        		<hr>
 				
 				<div class="modal_profile">
-					<c:choose>
-						<c:when test="${mid eq '1'}">
-							<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
-						</c:when>
-						<c:when test="${mid eq '2'}">
-							<img alt="" src="../resources/images/02_${i.index+1 }.jpg">
-						</c:when>
-						<c:when test="${mid eq '3'}">
-							<img alt="" src="../resources/images/03_${i.index+1 }.jpg">
-						</c:when>
-						<c:when test="${mid eq '4'}">
-							<img alt="" src="../resources/images/04_${i.index+1 }.jpg">
-						</c:when>
-						<c:otherwise>
-							<img alt="" src="../resources/images/05_${i.index+1 }.jpg">
-						</c:otherwise>
-					</c:choose>
+					<img alt="" src="../resources/images/${list.doctorImagesVO.fname}">
 				</div>
 				
 				<div class="modal_info">
