@@ -5,7 +5,7 @@
 <html>
 <head>
 <c:import url="../common/all.jsp" />
-<link href="../resources/css/newsSelect.css" rel="stylesheet">
+<link href="../resources/css/qnaSelect.css" rel="stylesheet">
 <script type="text/javascript">
 	$(function() {
 		
@@ -29,9 +29,12 @@
 		        $('#counter').html("(200 / 500)");
 		    }
 		});
-		
+
 		
 	});
+
+
+
 
 </script>
 </head>
@@ -41,8 +44,8 @@
 
 <div id="board">
 		<div id="board_title">
-			<p id="title">영양 정보</p>
-			<p id="sub_title">쌍용백병원의 전문 의료진들이 건강한 식이요법에 관해 알려드립니다.</p>
+			<p id="title">고객의 소리</p>
+			<p id="sub_title">쌍용백병원을 이용하시면서 불편하신점이나 건의할 사항을 등록해 주세요.</p>
 		</div>
 	
 	
@@ -53,10 +56,12 @@
 		<div id="board_nav">
 		
 			<ul>
-				<li>건강뉴스</li>
-				<li><a href="#">질병 정보</a></li>
-				<li><a href="#" style="color:#6bb5db;">영양 정보</a></li>
-				<li><a href="#">운동 정보</a></li>
+				<li>고객의 소리</li>
+				<li><a href="./noticeList">건의합니다</a></li>
+				<li><a href="#">칭찬합니다</a></li>
+				<li><a href="#">질문과답변</a></li>
+				
+			
 			</ul>
 		
 		</div>
@@ -75,15 +80,6 @@
 				</ul>
 			</div>
 			
-			<div id="file">
-					<table>
-						<tr>
-							<th><img src="../resources/images/clip.png">첨부파일</th>
-							<td><a href="">파일명.jpg</a></td>
-							<td><a href="">파일명sdfsdfsdf.jpg</a></td>
-						</tr>
-					</table>
-				</div>
 			<div id="contents">
 			
 			
@@ -109,7 +105,6 @@
 			
 			
 			</div>
-			
 			<!-- 댓글 -->
 			<div id="comment_box">
 			
@@ -269,10 +264,10 @@
 			
 			
 			<div id="btn_box">
-				<a href="./newsList" id="list">목록</a>
+				<a href="./qnaList" id="list">목록</a>
 				
-				<a href="./newsDelete" id="delete">삭제</a>
-				<a href="./newsUpdate" id="update">수정</a>
+				<a href="./qnaDelete?num=" id="delete">삭제</a>
+				<a href="./qnaUpdate?num=" id="update">수정</a>
 			</div>
 		
 		</div>
