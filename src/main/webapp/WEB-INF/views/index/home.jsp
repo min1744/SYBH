@@ -346,7 +346,9 @@ $(function() {
 				<p>환자를 위해 항상 노력하고 있습니다.</p>
 				</div>
 				<div id="search_box">
-					<input type="text" placeholder="의료진 검색하기"><button>검색</button>
+				<form action="./medical/medicalTeamSearch">
+					<input type="text" name="name" placeholder="의료진 검색하기"><button>검색</button>
+				</form>
 				</div>
 			</div>
 			
