@@ -49,7 +49,7 @@ function printWeek() {
 				<li>병원안내</li>
 				<li><a href="../notice/noticeList">공지사항</a></li>
 				<li><a href="../hospital/hospitalInfo">병원소개</a></li>
-				<li><a href="#" style="color:#6bb5db;">의료진 소개</a></li>
+				<li><a href="./medicalTeamList" style="color:#6bb5db;">의료진 소개</a></li>
 				<li><a href="../hospital/floorInfo">층별안내</a></li>
 				<li><a href="../hospital/location">오시는 길</a></li>
 			</ul>
@@ -57,16 +57,15 @@ function printWeek() {
 		
 		
 		<div id="doctorList">
-		
-			<div id="doctor_search">
-				<select id="select_box">
-					<option>진료과목</option>
-					<option>의료진 이름</option>
-				</select>
-				<input type="text" name="search" id="search" placeholder="검색어를 입력해주세요">
-				<button id="search_btn">검색</button>
-			</div>
-			
+			<form action="./medicalTeamSearch">
+				<div id="doctor_search">
+					<select id="select_box">
+						<option class="k" value="1">의료진 이름</option>
+					</select>
+					<input type="text" name="name" id="search" placeholder="검색어를 입력해주세요">
+					<button id="search_btn">검색</button>
+				</div>
+			</form>
 			<div id="doctor_select">
 				<h3>진료과목 선택</h3>
 				<ul>
@@ -178,7 +177,23 @@ function printWeek() {
 	        		<hr>
 				<!-- 교수 프로필 -->
 				<div class="modal_profile">
-					<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
+					<c:choose>
+						<c:when test="${mid eq '1'}">
+							<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
+						</c:when>
+						<c:when test="${mid eq '2'}">
+							<img alt="" src="../resources/images/02_${i.index+1 }.jpg">
+						</c:when>
+						<c:when test="${mid eq '3'}">
+							<img alt="" src="../resources/images/03_${i.index+1 }.jpg">
+						</c:when>
+						<c:when test="${mid eq '4'}">
+							<img alt="" src="../resources/images/04_${i.index+1 }.jpg">
+						</c:when>
+						<c:otherwise>
+							<img alt="" src="../resources/images/05_${i.index+1 }.jpg">
+						</c:otherwise>
+					</c:choose>
 				</div>
 				
 				<!-- 진료과목 -->

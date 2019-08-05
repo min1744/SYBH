@@ -327,7 +327,23 @@
 	        		<hr>
 				
 				<div class="modal_profile">
-					<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
+					<c:choose>
+						<c:when test="${mid eq '1'}">
+							<img alt="" src="../resources/images/01_${i.index+1 }.jpg">
+						</c:when>
+						<c:when test="${mid eq '2'}">
+							<img alt="" src="../resources/images/02_${i.index+1 }.jpg">
+						</c:when>
+						<c:when test="${mid eq '3'}">
+							<img alt="" src="../resources/images/03_${i.index+1 }.jpg">
+						</c:when>
+						<c:when test="${mid eq '4'}">
+							<img alt="" src="../resources/images/04_${i.index+1 }.jpg">
+						</c:when>
+						<c:otherwise>
+							<img alt="" src="../resources/images/05_${i.index+1 }.jpg">
+						</c:otherwise>
+					</c:choose>
 				</div>
 				
 				<div class="modal_info">

@@ -8,7 +8,11 @@
 	select * from medicalteam where mid=#{mid}
 </select>
 
-
+<select id="getSearch" resultType="MedicalTeamVO" parameterType="String">
+	select * from medicalteam where name
+	like '%' || #{name} || '%' order by name asc
+	
+</select>
 
 
 
