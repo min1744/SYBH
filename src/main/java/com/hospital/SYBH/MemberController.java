@@ -3,22 +3,15 @@
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import com.hospital.checkup.CheckUpDAO;
@@ -48,17 +41,17 @@ public class MemberController {
 	@Inject
 	private CheckUpDAO checkUpDAO;
 	
-	@ModelAttribute("variety")
-	public String board() {
-		return "member";
-	}
-	
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
-		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
-		MemberVO memberVO = memberService.getSelect(id);
-		if(memberVO != null) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+		MemberVO memberVO2 = memberService.getSelect(memberVO.getId());
+		if(memberVO2 != null) {
+			mv.addObject("memberVO", memberVO2);
+			mv.addObject("variety", "member");
+			mv.setViewName("member/memberMyPage");
+		} else if(memberVO != null) {
 			mv.addObject("memberVO", memberVO);
+			mv.addObject("variety", "kakao");
 			mv.setViewName("member/memberMyPage");
 		} else {
 			mv.addObject("message", "정보가 없습니다.");

@@ -1,5 +1,7 @@
 package com.hospital.SYBH;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -18,23 +20,16 @@ public class KakaoController {
 	@Inject
 	private MemberService memberService;
 	
-	@ModelAttribute("variety")
-	public String board() {
-		return "kakao";
-	}
-	
 	@RequestMapping(value="kakaoLogin")
-	public void kakaoLogin(HttpSession session) throws Exception{
-		session.setAttribute("varitey", "kakao");
-	}
+	public void kakaoLogin(MemberVO memberVO, HttpSession session) throws Exception{}
 	
-	/*@RequestMapping(value = "kakaoDelete")
+	@RequestMapping(value = "kakaoDelete")
 	public String kakaoDelete(HttpSession session) throws Exception{
-		KakaoMemberVO kakaoMemberVO = (KakaoMemberVO)session.getAttribute("memberVO");
-		memberService.kakaoDelete(kakaoMemberVO);
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+		memberService.kakaoDelete(memberVO);
 		session.invalidate();
 		return "redirect:../";
-	}*/
+	}
 	
 	@RequestMapping(value = "kakaoLogout")
 	public String kakaoLogout(HttpSession session) throws Exception{
@@ -46,8 +41,10 @@ public class KakaoController {
 	
 	@RequestMapping(value = "getInfo")
 	public String getInfo(String access_token, HttpSession session) throws Exception{
-		MemberVO memberVO = memberService.getInfo(access_token);
-		session.setAttribute("memberVO", memberVO);
+		HashMap<String, Object> map = memberService.getInfo(access_token);
+		session.setAttribute("memberVO", (MemberVO)map.get("memberVO"));
+		session.setAttribute("age_range", (String)map.get("age_range"));
+		session.setAttribute("variety", "kakao");
 		
 		return "redirect:../";
 	}
