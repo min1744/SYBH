@@ -48,6 +48,11 @@ public class MemberController {
 	@Inject
 	private CheckUpDAO checkUpDAO;
 	
+	@ModelAttribute("variety")
+	public String board() {
+		return "member";
+	}
+	
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
 		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
@@ -130,6 +135,7 @@ public class MemberController {
 		memberVO = memberService.login(memberVO);
 		if(memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
+			session.setAttribute("variety", "member");
 			mv.setViewName("redirect:../");
 		} else {
 			mv.addObject("message", "로그인 실패하셨습니다.");

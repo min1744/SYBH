@@ -349,8 +349,13 @@ $(function() {
 		var phone2 = $(this).val();
 		var phone3 = $('#phone3').val();
 		if(checkPhone1.test(phone1) && checkPhone2.test(phone2) && checkPhone3.test(phone3)){
-			$('#phone_result').html('');
-			alertPhone = true;
+			if(phone2*1 >= 0 && phone2*1 < 10000){
+				$('#phone_result').html('');
+				alertPhone = true;
+			} else {
+				$('#phone_result').html('잘못된 형식의 번호입니다.');
+				$('#phone_result').css("color", "red");
+			}
 		} else {
 			$('#phone_result').html('잘못된 형식의 번호입니다.');
 			$('#phone_result').css("color", "red");
@@ -368,8 +373,14 @@ $(function() {
 		var phone2 = $('#phone2').val();
 		var phone3 = $(this).val();
 		if(checkPhone1.test(phone1) && checkPhone2.test(phone2) && checkPhone3.test(phone3)){
-			$('#phone_result').html('');
-			alertPhone = true;
+			if(phone3*1 >= 0 && phone3*1 < 10000){
+				$('#phone_result').html('');
+				alertPhone = true;
+			} else {
+				$('#phone_result').html('잘못된 형식의 번호입니다.');
+				$('#phone_result').css("color", "red");
+				alertPhone = false;
+			}
 		} else {
 			$('#phone_result').html('잘못된 형식의 번호입니다.');
 			$('#phone_result').css("color", "red");

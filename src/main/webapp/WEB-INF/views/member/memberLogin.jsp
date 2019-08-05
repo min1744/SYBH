@@ -6,6 +6,10 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberLogin.css" rel="stylesheet">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
@@ -57,6 +61,47 @@
 				$('#form').submit();
 			}
 		});
+		
+		//kakaoLogin
+		// 사용할 앱의 JavaScript 키를 설정해 주세요.
+		Kakao.init('2cd6749259ffdeeb04fac6151f7cd93d');
+		
+		$("#kakaoLogin").click(function() {
+			Kakao.Auth.loginForm({
+				//login이 성공했을 때
+				success : function(authObj){
+					location.href="./getInfo?access_token="+authObj.access_token;
+				},
+				//login 실패했을 때
+				fail : function(errorObj){
+					alert(authObj);
+				}
+			});
+		});
+
+		$("#logout").click(function() {
+			//logout();
+			location.href="./kakaoLogout";
+		});
+	    
+	    //로그아웃
+	    function logout() {
+	    	var o = window.open("http://developers.kakao.com/logout");
+	    	
+		   /*  Kakao.Auth.logout(function() {
+				alert('logout');
+			}); */
+		}
+	    
+	    //현재상태
+	    function status() {
+		    Kakao.Auth.getStatus(function(statusObj) {
+				console.log(statusObj);
+			});
+		    
+	    status();
+		}
+	  //]]>
 	});
 </script>
 </head>
@@ -88,7 +133,7 @@
 					<li><a href="./memberAgree">회원가입</a></li>
 				</ul>
 				<button id="naver">네이버 아이디로 로그인</button>
-				<button id="kakao">카카오 아이디로 로그인</button>
+				<img id="kakaoLogin" src="../resources/images/kakao_account_login_btn_medium_narrow.png">
 			</div>
 		</div>
 	</div>

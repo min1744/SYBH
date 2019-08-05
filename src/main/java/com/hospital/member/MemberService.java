@@ -1,5 +1,9 @@
 package com.hospital.member;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import java.util.UUID;
 
@@ -7,6 +11,8 @@ import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -284,5 +290,86 @@ public class MemberService {
 			throw new Exception();
 		}
 		return result;
+	}
+	
+	//탈퇴
+	/*public void kakaoDelete(MemberVO memberVO) throws Exception{
+		URL url = null;
+		HttpURLConnection con = null;
+		String header = "Bearer ";
+		String kakaoUrl="https://kapi.kakao.com/v1/user/unlink";
+		header += memberVO.getAccess_token();
+		
+		url = new URL(kakaoUrl);
+		con = (HttpURLConnection)url.openConnection();
+		con.setRequestMethod("GET");
+		con.addRequestProperty("Authorization", header);
+		System.out.println(con.getResponseCode());
+		System.out.println(memberVO.getAccess_token());
+	}*/
+
+	//로그아웃(token 해제)
+	public void kakaoLogout(MemberVO memberVO) throws Exception{
+		URL url = null;
+		HttpURLConnection con = null;
+		String header = "Bearer ";
+		String kakaoUrl="https://kapi.kakao.com/v1/user/logout";
+		header += memberVO.getAccess_token();
+
+		url = new URL(kakaoUrl);
+		con = (HttpURLConnection)url.openConnection();
+		con.setRequestMethod("GET");
+		con.addRequestProperty("Authorization", header);
+	}
+
+	//로그인 성공 시 사용자 정보를 가져오기
+	public MemberVO getInfo(String access_token) throws Exception{
+		URL url=null;
+		HttpURLConnection con = null;
+		String header="Bearer ";
+		String kakaoUrl="https://kapi.kakao.com/v2/user/me";
+		header=header+access_token;
+		
+		url = new URL(kakaoUrl);
+		con = (HttpURLConnection)url.openConnection();
+		con.setRequestMethod("GET");
+		con.addRequestProperty("Authorization", header);
+
+		//java코드가 왔다갔다 하기 때문에 socket 연결
+		int resultCode = con.getResponseCode();
+		BufferedReader br= null;
+		MemberVO memberVO = null;
+		if(resultCode==200) {
+			//즉, byte가 이동하므로 String 타입으로 변환
+			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			memberVO = new MemberVO();
+
+			String resultMessage=null;
+			//문자열을 합치는 역할
+			StringBuffer sb = new StringBuffer();
+			while( (resultMessage=br.readLine()) != null) {
+				sb.append(resultMessage);
+			}
+			JSONParser jsonParser = new JSONParser();
+			JSONObject js = (JSONObject)jsonParser.parse(sb.toString());
+			JSONObject jsEmail = (JSONObject)js.get("kakao_account");
+			JSONObject jsName = (JSONObject)js.get("properties");
+			JSONObject jsGender = (JSONObject)js.get("gender");
+			JSONObject jsBirthday = (JSONObject)js.get("birthday");
+			memberVO.setId(js.get("id").toString());
+			memberVO.setEmail(jsEmail.get("email").toString());
+			memberVO.setName(jsName.get("nickname").toString());
+			//kakaoMemberVO.setRes_reg_num(jsBirthday.get("gender").toString());
+			//kakaoMemberVO.setGender(jsGender.get("gender").toString());
+			////////////////////////////////////////////////////////////
+			//System.out.println("주민등록번호 : "+jsBirthday.get("gender").toString());
+			//System.out.println("성별 : "+jsGender.get("gender").toString());
+			memberVO.setAccess_token(access_token);
+		}else {
+			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		}
+		br.close();
+
+		return memberVO;
 	}
 }
