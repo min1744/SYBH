@@ -16,5 +16,6 @@
 		<typeAlias type="com.hospital.pay.PayVO" alias="PayVO"/>
 		<typeAlias type="com.hospital.medicalTeam.MedicalTeamVO" alias="MedicalTeamVO"/>
 		<typeAlias type="com.hospital.checkup.CheckUpVO" alias="CheckUpVO"/>
+		<typeAlias type="com.hospital.news.NewsVO" alias="NewsVO"/>
 	</typeAliases>
 </configuration>
