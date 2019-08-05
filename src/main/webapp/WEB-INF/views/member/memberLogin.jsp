@@ -78,30 +78,6 @@
 				}
 			});
 		});
-
-		$("#logout").click(function() {
-			//logout();
-			location.href="./kakaoLogout";
-		});
-	    
-	    //로그아웃
-	    function logout() {
-	    	var o = window.open("http://developers.kakao.com/logout");
-	    	
-		   /*  Kakao.Auth.logout(function() {
-				alert('logout');
-			}); */
-		}
-	    
-	    //현재상태
-	    function status() {
-		    Kakao.Auth.getStatus(function(statusObj) {
-				console.log(statusObj);
-			});
-		    
-	    status();
-		}
-	  //]]>
 	});
 </script>
 </head>
@@ -137,7 +113,6 @@
 					<li style="margin: 0 5px;">│</li>
 					<li><a href="./memberAgree">회원가입</a></li>
 				</ul>
-				<button id="naver">네이버 아이디로 로그인</button>
 				<img id="kakaoLogin" src="../resources/images/kakao_account_login_btn_medium_narrow.png">
 			</div>
 		</div>

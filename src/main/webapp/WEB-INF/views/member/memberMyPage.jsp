@@ -8,12 +8,21 @@
 <link href="../resources/css/memberMypage.css" rel="stylesheet">
 <script type="text/javascript">
 $(function() {
-	//회원탈퇴
+	//회원탈퇴(일반 회원)
 	$("#memberDelete").click(function() {
 		var result = confirm("정말 회원탈퇴 하시겠습니까?");
 		if(result){
 			alert("회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
 			location.href = "./memberDelete";
+		}
+	});
+	
+	//회원탈퇴(카카오톡 회원)
+	$("#kakaoDelete").click(function() {
+		var result = confirm("정말 회원탈퇴 하시겠습니까?");
+		if(result){
+			alert("회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
+			location.href = "./kakaoDelete";
 		}
 	});
 });
@@ -35,41 +44,96 @@ $(function() {
 					<table>
 						<tr>
 							<th>아이디</th>
-							<td>${memberVO.id}</td>
+							<c:choose>
+								<c:when test="${empty memberVO.id}">
+									<td>정보가 없습니다.</td>
+								</c:when>
+								<c:otherwise>
+									<td>${memberVO.id}</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 						<tr>
 							<th>이름</th>
-							<td>${memberVO.name}</td>
+							<c:choose>
+								<c:when test="${empty memberVO.name}">
+									<td>정보가 없습니다.</td>
+								</c:when>
+								<c:otherwise>
+									<td>${memberVO.name}</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 						<tr>
 							<th>주민등록번호</th>
-							<td>${memberVO.res_reg_num}</td>
+							<c:choose>
+								<c:when test="${empty memberVO.res_reg_num}">
+									<td>정보가 없습니다.</td>
+								</c:when>
+								<c:otherwise>
+									<td>${memberVO.res_reg_num}</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 						<tr>
 							<th>핸드폰 번호</th>
-							<td>${memberVO.phone}</td>
+							<c:choose>
+								<c:when test="${empty memberVO.phone}">
+									<td>정보가 없습니다.</td>
+								</c:when>
+								<c:otherwise>
+									<td>${memberVO.phone}</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td>${memberVO.email}</td>
+							<c:choose>
+								<c:when test="${empty memberVO.email}">
+									<td>정보가 없습니다.</td>
+								</c:when>
+								<c:otherwise>
+									<td>${memberVO.email}</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 						<tr>
 							<th>성별</th>
-							<td>
 							<c:choose>
-								<c:when test="${memberVO.gender eq 1}">남자</c:when>
-								<c:otherwise>여자</c:otherwise>
+								<c:when test="${empty memberVO.gender}">
+									<td>정보가 없습니다.</td>
+								</c:when>
+								<c:when test="${memberVO.gender eq 1}">
+									<td>남자</td>
+								</c:when>
+								<c:when test="${memberVO.gender eq 2}">
+									<td>여자</td>
+								</c:when>
+								<c:otherwise>
+									<td>정보가 없습니다.</td>
+								</c:otherwise>
 							</c:choose>
+							<td>
 							</td>
 						</tr>
 						<tr>
 							<th>나이</th>
-							<td>${memberVO.age}세</td>
+							<c:choose>
+								<c:when test="${empty memberVO.age}">
+									<td>정보가 없습니다.</td>
+								</c:when>
+								<c:when test="${not empty age_range}">
+									<td>${age_range}세</td>
+								</c:when>
+								<c:otherwise>
+									<td>${memberVO.age}세</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 					</table>
 					<div id="info_btn">
 						<a href="./memberReLogin" id="memberUpdate">회원정보 수정</a>
-						<input type="button" id="memberDelete" value="회원탈퇴">
+						<input type="button" id="${variety}Delete" value="회원탈퇴">
 					</div>
 				</div>
 				<!-- 일반진료 -->
