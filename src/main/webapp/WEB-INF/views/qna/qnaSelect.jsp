@@ -30,8 +30,10 @@
 		    }
 		});
 		
+
 		
-		var id = '${memberVO.id}';
+		
+		var id = $('.c_list_writer').text();
 		var sub = id.substring(0, 4);
 		var str = id.substr(4, 7);
 		str = '*****';
@@ -44,7 +46,7 @@
 		
 		var curPage = 1;
 		
-		getList(); //함수호출
+		getList(1); //함수호출
 		
 		//댓글 등록하기 코드
 		$('#comment_btn').click(function() {
@@ -77,9 +79,8 @@
 		
 		//리스트 가져오기
 		function getList(count) {
-			$.get("../comments/commentsList?num=41&curPage=1",
+			$.get("../comments/commentsList?num=41&curPage="+count,
 					function(data) {
-						var data = data.trim();
 						if (count == 1) {
 							$('.commentslist').html(data);
 						} else {
