@@ -22,5 +22,5 @@ public interface BoardDAO {
 	
 	public List<BoardVO> getList(PageMaker pageMaker) throws Exception;
 	
-	public int addHit() throws Exception;
+	public int addHit(int num) throws Exception;
 }

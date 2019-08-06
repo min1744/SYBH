@@ -30,7 +30,7 @@
   	select * from 
   	(select rownum R, N.* from
   	(select * from news
-  	  	
+  	 where  	
   <choose>
   		<when test="kind = 1">
   			 title

@@ -56,12 +56,6 @@ public class NoticeDAO implements BoardDAO {
 	public int fixCount()throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"fixCount");
 	}
-	
-	@Override 
-	public int addHit() throws Exception { 
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int setWrite(BoardVO boardVO) throws Exception {
@@ -74,7 +68,10 @@ public class NoticeDAO implements BoardDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
 
+	@Override
+	public int addHit(int num) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
