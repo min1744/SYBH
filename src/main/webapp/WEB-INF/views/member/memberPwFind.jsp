@@ -24,7 +24,7 @@
 			<p id="sub_title">비밀번호를 잊으셨습니까?</p>
 		</div>
 		<div id="find_form">
-			<form action="./memberPwFind" method="post" id="form">
+			<form action="./memberPwUpdate" method="post" id="form">
 				<input type="email" name="email" id="email" placeholder="이메일을 입력하세요">
 			</form>
 			<button id="submit">인증메일 보내기</button>

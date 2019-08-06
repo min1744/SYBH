@@ -50,9 +50,11 @@ public class MemberService {
 		int loginCheck = memberDAO.loginCheck(memberVO.getId());
 		if(loginCheck > 0) {
 			memberVO = memberDAO.login(memberVO);
-			int result = memberDAO.setLoginStatus(memberVO.getId());
-			if(result < 1) {
-				throw new Exception();
+			if(memberVO != null) {
+				int result = memberDAO.setLoginStatus(memberVO.getId());
+				if(result < 1) {
+					throw new Exception();
+				}
 			}
 			map.put("memberVO", memberVO);
 			map.put("loginCheck", loginCheck);
@@ -180,7 +182,7 @@ public class MemberService {
 			mailVO.setSetFrom("alsrms1744@gmail.com");//보내는 사람
 			mailVO.setToMail(email);//받는 사람의 이메일
 			mailVO.setTitle("[SYBH](아이디 찾기)안녕하세요, 쌍용백병원입니다.");//메일 제목
-			mailVO.setContents("<h3>귀하의 아이디는 </h3><h1>"+id+"</h1><h3>입니다.</h3>");//메일 내용
+			mailVO.setContents("귀하의 아이디는 " + id + "입니다.");//메일 내용
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -216,7 +218,7 @@ public class MemberService {
 			mailVO.setSetFrom("alsrms1744@gmail.com");//보내는 사람
 			mailVO.setToMail(email);//받는 사람의 이메일
 			mailVO.setTitle("[SYBH](비밀번호 찾기)안녕하세요, 쌍용백병원입니다.");//메일 제목
-			mailVO.setContents("<h3>귀하의 비밀번호가 임시비밀번호로 변경되었습니다. 임시비밀번호는 </h3><h1>"+pw+"</h1><h3>입니다.</h3><br><h3>비밀번호를 마이페이지에서 변경해주시기 바랍니다.</h3>");//메일 내용
+			mailVO.setContents("귀하의 비밀번호가 임시비밀번호로 변경되었습니다. 임시비밀번호는 " + pw + "입니다. 비밀번호를 마이페이지에서 변경해주시기 바랍니다.");//메일 내용
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -232,6 +234,31 @@ public class MemberService {
 		}
 		
 		return mailVO;
+	}
+	
+	//비밀번호 변경하기
+	public int setPwUpdate(String email, String currPw, String newPw, String newPw2) throws Exception{
+		String pw = memberDAO.getPw(email);
+		int result = 0;
+		if(pw.equals(currPw)) {
+			MemberVO memberVO = new MemberVO();
+			memberVO.setPw(newPw);
+			memberVO.setEmail(email);
+			result= memberDAO.setPwUpdate(memberVO);
+		}
+		
+		return result;
+	}
+	
+	//비밀번호 확인하기
+	public int getPwCheck(MemberVO memberVO) throws Exception{
+		String pw = memberDAO.getPw(memberVO.getEmail());
+		int result = 0;
+		if(pw.equals(memberVO.getPw())) {
+			result = 1;
+		}
+		
+		return result;
 	}
 	
 	//회원가입
@@ -298,11 +325,15 @@ public class MemberService {
 	
 	//이메일 중복확인
 	public int getEmailDuplication(MemberVO memberVO) throws Exception{
-		String email1 = memberVO.getEmail1();
-		String email2 = memberVO.getEmail2();
 		String email = null;
-		if(email1 != null && email2 != null) {
-			email = email1 + "@" + email2;
+		if(memberVO.getEmail() != null) {
+			email = memberVO.getEmail();
+		} else {
+			String email1 = memberVO.getEmail1();
+			String email2 = memberVO.getEmail2();
+			if(email1 != null && email2 != null) {
+				email = email1 + "@" + email2;
+			}
 		}
 		
 		return memberDAO.getEmailDuplication(email);
