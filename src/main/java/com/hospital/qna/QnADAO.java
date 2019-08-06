@@ -47,6 +47,7 @@ public class QnADAO implements BoardDAO{
 	}
 	
 	//hit
+	@Override
 	public int addHit(int num) throws Exception {
 		return sqlSession.update(NAMESPACE+"setHitUpdate", num);
 	}
@@ -81,11 +82,6 @@ public class QnADAO implements BoardDAO{
 		return 0;
 	}
 	
-	@Override
-	public int addHit() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 	@Override
 	public int setWrite(BoardVO boardVO) throws Exception {
