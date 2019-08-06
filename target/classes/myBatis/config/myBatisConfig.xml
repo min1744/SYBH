@@ -17,5 +17,6 @@
 		<typeAlias type="com.hospital.medicalTeam.MedicalTeamVO" alias="MedicalTeamVO"/>
 		<typeAlias type="com.hospital.checkup.CheckUpVO" alias="CheckUpVO"/>
 		<typeAlias type="com.hospital.qna.comments.QnACommentsVO" alias="QnACommentsVO"/>
+		<typeAlias type="com.hospital.qna.QnAVO" alias="QnAVO"/>
 	</typeAliases>
 </configuration>
