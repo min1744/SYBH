@@ -24,7 +24,7 @@
 				<input type="text" name="id" id="id" placeholder="아이디">
 				<input type="password" name="pw" id="pw" placeholder="비밀번호">
 			</form>
-			<button id="login" style="margin-bottom: 80px;">로그인</button>
+			<button id="login" style="margin-bottom: 82px;">로그인</button>
 		</div>
 	</div>
 </div>

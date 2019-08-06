@@ -119,16 +119,40 @@ public class MemberController {
 	@RequestMapping(value = "memberPwFind", method = RequestMethod.GET)
 	public void memberPwFind() throws Exception {}
 	
-	@RequestMapping(value = "memberPwFind", method = RequestMethod.POST)
+	@RequestMapping(value = "memberPwUpdate", method = RequestMethod.POST)
 	public ModelAndView memberPwFind(ModelAndView mv, String email) throws Exception{
 		MailVO mailVO = memberService.getPw(email);
 		if(mailVO != null) {
-			mv.setViewName("member/memberLogin");
+			mv.addObject("email", email);
+			mv.setViewName("member/memberPwUpdate");
 		} else {
 			mv.addObject("message", "존재하지 않는 이메일입니다.");
 			mv.addObject("path", "member/memberPwFind");
 			mv.setViewName("common/messageMove");
 		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberSetPwUpdate", method = RequestMethod.POST)
+	public ModelAndView memberPwUpdate(String email, String currPw, String newPw, String newPw2, ModelAndView mv) throws Exception{
+		int result = memberService.setPwUpdate(email, currPw, newPw, newPw2);
+		if(result > 0) {
+			mv.setViewName("redirect:./memberLogin");
+		} else {
+			mv.addObject("message", "비밀번호 변경을 실패하였습니다.");
+			mv.addObject("path", "redirect:./memberLogin");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberPwCheck", method = RequestMethod.POST)
+	public ModelAndView memberPwCheck(MemberVO memberVO, ModelAndView mv) throws Exception{
+		int result = memberService.getPwCheck(memberVO);
+		mv.addObject("result", result);
+		mv.setViewName("common/message");
 		
 		return mv;
 	}
@@ -243,8 +267,6 @@ public class MemberController {
 		mv.setViewName("member/memberBreakdown");
 		return mv;
 	}
-	
-	
 	
 	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
 	public ModelAndView memberDelete(HttpSession session, ModelAndView mv) throws Exception{

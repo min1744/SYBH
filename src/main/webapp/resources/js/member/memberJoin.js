@@ -503,88 +503,29 @@ $(function() {
 		} else if(alertAge == false){
 			alert('나이를 확인해주세요. 주민등록번호가 잘못되었습니다.');
 		} else {
-			var email2 = $('#email2').val();
 			var site = null;
-			if(email2 == 'naver.com'){
-				//naver
-				site = 'https://nid.naver.com/nidlogin.login?url=http%3A%2F%2Fmail.naver.com%2F';
-			} else if(email2 == 'gmail.com'){
-				//google
-				site = 'https://www.google.com/intl/ko/gmail/about/#';
-			} else if(email2 == 'hanmail.net'){
-				//daum
-				site = 'https://mail.daum.net/login?url=https%3A%2F%2Fmail.daum.net%2F';
-			} else if(email2 == 'empal.com'){
-				//엠팔
-				site = 'http://home.mail.nate.com/login/login.html?s=mail&redirect=http%3A%2F%2Fmail3.nate.com%2F';
-			} else if(email2 == 'hotmail.com'){
-				//SN
-				site = 'http://www.hotmail.com/';
-			} else if(email2 == 'yahoo.co.kr' || email == 'yahoo.com'){
-				//yahoo
-				site = 'https://overview.mail.yahoo.com/';
-			} else if(email2 == 'hanmir.com' && email2 == 'paran.com'){
-				//2004년 7월 17일 한미르는 파란닷컴에 합병
-				//인증불가?
-				site = null;
-			} else if(email2 == 'hitel.net'){
-				//하이텔
-				//인증 불가?
-				//site = 'http://himail.hitel.net/';
-				site = null;
-			} else if(email2 == 'kebi.com'){
-				//깨비메일
-				//인증불가?
-				//site = 'http://mail.kebi.com/';
-				site = null;
-			} else if(email2 == 'netian.com'){
-				//네띠앙
-				site = 'https://www.netian.com/usr/com/index.vw';
-			} else if(email2 == 'nate.com'){
-				//네이트
-				site = 'http://home.mail.nate.com/login/login.html?s=mail&redirect=http%3A%2F%2Fmail3.nate.com%2F';
-			} else if(email2 == 'dreamwiz.com'){
-				//드림위즈
-				//2019년7월30일부로 서비스 종료
-				//site = 'https://uid.dreamwiz.com/login/?::GET::https://nmail.dreamwiz.com/nmail';
-				site = null;
-			} else if(email2 == 'orgio.net'){
-				//오르지오
-				//인증불가?
-				//site = 'http://www.orgio.net/';
-				site = null;
-			} else if(email2 == 'korea.com'){
-				//코리아닷컴
-				site = 'http://www.korea.com';
-			} else if(email2 == 'wail.co.kr'){
-				//W@IL
-				//인증 불가?
-				//site = 'http://www.wail.co.kr/';
-				site = null;
-			} else if(email2 == 'lycos.co.kr'){
-				//라이코스
-				site = 'http://www.lycos.co.kr/';
-			} else if(email2 == 'chol.com'){
-				//천리안
-				site = 'http://www.chol.com';
-			} else if(email2 == 'intizen.com'){
-				//인티즌
-				//인증 불가?
-				//site = 'http://www.intizen.com';
-				site = null;
-			} else if(email2 == 'freechal.com'){
-				//프리챌
-				//인증불가?
-				//site = 'http://www.freechal.com/';
-				site = null;
-			} else if(email2 == 'teramail.com'){
-				//테라메일
-				site = 'http://www.teramail.com';
-			} else if(email2 == 'metq.com'){
-				//메트큐
-				//인증불가?
-				//site = 'http://metq.com';
-				site = null;
+			var email2 = $('#email2').val();
+			var address = ['naver.com', 'gmail.com', 'hanmail.net',
+						   'empal.com', 'hotmail.com', 'yahoo.co.kr',
+						   'hanmir.com', 'hitel.net', 'kebi.com',
+						   'netian.com', 'nate.com', 'dreamwiz.com',
+						   'orgio.net', 'korea.com', 'wail.co.kr',
+						   'lycos.co.kr', 'chol.com', 'intizen.com',
+						   'freechal.com', 'teramail.com', 'metq.com'];
+			//드림위즈는 2019년7월30일부로 서비스 종료
+			//나머지 null값은 인증불가(?)
+			var page = ['https://nid.naver.com/nidlogin.login?url=http%3A%2F%2Fmail.naver.com%2F', 'https://www.google.com/intl/ko/gmail/about/#', 'https://mail.daum.net/login?url=https%3A%2F%2Fmail.daum.net%2F',
+						'http://home.mail.nate.com/login/login.html?s=mail&redirect=http%3A%2F%2Fmail3.nate.com%2F', 'http://www.hotmail.com/', 'https://overview.mail.yahoo.com/',
+						null, null, null,
+						'https://www.netian.com/usr/com/index.vw', 'http://home.mail.nate.com/login/login.html?s=mail&redirect=http%3A%2F%2Fmail3.nate.com%2F', null,
+						null, 'http://www.korea.com', null,
+						'http://www.lycos.co.kr/', 'http://www.chol.com', null,
+						null, 'http://www.teramail.com', null];
+			for(var i = 0; i < address.length; i++){
+				if(email2 == address[i]){
+					site = page[i];
+					break;
+				}
 			}
 			
 			if(site == null){
@@ -604,7 +545,9 @@ $(function() {
 					alert("회원가입 되었습니다. 이메일 인증 후 사용 가능합니다.");
 				}
 				if(!originEmail != updateEmail){
-					window.open(site, 'newWindow');//브라우저 새 창 열기
+					if(!originEmail == updateEmail){
+						window.open(site, 'newWindow');//브라우저 새 창 열기
+					}
 					$("#form").submit();
 				}
 			}
