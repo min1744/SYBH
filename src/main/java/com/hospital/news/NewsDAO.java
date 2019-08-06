@@ -49,6 +49,8 @@ public class NewsDAO {
 		return sqlSession.update(NAMESPACE+"addHit", num);
 	}
 	
+	//list
+	
 	
 
 }

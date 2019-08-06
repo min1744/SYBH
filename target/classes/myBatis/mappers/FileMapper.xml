@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="FileMapper">
+  
+  <select id="getList" parameterType="Integer" resultType="FileDTO">
+  select * from files where num=#{num}
+  </select>
+  
+  <delete id="setDelete" parameterType="Integer">
+  delete files where fnum=#{fnum}
+  </delete>
+  <delete id="setDeleteAll" parameterType="Integer">
+  delete files where num=#{num}
+  </delete>
+  
+  <insert id="setWrite" parameterType="java.util.List">
+  	<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+  		select news_seq.nextval as id from dual
+  	</selectKey>
+  	<foreach collection="list" item="item" index="i" separator=" ">	
+  		into files values
+  		(
+  		news_seq.nextval +#{i},
+  		#{item.num},
+  		#{item.fname},
+  		#{item.oname}
+  		)
+  	</foreach>	  
+  		select * from dual
+  	
+  </insert>
+    
+  </mapper>
