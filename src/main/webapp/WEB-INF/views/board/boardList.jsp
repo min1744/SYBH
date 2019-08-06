@@ -14,13 +14,24 @@ $(function() {
 			$(this).closest('tr').css({
 				'background-color': '#f5f5f5'
 				});
+			
+			$(this).closest('tr').mouseover(function() {
+				$(this).css({
+					'background-color': '#f8f8f8'
+				});
+			});
+			
+			$(this).closest('tr').mouseleave(function() {
+				$(this).css({
+					'background-color': '#f5f5f5'
+				});
+			});
+			
 			$('.depth_a').css({
 				'font-weight':'700',
 				'color': '#153F91'
 				});
-		} else {
-			
-		}
+			}
 		
 		$(this).mouseover(function() {
 			$(this).removeAttr('title');
