@@ -6,27 +6,7 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberMypage.css" rel="stylesheet">
-<script type="text/javascript">
-	$(function() {
-		//회원탈퇴(일반 회원)
-		$("#memberDelete").click(function() {
-			var result = confirm("정말 회원탈퇴 하시겠습니까?");
-			if (result) {
-				alert("회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
-				location.href = "./memberDelete";
-			}
-		});
-
-		//회원탈퇴(카카오톡 회원)
-		$("#kakaoDelete").click(function() {
-			var result = confirm("정말 회원탈퇴 하시겠습니까?");
-			if (result) {
-				alert("회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
-				location.href = "./kakaoDelete";
-			}
-		});
-	});
-</script>
+<script type="text/javascript" src="../resources/js/member/memberMyPage.js"></script>
 </head>
 <body>
 	<!-- header 추가 -->
@@ -42,6 +22,9 @@
 					<div id="myInfo_list">
 						<h3>내 정보</h3>
 						<table>
+							<!-- 민근 : kakao로그인 시 뿌려지는 member데이터들과 -->
+							<!-- 일반회원 로그인 시 뿌려지는 데이터들의 차이로 HTML 수정 -->
+							<!-- variety : kakao(카카오 로그인) / member(일반 로그인) -->
 							<c:choose>
 								<c:when test="${variety eq 'kakao'}">
 									<tr>

@@ -46,6 +46,26 @@ public class MemberDAO {
 		return sqlSession.selectOne(NAMESPACE+"login", memberVO);
 	}
 	
+	//login시 상태 변경
+	public int setLoginStatus(String id) throws Exception{
+		return sqlSession.update(NAMESPACE+"setLoginStatus", id);
+	}
+	
+	//logout시 상태 변경
+	public int setLogoutStatus(String id) throws Exception{
+		return sqlSession.update(NAMESPACE+"setLogoutStatus", id);
+	}
+	
+	//로그인 되어있는지 확인
+	public int loginCheck(String id) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"loginCheck", id);
+	}
+	
+	//신고당했을 때 +1 시켜주기
+	public int setUpdateStatedNum(String id) throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpdateStatedNum", id);
+	}
+	
 	//비밀번호 분실로 인한 비밀번호 난수로 변경
 	public int setPwUpdate(MemberVO memberVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setPwUpdate", memberVO);

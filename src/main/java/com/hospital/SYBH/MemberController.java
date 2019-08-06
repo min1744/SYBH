@@ -1,8 +1,10 @@
 ﻿package com.hospital.SYBH;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -44,8 +46,18 @@ public class MemberController {
 	
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
-		KakaoMemberVO kakaoMemberVO = (KakaoMemberVO)session.getAttribute("memberVO");
-		MemberVO memberVO = memberService.getSelect(kakaoMemberVO.getId());
+		String variety = (String)session.getAttribute("variety");
+		KakaoMemberVO kakaoMemberVO = null;
+		MemberVO memberVO = null;
+		String id = null;
+		if(variety.equals("kakao")) {
+			kakaoMemberVO = (KakaoMemberVO)session.getAttribute("memberVO");
+			id = kakaoMemberVO.getId();
+		} else {
+			memberVO = (MemberVO)session.getAttribute("memberVO");
+			id = memberVO.getId();
+		}
+		memberVO = memberService.getSelect(id);
 		if(memberVO != null) {
 			mv.addObject("memberVO", memberVO);
 			mv.addObject("variety", "member");
@@ -126,11 +138,19 @@ public class MemberController {
 	
 	@RequestMapping(value = "memberLogin", method = RequestMethod.POST)
 	public ModelAndView login(MemberVO memberVO, HttpSession session, ModelAndView mv) throws Exception{
-		memberVO = memberService.login(memberVO);
+		HashMap<String, Object> map = memberService.login(memberVO);
+		memberVO = (MemberVO)map.get("memberVO");
+		//int loginCheck = (Integer)map.get("loginCheck");
 		if(memberVO != null) {
-			session.setAttribute("memberVO", memberVO);
-			session.setAttribute("variety", "member");
-			mv.setViewName("redirect:../");
+			//if(loginCheck == 1) {
+				session.setAttribute("memberVO", memberVO);
+				session.setAttribute("variety", "member");
+				mv.setViewName("redirect:../");
+			/*} else {
+				mv.addObject("message", "다른 컴퓨터에서 사용하고 있는 아이디입니다.");
+				mv.addObject("path", "../member/memberLogin");
+				mv.setViewName("common/messageMove");
+			}*/
 		} else {
 			mv.addObject("message", "로그인 실패하셨습니다.");
 			mv.addObject("path", "../member/memberLogin");
@@ -141,10 +161,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping("memberLogout")
-	public String logOut(HttpSession session) throws Exception{
-		session.invalidate();
+	public ModelAndView logout(HttpSession session, ModelAndView mv) throws Exception{
+		int result = memberService.logout(session);
+		if(result > 0) {
+			session.invalidate();
+			mv.setViewName("redirect:../");
+		} else {
+			mv.addObject("message", "로그아웃을 실패하였습니다.");
+			mv.addObject("path", "redirect:../");
+			mv.setViewName("common/messageMove");
+		}
 		
-		return "redirect:../";
+		return mv;
 	}
 	
 	@RequestMapping(value = "memberAgree", method = RequestMethod.GET)

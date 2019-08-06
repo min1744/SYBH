@@ -8,7 +8,7 @@
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberJoin.css" rel="stylesheet">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="../resources/js/memberJoin.js"></script>
+<script type="text/javascript" src="../resources/js/member/memberJoin.js"></script>
 </head>
 <body>
 	<!-- header 추가 -->
