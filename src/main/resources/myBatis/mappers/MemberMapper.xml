@@ -55,6 +55,26 @@
 		SELECT * FROM MEMBER WHERE ID = #{id} AND PW = CRYPTO_AES256.ENC_AES(#{pw})
 	</select>
 	
+	<!-- Login시 상태 변경 -->
+	<update id="setLoginStatus" parameterType="String">
+		UPDATE MEMBER SET STATUS = 2 WHERE ID = #{id}
+	</update>
+	
+	<!-- Logout시 상태 변경 -->
+	<update id="setLogoutStatus" parameterType="String">
+		UPDATE MEMBER SET STATUS = 1 WHERE ID = #{id}
+	</update>
+	
+	<!-- 로그인 되어있는지 확인 -->
+	<select id="loginCheck" parameterType="String" resultType="Integer">
+		SELECT STATUS FROM MEMBER WHERE ID = #{id}
+	</select>
+	
+	<!-- 신고당했을 때 +1 -->
+	<update id="setUpdateStatedNum" parameterType="String">
+		UPDATE MEMBER SET STATED_NUM = STATED_NUM + 1 WHERE ID = #{id}
+	</update>
+	
 	<!-- 아이디 찾기 -->
 	<select id="getId" parameterType="String" resultType="String">
 		SELECT RPAD(SUBSTR(ID, 1, 4), LENGTH(ID), '*') FROM MEMBER WHERE EMAIL = #{email}
@@ -92,6 +112,8 @@
 			#{age},
 			1,
 			0,
+			0,
+			1,
 			0
 		)
 	</insert>

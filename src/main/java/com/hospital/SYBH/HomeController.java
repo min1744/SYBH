@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.board.BoardVO;
+import com.hospital.member.MemberDAO;
+import com.hospital.member.MemberService;
+import com.hospital.member.MemberVO;
 import com.hospital.notice.NoticeService;
 import com.hospital.util.PageMaker;
 
@@ -18,6 +21,8 @@ import com.hospital.util.PageMaker;
 public class HomeController {
 	@Inject
 	private NoticeService noticeService;
+	@Inject
+	private MemberService memberService;
 	
 	//진우 : noticeList
 	//민근 : variety(member or kakao)

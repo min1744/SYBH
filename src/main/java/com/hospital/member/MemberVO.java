@@ -68,9 +68,27 @@ public class MemberVO {
 	//1 : user
 	//2 : admin
 	private int grade;
+	//이메일 인증 코드
 	private String authCode;
+	//이메일 인증 여부
 	private String authStatus;
+	//로그인 상태(1 : 로그인X / 2 : 로그인O)
+	private int status;
+	//신고 당한 횟수
+	private int stated_num;
 	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public int getStated_num() {
+		return stated_num;
+	}
+	public void setStated_num(int stated_num) {
+		this.stated_num = stated_num;
+	}
 	public String getId() {
 		return id;
 	}

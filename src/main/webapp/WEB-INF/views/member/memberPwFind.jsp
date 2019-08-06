@@ -6,7 +6,7 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberFind.css" rel="stylesheet">
-<script type="text/javascript" src="../resources/js/memberFind.js"></script>
+<script type="text/javascript" src="../resources/js/member/memberFind.js"></script>
 </head>
 <body>
 <!-- header 추가 -->

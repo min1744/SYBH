@@ -44,9 +44,30 @@ public class MemberService {
 		return memberDAO.getList(pageMaker);
 	}
 	
-	//login
-	public MemberVO login(MemberVO memberVO) throws Exception{
-		return memberDAO.login(memberVO);
+	//일반회원 login
+	public HashMap<String, Object> login(MemberVO memberVO) throws Exception{
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int loginCheck = memberDAO.loginCheck(memberVO.getId());
+		if(loginCheck > 0) {
+			memberVO = memberDAO.login(memberVO);
+			int result = memberDAO.setLoginStatus(memberVO.getId());
+			if(result < 1) {
+				throw new Exception();
+			}
+			map.put("memberVO", memberVO);
+			map.put("loginCheck", loginCheck);
+		} else {
+			throw new Exception();
+		}
+		
+		return map;
+	}
+	
+	//일반회원 logout
+	public int logout(HttpSession session) throws Exception{
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		
+		return memberDAO.setLogoutStatus(id);
 	}
 	
 	//MyPage
@@ -394,7 +415,6 @@ public class MemberService {
 				//System.out.println("age_range : "+js_kakao_account.get("age_range").toString());
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println(e);
 			}
 		}else {
 			br = new BufferedReader(new InputStreamReader(con.getInputStream()));
