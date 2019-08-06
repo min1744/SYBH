@@ -19,45 +19,58 @@ public class QnADAO implements BoardDAO{
 	private SqlSession sqlSession;
 	private static final String NAMESPACE="QnaMapper.";
 
+	
+	//totalCount
 	@Override
 	public int getTotalCount(PageMaker pageMaker) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getCount", pageMaker);
 	}
 	
+	//write
 	public int setWrite(QnAVO qnaVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setWrite", qnaVO);
 	}
-
 	
+	//list
 	public List<QnAVO> getList(Map<String, Object> map) throws Exception {
 		return sqlSession.selectList(NAMESPACE+"getList", map);
 	}
 	
-
-	@Override
-	public int setUpdate(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setDelete(int num) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public BoardVO getSelect(int num) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	//hit
+	public int addHit(int num) throws Exception {
+		return sqlSession.update(NAMESPACE+"setHitUpdate", num);
 	}
 	
+	//update
+	public int setUpdate(QnAVO qnaVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setUpdate", qnaVO);
+	}
+	
+	//select
+	@Override
+	public QnAVO getSelect(int num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getSelect", num);
+	}
+
+	//delete
+	@Override
+	public int setDelete(int num) throws Exception {
+		return sqlSession.delete(NAMESPACE+"setDelete", num);
+	}
+
+	/////////////////////////////////////////////////////////////////
 
 	@Override
 	public List<BoardVO> getList(PageMaker pageMaker) throws Exception {
 		return null;
 	}
 
+	@Override
+	public int setUpdate(BoardVO boardVO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	@Override
 	public int addHit() throws Exception {
 		// TODO Auto-generated method stub

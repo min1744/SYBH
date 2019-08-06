@@ -13,7 +13,9 @@
 
 
 
-<!-- ------------ notice list -------------- -->
+<!-- ///////////////////////////////////////////////////////// -->
+<!-- ---------------------- 공지사항 list ---------------------- -->
+<!-- ///////////////////////////////////////////////////////// -->
 
 <c:if test="${board eq 'notice'}">
 
@@ -123,7 +125,11 @@
 
 </c:if>
 
-<!-- ------------------- QNA list ---------------- -->
+
+
+<!-- ///////////////////////////////////////////////////////// -->
+<!-- ---------------------- qna list ---------------------- -->
+<!-- ///////////////////////////////////////////////////////// -->
 
 
 <c:if test="${board eq 'qna'}">
@@ -254,20 +260,20 @@
 						<div id="paging">
 							<ul>
 								<c:if test="${pager.curBlock>1}">
-								<li><a href="./complaintList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+								<li><a href="./complaint?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
 							</c:if>
 							<c:choose>
 								<c:when test="${pager.totalCount == 0 }">
-									<li><a href="./complaintList?curPage=1&kind=${pager.kind}$search=${pager.search}">1</a></li>
+									<li><a href="./complaint?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
 								</c:when>
 								<c:otherwise>
 									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-										<li><a href="./complaintList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+										<li><a href="./complaint?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
 							<c:if test="${pager.curBlock<pager.totalBlock}">
-								<li><a href="./complaintList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+								<li><a href="./complaint?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
 							</c:if>
 							</ul>
 						</div>
@@ -276,20 +282,20 @@
 						<div id="paging">
 							<ul>
 								<c:if test="${pager.curBlock>1}">
-								<li><a href="./praiseList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+								<li><a href="./praise?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
 							</c:if>
 							<c:choose>
 								<c:when test="${pager.totalCount == 0 }">
-									<li><a href="./praiseList?curPage=1&kind=${pager.kind}$search=${pager.search}">1</a></li>
+									<li><a href="./praise?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
 								</c:when>
 								<c:otherwise>
 									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-										<li><a href="./praiseList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+										<li><a href="./praise?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
 							<c:if test="${pager.curBlock<pager.totalBlock}">
-								<li><a href="./praiseList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+								<li><a href="./praise?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
 							</c:if>
 							</ul>
 						</div>
@@ -302,7 +308,7 @@
 							</c:if>
 							<c:choose>
 								<c:when test="${pager.totalCount == 0 }">
-									<li><a href="./qnaList?curPage=1&kind=${pager.kind}$search=${pager.search}">1</a></li>
+									<li><a href="./qnaList?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
 								</c:when>
 								<c:otherwise>
 									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
@@ -320,16 +326,41 @@
 			
 			
 			
-			
-			<div id="search_box">
-				<select name="kind" id="select">
-					<option value="1">제목</option>
-					<option value="2">작성자</option>
-					<option value="3">내용</option>
-				</select>
-				<input type="text" name="search" id="search">
-				<button id="btn">검색</button>
-			</div>
+			<c:choose>
+				<c:when test="${menu eq 'complaint'}">
+					<div id="search_box">
+						<select name="kind" id="select">
+							<option value="1">제목</option>
+							<option value="2">작성자</option>
+							<option value="3">내용</option>
+						</select>
+						<input type="text" name="search" id="search">
+						<button id="btn">검색</button>
+					</div>
+				</c:when>
+				<c:when test="${menu eq 'praise'}">
+					<div id="search_box">
+						<select name="kind" id="select">
+							<option value="1">제목</option>
+							<option value="2">작성자</option>
+							<option value="3">내용</option>
+						</select>
+						<input type="text" name="search" id="search">
+						<button id="btn">검색</button>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div id="search_box">
+						<select name="kind" id="select">
+							<option value="1">제목</option>
+							<option value="2">작성자</option>
+							<option value="3">내용</option>
+						</select>
+						<input type="text" name="search" id="search">
+						<button id="btn">검색</button>
+					</div>
+				</c:otherwise>
+			</c:choose>
 			
 			
 		

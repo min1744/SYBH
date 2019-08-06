@@ -62,7 +62,7 @@
   
   <!-- 글 수정 -->
   <update id="setUpdate" parameterType="QnAVO">
-  	update qna set title=#{title}, #{writer}, #{contents} where num=#{num}
+  	update qna set title=#{title}, writer=#{writer}, contents=#{contents}, category=#{category} where num=#{num}
   </update>
   
   <!-- 글 삭제 -->
@@ -86,7 +86,7 @@
   </resultMap>
   
   <!-- select -->
-  <select id="getSelect" parameterType="Integer">
+  <select id="getSelect" parameterType="Integer" resultType="QnAVO">
   	select * from qna where num=#{num}
   </select>
   
@@ -97,8 +97,18 @@
   	(select rownum R, Q.* from
   	(select * from qna
   	where menu=#{menu} and 
-  	<include refid="subChoose" />
-  	like '%'||#{search}||'%' order by ref desc, step asc) Q)
+  	<choose>
+  			<when test="kind == 1">
+  				title
+  			</when>
+  			<when test="kind == 2">
+  				writer
+  			</when>
+  			<otherwise>
+  				contents
+  			</otherwise>
+  		</choose>
+  	like '%'||#{pager.search}||'%' order by ref desc, step asc) Q)
   	where R between #{pager.startRow} and #{pager.lastRow}
   </select>
   
@@ -119,5 +129,11 @@
   		</choose>
   			like '%'||#{search}||'%'
   </select>
+  
+  
+  <!-- hit -->
+  <update id="setHitUpdate" parameterType="Integer">
+  	update qna set hit=hit+1 where num=#{num}
+  </update>
   
   </mapper>

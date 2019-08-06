@@ -19,35 +19,32 @@ public class QnAService implements BoardService{
 	@Inject
 	private QnADAO qnaDAO;
 	
+	
+	//write
 	public int setWrite(QnAVO qnaVO, HttpSession session) throws Exception {
-		
 		return qnaDAO.setWrite(qnaVO);
 	}
-
-	@Override
-	public int setWrite(BoardVO boardDTO, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	//update
+	public int setUpdate(QnAVO qnaVO) throws Exception {
+		return qnaDAO.setUpdate(qnaVO);
 	}
 
+	//delete
 	@Override
 	public int setDelete(int num, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int setUpdate(BoardVO boardDTO, HttpSession session) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public BoardVO getSelect(int num) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return qnaDAO.setDelete(num);
 	}
 	
+	//select
+	@Override
+	public QnAVO getSelect(int num) throws Exception {
+		QnAVO qnaVO = qnaDAO.getSelect(num);
+		qnaDAO.addHit(num);
+		return qnaVO;
+	}
+	
+	//list
 	public List<QnAVO> getList(PageMaker pageMaker, String menu) throws Exception {
 		
 		pageMaker.makeRow();
@@ -59,12 +56,25 @@ public class QnAService implements BoardService{
 		return qnaDAO.getList(map);
 	}
 
+	
+	//////////////////////////////////////////////////////////////////
+	
 	@Override
 	public List<BoardVO> getList(PageMaker pageMaker) throws Exception {
-		
 		return null;
 	}
-	
+
+	@Override
+	public int setWrite(BoardVO boardDTO, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int setUpdate(BoardVO boardDTO, HttpSession session) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 }

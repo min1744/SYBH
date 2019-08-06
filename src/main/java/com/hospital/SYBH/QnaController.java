@@ -55,6 +55,27 @@ public class QnaController {
 	}
 	
 	
+	/////////////// 공통 update - post
+	//update - POST
+	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
+	public ModelAndView qnaUpdate(QnAVO qnaVO) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		int result = qnaService.setUpdate(qnaVO);
+		if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+			mv.setViewName("redirect:./complaint");
+		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+			mv.setViewName("redirect:./praise");
+		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+			mv.setViewName("redirect:./qnaList");
+		} else {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./complaint");
+			mv.setViewName("common/massageMove");
+		}
+		return mv;
+	}
+	
 	
 	////////////////////////////////////////건의합니다
 	
@@ -73,7 +94,7 @@ public class QnaController {
 		return mv;
 	}
 	
-	//write
+	//write - get
 	@RequestMapping(value = "complaintWrite", method = RequestMethod.GET)
 	public ModelAndView complaintWrite() throws Exception {
 		
@@ -86,17 +107,38 @@ public class QnaController {
 	
 	//select
 	@RequestMapping(value = "complaintSelect", method = RequestMethod.GET)
-	public ModelAndView getSelect(PageMaker pageMaker) throws Exception {
+	public ModelAndView complaintSelect(int num) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
-		int totalCount = qnACommentsService.getTotalCount(pageMaker);
+		BoardVO boardVO = qnaService.getSelect(num);
 		
-		mv.addObject("totalCount", totalCount);
+		mv.addObject("vo", boardVO);
 		mv.addObject("menu", "complaint");
 		mv.setViewName("board/boardSelect");
 		
 		return mv;
 		
+	}
+	
+	//update - get
+	@RequestMapping(value = "complaintUpdate", method = RequestMethod.GET)
+	public ModelAndView complaintUpdate(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		QnAVO qnaVO = qnaService.getSelect(num);
+		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("menu", "complaint");
+		mv.setViewName("board/boardUpdate");
+			
+		return mv;
+	}
+	
+	
+	//delete
+	@RequestMapping(value = "complaintDelete", method = RequestMethod.GET)
+	public String complaintDelete(int num, HttpSession session) throws Exception {
+		int result = qnaService.setDelete(num, session);
+		return "redirect:./complaint";
 	}
 	
 	
@@ -134,9 +176,45 @@ public class QnaController {
 			
 		return mv;
 	}
+	
+	
+	//select
+	@RequestMapping(value = "praiseSelect", method = RequestMethod.GET)
+	public ModelAndView praiseSelect(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+			
+		mv.addObject("vo", boardVO);
+		mv.addObject("menu", "praise");
+		mv.setViewName("board/boardSelect");
+			
+		return mv;
+			
+	}
+	
+	
+	//update - get
+	@RequestMapping(value = "praiseUpdate", method = RequestMethod.GET)
+	public ModelAndView praiseUpdate(int num) throws Exception {
 		
+		ModelAndView mv = new ModelAndView();
+		QnAVO qnaVO = qnaService.getSelect(num);
+		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("menu", "praise");
+		mv.setViewName("board/boardUpdate");
 		
+		return mv;
+	}
+	
 		
+	//delete
+	@RequestMapping(value = "praiseDelete", method = RequestMethod.GET)
+	public String praiseDelete(int num, HttpSession session) throws Exception {
+		int result = qnaService.setDelete(num, session);
+		return "redirect:./praise";
+	}
+	
 	
 	
 	
@@ -168,6 +246,44 @@ public class QnaController {
 		mv.setViewName("board/boardWrite");
 		
 		return mv;
+	}
+	
+	
+	//select
+	@RequestMapping(value = "qnaSelect", method = RequestMethod.GET)
+	public ModelAndView qnaSelect(int num) throws Exception {
+				
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+				
+		mv.addObject("vo", boardVO);
+		mv.addObject("menu", "qna");
+		mv.setViewName("board/boardSelect");
+				
+		return mv;
+				
+	}
+	
+	
+	//update - get
+	@RequestMapping(value = "qnaUpdate", method = RequestMethod.GET)
+	public ModelAndView qnaUpdate(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		QnAVO qnaVO = qnaService.getSelect(num);
+		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("menu", "qna");
+		mv.setViewName("board/boardUpdate");
+			
+		return mv;
+	}
+	
+	
+	//delete
+	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
+	public String qnaDelete(int num, HttpSession session) throws Exception {
+		int result = qnaService.setDelete(num, session);
+		return "redirect:./qnaList";
 	}
 	
 		
