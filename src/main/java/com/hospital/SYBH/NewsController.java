@@ -24,19 +24,21 @@ public class NewsController {
 	
 	
 	
-	//all
-	//@RequestMapping(value = "newsAll", method = RequestMethod.GET)
-	//public ModelAndView allList() throws Exception {
-	//	List<NewsVO> alist=newsService.getList();
-	//	ModelAndView mv = new ModelAndView();
-	//	mv.setViewName("news/newsAll");
-	//	return mv;
-	//}
+
+	@RequestMapping(value = "newsAll", method = RequestMethod.GET)
+	public ModelAndView allList(PageMaker pageMaker,int fnum) throws Exception {
+		List<NewsVO> alist=newsService.getList(pageMaker, fnum);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", alist);
+		mv.addObject("pager", pageMaker);
+		mv.setViewName("news/newsAll");
+		return mv;
+	}
 	
 	//list
 	@RequestMapping(value = "newsList", method = RequestMethod.GET)
-	public ModelAndView getList(PageMaker pageMaker) throws Exception {
-		List<NewsVO> lists=newsService.getList(pageMaker);
+	public ModelAndView getList(PageMaker pageMaker,int fnum) throws Exception {
+		List<NewsVO> lists=newsService.getList(pageMaker,fnum);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list",lists);
 		mv.addObject("pager", pageMaker);

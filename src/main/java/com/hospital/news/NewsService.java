@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import com.hospital.news.newsimages.NewsImagesDAO;
+import com.hospital.news.newsimages.NewsImagesVO;
 import com.hospital.util.PageMaker;
 
 @Service
@@ -14,6 +16,8 @@ public class NewsService {
 	
 	@Inject
 	private NewsDAO newsDAO;
+	private NewsImagesDAO newsImagesDAO;
+	
 	//write
 	public int setWrite(NewsVO newsVO, HttpSession session) throws Exception{
 		int result = newsDAO.setWrite(newsVO);
@@ -37,10 +41,10 @@ public class NewsService {
 		return newsVO;
 	}
 	//list
-	public List<NewsVO> getList(PageMaker pageMaker) throws Exception{
+	public List<NewsVO> getList(PageMaker pageMaker,int fnum) throws Exception{
 		pageMaker.makeRow();
 		List<NewsVO> list = newsDAO.getList(pageMaker);
-		
+		NewsImagesVO newsImagesVO = newsImagesDAO.getSelect(fnum);
 		int totalCount = newsDAO.getTotalCount(pageMaker);
 		pageMaker.makePage(totalCount);
 		return list;

@@ -18,6 +18,6 @@
 		<typeAlias type="com.hospital.checkup.CheckUpVO" alias="CheckUpVO"/>
 		<typeAlias type="com.hospital.qna.comments.QnACommentsVO" alias="QnACommentsVO"/>
 		<typeAlias type="com.hospital.news.NewsVO" alias="NewsVO"/>
-		<typeAlias type="com.hospital.news.NewsImagesVO" alias="NewsImagesVO"/>
+		<typeAlias type="com.hospital.news.newsimages.NewsImagesVO" alias="NewsImagesVO"/>
 	</typeAliases>
 </configuration>

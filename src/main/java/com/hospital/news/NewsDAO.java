@@ -43,11 +43,12 @@ public class NewsDAO {
 	
 	public List<NewsVO> getList(PageMaker pageMaker) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getList", pageMaker);
-	}
+		}
 	
 	public int addHit(int num) throws Exception{
 		return sqlSession.update(NAMESPACE+"addHit", num);
 	}
+	
 	
 	//list
 	

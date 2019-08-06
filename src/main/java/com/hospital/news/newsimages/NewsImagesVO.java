@@ -1,4 +1,4 @@
-package com.hospital.news;
+package com.hospital.news.newsimages;
 
 public class NewsImagesVO {
 	
