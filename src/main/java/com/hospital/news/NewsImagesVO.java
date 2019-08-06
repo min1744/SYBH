@@ -2,22 +2,23 @@ package com.hospital.news;
 
 public class NewsImagesVO {
 	
+	private int fnum;
 	private int num;
-	private String pid;
 	private String fname;
 	private String oname;
 	
+	
+	public int getFnum() {
+		return fnum;
+	}
+	public void setFnum(int fnum) {
+		this.fnum = fnum;
+	}
 	public int getNum() {
 		return num;
 	}
 	public void setNum(int num) {
 		this.num = num;
-	}
-	public String getPid() {
-		return pid;
-	}
-	public void setPid(String pid) {
-		this.pid = pid;
 	}
 	public String getFname() {
 		return fname;
@@ -31,6 +32,9 @@ public class NewsImagesVO {
 	public void setOname(String oname) {
 		this.oname = oname;
 	}
+	
+	
+
 	
 	
 
