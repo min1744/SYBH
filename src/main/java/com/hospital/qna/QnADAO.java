@@ -20,6 +20,16 @@ public class QnADAO implements BoardDAO{
 	private static final String NAMESPACE="QnaMapper.";
 
 	
+	//답글 insert
+	public int setReply(BoardVO qnaVO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setReply", qnaVO);
+	}
+	
+	//답글 update(사전작업)
+	public int setReplyUpdate(BoardVO qnaVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnaVO);
+	}
+	
 	//totalCount
 	@Override
 	public int getTotalCount(PageMaker pageMaker) throws Exception {

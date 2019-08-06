@@ -142,6 +142,18 @@ public class QnaController {
 	}
 	
 	
+	//reply
+	@RequestMapping(value = "complaintReply", method = RequestMethod.GET)
+	public ModelAndView setReply(int num) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("num", num);
+		mv.addObject("menu", "complaint");
+		mv.setViewName("board/boardReply");
+		
+		return mv;
+	}
+	
 	
 	
 	

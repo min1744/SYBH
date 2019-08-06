@@ -19,6 +19,16 @@ public class QnAService implements BoardService{
 	@Inject
 	private QnADAO qnaDAO;
 	
+	//답글
+	public int setReply(BoardVO qnaVO) throws Exception {
+		
+		//답글 update
+		int result = qnaDAO.setReplyUpdate(qnaVO);
+		//답글 insert
+		result = qnaDAO.setReply(qnaVO);
+		
+		return result;
+	}
 	
 	//write
 	public int setWrite(QnAVO qnaVO, HttpSession session) throws Exception {
