@@ -1,16 +1,13 @@
 package com.hospital.SYBH;
 
-import java.util.HashMap;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hospital.member.MemberService;
-import com.hospital.member.MemberVO;
+import com.hospital.member.kakao.KakaoMemberVO;
 
 
 @Controller
@@ -21,29 +18,28 @@ public class KakaoController {
 	private MemberService memberService;
 	
 	@RequestMapping(value="kakaoLogin")
-	public void kakaoLogin(MemberVO memberVO, HttpSession session) throws Exception{}
+	public void kakaoLogin() throws Exception{}
 	
 	@RequestMapping(value = "kakaoDelete")
 	public String kakaoDelete(HttpSession session) throws Exception{
-		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
-		memberService.kakaoDelete(memberVO);
+		KakaoMemberVO kakaoMemberVO = (KakaoMemberVO)session.getAttribute("memberVO");
+		memberService.kakaoDelete(kakaoMemberVO);
 		session.invalidate();
 		return "redirect:../";
 	}
 	
 	@RequestMapping(value = "kakaoLogout")
 	public String kakaoLogout(HttpSession session) throws Exception{
-		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
-		memberService.kakaoLogout(memberVO);
+		KakaoMemberVO kakaoMemberVO = (KakaoMemberVO)session.getAttribute("memberVO");
+		memberService.kakaoLogout(kakaoMemberVO);
 		session.invalidate();
 		return "redirect:../";
 	}
 	
 	@RequestMapping(value = "getInfo")
 	public String getInfo(String access_token, HttpSession session) throws Exception{
-		HashMap<String, Object> map = memberService.getInfo(access_token);
-		session.setAttribute("memberVO", (MemberVO)map.get("memberVO"));
-		session.setAttribute("age_range", (String)map.get("age_range"));
+		KakaoMemberVO kakaoMemberVO = memberService.getInfo(access_token);
+		session.setAttribute("memberVO", kakaoMemberVO);
 		session.setAttribute("variety", "kakao");
 		
 		return "redirect:../";
