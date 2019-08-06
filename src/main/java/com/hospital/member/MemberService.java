@@ -325,11 +325,15 @@ public class MemberService {
 	
 	//이메일 중복확인
 	public int getEmailDuplication(MemberVO memberVO) throws Exception{
-		String email1 = memberVO.getEmail1();
-		String email2 = memberVO.getEmail2();
 		String email = null;
-		if(email1 != null && email2 != null) {
-			email = email1 + "@" + email2;
+		if(memberVO.getEmail() != null) {
+			email = memberVO.getEmail();
+		} else {
+			String email1 = memberVO.getEmail1();
+			String email2 = memberVO.getEmail2();
+			if(email1 != null && email2 != null) {
+				email = email1 + "@" + email2;
+			}
 		}
 		
 		return memberDAO.getEmailDuplication(email);

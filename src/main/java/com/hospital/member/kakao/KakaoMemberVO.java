@@ -11,7 +11,7 @@ public class KakaoMemberVO {
 	private String birthday;
 	//성별(male, female)
 	private String gender;
-	//나이(ex : 20~29)
+	//연령대(ex : 20~29)
 	private String age_range;
 	//54자리의 대소문자 영어와 숫자, _
 	private String access_token;

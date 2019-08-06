@@ -7,40 +7,7 @@
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberPwUpdate.css" rel="stylesheet">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="../resources/js/member/memberReLogin.js"></script>
-<script type="text/javascript">
-$(function() {
-	$('#update').click(function() {
-		var newPw = $('#newPw').val();
-		var newPw2 = $('#newPw2').val();
-		console.log(newPw);
-		console.log(newPw2);
-		if(newPw == newPw2){
-			var currPw = $('#currPw').val();
-			var email = $('#email').val();
-			$.ajax({
-				url:"./memberPwCheck",
-				type:"POST",
-				data:{
-					pw:currPw,
-					email:email
-				},
-				success:function(data){
-					data = data.trim();
-					if(data == '1'){
-						alert("비밀번호가 변경되었습니다.");
-						$("#form").submit();
-					} else{
-						alert("'현재 비밀번호'가 일치하지 않습니다.");
-					}
-				}
-			});
-		} else {
-			alert("'새로운 비밀번호'가 일치하지 않습니다.");
-		}
-	});
-});
-</script>
+<script type="text/javascript" src="../resources/js/member/memberPwUpdate.js"></script>
 </head>
 <body>
 <!-- header 추가 -->
