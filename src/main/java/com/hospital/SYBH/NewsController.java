@@ -25,13 +25,13 @@ public class NewsController {
 	
 	
 	//all
-	@RequestMapping(value = "newsAll", method = RequestMethod.GET)
-	public ModelAndView allList() throws Exception {
-		List<NewsVO> alist=newsService.getList();
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("news/newsAll");
-		return mv;
-	}
+	//@RequestMapping(value = "newsAll", method = RequestMethod.GET)
+	//public ModelAndView allList() throws Exception {
+	//	List<NewsVO> alist=newsService.getList();
+	//	ModelAndView mv = new ModelAndView();
+	//	mv.setViewName("news/newsAll");
+	//	return mv;
+	//}
 	
 	//list
 	@RequestMapping(value = "newsList", method = RequestMethod.GET)
