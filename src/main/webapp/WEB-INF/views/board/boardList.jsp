@@ -6,6 +6,29 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/noticeList.css" rel="stylesheet">
+<script type="text/javascript">
+$(function() {	
+	$('.position_2 td').each(function() {
+		var check = $(this).attr("title");
+		if(check==1){
+			$(this).closest('tr').css({
+				'background-color': '#f5f5f5'
+				});
+			$('.depth_a').css({
+				'font-weight':'700',
+				'color': '#153F91'
+				});
+		} else {
+			
+		}
+		
+		$(this).mouseover(function() {
+			$(this).removeAttr('title');
+		});
+		
+	});
+});
+</script>
 </head>
 <body>
 <!-- header 추가 -->
@@ -221,7 +244,17 @@
 							<c:forEach items="${list}" var="complaint">
 							<tr class="position_2">
 								<td class="num">${complaint.num}</td>
-								<td><a href="./complaintSelect?num=${complaint.num}">${complaint.title}</a></td>
+								<td title="${complaint.depth}">
+								<c:forEach begin="1" end="${complaint.depth}">
+								<img width="20px" src="../resources/images/reply.png" style="transform: rotate(-180deg);">
+								</c:forEach>
+								<c:if test="${complaint.depth eq '1'}">
+								<a href="./complaintSelect?num=${complaint.num}" class="depth_a">${complaint.title}</a>
+								</c:if>
+								<c:if test="${complaint.depth eq '0'}">
+								<a href="./complaintSelect?num=${complaint.num}">${complaint.title}</a>
+								</c:if>
+								</td>
 								<td class="date">${complaint.writer}</td>
 								<td class="date">${complaint.reg_date }</td>
 								<td class="hit">${complaint.hit}</td>

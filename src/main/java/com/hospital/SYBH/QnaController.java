@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hospital.board.BoardVO;
 import com.hospital.qna.QnAService;
@@ -147,9 +148,32 @@ public class QnaController {
 	public ModelAndView setReply(int num) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+		
+		mv.addObject("vo", boardVO);
 		mv.addObject("num", num);
 		mv.addObject("menu", "complaint");
 		mv.setViewName("board/boardReply");
+		
+		return mv;
+	}
+	
+	//reply - post
+	@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
+	public ModelAndView setReply(QnAVO qnaVO, RedirectAttributes rd) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		int result = qnaService.setReply(qnaVO);
+		
+		String message = "Reply False";
+		
+		if(result > 0) {
+			
+			message = "success";
+		}
+		
+		rd.addFlashAttribute("message", message);
+		mv.setViewName("redirect:./complaint");
 		
 		return mv;
 	}

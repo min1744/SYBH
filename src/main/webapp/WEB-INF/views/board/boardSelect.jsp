@@ -231,6 +231,7 @@
 						
 					<a href="./complaintDelete?num=${vo.num}" id="delete">삭제</a>
 					<a href="./complaintUpdate?num=${vo.num}" id="update">수정</a>
+					<a href="./complaintReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>
 			</c:when>
 			<c:when test="${menu eq 'praise'}">
@@ -279,6 +280,7 @@
 						
 					<a href="./praiseDelete?num=${vo.num}" id="delete">삭제</a>
 					<a href="./praiseUpdate?num=${vo.num}" id="update">수정</a>
+					<a href="./praiseReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -327,6 +329,7 @@
 						
 					<a href="./qnaDelete?num=${vo.num}" id="delete">삭제</a>
 					<a href="./qnaUpdate?num=${vo.num}" id="update">수정</a>
+					<a href="./qnaReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>
 			</c:otherwise>
 		</c:choose>

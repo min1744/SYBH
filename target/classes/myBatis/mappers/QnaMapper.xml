@@ -29,21 +29,20 @@
   	</sql>
   
   <!-- 답글 사전 작업 -->
-  <update id="setReplyUpdate" parameterType="BoardVO">
+  <update id="setReplyUpdate" parameterType="QnAVO">
   	update qna set step=step+1
   	where ref=(<include refid="subRef"/>)
 	and step>(<include refid="subStep"/>)
   </update>
   
   <!-- 답글 -->
-  <insert id="setReply" parameterType="BoardVO">
+  <insert id="setReply" parameterType="QnAVO">
 		insert into qna values
 		(
 			qna_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0,
 			(<include refid="subRef"/>),
 			(<include refid="subStep"/>)+1,
-			(select depth from qna where num=#{num})+1,
-			#{menu}, #{category}
+			1, #{menu}, #{category}
 		)
 	</insert>
   
