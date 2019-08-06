@@ -1,5 +1,10 @@
 package com.hospital.file;
 
-public class FileDAO {
 
+import org.springframework.stereotype.Repository;
+@Repository
+public class FileDAO {
+	
+
+	
 }

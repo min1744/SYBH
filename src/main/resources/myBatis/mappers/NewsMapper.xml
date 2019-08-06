@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="NewsMapper">
+ 
+ <insert id="setWrite" parameterType="NewsVO">
+ <selectKey keyProperty="num" order="BEFORE" resultType="Integer">
+  		select news_seq.nextval from dual
+ </selectKey>
+ 	insert into news values(#{num},#{title},#{main_contents},#{sub_contents},sysdate,0,#{menu})
+ </insert> 
+ 
+ <update id="setUpdate" parameterType="NewsVO">
+ 	update news set title=#{title},#{main_contents},#{sub_contents},#{menu} where num=#{num}
+ </update>
+ 
+ <update id="addUpdate" parameterType="NewsVO">
+ 	update news set hit=hit+1 where num=#{num}
+ </update>
+  
+ <delete id="setDelete" parameterType="Integer">
+ 	delete news where num=#{num}
+ </delete> 
+ 
+ 
+ 
+ <select id="getList" parameterType="PageMaker" resultType="NewsVO">
+  	select * from 
+  	(select rownum R, N.* from
+  	(select * from news
+  	  	
+  <choose>
+  		<when test="kind = 1">
+  			 title
+  		</when>
+  		<when test="kind = 2">
+  			 writer
+  		</when>
+  		<when test="kind = 3">
+  			 main_contents
+  		</when>
+  		<when test="kind = 4">
+  			 sub_contents
+  		</when>
+  		
+  		<otherwise>
+  			 menu
+  		</otherwise>
+   </choose>
+   		
+  	 	 like '%'|| #{search} || '%'
+  	 	 order by num desc) N)
+  	 	 where R between #{startRow} and #{lastRow}
+  </select>
+  
+  <select id="getSelect" parameterType="Integer" resultMap="newsResult">
+ 	select * from news where num=#{num}
+ </select>
+ 
+ <resultMap type="NewsVO" id="newsResult">
+ <id property="num" column="num"/>
+ <result property="title" column="title"/>
+ <result property="main_contents" column="main_contents"/>
+ <result property="sub_contents" column="sub_contes"/>
+ <result property="reg_date" column="reg_date"/>
+ <result property="hit" column="hit"/>
+ <result property="menu" column="menu"/>
+ </resultMap>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
