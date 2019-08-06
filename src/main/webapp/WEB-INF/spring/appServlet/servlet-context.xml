@@ -73,6 +73,7 @@
 	<context:component-scan base-package="com.hospital.qna.comments"/>
 	<context:component-scan base-package="com.hospital.news"/>
 	<context:component-scan base-package="com.hospital.news.newsimages"/>
+	<context:component-scan base-package="com.hospital.qna"/>
 	
 	<!--뭐하는건지 정확히 기억안남  -->
 	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>

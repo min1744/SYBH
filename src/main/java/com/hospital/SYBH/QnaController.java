@@ -1,12 +1,19 @@
 package com.hospital.SYBH;
 
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hospital.board.BoardVO;
+import com.hospital.qna.QnAService;
+import com.hospital.qna.QnAVO;
 import com.hospital.qna.comments.QnACommentsService;
 import com.hospital.util.PageMaker;
 
@@ -16,34 +23,281 @@ public class QnaController {
 	
 	@Inject
 	private QnACommentsService qnACommentsService;
+	@Inject
+	private QnAService qnaService;
 	
-	//현아 작성 (qnaList jsp 테스트)
-	@RequestMapping(value = "qnaList", method = RequestMethod.GET)
-	public ModelAndView getList() throws Exception {
+	@ModelAttribute("board")
+	public String board() {
+		return "qna";
+	}
+	
+	
+	////////////// 공통 Write - post
+	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
+	public ModelAndView setWrite(QnAVO qnaVO, HttpSession session) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("qna", "suggestive");
-		mv.addObject("qna", "compliment");
-		mv.addObject("qna", "qna");
-		mv.setViewName("qna/qnaList");
+		
+		int result = qnaService.setWrite(qnaVO, session);
+		if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+			mv.setViewName("redirect:./complaint");
+		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+			mv.setViewName("redirect:./praise");
+		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+			mv.setViewName("redirect:./qnaList");
+		} else {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./complaint");
+			mv.setViewName("common/massageMove");
+		}
+		
+		return mv;
+	}
+	
+	
+	/////////////// 공통 update - post
+	//update - POST
+	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
+	public ModelAndView qnaUpdate(QnAVO qnaVO) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		int result = qnaService.setUpdate(qnaVO);
+		if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+			mv.setViewName("redirect:./complaint");
+		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+			mv.setViewName("redirect:./praise");
+		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+			mv.setViewName("redirect:./qnaList");
+		} else {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./complaint");
+			mv.setViewName("common/massageMove");
+		}
+		return mv;
+	}
+	
+	
+	////////////////////////////////////////건의합니다
+	
+	//list
+	@RequestMapping(value = "complaint", method = RequestMethod.GET)
+	public ModelAndView complaintList(PageMaker pageMaker, String menu) throws Exception {
+		
+		menu = "complaint";
+		List<QnAVO> list = qnaService.getList(pageMaker, menu);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.addObject("pager", pageMaker);
+		mv.addObject("menu", "complaint");
+		mv.setViewName("board/boardList");
+		
+		return mv;
+	}
+	
+	//write - get
+	@RequestMapping(value = "complaintWrite", method = RequestMethod.GET)
+	public ModelAndView complaintWrite() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("menu", "complaint");
+		mv.setViewName("board/boardWrite");
+		
+		return mv;
+	}
+	
+	//select
+	@RequestMapping(value = "complaintSelect", method = RequestMethod.GET)
+	public ModelAndView complaintSelect(int num) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+		
+		mv.addObject("vo", boardVO);
+		mv.addObject("menu", "complaint");
+		mv.setViewName("board/boardSelect");
 		
 		return mv;
 		
 	}
 	
+	//update - get
+	@RequestMapping(value = "complaintUpdate", method = RequestMethod.GET)
+	public ModelAndView complaintUpdate(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		QnAVO qnaVO = qnaService.getSelect(num);
+		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("menu", "complaint");
+		mv.setViewName("board/boardUpdate");
+			
+		return mv;
+	}
 	
-	//현아 작성 (qnaSelect jsp 테스트)
-		@RequestMapping(value = "qnaSelect", method = RequestMethod.GET)
-		public ModelAndView getSelect(PageMaker pageMaker) throws Exception {
+	
+	//delete
+	@RequestMapping(value = "complaintDelete", method = RequestMethod.GET)
+	public String complaintDelete(int num, HttpSession session) throws Exception {
+		int result = qnaService.setDelete(num, session);
+		return "redirect:./complaint";
+	}
+	
+	
+	//reply
+	@RequestMapping(value = "complaintReply", method = RequestMethod.GET)
+	public ModelAndView setReply(int num) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("num", num);
+		mv.addObject("menu", "complaint");
+		mv.setViewName("board/boardReply");
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	////////////////////////////////////////칭찬합니다
+	
+	//list
+	@RequestMapping(value = "praise", method = RequestMethod.GET)
+	public ModelAndView praiseList(PageMaker pageMaker, String menu) throws Exception {
+		
+		menu = "praise";
+		List<QnAVO> list = qnaService.getList(pageMaker, menu);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.addObject("pager", pageMaker);
+		mv.addObject("menu", "praise");
+		mv.setViewName("board/boardList");
 			
-			ModelAndView mv = new ModelAndView();
-			int totalCount = qnACommentsService.getTotalCount(pageMaker);
+		return mv;
 			
-			mv.addObject("totalCount", totalCount);
-			mv.setViewName("qna/qnaSelect");
+	}
+	
+	//write
+	@RequestMapping(value = "praiseWrite", method = RequestMethod.GET)
+	public ModelAndView praiseWrite() throws Exception {
 			
-			return mv;
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("menu", "praise");
+		mv.setViewName("board/boardWrite");
 			
-		}
+		return mv;
+	}
+	
+	
+	//select
+	@RequestMapping(value = "praiseSelect", method = RequestMethod.GET)
+	public ModelAndView praiseSelect(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+			
+		mv.addObject("vo", boardVO);
+		mv.addObject("menu", "praise");
+		mv.setViewName("board/boardSelect");
+			
+		return mv;
+			
+	}
+	
+	
+	//update - get
+	@RequestMapping(value = "praiseUpdate", method = RequestMethod.GET)
+	public ModelAndView praiseUpdate(int num) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		QnAVO qnaVO = qnaService.getSelect(num);
+		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("menu", "praise");
+		mv.setViewName("board/boardUpdate");
+		
+		return mv;
+	}
+	
+		
+	//delete
+	@RequestMapping(value = "praiseDelete", method = RequestMethod.GET)
+	public String praiseDelete(int num, HttpSession session) throws Exception {
+		int result = qnaService.setDelete(num, session);
+		return "redirect:./praise";
+	}
+	
+	
+	
+	
+	
+	
+	////////////////////////////////////////질문과답변
+	
+	//list
+	@RequestMapping(value = "qnaList", method = RequestMethod.GET)
+	public ModelAndView qnaList(PageMaker pageMaker, String menu) throws Exception {
+		
+		menu = "qna";
+		List<QnAVO> list = qnaService.getList(pageMaker, menu);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.addObject("pager", pageMaker);
+		mv.addObject("menu", "qnaList");
+		mv.setViewName("board/boardList");
+				
+		return mv;
+				
+	}
+	
+	//write
+	@RequestMapping(value = "qnaWrite", method = RequestMethod.GET)
+	public ModelAndView setWrite() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/boardWrite");
+		
+		return mv;
+	}
+	
+	
+	//select
+	@RequestMapping(value = "qnaSelect", method = RequestMethod.GET)
+	public ModelAndView qnaSelect(int num) throws Exception {
+				
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+				
+		mv.addObject("vo", boardVO);
+		mv.addObject("menu", "qna");
+		mv.setViewName("board/boardSelect");
+				
+		return mv;
+				
+	}
+	
+	
+	//update - get
+	@RequestMapping(value = "qnaUpdate", method = RequestMethod.GET)
+	public ModelAndView qnaUpdate(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		QnAVO qnaVO = qnaService.getSelect(num);
+		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("menu", "qna");
+		mv.setViewName("board/boardUpdate");
+			
+		return mv;
+	}
+	
+	
+	//delete
+	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
+	public String qnaDelete(int num, HttpSession session) throws Exception {
+		int result = qnaService.setDelete(num, session);
+		return "redirect:./qnaList";
+	}
+	
+		
 
 }

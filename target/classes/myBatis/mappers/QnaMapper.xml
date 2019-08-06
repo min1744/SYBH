@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="QnaMapper">
+  
+  <!-- <![CDATA[ 쿼리문   ]]> -->
+	<!-- query piece -->
+	<sql id="subRef">
+	<![CDATA[
+		select ref from qna where num=#{num}
+	]]>	
+	</sql>
+	<sql id="subStep">
+		select step from qna where num=#{num}
+	</sql>
+  	<sql id="subChoose">
+  		<choose>
+  			<when test="kind == 1">
+  				where title
+  			</when>
+  			<when test="kind == 2">
+  				where writer
+  			</when>
+  			<otherwise>
+  				where contents
+  			</otherwise>
+  		</choose>
+  	</sql>
+  
+  <!-- 답글 사전 작업 -->
+  <update id="setReplyUpdate" parameterType="BoardVO">
+  	update qna set step=step+1
+  	where ref=(<include refid="subRef"/>)
+	and step>(<include refid="subStep"/>)
+  </update>
+  
+  <!-- 답글 -->
+  <insert id="setReply" parameterType="BoardVO">
+		insert into qna values
+		(
+			qna_seq.nextval, #{title}, #{writer}, #{contents}, sysdate, 0,
+			(<include refid="subRef"/>),
+			(<include refid="subStep"/>)+1,
+			(select depth from qna where num=#{num})+1,
+			#{menu}, #{category}
+		)
+	</insert>
+  
+  
+  <!-- 글쓰기 -->
+  <insert id="setWrite" parameterType="QnAVO">
+  <selectKey keyProperty="num" order="BEFORE" resultType="Integer">
+  		select qna_seq.nextval from dual
+  </selectKey>
+  insert into qna values(
+  #{num}, #{title}, #{writer}, #{contents}, sysdate, 0, 
+  QnA_SEQ.currval, 0, 0, #{menu}, #{category}
+  )
+  </insert>
+  
+  
+  <!-- 글 수정 -->
+  <update id="setUpdate" parameterType="QnAVO">
+  	update qna set title=#{title}, writer=#{writer}, contents=#{contents}, category=#{category} where num=#{num}
+  </update>
+  
+  <!-- 글 삭제 -->
+  <delete id="setDelete" parameterType="Integer">
+  	delete qna where num=#{num}
+  </delete>
+  
+  
+  <resultMap type="QnAVO" id="qnaResult">
+  	<id property="num" column="num"/>
+  	<result property="title" column="title"/>
+	<result property="writer" column="writer"/>
+	<result property="contents" column="contents"/>
+	<result property="reg_date" column="reg_date"/>
+	<result property="hit" column="hit"/>
+	<result property="ref" column="ref"/>
+	<result property="step" column="step"/>
+	<result property="depth" column="depth"/>
+	<result property="menu" column="menu"/>
+	<result property="category" column="category"/>
+  </resultMap>
+  
+  <!-- select -->
+  <select id="getSelect" parameterType="Integer" resultType="QnAVO">
+  	select * from qna where num=#{num}
+  </select>
+  
+  
+  <!-- list -->
+  <select id="getList" parameterType="java.util.Map" resultType="QnAVO">
+  	select * from
+  	(select rownum R, Q.* from
+  	(select * from qna
+  	where menu=#{menu} and 
+  	<choose>
+  			<when test="kind == 1">
+  				title
+  			</when>
+  			<when test="kind == 2">
+  				writer
+  			</when>
+  			<otherwise>
+  				contents
+  			</otherwise>
+  		</choose>
+  	like '%'||#{pager.search}||'%' order by ref desc, step asc) Q)
+  	where R between #{pager.startRow} and #{pager.lastRow}
+  </select>
+  
+  
+  <!-- totalCount -->
+  <select id="getCount" parameterType="PageMaker" resultType="Integer">
+  	select count(num) from qna
+  	<choose>
+  			<when test="kind == 1">
+  				where title
+  			</when>
+  			<when test="kind == 2">
+  				where writer
+  			</when>
+  			<otherwise>
+  				where contents
+  			</otherwise>
+  		</choose>
+  			like '%'||#{search}||'%'
+  </select>
+  
+  
+  <!-- hit -->
+  <update id="setHitUpdate" parameterType="Integer">
+  	update qna set hit=hit+1 where num=#{num}
+  </update>
+  
+  </mapper>

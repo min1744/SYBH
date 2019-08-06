@@ -41,6 +41,7 @@
 #board_box {
 	
 	width: 60%;
+	min-height: 450px;
 	overflow: hidden;
 	position: relative;
 	margin: 0 auto;

@@ -19,5 +19,6 @@
 		<typeAlias type="com.hospital.qna.comments.QnACommentsVO" alias="QnACommentsVO"/>
 		<typeAlias type="com.hospital.news.NewsVO" alias="NewsVO"/>
 		<typeAlias type="com.hospital.news.newsimages.NewsImagesVO" alias="NewsImagesVO"/>
+		<typeAlias type="com.hospital.qna.QnAVO" alias="QnAVO"/>
 	</typeAliases>
 </configuration>
