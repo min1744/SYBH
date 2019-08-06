@@ -210,31 +210,116 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:choose>
+						<c:when test="${menu eq 'complaint'}">
+							<c:forEach items="${list}" var="complaint">
 							<tr class="position_2">
-								<td class="num">1</td>
-								<td><a href="./complaintSelect">123</a></td>
-								<td class="date">slkd****</td>
-								<td class="date">2019-07-26</td>
-								<td class="hit">0</td>
+								<td class="num">${complaint.num}</td>
+								<td><a href="./complaintSelect?num=${complaint.num}">${complaint.title}</a></td>
+								<td class="date">${complaint.writer}</td>
+								<td class="date">${complaint.reg_date }</td>
+								<td class="hit">${complaint.hit}</td>
 							</tr>
+							</c:forEach>
+						</c:when>
+						<c:when test="${menu eq 'praise'}">
+							<c:forEach items="${list}" var="praise">
+							<tr class="position_2">
+								<td class="num">${praise.num}</td>
+								<td><a href="./praiseSelect?num=${praise.num}">${praise.title}</a></td>
+								<td class="date">${praise.writer}</td>
+								<td class="date">${praise.reg_date }</td>
+								<td class="hit">${praise.hit}</td>
+							</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${list}" var="qna">
+							<tr class="position_2">
+								<td class="num">${qna.num}</td>
+								<td><a href="./qnaSelect?num=${qna.num}">${qna.title}</a></td>
+								<td class="date">${qna.writer}</td>
+								<td class="date">${qna.reg_date }</td>
+								<td class="hit">${qna.hit}</td>
+							</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 					</tbody>
 				</table>
-				<div id="paging">
-				<ul>
-					<li><a href="#"id="prev">◀</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
-					<li><a href="#">10</a></li>
-					<li><a href="#" id="next">▶</a></li>
-				</ul>
-			</div>
+				
+				
+				<c:choose>
+					<c:when test="${menu eq 'complaint'}">
+						<div id="paging">
+							<ul>
+								<c:if test="${pager.curBlock>1}">
+								<li><a href="./complaintList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+							</c:if>
+							<c:choose>
+								<c:when test="${pager.totalCount == 0 }">
+									<li><a href="./complaintList?curPage=1&kind=${pager.kind}$search=${pager.search}">1</a></li>
+								</c:when>
+								<c:otherwise>
+									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+										<li><a href="./complaintList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							<c:if test="${pager.curBlock<pager.totalBlock}">
+								<li><a href="./complaintList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+							</c:if>
+							</ul>
+						</div>
+					</c:when>
+					<c:when test="${menu eq 'praise'}">
+						<div id="paging">
+							<ul>
+								<c:if test="${pager.curBlock>1}">
+								<li><a href="./praiseList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+							</c:if>
+							<c:choose>
+								<c:when test="${pager.totalCount == 0 }">
+									<li><a href="./praiseList?curPage=1&kind=${pager.kind}$search=${pager.search}">1</a></li>
+								</c:when>
+								<c:otherwise>
+									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+										<li><a href="./praiseList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							<c:if test="${pager.curBlock<pager.totalBlock}">
+								<li><a href="./praiseList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+							</c:if>
+							</ul>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="paging">
+							<ul>
+								<c:if test="${pager.curBlock>1}">
+								<li><a href="./qnaList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+							</c:if>
+							<c:choose>
+								<c:when test="${pager.totalCount == 0 }">
+									<li><a href="./qnaList?curPage=1&kind=${pager.kind}$search=${pager.search}">1</a></li>
+								</c:when>
+								<c:otherwise>
+									<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+										<li><a href="./qnaList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+							<c:if test="${pager.curBlock<pager.totalBlock}">
+								<li><a href="./qnaList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+							</c:if>
+							</ul>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			
+			
+			
 			
 			<div id="search_box">
 				<select name="kind" id="select">

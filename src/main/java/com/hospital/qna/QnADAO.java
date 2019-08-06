@@ -1,6 +1,7 @@
 package com.hospital.qna;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,14 +21,18 @@ public class QnADAO implements BoardDAO{
 
 	@Override
 	public int getTotalCount(PageMaker pageMaker) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne(NAMESPACE+"getCount", pageMaker);
 	}
 	
 	public int setWrite(QnAVO qnaVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setWrite", qnaVO);
 	}
 
+	
+	public List<QnAVO> getList(Map<String, Object> map) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"getList", map);
+	}
+	
 
 	@Override
 	public int setUpdate(BoardVO boardVO) throws Exception {
@@ -46,10 +51,10 @@ public class QnADAO implements BoardDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 	@Override
 	public List<BoardVO> getList(PageMaker pageMaker) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

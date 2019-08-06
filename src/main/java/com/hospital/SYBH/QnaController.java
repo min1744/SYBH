@@ -1,5 +1,7 @@
 package com.hospital.SYBH;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hospital.board.BoardVO;
 import com.hospital.qna.QnAService;
 import com.hospital.qna.QnAVO;
 import com.hospital.qna.comments.QnACommentsService;
@@ -51,13 +54,19 @@ public class QnaController {
 		return mv;
 	}
 	
-	//건의합니다
+	
+	
+	////////////////////////////////////////건의합니다
 	
 	//list
 	@RequestMapping(value = "complaint", method = RequestMethod.GET)
-	public ModelAndView complaintList() throws Exception {
+	public ModelAndView complaintList(PageMaker pageMaker, String menu) throws Exception {
 		
+		menu = "complaint";
+		List<QnAVO> list = qnaService.getList(pageMaker, menu);
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.addObject("pager", pageMaker);
 		mv.addObject("menu", "complaint");
 		mv.setViewName("board/boardList");
 		
@@ -91,11 +100,23 @@ public class QnaController {
 	}
 	
 	
-	//칭찬합니다
+	
+	
+	
+	
+	
+	
+	////////////////////////////////////////칭찬합니다
+	
+	//list
 	@RequestMapping(value = "praise", method = RequestMethod.GET)
-	public ModelAndView praiseList() throws Exception {
-			
+	public ModelAndView praiseList(PageMaker pageMaker, String menu) throws Exception {
+		
+		menu = "praise";
+		List<QnAVO> list = qnaService.getList(pageMaker, menu);
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.addObject("pager", pageMaker);
 		mv.addObject("menu", "praise");
 		mv.setViewName("board/boardList");
 			
@@ -117,11 +138,21 @@ public class QnaController {
 		
 		
 	
-	//질문과답변
+	
+	
+	
+	
+	////////////////////////////////////////질문과답변
+	
+	//list
 	@RequestMapping(value = "qnaList", method = RequestMethod.GET)
-	public ModelAndView qnaList() throws Exception {
-				
+	public ModelAndView qnaList(PageMaker pageMaker, String menu) throws Exception {
+		
+		menu = "qna";
+		List<QnAVO> list = qnaService.getList(pageMaker, menu);
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.addObject("pager", pageMaker);
 		mv.addObject("menu", "qnaList");
 		mv.setViewName("board/boardList");
 				
@@ -129,6 +160,7 @@ public class QnaController {
 				
 	}
 	
+	//write
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.GET)
 	public ModelAndView setWrite() throws Exception {
 		

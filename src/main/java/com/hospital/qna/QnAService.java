@@ -1,6 +1,8 @@
 package com.hospital.qna;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -45,10 +47,21 @@ public class QnAService implements BoardService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public List<QnAVO> getList(PageMaker pageMaker, String menu) throws Exception {
+		
+		pageMaker.makeRow();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("menu", menu);
+		map.put("pager", pageMaker);
+		
+		return qnaDAO.getList(map);
+	}
 
 	@Override
 	public List<BoardVO> getList(PageMaker pageMaker) throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	
