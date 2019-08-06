@@ -23,12 +23,11 @@ public class QnADAO implements BoardDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public int setWrite(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public int setWrite(QnAVO qnaVO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setWrite", qnaVO);
 	}
+
 
 	@Override
 	public int setUpdate(BoardVO boardVO) throws Exception {
@@ -59,6 +58,12 @@ public class QnADAO implements BoardDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public int setWrite(BoardVO boardVO) throws Exception {
+		return 0;
+	}
+
 	
 	
 

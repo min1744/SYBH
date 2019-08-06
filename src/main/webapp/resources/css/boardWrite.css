@@ -16,14 +16,28 @@
 	overflow: hidden;
 	padding: 50px 0;
 	border-bottom: 1px solid #ddd;
+	text-align: center;
 }
 
-#board_title p {
+
+
+#wtitle {
 	
 	text-align: center;
 	font-size: 1.5em;
 	font-weight: 900;
 	letter-spacing: -1px;
+	
+}
+
+
+#sub_title {
+	
+	text-align: center;
+	font-size: 1em;
+	color: #808080;
+	letter-spacing: -1px;
+	margin-top: 5px;
 	
 }
 
@@ -81,6 +95,16 @@
 	margin-right: 15px;
 }
 
+
+#q_title {
+	
+	display: block;
+	width: 520px;
+	height: 50px;
+	margin-right: 15px;
+}
+
+
 .writer {
 	
 	font-size: 1.1em;
@@ -98,6 +122,23 @@
 }
 
 
+#q_writer {
+	
+	display: block;
+	width: 193px;
+	height: 50px;
+	margin-right: 15px;
+}
+
+
+
+#contents_box {
+	
+	clear: both;
+	
+}
+
+
 .contents {
 	
 	font-size: 1.1em;
@@ -105,6 +146,23 @@
 	line-height: 50px;
 }
 
+
+
+.category {
+	
+	font-size: 1.1em;
+	font-weight: 700;
+	margin-right: 10px;
+	line-height: 50px;
+}
+
+
+#select {
+	
+	display: block;
+	width: 130px;
+	height: 50px;
+}
 
 
 #write_btn {
@@ -127,6 +185,22 @@
 	font-weight: 700;
 	box-sizing: border-box;
 	text-align: center;
+	margin-bottom: 50px;
+}
+
+#q_write {
+	
+	padding: 1.5% 4%;
+	border: none;
+	margin: 0 auto;
+	border-radius: 5px;
+	background-color: #153F91;
+	color: white;
+	font-size: 1.2em;
+	font-weight: 700;
+	box-sizing: border-box;
+	text-align: center;
+	margin-top: 50px;
 	margin-bottom: 50px;
 }
 

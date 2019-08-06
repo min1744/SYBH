@@ -18,7 +18,7 @@
 	border-bottom: 1px solid #ddd;
 }
 
-#board_title p {
+#wtitle {
 	
 	text-align: center;
 	font-size: 1.5em;
@@ -27,9 +27,21 @@
 	
 }
 
+
+#sub_title {
+	
+	text-align: center;
+	font-size: 1em;
+	color: #808080;
+	letter-spacing: -1px;
+	margin-top: 5px;
+	
+}
+
 #board_box {
 	
 	width: 60%;
+	min-height: 450px;
 	overflow: hidden;
 	position: relative;
 	margin: 80px auto;
@@ -123,11 +135,77 @@
 	padding-bottom: 15px;
 }
 
+#sub li:nth-child(1),
+#sub li:nth-child(4) {
+	
+	font-size: 0.9em;
+	font-weight: 500;
+	color: #373737;	
+}
+
+
+#sub li:nth-child(3) {
+	
+	opacity: 0.5;
+	line-height: 20px;
+}
+
+
+
+#sub li:nth-child(2), #sub li:nth-child(5) {
+	
+	font-size: 0.9em;
+	color: #808080;	
+}
+
+
+/* qna li */
+
+#qsub {
+	
+	overflow: hidden;
+	border-bottom: 1px solid #ddd;
+}
+
+
+#qsub li {
+	
+	float: left;
+	padding-left: 10px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+
+#qsub li:nth-child(1),
+#qsub li:nth-child(4) {
+	
+	font-size: 0.9em;
+	font-weight: 500;
+	color: #373737;	
+}
+
+
+#qsub li:nth-child(3) {
+	
+	opacity: 0.5;
+	line-height: 20px;
+}
+
+
+
+#qsub li:nth-child(2), #qsub li:nth-child(5) {
+	
+	font-size: 0.9em;
+	color: #808080;	
+}
+
+/* -- */
 
 #contents {
 	
 	overflow: hidden;
-	padding: 40px 0;
+	padding: 40px 10px;
 	border-bottom: 1px solid #153F91;
 	text-align: left;
 }

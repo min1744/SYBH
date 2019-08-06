@@ -46,7 +46,7 @@ $(function() {
 				<li><a href="../reserve/reserveInfo">진료예약/조회</a></li>
 				<li><a href="../news/newsAll">건강뉴스</a></li>
 				<li><a href="../notice/noticeList">병원안내</a></li>
-				<li><a href="../qna/qnaList">고객의 소리</a></li>
+				<li><a href="../qna/complaint">고객의 소리</a></li>
 				<li id="last_menu"><a href="">주말약국</a></li>			
 			</ul>
 		</div>
@@ -117,9 +117,9 @@ $(function() {
 			<li><a href="../hospital/location">오시는 길</a></li>
 		</ul>
 		<ul id="ul_4">
-			<li><a href="">건의합니다</a></li>
-			<li><a href="">칭찬합니다</a></li>
-			<li><a href="">질문과답변</a></li>
+			<li><a href="../qna/complaint">건의합니다</a></li>
+			<li><a href="../qna/praise">칭찬합니다</a></li>
+			<li><a href="../qna/qnaList">질문과답변</a></li>
 		</ul>
 	</div>
 </div>

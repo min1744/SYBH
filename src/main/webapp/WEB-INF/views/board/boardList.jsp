@@ -11,6 +11,13 @@
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
 
+
+
+<!-- ------------ notice list -------------- -->
+
+<c:if test="${board eq 'notice'}">
+
+
 <div id="board">
 		<div id="board_title">
 			<p id="title">공지사항</p>
@@ -34,8 +41,6 @@
 				<li><a href="../medical/medicalTeamList">의료진 소개</a></li>
 				<li><a href="../hospital/floorInfo">층별안내</a></li>
 				<li><a href="../hospital/location">오시는 길</a></li>
-				
-			
 			</ul>
 		
 		</div>
@@ -115,6 +120,142 @@
 	
 	</div>
 </div>
+
+</c:if>
+
+<!-- ------------------- QNA list ---------------- -->
+
+
+<c:if test="${board eq 'qna'}">
+
+<div id="board">
+		<c:choose>
+			<c:when test="${menu eq 'complaint'}">
+		<div id="board_title">
+				<p id="title">건의합니다</p>
+				<p id="sub_title">쌍용백병원을 이용하시면서 불편하신점이나 건의할 사항을 등록해 주세요.</p>
+		</div>
+	
+		<div id="write_btn">
+		<a href="./complaintWrite" id="write">글쓰기</a>
+	</div>
+			</c:when>
+			<c:when test="${menu eq 'praise'}">
+			<div id="board_title">
+				<p id="title">칭찬합니다</p>
+				<p id="sub_title">쌍용백병원을 이용하시면서 칭찬하고싶은 사항을 등록해주세요.</p>
+				</div>
+	
+		<div id="write_btn">
+		<a href="./praiseWrite" id="write">글쓰기</a>
+	</div>
+			</c:when>
+			<c:otherwise>
+			<div id="board_title">
+				<p id="title">질문과 답변</p>
+				<p id="sub_title">쌍용백병원을 이용하시면서 궁금한 사항을 등록해 주세요.</p>
+				</div>
+	
+		<div id="write_btn">
+		<a href="./qnaWrite" id="write">글쓰기</a>
+	</div>
+			</c:otherwise>
+		</c:choose>
+	
+	
+	<div id="board_box">
+	
+		
+		<div id="board_nav">
+		
+		<c:choose>
+			<c:when test="${menu eq 'complaint'}">
+				<ul>
+					<li>고객의 소리</li>
+					<li><a href="#" style="color:#6BB5DB;">건의합니다</a></li>
+					<li><a href="./praise">칭찬합니다</a></li>
+					<li><a href="./qnaList">질문과답변</a></li>
+				</ul>
+			</c:when>
+			<c:when test="${menu eq 'praise'}">
+				<ul>
+					<li>고객의 소리</li>
+					<li><a href="./complaint">건의합니다</a></li>
+					<li><a href="#" style="color:#6BB5DB;">칭찬합니다</a></li>
+					<li><a href="./qnaList">질문과답변</a></li>
+				</ul>
+			</c:when>
+			<c:otherwise>
+				<ul>
+					<li>고객의 소리</li>
+					<li><a href="./complaint">건의합니다</a></li>
+					<li><a href="./praise">칭찬합니다</a></li>
+					<li><a href="#" style="color:#6BB5DB;">질문과답변</a></li>
+				</ul>
+			</c:otherwise>
+		</c:choose>
+		
+		</div>
+		
+		
+		<div id="boardList">
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 95px;">번호</th>
+							<th style="width: 510px;">제목</th>
+							<th style="width: 150px;">작성자</th>
+							<th style="width: 150px;">작성일</th>
+							<th style="width: 100Px;">조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr class="position_2">
+								<td class="num">1</td>
+								<td><a href="./complaintSelect">123</a></td>
+								<td class="date">slkd****</td>
+								<td class="date">2019-07-26</td>
+								<td class="hit">0</td>
+							</tr>
+					</tbody>
+				</table>
+				<div id="paging">
+				<ul>
+					<li><a href="#"id="prev">◀</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li><a href="#">6</a></li>
+					<li><a href="#">7</a></li>
+					<li><a href="#">8</a></li>
+					<li><a href="#">9</a></li>
+					<li><a href="#">10</a></li>
+					<li><a href="#" id="next">▶</a></li>
+				</ul>
+			</div>
+			
+			<div id="search_box">
+				<select name="kind" id="select">
+					<option value="1">제목</option>
+					<option value="2">작성자</option>
+					<option value="3">내용</option>
+				</select>
+				<input type="text" name="search" id="search">
+				<button id="btn">검색</button>
+			</div>
+			
+			
+		
+		</div>
+		
+	
+	</div>
+</div>
+
+</c:if>
+
 <!-- footer 추가 -->
 <c:import url="../common/footer.jsp" />
 </body>
