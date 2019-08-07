@@ -15,4 +15,19 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	
+	@RequestMapping(value = "memberNomal", method = RequestMethod.GET)
+	public ModelAndView memberNomal(ModelAndView mv) throws Exception {
+		mv.setViewName("admin/memberNomal");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberKakao", method = RequestMethod.GET)
+	public ModelAndView memberKakao(ModelAndView mv) throws Exception {
+		mv.setViewName("admin/memberKakao");
+		
+		return mv;
+	}
 }
