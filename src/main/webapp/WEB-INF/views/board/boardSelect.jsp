@@ -9,15 +9,43 @@
 <script type="text/javascript">
 	$(function() {
 		
+		
+		
 		$("#delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
 			if(result){
+				
 				location.href="./boardList";
 			}
 						
 		});
 		
 		
+		$("#q_delete").click(function() {
+			var result = confirm("삭제하시겠습니까?");
+			var num = 
+			if(result){
+				
+				post({'check':check,'price':price});
+			}
+						
+		});
+		
+		//post방식으로 넘기기
+		function post(params){
+			var form = document.createElement("form");
+			form.setAttribute("method","POST");
+			form.setAttribute("action","./qnaDelete");
+			for(var key in params){
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type","hidden");
+				hiddenField.setAttribute("name",key);
+				hiddenField.setAttribute("value",params[key]);
+				form.appendChild(hiddenField);
+			}
+			document.body.appendChild(form);
+			form.submit();
+		}
 		
 ///////////////////////////////////////////// 댓글 관련▼
 		
@@ -186,6 +214,8 @@
 		
 		<c:choose>
 			<c:when test="${menu eq 'complaint'}">
+				<input type="hidden" name="num" value="${vo.num}" id="qnum">
+				<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
 				<div class="title">${vo.title}</div>
 					<div id="qsub">
 						<ul style="width: 30%; float: left;">
@@ -207,12 +237,14 @@
 				<div id="btn_box">
 					<a href="./complaint" id="list">목록</a>
 						
-					<a href="./complaintDelete?num=${vo.num}" id="delete">삭제</a>
+					<button id="q_delete">삭제</button>
 					<a href="./complaintUpdate?num=${vo.num}" id="update">수정</a>
 					<a href="./complaintReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>
 			</c:when>
 			<c:when test="${menu eq 'praise'}">
+				<input type="hidden" name="num" value="${vo.num}" id="qnum">
+				<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
 				<div class="title">${vo.title}</div>
 					<div id="qsub">
 						<ul style="width: 30%; float: left;">
@@ -233,12 +265,14 @@
 				<div id="btn_box">
 					<a href="./praise" id="list">목록</a>
 						
-					<a href="./praiseDelete?num=${vo.num}" id="delete">삭제</a>
+					<button id="q_delete">삭제</button>
 					<a href="./praiseUpdate?num=${vo.num}" id="update">수정</a>
 					<a href="./praiseReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>
 			</c:when>
 			<c:otherwise>
+				<input type="hidden" name="num" value="${vo.num}" id="qnum">
+				<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
 				<div class="title">${vo.title}</div>
 					<div id="qsub">
 						<ul style="width: 30%; float: left;">
@@ -260,7 +294,7 @@
 				<div id="btn_box">
 					<a href="./qnaList" id="list">목록</a>
 						
-					<a href="./qnaDelete?num=${vo.num}" id="delete">삭제</a>
+					<button id="q_delete">삭제</button>
 					<a href="./qnaUpdate?num=${vo.num}" id="update">수정</a>
 					<a href="./qnaReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>

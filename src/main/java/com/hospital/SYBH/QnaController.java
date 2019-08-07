@@ -104,7 +104,29 @@ public class QnaController {
 	}
 	
 	
+	//////////////////공통 delete
+	//delete
 	
+	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
+	public ModelAndView complaintDelete(QnAVO qnaVO, int num, HttpSession session) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		int result = qnaService.setDelete(num, session);
+		
+		if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+			mv.setViewName("redirect:./complaint");
+		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+			mv.setViewName("redirect:./praise");
+		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+			mv.setViewName("redirect:./qnaList");
+		} else {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./complaint");
+			mv.setViewName("common/massageMove");
+		}
+		
+		return mv;
+	}
 	
 	
 	
@@ -164,14 +186,6 @@ public class QnaController {
 		mv.setViewName("board/boardUpdate");
 			
 		return mv;
-	}
-	
-	
-	//delete
-	@RequestMapping(value = "complaintDelete", method = RequestMethod.GET)
-	public String complaintDelete(int num, HttpSession session) throws Exception {
-		int result = qnaService.setDelete(num, session);
-		return "redirect:./complaint";
 	}
 	
 	
