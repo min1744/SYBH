@@ -95,18 +95,57 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
+          <span>Member</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+            <h6 class="collapse-header">MEMBER:</h6>
+            <a class="collapse-item" href="#">일반회원 관리</a>
+            <a class="collapse-item" href="#">카카오회원 관리</a>
             <div class="collapse-divider"></div>
+            <h6 class="collapse-header">DOCTOR MEMBER:</h6>
+            <a class="collapse-item" href="#">의사 리스트 관리</a>
+            <a class="collapse-item" href="#">등록하기</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>BOARD</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">RESERVE:</h6>
+            <a class="collapse-item" href="#">일반진료 예약 관리</a>
+            <a class="collapse-item" href="#">건강검진 예약 관리</a>
+            <div class="collapse-divider"></div>
+            <h6 class="collapse-header">NEWS:</h6>
+            <a class="collapse-item" href="#">질환 정보 관리</a>
+            <a class="collapse-item" href="#">영양 정보 관리</a>
+            <a class="collapse-item" href="#">운동 정보 관리</a>
+            <div class="collapse-divider"></div>
+            <h6 class="collapse-header">NOTICE:</h6>
+            <a class="collapse-item" href="#">공지사항 관리</a>
+            <div class="collapse-divider"></div>
+            <h6 class="collapse-header">QNA:</h6>
+            <a class="collapse-item" href="#">건의합니다 관리</a>
+            <a class="collapse-item" href="#">칭찬합니다 관리</a>
+            <a class="collapse-item" href="#">질문과답변 관리</a>
+            <div class="collapse-divider"></div>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>ERROR</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
+            <a class="collapse-item" href="#">404 Page 관리</a>
+            <a class="collapse-item" href="#">500 Page 관리</a>
           </div>
         </div>
       </li>
