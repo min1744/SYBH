@@ -5,7 +5,7 @@
 <c:forEach items="${list}" var="list">
 
 			<!-- foreach 돌릴곳 -->
-					<div class="c_list_box">
+					<div class="c_list_box" id="${list.qcnum}">
 					
 					<!-- 작성자/수정/삭제 -->
 					<div class="c_list_top">
@@ -32,7 +32,8 @@
 								<ul>
 									<li class="c_date">${list.reg_date}</li>
 									<li>│</li>
-									<li class="c_reply"><a href="">답글달기</a></li>
+									<li class="c_reply"><a href="" title="${list.qcnum}" class="c_replyBtn"
+									data-toggle="modal" data-target="#replyModal">답글달기</a></li>
 									<li>│</li>
 									<li class="c_report"><a href="">신고</a></li>
 								</ul>
@@ -40,8 +41,8 @@
 						
 						<!-- 좋아요/싫어요 -->
 						<div class="c_like_bottom">
-							<a href="" class="like"><img alt="like" src="../resources/images/like.png">54235</a>
-							<a href="" class="hate"><img alt="hate" src="../resources/images/hate.png">24234</a>
+							<a href="" class="like"><img alt="like" src="../resources/images/like.png">0</a>
+							<a href="" class="hate"><img alt="hate" src="../resources/images/hate.png">0</a>
 						</div>
 						
 						</div>
@@ -51,3 +52,4 @@
 </c:forEach>
 
 <!-- ----------------------------------- -->
+

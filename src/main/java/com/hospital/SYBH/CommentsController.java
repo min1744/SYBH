@@ -49,24 +49,28 @@ public class CommentsController {
 	//댓글 수정
 	@RequestMapping(value = "commentsUpdate", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView setUpdate(QnACommentsVO qnACommentsVO) throws Exception {
-		
-		ModelAndView mv = new ModelAndView();
+	public int setUpdate(QnACommentsVO qnACommentsVO) throws Exception {
 		int result = qnACommentsService.setUpdate(qnACommentsVO);
-		
-		return mv;
+		return result;
 	}
 	
 	
 	//댓글 삭제
 	@RequestMapping(value = "commentsDelete", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView setUpdate(int qcnum) throws Exception {
-		
-		ModelAndView mv = new ModelAndView();
+	public int setUpdate(int qcnum) throws Exception {
 		int result = qnACommentsService.setDelete(qcnum);
+		return result;
+	}
+	
+	
+	//답글
+	@RequestMapping(value = "commentsReply", method = RequestMethod.POST)
+	@ResponseBody
+	public int setReply(QnACommentsVO qnACommentsVO) throws Exception {
+		int result = qnACommentsService.setReply(qnACommentsVO);
 		
-		return mv;
+		return result;
 	}
 	
 	

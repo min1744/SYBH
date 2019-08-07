@@ -6,6 +6,35 @@
   
   <mapper namespace="QnACommentsMapper">
   
+  <!-- <![CDATA[ 쿼리문   ]]> -->
+	<!-- query piece -->
+	<sql id="subRef">
+	<![CDATA[
+		select ref from QnaComments where num=#{num}
+	]]>	
+	</sql>
+	<sql id="subStep">
+		select step from QnaComments where num=#{num}
+	</sql>
+	
+	<!-- 답글 사전 작업 -->
+  <update id="setReplyUpdate" parameterType="QnACommentsVO">
+  	update QnaComments set step=step+1
+  	where ref=(<include refid="subRef"/>)
+	and step>(<include refid="subStep"/>)
+  </update>
+  
+  <!-- 답글 -->
+  <insert id="setReply" parameterType="QnACommentsVO">
+		insert into QnaComments values
+		(
+			QnaComments_SEQ.nextval, #{num}, #{id}, #{contents}, sysdate,
+			(<include refid="subRef"/>),
+			(<include refid="subStep"/>)+1,
+			1
+		)
+	</insert>
+  
   <!-- write -->
   <insert id="setWrite" parameterType="QnACommentsVO">
   <selectKey keyProperty="qcnum" order="BEFORE" resultType="Integer">
@@ -19,7 +48,7 @@
   <select id="getList" parameterType="java.util.Map" resultType="QnACommentsVO">
 	select * from
 	(select rownum R, C.* from
-	(select * from QnAComments where num=#{num} order by qcnum desc) C)
+	(select * from QnAComments where num=#{num} order by ref desc, step asc) C)
 	where R between #{pager.startRow} and #{pager.lastRow}
   </select>
   

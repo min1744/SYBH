@@ -159,7 +159,7 @@ legend {
   border: 0;
 }
 textarea {
-  overflow: auto;
+  overflow: hidden auto;
 }
 optgroup {
   font-weight: bold;
@@ -1120,77 +1120,6 @@ img {
 }
 [role="button"] {
   cursor: pointer;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-  font-family: inherit;
-  color: inherit;
-}
-h1 small,
-h2 small,
-h3 small,
-h4 small,
-h5 small,
-h6 small,
-.h1 small,
-.h2 small,
-.h3 small,
-.h4 small,
-.h5 small,
-.h6 small,
-h1 .small,
-h2 .small,
-h3 .small,
-h4 .small,
-h5 .small,
-h6 .small,
-.h1 .small,
-.h2 .small,
-.h3 .small,
-.h4 .small,
-.h5 .small,
-.h6 .small {
-  font-weight: normal;
-  line-height: 1;
-  color: #777;
-}
-h1 small,
-.h1 small,
-h2 small,
-.h2 small,
-h3 small,
-.h3 small,
-h1 .small,
-.h1 .small,
-h2 .small,
-.h2 .small,
-h3 .small,
-.h3 .small {
-  font-size: 65%;
-}
-h4 small,
-.h4 small,
-h5 small,
-.h5 small,
-h6 small,
-.h6 small,
-h4 .small,
-.h4 .small,
-h5 .small,
-.h5 .small,
-h6 .small,
-.h6 .small {
-  font-size: 75%;
 }
 
 .lead {
@@ -2439,6 +2368,7 @@ output {
   color: #555;
 }
 .form-control {
+	overflow: hidden auto;
   display: block;
   width: 100%;
   height: 34px;
@@ -2487,7 +2417,8 @@ fieldset[disabled] .form-control {
   cursor: not-allowed;
 }
 textarea.form-control {
-  height: auto;
+	height: auto;
+  overflow: hidden auto;
 }
 input[type="search"] {
   -webkit-appearance: none;
@@ -5757,7 +5688,7 @@ button.close {
 }
 .modal {
   position: fixed;
-  top: 0;
+  top: 250px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -5839,6 +5770,7 @@ button.close {
 }
 .modal-title {
   margin: 0;
+  font-size: 20px;
   line-height: 1.42857143;
 }
 .modal-body {
@@ -5870,8 +5802,8 @@ button.close {
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 1080px;
-    height: 900px;
+    width: 600px;
+    height: 500px;
     overflow-x: hidden;
     overflow-y: auto;
     margin: 30px auto;

@@ -47,5 +47,17 @@ public class QnACommentsService {
 	public int setDelete(int qcnum) throws Exception {
 		return qnACommentsDAO.setDelete(qcnum);
 	}
+	
+	
+	//답글
+	public int setReply(QnACommentsVO qnACommentsVO) throws Exception {
+		
+		//답글 update
+		int result = qnACommentsDAO.setReplyUpdate(qnACommentsVO);
+		//답글 insert
+		result = qnACommentsDAO.setReply(qnACommentsVO);
+		
+		return result;
+	}
 
 }

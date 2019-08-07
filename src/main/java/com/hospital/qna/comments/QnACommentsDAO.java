@@ -44,5 +44,15 @@ public class QnACommentsDAO {
 		return sqlSession.delete(NAMESPACE+"setDelete", qcnum);
 	}
 	
+	//답글 insert
+	public int setReply(QnACommentsVO qnACommentsVO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setReply", qnACommentsVO);
+	}
+	
+	//답글 update(사전작업)
+	public int setReplyUpdate(QnACommentsVO qnACommentsVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnACommentsVO);
+	}
+	
 
 }
