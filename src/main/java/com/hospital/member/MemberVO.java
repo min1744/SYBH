@@ -1,5 +1,7 @@
 package com.hospital.member;
 
+import java.sql.Date;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -26,7 +28,7 @@ public class MemberVO {
 	@NotBlank
 	@Pattern(regexp = "^(?=.*[a-zA-Z가-힣]).{1,17}$")
 	private String name;
-	//주민번호
+	//주민등록번호
 	@NotBlank
 	@Pattern(regexp = "^(?=.*[0-9]).{6,6}$")
 	private String res_reg_num1;
@@ -76,7 +78,15 @@ public class MemberVO {
 	private int status;
 	//신고 당한 횟수
 	private int stated_num;
+	//아이디 개설일
+	private Date reg_date;
 	
+	public Date getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
+	}
 	public int getStatus() {
 		return status;
 	}
