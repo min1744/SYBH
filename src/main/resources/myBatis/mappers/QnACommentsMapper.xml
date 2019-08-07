@@ -28,4 +28,15 @@
   	select count(num) from QnaComments where num=#{num}
   </select>
   
+  <!-- update -->
+  <update id="setUpdate" parameterType="QnAVO">
+  	update QnaComments set contents=#{contents} where qcnum=#{qcnum}
+  </update>
+  
+  
+  <!-- delete -->
+  <delete id="setDelete" parameterType="Integer">
+  	delete QnaComments where qcnum=#{qcnum}
+  </delete>
+  
 </mapper>  

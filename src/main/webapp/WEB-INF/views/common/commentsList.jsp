@@ -24,9 +24,7 @@
 					</div>
 						
 						<img alt="best" src="../resources/images/best.png" class="best_icon">
-						<span class="c_contents">
-						${list.contents}
-						</span>
+						<span class="c_contents" id="c${list.qcnum}">${list.contents}</span>
 						
 						<!-- 날짜/답글/신고 -->
 						<div class="c_list_box_bottom">

@@ -6,6 +6,7 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/boardSelect.css" rel="stylesheet">
+<c:import url="../temp/commentBootstrap.jsp" />
 <script type="text/javascript">
 	$(function() {
 		
@@ -72,9 +73,9 @@
 		// 댓글 수정 코드
 		$('#updateBtn').click(function() {
 			var upContents = $('#updateContents').val();
-			var cnumId = $('#cnum').val();
-			$.post("../event/commentsUpdate", {
-				cnum : cnumId,
+			var qcnumId = $('#qcnum').val();
+			$.post("../comments/commentsUpdate", {
+				qcnum : cnumId,
 				contents : upContents
 			},
 			function(data) {
@@ -91,7 +92,7 @@
 			var id = $(this).attr('title');
 			var con = $('#c' + id).html();
 			$('#updateContents').val(con);
-			$('#cnum').val(id);
+			$('#qcnum').val(id);
 		});
 		
 		//댓글 등록하기 코드
@@ -312,6 +313,36 @@
 						<div class="commentslist">
 						
 						</div>	
+						
+						<!-- 댓글 수정 관련 modal -->
+						<div class="container">
+							<!-- Modal -->
+						  <div class="modal fade" id="myModal" role="dialog">
+						    <div class="modal-dialog">
+						    
+						      <!-- Modal content-->
+						      <div class="modal-content">
+						        <div class="modal-header">
+						          <h4 class="modal-title">${memberVO.id}</h4>
+						        </div>
+						        <div class="modal-body">
+						          <div class="form-group">
+								      <label for="contents">댓글 :</label>
+								      <textarea class="form-control" rows="5" id="updateContents" name="contents"></textarea>
+								      <input type="hidden" id="qcnum">
+								    </div>
+						        </div>
+						        <div class="modal-footer">
+								      <button class="btn btn-primary" id="updateBtn" data-dismiss="modal">댓글 수정</button>
+						          <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						        </div>
+						      </div>
+						      
+						    </div>
+						  </div>
+							</div>
+						<!-- modal 끝 -->
+						
 						<c:if test="${totalcount > 10}">
 							<button id="more">+ 댓글 더보기</button>
 						</c:if>
