@@ -28,7 +28,7 @@
 			
 				<h3>질환 정보</h3>
 				<a href="./newsList">전체 목록 보기</a>
-				
+			
 			</div>
 			
 			<div class="news_contents">

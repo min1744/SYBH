@@ -9,53 +9,7 @@
 <c:import url="../temp/boot.jsp" />
 <c:import url="../temp/summernote.jsp" />
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
-<script type="text/javascript">
-
-$(function() {
-	$("#write").click(function() {
-	//다른 input들 검증
-	if($('#contents').summernote('isEmpty')) {
-		alert('모두 입력해주세요.');
-	} else {
-		if($('#fix').prop("checked")){
-			var fixCount = $('#fixCount').val();
-			if(fixCount > 2){
-				alert('상단고정은 최대 3개까지가능합니다');
-			} else {
-				$('#frm').submit();	
-			}
-		} else {
-			$('#frm').submit();	
-		}	
-	}
-	});
-	
-	
-	//qna부분 form 검증
-	$("#q_write").click(function() {
-			//다른 input들 검증
-			if($('#contents').summernote('isEmpty')) {
-				alert('모두 입력해주세요.');
-			} else {
-				$('#frm').submit();				
-			}
-		});
-	
-	
-	$('#fix_info').hide();
-	
-	$('#fix_info_1').hover(function() {
-		$('#fix_info').show();
-	});
-	
-	$('#fix_info_1').mouseleave(function() {
-		$('#fix_info').hide();
-	});
-	
-	
-});
-
-</script>
+<script type="text/javascript" src="../resources/js/board/boardWrite.js"></script>
 </head>
 <body>
 <!-- header 추가 -->
