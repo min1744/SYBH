@@ -10,12 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
-	public ModelAndView index() throws Exception {
-		
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView index(ModelAndView mv) throws Exception {
 		mv.setViewName("admin/adminIndex");
 		
 		return mv;
 	}
-
 }
