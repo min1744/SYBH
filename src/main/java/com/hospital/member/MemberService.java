@@ -47,8 +47,8 @@ public class MemberService {
 	//일반회원 login
 	public HashMap<String, Object> login(MemberVO memberVO) throws Exception{
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		int loginCheck = memberDAO.loginCheck(memberVO.getId());
-		if(loginCheck > 0) {
+		//int loginCheck = memberDAO.loginCheck(memberVO.getId());
+		//if(loginCheck > 0) {
 			memberVO = memberDAO.login(memberVO);
 			if(memberVO != null) {
 				int result = memberDAO.setLoginStatus(memberVO.getId());
@@ -57,10 +57,10 @@ public class MemberService {
 				}
 			}
 			map.put("memberVO", memberVO);
-			map.put("loginCheck", loginCheck);
+			/*map.put("loginCheck", loginCheck);
 		} else {
 			throw new Exception();
-		}
+		}*/
 		
 		return map;
 	}
@@ -434,16 +434,14 @@ public class MemberService {
 				}
 				kakaoMemberVO.setAge_range(age_range);
 				kakaoMemberVO.setAccess_token(access_token);
+				
+				//카카오톡 로그인 시 꺼낼 수 있는 정보들에 대한 키값 구하기
 				/*Set set = js_kakao_account.keySet();
 				Iterator iterator = set.iterator();
 				while(iterator.hasNext()){
 					String key = (String)iterator.next();
 					System.out.println("jsEmail hashMap Key : " + key);
 				}*/
-				
-				//System.out.println("birthday : "+js_kakao_account.get("birthday").toString());
-				//System.out.println("gender : "+js_kakao_account.get("gender").toString());
-				//System.out.println("age_range : "+js_kakao_account.get("age_range").toString());
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

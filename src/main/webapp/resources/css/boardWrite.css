@@ -246,7 +246,11 @@ height: 300px;
 
 
 
-
+.note-editor.note-frame .note-editing-area .note-editable {
+	
+	color: #808080;
+	font-size: 0.9em;
+}
 
 
 

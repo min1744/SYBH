@@ -21,12 +21,12 @@ public class QnADAO implements BoardDAO{
 
 	
 	//답글 insert
-	public int setReply(BoardVO qnaVO) throws Exception {
+	public int setReply(QnAVO qnaVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setReply", qnaVO);
 	}
 	
 	//답글 update(사전작업)
-	public int setReplyUpdate(BoardVO qnaVO) throws Exception {
+	public int setReplyUpdate(QnAVO qnaVO) throws Exception {
 		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnaVO);
 	}
 	
