@@ -15,9 +15,10 @@
 						
 						<div class="c_list_ud">
 							<ul>
-								<li><a href="" class="c_update">수정</a></li>
+								<li><a href="" class="c_update" title="${list.qcnum}"
+								data-toggle="modal" data-target="#myModal">수정</a></li>
 								<li>│</li>
-								<li><a href="" class="c_delete">삭제</a></li>
+								<li><a href="" class="c_delete" id="${list.qcnum}">삭제</a></li>
 							</ul>
 						</div>
 					</div>

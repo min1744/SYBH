@@ -33,20 +33,17 @@ public class CommentsController {
 	
 	
 	@RequestMapping(value = "commentsList", method = RequestMethod.GET)
-	public ModelAndView getList(PageMaker pageMaker) throws Exception {
+	public ModelAndView getList(int num, PageMaker pageMaker) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
-		List<QnACommentsVO> list = qnACommentsService.getList(pageMaker);
-		int totalCount = qnACommentsService.getTotalCount(pageMaker);
-		
+		List<QnACommentsVO> list = qnACommentsService.getList(num, pageMaker);
+		int totalCount = qnACommentsService.getTotalCount(num);
 		mv.addObject("list", list);
 		mv.addObject("totalCount", totalCount);
 		mv.setViewName("common/commentsList");
 		
 		return mv;
-		
 	}
-	
 	
 
 }

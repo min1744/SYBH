@@ -47,6 +47,7 @@ $(function() {
 				<li><a href="../news/newsAll">건강뉴스</a></li>
 				<li><a href="../notice/noticeList">병원안내</a></li>
 				<li><a href="../qna/complaint">고객의 소리</a></li>
+				<li><a href="../community/communityList">커뮤니티</a></li>
 				<li id="last_menu"><a href="">주말약국</a></li>			
 			</ul>
 		</div>
@@ -89,15 +90,15 @@ $(function() {
 		<c:when test="${not empty memberVO.id}">
 			<c:choose>
 				<c:when test="${memberVO.grade eq '2'}">
-					<div id="sub_nav_box" style="padding-left: 810px;">
+					<div id="sub_nav_box" style="padding-left: 657px;">
 				</c:when>
 				<c:otherwise>
-				<div id="sub_nav_box" style="padding-left: 820px;">
+				<div id="sub_nav_box" style="padding-left: 671px;">
 				</c:otherwise>
 			</c:choose>
 		</c:when>
 		<c:otherwise>
-			<div id="sub_nav_box" style="padding-left: 845px;">
+			<div id="sub_nav_box" style="padding-left: 696px;">
 		</c:otherwise>
 	</c:choose>
 		<ul id="ul_1">

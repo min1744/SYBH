@@ -1,6 +1,8 @@
 package com.hospital.qna.comments;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -19,21 +21,21 @@ public class QnACommentsService {
 		return qnACommentsDAO.setWrite(qnACommentsVO);
 	}
 	
-	public List<QnACommentsVO> getList(PageMaker pageMaker) throws Exception {
+	public List<QnACommentsVO> getList(int num, PageMaker pageMaker) throws Exception {
 		
-		//startRow, lastRow
 		pageMaker.makeRow();
-		List<QnACommentsVO> list = qnACommentsDAO.getList(pageMaker);
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		int totalCount = qnACommentsDAO.getCount(pageMaker);
-		pageMaker.makePage(totalCount);
+		map.put("num", num);
+		map.put("pager", pageMaker);
 		
-		return list;
+		return qnACommentsDAO.getList(map);
 	}
 	
-	public int getTotalCount(PageMaker pageMaker) throws Exception {
+	public int getTotalCount(int num) throws Exception {
 		
-		return qnACommentsDAO.getCount(pageMaker);
+		return qnACommentsDAO.getTotalCount(num);
 	}
+	
 
 }

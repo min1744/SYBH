@@ -33,6 +33,9 @@ public class QnaController {
 	}
 	
 	
+	
+	
+	
 	////////////// 공통 Write - post
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
 	public ModelAndView setWrite(QnAVO qnaVO, HttpSession session) throws Exception {
@@ -166,7 +169,9 @@ public class QnaController {
 		
 		ModelAndView mv = new ModelAndView();
 		BoardVO boardVO = qnaService.getSelect(num);
+		int totalCount = qnACommentsService.getTotalCount(num);
 		
+		mv.addObject("totalCount", totalCount);
 		mv.addObject("vo", boardVO);
 		mv.addObject("menu", "complaint");
 		mv.setViewName("board/boardSelect");
@@ -247,7 +252,9 @@ public class QnaController {
 			
 		ModelAndView mv = new ModelAndView();
 		BoardVO boardVO = qnaService.getSelect(num);
-			
+		int totalCount = qnACommentsService.getTotalCount(num);
+		
+		mv.addObject("totalCount", totalCount);
 		mv.addObject("vo", boardVO);
 		mv.addObject("menu", "praise");
 		mv.setViewName("board/boardSelect");
@@ -327,7 +334,9 @@ public class QnaController {
 				
 		ModelAndView mv = new ModelAndView();
 		BoardVO boardVO = qnaService.getSelect(num);
-				
+		int totalCount = qnACommentsService.getTotalCount(num);
+		
+		mv.addObject("totalCount", totalCount);
 		mv.addObject("vo", boardVO);
 		mv.addObject("menu", "qna");
 		mv.setViewName("board/boardSelect");
