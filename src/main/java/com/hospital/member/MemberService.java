@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -37,11 +38,22 @@ public class MemberService {
 	private JavaMailSender mailSender;
 	
 	//Admin페이지 List
-	public List<MemberVO> getList(PageMaker pageMaker) throws Exception{
-		pageMaker.makeRow();
-		pageMaker.makePage(memberDAO.getTotalCount(pageMaker));
+	public List<MemberVO> getList() throws Exception{
+		List<MemberVO> list = memberDAO.getList();
+		for(MemberVO memberVO : list) {
+			//주민등록번호 복호화 및 뒷자리 *처리
+			String res_reg_num = memberDAO.setResDecryption(memberVO.getRes_reg_num());
+			if(res_reg_num == null) {
+				throw new Exception();
+			}
+			res_reg_num = memberDAO.setUpdateRes(res_reg_num);
+			if(res_reg_num == null) {
+				throw new Exception();
+			}
+			memberVO.setRes_reg_num(res_reg_num);
+		}
 		
-		return memberDAO.getList(pageMaker);
+		return list;
 	}
 	
 	//일반회원 login
@@ -451,5 +463,17 @@ public class MemberService {
 		br.close();
 
 		return kakaoMemberVO;
+	}
+	
+	//등급 상향
+	public int setUpgrade(String [] id) throws Exception{
+		List<String> list = Arrays.asList(id);
+		return memberDAO.setUpgrade(list);
+	}
+	
+	//등급 상향
+	public int setDowngrade(String [] id) throws Exception{
+		List<String> list = Arrays.asList(id);
+		return memberDAO.setDowngrade(list);
 	}
 }

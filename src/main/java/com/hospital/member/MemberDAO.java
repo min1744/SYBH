@@ -27,13 +27,13 @@ public class MemberDAO {
 	}
 	
 	//totalCount
-	public int getTotalCount(PageMaker pageMaker) throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotalCount", pageMaker);
+	public int getTotalCount() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotalCount");
 	}
 	
 	//회원 List
-	public List<MemberVO> getList(PageMaker pageMaker) throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getList", pageMaker);
+	public List<MemberVO> getList() throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getList");
 	}
 	
 	//select
@@ -135,5 +135,15 @@ public class MemberDAO {
 	//회원 탈퇴
 	public int setDelete(String id) throws Exception{
 		return sqlSession.delete(NAMESPACE+"setDelete", id);
+	}
+	
+	//등급 상향
+	public int setUpgrade(List<String> list) throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpgrade", list);
+	}
+	
+	//등급 하향
+	public int setDowngrade(List<String> list) throws Exception{
+		return sqlSession.update(NAMESPACE+"setDowngrade", list);
 	}
 }
