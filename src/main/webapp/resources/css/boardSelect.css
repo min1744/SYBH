@@ -360,6 +360,19 @@
 	padding: 15px 20px;
 }
 
+
+#c_write_box2 {
+	
+	width: 100%;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	float: left;
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 15px 20px;
+	
+}
+
 #c_btn {
 	
 	float: left;
@@ -420,6 +433,33 @@
 
 
 
+#c_write_box2 textarea {
+	
+	background-color: rgba(255,255,255,.001);
+	width: 100%;
+	border: none;
+	margin-top: 10px;
+	color: #808080;
+	display: block;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 1;
+	padding: 6px 0 0;
+	padding-right: 16px;
+	line-height: 18px;
+	vertical-align: top;
+	resize: none;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+}
+
+#c_write_box2 textarea::placeholder {
+	
+	color: #bcbcbc;
+}
+
+
+
 #counter {
 	
 	display: block;
@@ -438,7 +478,7 @@
 	
 	width: 100%;
 	overflow: hidden;
-	padding: 30px 0;
+	padding: 15px 0;
 	letter-spacing: -1px;
 	border-bottom: 1px solid #ddd;
 }
@@ -463,6 +503,7 @@
 	
 	font-weight: 600;
 	margin-bottom: 10px;
+	margin-top: 3px;
 	font-size: 0.95em;
 	float: left;
 }
@@ -532,7 +573,7 @@
 .c_list_bottom li {
 	
 	float: left;
-	font-size: 0.9em;
+	font-size: 0.8em;
 }
 
 

@@ -2,6 +2,7 @@ package com.hospital.qna.comments;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -23,15 +24,17 @@ public class QnACommentsDAO {
 		return sqlSession.insert(NAMESPACE+"setWrite", qnACommentsVO);
 	}
 	
-	public List<QnACommentsVO> getList(PageMaker pageMaker) throws Exception {
+	
+	public List<QnACommentsVO> getList(Map<String, Object> map) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE+"getList", pageMaker);
-		
+		return sqlSession.selectList(NAMESPACE+"getList", map);
 	}
 	
-	public int getCount(PageMaker pageMaker) throws Exception {
+	
+	public int getTotalCount(int num) throws Exception {
 		
-		return sqlSession.selectOne(NAMESPACE+"getCount", pageMaker);
+		return sqlSession.selectOne(NAMESPACE+"getCount", num);
 	}
+	
 
 }

@@ -11,21 +11,21 @@
   <selectKey keyProperty="qcnum" order="BEFORE" resultType="Integer">
   		select QnaComments_SEQ.nextval from dual
   </selectKey>
-  	insert into QnaComments values(#{qcnum}, 41, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0)
+  	insert into QnaComments values(#{qcnum}, #{num}, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0)
   </insert>
   
   
     <!-- list -->
-  <select id="getList" parameterType="PageMaker" resultType="QnACommentsVO">
+  <select id="getList" parameterType="java.util.Map" resultType="QnACommentsVO">
 	select * from
 	(select rownum R, C.* from
-	(select * from QnAComments where num=41 order by qcnum desc) C)
-	where R between #{startRow} and #{lastRow}
+	(select * from QnAComments where num=#{num} order by qcnum desc) C)
+	where R between #{pager.startRow} and #{pager.lastRow}
   </select>
   
   <!-- totalCount -->
-  <select id="getCount" resultType="Integer">
-  	select count(num) from QnaComments where num=41
+  <select id="getCount" parameterType="Integer" resultType="Integer">
+  	select count(num) from QnaComments where num=#{num}
   </select>
   
 </mapper>  

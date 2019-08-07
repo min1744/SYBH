@@ -20,6 +20,7 @@
 						
 		});
 		
+		console.log($('#qnum').val());
 		
 		//qna 부분
 		$("#q_delete").click(function() {
@@ -49,15 +50,53 @@
 			form.submit();
 		}
 		
-///////////////////////////////////////////// 댓글 관련▼
+		///////////////////////////////////////////// 댓글 관련▼
+		
+		//글자수 textarea 체크
+		$('.c_area').keyup(function (e){
+		    var content = $(this).val();
+		    $('#counter').html("("+content.length+" / 500)");    //글자수 실시간 카운팅
+
+		    if (content.length > 500){
+		        alert("최대 200자까지 입력 가능합니다.");
+		        $(this).val(content.substring(0, 500));
+		        $('#counter').html("(200 / 500)");
+		    }
+		});
+		
 		
 		var curPage = 1;
 		
-		getList(1); //함수호출
+		getList(curPage); //함수호출
+		
+		// 댓글 수정 코드
+		$('#updateBtn').click(function() {
+			var upContents = $('#updateContents').val();
+			var cnumId = $('#cnum').val();
+			$.post("../event/commentsUpdate", {
+				cnum : cnumId,
+				contents : upContents
+			},
+			function(data) {
+				if (data.trim() == '1') {
+					//location.reload();
+					getList(1);
+					//$('#c'+id).html(upContents);
+				} else {
+					alert('수정실패');
+				}
+			});
+		});
+		$('.commentslist').on('click', '.c_update', function() {
+			var id = $(this).attr('title');
+			var con = $('#c' + id).html();
+			$('#updateContents').val(con);
+			$('#cnum').val(id);
+		});
 		
 		//댓글 등록하기 코드
 		$('#comment_btn').click(function() {
-			var num = 41;
+			var num = $('#qnum').val();
 			var id = $('#c_writer').text();
 			var contents = $('.c_area').val();
 			$.ajax({
@@ -65,7 +104,7 @@
 				url:"../comments/commentsWrite",
 				type:"POST",
 				data: {
-					//num : num,
+					num : num,
 					id : id,
 					contents : contents
 				},
@@ -83,18 +122,29 @@
 		});
 		//등록하기 코드 끝
 		
-		
+		console.log(curPage);
 		//리스트 가져오기
-		function getList(count) {
-			$.get("../comments/commentsList?num=41&curPage="+count,
+		function getList(curPage) {
+			$.get("../comments/commentsList?num=${vo.num}&curPage="+curPage,
 					function(data) {
-						if (count == 1) {
+						if (curPage == 1) {
 							$('.commentslist').html(data);
 						} else {
 							$('.commentslist').append(data);
 						}
 					})
 		}
+		
+		
+		
+		/////////////////////////////////////////////////
+				////// 댓글 더보기 코드
+				$('#more').click(function() {
+					curPage++;
+					getList(curPage);
+				});
+		
+		
 		
 		
 	});
@@ -188,7 +238,7 @@
 			<c:when test="${menu eq 'complaint'}">
 				<ul>
 					<li>고객의 소리</li>
-					<li><a href="#" style="color:#6BB5DB;">건의합니다</a></li>
+					<li><a href="./complaint" style="color:#6BB5DB;">건의합니다</a></li>
 					<li><a href="./praise">칭찬합니다</a></li>
 					<li><a href="./qnaList">질문과답변</a></li>
 				</ul>
@@ -197,7 +247,7 @@
 				<ul>
 					<li>고객의 소리</li>
 					<li><a href="./complaint">건의합니다</a></li>
-					<li><a href="#" style="color:#6BB5DB;">칭찬합니다</a></li>
+					<li><a href="./praise" style="color:#6BB5DB;">칭찬합니다</a></li>
 					<li><a href="./qnaList">질문과답변</a></li>
 				</ul>
 			</c:when>
@@ -206,7 +256,7 @@
 					<li>고객의 소리</li>
 					<li><a href="./complaint">건의합니다</a></li>
 					<li><a href="./praise">칭찬합니다</a></li>
-					<li><a href="#" style="color:#6BB5DB;">질문과답변</a></li>
+					<li><a href="./qnaList" style="color:#6BB5DB;">질문과답변</a></li>
 				</ul>
 			</c:otherwise>
 		</c:choose>
@@ -233,13 +283,49 @@
 					
 					<div id="contents">${vo.contents}</div>
 					
+					<!-- 댓글 -->
+					<div id="comment_box">
+						<div id="comment">
+							<div id="c_top">
+								<input type="hidden" name="num" id="num" value="1">
+								<span id="c_count_title">전체댓글</span><span id="c_count">${totalCount}</span>
+							</div>
+							<c:choose>
+								<c:when test="${not empty memberVO}">
+								<div id="c_write_box">
+									<p id="c_writer">${memberVO.id}</p>
+									<textarea class="c_area" placeholder="주제와 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
+									<span id="counter">(0 / 500)</span>
+								</div>
+								<div id="c_btn">
+									<button id="comment_btn">등록</button>
+								</div>
+								</c:when>
+								<c:otherwise>
+								<div id="c_write_box2">
+									<textarea placeholder="로그인 후 사용하실 수 있습니다" disabled="disabled"></textarea>
+								</div>
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<!-- 댓글 리스트 -->
+						<div class="commentslist">
+						
+						</div>	
+						<c:if test="${totalcount > 10}">
+							<button id="more">+ 댓글 더보기</button>
+						</c:if>
+					</div>
+					<!-- 댓글 끝 -->
 					
 				<div id="btn_box">
 					<a href="./complaint" id="list">목록</a>
 						
 					<button id="q_delete">삭제</button>
 					<a href="./complaintUpdate?num=${vo.num}" id="update">수정</a>
+					<c:if test="${memberVO.grade eq '2'}">
 					<a href="./complaintReply?num=${vo.num}" id="reply">답글달기</a>
+					</c:if>
 				</div>
 		</div>
 	</div>
