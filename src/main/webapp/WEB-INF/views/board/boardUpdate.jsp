@@ -147,9 +147,7 @@ $(function() {
 
 			<div id="form_box">
 				<form id="frm" action="./qnaUpdate" method="post">
-				<c:choose>
-					<c:when test="${menu eq 'complaint'}">
-						<input type="hidden" name="menu" value="complaint">
+						<input type="hidden" name="menu" value="${qnaVO.menu}">
 						<input type="hidden" name="num" value="${qnaVO.num}">
 					
 						<div class="float">
@@ -173,60 +171,6 @@ $(function() {
 						<textarea class="form-control" rows="5" cols="15" id="contents"
 						name="contents">${qnaVO.contents}</textarea>
 					</div>					
-					</c:when>
-					<c:when test="${menu eq 'praise'}">
-						<input type="hidden" name="menu" value="praise">
-						<input type="hidden" name="num" value="${qnaVO.num}">
-						
-							<div class="float">
-								<span class="title">제목</span> <input class="form-control"
-									type="text" id="q_title" value="${qnaVO.title}" name="title">
-							</div>
-							<div class="float">
-								<span class="writer">작성자</span> <input class="form-control"
-									type="text" id="q_writer" name="writer" value="${qnaVO.writer}" readonly>
-							</div>
-							<div class="float">
-								<span class="category">구분</span> 
-								<select name="category" id="select" class="form-control">
-									<option value="site">사이트이용</option>
-									<option value="web">병원이용</option>
-									<option value="etc">기타</option>
-								</select>
-							</div>
-						<div class="form-group" id="contents_box">
-							<span class="contents">글내용</span>
-							<textarea class="form-control" rows="5" cols="15" id="contents"
-							name="contents">${qnaVO.contents}</textarea>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<input type="hidden" name="menu" value="qna">
-						<input type="hidden" name="num" value="${qnaVO.num}">
-					
-						<div class="float">
-							<span class="title">제목</span> <input class="form-control"
-								type="text" id="q_title" value="${qnaVO.title}" name="title">
-						</div>
-						<div class="float">
-							<span class="writer">작성자</span> <input class="form-control"
-								type="text" id="q_writer" name="writer" value="${qnaVO.writer}" readonly>
-						</div>
-						<div class="float">
-							<span class="category">구분</span> 
-							<select name="category" id="select" class="form-control">
-								<option value="site">사이트이용</option>
-								<option value="web">병원이용</option>
-								<option value="etc">기타</option>
-							</select>
-						</div>
-					<div class="form-group" id="contents_box">
-						<span class="contents">글내용</span>
-						<textarea class="form-control" rows="5" cols="15" id="contents"
-						name="contents">${qnaVO.contents}</textarea>
-					</div>
-					</c:otherwise>
-				</c:choose>
 
 					<div id="write_btn">
 						<input id="q_write" type="button" value="글수정">

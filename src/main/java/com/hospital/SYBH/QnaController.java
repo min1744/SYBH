@@ -107,7 +107,7 @@ public class QnaController {
 	//////////////////공통 delete
 	//delete
 	
-	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "qnaDelete", method = RequestMethod.POST)
 	public ModelAndView complaintDelete(QnAVO qnaVO, int num, HttpSession session) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
@@ -271,13 +271,6 @@ public class QnaController {
 	}
 	
 		
-	//delete
-	@RequestMapping(value = "praiseDelete", method = RequestMethod.GET)
-	public String praiseDelete(int num, HttpSession session) throws Exception {
-		int result = qnaService.setDelete(num, session);
-		return "redirect:./praise";
-	}
-	
 	
 	//reply
 	@RequestMapping(value = "praiseReply", method = RequestMethod.GET)
@@ -355,14 +348,6 @@ public class QnaController {
 		mv.setViewName("board/boardUpdate");
 			
 		return mv;
-	}
-	
-	
-	//delete
-	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
-	public String qnaDelete(int num, HttpSession session) throws Exception {
-		int result = qnaService.setDelete(num, session);
-		return "redirect:./qnaList";
 	}
 	
 	

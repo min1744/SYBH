@@ -21,12 +21,14 @@
 		});
 		
 		
+		//qna 부분
 		$("#q_delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
-			var num = 
+			var num = $('#qnum').val();
+			var menu = $('#qmenu').val();
 			if(result){
 				
-				post({'check':check,'price':price});
+				post({'num':num,'menu':menu});
 			}
 						
 		});
@@ -212,8 +214,6 @@
 		
 		<div id="boardSelect">
 		
-		<c:choose>
-			<c:when test="${menu eq 'complaint'}">
 				<input type="hidden" name="num" value="${vo.num}" id="qnum">
 				<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
 				<div class="title">${vo.title}</div>
@@ -241,66 +241,6 @@
 					<a href="./complaintUpdate?num=${vo.num}" id="update">수정</a>
 					<a href="./complaintReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>
-			</c:when>
-			<c:when test="${menu eq 'praise'}">
-				<input type="hidden" name="num" value="${vo.num}" id="qnum">
-				<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
-				<div class="title">${vo.title}</div>
-					<div id="qsub">
-						<ul style="width: 30%; float: left;">
-							<li>작성자</li>
-							<li>${vo.writer}</li>
-						</ul>
-						<ul style="width: 27%; float: right;">
-							<li>등록일</li>
-							<li>${vo.reg_date}</li>
-							<li>│</li>
-							<li>조회수</li>
-							<li>${vo.hit}</li>
-						</ul>
-					</div>
-					
-					<div id="contents">${vo.contents}</div>
-					
-				<div id="btn_box">
-					<a href="./praise" id="list">목록</a>
-						
-					<button id="q_delete">삭제</button>
-					<a href="./praiseUpdate?num=${vo.num}" id="update">수정</a>
-					<a href="./praiseReply?num=${vo.num}" id="reply">답글달기</a>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<input type="hidden" name="num" value="${vo.num}" id="qnum">
-				<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
-				<div class="title">${vo.title}</div>
-					<div id="qsub">
-						<ul style="width: 30%; float: left;">
-							<li>작성자</li>
-							<li>${vo.writer}</li>
-						</ul>
-						<ul style="width: 27%; float: right;">
-							<li>등록일</li>
-							<li>${vo.reg_date}</li>
-							<li>│</li>
-							<li>조회수</li>
-							<li>${vo.hit}</li>
-						</ul>
-					</div>
-					
-					<div id="contents">${vo.contents}</div>
-					
-					
-				<div id="btn_box">
-					<a href="./qnaList" id="list">목록</a>
-						
-					<button id="q_delete">삭제</button>
-					<a href="./qnaUpdate?num=${vo.num}" id="update">수정</a>
-					<a href="./qnaReply?num=${vo.num}" id="reply">답글달기</a>
-				</div>
-			</c:otherwise>
-		</c:choose>
-		
 		</div>
 	</div>
 </div>
