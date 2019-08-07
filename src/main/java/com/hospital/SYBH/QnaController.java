@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hospital.board.BoardVO;
 import com.hospital.qna.QnAService;
@@ -75,6 +76,38 @@ public class QnaController {
 		}
 		return mv;
 	}
+	
+	
+	////////////////// 공통 reply - post
+	//reply
+	
+	//reply - post
+	@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
+	public ModelAndView setReply(QnAVO qnaVO) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		int result = qnaService.setReply(qnaVO);
+			
+		if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+			mv.setViewName("redirect:./complaint");
+		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+			mv.setViewName("redirect:./praise");
+		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+			mv.setViewName("redirect:./qnaList");
+		} else {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./complaint");
+			mv.setViewName("common/massageMove");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	////////////////////////////////////////건의합니다
@@ -147,12 +180,16 @@ public class QnaController {
 	public ModelAndView setReply(int num) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+		
+		mv.addObject("vo", boardVO);
 		mv.addObject("num", num);
 		mv.addObject("menu", "complaint");
 		mv.setViewName("board/boardReply");
 		
 		return mv;
 	}
+	
 	
 	
 	
@@ -228,6 +265,22 @@ public class QnaController {
 	}
 	
 	
+	//reply
+	@RequestMapping(value = "praiseReply", method = RequestMethod.GET)
+	public ModelAndView praiseReply(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+			
+		mv.addObject("vo", boardVO);
+		mv.addObject("num", num);
+		mv.addObject("menu", "praise");
+		mv.setViewName("board/boardReply");
+		
+		return mv;
+	}
+	
+	
 	
 	
 	
@@ -296,6 +349,22 @@ public class QnaController {
 	public String qnaDelete(int num, HttpSession session) throws Exception {
 		int result = qnaService.setDelete(num, session);
 		return "redirect:./qnaList";
+	}
+	
+	
+	//reply
+	@RequestMapping(value = "qnaReply", method = RequestMethod.GET)
+	public ModelAndView qnaReply(int num) throws Exception {
+				
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+				
+		mv.addObject("vo", boardVO);
+		mv.addObject("num", num);
+		mv.addObject("menu", "qna");
+		mv.setViewName("board/boardReply");
+		
+		return mv;
 	}
 	
 		

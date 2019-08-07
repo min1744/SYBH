@@ -20,7 +20,7 @@ public class QnAService implements BoardService{
 	private QnADAO qnaDAO;
 	
 	//답글
-	public int setReply(BoardVO qnaVO) throws Exception {
+	public int setReply(QnAVO qnaVO) throws Exception {
 		
 		//답글 update
 		int result = qnaDAO.setReplyUpdate(qnaVO);

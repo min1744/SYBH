@@ -147,6 +147,16 @@
 	color: black;
 }
 
+
+.position_2 img {
+	
+	margin-right: 5px;
+	vertical-align: sub;
+}
+
+
+
+
 #boardList table a:hover {
 	
 	color: #153F91;

@@ -203,34 +203,13 @@
 					
 					<div id="contents">${vo.contents}</div>
 					
-					<!-- 댓글 / 건들지마시오 -->
-					<div id="comment_box">
-						<div id="comment">
-							<div id="c_top">
-								<input type="hidden" name="num" id="num" value="1">
-								<span id="c_count_title">전체댓글</span><span id="c_count">${totalCount}</span>
-							</div>
-							<div id="c_write_box">
-								<p id="c_writer">${memberVO.id}</p>
-								<textarea class="c_area" placeholder="주제와 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
-								<span id="counter">(0 / 500)</span>
-							</div>
-							<div id="c_btn">
-								<button id="comment_btn">등록</button>
-							</div>
-						</div>
-						<!-- 댓글 리스트 -->
-						<div class="commentslist">
-						</div>	
-						
-					</div>
-					<!-- 댓글 끝 -->
 					
 				<div id="btn_box">
 					<a href="./complaint" id="list">목록</a>
 						
 					<a href="./complaintDelete?num=${vo.num}" id="delete">삭제</a>
 					<a href="./complaintUpdate?num=${vo.num}" id="update">수정</a>
+					<a href="./complaintReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>
 			</c:when>
 			<c:when test="${menu eq 'praise'}">
@@ -251,34 +230,12 @@
 					
 					<div id="contents">${vo.contents}</div>
 					
-					<!-- 댓글 / 건들지마시오 -->
-					<div id="comment_box">
-						<div id="comment">
-							<div id="c_top">
-								<input type="hidden" name="num" id="num" value="1">
-								<span id="c_count_title">전체댓글</span><span id="c_count">${totalCount}</span>
-							</div>
-							<div id="c_write_box">
-								<p id="c_writer">${memberVO.id}</p>
-								<textarea class="c_area" placeholder="주제와 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
-								<span id="counter">(0 / 500)</span>
-							</div>
-							<div id="c_btn">
-								<button id="comment_btn">등록</button>
-							</div>
-						</div>
-						<!-- 댓글 리스트 -->
-						<div class="commentslist">
-						</div>	
-						
-					</div>
-					<!-- 댓글 끝 -->
-					
 				<div id="btn_box">
 					<a href="./praise" id="list">목록</a>
 						
 					<a href="./praiseDelete?num=${vo.num}" id="delete">삭제</a>
 					<a href="./praiseUpdate?num=${vo.num}" id="update">수정</a>
+					<a href="./praiseReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -299,34 +256,13 @@
 					
 					<div id="contents">${vo.contents}</div>
 					
-					<!-- 댓글 / 건들지마시오 -->
-					<div id="comment_box">
-						<div id="comment">
-							<div id="c_top">
-								<input type="hidden" name="num" id="num" value="1">
-								<span id="c_count_title">전체댓글</span><span id="c_count">${totalCount}</span>
-							</div>
-							<div id="c_write_box">
-								<p id="c_writer">${memberVO.id}</p>
-								<textarea class="c_area" placeholder="주제와 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
-								<span id="counter">(0 / 500)</span>
-							</div>
-							<div id="c_btn">
-								<button id="comment_btn">등록</button>
-							</div>
-						</div>
-						<!-- 댓글 리스트 -->
-						<div class="commentslist">
-						</div>	
-						
-					</div>
-					<!-- 댓글 끝 -->
 					
 				<div id="btn_box">
 					<a href="./qnaList" id="list">목록</a>
 						
 					<a href="./qnaDelete?num=${vo.num}" id="delete">삭제</a>
 					<a href="./qnaUpdate?num=${vo.num}" id="update">수정</a>
+					<a href="./qnaReply?num=${vo.num}" id="reply">답글달기</a>
 				</div>
 			</c:otherwise>
 		</c:choose>
