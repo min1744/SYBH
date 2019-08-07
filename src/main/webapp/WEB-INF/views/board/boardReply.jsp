@@ -55,7 +55,7 @@
 					<input type="hidden" name="category" value="${vo.category}">
 					<div class="float">
 						<span class="title">제목</span> <input class="form-control"
-							type="text" id="title" value="안녕하세요. 건의내용 답변 입니다^^" name="title" readonly>
+							type="text" id="title" value="안녕하세요. 건의내용 답변 입니다^^" name="title">
 					</div>
 					<div class="float">
 						<span class="writer">작성자</span> <input class="form-control"
@@ -79,9 +79,11 @@
 					</c:when>
 					<c:when test="${menu eq 'praise'}">
 					<input type="hidden" name="num" value="${vo.num}">
+					<input type="hidden" name="menu" value="${vo.menu}">
+					<input type="hidden" name="category" value="${vo.category}">
 					<div class="float">
 						<span class="title">제목</span> <input class="form-control"
-							type="text" id="title" value="${vo.title}" name="title">
+							type="text" id="title" value="안녕하세요.칭찬합니다 답글 입니다^^" name="title">
 					</div>
 					<div class="float">
 						<span class="writer">작성자</span> <input class="form-control"
@@ -90,7 +92,13 @@
 					<div class="form-group" id="contents_box">
 						<span class="contents">글내용</span>
 						<textarea class="form-control" rows="5" cols="15" id="contents"
-							name="contents">${vo.contents}</textarea>
+							name="contents">
+							--------------------------- 원글 내용 -------------------------- <br>
+							제목 : ${vo.title} <br>
+							작성자 : ${vo.writer} <br>
+							내용 : ${vo.contents} <br>
+							--------------------------- 답변 내용 -------------------------- <br>
+							</textarea>
 					</div>
 
 					<div id="write_btn">
@@ -99,9 +107,11 @@
 					</c:when>
 					<c:otherwise>
 					<input type="hidden" name="num" value="${vo.num}">
+					<input type="hidden" name="menu" value="${vo.menu}">
+					<input type="hidden" name="category" value="${vo.category}">
 					<div class="float">
 						<span class="title">제목</span> <input class="form-control"
-							type="text" id="title" value="${vo.title}" name="title">
+							type="text" id="title" value="안녕하세요. 질문내용 답변 입니다^^" name="title">
 					</div>
 					<div class="float">
 						<span class="writer">작성자</span> <input class="form-control"
@@ -110,7 +120,13 @@
 					<div class="form-group" id="contents_box">
 						<span class="contents">글내용</span>
 						<textarea class="form-control" rows="5" cols="15" id="contents"
-							name="contents">${vo.contents}</textarea>
+							name="contents">
+							--------------------------- 원글 내용 -------------------------- <br>
+							제목 : ${vo.title} <br>
+							작성자 : ${vo.writer} <br>
+							내용 : ${vo.contents} <br>
+							--------------------------- 답변 내용 -------------------------- <br>
+							</textarea>
 					</div>
 
 					<div id="write_btn">

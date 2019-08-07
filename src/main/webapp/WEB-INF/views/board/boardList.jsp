@@ -6,9 +6,11 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/noticeList.css" rel="stylesheet">
+
 <script type="text/javascript">
-$(function() {	
-	$('.position_2 td').each(function() {
+		$(function() {	
+	
+		$('.position_2 td').each(function() {
 		var check = $(this).attr("title");
 		if(check==1){
 			$(this).closest('tr').css({
@@ -27,6 +29,7 @@ $(function() {
 				});
 			});
 			
+			
 			$('.depth_a').css({
 				'font-weight':'700',
 				'color': '#153F91'
@@ -38,6 +41,7 @@ $(function() {
 		});
 		
 	});
+	
 });
 </script>
 </head>
@@ -276,7 +280,17 @@ $(function() {
 							<c:forEach items="${list}" var="praise">
 							<tr class="position_2">
 								<td class="num">${praise.num}</td>
-								<td><a href="./praiseSelect?num=${praise.num}">${praise.title}</a></td>
+								<td title="${praise.depth}">
+								<c:forEach begin="1" end="${praise.depth}">
+								<img width="20px" src="../resources/images/reply.png" style="transform: rotate(-180deg);">
+								</c:forEach>
+								<c:if test="${praise.depth eq '1'}">
+								<a href="./praiseSelect?num=${praise.num}" class="depth_a">${praise.title}</a>
+								</c:if>
+								<c:if test="${praise.depth eq '0'}">
+								<a href="./praiseSelect?num=${praise.num}">${praise.title}</a>
+								</c:if>
+								</td>
 								<td class="date">${praise.writer}</td>
 								<td class="date">${praise.reg_date }</td>
 								<td class="hit">${praise.hit}</td>
@@ -287,7 +301,17 @@ $(function() {
 							<c:forEach items="${list}" var="qna">
 							<tr class="position_2">
 								<td class="num">${qna.num}</td>
-								<td><a href="./qnaSelect?num=${qna.num}">${qna.title}</a></td>
+								<td title="${qna.depth}">
+								<c:forEach begin="1" end="${qna.depth}">
+								<img width="20px" src="../resources/images/reply.png" style="transform: rotate(-180deg);">
+								</c:forEach>
+								<c:if test="${qna.depth eq '1'}">
+								<a href="./qnaSelect?num=${qna.num}" class="depth_a">${qna.title}</a>
+								</c:if>
+								<c:if test="${qna.depth eq '0'}">
+								<a href="./qnaSelect?num=${qna.num}">${qna.title}</a>
+								</c:if>
+								</td>
 								<td class="date">${qna.writer}</td>
 								<td class="date">${qna.reg_date }</td>
 								<td class="hit">${qna.hit}</td>
