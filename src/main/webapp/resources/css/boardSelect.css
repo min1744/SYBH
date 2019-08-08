@@ -299,6 +299,20 @@
 
 
 
+#replyBtn {
+	
+	padding: 1.5% 2.2%;
+	border: none;
+	border-radius: 5px;
+	background-color: #153F91;
+	color: white;
+	font-weight: 500;
+	box-sizing: border-box;
+	text-align: center;
+	margin-right: 5px;
+	font-size: 0.9em;
+}
+
 
 
 
@@ -555,7 +569,7 @@
 	
 	width: 100%;
 	overflow: hidden;
-	padding: 15px 0;
+	padding: 15px 0 15px 10px;;
 	letter-spacing: -1px;
 	border-bottom: 1px solid #ddd;
 }
@@ -573,6 +587,7 @@
 .best_icon {
 	
 	margin-right: 10px;
+	display: inline-block;
 }
 
 
@@ -632,6 +647,9 @@
 	font-size: 0.95em;
 	margin-bottom: 5px;
 	clear: both;
+	width: 94%;
+	display: initial;
+	word-break:break-all;
 }
 
 
@@ -657,6 +675,7 @@
 	
 	float: left;
 	width: 40%;
+	margin-right: 10px;
 }
 
 

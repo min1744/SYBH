@@ -211,6 +211,35 @@
 		});
 		
 		
+		///////////////////////////////////////좋아요
+		$('.commentslist').on('click', '.like', function(e) {
+			e.preventDefault();
+			var likeQcnum = $(this).attr('title');
+			var likeId = '${memberVO.id}';
+			$.ajax({
+				
+				url:"../comments/commentsLike",
+				type:"POST",
+				data: {
+					qcnum : likeQcnum,
+					num : likeQcnum,
+					id : likeId
+				},
+				success:function(data) {
+					console.log(data);
+					if(data=='1') {
+						getList(1);
+					} else {
+						alert('등록실패');
+					}
+				}
+			});
+			
+		});
+		
+		
+		
+		
 	});
 </script>
 </head>

@@ -31,7 +31,7 @@
 			QnaComments_SEQ.nextval, #{num}, #{id}, #{contents}, sysdate,
 			(<include refid="subRef"/>),
 			(<include refid="subStep"/>)+1,
-			1
+			1, 0, 0
 		)
 	</insert>
   
@@ -40,7 +40,7 @@
   <selectKey keyProperty="qcnum" order="BEFORE" resultType="Integer">
   		select QnaComments_SEQ.nextval from dual
   </selectKey>
-  	insert into QnaComments values(#{qcnum}, #{num}, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0)
+  	insert into QnaComments values(#{qcnum}, #{num}, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0, 0, 0);
   </insert>
   
   
@@ -60,6 +60,17 @@
   <!-- update -->
   <update id="setUpdate" parameterType="QnAVO">
   	update QnaComments set contents=#{contents} where qcnum=#{qcnum}
+  </update>
+  
+  
+  <!-- 좋아요 카운트 수정 -->
+  <update id="likeUpdate" parameterType="QnAVO">
+  	update QnaComments set like_cnt=like_cnt+1 where qcnum=#{qcnum}
+  </update>
+  
+  <!-- 좋아요 취소 카운트 수정 -->
+  <update id="likeDelete" parameterType="QnAVO">
+  	update QnaComments set like_cnt=like_cnt-1 where qcnum=#{qcnum}
   </update>
   
   

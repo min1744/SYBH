@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:forEach items="${list}" var="list">
-
 			<!-- foreach 돌릴곳 -->
 				<c:if test="${list.depth eq '1'}">
 					<div class="redepth" id="${list.qcnum}">
@@ -26,12 +25,16 @@
 						
 						<div class="c_list_ud">
 							<ul>
-								<li class="c_report"><a href="">신고</a></li>
-								<li>│</li>
-								<li><a href="" class="c_update" title="${list.qcnum}"
-								data-toggle="modal" data-target="#myModal">수정</a></li>
-								<li>│</li>
-								<li><a href="" class="c_delete" id="${list.qcnum}">삭제</a></li>
+								<!-- <li class="c_report"><a href="">신고</a></li>
+								<li>│</li> -->
+								<c:choose>
+									<c:when test="${list.id eq memberVO.id && memberVO.grade eq '2'}">
+										<li><a href="" class="c_update" title="${list.qcnum}"
+										data-toggle="modal" data-target="#myModal">수정</a></li>
+										<li>│</li>
+										<li><a href="" class="c_delete" id="${list.qcnum}">삭제</a></li>
+									</c:when>
+								</c:choose>
 							</ul>
 						</div>
 					</div>
@@ -40,17 +43,21 @@
 						<c:if test="${list.depth eq '0'}">
 						<img alt="best" src="../resources/images/best.png" class="best_icon">
 						</c:if>
-						<span class="c_contents" id="c${list.qcnum}">${list.contents}</span>
+						<p class="c_contents" id="c${list.qcnum}">${list.contents}</p>
 						<!-- 답글 -->
 						<div class="c_list_box_bottom">
 							<div class="c_list_bottom">
 								<ul>
-									<c:if test="${list.depth eq '1'}">
-									</c:if>
-									<c:if test="${list.depth eq '0'}">
-									<li class="c_reply"><a href="" title="${list.qcnum}" class="c_replyBtn"
-									data-toggle="modal" data-target="#replyModal">답글달기</a></li>
-									</c:if>
+										<c:choose>
+											<c:when test="${memberVO.grade eq '1' && list.depth eq '0'}">
+												<li class="c_reply"><a href="" title="${list.qcnum}" class="c_replyBtn"
+												data-toggle="modal" data-target="#replyModal">답글달기</a></li>
+											</c:when>
+											<c:when test="${memberVO.grade eq '2' && list.depth eq '0'}">
+												<li class="c_reply"><a href="" title="${list.qcnum}" class="c_replyBtn"
+												data-toggle="modal" data-target="#replyModal">답글달기</a></li>
+											</c:when>
+										</c:choose>
 								</ul>
 						</div>
 						
@@ -59,8 +66,8 @@
 						</c:if>
 						<c:if test="${list.depth eq '0'}">
 						<div class="c_like_bottom">
-							<a href="" class="like"><img alt="like" src="../resources/images/like.png">0</a>
-							<a href="" class="hate"><img alt="hate" src="../resources/images/hate.png">0</a>
+							<a href="" class="like" title="${list.qcnum}"><img alt="like" src="../resources/images/like.png">${list.like_cnt}</a>
+							<a href="" class="hate"><img alt="hate" src="../resources/images/hate.png">${list.hate_cnt}</a>
 						</div>
 						</c:if>
 						</div>

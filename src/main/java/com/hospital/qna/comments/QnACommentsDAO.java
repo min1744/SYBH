@@ -54,5 +54,15 @@ public class QnACommentsDAO {
 		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnACommentsVO);
 	}
 	
+	//댓글 좋아요 update
+	public int likeUpdate(QnACommentsVO qnACommentsVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"likeUpdate", qnACommentsVO);
+	}
+	
+	//댓글 좋아요 delete
+	public int likeDelete(QnACommentsVO qnACommentsVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"likeDelete", qnACommentsVO);
+	}
+	
 
 }

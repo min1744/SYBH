@@ -52,7 +52,7 @@ public class QnaController {
 		} else {
 			mv.addObject("message", "Write Fail");
 			mv.addObject("path", "./complaint");
-			mv.setViewName("common/massageMove");
+			mv.setViewName("common/messageMove");
 		}
 		
 		return mv;
@@ -73,9 +73,9 @@ public class QnaController {
 		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
 			mv.setViewName("redirect:./qnaList");
 		} else {
-			mv.addObject("message", "Write Fail");
+			mv.addObject("message", "Update Fail");
 			mv.addObject("path", "./complaint");
-			mv.setViewName("common/massageMove");
+			mv.setViewName("common/messageMove");
 		}
 		return mv;
 	}
@@ -98,9 +98,9 @@ public class QnaController {
 		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
 			mv.setViewName("redirect:./qnaList");
 		} else {
-			mv.addObject("message", "Write Fail");
+			mv.addObject("message", "Reply Fail");
 			mv.addObject("path", "./complaint");
-			mv.setViewName("common/massageMove");
+			mv.setViewName("common/messageMove");
 		}
 		
 		return mv;
@@ -123,9 +123,9 @@ public class QnaController {
 		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
 			mv.setViewName("redirect:./qnaList");
 		} else {
-			mv.addObject("message", "Write Fail");
+			mv.addObject("message", "Delete Fail");
 			mv.addObject("path", "./complaint");
-			mv.setViewName("common/massageMove");
+			mv.setViewName("common/messageMove");
 		}
 		
 		return mv;

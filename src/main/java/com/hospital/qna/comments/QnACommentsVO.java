@@ -8,11 +8,12 @@ public class QnACommentsVO {
 	private int num;
 	private String id;
 	private String contents;
-	private Date reg_date;
+	private String reg_date;
 	private int ref;
 	private int step;
 	private int depth;
-	
+	private int like_cnt;
+	private int hate_cnt;
 	
 	public int getQcnum() {
 		return qcnum;
@@ -38,10 +39,10 @@ public class QnACommentsVO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Date getReg_date() {
+	public String getReg_date() {
 		return reg_date;
 	}
-	public void setReg_date(Date reg_date) {
+	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
 	public int getRef() {
@@ -62,7 +63,19 @@ public class QnACommentsVO {
 	public void setDepth(int depth) {
 		this.depth = depth;
 	}
+	public int getLike_cnt() {
+		return like_cnt;
+	}
+	public void setLike_cnt(int like_cnt) {
+		this.like_cnt = like_cnt;
+	}
+	public int getHate_cnt() {
+		return hate_cnt;
+	}
+	public void setHate_cnt(int hate_cnt) {
+		this.hate_cnt = hate_cnt;
+	}
 	
 	
-
 }
+	

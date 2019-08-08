@@ -59,5 +59,16 @@ public class QnACommentsService {
 		
 		return result;
 	}
+	
+	
+	//댓글 좋아요 update
+	public int likeUpdate(QnACommentsVO qnACommentsVO) throws Exception {
+		return qnACommentsDAO.likeUpdate(qnACommentsVO);
+	}
+	
+	//댓글 좋아요 delete
+	public int likeDelete(QnACommentsVO qnACommentsVO) throws Exception {
+		return qnACommentsDAO.likeDelete(qnACommentsVO);
+	}
 
 }

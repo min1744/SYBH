@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.qna.comments.QnACommentsService;
 import com.hospital.qna.comments.QnACommentsVO;
+import com.hospital.qna.comments.like.LikeService;
+import com.hospital.qna.comments.like.LikeVO;
 import com.hospital.util.PageMaker;
 
 @Controller
@@ -20,6 +22,8 @@ public class CommentsController {
 	
 	@Inject
 	private QnACommentsService qnACommentsService;
+	@Inject
+	private LikeService likeService;
 	
 	
 	//댓글 등록
@@ -74,5 +78,23 @@ public class CommentsController {
 	}
 	
 	
+	
+	//좋아요
+	@RequestMapping(value = "commentsLike", method = RequestMethod.POST)
+	@ResponseBody
+	public int likeUpdate(LikeVO likeVO, QnACommentsVO qnACommentsVO) throws Exception {
+		
+		int result = qnACommentsService.likeUpdate(qnACommentsVO);
+		result = likeService.setWrtie(likeVO);
+		
+		return result;
+	}
+	
+	
+	
+	//싫어요
+	
+	
+	//싫어요 취소
 
 }
