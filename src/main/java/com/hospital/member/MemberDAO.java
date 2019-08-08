@@ -31,11 +31,6 @@ public class MemberDAO {
 		return sqlSession.selectOne(NAMESPACE+"getTotalCount");
 	}
 	
-	//회원 List
-	public List<MemberVO> getList() throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getList");
-	}
-	
 	//select
 	public MemberVO getSelect(String id) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getSelect", id);
@@ -127,23 +122,8 @@ public class MemberDAO {
 		return sqlSession.update(NAMESPACE+"setGradeUpdate", memberVO);
 	}
 	
-	//회원 관리(삭제)
-	public int setDelete(List<String> list) throws Exception{
-		return sqlSession.delete(NAMESPACE+"setDeletes", list);
-	}
-	
 	//회원 탈퇴
 	public int setDelete(String id) throws Exception{
 		return sqlSession.delete(NAMESPACE+"setDelete", id);
-	}
-	
-	//등급 상향
-	public int setUpgrade(List<String> list) throws Exception{
-		return sqlSession.update(NAMESPACE+"setUpgrade", list);
-	}
-	
-	//등급 하향
-	public int setDowngrade(List<String> list) throws Exception{
-		return sqlSession.update(NAMESPACE+"setDowngrade", list);
 	}
 }

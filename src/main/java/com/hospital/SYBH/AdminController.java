@@ -3,22 +3,23 @@ package com.hospital.SYBH;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hospital.member.MemberService;
+import com.hospital.admin.AdminService;
 import com.hospital.member.MemberVO;
-import com.hospital.util.PageMaker;
+import com.hospital.member.unserviceability.UnserviceabilityVO;
 
 @Controller
 @RequestMapping("/admin/")
 public class AdminController {
 	
 	@Inject
-	private MemberService memberService;
+	private AdminService adminService;
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
@@ -30,23 +31,16 @@ public class AdminController {
 	
 	@RequestMapping(value = "memberNormal", method = RequestMethod.GET)
 	public ModelAndView memberNomal(ModelAndView mv) throws Exception {
-		List<MemberVO> list = memberService.getList();
+		List<MemberVO> list = adminService.getList();
 		mv.addObject("list", list);
 		mv.setViewName("admin/memberNormal");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "memberKakao", method = RequestMethod.GET)
-	public ModelAndView memberKakao(ModelAndView mv) throws Exception {
-		mv.setViewName("admin/memberKakao");
-		
-		return mv;
-	}
-	
 	@RequestMapping(value = "memberUpgrade", method = RequestMethod.POST)
 	public ModelAndView memberUpgrade(String [] id, ModelAndView mv) throws Exception {
-		int result = memberService.setUpgrade(id);
+		int result = adminService.setUpgrade(id);
 		mv.addObject("result", result);
 		mv.setViewName("common/message");
 		
@@ -55,7 +49,34 @@ public class AdminController {
 
 	@RequestMapping(value = "memberDowngrade", method = RequestMethod.POST)
 	public ModelAndView memberDowngrade(String [] id, ModelAndView mv) throws Exception {
-		int result = memberService.setDowngrade(id);
+		int result = adminService.setDowngrade(id);
+		mv.addObject("result", result);
+		mv.setViewName("common/message");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberDeletes", method = RequestMethod.POST)
+	public ModelAndView memberDeletes(String [] id, ModelAndView mv) throws Exception {
+		int result = adminService.setDelete(id);
+		mv.addObject("result", result);
+		mv.setViewName("common/message");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberUnserviceability", method = RequestMethod.GET)
+	public ModelAndView memberUnserviceability(ModelAndView mv) throws Exception {
+		List<UnserviceabilityVO> list = adminService.getUnserviceabilityList();
+		mv.addObject("list", list);
+		mv.setViewName("admin/memberUnserviceability");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "setUnserviceability", method = RequestMethod.POST)
+	public ModelAndView setUnserviceability(ModelAndView mv) throws Exception {
+		int result = adminService.setUnserviceability();
 		mv.addObject("result", result);
 		mv.setViewName("common/message");
 		

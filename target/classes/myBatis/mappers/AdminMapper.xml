@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- id, pw, name, res_reg_num, phone, email, gender, age, grade -->
+<mapper namespace="AdminMapper">
+	<!-- 회원 관리용 리스트 -->
+	<select id="getList" resultType="MemberVO">
+		SELECT * FROM MEMBER WHERE GRADE != 2
+	</select>
+	
+	<!-- 회원 관리(삭제) -->
+	<delete id="setDeletes" parameterType="List">
+		DELETE MEMBER
+		WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 등급 상향 -->
+	<update id="setUpgrade" parameterType="List">
+		UPDATE MEMBER SET GRADE = GRADE + 1 WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 등급 하향 -->
+	<update id="setDowngrade" parameterType="List">
+		UPDATE MEMBER SET GRADE = GRADE - 1 WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 주민번호를 활용해서 회원탈퇴를 당한 사람이 로그인하지 못하도록 기록남기기 -->
+	<insert id="setUnserviceability" parameterType="UnserviceabilityVO">
+		<selectKey keyProperty="unum" order="BEFORE" resultType="Integer">
+			SELECT UNSERVICEABILITY_SEQ.NEXTVAL FROM DUAL 
+		</selectKey>
+		INSERT INTO MEMBER
+		VALUES(
+			#{unum},
+			#{id},
+			#{email},
+			#{name},
+			CRYPTO_AES256.ENC_AES(#{res_reg_num}),
+			#{reason}
+		)
+	</insert>
+	
+	<!-- 차단된 사람인지 조사 -->
+	<select id="getUnserviceability" parameterType="String" resultType="Integer">
+		SELECT COUNT(*)
+		FROM UNSERVICEABILITY
+		WHERE RES_REG_NUM = CRYPTO_AES256.ENC_AES(#{res_reg_num})
+	</select>
+	
+	<!-- 차된 된 사람들 리스트 -->
+	<select id="getUnserviceabilityList" resultType="UnserviceabilityVO">
+		SELECT UNUM, ID, EMAIL, NAME, REASON
+		FROM UNSERVICEABILITY
+	</select>
+	
+	<!-- 차단 해제 -->
+	<delete id="setDeleteUnserviceability" parameterType="String">
+		DELETE UNSERVICEABILITY
+		WHERE RES_REG_NUM = CRYPTO_AES256.ENC_AES(#{res_reg_num})
+	</delete>
+</mapper>

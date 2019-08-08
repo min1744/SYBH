@@ -166,7 +166,7 @@ public class MemberController {
 		memberVO = (MemberVO)map.get("memberVO");
 		//int loginCheck = (Integer)map.get("loginCheck");
 		if(memberVO != null) {
-			//if(loginCheck == 1) {
+			//if(loginCheck == 2) {
 				session.setAttribute("memberVO", memberVO);
 				session.setAttribute("variety", "member");
 				mv.setViewName("redirect:../");

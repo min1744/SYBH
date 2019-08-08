@@ -37,25 +37,6 @@ public class MemberService {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	//Admin페이지 List
-	public List<MemberVO> getList() throws Exception{
-		List<MemberVO> list = memberDAO.getList();
-		for(MemberVO memberVO : list) {
-			//주민등록번호 복호화 및 뒷자리 *처리
-			String res_reg_num = memberDAO.setResDecryption(memberVO.getRes_reg_num());
-			if(res_reg_num == null) {
-				throw new Exception();
-			}
-			res_reg_num = memberDAO.setUpdateRes(res_reg_num);
-			if(res_reg_num == null) {
-				throw new Exception();
-			}
-			memberVO.setRes_reg_num(res_reg_num);
-		}
-		
-		return list;
-	}
-	
 	//일반회원 login
 	public HashMap<String, Object> login(MemberVO memberVO) throws Exception{
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -463,17 +444,5 @@ public class MemberService {
 		br.close();
 
 		return kakaoMemberVO;
-	}
-	
-	//등급 상향
-	public int setUpgrade(String [] id) throws Exception{
-		List<String> list = Arrays.asList(id);
-		return memberDAO.setUpgrade(list);
-	}
-	
-	//등급 상향
-	public int setDowngrade(String [] id) throws Exception{
-		List<String> list = Arrays.asList(id);
-		return memberDAO.setDowngrade(list);
 	}
 }

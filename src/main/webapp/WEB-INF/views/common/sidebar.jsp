@@ -78,8 +78,8 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">MEMBER:</h6>
-            <a class="collapse-item" href="./memberNormal">일반회원 관리</a>
-            <a class="collapse-item" href="./memberKakao">카카오회원 관리</a>
+            <a class="collapse-item" href="./memberNormal">일반 회원 관리</a>
+            <a class="collapse-item" href="./memberUnserviceability">차단 회원 관리</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">DOCTOR MEMBER:</h6>
             <a class="collapse-item" href="#">의사 리스트 관리</a>

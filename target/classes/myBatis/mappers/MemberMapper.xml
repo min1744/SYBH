@@ -19,11 +19,6 @@
 		SELECT COUNT(*) FROM MEMBER
 	</select>
 	
-	<!-- 회원 관리용 리스트 -->
-	<select id="getList" resultType="MemberVO">
-		SELECT * FROM MEMBER
-	</select>
-	
 	<!-- 회원 myPage -->
 	<select id="getSelect" parameterType="String" resultType="MemberVO">
 		SELECT * FROM MEMBER WHERE ID = #{id} AND GRADE != 2
@@ -91,9 +86,8 @@
 			#{age},
 			1,
 			0,
-			0,
 			1,
-			0,
+			1,
 			SYSDATE
 		)
 	</insert>
@@ -110,7 +104,7 @@
 	
 	<!-- 회원정보 수정으로 인한 이메일 인증 재요구 -->
 	<update id="setStatusInit" parameterType="String">
-		UPDATE MEMBER SET AUTHSTAUS = 0 WHERE ID = #{id}
+		UPDATE MEMBER SET AUTHSTATUS = 1 WHERE ID = #{id}
 	</update>
 	
 	<!-- 주민등록번호 AES256 복호화 -->
@@ -130,15 +124,6 @@
 		WHERE ID = #{id}
 	</update>
 	
-	<!-- 회원 관리(삭제) -->
-	<delete id="setDeletes" parameterType="List">
-		DELETE MEMBER
-		WHERE ID IN
-		<foreach collection="list" item="item" open="(" separator=", " close=")">
-			#{item}
-		</foreach>
-	</delete>
-	
 	<!-- 회원 탈퇴 -->
 	<delete id="setDelete" parameterType="String">
 		DELETE MEMBER WHERE ID = #{id}
@@ -151,22 +136,6 @@
 	
 	<!-- 이메일 인증 완료 -->
 	<update id="userAuth" parameterType="String">
-		UPDATE MEMBER SET AUTHSTAUS = 1 WHERE EMAIL = #{email}
-	</update>
-	
-	<!-- 등급 상향 -->
-	<update id="setUpgrade" parameterType="List">
-		UPDATE MEMBER SET GRADE = GRADE + 1 WHERE ID IN
-		<foreach collection="list" item="item" open="(" separator=", " close=")">
-			#{item}
-		</foreach>
-	</update>
-	
-	<!-- 등급 하향 -->
-	<update id="setDowngrade" parameterType="List">
-		UPDATE MEMBER SET GRADE = GRADE - 1 WHERE ID IN
-		<foreach collection="list" item="item" open="(" separator=", " close=")">
-			#{item}
-		</foreach>
+		UPDATE MEMBER SET AUTHSTATUS = 2 WHERE EMAIL = #{email}
 	</update>
 </mapper>
