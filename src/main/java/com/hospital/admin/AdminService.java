@@ -75,4 +75,14 @@ public class AdminService {
 		}
 		return adminDAO.setUnserviceability(unserviceabilityVO);
 	}
+	
+	//차단 해제
+	public int setDeleteUnserviceability(String [] id) throws Exception{
+		List<UnserviceabilityVO> list = adminDAO.getUnserviceabilityList();
+		for(UnserviceabilityVO unserviceabilityVO:list) {
+			System.out.println("아직 작업중");
+		}
+		//return adminDAO.setDeleteUnserviceability(res_reg_num);
+		return 0;
+	}
 }

@@ -82,4 +82,13 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "memberDeleteUnserviceability", method = RequestMethod.POST)
+	public ModelAndView memberDeleteUnserviceability(String [] id, ModelAndView mv) throws Exception {
+		int result = adminService.setDeleteUnserviceability(id);
+		mv.addObject("result", result);
+		mv.setViewName("common/message");
+		
+		return mv;
+	}
 }

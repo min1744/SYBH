@@ -37,9 +37,9 @@
 	<!-- 주민번호를 활용해서 회원탈퇴를 당한 사람이 로그인하지 못하도록 기록남기기 -->
 	<insert id="setUnserviceability" parameterType="UnserviceabilityVO">
 		<selectKey keyProperty="unum" order="BEFORE" resultType="Integer">
-			SELECT UNSERVICEABILITY_SEQ.NEXTVAL FROM DUAL 
+			SELECT UNSERVICEABILITY_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO MEMBER
+		INSERT INTO UNSERVICEABILITY
 		VALUES(
 			#{unum},
 			#{id},

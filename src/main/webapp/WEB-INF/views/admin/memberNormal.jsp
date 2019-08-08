@@ -61,7 +61,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                    	<th><input type="checkbox" value="1" id="checkAll"></th>
+                    	<th><input type="checkbox" id="checkAll"></th>
                     	<th>아이디</th>
                     	<th>이름</th>
                     	<th>주민등록번호</th>
@@ -100,7 +100,14 @@
                       		<td>관리자</td>
                       	</c:otherwise>
                       </c:choose>
-                      <td>${memberVO.authStatus}</td>
+                      <c:choose>
+                      	<c:when test="${memberVO.authStatus eq 1}">
+                      		<td>X</td>
+                      	</c:when>
+                      	<c:otherwise>
+                      		<td>O</td>
+                      	</c:otherwise>
+                      </c:choose>
                       <td>${memberVO.reg_date}</td>
                     </tr>
                     </c:forEach>

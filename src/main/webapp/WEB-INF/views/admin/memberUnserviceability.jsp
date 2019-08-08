@@ -17,6 +17,11 @@
   <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
   <!-- Custom styles for this page -->
   <link href="../resources/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <style type="text/css">
+  	#controller_div{
+  		height: 50px;
+  	}
+  </style>
 </head>
 <body id="page-top">
 
@@ -41,15 +46,19 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">카카오멤버관리</h1>
+          <h1 class="h3 mb-2 text-gray-800">차단 회원 관리</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
+              	<div id="controller_div">
+         			<input type="button" value="DELETE" id="delete_btn" class="btn btn-danger">
+         		</div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
+                      <th><input type="checkbox" id="checkAll"></th>
                       <th>NUM</th>
                       <th>아이디</th>
                       <th>이메일</th>
@@ -59,14 +68,14 @@
                   </thead>
                   <tbody>
                     <c:forEach items="${list}" var="unserviceabilityVO">
-                    <tr>
-                      <td><input type="checkbox" class="check" name="id" value="${memberVO.id}"></td>
-                      <td>${unserviceabilityVO.unum}</td>
-                      <td>${unserviceabilityVO.id}</td>
-                      <td>${unserviceabilityVO.email}</td>
-                      <td>${unserviceabilityVO.name}</td>
-                      <td>${unserviceabilityVO.reason}</td>
-                    </tr>
+	                    <tr>
+	                      <td><input type="checkbox" class="check" name="id" value="${memberVO.id}"></td>
+	                      <td>${unserviceabilityVO.unum}</td>
+	                      <td>${unserviceabilityVO.id}</td>
+	                      <td>${unserviceabilityVO.email}</td>
+	                      <td>${unserviceabilityVO.name}</td>
+	                      <td>${unserviceabilityVO.reason}</td>
+	                    </tr>
                     </c:forEach>
                   </tbody>
                 </table>
@@ -132,7 +141,62 @@
   <script src="../resources/js/admin/dataTables.bootstrap4.min.js"></script>
   <!-- Page level custom scripts -->
   <script src="../resources/js/admin/datatables-demo.js"></script>
-
+  <script type="text/javascript">
+  	$("#checkAll").click(function() {
+		var checkAll = $(this).prop("checked");
+		$(".check").prop("checked", checkAll);
+	});
+	
+	//All check control & Check More Zero
+	var checkMoreZero = false;
+	$(".check").click(function() {
+		var check = true;
+		checkMoreZero = false;
+		$(".check").each(function() {
+			if (!$(this).prop("checked")) {
+				check = false;
+			} else {
+				checkMoreZero = true;
+			}
+		});
+		$("#checkAll").prop("checked", check);
+	});  
+  
+  	$('#delete_btn').click(function() {
+		if(checkMoreZero){
+			var result = confirm("삭제하시겠습니까?");
+			if(result){
+				var ids = [];
+				$(".check").each(function() {
+					if($(this).prop("checked")){
+						ids.push($(this).val());
+					}
+				});
+				//ajax로 배열을 전송하고자 할때 추가
+				jQuery.ajaxSettings.traditional = true;
+				
+				$.ajax({
+					url : "./memberDeleteUnserviceability",
+					type : "POST",
+					data : {
+						id : ids
+					},
+					success : function(data) {
+						data = data.trim();
+						if (data == '0') {
+							alert("삭제 실패");
+						} else {
+							alert("삭제 되었습니다.");
+							location.reload();
+						}
+					}
+				});
+			}
+		} else {
+			alert("선택된 것이 없습니다.");
+		}
+	});
+  </script>
 
 </body>
 </html>
