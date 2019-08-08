@@ -65,15 +65,16 @@ select count(fix) from notice where fix=1
   <!-- search  -->
   <select id="getCount" parameterType="PageMaker" resultType="Integer">
   	select count(num) from notice
+  	where
   	<choose>
   		<when test="kind=1">
-  			where title 		
+  			 title 		
   		</when>
   		<when test="kind=2">
-  			where writer
+  			 writer
   		</when>
   		<otherwise>
-  			where contents
+  			 contents
   		</otherwise>
   	</choose>
 	  like '%' || #{search} || '%'

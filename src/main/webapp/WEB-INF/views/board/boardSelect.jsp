@@ -17,8 +17,9 @@
 <!-- ---------------------- 공지사항 select ---------------------- -->
 <!-- ///////////////////////////////////////////////////////// -->
 
+<input type="hidden" id="board" value="${board}"> 
 <c:if test="${board eq 'notice'}">
-
+<input type="hidden" id="num" value="${vo.num}">
 <div id="board">
 		<div id="board_title">
 			<p id="wtitle">공지사항</p>
@@ -53,7 +54,8 @@
 			<div id="btn_box">
 				<a href="./${board}List" id="list">목록</a>
 				
-				<a href="./${board}Delete?num=${vo.num}" id="delete">삭제</a>
+				<button id="delete">삭제</button>
+				<%-- <a href="./${board}Delete?num=${vo.num}" id="delete">삭제</a> --%>
 				<a href="./${board}Update?num=${vo.num}" id="update">수정</a>
 			</div>
 		

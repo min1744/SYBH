@@ -37,9 +37,9 @@
 					<div class="news_img">
 					<img src="../resources/images/news_all_1.jpg">
 					</div>
-					<p class="news_title">자가면역질환 ‘류마티스 관절염’, 빠른 치료와 지속적인 관리가 필요</p>
-					<p class="news_sub">류마티스 관절염은 관절 주위를 싸고 있는 활막이라는 조직에 염증이 일어나는 질환으로, 치료하지 않을</p>
-					<p class="news_date">2019-07-24</p>
+					<p class="news_title">${vo.title}</p>
+					<p class="news_sub">${vo.sub_contents}</p>
+					<p class="news_date">${vo.reg_date}</p>
 				</a>
 				
 				<a href="./newsSelect" class="news">

@@ -38,9 +38,7 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int setDelete(int num, HttpSession session) throws Exception {
-		
-		int result = noticeDAO.setDelete(num);
-		return result;
+		return noticeDAO.setDelete(num);
 	}
 
 	public int setUpdate(NoticeVO noticeVO) throws Exception {

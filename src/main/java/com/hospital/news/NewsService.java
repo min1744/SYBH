@@ -41,10 +41,10 @@ public class NewsService {
 		return newsVO;
 	}
 	//list
-	public List<NewsVO> getList(PageMaker pageMaker,int fnum) throws Exception{
+	public List<NewsVO> getList(PageMaker pageMaker) throws Exception{
 		pageMaker.makeRow();
 		List<NewsVO> list = newsDAO.getList(pageMaker);
-		NewsImagesVO newsImagesVO = newsImagesDAO.getSelect(fnum);
+		//NewsImagesVO newsImagesVO = newsImagesDAO.getSelect(fnum);
 		int totalCount = newsDAO.getTotalCount(pageMaker);
 		pageMaker.makePage(totalCount);
 		return list;

@@ -38,13 +38,14 @@ public class NoticeController {
 	
 	
 	//delete
-	@RequestMapping(value = "noticeDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "noticeDelete", method = RequestMethod.POST)
 	public String setDelete(int num, HttpSession session)throws Exception{
 		int result = noticeService.setDelete(num, session);
 		return "redirect:./noticeList";
 		
 	}
 	
+
 	
 	  //write
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET) 

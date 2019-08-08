@@ -27,7 +27,7 @@ public class NewsController {
 
 	@RequestMapping(value = "newsAll", method = RequestMethod.GET)
 	public ModelAndView allList(PageMaker pageMaker,int fnum) throws Exception {
-		List<NewsVO> alist=newsService.getList(pageMaker, fnum);
+		List<NewsVO> alist=newsService.getList(pageMaker);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", alist);
 		mv.addObject("pager", pageMaker);
@@ -37,8 +37,8 @@ public class NewsController {
 	
 	//list
 	@RequestMapping(value = "newsList", method = RequestMethod.GET)
-	public ModelAndView getList(PageMaker pageMaker,int fnum) throws Exception {
-		List<NewsVO> lists=newsService.getList(pageMaker,fnum);
+	public ModelAndView getList(PageMaker pageMaker) throws Exception {
+		List<NewsVO> lists=newsService.getList(pageMaker);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list",lists);
 		mv.addObject("pager", pageMaker);
@@ -97,7 +97,7 @@ public class NewsController {
 	}
 	
 	//delete 
-	@RequestMapping(value = "newsDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "newsDelete", method = RequestMethod.POST)
 	public String setDelete(int num, HttpSession session)throws Exception{
 		int result = newsService.setDelete(num, session);
 		return "redirect:./newsList";

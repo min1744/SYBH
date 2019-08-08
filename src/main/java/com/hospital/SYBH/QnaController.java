@@ -125,7 +125,7 @@ public class QnaController {
 		} else {
 			mv.addObject("message", "Write Fail");
 			mv.addObject("path", "./complaint");
-			mv.setViewName("common/massageMove");
+			mv.setViewName("common/messageMove");
 		}
 		
 		return mv;
