@@ -55,7 +55,7 @@
 				<a href="./${board}List" id="list">목록</a>
 				
 				<button id="delete">삭제</button>
-				<%-- <a href="./${board}Delete?num=${vo.num}" id="delete">삭제</a> --%>
+				
 				<a href="./${board}Update?num=${vo.num}" id="update">수정</a>
 			</div>
 		

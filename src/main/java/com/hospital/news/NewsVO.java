@@ -11,7 +11,7 @@ public class NewsVO {
 	private String sub_contents;
 	private Date reg_date;
 	private int hit;
-	private int menu;
+	private String menu;
 	
 	
 	public int getNum() {
@@ -56,10 +56,10 @@ public class NewsVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public int getMenu() {
+	public String getMenu() {
 		return menu;
 	}
-	public void setMenu(int menu) {
+	public void setMenu(String menu) {
 		this.menu = menu;
 	}
 	

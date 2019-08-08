@@ -1,6 +1,8 @@
 package com.hospital.news;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -20,19 +22,15 @@ public class NewsService {
 	
 	//write
 	public int setWrite(NewsVO newsVO, HttpSession session) throws Exception{
-		int result = newsDAO.setWrite(newsVO);
-		
-		return result;
+		return newsDAO.setWrite(newsVO);
 	}
 	//update
 	public int setUpdate(NewsVO newsVO) throws Exception{
-		int result = newsDAO.setUpdate(newsVO);
-		return result;
+		return newsDAO.setUpdate(newsVO);
 	}
 	//delete
 	public int setDelete(int num,HttpSession session) throws Exception{
-		int result = newsDAO.setDelete(num);
-		return result;
+		return newsDAO.setDelete(num);
 	}
 	//select
 	public NewsVO getSelect(int num) throws Exception{
@@ -41,13 +39,13 @@ public class NewsService {
 		return newsVO;
 	}
 	//list
-	public List<NewsVO> getList(PageMaker pageMaker) throws Exception{
+	public List<NewsVO> getList(PageMaker pageMaker, String menu) throws Exception{
 		pageMaker.makeRow();
-		List<NewsVO> list = newsDAO.getList(pageMaker);
-		//NewsImagesVO newsImagesVO = newsImagesDAO.getSelect(fnum);
-		int totalCount = newsDAO.getTotalCount(pageMaker);
-		pageMaker.makePage(totalCount);
-		return list;
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("menu", menu);
+		map.put("pager", pageMaker);
+		return newsDAO.getList(map);
 	}
 	//all
 	
