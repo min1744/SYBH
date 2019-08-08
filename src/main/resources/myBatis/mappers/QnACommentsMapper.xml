@@ -10,11 +10,11 @@
 	<!-- query piece -->
 	<sql id="subRef">
 	<![CDATA[
-		select ref from QnaComments where num=#{num}
+		select ref from QnaComments where qcnum=#{qcnum}
 	]]>	
 	</sql>
 	<sql id="subStep">
-		select step from QnaComments where num=#{num}
+		select step from QnaComments where qcnum=#{qcnum}
 	</sql>
 	
 	<!-- 답글 사전 작업 -->

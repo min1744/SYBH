@@ -175,8 +175,17 @@
 				});
 		
 		
+		
+		////////////////////////////대댓글 관련 코드
+		var reqcnum = 0;
+		$('.commentslist').on('click', '.c_replyBtn', function() {
+				
+			reqcnum = $(this).attr('title');
+			
+		});
 		///댓글 답글 
 		$('#replyBtn').click(function() {
+			var reqcnum2 = reqcnum;
 			var reContents = $('#replyContents').val();
 			var renum = $('#qnum').val();
 			var reid = $('#reid').val();
@@ -185,6 +194,7 @@
 				url:"../comments/commentsReply",
 				type:"POST",
 				data: {
+					qcnum : reqcnum2,
 					num : renum,
 					id : reid,
 					contents : reContents
@@ -423,7 +433,7 @@
 						          <div class="form-group">
 								      <label for="contents">댓글 :</label>
 								      <textarea class="form-control" rows="5" id="replyContents" name="contents"></textarea>
-								      <input type="hidden" id="qcnum">
+								      <input type="hidden" id="qcnum2" value="1">
 								    </div>
 						        </div>
 						        <div class="modal-footer">

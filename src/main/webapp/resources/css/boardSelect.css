@@ -535,7 +535,20 @@
 	border-top: 1px solid #ddd;
 }
 
+
+
 /* 댓글 리스트 */
+
+
+.redepth {
+	
+	background-color: #f8f8f8;
+	width: 100%;
+	overflow: hidden;
+	padding: 15px 0 5px 40px;
+	letter-spacing: -1px;
+	border-bottom: 1px solid #ddd;
+}
 
 
 .c_list_box {
@@ -563,6 +576,16 @@
 }
 
 
+.c_reicon {
+	
+	float: left;
+	width: 15px;
+	display: inline-block;
+	margin-top: 8px;
+	margin-right: 10px;
+}
+
+
 .c_list_writer {
 	
 	font-weight: 600;
@@ -570,12 +593,14 @@
 	margin-top: 3px;
 	font-size: 0.95em;
 	float: left;
+	margin-right: 10px;
 }
 
 
 .c_list_ud {
 	
 	float: right;
+	margin-right: 15px;
 }
 
 
@@ -585,10 +610,11 @@
 	font-size: 0.9em;
 }
 
-.c_list_ud li:nth-child(2) {
+.c_list_ud li:nth-child(2),
+.c_list_ud li:nth-child(4) {
 	
 	color: #ddd;
-	line-height: 24px;
+	line-height: 23px;
 	margin: 0 5px;
 }
 
@@ -655,10 +681,12 @@
 .c_date {
 	
 	letter-spacing: 0;
+	color: #b0b0b0;
+	font-size: 0.75em;
 }
 
 
-.c_date, .c_report, .c_reply {
+.c_report, .c_reply {
 	
 	color: #b0b0b0;
 	font-size: 0.9em;
