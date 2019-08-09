@@ -60,14 +60,27 @@ public class PayController {
 	@RequestMapping(value="donationTotal", method = RequestMethod.GET)
 	@ResponseBody
 	public int donationTotal() throws Exception{
-		return payService.getDonationTotal();
+		int total;
+		try {
+			total = payService.getDonationPeopleTotal();
+		} catch (Exception e) {
+			total = 0;
+		}
+		return total;
 	}
 	
 	//후원인 총 인원
 	@RequestMapping(value = "donationPeopleTotal", method = RequestMethod.GET)
 	@ResponseBody
 	public int donationPeopleTotal() throws Exception{
-		return payService.getDonationPeopleTotal();
+		int total;
+		try {
+			total = payService.getDonationPeopleTotal();
+			
+		} catch (Exception e) {
+			total = 0;
+		}
+		return total;
 	}
 	
 

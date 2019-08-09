@@ -16,13 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import com.hospital.checkup.CheckUpDAO;
 import com.hospital.checkup.CheckUpService;
 import com.hospital.checkup.CheckUpVO;
 import com.hospital.member.MemberService;
 import com.hospital.member.MemberVO;
 import com.hospital.member.mail.MailVO;
-import com.hospital.pay.PayDAO;
 import com.hospital.pay.PayService;
 import com.hospital.pay.PayVO;
 import com.hospital.util.PageMaker;
@@ -38,11 +36,7 @@ public class MemberController {
 	@Inject
 	private PayService payService;
 	@Inject
-	private PayDAO payDAO;
-	@Inject
 	private CheckUpService checkUpService;
-	@Inject
-	private CheckUpDAO checkUpDAO;
 	
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
@@ -90,7 +84,7 @@ public class MemberController {
 		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
 		checkUpVO.setId(id);
 		List<CheckUpVO> list = checkUpService.getOneList(pageMaker, checkUpVO);
-		int totalCount = checkUpDAO.getOneTotalCount(checkUpVO);
+		int totalCount = checkUpService.getOneTotalCount(checkUpVO);
 		mv.addObject("list",list);
 		mv.addObject("pager",pageMaker);
 		mv.addObject("count",totalCount);
@@ -258,7 +252,7 @@ public class MemberController {
 		payVO.setId(id);
 		payVO.setCategory(1);
 		List<PayVO> list =  payService.getOneList(pageMaker, payVO);
-		int totalCount = payDAO.getOneTotalCount(payVO);
+		int totalCount = payService.getOneTotalCount(payVO);
 		mv.addObject("board", "Donation");
 		mv.addObject("what", "후원");
 		mv.addObject("list", list);

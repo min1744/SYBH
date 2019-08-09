@@ -34,4 +34,14 @@ public class CheckUpService {
 	public int setUpdate(CheckUpVO checkUpVO)throws Exception{
 		return checkUpDAO.setUpdate(checkUpVO);
 	}
+	//총 횟수
+	public int getOneTotalCount(CheckUpVO checkUpVO)throws Exception{
+		int total;
+		try {
+			total = checkUpDAO.getOneTotalCount(checkUpVO);
+		} catch (Exception e) {
+			total = 0;
+		}
+		return total;
+	}
 }

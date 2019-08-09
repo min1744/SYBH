@@ -53,5 +53,16 @@ public class PayService {
 		return payDAO.getAllList(pageMaker);
 	}
 	
-	
+	//총 횟수
+	public int getOneTotalCount(PayVO payVO) throws Exception{
+		int total;
+		try {
+			
+			total = payDAO.getOneTotalCount(payVO);
+		} catch (Exception e) {
+			total = 0;
+		}
+		
+		return total;
+	}
 }
