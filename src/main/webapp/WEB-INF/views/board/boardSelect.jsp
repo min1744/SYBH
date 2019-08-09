@@ -233,7 +233,8 @@
 				},
 				success:function(data) {
 					if(data=='1') {
-						like_check();
+						
+						
 						getList(1);
 					} else {
 						alert('like error');
@@ -256,18 +257,27 @@
 				success:function(data) {
 					
 					likeResult = data;
-					console.log(likeResult);
-					
+					//alert(likeResult);
+					//$('#like_check').val(likeResult);
 				}
 			});
 		}
+			
+		
+		
+		
 		
 		
 		
 		///////////////////////////////////////싫어요
 		$('.commentslist').on('click', '.hate', function(e) {
-
 			e.preventDefault();
+			likeQcnum = $(this).attr('title');
+			likeId = '${memberVO.id}';
+			like_check();
+			if(likeResult==1){
+				alert('좋아요는 한번');
+			} else if(likeResult ==0){
 			var hateQcnum = $(this).attr('title');
 			var hateId = '${memberVO.id}';
 			$.ajax({
@@ -287,7 +297,7 @@
 					}
 				}
 			});
-			
+			}
 		});
 		
 		
