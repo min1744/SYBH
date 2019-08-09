@@ -399,8 +399,8 @@ $(function() {
 			<img alt="" src="./resources/images/news_1.jpg">
 			<div class="news_contents">
 				<p class="category">운동</p>
-				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
-				<p class="news_date">2019-07-23</p>
+				<p><a href="./news/newsSelect?num=${vo.num}">${vo.title}</a></p>
+				<p class="news_date">${vo.reg_date}</p>
 			</div>
 		</div>
 		
@@ -408,8 +408,8 @@ $(function() {
 			<img alt="" src="./resources/images/news_2.jpg">
 			<div class="news_contents">
 				<p class="category">운동</p>
-				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
-				<p class="news_date">2019-07-23</p>
+				<p><a href="./news/newsSelect?num=${vo.num}">${vo.title}</a></p>
+				<p class="news_date">${vo.reg_date}</p>
 			</div>
 		</div>
 		
@@ -417,8 +417,8 @@ $(function() {
 			<img alt="" src="./resources/images/news_3.jpg">
 			<div class="news_contents">
 				<p class="category">운동</p>
-				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
-				<p class="news_date">2019-07-23</p>
+				<p><a href="./news/newsSelect?num=${vo.num}">${vo.title}</a></p>
+				<p class="news_date">${vo.reg_date}</p>
 			</div>
 		</div>
 		
@@ -426,8 +426,8 @@ $(function() {
 			<img alt="" src="./resources/images/news_4.jpg">
 			<div class="news_contents">
 				<p class="category">운동</p>
-				<p><a href="">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</a></p>
-				<p class="news_date">2019-07-23</p>
+				<p><a href="./news/newsSelect?num=${vo.num}">${vo.title}</a></p>
+				<p class="news_date">${vo.reg_date}</p>
 			</div>
 		</div>
 		

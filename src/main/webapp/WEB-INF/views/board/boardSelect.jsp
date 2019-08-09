@@ -10,14 +10,15 @@
 <c:import url="../temp/commentBootstrap.jsp" />
 <script type="text/javascript">
 	$(function() {
-		
-		
+			
 		
 		$("#delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
+			var num = $('#num').val();
 			if(result){
 				
-				location.href="./boardList";
+				post({'num'})
+				
 			}
 						
 		});
