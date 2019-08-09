@@ -453,7 +453,7 @@ public class MemberService {
 	public int getUnserviceability(String id) throws Exception{
 		int result = 0;
 		MemberVO memberVO = memberDAO.getSelect(id);
-		if(memberVO.getRes_reg_num() != null) {
+		if(memberVO != null) {
 			result = adminDAO.getUnserviceability(memberVO.getRes_reg_num());
 		}
 		return result;
