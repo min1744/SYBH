@@ -77,7 +77,7 @@
                   <tbody>
                   <c:forEach items="${list}" var="memberVO">
                     <tr>
-                      <td><input type="checkbox" class="check" name="id" value="${memberVO.id}" title="${memberVO.grade}"></td>
+                      <td><input type="checkbox" class="check" value="${memberVO.id}" title="${memberVO.grade}" ></td>
                       <td>${memberVO.id}</td>
                       <td>${memberVO.name}</td>
                       <td>${memberVO.res_reg_num}</td>
@@ -177,13 +177,14 @@
   <script src="../resources/js/admin/datatables-demo.js"></script>
   <script type="text/javascript">
   //checkAll button control
+    var checkMoreZero = false;
 	$("#checkAll").click(function() {
 		var checkAll = $(this).prop("checked");
 		$(".check").prop("checked", checkAll);
+		checkMoreZero = checkAll;
 	});
 	
 	//All check control & Check More Zero
-	var checkMoreZero = false;
 	$(".check").click(function() {
 		var check = true;
 		checkMoreZero = false;
@@ -322,6 +323,7 @@
 						}
 					}
 				});
+				//////////////////
 			}
 		} else {
 			alert("선택된 것이 없습니다.");
@@ -353,7 +355,7 @@
 							alert("차단 실패");
 						} else {
 							alert("차단 되었습니다.");
-							location.reload();
+							location.href="./memberUnserviceability";
 						}
 					}
 				});

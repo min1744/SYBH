@@ -21,7 +21,7 @@
 	
 	<!-- 회원 myPage -->
 	<select id="getSelect" parameterType="String" resultType="MemberVO">
-		SELECT * FROM MEMBER WHERE ID = #{id} AND GRADE != 2
+		SELECT * FROM MEMBER WHERE ID = #{id}
 	</select>
 	
 	<!-- Login -->

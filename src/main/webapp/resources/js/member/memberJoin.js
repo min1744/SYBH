@@ -540,14 +540,12 @@ $(function() {
 					updateEmail = email1 + "@" + email2;
 					if(originEmail != updateEmail){
 						alert("이메일 변경 - 인증을 다시 해주시기 바랍니다.");
-					}
-				} else {
-					alert("회원가입 되었습니다. 이메일 인증 후 사용 가능합니다.");
-				}
-				if(!originEmail != updateEmail){
-					if(!originEmail == updateEmail){
 						window.open(site, 'newWindow');//브라우저 새 창 열기
 					}
+					$("#form").submit();
+				} else {
+					alert("회원가입 되었습니다. 이메일 인증 후 사용 가능합니다.");
+					window.open(site, 'newWindow');//브라우저 새 창 열기
 					$("#form").submit();
 				}
 			}

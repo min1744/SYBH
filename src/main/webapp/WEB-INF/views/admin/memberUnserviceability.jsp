@@ -59,21 +59,21 @@
                   <thead>
                     <tr>
                       <th><input type="checkbox" id="checkAll"></th>
-                      <th>NUM</th>
                       <th>아이디</th>
-                      <th>이메일</th>
                       <th>이름</th>
+                      <th>이메일</th>
+                      <th>주민등록번호</th>
                       <th>사유</th>
                     </tr>
                   </thead>
                   <tbody>
                     <c:forEach items="${list}" var="unserviceabilityVO">
 	                    <tr>
-	                      <td><input type="checkbox" class="check" name="id" value="${memberVO.id}"></td>
-	                      <td>${unserviceabilityVO.unum}</td>
+	                      <td><input type="checkbox" class="check" name="id" value="${unserviceabilityVO.id}""></td>
 	                      <td>${unserviceabilityVO.id}</td>
-	                      <td>${unserviceabilityVO.email}</td>
 	                      <td>${unserviceabilityVO.name}</td>
+	                      <td>${unserviceabilityVO.email}</td>
+	                      <td>${unserviceabilityVO.res_reg_num}</td>
 	                      <td>${unserviceabilityVO.reason}</td>
 	                    </tr>
                     </c:forEach>
@@ -142,13 +142,14 @@
   <!-- Page level custom scripts -->
   <script src="../resources/js/admin/datatables-demo.js"></script>
   <script type="text/javascript">
+    var checkMoreZero = false;
   	$("#checkAll").click(function() {
 		var checkAll = $(this).prop("checked");
 		$(".check").prop("checked", checkAll);
+		checkMoreZero = checkAll;
 	});
 	
 	//All check control & Check More Zero
-	var checkMoreZero = false;
 	$(".check").click(function() {
 		var check = true;
 		checkMoreZero = false;
@@ -164,7 +165,7 @@
   
   	$('#delete_btn').click(function() {
 		if(checkMoreZero){
-			var result = confirm("삭제하시겠습니까?");
+			var result = confirm("차단 해제 하시겠습니까?");
 			if(result){
 				var ids = [];
 				$(".check").each(function() {
@@ -184,9 +185,9 @@
 					success : function(data) {
 						data = data.trim();
 						if (data == '0') {
-							alert("삭제 실패");
+							alert("차단 해제 실패");
 						} else {
-							alert("삭제 되었습니다.");
+							alert("차단 해제 되었습니다.");
 							location.reload();
 						}
 					}
@@ -197,6 +198,5 @@
 		}
 	});
   </script>
-
 </body>
 </html>
