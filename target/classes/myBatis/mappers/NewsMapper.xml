@@ -55,6 +55,32 @@
   	 	 where R between #{startRow} and #{lastRow}
   </select>
   
+ <select id="getCount" parameterType="PageMaker" resultType="Integer">
+ 	select count(num) from news
+ 	where
+ <choose>
+  		<when test="kind = 1">
+  			 title
+  		</when>
+  		<when test="kind = 2">
+  			 writer
+  		</when>
+  		<when test="kind = 3">
+  			 main_contents
+  		</when>
+  		<when test="kind = 4">
+  			 sub_contents
+  		</when>
+  		
+  		<otherwise>
+  			 menu
+  		</otherwise>
+  </choose>
+  	like '%' || #{search} || '%'
+  	
+ </select>
+  
+ 
   <select id="getSelect" parameterType="Integer" resultMap="newsResult">
  	select * from news where num=#{num}
  </select>
@@ -68,22 +94,5 @@
  <result property="hit" column="hit"/>
  <result property="menu" column="menu"/>
  </resultMap>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+    
   </mapper>

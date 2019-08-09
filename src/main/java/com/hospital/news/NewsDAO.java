@@ -3,6 +3,7 @@ package com.hospital.news;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -41,9 +42,9 @@ public class NewsDAO {
 		return sqlSession.selectOne(NAMESPACE+"getSelect", num);
 	}
 	
-	public List<NewsVO> getList(PageMaker pageMaker) throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getList", pageMaker);
-		}
+	public List<NewsVO> getList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getList", map);
+	}
 	//
 	public int addHit(int num) throws Exception{
 		return sqlSession.update(NAMESPACE+"addHit", num);
