@@ -40,7 +40,7 @@
   <selectKey keyProperty="qcnum" order="BEFORE" resultType="Integer">
   		select QnaComments_SEQ.nextval from dual
   </selectKey>
-  	insert into QnaComments values(#{qcnum}, #{num}, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0, 0, 0);
+  	insert into QnaComments values(#{qcnum}, #{num}, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0, 0, 0)
   </insert>
   
   
@@ -63,20 +63,29 @@
   </update>
   
   
-  <!-- 좋아요 카운트 수정 -->
-  <update id="likeUpdate" parameterType="QnAVO">
-  	update QnaComments set like_cnt=like_cnt+1 where qcnum=#{qcnum}
-  </update>
-  
-  <!-- 좋아요 취소 카운트 수정 -->
-  <update id="likeDelete" parameterType="QnAVO">
-  	update QnaComments set like_cnt=like_cnt-1 where qcnum=#{qcnum}
-  </update>
-  
-  
   <!-- delete -->
   <delete id="setDelete" parameterType="Integer">
   	delete QnaComments where qcnum=#{qcnum}
   </delete>
+  
+  <!-- 좋아요 카운트 수정 -->
+  <update id="likeUpdate" parameterType="QnACommentsVO">
+  	update QnaComments set like_cnt=like_cnt+1 where qcnum=#{qcnum}
+  </update>
+  
+  <!-- 좋아요 취소 카운트 수정 -->
+  <update id="likeDelete" parameterType="QnACommentsVO">
+  	update QnaComments set like_cnt=like_cnt-1 where qcnum=#{qcnum}
+  </update>
+  
+  <!-- 싫어요 카운트 수정 -->
+  <update id="hateUpdate" parameterType="QnACommentsVO">
+  	update QnaComments set hate_cnt=hate_cnt+1 where qcnum=#{qcnum}
+  </update>
+  
+  <!-- 싫어요 취소 카운트 수정 -->
+  <update id="hateDelete" parameterType="QnACommentsVO">
+  	update QnaComments set hate_cnt=hate_cnt-1 where qcnum=#{qcnum}
+  </update>
   
 </mapper>  

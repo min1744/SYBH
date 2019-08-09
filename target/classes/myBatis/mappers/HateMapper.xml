@@ -6,6 +6,44 @@
   
   <mapper namespace="HateMapper">
   
+  <insert id="setWrtie" parameterType="HateVO">
+  	<selectKey keyProperty="hnum" order="BEFORE" resultType="Integer">
+  		select t_hate_seq.nextval from dual
+	  </selectKey>
+	  insert into t_hate values(
+	 	 #{hnum}, #{num}, #{id}, 1
+	  )
+  </insert>
+  
+  <!-- 싫어요 -->
+  <update id="hate_check" parameterType="HateVO">
+    UPDATE t_hate
+    SET hate_check = hate_check + 1 
+    WHERE id=#{id} AND num=#{num}
+  </update>
+  
+  <!-- 싫어요 취소 -->
+  <update id="hate_check_cancel" parameterType="HateVO">
+    UPDATE t_hate
+    SET hate_check =0
+    WHERE id=#{id} AND num=#{num}
+  </update>
   
   
+  <!-- 최초 싫어요 눌렀을때 데이터가 있는지 확인하는 select -->
+  <select id="getSelect" parameterType="java.util.Map" resultType="String">
+  	select id from t_hate where num=#{num} and id=#{id}
+  </select>
+  
+  
+  <!-- 싫어요 눌렀을때 check값이 0인지 1인지 확인하는 select -->
+	<select id="updateSelect" parameterType="java.util.Map" resultType="Integer">
+		select hate_check from t_hate where num=#{qcnum} and id=#{id}
+	</select>
+	
+
+	<!-- t_hate 테이블 값 가져오기 -->
+	<select id="hateList" parameterType="java.util.Map" resultType="HateVO">
+		select * from t_hate where num=#{qcnum} and id=#{id}
+	</select>
 </mapper>  

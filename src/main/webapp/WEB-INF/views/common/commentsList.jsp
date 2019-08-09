@@ -10,7 +10,6 @@
 				<c:if test="${list.depth eq '0'}">
 					<div class="c_list_box" id="${list.qcnum}">
 				</c:if>
-					
 					<!-- 작성자/수정/삭제 -->
 					<div class="c_list_top">
 						<c:forEach begin="1" end="${list.depth}">
@@ -28,7 +27,7 @@
 								<!-- <li class="c_report"><a href="">신고</a></li>
 								<li>│</li> -->
 								<c:choose>
-									<c:when test="${list.id eq memberVO.id && memberVO.grade eq '2'}">
+									<c:when test="${list.id eq memberVO.id || memberVO.grade eq '2'}">
 										<li><a href="" class="c_update" title="${list.qcnum}"
 										data-toggle="modal" data-target="#myModal">수정</a></li>
 										<li>│</li>
@@ -67,7 +66,7 @@
 						<c:if test="${list.depth eq '0'}">
 						<div class="c_like_bottom">
 							<a href="" class="like" title="${list.qcnum}"><img alt="like" src="../resources/images/like.png">${list.like_cnt}</a>
-							<a href="" class="hate"><img alt="hate" src="../resources/images/hate.png">${list.hate_cnt}</a>
+							<a href="" class="hate" title="${list.qcnum}"><img alt="hate" src="../resources/images/hate.png">${list.hate_cnt}</a>
 						</div>
 						</c:if>
 						</div>

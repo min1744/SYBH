@@ -8,6 +8,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.hospital.qna.comments.hate.HateDAO;
+import com.hospital.qna.comments.hate.HateVO;
+import com.hospital.qna.comments.like.LikeDAO;
+import com.hospital.qna.comments.like.LikeVO;
 import com.hospital.util.PageMaker;
 
 @Service
@@ -15,6 +19,10 @@ public class QnACommentsService {
 	
 	@Inject
 	private QnACommentsDAO qnACommentsDAO;
+	@Inject
+	private LikeDAO likeDAO;
+	@Inject
+	private HateDAO hateDAO;
 	
 	//댓글 등록
 	public int setWrite(QnACommentsVO qnACommentsVO) throws Exception {
@@ -61,14 +69,148 @@ public class QnACommentsService {
 	}
 	
 	
-	//댓글 좋아요 update
-	public int likeUpdate(QnACommentsVO qnACommentsVO) throws Exception {
-		return qnACommentsDAO.likeUpdate(qnACommentsVO);
+	
+	
+	/////////////////////////////////////댓글 좋아요
+	//댓글 t_like 테이블의 like_check 값 확인하는 select
+	public int likeUpdate(int qcnum, int num, String id, LikeVO likeVO, QnACommentsVO qnACommentsVO) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("num", num);
+		map.put("id", id);
+		
+		String select = likeDAO.getSelect(map);
+		int result = 0;
+		
+		if(select == null) {
+			
+			result = likeDAO.likeWrite(likeVO);
+			result = qnACommentsDAO.likeUpdate(qnACommentsVO);
+			
+		} 
+		
+		if(select != null) {
+			
+			int updateSelect = likeDAO.updateSelect(map);
+			
+			if(updateSelect == 1){
+				
+				result = likeDAO.setUpdateDelete(likeVO);
+				result = qnACommentsDAO.likeDelete(qnACommentsVO);
+				
+			} else if(updateSelect == 0) {
+				
+				result = likeDAO.setUpdate(likeVO);
+				result = qnACommentsDAO.likeUpdate(qnACommentsVO);
+				
+			} 
+			
+		}
+		
+		
+		return result;
+		
 	}
 	
-	//댓글 좋아요 delete
-	public int likeDelete(QnACommentsVO qnACommentsVO) throws Exception {
-		return qnACommentsDAO.likeDelete(qnACommentsVO);
+	
+	/////////////////////////////////////댓글 싫어요
+	//댓글 t_hate 테이블의 hate_check 값 확인하는 select
+	public int hateUpdate(int qcnum, int num, String id, HateVO hateVO, QnACommentsVO qnACommentsVO) throws Exception {
+	
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("num", num);
+		map.put("id", id);
+		
+		String select = hateDAO.getSelect(map);
+		int result = 0;
+		
+		if(select == null) {
+			
+			result = hateDAO.hateWrite(hateVO);
+			result = qnACommentsDAO.hateUpdate(qnACommentsVO);
+		
+		} 
+		
+		if(select != null) {
+		
+			int updateSelect = hateDAO.updateSelect(map);
+		
+		if(updateSelect == 1){
+		
+			result = hateDAO.setUpdateDelete(hateVO);
+			result = qnACommentsDAO.hateDelete(qnACommentsVO);
+		
+		} else if(updateSelect == 0) {
+		
+			result = hateDAO.setUpdate(hateVO);
+			result = qnACommentsDAO.hateUpdate(qnACommentsVO);
+		} 
+	
+	}
+
+		return result;
+
+	}
+	
+	
+	
+	//// 댓글 like_check 값 가져오기
+	public int likeCheck(int num, String id) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("num", num);
+		map.put("id", id);
+		
+		int updateSelect = likeDAO.updateSelect(map);
+		
+		return updateSelect;
+		
+	}
+	
+	
+	/// 댓글 Like 테이블 리스트 가져오기
+	public List<LikeVO> likeList(int num, String id) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("num", num);
+		map.put("id", id);
+		
+		List<LikeVO> likeList = likeDAO.likeList(map);
+		
+		return likeList;
+	}
+	
+	
+	////댓글 hate_check 값 가져오기
+	public int hateCheck(int num, String id) throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("num", num);
+		map.put("id", id);
+		
+		int updateSelect = hateDAO.updateSelect(map);
+		
+		return updateSelect;
+		
+	}
+	
+	
+	/// 댓글 Hate 테이블 리스트 가져오기
+	public List<HateVO> hateList(int num, String id) throws Exception {
+			
+		Map<String, Object> map = new HashMap<String, Object>();
+			
+		map.put("num", num);
+		map.put("id", id);
+			
+		List<HateVO> hateList = hateDAO.hateList(map);
+			
+		return hateList;
 	}
 
 }

@@ -6,7 +6,7 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/boardSelect.css" rel="stylesheet">
-<script type="text/javascript" src="../resources/js/board/boardSelect.js"></script>
+<!-- <script type="text/javascript" src="../resources/js/board/boardSelect.js"></script> -->
 <c:import url="../temp/commentBootstrap.jsp" />
 <script type="text/javascript">
 	$(function() {
@@ -211,6 +211,8 @@
 			});
 		});
 		
+		var likeListId = $('#likeListId').val();
+		console.log(likeListId);
 		
 		///////////////////////////////////////좋아요
 		$('.commentslist').on('click', '.like', function(e) {
@@ -231,7 +233,37 @@
 					if(data=='1') {
 						getList(1);
 					} else {
-						alert('등록실패');
+						alert('like error');
+					}
+				}
+			});
+			
+		});
+		
+		
+		
+		
+		
+		///////////////////////////////////////싫어요
+		$('.commentslist').on('click', '.hate', function(e) {
+			e.preventDefault();
+			var hateQcnum = $(this).attr('title');
+			var hateId = '${memberVO.id}';
+			$.ajax({
+				
+				url:"../comments/commentsHate",
+				type:"POST",
+				data: {
+					qcnum : hateQcnum,
+					num : hateQcnum,
+					id : hateId
+				},
+				success:function(data) {
+					console.log(data);
+					if(data=='1') {
+						getList(1);
+					} else {
+						alert('hate error');
 					}
 				}
 			});
