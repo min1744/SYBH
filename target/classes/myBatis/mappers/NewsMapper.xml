@@ -26,11 +26,11 @@
  
  
  
- <select id="getList" parameterType="PageMaker" resultType="NewsVO">
+ <select id="getList" parameterType="java.util.Map" resultType="NewsVO">
   	select * from 
   	(select rownum R, N.* from
   	(select * from news
-  	 where  	
+  	 where 	
   <choose>
   		<when test="kind = 1">
   			 title
@@ -50,9 +50,9 @@
   		</otherwise>
    </choose>
    		
-  	 	 like '%'|| #{search} || '%'
+  	 	 like '%'|| #{pager.search} || '%'
   	 	 order by num desc) N)
-  	 	 where R between #{startRow} and #{lastRow}
+  	 	 where R between #{pager.startRow} and #{pager.lastRow}
   </select>
   
  <select id="getCount" parameterType="PageMaker" resultType="Integer">

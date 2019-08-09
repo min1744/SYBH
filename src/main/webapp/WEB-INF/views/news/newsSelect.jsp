@@ -76,9 +76,9 @@
 		
 			<ul>
 				<li>건강뉴스</li>
-				<li><a href="#">질병 정보</a></li>
-				<li><a href="#" style="color:#6bb5db;">영양 정보</a></li>
-				<li><a href="#">운동 정보</a></li>
+				<li><a href="./disease">질환 정보</a></li>
+				<li><a href="./nutrition" style="color:#6bb5db;">영양 정보</a></li>
+				<li><a href="./exercise">운동 정보</a></li>
 			</ul>
 		
 		</div>
