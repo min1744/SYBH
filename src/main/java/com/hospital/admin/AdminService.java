@@ -58,31 +58,47 @@ public class AdminService {
 	
 	//차단 된 사람들 리스트
 	public List<UnserviceabilityVO> getUnserviceabilityList() throws Exception{
-		return adminDAO.getUnserviceabilityList();
+		List<UnserviceabilityVO> list = adminDAO.getUnserviceabilityList();
+		for(UnserviceabilityVO unserviceabilityVO : list) {
+			String res_reg_num = memberDAO.setResDecryption(unserviceabilityVO.getRes_reg_num());
+			if(res_reg_num == null) {
+				throw new Exception();
+			}
+			res_reg_num = memberDAO.setUpdateRes(res_reg_num);
+			if(res_reg_num == null) {
+				throw new Exception();
+			}
+			unserviceabilityVO.setRes_reg_num(res_reg_num);
+		}
+		
+		return list;
 	}
 	
 	//주민번호를 활용해서 회원탈퇴를 당한 사람이 로그인하지 못하도록 기록남기기 
-	public int setUnserviceability() throws Exception{
-		List<MemberVO> list = adminDAO.getList();
+	public int setUnserviceability(String [] id) throws Exception{
 		UnserviceabilityVO unserviceabilityVO = null;
-		for(MemberVO memberVO:list) {
+		int result = 0;
+		for(int i = 0; i < id.length; i++) {
+			MemberVO memberVO = memberDAO.getSelect(id[i]);
 			unserviceabilityVO = new UnserviceabilityVO();
 			unserviceabilityVO.setId(memberVO.getId());
 			unserviceabilityVO.setEmail(memberVO.getEmail());
 			unserviceabilityVO.setName(memberVO.getName());
 			unserviceabilityVO.setRes_reg_num(memberVO.getRes_reg_num());
 			unserviceabilityVO.setReason("관리자에 의해 차단됨");
+			result = adminDAO.setUnserviceability(unserviceabilityVO);
+			if(result < 1) {
+				throw new Exception();
+			}
 		}
-		return adminDAO.setUnserviceability(unserviceabilityVO);
+		
+		return result;
 	}
 	
 	//차단 해제
 	public int setDeleteUnserviceability(String [] id) throws Exception{
-		List<UnserviceabilityVO> list = adminDAO.getUnserviceabilityList();
-		for(UnserviceabilityVO unserviceabilityVO:list) {
-			System.out.println("아직 작업중");
-		}
-		//return adminDAO.setDeleteUnserviceability(res_reg_num);
-		return 0;
+		List<String> list = Arrays.asList(id);
+		
+		return adminDAO.setDeleteUnserviceability(list);
 	}
 }

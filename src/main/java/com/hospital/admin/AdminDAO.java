@@ -53,7 +53,7 @@ public class AdminDAO {
 	}
 	
 	//차단 해제
-	public int setDeleteUnserviceability(String res_reg_num) throws Exception{
-		return sqlSession.delete(NAMESPACE+"setDeleteUnserviceability", res_reg_num);
+	public int setDeleteUnserviceability(List<String> list) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setDeleteUnserviceability", list);
 	}
 }

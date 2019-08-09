@@ -32,16 +32,30 @@
 					},
 					success : function(data) {
 						data = data.trim();
-						if(data == '1'){
-							$('#form').submit();
-						} else if(data == '2') {
+						if(data == '1'){*/
+							//차단된 아이디인지 확인
+							$.ajax({
+								url : './checkUnserviceability',
+								type : 'POST',
+								data : {
+									id : id
+								},
+								success : function(data) {
+									data = data.trim();
+									if(data == '0'){
+										$('#form').submit();
+									} else {
+										alert("접근이 차단되었습니다. 대표전화로 문의해주시기 바랍니다.");
+									}
+								}
+							});
+						/*} else if(data == '2') {
 							alert("자동 가입 방지 봇을 확인 한 뒤 진행 해 주세요.");
 						} else {
 							alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
 						}
 					}
 				});*/
-				$('#form').submit();
 			}
 		});
 		

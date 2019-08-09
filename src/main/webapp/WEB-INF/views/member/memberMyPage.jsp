@@ -148,7 +148,7 @@
 														<td>남자</td>
 													</c:when>
 													<c:when test="${memberVO.gender eq 2}">
-														<td>남자</td>
+														<td>여자</td>
 													</c:when>
 													<c:otherwise>
 														<td>정보가 없습니다.</td>

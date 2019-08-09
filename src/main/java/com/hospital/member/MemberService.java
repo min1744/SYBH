@@ -23,6 +23,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hospital.admin.AdminDAO;
 import com.hospital.member.kakao.KakaoMemberVO;
 import com.hospital.member.mail.MailHandler;
 import com.hospital.member.mail.MailVO;
@@ -36,6 +37,8 @@ public class MemberService {
 	private MemberDAO memberDAO;
 	@Autowired
 	private JavaMailSender mailSender;
+	@Inject
+	private AdminDAO adminDAO;
 	
 	//일반회원 login
 	public HashMap<String, Object> login(MemberVO memberVO) throws Exception{
@@ -444,5 +447,15 @@ public class MemberService {
 		br.close();
 
 		return kakaoMemberVO;
+	}
+	
+	//차단된 회원인지 확인
+	public int getUnserviceability(String id) throws Exception{
+		int result = 0;
+		MemberVO memberVO = memberDAO.getSelect(id);
+		if(memberVO.getRes_reg_num() != null) {
+			result = adminDAO.getUnserviceability(memberVO.getRes_reg_num());
+		}
+		return result;
 	}
 }

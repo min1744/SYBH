@@ -45,7 +45,7 @@
 			#{id},
 			#{email},
 			#{name},
-			CRYPTO_AES256.ENC_AES(#{res_reg_num}),
+			#{res_reg_num},
 			#{reason}
 		)
 	</insert>
@@ -54,18 +54,20 @@
 	<select id="getUnserviceability" parameterType="String" resultType="Integer">
 		SELECT COUNT(*)
 		FROM UNSERVICEABILITY
-		WHERE RES_REG_NUM = CRYPTO_AES256.ENC_AES(#{res_reg_num})
+		WHERE RES_REG_NUM = #{res_reg_num}
 	</select>
 	
 	<!-- 차된 된 사람들 리스트 -->
 	<select id="getUnserviceabilityList" resultType="UnserviceabilityVO">
-		SELECT UNUM, ID, EMAIL, NAME, REASON
-		FROM UNSERVICEABILITY
+		SELECT * FROM UNSERVICEABILITY
 	</select>
 	
 	<!-- 차단 해제 -->
-	<delete id="setDeleteUnserviceability" parameterType="String">
+	<delete id="setDeleteUnserviceability" parameterType="List">
 		DELETE UNSERVICEABILITY
-		WHERE RES_REG_NUM = CRYPTO_AES256.ENC_AES(#{res_reg_num})
+		WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
 	</delete>
 </mapper>

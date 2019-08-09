@@ -337,7 +337,6 @@ public class MemberController {
     public ModelAndView VerifyRecaptcha(String recaptcha, ModelAndView mv) throws Exception {
     	int result = 0;
         VerifyRecaptcha.setSecretKey("6LeDI7EUAAAAAOl-nsomoO5UGCFyfw6_mYexVvex");
-        System.out.println(recaptcha);
         //0 = 오류, 1 = 성공, 2 = 실패
         try {
             if(VerifyRecaptcha.verify(recaptcha)) {
@@ -348,6 +347,15 @@ public class MemberController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mv.addObject("result", result);
+        mv.setViewName("common/message");
+        
+        return mv;
+    }
+    
+    @RequestMapping(value = "checkUnserviceability", method = RequestMethod.POST)
+    public ModelAndView checkUnserviceability(String id, ModelAndView mv) throws Exception {
+    	int result = memberService.getUnserviceability(id);
         mv.addObject("result", result);
         mv.setViewName("common/message");
         

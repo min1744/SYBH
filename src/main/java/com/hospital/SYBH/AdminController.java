@@ -75,8 +75,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "setUnserviceability", method = RequestMethod.POST)
-	public ModelAndView setUnserviceability(ModelAndView mv) throws Exception {
-		int result = adminService.setUnserviceability();
+	public ModelAndView setUnserviceability(String [] id, ModelAndView mv) throws Exception {
+		int result = adminService.setUnserviceability(id);
 		mv.addObject("result", result);
 		mv.setViewName("common/message");
 		
