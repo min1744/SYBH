@@ -1,5 +1,7 @@
 package com.hospital.SYBH;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,6 +25,9 @@ public class AdminController {
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
+		HashMap<String, Object> map = adminService.getMemberChart();
+		mv.addObject("allMemberCount", (Integer)map.get("allMemberCount"));
+		mv.addObject("monthDates", (int [])map.get("monthDates"));
 		mv.setViewName("admin/adminIndex");
 		
 		return mv;

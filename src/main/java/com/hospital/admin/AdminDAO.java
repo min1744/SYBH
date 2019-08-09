@@ -1,5 +1,6 @@
 package com.hospital.admin;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,6 +21,16 @@ public class AdminDAO {
 	//회원 List
 	public List<MemberVO> getList() throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getList");
+	}
+	
+	//관리자를 제외한 모든 회원들의 수
+	public int getAllMemberCount() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getAllMemberCount");
+	}
+	
+	//가입 날짜 모두 select하기
+	public List<Date> getRegDate() throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getRegDate");
 	}
 	
 	//회원 관리(삭제)
