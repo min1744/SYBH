@@ -91,6 +91,17 @@ public class CommentsController {
 	}
 	
 	
+	//좋아요 like_check 값
+	@RequestMapping(value = "commentsLikeCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public int likeList(int num, String id) throws Exception {
+		
+		int like_check = qnACommentsService.likeCheck(num, id);
+			
+		return like_check;
+	}
+	
+	
 	//싫어요
 	@RequestMapping(value = "commentsHate", method = RequestMethod.POST)
 	@ResponseBody
@@ -99,6 +110,16 @@ public class CommentsController {
 		int result = qnACommentsService.hateUpdate(qcnum, num, id, hateVO, qnACommentsVO);
 		
 		return result;
+	}
+	
+	//좋아요 hate_check 값
+	@RequestMapping(value = "commentsHateCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public int hateList(int num, String id) throws Exception {
+			
+		int hate_check = qnACommentsService.hateCheck(num, id);
+				
+		return hate_check;
 	}
 	
 	

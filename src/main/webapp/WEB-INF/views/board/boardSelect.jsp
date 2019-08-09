@@ -141,6 +141,7 @@
 		}
 		
 		
+		
 		//댓글 삭제
 		$('.commentslist').on('click', '.c_delete', function() {
 			var qcnum = $(this).attr('id');
@@ -211,14 +212,16 @@
 			});
 		});
 		
-		var likeListId = $('#likeListId').val();
-		console.log(likeListId);
+		var likeQcnum = 0;
+		var likeId = null;
+		var likeResult = null;
+		var hateResult = null;
 		
 		///////////////////////////////////////좋아요
 		$('.commentslist').on('click', '.like', function(e) {
 			e.preventDefault();
-			var likeQcnum = $(this).attr('title');
-			var likeId = '${memberVO.id}';
+			likeQcnum = $(this).attr('title');
+			likeId = '${memberVO.id}';
 			$.ajax({
 				
 				url:"../comments/commentsLike",
@@ -229,8 +232,8 @@
 					id : likeId
 				},
 				success:function(data) {
-					console.log(data);
 					if(data=='1') {
+						like_check();
 						getList(1);
 					} else {
 						alert('like error');
@@ -240,12 +243,30 @@
 			
 		});
 		
-		
+		//////////////좋아요 like_check
+		function like_check() {
+			$.ajax({
+				
+				url:"../comments/commentsLikeCheck",
+				type:"POST",
+				data: {
+					num : likeQcnum,
+					id: likeId
+				},
+				success:function(data) {
+					
+					likeResult = data;
+					console.log(likeResult);
+					
+				}
+			});
+		}
 		
 		
 		
 		///////////////////////////////////////싫어요
 		$('.commentslist').on('click', '.hate', function(e) {
+
 			e.preventDefault();
 			var hateQcnum = $(this).attr('title');
 			var hateId = '${memberVO.id}';
@@ -259,7 +280,6 @@
 					id : hateId
 				},
 				success:function(data) {
-					console.log(data);
 					if(data=='1') {
 						getList(1);
 					} else {
@@ -269,6 +289,7 @@
 			});
 			
 		});
+		
 		
 		
 		
@@ -413,6 +434,7 @@
 					<div id="comment_box">
 						<div id="comment">
 							<div id="c_top">
+								<input type="hidden" id="like_check">
 								<input type="hidden" name="num" id="num" value="1">
 								<span id="c_count_title">전체댓글</span><span id="c_count">${totalCount}</span>
 							</div>

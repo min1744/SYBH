@@ -38,12 +38,12 @@
   
   <!-- 좋아요 눌렀을때 check값이 0인지 1인지 확인하는 select -->
 	<select id="updateSelect" parameterType="java.util.Map" resultType="Integer">
-		select like_check from t_like where num=#{qcnum} and id=#{id}
+		select like_check from t_like where num=#{num} and id=#{id}
 	</select>
 	
 	<!-- t_like 테이블 값 가져오기 -->
 	<select id="likeList" parameterType="java.util.Map" resultType="LikeVO">
-		select * from t_like where num=#{qcnum} and id=#{id}
+		select * from t_like where num=#{num} and id=#{id}
 	</select>
   
 </mapper>  
