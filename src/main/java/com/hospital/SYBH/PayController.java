@@ -62,7 +62,7 @@ public class PayController {
 	public int donationTotal() throws Exception{
 		int total;
 		try {
-			total = payService.getDonationPeopleTotal();
+			total = payService.getDonationTotal();
 		} catch (Exception e) {
 			total = 0;
 		}
