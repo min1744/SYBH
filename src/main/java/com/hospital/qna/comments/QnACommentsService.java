@@ -16,11 +16,12 @@ public class QnACommentsService {
 	@Inject
 	private QnACommentsDAO qnACommentsDAO;
 	
+	//댓글 등록
 	public int setWrite(QnACommentsVO qnACommentsVO) throws Exception {
-		
 		return qnACommentsDAO.setWrite(qnACommentsVO);
 	}
-	
+
+	//댓글리스트
 	public List<QnACommentsVO> getList(int num, PageMaker pageMaker) throws Exception {
 		
 		pageMaker.makeRow();
@@ -32,10 +33,42 @@ public class QnACommentsService {
 		return qnACommentsDAO.getList(map);
 	}
 	
+	//댓글 총 갯수 //select 에도 필요함
 	public int getTotalCount(int num) throws Exception {
-		
 		return qnACommentsDAO.getTotalCount(num);
 	}
 	
+	//댓글 수정
+	public int setUpdate(QnACommentsVO qnACommentsVO) throws Exception {
+		return qnACommentsDAO.setUpdate(qnACommentsVO);
+	}
+	
+	//댓글 삭제
+	public int setDelete(int qcnum) throws Exception {
+		return qnACommentsDAO.setDelete(qcnum);
+	}
+	
+	
+	//답글
+	public int setReply(QnACommentsVO qnACommentsVO) throws Exception {
+		
+		//답글 update
+		int result = qnACommentsDAO.setReplyUpdate(qnACommentsVO);
+		//답글 insert
+		result = qnACommentsDAO.setReply(qnACommentsVO);
+		
+		return result;
+	}
+	
+	
+	//댓글 좋아요 update
+	public int likeUpdate(QnACommentsVO qnACommentsVO) throws Exception {
+		return qnACommentsDAO.likeUpdate(qnACommentsVO);
+	}
+	
+	//댓글 좋아요 delete
+	public int likeDelete(QnACommentsVO qnACommentsVO) throws Exception {
+		return qnACommentsDAO.likeDelete(qnACommentsVO);
+	}
 
 }

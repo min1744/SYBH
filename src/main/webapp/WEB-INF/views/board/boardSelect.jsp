@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -7,6 +7,242 @@
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/boardSelect.css" rel="stylesheet">
 <script type="text/javascript" src="../resources/js/board/boardSelect.js"></script>
+<c:import url="../temp/commentBootstrap.jsp" />
+<script type="text/javascript">
+	$(function() {
+		
+		
+		
+		$("#delete").click(function() {
+			var result = confirm("삭제하시겠습니까?");
+			if(result){
+				
+				location.href="./boardList";
+			}
+						
+		});
+		
+		console.log($('#qnum').val());
+		
+		//qna 부분
+		$("#q_delete").click(function() {
+			var result = confirm("삭제하시겠습니까?");
+			var num = $('#qnum').val();
+			var menu = $('#qmenu').val();
+			if(result){
+				
+				post({'num':num,'menu':menu});
+			}
+						
+		});
+		
+		//post방식으로 넘기기
+		function post(params){
+			var form = document.createElement("form");
+			form.setAttribute("method","POST");
+			form.setAttribute("action","./qnaDelete");
+			for(var key in params){
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type","hidden");
+				hiddenField.setAttribute("name",key);
+				hiddenField.setAttribute("value",params[key]);
+				form.appendChild(hiddenField);
+			}
+			document.body.appendChild(form);
+			form.submit();
+		}
+		
+		///////////////////////////////////////////// 댓글 관련▼
+		
+		//글자수 textarea 체크
+		$('.c_area').keyup(function (e){
+		    var content = $(this).val();
+		    $('#counter').html("("+content.length+" / 500)");    //글자수 실시간 카운팅
+
+		    if (content.length > 500){
+		        alert("최대 500자까지 입력 가능합니다.");
+		        $(this).val(content.substring(0, 500));
+		        $('#counter').html("(500 / 500)");
+		    }
+		});
+		
+		
+		var curPage = 1;
+		
+		getList(curPage); //함수호출
+		
+		// 댓글 수정 코드
+		$('#updateBtn').click(function() {
+			var upContents = $('#updateContents').val();
+			var qcnumId = $('#qcnum').val();
+			$.ajax({
+				
+				url:"../comments/commentsUpdate",
+				type:"POST",
+				data: {
+					qcnum : qcnumId,
+					contents : upContents
+				},
+				success:function(data) {
+					console.log(data);
+					if(data=='1') {
+						getList(1);
+					} else {
+						alert('수정실패');
+					}
+				}
+			});
+		});
+		$('.commentslist').on('click', '.c_update', function() {
+			var id = $(this).attr('title');
+			var con = $('#c' + id).html();
+			$('#updateContents').val(con);
+			$('#qcnum').val(id);
+		});
+		
+		//댓글 등록하기 코드
+		$('#comment_btn').click(function() {
+			var num = $('#qnum').val();
+			var id = $('#c_writer').text();
+			var contents = $('.c_area').val();
+			$.ajax({
+				
+				url:"../comments/commentsWrite",
+				type:"POST",
+				data: {
+					num : num,
+					id : id,
+					contents : contents
+				},
+				success:function(data) {
+					if(data=='1') {
+						alert('등록성공');
+						location.reload();
+						getList(1);
+					} else {
+						alert('등록실패');
+					}
+				}
+			});
+			
+		});
+		//등록하기 코드 끝
+		
+		//리스트 가져오기
+		function getList(curPage) {
+			$.get("../comments/commentsList?num=${vo.num}&curPage="+curPage,
+					function(data) {
+						if (curPage == 1) {
+							$('.commentslist').html(data);
+						} else {
+							$('.commentslist').append(data);
+						}
+					})
+		}
+		
+		
+		//댓글 삭제
+		$('.commentslist').on('click', '.c_delete', function() {
+			var qcnum = $(this).attr('id');
+			var check = confirm("삭제하시겠습니까?");
+			if (check == true) {
+				
+				$.ajax({
+					
+					url:"../comments/commentsDelete",
+					type:"POST",
+					data: {
+						qcnum : qcnum
+					},
+					success:function(data) {
+						if(data=='1') {
+							location.reload();
+							getList(1); //append가 아니라 html로 덮어씌우기
+						} else {
+							alert('삭제실패');
+						}
+					}
+				});
+				
+			}
+		});
+		
+		
+		/////////////////////////////////////////////////
+				////// 댓글 더보기 코드
+				$('#more').click(function() {
+					curPage++;
+					getList(curPage);
+				});
+		
+		
+		
+		////////////////////////////대댓글 관련 코드
+		var reqcnum = 0;
+		$('.commentslist').on('click', '.c_replyBtn', function() {
+				
+			reqcnum = $(this).attr('title');
+			
+		});
+		///댓글 답글 
+		$('#replyBtn').click(function() {
+			var reqcnum2 = reqcnum;
+			var reContents = $('#replyContents').val();
+			var renum = $('#qnum').val();
+			var reid = $('#reid').val();
+			$.ajax({
+				
+				url:"../comments/commentsReply",
+				type:"POST",
+				data: {
+					qcnum : reqcnum2,
+					num : renum,
+					id : reid,
+					contents : reContents
+				},
+				success:function(data) {
+					console.log(data);
+					if(data=='1') {
+						getList(1);
+					} else {
+						alert('등록실패');
+					}
+				}
+			});
+		});
+		
+		
+		///////////////////////////////////////좋아요
+		$('.commentslist').on('click', '.like', function(e) {
+			e.preventDefault();
+			var likeQcnum = $(this).attr('title');
+			var likeId = '${memberVO.id}';
+			$.ajax({
+				
+				url:"../comments/commentsLike",
+				type:"POST",
+				data: {
+					qcnum : likeQcnum,
+					num : likeQcnum,
+					id : likeId
+				},
+				success:function(data) {
+					console.log(data);
+					if(data=='1') {
+						getList(1);
+					} else {
+						alert('등록실패');
+					}
+				}
+			});
+			
+		});
+		
+		
+		
+		
+	});
+</script>
 </head>
 <body>
 <!-- header 추가 -->
@@ -170,9 +406,77 @@
 						<div class="commentslist">
 						
 						</div>	
-						<c:if test="${totalcount > 10}">
-							<button id="more">+ 댓글 더보기</button>
+						<c:if test="${totalCount > 10}">
+							<div id="more_box">
+								<button id="more">+ 댓글 더보기</button>
+							</div>
 						</c:if>
+						<!-- 댓글 수정 관련 modal -->
+						<div class="container">
+							<!-- Modal -->
+						  <div class="modal fade" id="myModal" role="dialog">
+						    <div class="modal-dialog">
+						    
+						      <!-- Modal content-->
+						      <div class="modal-content">
+						        <div class="modal-header">
+						          <h4 class="modal-title">댓글 수정</h4>
+						        </div>
+						        <div class="modal-body">
+						        	<div class="form-group">
+								      <label for="contents">작성자 :</label>
+								      <input class="form-control" type="text" value="${memberVO.id}" disabled="disabled">
+								    </div>
+						          <div class="form-group">
+								      <label for="contents">댓글 :</label>
+								      <textarea class="form-control" rows="5" id="updateContents" name="contents"></textarea>
+								      <input type="hidden" id="qcnum">
+								    </div>
+						        </div>
+						        <div class="modal-footer">
+								      <button id="updateBtn" data-dismiss="modal">댓글 수정</button>
+						          <button type="button" id="cancleBtn" data-dismiss="modal">취소</button>
+						        </div>
+						      </div>
+						      
+						    </div>
+						  </div>
+							</div>
+						<!-- modal 끝 -->
+						
+						<!-- 댓글 답글 관련 modal -->
+						<div class="container">
+							<!-- Modal -->
+						  <div class="modal fade" id="replyModal" role="dialog">
+						    <div class="modal-dialog">
+						    
+						      <!-- Modal content-->
+						      <div class="modal-content">
+						        <div class="modal-header">
+						          <h4 class="modal-title">답글 달기</h4>
+						        </div>
+						        <div class="modal-body">
+						        	<div class="form-group">
+								      <label for="contents">작성자 :</label>
+								      <input class="form-control" type="text" id="reid" value="${memberVO.id}" readonly>
+								    </div>
+						          <div class="form-group">
+								      <label for="contents">댓글 :</label>
+								      <textarea class="form-control" rows="5" id="replyContents" name="contents"></textarea>
+								      <input type="hidden" id="qcnum2" value="1">
+								    </div>
+						        </div>
+						        <div class="modal-footer">
+								      <button id="replyBtn" data-dismiss="modal">답글 등록</button>
+						          <button type="button" id="cancleBtn" data-dismiss="modal">취소</button>
+						        </div>
+						      </div>
+						      
+						    </div>
+						  </div>
+							</div>
+						<!-- modal 끝 -->
+						
 					</div>
 					<!-- 댓글 끝 -->
 					

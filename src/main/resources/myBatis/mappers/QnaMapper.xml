@@ -64,6 +64,7 @@
   	update qna set title=#{title}, writer=#{writer}, contents=#{contents}, category=#{category} where num=#{num}
   </update>
   
+  
   <!-- 글 삭제 -->
   <delete id="setDelete" parameterType="Integer">
   	delete qna where num=#{num}
