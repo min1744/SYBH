@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,8 @@ public class NewsController {
 	
 	@Inject
 	private NewsService newsService;
+	
+	
 		
 	@RequestMapping(value = "newsAll", method = RequestMethod.GET)
 	public ModelAndView allList(PageMaker pageMaker,String menu) throws Exception {
@@ -42,7 +45,7 @@ public class NewsController {
 		
 		int result = newsService.setWrite(newsVO, session);
 		if(result > 0 && newsVO.getMenu().equals("disease")) {
-			mv.setViewName("redirect:./diease");
+			mv.setViewName("redirect:./disease");
 		}else if(result > 0 && newsVO.getMenu().equals("nutrition")) {
 			mv.setViewName("redirect:./nutrition");
 		}else if(result > 0 && newsVO.getMenu().equals("exercise")) {
@@ -91,7 +94,7 @@ public class NewsController {
 		}else if (result > 0 && newsVO.getMenu().equals("exercise")) {
 			mv.setViewName("redirect:./exercise");
 		}else {
-			mv.addObject("message", "Write Fail");
+			mv.addObject("message", "Delete Fail");
 			mv.addObject("path", "./disease");
 			mv.setViewName("common/messageMove");
 		}
@@ -106,7 +109,7 @@ public class NewsController {
 	public ModelAndView getList(PageMaker pageMaker,String menu) throws Exception {
 		
 		menu = "disease";
-		List<NewsVO> list=newsService.getList(pageMaker, menu);
+		List<NewsVO> list = newsService.getList(pageMaker, menu);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list",list);
 		mv.addObject("pager", pageMaker);
@@ -118,7 +121,6 @@ public class NewsController {
 	//write
 	@RequestMapping(value = "diseaseWrite", method = RequestMethod.GET)
 	public ModelAndView setWrite() throws Exception {
-		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("menu", "disease");
 		mv.setViewName("news/newsWrite");

@@ -55,13 +55,34 @@
 
 <div id="board">
 		<div id="board_title">
-			<p>뉴스 등록</p>
-		</div>
-	
+		<c:choose>
+			<c:when test="${menu eq 'disease'}">
+				<p id="wtitle">질환 글 등록</p>
+			</c:when>
+			<c:when test="${menu eq 'nutrition'}">
+				<p id="wtitle">영양 글 등록</p>
+			</c:when>
+			<c:otherwise>
+				<p id="wtitle">운동 글 등록</p>
+			</c:otherwise>
+			
+		</c:choose>
 <div id="board_box">
 	
 	<div id="form_box">
-		<form id="frm" action="./${board}Write" method="post" enctype="multipart/form-data">
+		<form id="frm" action="./newsWrite" method="post" enctype="multipart/form-data">
+		<c:choose>
+			<c:when test="${menu eq 'disease'}">
+			<input type="hidden" name="menu" value="disease">
+			</c:when>
+			<c:when test="${menu eq 'nutrition'}">
+			<input type="hidden" name="menu" value="nutrition">
+			</c:when>
+			<c:otherwise>
+			<input type="hidden" name="menu" value="exercise">
+			</c:otherwise>
+						
+		</c:choose>
 		<div class="float">
 		 <span class="title">제목</span>
  		 <input class="form-control" type="text" id="title" name="title">

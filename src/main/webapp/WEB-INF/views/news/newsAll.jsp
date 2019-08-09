@@ -27,13 +27,13 @@
 			<div class="news_nav">
 			
 				<h3>질환 정보</h3>
-				<a href="./newsList">전체 목록 보기</a>
+				<a href="./disease">전체 목록 보기</a>
 			
 			</div>
 			
 			<div class="news_contents">
 				
-				<a href="./newsSelect" class="news">
+				<a href="./newsSelect?num=${vo.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_all_1.jpg">
 					</div>
@@ -68,13 +68,13 @@
 			<div class="news_nav">
 			
 				<h3>영양 정보</h3>
-				<a href="./newsList">전체 목록 보기</a>
+				<a href="./nutrition">전체 목록 보기</a>
 				
 			</div>
 			
 			<div class="news_contents">
 				
-				<a href="./newsSelect" class="news">
+				<a href="./newsSelect?num=${vo.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_health_1.jpg">
 					</div>
@@ -83,7 +83,7 @@
 					<p class="news_date">2019-07-24</p>
 				</a>
 				
-				<a href="./newsSelect" class="news">
+				<a href="./newsSelect?num=${vo.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_health_2.jpg">
 					</div>
@@ -92,7 +92,7 @@
 					<p class="news_date">2019-07-24</p>
 				</a>
 				
-				<a href="./newsSelect" class="news last_box">
+				<a href="./newsSelect?num=${vo.num}" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_health_3.jpg">
 					</div>
@@ -109,7 +109,7 @@
 			<div class="news_nav">
 			
 				<h3>운동 정보</h3>
-				<a href="./newsList">전체 목록 보기</a>
+				<a href="./exercise">전체 목록 보기</a>
 				
 			</div>
 			
