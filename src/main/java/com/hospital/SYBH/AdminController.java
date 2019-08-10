@@ -25,9 +25,10 @@ public class AdminController {
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
-		HashMap<String, Object> map = adminService.getMemberChart();
+		HashMap<String, Object> map = adminService.getData();
 		mv.addObject("allMemberCount", (Integer)map.get("allMemberCount"));
-		mv.addObject("monthDates", (int [])map.get("monthDates"));
+		mv.addObject("earnings", (String)map.get("earnings"));
+		mv.addObject("monthData", (int [])map.get("monthData"));
 		mv.setViewName("admin/adminIndex");
 		
 		return mv;

@@ -15,8 +15,8 @@
 	</select>
 	
 	<!-- 가입 날짜 모두 select -->
-	<select id="getRegDate" resultType="Date">
-		SELECT REG_DATE FROM MEMBER WHERE GRADE != 2
+	<select id="getRegDate" parameterType="Integer" resultType="Date">
+		SELECT REG_DATE FROM MEMBER WHERE GRADE != 2 AND SUBSTR(REG_DATE, 1, 2) = #{year}
 	</select>
 	
 	<!-- 회원 관리(삭제) -->
@@ -80,4 +80,9 @@
 			#{item}
 		</foreach>
 	</delete>
+	
+	<!-- 후원을 제외한 총 earnings 구하기 -->
+	<select id="getEarnings" parameterType="Integer" resultType="Integer">
+		SELECT PRICE FROM PAY WHERE CATEGORY != 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
+	</select>
 </mapper>

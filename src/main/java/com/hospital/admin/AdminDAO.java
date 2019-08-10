@@ -29,8 +29,8 @@ public class AdminDAO {
 	}
 	
 	//가입 날짜 모두 select하기
-	public List<Date> getRegDate() throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getRegDate");
+	public List<Date> getRegDate(int year) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getRegDate", year);
 	}
 	
 	//회원 관리(삭제)
@@ -66,5 +66,10 @@ public class AdminDAO {
 	//차단 해제
 	public int setDeleteUnserviceability(List<String> list) throws Exception{
 		return sqlSession.delete(NAMESPACE+"setDeleteUnserviceability", list);
+	}
+	
+	//후원을 제외한 earnings 구하기
+	public List<Integer> getEarnings(int year) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getEarnings", year);
 	}
 }
