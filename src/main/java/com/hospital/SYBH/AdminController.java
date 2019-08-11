@@ -28,6 +28,7 @@ public class AdminController {
 		HashMap<String, Object> map = adminService.getData();
 		mv.addObject("allMemberCount", (Integer)map.get("allMemberCount"));
 		mv.addObject("earnings", (String)map.get("earnings"));
+		mv.addObject("donations", (String)map.get("donations"));
 		mv.addObject("monthData", (int [])map.get("monthData"));
 		mv.setViewName("admin/adminIndex");
 		

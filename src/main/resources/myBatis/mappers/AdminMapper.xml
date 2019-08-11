@@ -19,6 +19,11 @@
 		SELECT REG_DATE FROM MEMBER WHERE GRADE != 2 AND SUBSTR(REG_DATE, 1, 2) = #{year}
 	</select>
 	
+	<!-- 결제 날짜 모두 select -->
+	<select id="getPayDate" parameterType="Integer" resultType="Date">
+		SELECT PAY_DATE FROM PAY WHERE SUBSTR(PAY_DATE, 1, 2) = #{year}
+	</select>
+	
 	<!-- 회원 관리(삭제) -->
 	<delete id="setDeletes" parameterType="List">
 		DELETE MEMBER
@@ -84,5 +89,10 @@
 	<!-- 후원을 제외한 총 earnings 구하기 -->
 	<select id="getEarnings" parameterType="Integer" resultType="Integer">
 		SELECT PRICE FROM PAY WHERE CATEGORY != 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
+	</select>
+	
+	<!-- 총 후원 금액 구하기 -->
+	<select id="getDonations" parameterType="Integer" resultType="Integer">
+		SELECT PRICE FROM PAY WHERE CATEGORY = 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
 	</select>
 </mapper>

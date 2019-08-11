@@ -49,17 +49,27 @@ public class AdminService {
 		Date current = new Date();
 		String today = format.format(current);
 		int todayYear = Integer.parseInt(today.substring(0, today.indexOf("년")));
+		DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 		
+		//모든 회원 수 구하기
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int allMemberCount = adminDAO.getAllMemberCount();
 		
+		//annual earnings chart data
 		List<Integer> earnings = adminDAO.getEarnings(todayYear);
 		int extendedPrice = 0;
-		DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 		for(int earning:earnings) {
 			extendedPrice += earning;
 		}
 		String e = formatter.format(extendedPrice);
+		
+		//annual donations chart data
+		List<Integer> donations = adminDAO.getDonations(todayYear);
+		extendedPrice = 0;
+		for(int donation:donations) {
+			extendedPrice += donation;
+		}
+		String dona = formatter.format(extendedPrice);
 		
 		int [] monthData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		List<Date> reg_dateList = adminDAO.getRegDate(todayYear);
@@ -78,6 +88,7 @@ public class AdminService {
 		}
 		map.put("allMemberCount", allMemberCount);
 		map.put("earnings", e);
+		map.put("donations", dona);
 		map.put("monthData", monthData);
 		return map;
 	}
