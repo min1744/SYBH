@@ -1,4 +1,4 @@
-package com.hospital.news;
+	package com.hospital.news;
 
 
 
@@ -47,7 +47,7 @@ public class NewsDAO {
 	}
 	//
 	public int addHit(int num) throws Exception{
-		return sqlSession.update(NAMESPACE+"addHit", num);
+		return sqlSession.update(NAMESPACE+"setHitUpdate", num);
 	}
 	
 	

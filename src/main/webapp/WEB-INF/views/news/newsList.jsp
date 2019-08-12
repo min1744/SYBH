@@ -89,7 +89,7 @@
 			<c:choose>
 				<c:when test="${menu eq 'disease'}">
 					<c:forEach items="${list}" var="disease">
-				<a href="./newsSelect?num=${disease.num}" class="news">
+				<a href="./diseaseSelect?num=${disease.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_all_1.jpg">
 					</div>
@@ -103,7 +103,7 @@
 				
 				<c:when test="${menu eq 'nutrition'}">
 					<c:forEach items="${list}" var="nutrition">
-				<a href="./newsSelect?num=${nutrition.num}" class="news">
+				<a href="./nutritionSelect?num=${nutrition.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_health_1.jpg">
 					</div>
@@ -117,7 +117,7 @@
 				
 				<c:when test="${menu eq 'exercise'}">
 					<c:forEach items="${list}" var="exercise">
-				<a href="./newsSelect?num=${exercise.num}" class="news">
+				<a href="./exerciseSelect?num=${exercise.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_1.jpg">
 					</div>
