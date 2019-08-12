@@ -11,12 +11,14 @@
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
 
+
+
 <div id="board">
 		<c:choose>
 			<c:when test="${menu eq 'disease'}">
 				<div id="board_title">
 					<p id="title">질환 정보</p>
-					<p id="sub_title">쌍용백병원의 전문 의료진들이 건강한 식이요법에 관해 알려드립니다.</p>
+					<p id="sub_title">쌍용백병원의 전문 의료진들이 질환 정보에 관해 알려드립니다.</p>
 				</div>
 
 				<div id="write_btn">
@@ -36,7 +38,7 @@
 			<c:otherwise>
 				<div id="board_title">
 					<p id="title">운동 정보</p>
-					<p id="sub_title">쌍용백병원의 전문 의료진들이 건강한 식이요법에 관해 알려드립니다.</p>
+					<p id="sub_title">쌍용백병원의 전문 의료진들이 운동 정보에 관해 알려드립니다.</p>
 				</div>
 				<div id="write_btn">
 					<a href="./exerciseWrite" id="write">뉴스 등록</a>

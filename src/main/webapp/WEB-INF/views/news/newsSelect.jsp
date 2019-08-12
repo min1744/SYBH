@@ -65,20 +65,23 @@
 
 <div id="board">
 		<div id="board_title">
-			<p id="title">영양 정보</p>
-			<p id="sub_title">쌍용백병원의 전문 의료진들이 건강한 식이요법에 관해 알려드립니다.</p>
 			
-	<c:choose>
-	<c:when test="${menu eq 'disease'}">
-	<p id="wtitle">질환 정보</p>
-	</c:when>
-	<c:when test="${menu eq 'nutrition'}">
-	<p id="wtitle">영양 정보</p>
-	</c:when>
-	<c:otherwise>
-	<p id="wtitle">운동 정보</p>
-	</c:otherwise>
-	</c:choose>	
+			<c:choose>
+				<c:when test="${menu eq 'disease'}">
+					<p id="title">질환 정보</p>
+					<p id="sub_title">쌍용백병원의 전문 의료진들이 질환 정보에 관해 알려드립니다.</p>
+				</c:when>
+				<c:when test="${menu eq 'nutrition'}">
+					<p id="title">영양 정보</p>
+					<p id="sub_title">쌍용백병원의 전문 의료진들이 건강한 식이요법에 관해 알려드립니다.</p>
+				</c:when>
+				<c:otherwise>
+					<p id="title">운동 정보</p>
+					<p id="sub_title">쌍용백병원의 전문 의료진들이 운동 정보에 관해 알려드립니다.</p>
+				</c:otherwise>
+			</c:choose>
+			
+	
 		
 	</div>
 	<div id="board_box">
@@ -120,7 +123,7 @@
 			<div id="sub">
 				<ul>
 					<li>등록일</li>
-					<li>{vo.reg_date}</li>
+					<li>${vo.reg_date}</li>
 					<li>│</li>
 					<li>조회수</li>
 					<li>${vo.hit}</li>

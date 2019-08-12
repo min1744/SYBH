@@ -77,7 +77,7 @@
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">sub</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="sub_contents" name="sub_scontents">${newsVO.sub_contents}</textarea>
+ 		 <textarea class="form-control" rows="5" cols="15" id="sub_contents" name="sub_contents">${newsVO.sub_contents}</textarea>
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">main</span>

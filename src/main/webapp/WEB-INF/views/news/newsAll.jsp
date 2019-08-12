@@ -33,31 +33,31 @@
 			
 			<div class="news_contents">
 				
-				<a href="./diseaseSelect?num=${vo.num}" class="news">
+				<a href="./diseaseSelect?num=${disease.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_all_1.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${disease.title}</p>
+					<p class="news_sub">${disease.sub_contents}</p>
+					<p class="news_date">${disease.reg_date}</p>
 				</a>
 				
 				<a href="./diseaseSelect" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_all_2.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${disease.title}</p>
+					<p class="news_sub">${disease.sub_contents}</p>
+					<p class="news_date">${disease.reg_date}</p>
 				</a>
 				
 				<a href="./diseaseSelect" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_all_3.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${disease.title}</p>
+					<p class="news_sub">${disease.sub_contents}</p>
+					<p class="news_date">${disease.reg_date}</p>
 				</a>
 				
 			</div>		
@@ -74,31 +74,31 @@
 			
 			<div class="news_contents">
 				
-				<a href="./nutritionSelect?num=${vo.num}" class="news">
+				<a href="./nutritionSelect?num=${nutrition.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_health_1.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${nutrition.title}</p>
+					<p class="news_sub">${nutrition.sub_contents}</p>
+					<p class="news_date">${nutrition.reg_date}</p>
 				</a>
 				
-				<a href="./nutritionSelect?num=${vo.num}" class="news">
+				<a href="./nutritionSelect?num=${nutrition.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_health_2.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${nutrition.title}</p>
+					<p class="news_sub">${nutrition.sub_contents}</p>
+					<p class="news_date">${nutrition.reg_date}</p>
 				</a>
 				
-				<a href="./nutritionSelect?num=${vo.num}" class="news last_box">
+				<a href="./nutritionSelect?num=${nutrition.num}" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_health_3.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${nutrition.title}</p>
+					<p class="news_sub">${nutrition.sub_contents}</p>
+					<p class="news_date">${nutrition.reg_date}</p>
 				</a>
 				
 			</div>			
@@ -115,31 +115,31 @@
 			
 			<div class="news_contents">
 				
-				<a href="./exerciseSelect?num=${vo.num}" class="news">
+				<a href="./exerciseSelect?num=${exercise.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_1.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${exercise.title}</p>
+					<p class="news_sub">${exercise.sub_contents}</p>
+					<p class="news_date">${exercise.reg_date}</p>
 				</a>
 				
-				<a href="./exerciseSelect?num=${vo.num}" class="news">
+				<a href="./exerciseSelect?num=${exercise.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_2.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${exercise.title}</p>
+					<p class="news_sub">${exercise.sub_contents}</p>
+					<p class="news_date">${exercise.reg_date}</p>
 				</a>
 				
-				<a href="./exerciseSelect?num=${vo.num}" class="news last_box">
+				<a href="./exerciseSelect?num=${exercise.num}" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_3.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${exercise.title}</p>
+					<p class="news_sub">${exercise.sub_contents}</p>
+					<p class="news_date">${exercise.reg_date}</p>
 				</a>
 				
 			</div>			

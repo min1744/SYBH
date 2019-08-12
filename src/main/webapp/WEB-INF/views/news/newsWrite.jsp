@@ -50,7 +50,6 @@
 <c:import url="../common/header.jsp" />
 
 
-
 <div id="board">
 		<div id="board_title">
 		<c:choose>
@@ -108,7 +107,6 @@
 	</div>
 	</div>
 </div>
-
 <!-- footer 추가 -->
 <c:import url="../common/footer.jsp" />
 </body>
