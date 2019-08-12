@@ -385,7 +385,7 @@
 				</form>
 				</c:when>
 				<c:otherwise>
-				<form action="./qna">
+				<form action="./qnaList">
 					<div id="search_box">
 						<select name="kind" id="select">
 							<option value="1">제목</option>

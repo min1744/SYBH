@@ -99,8 +99,8 @@
 							<td>이비인후과/최재혁</td>
 							<td>2019-07-30</td>
 							<td>2019-08-01-09:00</td>
-							<td>예약완료or진료완료</td>	<!-- 진료예약날짜가 지나야 진료완료 떠야함 -->
-							<td>처방전파일.pdf</td> <!-- 처방전은 진료완료일때만 뜨게끔 -->					
+							<td><button class="cancel">예약취소</button></td><!-- 진료예약날짜가 안지났을때 예약취소버튼 / 예약날짜 지나야 진료완료 떠야함 -->
+							<td>처방전파일.pdf</td> <!-- 처방전은 진료완료일때만 뜨게끔 -->		
 						</tr>
 					</tbody>
 				</table>
@@ -156,7 +156,7 @@
 							<td id="check_status" class="check_status">
 							<c:choose>
 								<c:when test="${list.check_status eq 0 }">예약대기</c:when>
-								<c:when test="${list.check_status eq 1 }">예약취소</c:when>
+								<c:when test="${list.check_status eq 1 }"><button class="cancel">예약취소</button></c:when>
 								<c:when test="${list.check_status eq 2 }">검진완료</c:when>
 							</c:choose>
 							</td>
