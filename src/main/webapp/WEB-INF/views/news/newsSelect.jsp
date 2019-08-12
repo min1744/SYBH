@@ -19,11 +19,12 @@
 				post({'num':num, 'menu':menu});
 			}
 		});
+		
 		//post방식으로 넘기기
 		function post(params){
 			var form = document.createElement("form");
 			form.setAttribute("method","POST");
-			form.setAttribute("action","./"+news+"Delete");
+			form.setAttribute("action","./newsDelete");
 			for(var key in params){
 				var hiddenField = document.createElement("input");
 				hiddenField.setAttribute("type","hidden");
@@ -87,7 +88,7 @@
 			<ul>
 				<li>건강뉴스</li>
 				<li><a href="./disease" style="color:#6bb5db;">질환 정보</a></li>
-				<li><a href="./nutrition">질환 정보</a></li>
+				<li><a href="./nutrition">영양 정보</a></li>
 				<li><a href="./exercise">운동 정보</a></li>
 			</ul>
 			</c:when>
@@ -103,7 +104,7 @@
 			<ul>
 				<li>건강뉴스</li>
 				<li><a href="./disease">질환 정보</a></li>
-				<li><a href="./nutrition">운동 정보</a></li>
+				<li><a href="./nutrition">영양 정보</a></li>
 				<li><a href="./exercise" style="color:#6bb5db;">운동 정보</a></li>
 			</ul>
 			</c:otherwise>
@@ -303,7 +304,7 @@
 				<a href="./newsList" id="list">목록</a>
 				
 				<button id="delete">삭제</button>
-				<a href="./newsUpdate?num=${vo.num}" id="update">수정</a>
+				<a href="./${vo.menu}Update?num=${vo.num}" id="update">수정</a>
 			</div>
 		
 		</div>

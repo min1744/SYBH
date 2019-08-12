@@ -149,7 +149,7 @@ public class NewsController {
 	public ModelAndView diseaseUpdate(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		NewsVO newsVO= newsService.getSelect(num);
-		mv.addObject("vo", newsVO);
+		mv.addObject("newsVO", newsVO);
 		mv.addObject("menu", "disease");
 		mv.setViewName("news/newsUpdate");
 		return mv;
@@ -244,6 +244,7 @@ public class NewsController {
 		//Update
 		@RequestMapping(value = "exerciseUpdate", method = RequestMethod.GET)
 		public ModelAndView exerciseUpdate(int num) throws Exception{
+			
 			ModelAndView mv = new ModelAndView();
 			NewsVO newsVO = newsService.getSelect(num);
 			mv.addObject("newsVO", newsVO);

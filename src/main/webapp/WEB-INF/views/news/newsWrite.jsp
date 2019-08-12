@@ -91,11 +91,11 @@
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">sub</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="main_contents" name="main_contents"></textarea>
+ 		 <textarea class="form-control" rows="5" cols="15" id="sub_contents" name="sub_contents"></textarea>
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">main</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="sub_contents" name="sub_contents"></textarea>
+ 		 <textarea class="form-control" rows="5" cols="15" id="main_contents" name="main_contents"></textarea>
 		</div>
 		<div class="form-group" id="box">
 			<input type="button" id="add" value="ADD FILE" class="btn btn-primary">

@@ -51,8 +51,8 @@
 			<c:when test="${menu eq 'disease' }">
 			<ul>
 				<li>건강뉴스</li>
-				<li><a href="./disease">질환 정보</a></li>
-				<li><a href="./nutrition" style="color:#6bb5db;">영양 정보</a></li>
+				<li><a href="./disease" style="color:#6bb5db;">질환 정보</a></li>
+				<li><a href="./nutrition">영양 정보</a></li>
 				<li><a href="./exercise">운동 정보</a></li>
 			</ul>
 			</c:when>
@@ -68,8 +68,8 @@
 			<ul>
 				<li>건강뉴스</li>
 				<li><a href="./disease">질환 정보</a></li>
-				<li><a href="./nutrition" style="color:#6bb5db;">영양 정보</a></li>
-				<li><a href="./exercise">운동 정보</a></li>
+				<li><a href="./nutrition">영양 정보</a></li>
+				<li><a href="./exercise" style="color:#6bb5db;">운동 정보</a></li>
 			</ul>
 			</c:when>
 		</c:choose>
