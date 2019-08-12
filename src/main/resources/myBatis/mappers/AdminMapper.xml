@@ -9,6 +9,16 @@
 		SELECT * FROM MEMBER WHERE GRADE != 2
 	</select>
 	
+	<!-- 관리자를 제외한 모든 회원들의 수 -->
+	<select id="getAllMemberCount" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 2
+	</select>
+	
+	<!-- 가입 날짜 모두 select -->
+	<select id="getRegDate" parameterType="Integer" resultType="Date">
+		SELECT REG_DATE FROM MEMBER WHERE GRADE != 2 AND SUBSTR(REG_DATE, 1, 2) = #{year}
+	</select>
+	
 	<!-- 회원 관리(삭제) -->
 	<delete id="setDeletes" parameterType="List">
 		DELETE MEMBER
@@ -70,4 +80,9 @@
 			#{item}
 		</foreach>
 	</delete>
+	
+	<!-- 후원을 제외한 총 earnings 구하기 -->
+	<select id="getEarnings" parameterType="Integer" resultType="Integer">
+		SELECT PRICE FROM PAY WHERE CATEGORY != 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
+	</select>
 </mapper>
