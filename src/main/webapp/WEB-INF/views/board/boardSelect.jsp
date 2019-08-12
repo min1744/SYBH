@@ -220,6 +220,10 @@
 		///////////////////////////////////////좋아요
 		$('.commentslist').on('click', '.like', function(e) {
 			e.preventDefault();
+			hate_check();
+			if(hateResult==1){
+				alert('싫어요는 한번');
+			} else if(hateResult ==0 && hateResult == null){
 			likeQcnum = $(this).attr('title');
 			likeId = '${memberVO.id}';
 			$.ajax({
@@ -241,7 +245,7 @@
 					}
 				}
 			});
-			
+			}
 		});
 		
 		//////////////좋아요 like_check
@@ -262,11 +266,6 @@
 				}
 			});
 		}
-			
-		
-		
-		
-		
 		
 		
 		///////////////////////////////////////싫어요
@@ -277,7 +276,7 @@
 			like_check();
 			if(likeResult==1){
 				alert('좋아요는 한번');
-			} else if(likeResult ==0){
+			} else if(likeResult ==0 && likeResult == null){
 			var hateQcnum = $(this).attr('title');
 			var hateId = '${memberVO.id}';
 			$.ajax({
@@ -301,8 +300,25 @@
 		});
 		
 		
-		
-		
+
+		//////////////싫어요 hate_check
+		function hate_check() {
+			$.ajax({
+				
+				url:"../comments/commentsHateCheck",
+				type:"POST",
+				data: {
+					num : likeQcnum,
+					id: likeId
+				},
+				success:function(data) {
+					
+					hateResult = data;
+					alert(heateResult);
+				}
+			});
+		}
+				
 		
 	});
 </script>
