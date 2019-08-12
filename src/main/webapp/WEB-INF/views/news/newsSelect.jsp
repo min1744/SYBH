@@ -13,9 +13,10 @@
 		
 		$("#delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
-			var num = $("#num").val();
+			var num = $("#nnum").val();
+			var menu= $("#nmenu").val();
 			if(result){
-				post({'num':num});
+				post({'num':num, 'menu':menu});
 			}
 		});
 		//post방식으로 넘기기
@@ -65,26 +66,54 @@
 		<div id="board_title">
 			<p id="title">영양 정보</p>
 			<p id="sub_title">쌍용백병원의 전문 의료진들이 건강한 식이요법에 관해 알려드립니다.</p>
-		</div>
-	
-	
-	
+			
+	<c:choose>
+	<c:when test="${menu eq 'disease'}">
+	<p id="wtitle">질환 정보</p>
+	</c:when>
+	<c:when test="${menu eq 'nutrition'}">
+	<p id="wtitle">영양 정보</p>
+	</c:when>
+	<c:otherwise>
+	<p id="wtitle">운동 정보</p>
+	</c:otherwise>
+	</c:choose>	
+		
+	</div>
 	<div id="board_box">
-	
-		
-		<div id="board_nav">
-		
+	  <div id="board_nav">
+		<c:choose>
+			<c:when test="${menu eq 'disease'}">
+			<ul>
+				<li>건강뉴스</li>
+				<li><a href="./disease" style="color:#6bb5db;">질환 정보</a></li>
+				<li><a href="./nutrition">질환 정보</a></li>
+				<li><a href="./exercise">운동 정보</a></li>
+			</ul>
+			</c:when>
+			<c:when test="${menu eq 'nutrition'}">
 			<ul>
 				<li>건강뉴스</li>
 				<li><a href="./disease">질환 정보</a></li>
 				<li><a href="./nutrition" style="color:#6bb5db;">영양 정보</a></li>
 				<li><a href="./exercise">운동 정보</a></li>
 			</ul>
-		
+			</c:when>
+			<c:otherwise>
+			<ul>
+				<li>건강뉴스</li>
+				<li><a href="./disease">질환 정보</a></li>
+				<li><a href="./nutrition">운동 정보</a></li>
+				<li><a href="./exercise" style="color:#6bb5db;">운동 정보</a></li>
+			</ul>
+			</c:otherwise>
+		</c:choose>
 		</div>
 		
 		
 		<div id="boardSelect">
+			<input type="hidden" name="num" value="${vo.num}" id="nnum">
+			<input type="hidden" name="menu" value="${vo.menu}" id="nmenu">
 		
 			<div class="title">${vo.title}</div>
 			<div id="sub">
@@ -97,6 +126,10 @@
 				</ul>
 			</div>
 			
+			<div id="main_contents">${vo.main_contents}</div>
+			<div id="sub_contents">${vo.sub_contents}</div>
+			
+			
 			<div id="file">
 					<table>
 						<tr>
@@ -106,9 +139,7 @@
 						</tr>
 					</table>
 				</div>
-			<div id="contents">${vo.main_contents}</div>
 			
-			<div id="contents">${vo.sub_contents}</div>
 			
 			<!-- 댓글 -->
 			<div id="comment_box">

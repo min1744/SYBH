@@ -9,14 +9,14 @@
  <selectKey keyProperty="num" order="BEFORE" resultType="Integer">
   		select news_seq.nextval from dual
  </selectKey>
- 	insert into news values(#{num},#{title},#{main_contents},#{sub_contents},sysdate,0,#{menu})
+ 	insert into news values(#{num},#{title},#{writer},#{main_contents},#{sub_contents},sysdate,0,#{menu})
  </insert> 
  
  <update id="setUpdate" parameterType="NewsVO">
  	update news set title=#{title},#{main_contents},#{sub_contents},#{menu} where num=#{num}
  </update>
  
- <update id="addUpdate" parameterType="NewsVO">
+ <update id="setHitUpdate" parameterType="Integer">
  	update news set hit=hit+1 where num=#{num}
  </update>
   
@@ -81,7 +81,7 @@
  </select>
   
  
-  <select id="getSelect" parameterType="Integer" resultMap="newsResult">
+  <select id="getSelect" parameterType="Integer" resultType="NewsVO">
  	select * from news where num=#{num}
  </select>
  

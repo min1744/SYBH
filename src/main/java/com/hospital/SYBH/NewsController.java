@@ -120,7 +120,8 @@ public class NewsController {
 	
 	//write
 	@RequestMapping(value = "diseaseWrite", method = RequestMethod.GET)
-	public ModelAndView setWrite() throws Exception {
+	public ModelAndView dieaseWrite() throws Exception {
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("menu", "disease");
 		mv.setViewName("news/newsWrite");
@@ -130,7 +131,8 @@ public class NewsController {
 	
 	//select
 	@RequestMapping(value = "diseaseSelect", method = RequestMethod.GET)
-	public ModelAndView getSelect(int num) throws Exception {
+	public ModelAndView diseaseSelect(int num) throws Exception {
+	
 		ModelAndView mv = new ModelAndView();
 		NewsVO newsVO = newsService.getSelect(num);
 		mv.addObject("vo", newsVO);
@@ -144,7 +146,7 @@ public class NewsController {
 	
 	//update
 	@RequestMapping(value = "diseaseUpdate", method = RequestMethod.GET)
-	public ModelAndView setUpdate(int num) throws Exception {
+	public ModelAndView diseaseUpdate(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		NewsVO newsVO= newsService.getSelect(num);
 		mv.addObject("vo", newsVO);

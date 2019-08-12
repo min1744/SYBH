@@ -47,7 +47,7 @@ public class NewsService {
 		map.put("pager", pageMaker);
 		return newsDAO.getList(map);
 	}
-	//all
+	
 	
 	
 }

@@ -36,11 +36,9 @@
 		//폼 검증				
 		$("#write").click(function() {
 			//다른 input들 검증
-			if($('#contents').summernote('isEmpty')) {
-				alert('Empty');
-			} else {
+			
 				$('#frm').submit();				
-			}
+			
 		});
 			
 			
@@ -92,8 +90,12 @@
  		 <input class="form-control" type="text" id="writer" name="writer" value="admin" readonly>
 		</div>
 		<div class="form-group" id="contents_box">
-		  <span class="contents">글내용</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="contents" name="contents"></textarea>
+		  <span class="contents">sub</span>
+ 		 <textarea class="form-control" rows="5" cols="15" id="main_contents" name="main_contents"></textarea>
+		</div>
+		<div class="form-group" id="contents_box">
+		  <span class="contents">main</span>
+ 		 <textarea class="form-control" rows="5" cols="15" id="sub_contents" name="sub_contents"></textarea>
 		</div>
 		<div class="form-group" id="box">
 			<input type="button" id="add" value="ADD FILE" class="btn btn-primary">
