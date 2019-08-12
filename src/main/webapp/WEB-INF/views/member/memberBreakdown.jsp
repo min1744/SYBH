@@ -92,19 +92,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${list }" var="list">
+						<c:forEach items="${list }" var="list" varStatus="i">
 						<tr>
 
-							<td>${list.num }</td>
+							<td id="num${i.index }">${list.tnum }</td>
 							<td>${list.name }</td>
 							<td>${list.contents }</td>
 							<td>${list.apply_date }</td>
 							<td class="check">${list.reserve_date }</td>
 							<!-- 진료예약날짜가 지나야 진료완료 떠야함 -->
-							<td id="check_status" class="check_status">
+							<td id="check_status" class="check_status" data-toggle="${list.status}">
 							<c:choose>
-								<c:when test="${list.status eq 0 }">예약완료</c:when>
-								<c:when test="${list.status eq 1 }"><button class="cancel">예약취소</button></c:when>
+								<c:when test="${list.status eq 0 }">
+								<button class="cancel" id="cancel${i.index }" data-num="${i.index }">예약취소</button></c:when>
+								<c:when test="${list.status eq 1 }">예약취소</c:when>
 								<c:when test="${list.status eq 2 }">진료완료</c:when>
 							</c:choose>
 							</td>
@@ -135,15 +136,15 @@
 					} 
 					var today = year+"-"+month+"-"+day; //오늘날짜
 					$(".check").each(function(){
-						var num = $(this).prev().prev().prev().prev().text();
+						var tnum = $(this).prev().prev().prev().prev().text();
 						var check_date = $(this).text();
-						var check_status = $(this).next().text().match('예약완료');
-						if(today>check_date && check_status =='예약완료' ){
+						var check_status = $(this).next().attr('data-toggle');
+						if(today>check_date && check_status =='0' ){
 							$.ajax({
 								url:"../treatBreakDown/treatBreakDownUpdate",
 								type:"POST",
 								data:{
-									num : num,
+									tnum : tnum,
 									status : 2
 								},success : function(data){
 									location.reload();
@@ -151,6 +152,28 @@
 							});//ajax문
 						}//if문	
 					});//each문
+					
+					$('.cancel').click(function(){
+						var index = $(this).attr('data-num');
+						var tnum = $('#num'+index).text();
+						var check = confirm('예약을 취소하시겠습니까? \n예약을 취소하신 후에는 다시 예약해야합니다.');
+						if(check){
+						$.ajax({
+							url:"../treatBreakDown/treatBreakDownUpdate",
+							type:"POST",
+							data:{
+								tnum : tnum,
+								status : 1
+							},success : function(data){
+								location.reload();
+							}
+						});//ajax문
+						} else{
+							alert('예약이 취소되었습니다');
+						}
+					}); //cancel
+					
+						
 					
 					});
 					
@@ -163,7 +186,7 @@
 						<li><a href="./member${board }?curPage=${pager.startNum-1}&kind=${pager.kind}" id="prev">◀</a></li>
 						</c:if>
 						<c:choose>
-							<c:when test="${pager.totalCount < 10 }">
+							<c:when test="${pager.totalCount == 0 }">
 								<li><a href="./member${board }?curPage=1&kind=${pager.kind}">1</a></li>
 							</c:when>
 							<c:otherwise>
@@ -199,17 +222,17 @@
 					<tbody>
 						<c:forEach items="${list}" var="list" varStatus="i">
 						<tr>
-							<td>${list.num }</td>
+							<td id="num${i.index }">${list.num }</td>
 							<td>${memberVO.name }</td>
 							<td>${list.contents }</td>
 							<td id="check_date${i.index}" class="check" >${list.check_date}</td>
 							<td>${list.price }</td>
 							
 							<!-- 검진날짜가 지나야 검진완료 떠야함 -->
-							<td id="check_status" class="check_status">
+							<td id="check_status" class="check_status" data-toggle="${list.check_status}">
 							<c:choose>
-								<c:when test="${list.check_status eq 0 }">예약대기</c:when>
-								<c:when test="${list.check_status eq 1 }"><button class="cancel">예약취소</button></c:when>
+								<c:when test="${list.check_status eq 0 }"><button class="cancel" data-num="${i.index }">예약취소</button></c:when>
+								<c:when test="${list.check_status eq 1 }">예약취소</c:when>
 								<c:when test="${list.check_status eq 2 }">검진완료</c:when>
 							</c:choose>
 							</td>
@@ -258,8 +281,8 @@
 					$(".check").each(function(){
 						var num = $(this).prev().prev().prev().text();
 						var check_date = $(this).text();
-						var check_status = $(this).next().next().text().match('예약대기');
-						if(today>check_date && check_status =='예약대기' ){
+						var check_status = $(this).next().next().attr('data-toggle');
+						if(today>check_date && check_status =='0' ){
 							$.ajax({
 								url:"../checkup/checkUpUpdate",
 								type:"POST",
@@ -272,6 +295,26 @@
 							});//ajax문
 						}//if문	
 					});//each문
+					$('.cancel').click(function(){
+						var index = $(this).attr('data-num');
+						var num = $('#num'+index).text();
+						var check = confirm('예약을 취소하시겠습니까? \n예약을 취소하신 후에는 다시 예약해야합니다.');
+						if(check){
+						$.ajax({
+							url:"../checkup/checkUpUpdate",
+							type:"POST",
+							data:{
+								num : num,
+								check_status : 1
+							},success : function(data){
+								location.reload();
+							}
+						});//ajax문
+						} else{
+							alert('예약이 취소되었습니다');
+						}
+					}); //cancel
+					
 					
 					});
 					
@@ -311,7 +354,7 @@
 						<li><a href="./member${board }?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
 						</c:if>
 						<c:choose>
-							<c:when test="${pager.totalCount < 10 }">
+							<c:when test="${pager.totalCount == 0 }">
 								<li><a href="./member${board }?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
 							</c:when>
 							<c:otherwise>

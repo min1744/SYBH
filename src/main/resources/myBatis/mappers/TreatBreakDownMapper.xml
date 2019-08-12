@@ -17,12 +17,12 @@
   	(select rownum R,Tr.* from
   	(select T.*, M.name from treatbreakdown T
   	FULL JOIN member M on (T.id = M.id)
-  	where T.id=#{kind} order by T.num desc) Tr)
+  	where T.id=#{kind} order by T.tnum desc) Tr)
   	where R between #{startRow} and #{lastRow}
   </select>
 	
 	<update id="setUpdate" parameterType="TreatBreakDownVO">
-		update treatbreakdown set status=#{status} where num=#{num}
+		update treatbreakdown set status=#{status} where tnum=#{tnum}
 	</update>
 
   </mapper>

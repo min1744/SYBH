@@ -90,12 +90,12 @@
 	              if (cnt % 7 == 1) {/*일요일 계산*/
 	                  //1주일이 7일 이므로 일요일 구하기
 	                  //월화수목금토일을 7로 나눴을때 나머지가 1이면 cnt가 1번째에 위치함을 의미한다
-	                cell.innerHTML = "<font color=red>" + '<button dt-data="'+too+'"class="doctor">'+i+'</button>'
+	                cell.innerHTML = "<font color=red>" + '<button dt-data="'+too+'"class="doctor">'+"<font color=red>"+i+'</button>'
 	                //1번째의 cell에만 색칠
 	            }    
 	              if (cnt%7 == 0){/* 1주일이 7일 이므로 토요일 구하기*/
 	                  //월화수목금토일을 7로 나눴을때 나머지가 0이면 cnt가 7번째에 위치함을 의미한다
-	                  cell.innerHTML = "<font color=#153F91>" + '<button dt-data="'+too+'" class="doctor">'+i+'</button>'
+	                  cell.innerHTML =  '<button dt-data="'+too+'" class="doctor">'+"<font color=#153F91>"+i+'</button>'
 	                  //7번째의 cell에만 색칠
 	                   row = calendar.insertRow();
 	                   //토요일 다음에 올 셀을 추가
@@ -155,9 +155,22 @@
 				$('#off').html(med_office);
 				var docnum = $("#name"+index).attr('data-toggle');
 				$('#docnum').val(docnum);
+				$.ajax({
+					url:"../schedule/getOneList",
+					type:"POST",
+					data:{
+						num:docnum
+					},success: function(data) {
+						
+						console.log(data);
+					}
+				});//ajax
 			});
 			var date ='';
 			$('.doctor').click(function(){
+				//this.style.color="white";
+				//this.style.backgroundColor="#153f91";
+				
 				date = $(this).attr('dt-data');
 				$('#ti').html(date);
 			});

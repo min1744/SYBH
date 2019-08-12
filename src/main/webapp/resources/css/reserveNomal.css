@@ -477,7 +477,10 @@
 }
 
 
-
+button{
+	background: inherit;
+	border:inherit;
+}
 
 
 

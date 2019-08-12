@@ -26,5 +26,6 @@
 		<typeAlias type="com.hospital.qna.comments.like.LikeVO" alias="LikeVO"/>
 		<typeAlias type="com.hospital.qna.comments.hate.HateVO" alias="HateVO"/>
 		<typeAlias type="com.hospital.treatbreakdown.TreatBreakDownVO" alias="TreatBreakDownVO"/>
+		<typeAlias type="com.hospital.schedule.ScheduleVO" alias="ScheduleVO"/>
 	</typeAliases>
 </configuration>
