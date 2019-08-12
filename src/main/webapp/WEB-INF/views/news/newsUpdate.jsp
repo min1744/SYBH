@@ -27,14 +27,17 @@
 			
 		$("#write").click(function() {
 			//다른 input들 검증
-			if($('#contents').summernote('isEmpty')) {
+			if($('#main_contents').summernote('isEmpty')) {
 				alert('Empty');
+			} else if($('#sub_contents').summernote('isEmpty')){
+				alert('Empty');				
 			} else {
-				$('#frm').submit();				
+				$('#frm').submit();	
 			}
-		});
 			
 		});
+			
+	});
 </script>
 </head>
 <body>
@@ -44,25 +47,41 @@
 
 <div id="board">
 		<div id="board_title">
-			<p>공지수정</p>
+			<c:choose>
+			<c:when test="${menu eq 'disease'}">
+				<p id="wtitle">질환 글수정</p>
+			</c:when>
+			<c:when test="${menu eq 'nutrition'}">
+				<p id="wtitle">영양 글수정</p>
+			</c:when>
+			<c:otherwise>
+				<p id="wtitle">운동 글수정</p>
+			</c:otherwise>
+		</c:choose>
 		</div>
+
 	
 <div id="board_box">
 	
 	<div id="form_box">
 		<form id="frm" action="./newsUpdate" method="post">
-		<input type="hidden" name="num" value="${vo.num}">
+		<input type="hidden" name="num" value="${newsVO.num}">
+		<input type="hidden" name="menu" value="${newsVO.menu}">
 		<div class="float">
 		 <span class="title">제목</span>
- 		 <input class="form-control" type="text" id="title" value="${vo.title}" name="title">
+ 		 <input class="form-control" type="text" id="title" value="${newsVO.title}" name="title">
 		</div>
 		<div class="float">
 		 <span class="writer">작성자</span>
  		 <input class="form-control" type="text" id="writer" name="writer" value="admin" readonly>
 		</div>
 		<div class="form-group" id="contents_box">
-		  <span class="contents">글내용</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="contents" name="contents">${vo.contents}</textarea>
+		  <span class="contents">sub</span>
+ 		 <textarea class="form-control" rows="5" cols="15" id="sub_contents" name="sub_contents">${newsVO.sub_contents}</textarea>
+		</div>
+		<div class="form-group" id="contents_box">
+		  <span class="contents">main</span>
+ 		 <textarea class="form-control" rows="5" cols="15" id="main_contents" name="main_contents">${newsVO.main_contents}</textarea>
 		</div>
 		<div class="form-group" id="box">
 			<input type="button" id="add" value="ADD FILE" class="btn btn-primary">

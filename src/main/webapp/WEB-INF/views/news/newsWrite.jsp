@@ -50,7 +50,6 @@
 <c:import url="../common/header.jsp" />
 
 
-
 <div id="board">
 		<div id="board_title">
 		<c:choose>
@@ -91,11 +90,11 @@
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">sub</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="main_contents" name="main_contents"></textarea>
+ 		 <textarea class="form-control" rows="5" cols="15" id="sub_contents" name="sub_contents"></textarea>
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">main</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="sub_contents" name="sub_contents"></textarea>
+ 		 <textarea class="form-control" rows="5" cols="15" id="main_contents" name="main_contents"></textarea>
 		</div>
 		<div class="form-group" id="box">
 			<input type="button" id="add" value="ADD FILE" class="btn btn-primary">
@@ -108,7 +107,6 @@
 	</div>
 	</div>
 </div>
-
 <!-- footer 추가 -->
 <c:import url="../common/footer.jsp" />
 </body>

@@ -33,31 +33,31 @@
 			
 			<div class="news_contents">
 				
-				<a href="./newsSelect?num=${vo.num}" class="news">
+				<a href="./diseaseSelect?num=${disease.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_all_1.jpg">
 					</div>
-					<p class="news_title">${vo.title}</p>
-					<p class="news_sub">${vo.sub_contents}</p>
-					<p class="news_date">${vo.reg_date}</p>
+					<p class="news_title">${disease.title}</p>
+					<p class="news_sub">${disease.sub_contents}</p>
+					<p class="news_date">${disease.reg_date}</p>
 				</a>
 				
-				<a href="./newsSelect" class="news">
+				<a href="./diseaseSelect" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_all_2.jpg">
 					</div>
-					<p class="news_title">갑자기 약해진 소변줄기? 전립선비대증 의심하세요!</p>
-					<p class="news_sub">전립선비대증 증상은 무엇인가요?전립선비대증으로 나타나는 배뇨증상은 방광 증상을 함께 동반하는 경우</p>
-					<p class="news_date">2019-07-24</p>
+					<p class="news_title">${disease.title}</p>
+					<p class="news_sub">${disease.sub_contents}</p>
+					<p class="news_date">${disease.reg_date}</p>
 				</a>
 				
-				<a href="./newsSelect" class="news last_box">
+				<a href="./diseaseSelect" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_all_3.jpg">
 					</div>
-					<p class="news_title">당뇨병 관리, 환자의 적극적인 참여가 필요하다! 당뇨병 관리 생활수칙</p>
-					<p class="news_sub">넓은 의미의 당뇨병 관리라 함은 혈당 조절 뿐 아니라 당뇨병과 동반하기 쉬운 비만, 고혈압, 고지혈증</p>
-					<p class="news_date">2019-07-24</p>
+					<p class="news_title">${disease.title}</p>
+					<p class="news_sub">${disease.sub_contents}</p>
+					<p class="news_date">${disease.reg_date}</p>
 				</a>
 				
 			</div>		
@@ -74,31 +74,31 @@
 			
 			<div class="news_contents">
 				
-				<a href="./newsSelect?num=${vo.num}" class="news">
+				<a href="./nutritionSelect?num=${nutrition.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_health_1.jpg">
 					</div>
-					<p class="news_title">식사의 사칙연산</p>
-					<p class="news_sub">수학이 필요한 순간’이란 책을 읽고 있습니다. 기초산수인 사칙연산이 고대에는 전문가의 영역이었지만 지금은 읽기능력보다 훨씬 보편적인 능력이 되었다고 하네요. </p>
-					<p class="news_date">2019-07-24</p>
+					<p class="news_title">${nutrition.title}</p>
+					<p class="news_sub">${nutrition.sub_contents}</p>
+					<p class="news_date">${nutrition.reg_date}</p>
 				</a>
 				
-				<a href="./newsSelect?num=${vo.num}" class="news">
+				<a href="./nutritionSelect?num=${nutrition.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_health_2.jpg">
 					</div>
-					<p class="news_title">간질환 환자를 위한 식사요법</p>
-					<p class="news_sub">간은 인체의 화학공장으로 각종 단백질과 영양소, 지방을 소화시키는데 필요한 담즙을 만들며 필요시 다른 장기에서 사용할 수 있도록 운반시키는 역할을 하며, </p>
-					<p class="news_date">2019-07-24</p>
+					<p class="news_title">${nutrition.title}</p>
+					<p class="news_sub">${nutrition.sub_contents}</p>
+					<p class="news_date">${nutrition.reg_date}</p>
 				</a>
 				
-				<a href="./newsSelect?num=${vo.num}" class="news last_box">
+				<a href="./nutritionSelect?num=${nutrition.num}" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_health_3.jpg">
 					</div>
-					<p class="news_title">심혈관계 환자를 위한 식사요법</p>
-					<p class="news_sub">심혈관계질환은 동맥경화나 혈전 등으로 인해 심장으로 가는 혈류량이 감소하여 발생되는 질환으로 초기에는 식은땀, 흉통 등의 증상이 나타나며 </p>
-					<p class="news_date">2019-07-24</p>
+					<p class="news_title">${nutrition.title}</p>
+					<p class="news_sub">${nutrition.sub_contents}</p>
+					<p class="news_date">${nutrition.reg_date}</p>
 				</a>
 				
 			</div>			
@@ -115,31 +115,31 @@
 			
 			<div class="news_contents">
 				
-				<a href="./newsSelect" class="news">
+				<a href="./exerciseSelect?num=${exercise.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_1.jpg">
 					</div>
-					<p class="news_title">소리 없이 다가오는 뼈 도둑, 골다공증(내분비내과 오기원 교수)</p>
-					<p class="news_sub">평소 건강에 많은 관심을 가지고 있었던 분이라면 ‘골다공증’이라는 질병에 대해 많이 들어보셨을 겁니다. </p>
-					<p class="news_date">2019-07-24</p>
+					<p class="news_title">${exercise.title}</p>
+					<p class="news_sub">${exercise.sub_contents}</p>
+					<p class="news_date">${exercise.reg_date}</p>
 				</a>
 				
-				<a href="./newsSelect" class="news">
+				<a href="./exerciseSelect?num=${exercise.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_2.jpg">
 					</div>
-					<p class="news_title">재활의학과 전문의가 알려주는 건강하게 등산하는 방법(재활의학과 이용택 교수)</p>
-					<p class="news_sub">등산은 건강에 좋은 대표적 운동이지만 안타깝게도 잘못된 등산 방법으로 병원을 찾는 사람이 많습니다.</p>
-					<p class="news_date">2019-07-24</p>
+					<p class="news_title">${exercise.title}</p>
+					<p class="news_sub">${exercise.sub_contents}</p>
+					<p class="news_date">${exercise.reg_date}</p>
 				</a>
 				
-				<a href="./newsSelect" class="news last_box">
+				<a href="./exerciseSelect?num=${exercise.num}" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_3.jpg">
 					</div>
-					<p class="news_title">10월 유방암 예방의 달, 유방암을 예방합시다! (외과 박용래 교수)</p>
-					<p class="news_sub">매년 이맘때가 되면 핑크리본을 가슴에 단 여성들을 심심찮게 볼 수 있습니다. 10월, 유방암 예방의 달을 맞이하여</p>
-					<p class="news_date">2019-07-24</p>
+					<p class="news_title">${exercise.title}</p>
+					<p class="news_sub">${exercise.sub_contents}</p>
+					<p class="news_date">${exercise.reg_date}</p>
 				</a>
 				
 			</div>			

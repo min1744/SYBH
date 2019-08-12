@@ -27,6 +27,9 @@ public class NewsController {
 		
 	@RequestMapping(value = "newsAll", method = RequestMethod.GET)
 	public ModelAndView allList(PageMaker pageMaker,String menu) throws Exception {
+		if(menu == null) {
+			menu = "";
+		}
 		List<NewsVO> alist=newsService.getList(pageMaker, menu);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", alist);
@@ -42,7 +45,6 @@ public class NewsController {
 	public ModelAndView setWrite(NewsVO newsVO,HttpSession session)throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
-		
 		int result = newsService.setWrite(newsVO, session);
 		if(result > 0 && newsVO.getMenu().equals("disease")) {
 			mv.setViewName("redirect:./disease");
@@ -149,7 +151,7 @@ public class NewsController {
 	public ModelAndView diseaseUpdate(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		NewsVO newsVO= newsService.getSelect(num);
-		mv.addObject("vo", newsVO);
+		mv.addObject("newsVO", newsVO);
 		mv.addObject("menu", "disease");
 		mv.setViewName("news/newsUpdate");
 		return mv;
@@ -244,6 +246,7 @@ public class NewsController {
 		//Update
 		@RequestMapping(value = "exerciseUpdate", method = RequestMethod.GET)
 		public ModelAndView exerciseUpdate(int num) throws Exception{
+			
 			ModelAndView mv = new ModelAndView();
 			NewsVO newsVO = newsService.getSelect(num);
 			mv.addObject("newsVO", newsVO);
