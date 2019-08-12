@@ -79,6 +79,7 @@
 	<context:component-scan base-package="com.hospital.admin"/>
 	<context:component-scan base-package="com.hospital.qna.comments.like"/>
 	<context:component-scan base-package="com.hospital.qna.comments.hate"/>
+	<context:component-scan base-package="com.hospital.treatbreakdown"/>
 	
 	<!--뭐하는건지 정확히 기억안남  -->
 	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>

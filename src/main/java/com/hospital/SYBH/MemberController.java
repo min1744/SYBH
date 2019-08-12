@@ -23,6 +23,8 @@ import com.hospital.member.MemberVO;
 import com.hospital.member.mail.MailVO;
 import com.hospital.pay.PayService;
 import com.hospital.pay.PayVO;
+import com.hospital.treatbreakdown.TreatBreakDownService;
+import com.hospital.treatbreakdown.TreatBreakDownVO;
 import com.hospital.util.PageMaker;
 import com.hospital.member.captcha.VerifyRecaptcha;
 import com.hospital.member.kakao.KakaoMemberVO;
@@ -37,6 +39,8 @@ public class MemberController {
 	private PayService payService;
 	@Inject
 	private CheckUpService checkUpService;
+	@Inject
+	private TreatBreakDownService treatBreakDownService;
 	
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
@@ -68,10 +72,18 @@ public class MemberController {
 		return mv;
 	}
 	
-	//현아 작성 (일반 진료 예약내역 jsp 잘 나오는지 테스트용)
+	//일반진료 예약내역
 	@RequestMapping(value = "memberNomal", method = RequestMethod.GET)
-	public ModelAndView memberNomal(ModelAndView mv) throws Exception {
-		mv.addObject("board", "nomal");
+	public ModelAndView memberNomal(PageMaker pageMaker, TreatBreakDownVO treatBreakDownVO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		treatBreakDownVO.setId(id);
+		List<TreatBreakDownVO> list = treatBreakDownService.getOneList(pageMaker, treatBreakDownVO);
+		int totalCount = treatBreakDownService.getOneTotalCount(treatBreakDownVO);
+		mv.addObject("list",list);
+		mv.addObject("pager",pageMaker);
+		mv.addObject("count",totalCount);
+		mv.addObject("board", "Nomal");
 		mv.setViewName("member/memberBreakdown");
 		return mv;
 			

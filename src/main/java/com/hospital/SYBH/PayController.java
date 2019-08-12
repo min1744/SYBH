@@ -40,7 +40,6 @@ public class PayController {
 	@RequestMapping(value = "donationWrite",method = RequestMethod.POST)
 	@ResponseBody
 	public int setWrite(PayVO payVO)throws Exception{
-		
 		return payService.setWrite(payVO);
 	}
 	

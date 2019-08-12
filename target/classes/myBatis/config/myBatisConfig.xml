@@ -24,5 +24,6 @@
 		<typeAlias type="com.hospital.member.unserviceability.UnserviceabilityVO" alias="UnserviceabilityVO"/>
 		<typeAlias type="com.hospital.qna.comments.like.LikeVO" alias="LikeVO"/>
 		<typeAlias type="com.hospital.qna.comments.hate.HateVO" alias="HateVO"/>
+		<typeAlias type="com.hospital.treatbreakdown.TreatBreakDownVO" alias="TreatBreakDownVO"/>
 	</typeAliases>
 </configuration>

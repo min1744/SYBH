@@ -153,7 +153,8 @@
 				//진료과 불러오기
 				med_office = $('#med'+index).attr('title');
 				$('#off').html(med_office);
-				
+				var docnum = $("#name"+index).attr('data-toggle');
+				$('#docnum').val(docnum);
 			});
 			var date ='';
 			$('.doctor').click(function(){
@@ -189,10 +190,33 @@
 				var result = confirm('[예약정보]\n환자명 : ${memberVO.name}\n병원/진료과 : '+name+'\n의료진 : '+med_office+'\n예약시간 : '+reserve+'\n예약하시겠습니까?');
 				
 				if(result) {
-					location.href="#";
-					
+					var id = '${memberVO.id}';
+					var num = $('#docnum').val();
+					var status = 0;
+					var doc = $('#doc').text();
+					var off = $('#off').text();
+					var contents = doc+"/"+off;
+					var reserve_date = $('#ti').text();
+					$.ajax({
+						url: "../treatBreakDown/treatWrite",
+						type: "POST",
+						data: {
+							id : id,
+							num : num,
+							status : status,
+							contents : contents,
+							reserve_date : reserve_date
+						},
+						success: function(data){
+							if(data=='1'){
+								console.log(data);
+								alert('예약이 완료되었습니다.');
+								location.href="../member/memberNomal";
+							}
+						}
+					});//ajax
 				} else {
-					
+					alert('예약이 취소되었습니다.');
 				}
 				
 			});	
@@ -254,7 +278,7 @@
 						</div>
 						
 						<div class="list_info">
-							<h2 class="name" id="name${i.index}"  title="${list.name}">${list.name }</h2>
+							<h2 class="name" id="name${i.index}"  title="${list.name}" data-toggle="${list.num }">${list.name }</h2>
 							<p class="med_office" id="med${i.index}" title="${list.med_office }">진료과</p><span>${list.med_office}</span><br>
 							<p class="pro_field">전문분야</p><span>${list.pro_field }</span>
 						</div>
@@ -280,7 +304,7 @@
 					<p id="user_office">병원/진료과 : </p><span id="off"></span><br>
 					<p id="user_doctor">의료진 : </p><span id="doc"></span><br>
 					<p id="user_date">진료일시 :</p><span id="ti"></span><br>
-											
+					<input type="hidden" id="docnum">						
 				</div>
 				
 			</div>
@@ -335,7 +359,7 @@
 			</div>
 			
 			<!-- 예약확인 버튼 -->
-			<a href="" id="reserve_ok">예약하기</a>
+			<button type="submit" id="reserve_ok">예약하기</button>
 				
 			
 			
