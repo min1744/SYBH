@@ -33,6 +33,11 @@ public class AdminDAO {
 		return sqlSession.selectList(NAMESPACE+"getRegDate", year);
 	}
 	
+	//결제 날짜 모두 select하기
+	public List<Date> getPayDate(int year) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getPayDate", year);
+	}
+	
 	//회원 관리(삭제)
 	public int setDelete(List<String> list) throws Exception{
 		return sqlSession.delete(NAMESPACE+"setDeletes", list);
@@ -71,5 +76,10 @@ public class AdminDAO {
 	//후원을 제외한 earnings 구하기
 	public List<Integer> getEarnings(int year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getEarnings", year);
+	}
+	
+	// 총 후원 금액 구하기 구하기
+	public List<Integer> getDonations(int year) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getDonations", year);
 	}
 }

@@ -104,12 +104,12 @@
             <a class="collapse-item" href="#">운동 정보 관리</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">NOTICE:</h6>
-            <a class="collapse-item" href="#">공지사항 관리</a>
+            <a class="collapse-item" href="../admin/${board}List">공지사항 관리</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">QNA:</h6>
-            <a class="collapse-item" href="#">건의합니다 관리</a>
-            <a class="collapse-item" href="#">칭찬합니다 관리</a>
-            <a class="collapse-item" href="#">질문과답변 관리</a>
+            <a class="collapse-item" href="../admin/${board}List">건의합니다 관리</a>
+            <a class="collapse-item" href="../admin/${board}List">칭찬합니다 관리</a>
+            <a class="collapse-item" href="../admin/${board}List">질문과답변 관리</a>
             <div class="collapse-divider"></div>
           </div>
         </div>

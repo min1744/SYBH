@@ -32,6 +32,19 @@ var monthData = [];
 $(".monthData").each(function() {
 	monthData.push($(this).val());
 });
+
+/*$('#membership_btn').click(function() {
+	$(".monthData").each(function() {
+		monthData.push($(this).val());
+	});
+});
+
+$('#earnings_btn').click(function() {
+	$(".monthData").each(function() {
+		monthData.push($(this).prop("title"));
+	});
+});*/
+
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
