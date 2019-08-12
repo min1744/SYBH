@@ -312,7 +312,7 @@
 					id: likeId
 				},
 				success:function(data) {
-					
+					alert(data);
 					hateResult = data;
 					alert(heateResult);
 				}
