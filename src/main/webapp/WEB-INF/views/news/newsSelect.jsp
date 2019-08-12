@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -19,6 +19,7 @@
 				post({'num':num, 'menu':menu});
 			}
 		});
+
 		//post방식으로 넘기기
 		function post(params){
 			var form = document.createElement("form");
@@ -46,9 +47,11 @@
 		        $('#counter').html("(200 / 500)");
 		    }
 		});
-		
-		
+
 	});
+
+
+
 
 </script>
 </head>
@@ -149,155 +152,22 @@
 						<span id="c_count_title">전체댓글</span><span id="c_count">1,000</span>
 					</div>
 					
-					
-					
 					<div id="c_write_box">
+					
 						<p id="c_writer">hhhh</p>
-						<textarea class="c_area" placeholder="주제와 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
-						<span id="counter">(0 / 500)</span>
+						<textarea placeholder="주제와 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다.">
+						</textarea>
 					</div>
-					
-					
 					
 					<div id="c_btn">
 						<button id="comment_btn">등록</button>
 					</div>
 					
 				</div>
-				
-				
-					<!-- foreach 돌릴곳 -->
-					<div class="c_list_box">
-					
-					<!-- 작성자/수정/삭제 -->
-					<div class="c_list_top">
-						<p class="c_list_writer">백민근&nbsp;<span>(qora****)</span></p>
-						
-						<div class="c_list_ud">
-							<ul>
-								<li><a href="" class="c_update">수정</a></li>
-								<li>│</li>
-								<li><a href="" class="c_delete">삭제</a></li>
-							</ul>
-						</div>
-					</div>
-						
-						<img alt="best" src="../resources/images/best.png" class="best_icon">
-						<span class="c_contents">
-						아..ㅠㅠ 유연이 마음 속에서 바름이는 진짜 오래전부터 스며들었었나봐.. 36화 보면 엠티 갔다가 유연이랑 바름이만 먼저 돌아오는데, 바름이가 유연이한테 '로체'미니 피규어 주고 나서 잠이 드는데, 바름이 머리가 유연이 어깨에 톡- 기대는 장면에서 나오는 유연이의 독백.'나는 이 감정을 인정할 수 없다. 너에게 재현이처럼, 나에게 너처럼, 너에게 나 역시 특별한 사람이고 싶다는 걸. 네 머리가 내 어깨에 닿기 전까진 나는 인정할 수 없었다' 유연이는 전부터 바름이가 신경쓰이고 눈에 아른거렸고, 스며들어있었는데 인정하기 싫었던거였고ㅠㅠ개인적인 생각이지만 바름이도 그 전부터 유연이가 이미 마음 속에서 스며들고 있지 않았을까- 싶음..ㅠㅠ 재현이를 좋아하고 있었지만, 자기를 챙겨주고 신경써주는 유연이를 무의식 중에 신경쓰고 있었지 않았을까- 하는 생각..ㅠㅠ 그래서 바름이 꿈 속에, 유연이가 줬던 딸기사탕도 나온거고ㅠㅠ
-						</span>
-						
-						<!-- 날짜/답글/신고 -->
-						<div class="c_list_box_bottom">
-							<div class="c_list_bottom">
-								<ul>
-									<li class="c_date">2019-07-16 00:36</li>
-									<li>│</li>
-									<li class="c_reply"><a href="">답글달기</a></li>
-									<li>│</li>
-									<li class="c_report"><a href="">신고</a></li>
-								</ul>
-						</div>
-						
-						<!-- 좋아요/싫어요 -->
-						<div class="c_like_bottom">
-							<a href="" class="like"><img alt="like" src="../resources/images/like.png">54235</a>
-							<a href="" class="hate"><img alt="hate" src="../resources/images/hate.png">24234</a>
-						</div>
-						
-						</div>
-					</div>
-					<!-- foreach -->
-					
-					<!-- foreach 돌릴곳 -->
-					<div class="c_list_box">
-					
-					<!-- 작성자/수정/삭제 -->
-					<div class="c_list_top">
-						<p class="c_list_writer">백민근&nbsp;<span>(qora****)</span></p>
-						
-						<div class="c_list_ud">
-							<ul>
-								<li><a href="" class="c_update">수정</a></li>
-								<li>│</li>
-								<li><a href="" class="c_delete">삭제</a></li>
-							</ul>
-						</div>
-					</div>
-						
-						<img alt="best" src="../resources/images/best.png" class="best_icon">
-						<span class="c_contents">
-						아..ㅠㅠ 유연이 마음 속에서 바름이는 진짜 오래전부터 스며들었었나봐.. 36화 보면 엠티 갔다가 유연이랑 바름이만 먼저 돌아오는데, 바름이가 유연이한테 '로체'미니 피규어 주고 나서 잠이 드는데, 바름이 머리가 유연이 어깨에 톡- 기대는 장면에서 나오는 유연이의 독백.'나는 이 감정을 인정할 수 없다. 너에게 재현이처럼, 나에게 너처럼, 너에게 나 역시 특별한 사람이고 싶다는 걸. 네 머리가 내 어깨에 닿기 전까진 나는 인정할 수 없었다' 유연이는 전부터 바름이가 신경쓰이고 눈에 아른거렸고, 스며들어있었는데 인정하기 싫었던거였고ㅠㅠ개인적인 생각이지만 바름이도 그 전부터 유연이가 이미 마음 속에서 스며들고 있지 않았을까- 싶음..ㅠㅠ 재현이를 좋아하고 있었지만, 자기를 챙겨주고 신경써주는 유연이를 무의식 중에 신경쓰고 있었지 않았을까- 하는 생각..ㅠㅠ 그래서 바름이 꿈 속에, 유연이가 줬던 딸기사탕도 나온거고ㅠㅠ
-						</span>
-						
-						<!-- 날짜/답글/신고 -->
-						<div class="c_list_box_bottom">
-							<div class="c_list_bottom">
-								<ul>
-									<li class="c_date">2019-07-16 00:36</li>
-									<li>│</li>
-									<li class="c_reply"><a href="">답글달기</a></li>
-									<li>│</li>
-									<li class="c_report"><a href="">신고</a></li>
-								</ul>
-						</div>
-						
-						<!-- 좋아요/싫어요 -->
-						<div class="c_like_bottom">
-							<a href="" class="like"><img alt="like" src="../resources/images/like.png">54235</a>
-							<a href="" class="hate"><img alt="hate" src="../resources/images/hate.png">24234</a>
-						</div>
-						
-						</div>
-					</div>
-					<!-- foreach -->
-					
-					<!-- foreach 돌릴곳 -->
-					<div class="c_list_box">
-					
-					<!-- 작성자/수정/삭제 -->
-					<div class="c_list_top">
-						<p class="c_list_writer">백민근&nbsp;<span>(qora****)</span></p>
-						
-						<div class="c_list_ud">
-							<ul>
-								<li><a href="" class="c_update">수정</a></li>
-								<li>│</li>
-								<li><a href="" class="c_delete">삭제</a></li>
-							</ul>
-						</div>
-					</div>
-						
-						<img alt="best" src="../resources/images/best.png" class="best_icon">
-						<span class="c_contents">
-						아..ㅠㅠ 유연이 마음 속에서 바름이는 진짜 오래전부터 스며들었었나봐.. 36화 보면 엠티 갔다가 유연이랑 바름이만 먼저 돌아오는데, 바름이가 유연이한테 '로체'미니 피규어 주고 나서 잠이 드는데, 바름이 머리가 유연이 어깨에 톡- 기대는 장면에서 나오는 유연이의 독백.'나는 이 감정을 인정할 수 없다. 너에게 재현이처럼, 나에게 너처럼, 너에게 나 역시 특별한 사람이고 싶다는 걸. 네 머리가 내 어깨에 닿기 전까진 나는 인정할 수 없었다' 유연이는 전부터 바름이가 신경쓰이고 눈에 아른거렸고, 스며들어있었는데 인정하기 싫었던거였고ㅠㅠ개인적인 생각이지만 바름이도 그 전부터 유연이가 이미 마음 속에서 스며들고 있지 않았을까- 싶음..ㅠㅠ 재현이를 좋아하고 있었지만, 자기를 챙겨주고 신경써주는 유연이를 무의식 중에 신경쓰고 있었지 않았을까- 하는 생각..ㅠㅠ 그래서 바름이 꿈 속에, 유연이가 줬던 딸기사탕도 나온거고ㅠㅠ
-						</span>
-						
-						<!-- 날짜/답글/신고 -->
-						<div class="c_list_box_bottom">
-							<div class="c_list_bottom">
-								<ul>
-									<li class="c_date">2019-07-16 00:36</li>
-									<li>│</li>
-									<li class="c_reply"><a href="">답글달기</a></li>
-									<li>│</li>
-									<li class="c_report"><a href="">신고</a></li>
-								</ul>
-						</div>
-						
-						<!-- 좋아요/싫어요 -->
-						<div class="c_like_bottom">
-							<a href="" class="like"><img alt="like" src="../resources/images/like.png">54235</a>
-							<a href="" class="hate"><img alt="hate" src="../resources/images/hate.png">24234</a>
-						</div>
-						
-						</div>
-					</div>
-					<!-- foreach -->
-					
+			
+			
 			</div>
 			<!-- 댓글 끝 -->
-			
 			
 			<div id="btn_box">
 				<a href="./newsList" id="list">목록</a>

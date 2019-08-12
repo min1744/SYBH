@@ -132,12 +132,14 @@
 	border-top: 2px solid #153F91;
 	border-bottom: 2px solid #153F91;
 	padding: 25px 0;
+	font-size: 0.9em;
 	
 }
 
 #info_list table td {
 	
 	padding: 25px 0;
+	font-size: 0.9em;
 	border-bottom: 1px solid #ddd;
 }
 
@@ -146,6 +148,18 @@
 	
 	border-bottom: 1px solid #153F91;
 }
+
+
+#info_list .cancel {
+	
+	background-color: #bd0000;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	padding: 10% 9%;
+	cursor: pointer;
+}
+
 
 
 #paging {

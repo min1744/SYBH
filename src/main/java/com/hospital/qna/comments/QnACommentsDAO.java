@@ -54,6 +54,12 @@ public class QnACommentsDAO {
 		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnACommentsVO);
 	}
 	
+	
+	//댓글 t_like 테이블의 like_check 값 확인하는 select
+	public int likeSelect(Map<String, Object> map) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"likeSelect", map);
+	}
+	
 	//댓글 좋아요 update
 	public int likeUpdate(QnACommentsVO qnACommentsVO) throws Exception {
 		return sqlSession.update(NAMESPACE+"likeUpdate", qnACommentsVO);
@@ -63,6 +69,19 @@ public class QnACommentsDAO {
 	public int likeDelete(QnACommentsVO qnACommentsVO) throws Exception {
 		return sqlSession.update(NAMESPACE+"likeDelete", qnACommentsVO);
 	}
+	
+	
+	//댓글 싫어요 update
+	public int hateUpdate(QnACommentsVO qnACommentsVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"hateUpdate", qnACommentsVO);
+	}
+		
+	//댓글 싫어요 delete
+	public int hateDelete(QnACommentsVO qnACommentsVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"hateDelete", qnACommentsVO);
+	}
+	
+	
 	
 
 }

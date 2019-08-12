@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>     
@@ -94,6 +94,7 @@
 					<tbody>
 						<c:forEach items="${list }" var="list">
 						<tr>
+
 							<td>${list.num }</td>
 							<td>${list.name }</td>
 							<td>${list.contents }</td>
@@ -103,7 +104,7 @@
 							<td id="check_status" class="check_status">
 							<c:choose>
 								<c:when test="${list.status eq 0 }">예약완료</c:when>
-								<c:when test="${list.status eq 1 }">예약취소</c:when>
+								<c:when test="${list.status eq 1 }"><button class="cancel">예약취소</button></c:when>
 								<c:when test="${list.status eq 2 }">진료완료</c:when>
 							</c:choose>
 							</td>
@@ -114,6 +115,7 @@
 								</c:when>
 								<c:otherwise><td></td></c:otherwise>
 							</c:choose>				
+
 						</tr>
 						</c:forEach>
 					</tbody>
@@ -207,7 +209,7 @@
 							<td id="check_status" class="check_status">
 							<c:choose>
 								<c:when test="${list.check_status eq 0 }">예약대기</c:when>
-								<c:when test="${list.check_status eq 1 }">예약취소</c:when>
+								<c:when test="${list.check_status eq 1 }"><button class="cancel">예약취소</button></c:when>
 								<c:when test="${list.check_status eq 2 }">검진완료</c:when>
 							</c:choose>
 							</td>

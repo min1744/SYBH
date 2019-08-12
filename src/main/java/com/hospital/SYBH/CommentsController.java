@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.qna.comments.QnACommentsService;
 import com.hospital.qna.comments.QnACommentsVO;
+import com.hospital.qna.comments.hate.HateVO;
 import com.hospital.qna.comments.like.LikeService;
 import com.hospital.qna.comments.like.LikeVO;
 import com.hospital.util.PageMaker;
@@ -37,7 +38,7 @@ public class CommentsController {
 	
 	//댓글 리스트
 	@RequestMapping(value = "commentsList", method = RequestMethod.GET)
-	public ModelAndView getList(int num, PageMaker pageMaker) throws Exception {
+	public ModelAndView getList(int num, String id, PageMaker pageMaker) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		List<QnACommentsVO> list = qnACommentsService.getList(num, pageMaker);
@@ -82,19 +83,45 @@ public class CommentsController {
 	//좋아요
 	@RequestMapping(value = "commentsLike", method = RequestMethod.POST)
 	@ResponseBody
-	public int likeUpdate(LikeVO likeVO, QnACommentsVO qnACommentsVO) throws Exception {
+	public int likeUpdate(int qcnum, int num, String id, LikeVO likeVO, QnACommentsVO qnACommentsVO) throws Exception {
 		
-		int result = qnACommentsService.likeUpdate(qnACommentsVO);
-		result = likeService.setWrtie(likeVO);
+		int result = qnACommentsService.likeUpdate(qcnum, num, id, likeVO, qnACommentsVO);
 		
 		return result;
 	}
 	
 	
+	//좋아요 like_check 값
+	@RequestMapping(value = "commentsLikeCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public int likeList(int num, String id) throws Exception {
+		
+		int like_check = qnACommentsService.likeCheck(num, id);
+			
+		return like_check;
+	}
+	
 	
 	//싫어요
+	@RequestMapping(value = "commentsHate", method = RequestMethod.POST)
+	@ResponseBody
+	public int likeUpdate(int qcnum, int num, String id, HateVO hateVO, QnACommentsVO qnACommentsVO) throws Exception {
+		
+		int result = qnACommentsService.hateUpdate(qcnum, num, id, hateVO, qnACommentsVO);
+		
+		return result;
+	}
+	
+	//좋아요 hate_check 값
+	@RequestMapping(value = "commentsHateCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public int hateList(int num, String id) throws Exception {
+			
+		int hate_check = qnACommentsService.hateCheck(num, id);
+				
+		return hate_check;
+	}
 	
 	
-	//싫어요 취소
 
 }

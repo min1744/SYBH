@@ -179,7 +179,7 @@
 			<c:when test="${menu eq 'complaint'}">
 				<ul>
 					<li>고객의 소리</li>
-					<li><a href="#" style="color:#6BB5DB;">건의합니다</a></li>
+					<li><a href="./complaint" style="color:#6BB5DB;">건의합니다</a></li>
 					<li><a href="./praise">칭찬합니다</a></li>
 					<li><a href="./qnaList">질문과답변</a></li>
 				</ul>
@@ -188,7 +188,7 @@
 				<ul>
 					<li>고객의 소리</li>
 					<li><a href="./complaint">건의합니다</a></li>
-					<li><a href="#" style="color:#6BB5DB;">칭찬합니다</a></li>
+					<li><a href="./praise" style="color:#6BB5DB;">칭찬합니다</a></li>
 					<li><a href="./qnaList">질문과답변</a></li>
 				</ul>
 			</c:when>
@@ -197,7 +197,7 @@
 					<li>고객의 소리</li>
 					<li><a href="./complaint">건의합니다</a></li>
 					<li><a href="./praise">칭찬합니다</a></li>
-					<li><a href="#" style="color:#6BB5DB;">질문과답변</a></li>
+					<li><a href="./qnaList" style="color:#6BB5DB;">질문과답변</a></li>
 				</ul>
 			</c:otherwise>
 		</c:choose>
@@ -359,6 +359,7 @@
 			
 			<c:choose>
 				<c:when test="${menu eq 'complaint'}">
+				<form action="./complaint">
 					<div id="search_box">
 						<select name="kind" id="select">
 							<option value="1">제목</option>
@@ -368,8 +369,10 @@
 						<input type="text" name="search" id="search">
 						<button id="btn">검색</button>
 					</div>
+				</form>
 				</c:when>
 				<c:when test="${menu eq 'praise'}">
+				<form action="./praise">
 					<div id="search_box">
 						<select name="kind" id="select">
 							<option value="1">제목</option>
@@ -379,8 +382,10 @@
 						<input type="text" name="search" id="search">
 						<button id="btn">검색</button>
 					</div>
+				</form>
 				</c:when>
 				<c:otherwise>
+				<form action="./qnaList">
 					<div id="search_box">
 						<select name="kind" id="select">
 							<option value="1">제목</option>
@@ -390,6 +395,7 @@
 						<input type="text" name="search" id="search">
 						<button id="btn">검색</button>
 					</div>
+				</form>
 				</c:otherwise>
 			</c:choose>
 			
