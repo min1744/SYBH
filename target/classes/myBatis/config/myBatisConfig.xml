@@ -9,6 +9,7 @@
 		<typeAlias type="java.lang.String" alias="String" />
 		<typeAlias type="java.util.List" alias="List" />
 		<typeAlias type="java.util.Date" alias="Date"/>
+		<typeAlias type="java.util.Map" alias="Map"/>
 		<typeAlias type="com.hospital.board.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.hospital.board.FileBoardVO" alias="FileBoardVO" />
 		<typeAlias type="com.hospital.file.FileVO" alias="FileVO" />
@@ -27,5 +28,7 @@
 		<typeAlias type="com.hospital.qna.comments.hate.HateVO" alias="HateVO"/>
 		<typeAlias type="com.hospital.treatbreakdown.TreatBreakDownVO" alias="TreatBreakDownVO"/>
 		<typeAlias type="com.hospital.schedule.ScheduleVO" alias="ScheduleVO"/>
+		<typeAlias type="com.hospital.admin.AccessVO" alias="AccessVO"/>
+		<typeAlias type="com.hospital.admin.AccessInfoVO" alias="AccessInfoVO"/>
 	</typeAliases>
 </configuration>

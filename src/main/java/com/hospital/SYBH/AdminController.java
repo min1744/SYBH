@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hospital.admin.AccessInfoVO;
+import com.hospital.admin.AccessVO;
 import com.hospital.admin.AdminService;
 import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
@@ -29,6 +31,8 @@ public class AdminController {
 		HashMap<String, Object> map = adminService.getData();
 		mv.addObject("allMemberCount", (Integer)map.get("allMemberCount"));
 		mv.addObject("earnings", (String)map.get("earnings"));
+		mv.addObject("earningsNum", (Long)map.get("earningsNum"));
+		mv.addObject("access_count", (Integer)map.get("access_count"));
 		mv.addObject("donations", (String)map.get("donations"));
 		mv.addObject("monthData", (int [])map.get("monthData"));
 		mv.setViewName("admin/adminIndex");
@@ -41,7 +45,8 @@ public class AdminController {
 	public ModelAndView memberNomal(ModelAndView mv) throws Exception {
 		List<MemberVO> list = adminService.getMemberList();
 		mv.addObject("list", list);
-		mv.setViewName("admin/memberNormal");
+		mv.addObject("variety", "normal");
+		mv.setViewName("admin/memberManagement");
 		
 		return mv;
 	}
@@ -77,7 +82,8 @@ public class AdminController {
 	public ModelAndView memberUnserviceability(ModelAndView mv) throws Exception {
 		List<UnserviceabilityVO> list = adminService.getUnserviceabilityList();
 		mv.addObject("list", list);
-		mv.setViewName("admin/memberUnserviceability");
+		mv.addObject("variety", "unserviceability");
+		mv.setViewName("admin/memberManagement");
 		
 		return mv;
 	}
@@ -113,6 +119,16 @@ public class AdminController {
 			mv.addObject("path", "./adminIndex");
 			mv.setViewName("common/messageMove");
 		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "memberAccessInfo", method = RequestMethod.GET)
+	public ModelAndView memberAccessInfo(ModelAndView mv) throws Exception {
+		List<AccessInfoVO> list = adminService.getAccessInfoList();
+		mv.addObject("list", list);
+		mv.addObject("variety", "accessinfo");
+		mv.setViewName("admin/memberManagement");
 		
 		return mv;
 	}

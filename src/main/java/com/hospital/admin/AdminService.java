@@ -2,6 +2,7 @@ package com.hospital.admin;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -51,10 +52,12 @@ public class AdminService {
 	
 	//member chart
 	public HashMap<String, Object> getData() throws Exception{
-		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월");
+		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
 		Date current = new Date();
 		String today = format.format(current);
 		int todayYear = Integer.parseInt(today.substring(0, today.indexOf("년")));
+		String todayMonth = today.substring(today.indexOf("년")+2, today.indexOf("월"));
+		String todayDate = today.substring(today.indexOf("월")+2, today.indexOf("일"));
 		DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 		
 		//모든 회원 수 구하기
@@ -63,11 +66,23 @@ public class AdminService {
 		
 		//annual earnings chart data
 		List<Integer> earnings = adminDAO.getEarnings(todayYear);
-		int extendedPrice = 0;
-		for(int earning:earnings) {
-			extendedPrice += earning;
+		long extendedPrice = 0;
+		for(long earning:earnings) {
+			extendedPrice += (earning/10000);
 		}
 		String e = formatter.format(extendedPrice);
+		//단위 : 만(원)
+		//총 목표 매출액 : 1조(원)
+		//온라인 목표 매출액 : 총 목표 매출액의 5%
+		extendedPrice = (long)Math.floor(extendedPrice/100000000*2/1000*100);
+		map.put("earningsNum", extendedPrice);
+		
+		//오늘 접속자 수 구하기
+		HashMap<String, String> map2 = new HashMap<String, String>();
+		map2.put("year", todayYear+"");
+		map2.put("month", todayMonth);
+		map2.put("date", todayDate);
+		int access_count = adminDAO.getAllAccessCounts(map2);
 		
 		//annual donations chart data
 		List<Integer> donations = adminDAO.getDonations(todayYear);
@@ -93,6 +108,7 @@ public class AdminService {
 			}
 		}
 		map.put("allMemberCount", allMemberCount);
+		map.put("access_count", access_count);
 		map.put("earnings", e);
 		map.put("donations", dona);
 		map.put("monthData", monthData);
@@ -163,6 +179,7 @@ public class AdminService {
 		return adminDAO.setDeleteUnserviceability(list);
 	}
 	
+	//getNoticeList
 	public HashMap<String, List> getNoticeList(PageMaker pageMaker) throws Exception{
 		pageMaker.makeRow();
 		List<BoardVO> list = noticeDAO.getList(pageMaker);
@@ -174,5 +191,10 @@ public class AdminService {
 		map.put("fixedList", fixedList);
 		
 		return map;
+	}
+	
+	//getAccessInfoList
+	public List<AccessInfoVO> getAccessInfoList() throws Exception{
+		return adminDAO.getAccessInfoList();
 	}
 }

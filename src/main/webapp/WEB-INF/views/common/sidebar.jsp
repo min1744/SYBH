@@ -71,15 +71,16 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMemberPages" aria-expanded="true" aria-controls="collapseMemberPages">
           <i class="fas fa-fw fa-folder"></i>
           <span>Member</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseMemberPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">MEMBER:</h6>
             <a class="collapse-item" href="./memberNormal">일반 회원 관리</a>
             <a class="collapse-item" href="./memberUnserviceability">차단 회원 관리</a>
+            <a class="collapse-item" href="./memberAccessInfo">회원 접근 정보 리스트</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">DOCTOR MEMBER:</h6>
             <a class="collapse-item" href="#">의사 리스트 관리</a>
@@ -88,11 +89,11 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBoardPages" aria-expanded="true" aria-controls="collapseBoardPages">
           <i class="fas fa-fw fa-folder"></i>
           <span>BOARD</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseBoardPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">RESERVE:</h6>
             <a class="collapse-item" href="#">일반진료 예약 관리</a>
@@ -104,22 +105,22 @@
             <a class="collapse-item" href="#">운동 정보 관리</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">NOTICE:</h6>
-            <a class="collapse-item" href="../admin/${board}List">공지사항 관리</a>
+            <a class="collapse-item" href="../admin/noticeList">공지사항 관리</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">QNA:</h6>
-            <a class="collapse-item" href="../admin/${board}List">건의합니다 관리</a>
-            <a class="collapse-item" href="../admin/${board}List">칭찬합니다 관리</a>
-            <a class="collapse-item" href="../admin/${board}List">질문과답변 관리</a>
+            <a class="collapse-item" href="../admin/complaint">건의합니다 관리</a>
+            <a class="collapse-item" href="../admin/praise">칭찬합니다 관리</a>
+            <a class="collapse-item" href="../admin/qnaList">질문과답변 관리</a>
             <div class="collapse-divider"></div>
           </div>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseErrorPages" aria-expanded="true" aria-controls="collapseErrorPages">
           <i class="fas fa-fw fa-folder"></i>
           <span>ERROR</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapseErrorPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Other Pages:</h6>
             <a class="collapse-item" href="#">404 Page 관리</a>

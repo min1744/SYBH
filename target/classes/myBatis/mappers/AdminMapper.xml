@@ -95,4 +95,24 @@
 	<select id="getDonations" parameterType="Integer" resultType="Integer">
 		SELECT PRICE FROM PAY WHERE CATEGORY = 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
 	</select>
+	
+	<!-- AccessInfo table insert -->
+	<insert id="setAccess" parameterType="AccessVO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Integer">
+			SELECT ACCESSINFO_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO ACCESSINFO VALUES(#{num}, #{id}, #{ip}, SYSDATE)
+	</insert>
+	
+	<!-- AccessInfo TotalCount -->
+	<select id="getAllAccessCounts" parameterType="Map" resultType="Integer">
+		SELECT COUNT(*) FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID) WHERE SUBSTR(A.REG_DATE, 1, 2) = #{year} AND SUBSTR(A.REG_DATE, 4, 2) = #{month} AND SUBSTR(A.REG_DATE, 7, 2) = #{date} AND M.GRADE != 2
+	</select>
+	
+	<!-- AccessInfo List -->
+	<select id="getAccessInfoList" resultType="AccessInfoVO">
+		SELECT A.NUM, ID, M.NAME, M.PHONE, M.EMAIL, A.IP, A.REG_DATE
+		FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID)
+		ORDER BY A.NUM DESC
+	</select>
 </mapper>

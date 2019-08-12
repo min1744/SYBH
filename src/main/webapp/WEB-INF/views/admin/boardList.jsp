@@ -1,101 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="../common/all.jsp" />
-<link href="../resources/css/noticeList.css" rel="stylesheet">
-<script type="text/javascript" src="../resources/js/board/boardList.js"></script>
+<meta charset="UTF-8">
+<title>쌍용백병원::관리자페이지::</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+ <!-- Custom fonts for this template -->
+  <link href="../resources/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
+  <!-- Custom styles for this page -->
+  <link href="../resources/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <style type="text/css">
+  	#controller_div{
+  		height: 50px;
+  	}
+  </style>
 </head>
-<body>
-	<!-- header 추가 -->
-	<c:import url="../common/header.jsp" />
-	<!-- ///////////////////////////////////////////////////////// -->
-	<!-- ---------------------- 공지사항 list ---------------------- -->
-	<!-- ///////////////////////////////////////////////////////// -->
-	<div id="board">
-		<c:choose>
-			<c:when test="${board eq 'notice'}">
-				<div id="board_title">
-					<p id="title">공지사항</p>
-					<p id="sub_title">쌍용백병원의 새로운 소식을 알려드립니다.</p>
-				</div>
-				<div id="write_btn">
-					<a href="./${board}Write" id="write">공지등록</a>
-				</div>
-			</c:when>
-			<c:when test="${board eq 'qna'}">
-				<c:choose>
-					<c:when test="${menu eq 'complaint'}">
-						<div id="board_title">
-							<p id="title">건의합니다</p>
-							<p id="sub_title">쌍용백병원을 이용하시면서 불편하신점이나 건의할 사항을 등록해 주세요.</p>
-						</div>
-					</c:when>
-					<c:when test="${menu eq 'praise'}">
-						<div id="board_title">
-							<p id="title">칭찬합니다</p>
-							<p id="sub_title">쌍용백병원을 이용하시면서 칭찬하고싶은 사항을 등록해주세요.</p>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div id="board_title">
-							<p id="title">질문과 답변</p>
-							<p id="sub_title">쌍용백병원을 이용하시면서 궁금한 사항을 등록해 주세요.</p>
-						</div>
-					</c:otherwise>
-				</c:choose>
-				<div id="write_btn">
-					<a href="./${menu}Write" id="write">글쓰기</a>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<!-- community -->
-			</c:otherwise>
-		</c:choose>
-		<div id="board_box">
-			<div id="board_nav">
-				<c:choose>
-					<c:when test="${board eq 'notice'}">
-						<ul>
-							<li>병원안내</li>
-							<li><a href="./${board}List" style="color: #6bb5db;">공지사항</a></li>
-							<li><a href="../hospital/hospitalInfo">병원소개</a></li>
-							<li><a href="../medical/medicalTeamList">의료진 소개</a></li>
-							<li><a href="../hospital/floorInfo">층별안내</a></li>
-							<li><a href="../hospital/location">오시는 길</a></li>
-						</ul>
-					</c:when>
-					<c:when test="${board eq 'qna'}">
-						<ul>
-							<li>고객의 소리</li>
-							<li><a href="./complaint">건의합니다</a></li>
-							<li><a href="./praise">칭찬합니다</a></li>
-							<li><a href="./qnaList">질문과답변</a></li>
-						</ul>
-					</c:when>
-					<c:otherwise>
-						<!-- community -->
-					</c:otherwise>
-				</c:choose>
-			</div>
-			<div id="boardList">
-				<table>
-					<thead>
-						<tr>
-							<th style="width: 95px;">번호</th>
-							<th style="width: 510px;">제목</th>
-							<th style="width: 150px;">작성일</th>
-							<th style="width: 100Px;">조회수</th>
-						</tr>
-					</thead>
-					<tbody>
-						<!-- fix -->
-						<c:choose>
+<body id="page-top">
+
+ <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <c:import url="../common/sidebar.jsp" />
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <c:import url="../common/topbar.jsp" />
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">${board} 게시판 관리</h1>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="table-responsive">
+              	<div id="controller_div">
+         			<input type="button" value="DELETE" id="delete_btn" class="btn btn-danger">
+         		</div>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th><input type="checkbox" id="checkAll"></th>
+                      <th>번호</th>
+                      <th>제목</th>
+                      <c:if test="${board ne 'notice'}">
+                      	<th>작성자</th>
+                      </c:if>
+                      <th>작성일</th>
+                      <th>조회수</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <c:choose>
 							<c:when test="${board eq qna}">
 								<c:forEach items="${list}" var="vo">
 									<tr class="position_2">
+										<td><input type="checkbox" class="check" name="num" value="${vo.num}"></td>
 										<td class="num">${vo.num}</td>
 										<td title="${vo.depth}"><c:forEach begin="1"
 												end="${vo.depth}">
@@ -120,6 +98,7 @@
 								<c:if test="${board eq 'notice'}">
 									<c:forEach items="${fixedList}" var="vo">
 										<tr class="position">
+											<td><input type="checkbox" class="check" name="num" value="${vo.num}"></td>
 											<td class="num"><img
 												src="../resources/images/notice_icon.png"></td>
 											<td class="title"><a
@@ -131,6 +110,7 @@
 								</c:if>
 								<c:forEach items="${list}" var="vo">
 									<tr class="position_2">
+										<td><input type="checkbox" class="check" name="num" value="${vo.num}"></td>
 										<td class="num">${vo.num}</td>
 										<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
 										<td class="date">${vo.reg_date}</td>
@@ -139,79 +119,126 @@
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
-					</tbody>
-				</table>
-				<div id="paging">
-					<c:choose>
-						<c:when test="${board eq 'qna'}">
-							<ul>
-								<c:if test="${pager.curBlock > 1}">
-									<li><a
-										href="./${menu}?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"
-										id="prev">◀</a></li>
-								</c:if>
-								<c:choose>
-									<c:when test="${pager.totalCount == 0 }">
-										<li><a
-											href="./${menu}?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
-									</c:when>
-									<c:otherwise>
-										<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-											var="i">
-											<li><a
-												href="./${menu}?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-								<c:if test="${pager.curBlock < pager.totalBlock}">
-									<li><a
-										href="./${menu}?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}"
-										id="next">▶</a></li>
-								</c:if>
-							</ul>
-						</c:when>
-						<c:otherwise>
-							<ul>
-								<c:if test="${pager.curBlock>1}">
-									<li>
-										<a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a>
-									</li>
-								</c:if>
-								<c:choose>
-									<c:when test="${pager.totalCount == 0 }">
-										<li>
-											<a href="./${board}List?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a>
-										</li>
-									</c:when>
-									<c:otherwise>
-										<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-											<li>
-												<a href="./${board}List?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a>
-											</li>
-										</c:forEach>
-									</c:otherwise>
-								</c:choose>
-								<c:if test="${pager.curBlock<pager.totalBlock}">
-									<li>
-										<a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a>
-									</li>
-								</c:if>
-							</ul>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<div id="search_box">
-					<select name="kind" id="select">
-						<option value="1">제목</option>
-						<option value="2">작성자</option>
-						<option value="3">내용</option>
-					</select> <input type="text" name="search" id="search">
-					<button id="btn">검색</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- footer 추가 -->
-	<c:import url="../common/footer.jsp" />
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- Bootstrap core JavaScript-->
+  <script src="../resources/js/admin/jquery.min.js"></script>
+  <script src="../resources/js/admin/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+ <script src="../resources/js/admin/jquery.easing.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="../resources/js/admin/sb-admin-2.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="../resources/js/admin/jquery.dataTables.min.js"></script>
+  <script src="../resources/js/admin/dataTables.bootstrap4.min.js"></script>
+  <!-- Page level custom scripts -->
+  <script src="../resources/js/admin/datatables-demo.js"></script>
+  <script type="text/javascript">
+    var checkMoreZero = false;
+  	$("#checkAll").click(function() {
+		var checkAll = $(this).prop("checked");
+		$(".check").prop("checked", checkAll);
+		checkMoreZero = checkAll;
+	});
+	
+	//All check control & Check More Zero
+	$(".check").click(function() {
+		var check = true;
+		checkMoreZero = false;
+		$(".check").each(function() {
+			if (!$(this).prop("checked")) {
+				check = false;
+			} else {
+				checkMoreZero = true;
+			}
+		});
+		$("#checkAll").prop("checked", check);
+	});  
+  
+  	$('#delete_btn').click(function() {
+		if(checkMoreZero){
+			var result = confirm("차단 해제 하시겠습니까?");
+			if(result){
+				var ids = [];
+				$(".check").each(function() {
+					if($(this).prop("checked")){
+						ids.push($(this).val());
+					}
+				});
+				//ajax로 배열을 전송하고자 할때 추가
+				jQuery.ajaxSettings.traditional = true;
+				
+				$.ajax({
+					url : "./memberDeleteUnserviceability",
+					type : "POST",
+					data : {
+						id : ids
+					},
+					success : function(data) {
+						data = data.trim();
+						if (data == '0') {
+							alert("차단 해제 실패");
+						} else {
+							alert("차단 해제 되었습니다.");
+							location.reload();
+						}
+					}
+				});
+			}
+		} else {
+			alert("선택된 것이 없습니다.");
+		}
+	});
+  </script>
 </body>
 </html>
