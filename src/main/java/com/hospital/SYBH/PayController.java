@@ -40,7 +40,6 @@ public class PayController {
 	@RequestMapping(value = "donationWrite",method = RequestMethod.POST)
 	@ResponseBody
 	public int setWrite(PayVO payVO)throws Exception{
-		
 		return payService.setWrite(payVO);
 	}
 	
@@ -62,7 +61,7 @@ public class PayController {
 	public int donationTotal() throws Exception{
 		int total;
 		try {
-			total = payService.getDonationPeopleTotal();
+			total = payService.getDonationTotal();
 		} catch (Exception e) {
 			total = 0;
 		}

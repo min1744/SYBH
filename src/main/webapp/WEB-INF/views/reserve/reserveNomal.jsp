@@ -12,9 +12,12 @@
 		
 		
 		/////////////////////캘린더
+			
 		
-		 var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
+			var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
 	        var date = new Date();//today의 Date를 세어주는 역할
+	        
+	        
 	        function prevCalendar() {//이전 달
 	        // 이전 달을 today에 값을 저장하고 달력에 today를 넣어줌
 	        //today.getFullYear() 현재 년도//today.getMonth() 월  //today.getDate() 일 
@@ -30,6 +33,7 @@
 	             today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
 	             buildCalendar();//달력 cell 만들어 출력
 	        }
+	        var too ='';
 	        function buildCalendar(){//현재 달 달력 만들기
 	            var doMonth = new Date(today.getFullYear(),today.getMonth(),1);
 	            //이번 달의 첫째 날,
@@ -47,8 +51,12 @@
 	            //테이블에 정확한 날짜 찍는 변수
 	            //innerHTML : js 언어를 HTML의 권장 표준 언어로 바꾼다
 	            //new를 찍지 않아서 month는 +1을 더해줘야 한다. 
-	             tbCalendarYM.innerHTML = today.getFullYear() + "년 " + (today.getMonth() + 1) + "월"; 
-	 
+	            var month = today.getMonth()+1;
+	            if(month <10){
+	    			month = "0"+month;
+	    		}
+	             tbCalendarYM.innerHTML = today.getFullYear() + "년 " + month + "월"; 
+	 			var to = today.getFullYear()+"-"+month;
 	             /*while은 이번달이 끝나면 다음달로 넘겨주는 역할*/
 	            while (tbCalendar.rows.length > 2) {
 	            //열을 지워줌
@@ -71,17 +79,23 @@
 	             for (i=1; i<=lastDate.getDate(); i++) { 
 	             //1일부터 마지막 일까지 돌림
 	                  cell = row.insertCell();//열 한칸한칸 계속 만들어주는 역할
-	                  cell.innerHTML = i;//셀을 1부터 마지막 day까지 HTML 문법에 넣어줌
+	                  var day = i;
+	                  if(day<10){
+	                	  day= "0"+day;
+	                  }
+	                  too = to;
+	                  too += '-'+day;
+	                  cell.innerHTML = '<button dt-data="'+too+'" class="doctor">'+i+'</button>';//셀을 1부터 마지막 day까지 HTML 문법에 넣어줌
 	                  cnt = cnt + 1;//열의 갯수를 계속 다음으로 위치하게 해주는 역할
 	              if (cnt % 7 == 1) {/*일요일 계산*/
 	                  //1주일이 7일 이므로 일요일 구하기
 	                  //월화수목금토일을 7로 나눴을때 나머지가 1이면 cnt가 1번째에 위치함을 의미한다
-	                cell.innerHTML = "<font color=red>" + i
+	                cell.innerHTML = "<font color=red>" + '<button dt-data="'+too+'"class="doctor">'+i+'</button>'
 	                //1번째의 cell에만 색칠
 	            }    
 	              if (cnt%7 == 0){/* 1주일이 7일 이므로 토요일 구하기*/
 	                  //월화수목금토일을 7로 나눴을때 나머지가 0이면 cnt가 7번째에 위치함을 의미한다
-	                  cell.innerHTML = "<font color=#153F91>" + i
+	                  cell.innerHTML = "<font color=#153F91>" + '<button dt-data="'+too+'" class="doctor">'+i+'</button>'
 	                  //7번째의 cell에만 색칠
 	                   row = calendar.insertRow();
 	                   //토요일 다음에 올 셀을 추가
@@ -102,10 +116,21 @@
 	        ////////////////////// 캘린더 끝
 	        
 	        
-	        
-	        
 	        $(function() {
-				
+	        	var date = new Date();
+	        	var year = date.getFullYear();
+		        var month = new String(date.getMonth()+1);
+		        var day = new String(date.getDate());
+		        
+		        if(month.length == 1){ 
+		      	  month = "0" + month; 
+		      	} 
+		      	if(day.length == 1){ 
+		      	  day = "0" + day; 
+		      	} 
+		      	var today = year+"-"+month+"-"+day;
+	        	
+	        	
 	        	$('#cal_box').hide();
 	        	$('#time_box').hide();
 	        	$('#reserve_ok').hide();
@@ -128,18 +153,70 @@
 				//진료과 불러오기
 				med_office = $('#med'+index).attr('title');
 				$('#off').html(med_office);
-				
+				var docnum = $("#name"+index).attr('data-toggle');
+				$('#docnum').val(docnum);
 			});
+			var date ='';
+			$('.doctor').click(function(){
+				date = $(this).attr('dt-data');
+				$('#ti').html(date);
+			});
+			var time ='';
+			$('.time').click(function(){
+				time = $(this).val();
+				if(date ==''){
+					alert('날짜를 먼저 선택해 주세요');
+					return false;
+				}
+				$('#ti').html(date+" "+time);
+			})
+			var reserve = '';
 			$('#reserve_ok').click(function() {
+        		if(date ==''){
+        			alert('날짜를 선택해 주세요');
+        			return false;
+        		}
+        		if(date<today){
+        			alert(today +' 이후로 선택 가능합니다.');
+        			time ='';
+        			return false;
+        		}
+        		if(time ==''){
+        			alert('시간을 선택해 주세요');
+        			return false;
+        		}
+        		reserve = date+" "+time;
         		
-        		
-				var result = confirm('[예약정보]\n 환자명 : ${memberVO.name}\n 병원/진료과 : '+name+'\n 의료진 : '+med_office+'\n 예약하시겠습니까?');
+				var result = confirm('[예약정보]\n환자명 : ${memberVO.name}\n병원/진료과 : '+name+'\n의료진 : '+med_office+'\n예약시간 : '+reserve+'\n예약하시겠습니까?');
 				
 				if(result) {
-					location.href="#";
-					
+					var id = '${memberVO.id}';
+					var num = $('#docnum').val();
+					var status = 0;
+					var doc = $('#doc').text();
+					var off = $('#off').text();
+					var contents = doc+"/"+off;
+					var reserve_date = $('#ti').text();
+					$.ajax({
+						url: "../treatBreakDown/treatWrite",
+						type: "POST",
+						data: {
+							id : id,
+							num : num,
+							status : status,
+							contents : contents,
+							reserve_date : reserve_date
+						},
+						success: function(data){
+							if(data=='1'){
+								console.log(data);
+								alert('예약이 완료되었습니다.');
+								location.href="../member/memberNomal";
+							}
+						}
+					});//ajax
 				} else {
-					
+					alert('예약이 취소되었습니다.');
 				}
 				
 			});	
@@ -201,7 +278,7 @@
 						</div>
 						
 						<div class="list_info">
-							<h2 class="name" id="name${i.index}"  title="${list.name}">${list.name }</h2>
+							<h2 class="name" id="name${i.index}"  title="${list.name}" data-toggle="${list.num }">${list.name }</h2>
 							<p class="med_office" id="med${i.index}" title="${list.med_office }">진료과</p><span>${list.med_office}</span><br>
 							<p class="pro_field">전문분야</p><span>${list.pro_field }</span>
 						</div>
@@ -226,8 +303,8 @@
 					<p class="user_name">환자명 : </p><span>${memberVO.name}</span><br>
 					<p id="user_office">병원/진료과 : </p><span id="off"></span><br>
 					<p id="user_doctor">의료진 : </p><span id="doc"></span><br>
-					<p id="user_date">진료일시 :</p><span>2019-08-29 09:45</span><br>
-											
+					<p id="user_date">진료일시 :</p><span id="ti"></span><br>
+					<input type="hidden" id="docnum">						
 				</div>
 				
 			</div>
@@ -269,19 +346,19 @@
 				
 				<div id="time_box">
 					
-					<button>09:00</button>
-					<button>10:00</button>
-					<button>11:00</button>
-					<button>12:00</button>
-					<button>13:00</button>
-					<button>14:00</button>
-					<button>15:00</button>
-					<button>16:00</button>				
+					<button value="09:00" class="time">09:00</button>
+					<button value="10:00" class="time">10:00</button>
+					<button class="time">11:00</button>
+					<button class="time">12:00</button>
+					<button class="time">13:00</button>
+					<button class="time">14:00</button>
+					<button class="time">15:00</button>
+					<button class="time">16:00</button>				
 				</div>
 				
 			</div>
 			
-			<!-- 예약확인 버틈 -->
+			<!-- 예약확인 버튼 -->
 			<button type="submit" id="reserve_ok">예약하기</button>
 				
 			

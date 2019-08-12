@@ -7,7 +7,6 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/memberBreakdown.css" rel="stylesheet">
-
 </head>
 <body>
 <!-- header 추가 -->
@@ -15,7 +14,7 @@
 
 <div id="board">
 		<c:choose>
-			<c:when test="${board eq 'nomal'}">
+			<c:when test="${board eq 'Nomal'}">
 		<div id="board_title">
 			<p>진료 예약 조회</p>
 		</div>
@@ -76,51 +75,103 @@
 			<div id="info_list">
 				
 			<c:choose>
-				<c:when test="${board eq 'nomal'}">
+				<c:when test="${board eq 'Nomal'}">
 				<!-- 일반진료 예약 내역 -->
-				<p>총 게시물 : <span>0</span></p>
+				<p>총 게시물 : <span>${count }</span></p>
 			
 				<table>
 					<thead>
 						<tr>
-							<th>번호</th>
+							<th>접수번호</th>
 							<th>예약자명</th>
-							<th>진료과목/의료진</th>
-							<th>예약날짜</th>
-							<th>진료날짜</th>
+							<th>의료진/진료과목</th>
+							<th>신청일자</th>
+							<th>진료예약날짜</th>
 							<th>예약여부</th>
 							<th>처방전</th>
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${list }" var="list">
 						<tr>
-							<td>1</td>
-							<td>홍길동</td>
-							<td>이비인후과/최재혁</td>
-							<td>2019-07-30</td>
-							<td>2019-08-01-09:00</td>
-							<td>예약완료or진료완료</td>	<!-- 진료예약날짜가 지나야 진료완료 떠야함 -->
-							<td>처방전파일.pdf</td> <!-- 처방전은 진료완료일때만 뜨게끔 -->					
+							<td>${list.num }</td>
+							<td>${list.name }</td>
+							<td>${list.contents }</td>
+							<td>${list.apply_date }</td>
+							<td class="check">${list.reserve_date }</td>
+							<!-- 진료예약날짜가 지나야 진료완료 떠야함 -->
+							<td id="check_status" class="check_status">
+							<c:choose>
+								<c:when test="${list.status eq 0 }">예약완료</c:when>
+								<c:when test="${list.status eq 1 }">예약취소</c:when>
+								<c:when test="${list.status eq 2 }">진료완료</c:when>
+							</c:choose>
+							</td>
+							<!-- 처방전은 진료완료일때만 뜨게끔 -->
+							<c:choose>
+								<c:when test="${list.status eq 2 }">
+									<td>처방전파일.pdf</td> 
+								</c:when>
+								<c:otherwise><td></td></c:otherwise>
+							</c:choose>				
 						</tr>
+						</c:forEach>
 					</tbody>
+					<script type="text/javascript">
+					//한자리수일 경우 0을 채워준다. 
+					$(function(){
+					var date = new Date(); 
+					var year = date.getFullYear(); 
+					var month = new String(date.getMonth()+1); 
+					var day = new String(date.getDate()); 	
+						
+					if(month.length == 1){ 
+					  month = "0" + month; 
+					} 
+					if(day.length == 1){ 
+					  day = "0" + day; 
+					} 
+					var today = year+"-"+month+"-"+day; //오늘날짜
+					$(".check").each(function(){
+						var num = $(this).prev().prev().prev().prev().text();
+						var check_date = $(this).text();
+						var check_status = $(this).next().text().match('예약완료');
+						if(today>check_date && check_status =='예약완료' ){
+							$.ajax({
+								url:"../treatBreakDown/treatBreakDownUpdate",
+								type:"POST",
+								data:{
+									num : num,
+									status : 2
+								},success : function(data){
+									location.reload();
+								}
+							});//ajax문
+						}//if문	
+					});//each문
+					
+					});
+					
+					
+				</script>
 				</table>
 				<div id="paging">
 					<ul>
 						<c:if test="${pager.curBlock>1 }">
-						<li><a href="./member${board }?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+						<li><a href="./member${board }?curPage=${pager.startNum-1}&kind=${pager.kind}" id="prev">◀</a></li>
 						</c:if>
 						<c:choose>
 							<c:when test="${pager.totalCount < 10 }">
-								<li><a href="./member${board }?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
+								<li><a href="./member${board }?curPage=1&kind=${pager.kind}">1</a></li>
 							</c:when>
 							<c:otherwise>
 								<c:forEach begin="${pager.startNum }" end="${pager.lastNum }" var="i">
-									<li><a href="./member${board }?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+									<li><a href="./member${board }?curPage=${i}&kind=${pager.kind}">${i}</a></li>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 						<c:if test="${pager.curBlock<pager.totalBlock }">
-						<li><a href="./member${board }?curPage=${pager.lastNum+1 }&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+						<li><a href="./member${board }?curPage=${pager.lastNum+1 }&kind=${pager.kind}" id="next">▶</a></li>
 						</c:if>
 					</ul>				
 				
