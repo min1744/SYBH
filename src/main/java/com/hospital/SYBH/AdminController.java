@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hospital.admin.AdminService;
 import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
+import com.hospital.util.PageMaker;
 
 @Controller
 @RequestMapping("/admin/")
@@ -38,7 +39,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "memberNormal", method = RequestMethod.GET)
 	public ModelAndView memberNomal(ModelAndView mv) throws Exception {
-		List<MemberVO> list = adminService.getList();
+		List<MemberVO> list = adminService.getMemberList();
 		mv.addObject("list", list);
 		mv.setViewName("admin/memberNormal");
 		
@@ -95,6 +96,23 @@ public class AdminController {
 		int result = adminService.setDeleteUnserviceability(id);
 		mv.addObject("result", result);
 		mv.setViewName("common/message");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "noticeList", method = RequestMethod.GET)
+	public ModelAndView noticeList(PageMaker pageMaker, ModelAndView mv) throws Exception{
+		HashMap<String, List> map = adminService.getNoticeList(pageMaker);
+		if(map != null) {
+			mv.addObject("board", "notice");
+			mv.addObject("list", map.get("list"));
+			mv.addObject("fixedList", map.get("fixedList"));
+			mv.setViewName("admin/boardList");
+		} else {
+			mv.addObject("message", "데이터가 없습니다.");
+			mv.addObject("path", "./adminIndex");
+			mv.setViewName("common/messageMove");
+		}
 		
 		return mv;
 	}

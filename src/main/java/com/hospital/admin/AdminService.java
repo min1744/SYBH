@@ -13,9 +13,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import com.hospital.board.BoardVO;
 import com.hospital.member.MemberDAO;
 import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
+import com.hospital.notice.NoticeDAO;
+import com.hospital.notice.NoticeVO;
+import com.hospital.util.PageMaker;
 
 @Service
 public class AdminService {
@@ -23,9 +27,11 @@ public class AdminService {
 	private AdminDAO adminDAO;
 	@Inject
 	private MemberDAO memberDAO;
+	@Inject
+	private NoticeDAO noticeDAO;
 	
 	//Admin페이지 List
-	public List<MemberVO> getList() throws Exception{
+	public List<MemberVO> getMemberList() throws Exception{
 		List<MemberVO> list = adminDAO.getList();
 		for(MemberVO memberVO : list) {
 			//주민등록번호 복호화 및 뒷자리 *처리
@@ -155,5 +161,18 @@ public class AdminService {
 		List<String> list = Arrays.asList(id);
 		
 		return adminDAO.setDeleteUnserviceability(list);
+	}
+	
+	public HashMap<String, List> getNoticeList(PageMaker pageMaker) throws Exception{
+		pageMaker.makeRow();
+		List<BoardVO> list = noticeDAO.getList(pageMaker);
+		int totalCount = noticeDAO.getTotalCount(pageMaker);
+		pageMaker.makePage(totalCount);
+		List<NoticeVO> fixedList = noticeDAO.getListFix();
+		HashMap<String, List> map = new HashMap<String, List>();
+		map.put("list", list);
+		map.put("fixedList", fixedList);
+		
+		return map;
 	}
 }
