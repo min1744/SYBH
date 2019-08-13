@@ -207,29 +207,29 @@
   
   	$('#delete_btn').click(function() {
 		if(checkMoreZero){
-			var result = confirm("차단 해제 하시겠습니까?");
+			var result = confirm("삭제 하시겠습니까?");
 			if(result){
-				var ids = [];
+				var nums = [];
 				$(".check").each(function() {
 					if($(this).prop("checked")){
-						ids.push($(this).val());
+						nums.push($(this).val());
 					}
 				});
 				//ajax로 배열을 전송하고자 할때 추가
 				jQuery.ajaxSettings.traditional = true;
 				
 				$.ajax({
-					url : "./memberDeleteUnserviceability",
+					url : "./noticeDelete",
 					type : "POST",
 					data : {
-						id : ids
+						num : nums
 					},
 					success : function(data) {
 						data = data.trim();
 						if (data == '0') {
-							alert("차단 해제 실패");
+							alert("삭제 실패");
 						} else {
-							alert("차단 해제 되었습니다.");
+							alert("삭제 되었습니다.");
 							location.reload();
 						}
 					}

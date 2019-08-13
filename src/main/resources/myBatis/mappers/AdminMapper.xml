@@ -20,8 +20,8 @@
 	</select>
 	
 	<!-- 결제 날짜 모두 select -->
-	<select id="getPayDate" parameterType="Integer" resultType="Date">
-		SELECT PAY_DATE FROM PAY WHERE SUBSTR(PAY_DATE, 1, 2) = #{year}
+	<select id="getPayDate" parameterType="Integer" resultType="PayVO">
+		SELECT PAY_DATE, PRICE FROM PAY WHERE SUBSTR(PAY_DATE, 1, 2) = #{year}
 	</select>
 	
 	<!-- 회원 관리(삭제) -->

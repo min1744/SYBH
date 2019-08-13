@@ -20,6 +20,7 @@ import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
 import com.hospital.notice.NoticeDAO;
 import com.hospital.notice.NoticeVO;
+import com.hospital.pay.PayVO;
 import com.hospital.util.PageMaker;
 
 @Service
@@ -50,7 +51,7 @@ public class AdminService {
 		return list;
 	}
 	
-	//member chart
+	//Data of adminIndex
 	public HashMap<String, Object> getData() throws Exception{
 		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
 		Date current = new Date();
@@ -60,7 +61,7 @@ public class AdminService {
 		String todayDate = today.substring(today.indexOf("월")+2, today.indexOf("일"));
 		DecimalFormat formatter = new DecimalFormat("###,###,###,###");
 		
-		//모든 회원 수 구하기
+		//total membership count
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int allMemberCount = adminDAO.getAllMemberCount();
 		
@@ -77,14 +78,14 @@ public class AdminService {
 		extendedPrice = extendedPrice/(100000000*2/10000);
 		map.put("earningsNum", extendedPrice);
 		
-		//오늘 접속자 수 구하기
+		//today access count
 		HashMap<String, String> map2 = new HashMap<String, String>();
 		map2.put("year", todayYear+"");
 		map2.put("month", todayMonth);
 		map2.put("date", todayDate);
 		int access_count = adminDAO.getAllAccessCounts(map2);
 		
-		//annual donations chart data
+		//Data of annual donations
 		List<Integer> donations = adminDAO.getDonations(todayYear);
 		extendedPrice = 0;
 		for(int donation:donations) {
@@ -92,18 +93,16 @@ public class AdminService {
 		}
 		String dona = formatter.format(extendedPrice);
 		
-		int [] monthData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		//Annual earnings chart data
+		int [] monthMembershipData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		List<Date> reg_dateList = adminDAO.getRegDate(todayYear);
 		for(Date d:reg_dateList) {
 			String reg_date = format.format(d);
-			int regYear = Integer.parseInt(reg_date.substring(0, reg_date.indexOf("년")));
 			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
-			if(regYear == todayYear) {
-				for(int i = 0; i < 12; i++) {
-					if(regMonth == i+1) {
-						monthData[i] += 1;
-						break;
-					}
+			for(int i = 0; i < 12; i++) {
+				if(regMonth == i+1) {
+					monthMembershipData[i] += 1;
+					break;
 				}
 			}
 		}
@@ -111,7 +110,7 @@ public class AdminService {
 		map.put("access_count", access_count);
 		map.put("earnings", e);
 		map.put("donations", dona);
-		map.put("monthData", monthData);
+		map.put("monthMembershipData", monthMembershipData);
 		return map;
 	}
 	
@@ -196,5 +195,49 @@ public class AdminService {
 	//getAccessInfoList
 	public List<AccessInfoVO> getAccessInfoList() throws Exception{
 		return adminDAO.getAccessInfoList();
+	}
+	
+	//getMemberData
+	public int [] getMemberData() throws Exception{
+		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
+		Date current = new Date();
+		String today = format.format(current);
+		int todayYear = Integer.parseInt(today.substring(0, today.indexOf("년")));
+		int [] monthMembershipData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		List<Date> reg_dateList = adminDAO.getRegDate(todayYear);
+		for(Date d:reg_dateList) {
+			String reg_date = format.format(d);
+			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
+			for(int i = 0; i < 12; i++) {
+				if(regMonth == i+1) {
+					monthMembershipData[i] += 1;
+					break;
+				}
+			}
+		}
+		
+		return monthMembershipData;
+	}
+	
+	//getEarningsData
+	public long [] getEarningsData() throws Exception{
+		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
+		Date current = new Date();
+		String today = format.format(current);
+		int todayYear = Integer.parseInt(today.substring(0, today.indexOf("년")));
+		long [] monthEarningsData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		List<PayVO> list = adminDAO.getPayDate(todayYear);
+		for(PayVO payVO:list) {
+			String reg_date = format.format(payVO.getPay_date());
+			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
+			for(int i = 0; i < 12; i++) {
+				if(regMonth == i+1) {
+					monthEarningsData[i] += payVO.getPrice();
+					break;
+				}
+			}
+		}
+		
+		return monthEarningsData;
 	}
 }

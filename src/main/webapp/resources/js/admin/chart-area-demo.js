@@ -29,21 +29,53 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Area Chart Example
 var monthData = [];
-$(".monthData").each(function() {
+$(".monthMembershipData").each(function() {
 	monthData.push($(this).val());
 });
 
-/*$('#membership_btn').click(function() {
-	$(".monthData").each(function() {
-		monthData.push($(this).val());
+//Data of membership chart
+$('#membership_btn').click(function() {
+	$.ajax({
+		url : "./getMemberData",
+		type : "GET",
+		success : function(data) {
+			data = data.trim();
+			alert(data);
+			/*if (data == '0') {
+				alert("삭제 실패");
+			} else {
+				alert("삭제 되었습니다.");
+				location.reload();
+			}*/
+		}
 	});
 });
 
+//Data of Annual earnings chart
 $('#earnings_btn').click(function() {
-	$(".monthData").each(function() {
-		monthData.push($(this).prop("title"));
+	$.ajax({
+		url : "./getEarningsData",
+		type : "GET",
+		success : function(data) {
+			data = data.trim();
+			alert(data);
+			/*if (data == '0') {
+				alert("삭제 실패");
+			} else {
+				alert("삭제 되었습니다.");
+				location.reload();
+			}*/
+		}
 	});
-});*/
+});
+
+//Data of visitors chart
+$('#visitors_btn').click(function() {
+	$(".monthVisitorsData").each(function() {
+		monthData.push($(this).val());
+	});
+	location.reload();
+});
 
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {

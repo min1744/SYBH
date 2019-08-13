@@ -34,7 +34,7 @@ public class MemberDAOTest extends AbstractTest {
 		assertEquals(1, memberDAO.setDelete("iu"));
 	}
 	
-	@Test
+	//@Test
 	public void login() throws Exception{
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId("min1744");
@@ -42,5 +42,11 @@ public class MemberDAOTest extends AbstractTest {
 		memberVO = memberDAO.login(memberVO);
 		System.out.println(memberVO.getId());
 		System.out.println(memberVO.getPw());
+	}
+	
+	@Test
+	public void eqNull() throws Exception{
+		int [] a = {};
+		System.out.println(a);
 	}
 }

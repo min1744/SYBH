@@ -87,8 +87,8 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Annual Earnings (단위 : 만)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">￦${earnings}</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Annual Earnings</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">￦${earnings} (단위 : 만)</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-won-sign fa-2x text-gray-300"></i>
@@ -121,8 +121,9 @@
           <div class="row">
 
             <!-- Area Chart -->
-            <c:forEach items="${monthData}" var="mData">
-            	<input type="hidden" class="monthData" value="${mData}">
+            <!-- Membership data -->
+            <c:forEach items="${monthMembershipData}" var="monthMembership">
+            	<input type="hidden" class="monthMembershipData" value="${monthMembership}">
             </c:forEach>
             <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
@@ -137,8 +138,8 @@
                       <div class="dropdown-header">Variety : </div>
                       <div class="dropdown-divider"></div>
                       <button class="dropdown-item" id="membership_btn">Membership</button>
-                      <button class="dropdown-item" id="donations_btn">Donations</button>
                       <button class="dropdown-item" id="earnings_btn">Earnings</button>
+                      <button class="dropdown-item" id="visitors_btn">The Member of Visitors</button>
                     </div>
                   </div>
                 </div>
@@ -369,6 +370,5 @@
   <!-- Page level custom scripts -->
   <script src="../resources/js/admin/chart-area-demo.js"></script>
   <script src="../resources/js/admin/chart-pie-demo.js"></script>
-
 </body>
 </html>
