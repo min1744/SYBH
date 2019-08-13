@@ -30,7 +30,7 @@
   	select * from 
   	(select rownum R, N.* from
   	(select * from news
-  	 where menu=#{menu} and	menu=#{menu} and
+  	 where menu=#{menu} and	
   <choose>
   		
   		<when test="kind = 2">
@@ -48,7 +48,7 @@
   		</otherwise>
    </choose>
    		
-  	 	 like '%'|| #{pager.search} || '%'
+  	 	 like '%'||#{pager.search}||'%'
   	 	 order by num desc) N)
   	 	 where R between #{pager.startRow} and #{pager.lastRow}
   </select>
@@ -66,15 +66,12 @@
   		<when test="kind = 3">
   			 main_contents
   		</when>
-  		<when test="kind = 4">
-  			 sub_contents
-  		</when>
-  		
+  		  		
   		<otherwise>
-  			 menu
+  			sub_contents
   		</otherwise>
   </choose>
-  	like '%' || #{search} || '%'
+  	like '%'||#{search}||'%'
   	
  </select>
   

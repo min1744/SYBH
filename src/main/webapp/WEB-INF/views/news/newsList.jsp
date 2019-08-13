@@ -76,17 +76,45 @@
 			</c:when>
 		</c:choose>
 		</div>
-			
+<!-- 검색 -->			
 		<div id="newsList">
 		
-			<div id="news_search">
-				<select id="select_box">
-					<option>제목</option>
-				</select>
-				<input type="text" name="search" id="search" placeholder="검색어를 입력해주세요">
-				<button id="search_btn">검색</button>
-			</div>
-			
+		
+		
+		
+		<c:choose>
+					<c:when test="${menu eq 'disease'}">
+						<form action="./disease">
+							<div id="news_search">
+								<select id="select_box">
+									<option>제목</option>
+								</select> 
+								<input type="text" name="search" id="search" placeholder="검색어를 입력해주세요">
+								<button id="search_btn">검색</button>
+							</div>
+						</form>
+					</c:when>
+					<c:when test="${menu eq 'nutrition'}">
+						<form action="./nutrition">
+							<div id="news_search">
+								<select id="select_box">
+									<option>제목</option>
+								</select> <input type="text" name="search" id="search"	placeholder="검색어를 입력해주세요">
+								<button id="search_btn">검색</button>
+							</div>
+						</form>
+					</c:when>
+					<c:otherwise>
+						<form action="./exercise">
+							<div id="news_search">
+								<select id="select_box">
+									<option>제목</option>
+								</select> <input type="text" name="search" id="search"	placeholder="검색어를 입력해주세요">
+								<button id="search_btn">검색</button>
+							</div>
+						</form>
+					</c:otherwise>
+			</c:choose>
 			<div id="newsContents">
 			<c:choose>
 				<c:when test="${menu eq 'disease'}">
@@ -132,33 +160,77 @@
 			</c:choose>
 			</div>
 			
+<!--페이징처리 -->			
 			
+			<c:choose>
+				<c:when test="${menu eq 'disease'}">		
 				<div id="paging">
 			<ul>
 				<c:if test="${pager.curBlock>1}">
-					<li><a href="./${news}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+					<li><a href="./disease?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
 				</c:if>
-				
-				
-				<c:choose>
+					<c:choose>				
 					<c:when test="${pager.totalCount == 0 }">
-						<li><a href="./${news}List?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
+						<li><a href="./disease?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
 					</c:when>
 					<c:otherwise>
 						<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-							<li><a href="./${news}List?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+							<li><a href="./disease?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 						</c:forEach>
 					</c:otherwise>
-				</c:choose>
-				
-								
+					</c:choose>
 				<c:if test="${pager.curBlock<pager.totalBlock}">
-					<li><a href="./${news}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+					<li><a href="./disease?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
 				</c:if>
-				
-			
 				</ul>
 			</div>
+			</c:when>
+			<c:when test="${menu eq 'nutrition'}">		
+				<div id="paging">
+			<ul>
+				<c:if test="${pager.curBlock>1}">
+					<li><a href="./nutrition?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+				</c:if>
+					<c:choose>				
+					<c:when test="${pager.totalCount == 0 }">
+						<li><a href="./nutrition?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+							<li><a href="./disease?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+						</c:forEach>
+					</c:otherwise>
+					</c:choose>
+				<c:if test="${pager.curBlock<pager.totalBlock}">
+					<li><a href="./nutrition?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+				</c:if>
+				</ul>
+			</div>
+			</c:when>
+			<c:otherwise>
+			<div id="paging">
+			<ul>
+				<c:if test="${pager.curBlock>1}">
+					<li><a href="./exercise?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
+				</c:if>
+					<c:choose>				
+					<c:when test="${pager.totalCount == 0 }">
+						<li><a href="./exercise?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
+					</c:when>
+					<c:otherwise>
+						<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+							<li><a href="./exercise?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+						</c:forEach>
+					</c:otherwise>
+					</c:choose>
+				<c:if test="${pager.curBlock<pager.totalBlock}">
+					<li><a href="./exercise?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>
+				</c:if>
+				</ul>
+			 </div>
+			</c:otherwise>
+		</c:choose>
+		
 			
 			
 			
