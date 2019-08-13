@@ -208,7 +208,7 @@
                   <div class="progress mb-4">
                     <div class="progress-bar bg-danger" role="progressbar" style="width: ${allMemberCount}%" aria-valuenow="${allMemberCount}" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">Annual Earnings (Online Earnings/Total Earings : 0.2%)<span class="float-right">${earningsNum}%</span></h4>
+                  <h4 class="small font-weight-bold">Annual Earnings (Online Earnings/Total Earings : 0.02%)<span class="float-right">${earningsNum}%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar bg-warning" role="progressbar" style="width: ${earningsNum}%" aria-valuenow="${earningsNum}" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>

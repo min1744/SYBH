@@ -71,10 +71,10 @@ public class AdminService {
 			extendedPrice += (earning/10000);
 		}
 		String e = formatter.format(extendedPrice);
-		//단위 : 만(원)
-		//총 목표 매출액 : 1조(원)
-		//온라인 목표 매출액 : 총 목표 매출액의 5%
-		extendedPrice = (long)Math.floor(extendedPrice/100000000*2/1000*100);
+		//전체 매출액 목표(1조 원)의 0.02%인 200억을 기준으로 온라인 매출 퍼센트 구하기
+		// = (온라인상의 총 매출액 : 만원 단위) / (1억 * 0.02%)
+		// = 온라인상의 총 매출액 / (1조 * 0.02%)
+		extendedPrice = extendedPrice/(100000000*2/10000);
 		map.put("earningsNum", extendedPrice);
 		
 		//오늘 접속자 수 구하기
