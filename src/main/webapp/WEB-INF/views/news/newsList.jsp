@@ -76,11 +76,10 @@
 			</c:when>
 		</c:choose>
 		</div>
+	    
 <!-- 검색 -->			
 		<div id="newsList">
-		
-		
-		
+				
 		
 		<c:choose>
 					<c:when test="${menu eq 'disease'}">
@@ -115,6 +114,7 @@
 						</form>
 					</c:otherwise>
 			</c:choose>
+			
 			<div id="newsContents">
 			<c:choose>
 				<c:when test="${menu eq 'disease'}">
@@ -129,7 +129,6 @@
 				</a>
 				</c:forEach>
 				</c:when>
-				
 				
 				<c:when test="${menu eq 'nutrition'}">
 					<c:forEach items="${list}" var="nutrition">

@@ -42,7 +42,7 @@
 					<p class="news_date">${disease.reg_date}</p>
 				</a>
 				
-				<a href="./diseaseSelect" class="news">
+				<a href="./diseaseSelect?num=${disease.num}" class="news">
 					<div class="news_img">
 					<img src="../resources/images/news_all_2.jpg">
 					</div>
@@ -51,7 +51,7 @@
 					<p class="news_date">${disease.reg_date}</p>
 				</a>
 				
-				<a href="./diseaseSelect" class="news last_box">
+				<a href="./diseaseSelect?num=${disease.num}" class="news last_box">
 					<div class="news_img">
 					<img src="../resources/images/news_all_3.jpg">
 					</div>

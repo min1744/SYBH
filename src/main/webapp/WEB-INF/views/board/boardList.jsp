@@ -235,7 +235,7 @@
 								</td>
 								<td class="date">${complaint.writer}</td>
 								<td class="date">${complaint.reg_date }</td>
-								<td class="hit">${complaint.hit}</td>
+								<td class="hit">${complaint.hit}</td>	
 							</tr>
 							</c:forEach>
 						</c:when>
