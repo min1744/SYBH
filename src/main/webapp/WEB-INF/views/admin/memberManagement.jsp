@@ -114,7 +114,7 @@
          		             	<th>이름</th>
          		             	<th>핸드폰 번호</th>
          		             	<th>이메일</th>
-                      			<th>아이피 번호</th>
+                      			<th>접속 지역</th>
                       			<th>접속 날짜</th>
                     		</c:otherwise>
                     	</c:choose>
@@ -173,7 +173,7 @@
 	                      		<td>${vo.name}</td>
 	                      		<td>${vo.phone}</td>
 	                      		<td>${vo.email}</td>
-	                      		<td>${vo.ip}</td>
+	                      		<td>(${vo.country}) ${vo.location}</td>
 	                      		<td>${vo.reg_date}</td>
                  			</c:otherwise>
                  		</c:choose>

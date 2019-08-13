@@ -33,6 +33,7 @@ import com.hospital.member.kakao.KakaoMemberVO;
 import com.hospital.member.mail.MailHandler;
 import com.hospital.member.mail.MailVO;
 import com.hospital.member.mail.TempKey;
+import com.hospital.util.ApiClient;
 import com.hospital.util.PageMaker;
 
 @Transactional
@@ -60,6 +61,23 @@ public class MemberService {
 				accessVO.setId(memberVO.getId());
 				String ip = InetAddress.getLocalHost().getHostAddress();
 				accessVO.setIp(ip);
+				
+				final String accessKey = "DKXx0tuvpQ1rsg0r8YJq";
+			    final String secretKey = "2KfZA0P8lots5bvuoy5icbnAPKMCJmcNwVMe1IUF";
+			    ApiClient apiClient = new ApiClient(accessKey, secretKey);
+			    String msg = apiClient.run(ip);
+			    JSONParser jsonParser = new JSONParser();
+				JSONObject js = (JSONObject)jsonParser.parse(msg.toString());
+				JSONObject js_geoLocation = (JSONObject)js.get("geoLocation");
+				String country = (String)js_geoLocation.get("country");
+				String location = (String)js_geoLocation.get("r1") + " " + (String)js_geoLocation.get("r2") + " " + (String)js_geoLocation.get("r3");
+				double latitude = (Double)js_geoLocation.get("lat");
+				double longitude = (Double)js_geoLocation.get("long");
+				accessVO.setCountry(country);
+				accessVO.setLocation(location);
+				accessVO.setLatitude(latitude);
+				accessVO.setLongitude(longitude);
+				
 				result = adminDAO.setAccess(accessVO);
 				if(result < 1) {
 					throw new Exception();

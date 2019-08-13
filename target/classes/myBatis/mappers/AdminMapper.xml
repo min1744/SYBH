@@ -101,7 +101,17 @@
 		<selectKey keyProperty="num" order="BEFORE" resultType="Integer">
 			SELECT ACCESSINFO_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO ACCESSINFO VALUES(#{num}, #{id}, #{ip}, SYSDATE)
+		INSERT INTO ACCESSINFO
+		VALUES(
+			#{num},
+			#{id},
+			#{ip},
+			#{country},
+			#{location},
+			#{latitude},
+			#{longitude},
+			SYSDATE
+		)
 	</insert>
 	
 	<!-- AccessInfo TotalCount -->
@@ -111,7 +121,7 @@
 	
 	<!-- AccessInfo List -->
 	<select id="getAccessInfoList" resultType="AccessInfoVO">
-		SELECT A.NUM, ID, M.NAME, M.PHONE, M.EMAIL, A.IP, A.REG_DATE
+		SELECT A.NUM, ID, M.NAME, M.PHONE, M.EMAIL, A.COUNTRY, A.LOCATION, A.REG_DATE
 		FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID)
 		ORDER BY A.NUM DESC
 	</select>
