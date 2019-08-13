@@ -194,6 +194,7 @@ public class QnACommentsService {
 		map.put("id", id);
 		
 		int updateSelect = hateDAO.updateSelect(map);
+		System.out.println(updateSelect);
 		
 		return updateSelect;
 		
