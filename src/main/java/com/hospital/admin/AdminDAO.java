@@ -2,6 +2,7 @@ package com.hospital.admin;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -81,5 +82,20 @@ public class AdminDAO {
 	// 총 후원 금액 구하기 구하기
 	public List<Integer> getDonations(int year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getDonations", year);
+	}
+	
+	//AccessInfo table insert
+	public int setAccess(AccessVO accessVO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setAccess", accessVO);
+	}
+	
+	//AccessInfo TotalCount
+	public int getAllAccessCounts(Map<String, String> map) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getAllAccessCounts", map);
+	}
+	
+	//AccessInfo List
+	public List<AccessInfoVO> getAccessInfoList() throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getAccessInfoList");
 	}
 }

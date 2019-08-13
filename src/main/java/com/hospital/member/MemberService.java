@@ -3,6 +3,7 @@ package com.hospital.member;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -22,7 +24,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.hospital.admin.AccessVO;
 import com.hospital.admin.AdminDAO;
 import com.hospital.member.kakao.KakaoMemberVO;
 import com.hospital.member.mail.MailHandler;
@@ -48,6 +53,14 @@ public class MemberService {
 			memberVO = memberDAO.login(memberVO);
 			if(memberVO != null) {
 				int result = memberDAO.setLoginStatus(memberVO.getId());
+				if(result < 1) {
+					throw new Exception();
+				}
+				AccessVO accessVO = new AccessVO();
+				accessVO.setId(memberVO.getId());
+				String ip = InetAddress.getLocalHost().getHostAddress();
+				accessVO.setIp(ip);
+				result = adminDAO.setAccess(accessVO);
 				if(result < 1) {
 					throw new Exception();
 				}
