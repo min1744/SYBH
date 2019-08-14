@@ -49,10 +49,10 @@ public class NewsController {
 	//공통 write post
 	
 	@RequestMapping(value = "newsWrite", method = RequestMethod.POST)
-	public ModelAndView setWrite(NewsVO newsVO,HttpSession session,List<MultipartFile> f1)throws Exception{
+	public ModelAndView setWrite(NewsVO newsVO,HttpSession session,MultipartFile multipartFile)throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
-		int result = newsService.setWrite(newsVO, session,f1);
+		int result = newsService.setWrite(newsVO, session, multipartFile);
 		if(result > 0 && newsVO.getMenu().equals("disease")) {
 			mv.setViewName("redirect:./disease");
 		}else if(result > 0 && newsVO.getMenu().equals("nutrition")) {

@@ -80,14 +80,14 @@
  </select>
  
  <resultMap type="NewsVO" id="newsResult">
- <id property="num" column="num"/>
- <result property="title" column="title"/>
- <result property="writer" column="writer"/>
- <result property="main_contents" column="main_contents"/>
- <result property="sub_contents" column="sub_contents"/>
- <result property="reg_date" column="reg_date"/>
- <result property="hit" column="hit"/>
- <result property="menu" column="menu"/>
+	 <id property="num" column="num"/>
+	 <result property="title" column="title"/>
+	 <result property="writer" column="writer"/>
+	 <result property="main_contents" column="main_contents"/>
+	 <result property="sub_contents" column="sub_contents"/>
+	 <result property="reg_date" column="reg_date"/>
+	 <result property="hit" column="hit"/>
+	 <result property="menu" column="menu"/>
  </resultMap>
     
   </mapper>

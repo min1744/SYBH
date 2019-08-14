@@ -1,6 +1,6 @@
 package com.hospital.news.newsimages;
 
-import java.util.List;
+
 
 import javax.inject.Inject;
 

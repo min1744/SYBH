@@ -29,11 +29,14 @@ public class NewsService {
 	//write
 	public int setWrite(NewsVO newsVO, HttpSession session, MultipartFile multipartFile) throws Exception{
 		NewsImagesVO newsImagesVO = new NewsImagesVO();
+		
 		String realPath = session.getServletContext().getRealPath("/resources/file");
 		int result = newsDAO.setWrite(newsVO);
+		
 		if(result < 1) {
 			throw new Exception();
 		}
+		
 		newsImagesVO.setNum(newsVO.getNum());
 		newsImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
 		newsImagesVO.setOname(multipartFile.getOriginalFilename());
