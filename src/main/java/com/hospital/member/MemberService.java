@@ -68,16 +68,22 @@ public class MemberService {
 			    String msg = apiClient.run(ip);
 			    JSONParser jsonParser = new JSONParser();
 				JSONObject js = (JSONObject)jsonParser.parse(msg.toString());
-				JSONObject js_geoLocation = (JSONObject)js.get("geoLocation");
-				String country = (String)js_geoLocation.get("country");
-				String location = (String)js_geoLocation.get("r1") + " " + (String)js_geoLocation.get("r2") + " " + (String)js_geoLocation.get("r3");
-				double latitude = (Double)js_geoLocation.get("lat");
-				double longitude = (Double)js_geoLocation.get("long");
-				accessVO.setCountry(country);
-				accessVO.setLocation(location);
-				accessVO.setLatitude(latitude);
-				accessVO.setLongitude(longitude);
-				
+				if((String)js.get("returnCode") == "0") {
+					JSONObject js_geoLocation = (JSONObject)js.get("geoLocation");
+					String country = (String)js_geoLocation.get("country");
+					String location = (String)js_geoLocation.get("r1") + " " + (String)js_geoLocation.get("r2") + " " + (String)js_geoLocation.get("r3");
+					double latitude = (Double)js_geoLocation.get("lat");
+					double longitude = (Double)js_geoLocation.get("long");
+					accessVO.setCountry(country);
+					accessVO.setLocation(location);
+					accessVO.setLatitude(latitude);
+					accessVO.setLongitude(longitude);
+				} else {
+					accessVO.setCountry("Unknowability");
+					accessVO.setLocation("Unknowability");
+					accessVO.setLatitude(0.0);
+					accessVO.setLongitude(0.0);
+				}
 				result = adminDAO.setAccess(accessVO);
 				if(result < 1) {
 					throw new Exception();
