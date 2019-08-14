@@ -85,7 +85,6 @@
 					<li><a href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}" id="prev">◀</a></li>
 				</c:if>
 				
-				
 				<c:choose>
 					<c:when test="${pager.totalCount == 0 }">
 						<li><a href="./${board}List?curPage=1&kind=${pager.kind}&search=${pager.search}">1</a></li>
@@ -96,7 +95,6 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
-				
 								
 				<c:if test="${pager.curBlock<pager.totalBlock}">
 					<li><a href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}" id="next">▶</a></li>

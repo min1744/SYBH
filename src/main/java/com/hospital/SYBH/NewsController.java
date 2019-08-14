@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.news.NewsService;
@@ -22,6 +23,12 @@ public class NewsController {
 	
 	@Inject
 	private NewsService newsService;
+	
+	@ModelAttribute
+	public NewsVO getNewsVO() throws Exception{
+		NewsVO newsVO = new NewsVO();
+		return newsVO;
+	}
 	
 	
 		
@@ -42,10 +49,10 @@ public class NewsController {
 	//공통 write post
 	
 	@RequestMapping(value = "newsWrite", method = RequestMethod.POST)
-	public ModelAndView setWrite(NewsVO newsVO,HttpSession session)throws Exception{
+	public ModelAndView setWrite(NewsVO newsVO,HttpSession session,List<MultipartFile> f1)throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
-		int result = newsService.setWrite(newsVO, session);
+		int result = newsService.setWrite(newsVO, session,f1);
 		if(result > 0 && newsVO.getMenu().equals("disease")) {
 			mv.setViewName("redirect:./disease");
 		}else if(result > 0 && newsVO.getMenu().equals("nutrition")) {
@@ -109,7 +116,6 @@ public class NewsController {
 	//list
 	@RequestMapping(value = "disease", method = RequestMethod.GET)
 	public ModelAndView getList(PageMaker pageMaker,String menu) throws Exception {
-		
 		menu = "disease";
 		List<NewsVO> list = newsService.getList(pageMaker, menu);
 		ModelAndView mv = new ModelAndView();
@@ -160,7 +166,7 @@ public class NewsController {
 	//////////////////////////영양정보 ////////////////////
 	//list
 	@RequestMapping(value = "nutrition", method = RequestMethod.GET)
-	public ModelAndView nutritionList(PageMaker pageMaker,String menu) throws Exception {
+	public ModelAndView nutritionList(PageMaker pageMaker,String menu,String search) throws Exception {
 		
 		menu = "nutrition";
 		List<NewsVO> list=newsService.getList(pageMaker, menu);

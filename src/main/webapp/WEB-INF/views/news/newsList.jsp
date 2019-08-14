@@ -85,8 +85,8 @@
 					<c:when test="${menu eq 'disease'}">
 						<form action="./disease">
 							<div id="news_search">
-								<select id="select_box">
-									<option>제목</option>
+								<select id="select_box" name="kind">
+									<option value="1">제목</option>
 								</select> 
 								<input type="text" name="search" id="search" placeholder="검색어를 입력해주세요">
 								<button id="search_btn">검색</button>
@@ -96,9 +96,10 @@
 					<c:when test="${menu eq 'nutrition'}">
 						<form action="./nutrition">
 							<div id="news_search">
-								<select id="select_box">
-									<option>제목</option>
-								</select> <input type="text" name="search" id="search"	placeholder="검색어를 입력해주세요">
+								<select id="select_box" name="kind">
+									<option value="1">제목</option>
+								</select> 
+								<input type="text" name="search" id="search"	placeholder="검색어를 입력해주세요">
 								<button id="search_btn">검색</button>
 							</div>
 						</form>
@@ -106,9 +107,10 @@
 					<c:otherwise>
 						<form action="./exercise">
 							<div id="news_search">
-								<select id="select_box">
-									<option>제목</option>
-								</select> <input type="text" name="search" id="search"	placeholder="검색어를 입력해주세요">
+								<select id="select_box" name="kind">
+									<option value="1">제목</option>
+								</select> 
+								<input type="text" name="search" id="search"	placeholder="검색어를 입력해주세요">
 								<button id="search_btn">검색</button>
 							</div>
 						</form>
@@ -196,7 +198,7 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-							<li><a href="./disease?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+							<li><a href="./nutrition?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
 						</c:forEach>
 					</c:otherwise>
 					</c:choose>
