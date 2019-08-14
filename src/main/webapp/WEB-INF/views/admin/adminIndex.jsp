@@ -122,14 +122,26 @@
 
             <!-- Area Chart -->
             <!-- Membership data -->
-            <c:forEach items="${monthMembershipData}" var="monthMembership">
-            	<input type="hidden" class="monthMembershipData" value="${monthMembership}">
+            <c:forEach items="${monthData}" var="monthdata">
+            	<input type="hidden" class="monthData" value="${monthdata}">
             </c:forEach>
             <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Membership Overview</h6>
+                  <h6 class="m-0 font-weight-bold text-primary" id="chartName">
+                  	<%-- <c:choose>
+                  		<c:when test="">
+                  			
+                  		</c:when>
+                  		<c:when test="">
+                  			
+                  		</c:when>
+                  		<c:otherwise>
+                  		</c:otherwise>
+                  	</c:choose> --%>
+                  	Membership Overview
+                  </h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -358,14 +370,14 @@
     </div>
   </div>
 
-<!-- Bootstrap core JavaScript-->
+  <!-- Bootstrap core JavaScript-->
   <script src="../resources/js/admin/jquery.min.js"></script>
   <script src="../resources/js/admin/bootstrap.bundle.min.js"></script>
   <!-- Core plugin JavaScript-->
- <script src="../resources/js/admin/jquery.easing.min.js"></script>
+  <script src="../resources/js/admin/jquery.easing.min.js"></script>
   <!-- Custom scripts for all pages-->
   <script src="../resources/js/admin/sb-admin-2.min.js"></script>
- <!-- Page level plugins -->
+  <!-- Page level plugins -->
   <script src="../resources/js/admin/Chart.min.js"></script>
   <!-- Page level custom scripts -->
   <script src="../resources/js/admin/chart-area-demo.js"></script>

@@ -34,7 +34,7 @@ public class AdminController {
 		mv.addObject("earningsNum", (Long)map.get("earningsNum"));
 		mv.addObject("access_count", (Integer)map.get("access_count"));
 		mv.addObject("donations", (String)map.get("donations"));
-		mv.addObject("monthMembershipData", (int [])map.get("monthMembershipData"));
+		mv.addObject("monthData", (int [])map.get("monthMembershipData"));
 		mv.setViewName("admin/adminIndex");
 		
 		return mv;
@@ -135,10 +135,8 @@ public class AdminController {
 	
 	@RequestMapping(value = "getMemberData", method = RequestMethod.GET)
 	public ModelAndView getMemberData(ModelAndView mv) throws Exception {
-		int [] result = adminService.getMemberData();
-		for(int i = 0; i < result.length; i++) {
-			mv.addObject("result", result[i]);
-		}
+		List<Integer> result = adminService.getMemberData();
+		mv.addObject("result", result);
 		mv.setViewName("common/message");
 		
 		return mv;
@@ -146,7 +144,16 @@ public class AdminController {
 	
 	@RequestMapping(value = "getEarningsData", method = RequestMethod.GET)
 	public ModelAndView getEarningsData(ModelAndView mv) throws Exception {
-		long [] result = adminService.getEarningsData();
+		List<Long> result = adminService.getEarningsData();
+		mv.addObject("result", result);
+		mv.setViewName("common/message");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "getVisitorsData", method = RequestMethod.GET)
+	public ModelAndView getVisitorsData(ModelAndView mv) throws Exception {
+		List<Long> result = adminService.getEarningsData();
 		mv.addObject("result", result);
 		mv.setViewName("common/message");
 		

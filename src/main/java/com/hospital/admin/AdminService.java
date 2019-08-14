@@ -198,19 +198,22 @@ public class AdminService {
 	}
 	
 	//getMemberData
-	public int [] getMemberData() throws Exception{
+	public List<Integer> getMemberData() throws Exception{
 		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
 		Date current = new Date();
 		String today = format.format(current);
 		int todayYear = Integer.parseInt(today.substring(0, today.indexOf("년")));
-		int [] monthMembershipData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		List<Integer> monthMembershipData = new ArrayList<Integer>();
 		List<Date> reg_dateList = adminDAO.getRegDate(todayYear);
-		for(Date d:reg_dateList) {
-			String reg_date = format.format(d);
+		for(int i = 0; i < 12; i++) {
+			monthMembershipData.add(0);
+		}
+		for(int i = 0; i < reg_dateList.size(); i++) {
+			String reg_date = format.format(reg_dateList.get(i));
 			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
-			for(int i = 0; i < 12; i++) {
-				if(regMonth == i+1) {
-					monthMembershipData[i] += 1;
+			for(int j = 0; j < 12; j++) {
+				if(regMonth == j + 1) {
+					monthMembershipData.set(j, monthMembershipData.get(j) + 1);
 					break;
 				}
 			}
@@ -220,19 +223,22 @@ public class AdminService {
 	}
 	
 	//getEarningsData
-	public long [] getEarningsData() throws Exception{
+	public List<Long> getEarningsData() throws Exception{
 		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
 		Date current = new Date();
 		String today = format.format(current);
 		int todayYear = Integer.parseInt(today.substring(0, today.indexOf("년")));
-		long [] monthEarningsData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		List<Long> monthEarningsData = new ArrayList<Long>();
 		List<PayVO> list = adminDAO.getPayDate(todayYear);
-		for(PayVO payVO:list) {
-			String reg_date = format.format(payVO.getPay_date());
+		for(int i = 0; i < 12; i++) {
+			monthEarningsData.add((long)0);
+		}
+		for(int i = 0; i < list.size(); i++) {
+			String reg_date = format.format(list.get(i).getPay_date());
 			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
-			for(int i = 0; i < 12; i++) {
-				if(regMonth == i+1) {
-					monthEarningsData[i] += payVO.getPrice();
+			for(int j = 0; j < 12; j++) {
+				if(regMonth == j + 1) {
+					monthEarningsData.set(j, monthEarningsData.get(j) + list.get(i).getPrice()/10000);
 					break;
 				}
 			}

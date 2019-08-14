@@ -2,6 +2,7 @@ package com.hospital.member;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -45,8 +46,9 @@ public class MemberDAOTest extends AbstractTest {
 	}
 	
 	@Test
-	public void eqNull() throws Exception{
-		int [] a = {};
-		System.out.println(a);
+	public void test() throws Exception{
+		List<Integer> test = new ArrayList<Integer>();
+		test.add(1);
+		assertEquals(1, (int)test.get(0));
 	}
 }
