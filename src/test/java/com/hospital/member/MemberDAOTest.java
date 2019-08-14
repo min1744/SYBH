@@ -2,6 +2,7 @@ package com.hospital.member;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -34,7 +35,7 @@ public class MemberDAOTest extends AbstractTest {
 		assertEquals(1, memberDAO.setDelete("iu"));
 	}
 	
-	@Test
+	//@Test
 	public void login() throws Exception{
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId("min1744");
@@ -42,5 +43,12 @@ public class MemberDAOTest extends AbstractTest {
 		memberVO = memberDAO.login(memberVO);
 		System.out.println(memberVO.getId());
 		System.out.println(memberVO.getPw());
+	}
+	
+	@Test
+	public void test() throws Exception{
+		List<Integer> test = new ArrayList<Integer>();
+		test.add(1);
+		assertEquals(1, (int)test.get(0));
 	}
 }
