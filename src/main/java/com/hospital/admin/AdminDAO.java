@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
+import com.hospital.pay.PayVO;
 
 @Repository
 public class AdminDAO {
@@ -35,7 +36,7 @@ public class AdminDAO {
 	}
 	
 	//결제 날짜 모두 select하기
-	public List<Date> getPayDate(int year) throws Exception{
+	public List<PayVO> getPayDate(int year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getPayDate", year);
 	}
 	
