@@ -32,19 +32,18 @@
   	(select * from news
   	 where menu=#{menu} and	
   <choose>
-  		
-  		<when test="kind = 2">
-  			 writer
+  		<when test="kind = 1">
+  			 title
   		</when>
-  		<when test="kind = 3">
+  		<when test="kind = 2">
   			 main_contents
   		</when>
-  		<when test="kind = 4">
+  		<when test="kind = 3">
   			 sub_contents
   		</when>
   		
   		<otherwise>
-  			title
+  			writer
   		</otherwise>
    </choose>
    		
@@ -53,9 +52,9 @@
   	 	 where R between #{pager.startRow} and #{pager.lastRow}
   </select>
   
- <select id="getCount" parameterType="PageMaker" resultType="Integer">
+ <select id="getCount" parameterType="java.util.Map" resultType="Integer">
  	select count(num) from news
- 	where
+ 	where menu=#{menu} and
  <choose>
   		<when test="kind = 1">
   			 title
@@ -71,7 +70,7 @@
   			sub_contents
   		</otherwise>
   </choose>
-  	like '%'||#{search}||'%'
+  	like '%'||#{pager.search}||'%'
   	
  </select>
   
@@ -81,14 +80,14 @@
  </select>
  
  <resultMap type="NewsVO" id="newsResult">
- <id property="num" column="num"/>
- <result property="title" column="title"/>
- <result property="writer" column="writer"/>
- <result property="main_contents" column="main_contents"/>
- <result property="sub_contents" column="sub_contents"/>
- <result property="reg_date" column="reg_date"/>
- <result property="hit" column="hit"/>
- <result property="menu" column="menu"/>
+	 <id property="num" column="num"/>
+	 <result property="title" column="title"/>
+	 <result property="writer" column="writer"/>
+	 <result property="main_contents" column="main_contents"/>
+	 <result property="sub_contents" column="sub_contents"/>
+	 <result property="reg_date" column="reg_date"/>
+	 <result property="hit" column="hit"/>
+	 <result property="menu" column="menu"/>
  </resultMap>
     
   </mapper>

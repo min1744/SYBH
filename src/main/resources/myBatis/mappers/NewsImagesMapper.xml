@@ -6,13 +6,10 @@
   <mapper namespace="NewsImagesMapper">
   
   	<insert id="setWrite" parameterType="NewsImagesVO">
-  		<selectKey>
-  			select news_seq.currval from news where num=#{num}
+  		<selectKey keyProperty="fnum" order="BEFORE" resultType="java.lang.Integer" >
+  			select news_seq.nextval  from dual
   		</selectKey>
-  		insert into newsimages values(
-  			newsimages_seq.nextval, #{fnum},#{num},#{fname},#{oname} 
-  		)
-  		
+  		insert into newsimages values(#{fnum},#{num},#{fname},#{oname})
   	</insert>
   	
   	<update id="setUpdate" parameterType="NewsImagesVO">
@@ -23,6 +20,8 @@
   		select * from newsimages where fnum=#{fnum}
   	</select>
   	
-  	
+  	<delete id="setDelete" parameterType="Integer">
+  		delete newsimages where fnum=#{fnum}
+  	</delete>
   
   </mapper>

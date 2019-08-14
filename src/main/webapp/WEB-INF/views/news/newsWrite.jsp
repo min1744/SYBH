@@ -94,10 +94,10 @@
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">main</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="main_contents" name="main_contents"></textarea>
+ 		 <textarea class="form-control" rows="5" cols="15" id="contents" name="main_contents"></textarea>
 		</div>
 		<div class="form-group" id="box">
-			<input type="button" id="add" value="ADD FILE" class="btn btn-primary">
+			<input type="file" id="add" value="ADD FILE" name="multipartFile" class="">
 			<div id="files"></div>
 		</div>
 		<div id="write_btn">

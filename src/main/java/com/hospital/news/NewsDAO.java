@@ -22,8 +22,8 @@ public class NewsDAO {
 	private SqlSession sqlSession;
 	private static final String NAMESPACE="NewsMapper.";
 	
-	public int getTotalCount(PageMaker pageMaker) throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getCount", pageMaker);
+	public int getTotalCount(Map<String, Object> map) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getCount", map);
 	}
 	
 	public int setWrite(NewsVO newsVO) throws Exception{
