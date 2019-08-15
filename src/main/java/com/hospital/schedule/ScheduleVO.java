@@ -5,7 +5,7 @@ public class ScheduleVO {
 	private int num;
 	private String rest_date;
 	private String ddate;
-	private int dtime;
+	private String dtime;
 	public int getDnum() {
 		return dnum;
 	}
@@ -31,11 +31,12 @@ public class ScheduleVO {
 	public void setDdate(String ddate) {
 		this.ddate = ddate;
 	}
-	public int getDtime() {
+	public String getDtime() {
 		return dtime;
 	}
-	public void setDtime(int dtime) {
+	public void setDtime(String dtime) {
 		this.dtime = dtime;
 	}
+	
 	
 }
