@@ -14,14 +14,29 @@
 		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 2
 	</select>
 	
+	<!-- 의사 수 -->
+	<select id="getAllDoctorCount" resultType="Integer">
+		SELECT COUNT(*) FROM MEDICALTEAM
+	</select>
+	
+	<!-- 관리자 수 -->
+	<select id="getAllAdminCount" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE GRADE = 2
+	</select>
+	
 	<!-- 가입 날짜 모두 select -->
-	<select id="getRegDate" parameterType="Integer" resultType="Date">
+	<select id="getRegDate" parameterType="String" resultType="Date">
 		SELECT REG_DATE FROM MEMBER WHERE GRADE != 2 AND SUBSTR(REG_DATE, 1, 2) = #{year}
 	</select>
 	
 	<!-- 결제 날짜 모두 select -->
-	<select id="getPayDate" parameterType="Integer" resultType="PayVO">
+	<select id="getPayDate" parameterType="String" resultType="PayVO">
 		SELECT PAY_DATE, PRICE FROM PAY WHERE CATEGORY != 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
+	</select>
+	
+	<!-- 방문객들의 방문 날짜 모두 select -->
+	<select id="getAccessDate" parameterType="String" resultType="Date">
+		SELECT A.REG_DATE FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID) WHERE M.GRADE != 2 AND SUBSTR(A.REG_DATE, 1, 2) = #{year}
 	</select>
 	
 	<!-- 회원 관리(삭제) -->
@@ -87,12 +102,12 @@
 	</delete>
 	
 	<!-- 후원을 제외한 총 earnings 구하기 -->
-	<select id="getEarnings" parameterType="Integer" resultType="Integer">
+	<select id="getEarnings" parameterType="String" resultType="Integer">
 		SELECT PRICE FROM PAY WHERE CATEGORY != 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
 	</select>
 	
 	<!-- 총 후원 금액 구하기 -->
-	<select id="getDonations" parameterType="Integer" resultType="Integer">
+	<select id="getDonations" parameterType="String" resultType="Integer">
 		SELECT PRICE FROM PAY WHERE CATEGORY = 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
 	</select>
 	
@@ -121,8 +136,8 @@
 	
 	<!-- AccessInfo List -->
 	<select id="getAccessInfoList" resultType="AccessInfoVO">
-		SELECT A.NUM, ID, M.NAME, M.PHONE, M.EMAIL, A.COUNTRY, A.LOCATION, A.REG_DATE
-		FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID)
-		ORDER BY A.NUM DESC
+		SELECT ROWNUM NUM, A.* FROM
+		(SELECT ID, M.NAME, M.PHONE, M.EMAIL, A.COUNTRY, A.LOCATION, A.REG_DATE
+		FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID)) A
 	</select>
 </mapper>

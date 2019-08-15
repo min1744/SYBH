@@ -2,14 +2,32 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
-// Pie Chart Example
+//data
+var doughnutChartData = [];
+var member = $('#allMemberCount').val();
+var doctor = $('#allDocotrCount').val();
+var admin = $('#allAdminCount').val();
+doughnutChartData.push(member);
+doughnutChartData.push(doctor);
+doughnutChartData.push(admin);
+
+//labels
+var doughnutChartName = [];
+member = $('#allMemberCount').prop("title");
+doctor = $('#allDoctorCount').prop("title");
+admin = $('#allAdminCount').prop("title");
+doughnutChartName.push(member);
+doughnutChartName.push(doctor);
+doughnutChartName.push(admin);
+
+// Pie Chart
 var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
 	type: 'doughnut',
 	data: {
-		labels: ["Direct", "Referral", "Social"],
+		labels: doughnutChartName,
 		datasets: [{
-			data: [55, 30, 15],
+			data: doughnutChartData,
 			backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
 			hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
 			hoverBorderColor: "rgba(234, 236, 244, 1)",
