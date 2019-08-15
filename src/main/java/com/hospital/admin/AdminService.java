@@ -56,31 +56,32 @@ public class AdminService {
 		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
 		Date current = new Date();
 		String today = format.format(current);
-		int todayYear = Integer.parseInt(today.substring(0, today.indexOf("년")));
+		String todayYear = today.substring(0, today.indexOf("년"));
 		String todayMonth = today.substring(today.indexOf("년")+2, today.indexOf("월"));
 		String todayDate = today.substring(today.indexOf("월")+2, today.indexOf("일"));
-		DecimalFormat formatter = new DecimalFormat("###,###,###,###");
+		DecimalFormat formatter = new DecimalFormat("###,###,###,###,###");
 		
-		//total membership count
+		//total membership, Doctor, Admin count
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		int allMemberCount = adminDAO.getAllMemberCount();
+		int allDoctorCount = adminDAO.getAllDoctorCount();
+		int allAdminCount = adminDAO.getAllAdminCount();
 		
 		//annual earnings chart data
 		List<Integer> earnings = adminDAO.getEarnings(todayYear);
 		long extendedPrice = 0;
 		for(long earning:earnings) {
-			extendedPrice += (earning/10000);
+			extendedPrice += earning;
 		}
 		String e = formatter.format(extendedPrice);
 		//전체 매출액 목표(1조 원)의 0.02%인 200억을 기준으로 온라인 매출 퍼센트 구하기
-		// = (온라인상의 총 매출액 : 만원 단위) / (1억 * 0.02%)
 		// = 온라인상의 총 매출액 / (1조 * 0.02%)
-		extendedPrice = extendedPrice/(100000000*2/10000);
+		extendedPrice = extendedPrice/(1000000000000L*2/10000);
 		map.put("earningsNum", extendedPrice);
 		
 		//today access count
 		HashMap<String, String> map2 = new HashMap<String, String>();
-		map2.put("year", todayYear+"");
+		map2.put("year", todayYear);
 		map2.put("month", todayMonth);
 		map2.put("date", todayDate);
 		int access_count = adminDAO.getAllAccessCounts(map2);
@@ -107,6 +108,8 @@ public class AdminService {
 			}
 		}
 		map.put("allMemberCount", allMemberCount);
+		map.put("allDoctorCount", allDoctorCount);
+		map.put("allAdminCount", allAdminCount);
 		map.put("access_count", access_count);
 		map.put("earnings", e);
 		map.put("donations", dona);
@@ -202,7 +205,7 @@ public class AdminService {
 		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
 		Date current = new Date();
 		String today = format.format(current);
-		int todayYear = Integer.parseInt(today.substring(0, today.indexOf("년")));
+		String todayYear = today.substring(0, today.indexOf("년"));
 		List<Integer> monthMembershipData = new ArrayList<Integer>();
 		List<Date> reg_dateList = adminDAO.getRegDate(todayYear);
 		for(int i = 0; i < 12; i++) {
@@ -227,7 +230,7 @@ public class AdminService {
 		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
 		Date current = new Date();
 		String today = format.format(current);
-		int todayYear = Integer.parseInt(today.substring(0, today.indexOf("년")));
+		String todayYear = today.substring(0, today.indexOf("년"));
 		List<Long> monthEarningsData = new ArrayList<Long>();
 		List<PayVO> list = adminDAO.getPayDate(todayYear);
 		for(int i = 0; i < 12; i++) {
@@ -238,12 +241,37 @@ public class AdminService {
 			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
 			for(int j = 0; j < 12; j++) {
 				if(regMonth == j + 1) {
-					monthEarningsData.set(j, monthEarningsData.get(j) + list.get(i).getPrice()/10000);
+					monthEarningsData.set(j, monthEarningsData.get(j) + list.get(i).getPrice());
 					break;
 				}
 			}
 		}
 		
 		return monthEarningsData;
+	}
+	
+	//getVisitorsData
+	public List<Integer> getVisitorsData() throws Exception{
+		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
+		Date current = new Date();
+		String today = format.format(current);
+		String todayYear = today.substring(0, today.indexOf("년"));
+		List<Integer> monthVisitorsData = new ArrayList<Integer>();
+		List<Date> reg_dateList = adminDAO.getAccessDate(todayYear);
+		for(int i = 0; i < 12; i++) {
+			monthVisitorsData.add(0);
+		}
+		for(int i = 0; i < reg_dateList.size(); i++) {
+			String reg_date = format.format(reg_dateList.get(i));
+			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
+			for(int j = 0; j < 12; j++) {
+				if(regMonth == j + 1) {
+					monthVisitorsData.set(j, monthVisitorsData.get(j) + 1);
+					break;
+				}
+			}
+		}
+		
+		return monthVisitorsData;
 	}
 }
