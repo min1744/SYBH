@@ -25,10 +25,32 @@
  </delete> 
  
  <select id="newsAll" parameterType="PageMaker" resultType="NewsVO">
+	select * from 
+  	(select rownum R, N.* from
+  	(select * from news
+  	 where 	
+  <choose>
+  		<when test="kind = 1">
+  			 title
+  		</when>
+  		<when test="kind = 2">
+  			 main_contents
+  		</when>
+  		<when test="kind = 3">
+  			 sub_contents
+  		</when>
+  		
+  		<otherwise>
+  			writer
+  		</otherwise>
+   </choose>
+   		
+  	 	 like '%'||#{pager.search}||'%'
+  	 	 order by num desc) N)
+  	 	 where R between #{pager.startRow} and #{pager.lastRow}
+  </select> 	
  	
- 	
- 
- </select>
+
  
  
  
