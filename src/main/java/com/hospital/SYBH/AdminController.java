@@ -30,6 +30,8 @@ public class AdminController {
 	public ModelAndView index(ModelAndView mv) throws Exception {
 		HashMap<String, Object> map = adminService.getData();
 		mv.addObject("allMemberCount", (Integer)map.get("allMemberCount"));
+		mv.addObject("allDoctorCount", (Integer)map.get("allDoctorCount"));
+		mv.addObject("allAdminCount", (Integer)map.get("allAdminCount"));
 		mv.addObject("earnings", (String)map.get("earnings"));
 		mv.addObject("earningsNum", (Long)map.get("earningsNum"));
 		mv.addObject("access_count", (Integer)map.get("access_count"));
@@ -153,7 +155,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "getVisitorsData", method = RequestMethod.GET)
 	public ModelAndView getVisitorsData(ModelAndView mv) throws Exception {
-		List<Long> result = adminService.getEarningsData();
+		List<Integer> result = adminService.getVisitorsData();
 		mv.addObject("result", result);
 		mv.setViewName("common/message");
 		

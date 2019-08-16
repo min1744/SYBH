@@ -30,14 +30,29 @@ public class AdminDAO {
 		return sqlSession.selectOne(NAMESPACE+"getAllMemberCount");
 	}
 	
+	//의사 수
+	public int getAllDoctorCount() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getAllDoctorCount");
+	}
+	
+	//관리자 수
+	public int getAllAdminCount() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getAllAdminCount");
+	}
+	
 	//가입 날짜 모두 select하기
-	public List<Date> getRegDate(int year) throws Exception{
+	public List<Date> getRegDate(String year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getRegDate", year);
 	}
 	
 	//결제 날짜 모두 select하기
-	public List<PayVO> getPayDate(int year) throws Exception{
+	public List<PayVO> getPayDate(String year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getPayDate", year);
+	}
+	
+	//방문객들의 방문 날짜 모두 select하기
+	public List<Date> getAccessDate(String year) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getAccessDate", year);
 	}
 	
 	//회원 관리(삭제)
@@ -76,12 +91,12 @@ public class AdminDAO {
 	}
 	
 	//후원을 제외한 earnings 구하기
-	public List<Integer> getEarnings(int year) throws Exception{
+	public List<Integer> getEarnings(String year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getEarnings", year);
 	}
 	
 	// 총 후원 금액 구하기 구하기
-	public List<Integer> getDonations(int year) throws Exception{
+	public List<Integer> getDonations(String year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getDonations", year);
 	}
 	
