@@ -6,9 +6,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./adminIndex">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <img alt="logo" src="../resources/images/logo_white.png" id="top_logo">
         </div>
-        <div class="sidebar-brand-text mx-3">관리자페이지</div>
+        <!-- <div class="sidebar-brand-text mx-3">관리자페이지</div> -->
       </a>
 
       <!-- Divider -->

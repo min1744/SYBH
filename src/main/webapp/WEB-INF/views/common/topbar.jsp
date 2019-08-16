@@ -31,13 +31,13 @@
             </li>
 
             <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
+            <!-- <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
+                Counter - Alerts
                 <span class="badge badge-danger badge-counter">3+</span>
               </a>
-              <!-- Dropdown - Alerts -->
+              Dropdown - Alerts
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                   Alerts Center
@@ -77,14 +77,14 @@
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
               </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Messages -->
-            <li class="nav-item dropdown no-arrow mx-1">
+            <li class="nav-item dropdown no-arrow mx-1" style="overflow: hidden; width: 125px;">
               <a class="nav-link dropdown-toggle" href="http://tocplus007.com/consoleFrame.do;jsessionid=C2237522F111E9A226E81725066A6569?viewName=testPage1" id="messagesDropdown" role="button" target="_blank">
-                <i class="fas fa-envelope fa-fw"></i>
+                1:1 상담 관리
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">N</span>
+                <span class="badge badge-danger badge-counter" style="top:33px; right: 4px;">N</span>
               </a>
             </li>
 
