@@ -12,20 +12,21 @@
 			<ul>
 				<li><a href="../hospital/hospitalInfo">병원소개</a></li>
 				<li>│</li>
-				<li><a href="">회원약관</a></li>
+				<li><a href="../hospital/web">웹이용약관</a></li>
 				<li>│</li>
-				<li><a href="">개인정보처리방침</a></li>
+				<li><a href="../hospital/privacyList">개인정보처리방침</a></li>
 				<li>│</li>
-				<li><a href="">환자의 권리와 의무</a></li>
+				<li><a href="../hospital/patientRight">환자권리장전</a></li>
 				<li>│</li>
-				<li><a href="">비급여진료안내</a></li>			
+				<li><a href="../hospital/nonSalary">비급여진료안내</a></li>			
 			</ul>
 		</div>
 		
+		
 		<div id="footer_sns">
-			<a href=""><img alt="" src="../resources/images/t.png"></a>
-			<a href=""><img alt="" src="../resources/images/i.png"></a>
-			<a href=""><img alt="" src="../resources/images/f.png"></a>
+			<a href="https://twitter.com/myKBSMC" target="_blank"><img alt="" src="../resources/images/t.png"></a>
+			<a href="http://www.mykbsmc.com/" target="_blank"><img alt="" src="../resources/images/b.png"></a>
+			<a href="https://www.facebook.com/myKBSMC" target="_blank"><img alt="" src="../resources/images/f.png"></a>
 		</div>
 		
 		

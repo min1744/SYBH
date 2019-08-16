@@ -37,5 +37,38 @@ public class HospitalInfoController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(value = "privacyList", method = RequestMethod.GET)
+	public ModelAndView privacyList() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hospital/privacyList");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "patientRight", method = RequestMethod.GET)
+	public ModelAndView patientRight() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hospital/patientRight");
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "web", method = RequestMethod.GET)
+	public ModelAndView web() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hospital/web");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "nonSalary", method = RequestMethod.GET)
+	public ModelAndView nonSalary() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hospital/nonSalary");
+		
+		return mv;
+	}
 
 }

@@ -43,6 +43,8 @@
 						</div>
 					</div>
 					<c:choose>
+						<c:when test="${list.depth eq '1'}">
+						</c:when>
 						<c:when test="${list.depth eq '0'}">
 							<c:if test="${list.like_cnt > '30'}">
 								<img alt="best" src="../resources/images/best.png" class="best_icon">
