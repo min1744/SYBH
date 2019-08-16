@@ -369,6 +369,7 @@
 				
 			</div>
 			
+		<div id="all_select_box">
 			<div id="user_info">
 				<h3>진료 환자 정보</h3>
 				
@@ -433,7 +434,7 @@
 			
 			<!-- 예약확인 버튼 -->
 			<button type="submit" id="reserve_ok" >예약하기</button>
-				
+		</div>	
 			
 			
 		</div>
