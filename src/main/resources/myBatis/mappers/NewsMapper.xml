@@ -45,9 +45,9 @@
   		</otherwise>
    </choose>
    		
-  	 	 like '%'||#{pager.search}||'%'
+  	 	 like '%'||#{search}||'%'
   	 	 order by num desc) N)
-  	 	 where R between #{pager.startRow} and #{pager.lastRow}
+  	 	 where R between #{startRow} and #{lastRow}
   </select> 	
  	
 

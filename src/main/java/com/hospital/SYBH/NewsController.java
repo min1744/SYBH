@@ -40,10 +40,7 @@ public class NewsController {
 		mv.addObject("list", alist);
 		mv.addObject("pager", pageMaker);
 		mv.setViewName("news/newsAll");
-		for(int i = 0; i < alist.size(); i++) {
-			System.out.println(alist.get(i).getTitle());
-			System.out.println(alist.get(i).getWriter());
-		}
+		
 		
 		return mv;
 	}
