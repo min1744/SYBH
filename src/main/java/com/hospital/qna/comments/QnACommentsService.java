@@ -51,9 +51,14 @@ public class QnACommentsService {
 		return qnACommentsDAO.setUpdate(qnACommentsVO);
 	}
 	
-	//댓글 삭제
-	public int setDelete(int qcnum) throws Exception {
-		return qnACommentsDAO.setDelete(qcnum);
+	//원본 댓글 삭제
+	public int setDelete(int ref) throws Exception {
+		return qnACommentsDAO.setDelete(ref);
+	}
+	
+	//댓글 답글 삭제
+	public int replyDelete(int qcnum) throws Exception {
+		return qnACommentsDAO.replyDelete(qcnum);
 	}
 	
 	

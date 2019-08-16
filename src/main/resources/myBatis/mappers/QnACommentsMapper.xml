@@ -17,14 +17,14 @@
 		select step from QnaComments where qcnum=#{qcnum}
 	</sql>
 	
-	<!-- 답글 사전 작업 -->
+	<!-- 댓글 답글 사전 작업 -->
   <update id="setReplyUpdate" parameterType="QnACommentsVO">
   	update QnaComments set step=step+1
   	where ref=(<include refid="subRef"/>)
 	and step>(<include refid="subStep"/>)
   </update>
   
-  <!-- 답글 -->
+  <!-- 댓글 답글 insert -->
   <insert id="setReply" parameterType="QnACommentsVO">
 		insert into QnaComments values
 		(
@@ -34,6 +34,11 @@
 			1, 0, 0
 		)
 	</insert>
+	
+	<!-- 댓글 답글 delete -->
+  <delete id="replyDelete" parameterType="Integer">
+  	delete QnaComments where qcnum=#{qcnum}
+  </delete>
   
   <!-- write -->
   <insert id="setWrite" parameterType="QnACommentsVO">
@@ -63,9 +68,9 @@
   </update>
   
   
-  <!-- delete -->
+  <!-- 원본 댓글 delete -->
   <delete id="setDelete" parameterType="Integer">
-  	delete QnaComments where qcnum=#{qcnum}
+  	delete QnaComments where ref=#{ref}
   </delete>
   
   <!-- 좋아요 카운트 수정 -->

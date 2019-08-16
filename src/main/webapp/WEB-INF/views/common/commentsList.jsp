@@ -31,7 +31,12 @@
 										<li><a href="" class="c_update" title="${list.qcnum}"
 										data-toggle="modal" data-target="#myModal">수정</a></li>
 										<li>│</li>
-										<li><a href="" class="c_delete" id="${list.qcnum}">삭제</a></li>
+										<c:if test="${list.depth eq '0'}">
+										<li><a href="" class="c_delete" id="${list.ref}">삭제</a></li>
+										</c:if>
+										<c:if test="${list.depth eq '1'}">
+										<li><a href="" class="reply_delete" id="${list.qcnum}">삭제</a></li>
+										</c:if>
 									</c:when>
 								</c:choose>
 							</ul>

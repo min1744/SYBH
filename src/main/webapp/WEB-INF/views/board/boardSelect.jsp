@@ -146,7 +146,6 @@
 				},
 				success:function(data) {
 					if(data=='1') {
-						alert('등록성공');
 						location.reload();
 						getList(1);
 					} else {
@@ -172,15 +171,37 @@
 		
 		
 		
-		//댓글 삭제
+		//원본 댓글 삭제
 		$('.commentslist').on('click', '.c_delete', function() {
-			var qcnum = $(this).attr('id');
+			var ref = $(this).attr('id');
 			var check = confirm("삭제하시겠습니까?");
 			if (check == true) {
 				
 				$.ajax({
 					
 					url:"../comments/commentsDelete",
+					type:"POST",
+					data: {
+						ref : ref
+					},
+					success:function(data) {
+							location.reload();
+							getList(1); //append가 아니라 html로 덮어씌우기
+					}
+				});
+				
+			}
+		});
+		
+		//원본 댓글 삭제
+		$('.commentslist').on('click', '.reply_delete', function() {
+			var qcnum = $(this).attr('id');
+			var check = confirm("삭제하시겠습니까?");
+			if (check == true) {
+				
+				$.ajax({
+					
+					url:"../comments/commentsReplyDelete",
 					type:"POST",
 					data: {
 						qcnum : qcnum
@@ -232,7 +253,6 @@
 					contents : reContents
 				},
 				success:function(data) {
-					console.log(data);
 					if(data=='1') {
 						getList(1);
 					} else {

@@ -60,11 +60,20 @@ public class CommentsController {
 	}
 	
 	
-	//댓글 삭제
+	//원본 댓글 삭제
 	@RequestMapping(value = "commentsDelete", method = RequestMethod.POST)
 	@ResponseBody
-	public int setUpdate(int qcnum) throws Exception {
-		int result = qnACommentsService.setDelete(qcnum);
+	public int setDelete(int ref) throws Exception {
+		int result = qnACommentsService.setDelete(ref);
+		System.out.println(result);
+		return result;
+	}
+	
+	//댓글 답글 삭제
+	@RequestMapping(value = "commentsReplyDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public int replyDelete(int qcnum) throws Exception {
+		int result = qnACommentsService.replyDelete(qcnum);
 		return result;
 	}
 	
