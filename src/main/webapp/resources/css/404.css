@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#wrap {
+	
+	width: 100%;
+	overflow: hidden;
+}
+
+#error_box {
+	
+	width: 70%;
+	margin: 0 auto;
+	overflow: hidden;
+}
