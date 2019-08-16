@@ -16,8 +16,6 @@
   <!-- Custom styles for this template-->
   <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
-
-
 <body id="page-top">
 
   <!-- Page Wrapper -->
@@ -41,7 +39,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <a href="javascript:generateReport()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
           <!-- Content Row -->
@@ -71,7 +69,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Annual Donations</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">￦${donations}</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="donations">￦${donations}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-won-sign fa-2x text-gray-300"></i>
@@ -88,7 +86,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Annual Earnings</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">￦${earnings}</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="earnings">￦${earnings}</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-won-sign fa-2x text-gray-300"></i>
@@ -105,7 +103,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">The Number of Visitors(Today)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">${access_count}명</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="access_count">${access_count}명</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -163,18 +161,6 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Member Ratio</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Variety : </div>
-                      <div class="dropdown-divider"></div>
-                      <button class="dropdown-item">Action</button>
-                      <button class="dropdown-item">Another action</button>
-                      <button class="dropdown-item">Something else here</button>
-                    </div>
-                  </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -210,75 +196,63 @@
                 </div>
                 <div class="card-body">
                   <input type="hidden">
-                  <h4 class="small font-weight-bold">Membership<span class="float-right">${allMemberCount}%</span></h4>
+                  <h4 class="small font-weight-bold">Annual Membership<span class="float-right" id="annualMemberCount">${annualMemberCount}%</span></h4>
                   <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: ${allMemberCount}%" aria-valuenow="${allMemberCount}" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: ${annualMemberCount}%" aria-valuenow="${annualMemberCount}" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">Annual Earnings (Online Earnings/Total Earings : 0.02%)<span class="float-right">${earningsNum}%</span></h4>
+                  <h4 class="small font-weight-bold">Annual Earnings (Online Earnings/Total Earings : 0.02%)<span class="float-right" id="earningsNum">${earningsNum}%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar bg-warning" role="progressbar" style="width: ${earningsNum}%" aria-valuenow="${earningsNum}" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                  <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                 </div>
               </div>
 
               <!-- Color System -->
               <div class="row">
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-4 mb-4">
                   <div class="card bg-primary text-white shadow">
                     <div class="card-body">
-                      Primary
+                      Primary (50 ~ 80%)
                       <div class="text-white-50 small">#4e73df</div>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-4 mb-4">
                   <div class="card bg-success text-white shadow">
                     <div class="card-body">
-                      Success
+                      Success (100%)
                       <div class="text-white-50 small">#1cc88a</div>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-4 mb-4">
                   <div class="card bg-info text-white shadow">
                     <div class="card-body">
-                      Info
+                      Info (80 ~ 99%)
                       <div class="text-white-50 small">#36b9cc</div>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-4 mb-4">
                   <div class="card bg-warning text-white shadow">
                     <div class="card-body">
-                      Warning
+                      Warning (20 ~ 50%)
                       <div class="text-white-50 small">#f6c23e</div>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-4 mb-4">
                   <div class="card bg-danger text-white shadow">
                     <div class="card-body">
-                      Danger
+                      Danger (0 ~ 20%)
                       <div class="text-white-50 small">#e74a3b</div>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-4 mb-4">
                   <div class="card bg-secondary text-white shadow">
                     <div class="card-body">
-                      Secondary
+                      Secondary (0%)
                       <div class="text-white-50 small">#858796</div>
                     </div>
                   </div>
@@ -292,19 +266,19 @@
               <!-- Illustrations -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Pledge</h6>
                 </div>
                 <div class="card-body">
                   <div class="text-center">
                     <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="../resources/images/undraw_posting_photo.svg" alt="">
                   </div>
-                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-                  <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
+                  <p><strong>Of the People, By the People, For the People</strong></p>
+                  <p>세계는 오늘 우리가 여기 모여 무슨 말을 했는가를 별로 주목하지도, 오래 기억하지도 않겠지만 여기서 수행한 일이 어떤 것이었던가는 결코 잊지 않을 것입니다. 우리 앞에 남겨진 미완의 큰 과업을 다 하기 위해 지금 여기 이곳에 바쳐져야 하는 것은 우리들 자신입니다. 우리는 생명이라는 존엄성 앞에서 최선을 다 할 것을 굳게 다짐하겠습니다.</p>
                 </div>
               </div>
 
               <!-- Approach -->
-              <div class="card shadow mb-4">
+              <!-- <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                 </div>
@@ -312,7 +286,7 @@
                   <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
                   <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
                 </div>
-              </div>
+              </div> -->
 
             </div>
           </div>
@@ -327,7 +301,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>COPYRIGHT©1996-2019 BY SSANGYONG MEDICAL CENTER. ALL RIGHTS RESERVED.</span>
           </div>
         </div>
       </footer>
@@ -375,5 +349,11 @@
   <!-- Page level custom scripts -->
   <script src="../resources/js/admin/chart-area-demo.js"></script>
   <script src="../resources/js/admin/chart-pie-demo.js"></script>
+  
+  <!-- jsPDF -->
+  <script type="text/javascript" src="../resources/js/admin/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../resources/js/admin/jquery-ui-1.8.17.custom.min.js"></script>
+  <script type="text/javascript" src="../resources/js/admin/jspdf.debug.js"></script>
+  <script type="text/javascript" src="../resources/js/admin/basic.js"></script>
 </body>
 </html>

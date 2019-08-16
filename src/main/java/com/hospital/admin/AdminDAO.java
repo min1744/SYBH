@@ -26,6 +26,11 @@ public class AdminDAO {
 	}
 	
 	//관리자를 제외한 모든 회원들의 수
+	public int getAnnualMemberCount(String year) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getAnnualMemberCount", year);
+	}
+	
+	//관리자를 제외한 모든 회원들의 수
 	public int getAllMemberCount() throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getAllMemberCount");
 	}

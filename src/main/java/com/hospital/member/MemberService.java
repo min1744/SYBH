@@ -5,16 +5,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -24,8 +19,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.hospital.admin.AccessVO;
 import com.hospital.admin.AdminDAO;
@@ -34,7 +27,6 @@ import com.hospital.member.mail.MailHandler;
 import com.hospital.member.mail.MailVO;
 import com.hospital.member.mail.TempKey;
 import com.hospital.util.ApiClient;
-import com.hospital.util.PageMaker;
 
 @Transactional
 @Service
