@@ -137,7 +137,6 @@
 	        	
 	        	$('.select_btn').click(function() {
 					$('#cal_box').show();
-					$('#time_box').show();
 					$('#reserve_ok').show();
 				});
 	        	
@@ -161,8 +160,34 @@
 					data:{
 						num:docnum
 					},success: function(data) {
+						//var str = JSON.stringify(data);
+						//var list = $.parseJSON(data);
+						$.each(data,function(){
+							if(this["ddate"] != null){						
+							var str = this["ddate"].split(' ');//일정표를 파싱
+							
+							$('.doctor').each(function(){ //휴진날짜, 진료 날짜를 먼저 찾음(위치)
+								var dta = $(this).attr('dt-data');
+								
+								if(dta == str[0]){ //진료날짜와 캘린더에서 일치하는 버튼 찾음
+									$('.time').each(function(){
+										var time = $(this).val();
+										
+										if(time == str[1].substring(0,5)){ //버튼 의 시간을 찾아서 hidden 클래스 추가
+											$(this).hide();
+											
+										}
+									});
+								}
+							});
+							
+							}
+							
+						});
+						//console.log(data);
 						
-						console.log(data);
+						
+						
 					}
 				});//ajax
 			});
@@ -173,6 +198,8 @@
 				
 				date = $(this).attr('dt-data');
 				$('#ti').html(date);
+				$('#time_box').show();
+
 			});
 			var time ='';
 			$('.time').click(function(){
@@ -361,18 +388,18 @@
 					
 					<button value="09:00" class="time">09:00</button>
 					<button value="10:00" class="time">10:00</button>
-					<button class="time">11:00</button>
-					<button class="time">12:00</button>
-					<button class="time">13:00</button>
-					<button class="time">14:00</button>
-					<button class="time">15:00</button>
-					<button class="time">16:00</button>				
+					<button value="11:00" class="time">11:00</button>
+					<button value="12:00" class="time">12:00</button>
+					<button value="13:00" class="time">13:00</button>
+					<button value="14:00" class="time">14:00</button>
+					<button value="15:00" class="time">15:00</button>
+					<button value="16:00" class="time">16:00</button>				
 				</div>
 				
 			</div>
 			
 			<!-- 예약확인 버튼 -->
-			<button type="submit" id="reserve_ok">예약하기</button>
+			<button type="submit" id="reserve_ok" >예약하기</button>
 				
 			
 			
@@ -395,8 +422,8 @@
 	        </div>
 	        <div class="modal-body">
 	        	<div class="modal_title_box">
-		        	<p class="modal_med_office_title">${list.med_office}</p>
-		        	<h2 class="modal_med_office">${list.name } 교수</h2>
+		        	<p class="modal_med_office_title" id="med${i.index }" id="med${i.index}" title="${list.med_office }">${list.med_office}</p>
+		        	<h2 class="modal_med_office" id="name${i.index }" title="${list.name}" data-toggle="${list.num }">${list.name } 교수</h2>
 		        </div>
 	        		<hr>
 				
@@ -409,7 +436,7 @@
 					<p class="modal_pro_field">${list.pro_field }</p>
 				</div>	
 				
-				<a href="../reserve/reserveNomal" id="reserve_btn">진료예약</a>
+				<button id="reserve_btn" data-num="${i.index }" class="reserve_btn class" data-dismiss="modal">진료예약</button>
 				
 				<div class="modal_career">
 					
@@ -439,6 +466,21 @@
     	</div>
  	 </div>
  	 </c:forEach>
+ 	 <script type="text/javascript">
+ 	 	$(function(){
+ 	 		$('.reserve_btn').click(function(){
+ 	 			var index = $(this).attr('data-num');
+				//의사 이름 불러오기
+				name = $("#name"+index).attr('title');
+				$('#doc').html(name);
+				//진료과 불러오기
+				med_office = $('#med'+index).attr('title');
+				$('#off').html(med_office);
+				$('#cal_box').show();
+				$('#reserve_ok').show();
+ 	 		});
+ 	 	});
+ 	 </script>
  	 <!-- ---------- -->
 
 <!-- footer 추가 -->
