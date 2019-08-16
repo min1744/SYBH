@@ -37,6 +37,7 @@ public class AdminController {
 		mv.addObject("access_count", (Integer)map.get("access_count"));
 		mv.addObject("donations", (String)map.get("donations"));
 		mv.addObject("monthData", (int [])map.get("monthMembershipData"));
+		mv.addObject("annualMemberCount", (Integer)map.get("annualMemberCount"));
 		mv.setViewName("admin/adminIndex");
 		
 		return mv;
@@ -160,5 +161,10 @@ public class AdminController {
 		mv.setViewName("common/message");
 		
 		return mv;
+	}
+	
+	@RequestMapping(value = "downloadGenerateReport", method = RequestMethod.GET)
+	public String jsPDF() throws Exception{
+		return "common/jsPDF";
 	}
 }

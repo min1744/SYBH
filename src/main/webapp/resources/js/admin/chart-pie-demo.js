@@ -2,23 +2,23 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
-//data
-var doughnutChartData = [];
-var member = $('#allMemberCount').val();
-var doctor = $('#allDocotrCount').val();
-var admin = $('#allAdminCount').val();
-doughnutChartData.push(member);
-doughnutChartData.push(doctor);
-doughnutChartData.push(admin);
-
 //labels
 var doughnutChartName = [];
-member = $('#allMemberCount').prop("title");
-doctor = $('#allDoctorCount').prop("title");
-admin = $('#allAdminCount').prop("title");
+var member = $('#allMemberCount').prop("title");
+var doctor = $('#allDoctorCount').prop("title");
+var admin = $('#allAdminCount').prop("title");
 doughnutChartName.push(member);
 doughnutChartName.push(doctor);
 doughnutChartName.push(admin);
+
+//data
+var doughnutChartData = [];
+member = $('#allMemberCount').val();
+doctor = $('#allDoctorCount').val();
+admin = $('#allAdminCount').val();
+doughnutChartData.push(member);
+doughnutChartData.push(doctor);
+doughnutChartData.push(admin);
 
 // Pie Chart
 var ctx = document.getElementById("myPieChart");

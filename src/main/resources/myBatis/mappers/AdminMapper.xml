@@ -9,6 +9,11 @@
 		SELECT * FROM MEMBER WHERE GRADE != 2
 	</select>
 	
+	<!-- 월 별 회원가입 수-->
+	<select id="getAnnualMemberCount" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 2 AND SUBSTR(REG_DATE, 1, 2) = #{year}
+	</select>
+	
 	<!-- 관리자를 제외한 모든 회원들의 수 -->
 	<select id="getAllMemberCount" resultType="Integer">
 		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 2

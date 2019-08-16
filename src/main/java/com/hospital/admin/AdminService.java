@@ -67,6 +67,8 @@ public class AdminService {
 		int allDoctorCount = adminDAO.getAllDoctorCount();
 		int allAdminCount = adminDAO.getAllAdminCount();
 		
+		int annualMemberCount = adminDAO.getAnnualMemberCount(todayYear);
+		
 		//annual earnings chart data
 		List<Integer> earnings = adminDAO.getEarnings(todayYear);
 		long extendedPrice = 0;
@@ -114,6 +116,7 @@ public class AdminService {
 		map.put("earnings", e);
 		map.put("donations", dona);
 		map.put("monthMembershipData", monthMembershipData);
+		map.put("annualMemberCount", annualMemberCount);
 		return map;
 	}
 	
