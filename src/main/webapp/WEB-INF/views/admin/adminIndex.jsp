@@ -12,9 +12,37 @@
   <meta name="author" content="">
   <!-- Custom fonts for this template-->
   <link href="../resources/css/all.min.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
+  <script type="text/javascript">
+  
+  $(function() {
+    	$('#myAreaChart2').hide();
+    	$('#myAreaChart3').hide();
+    	
+    	$('#membership_btn').click(function() {
+    		$('#myAreaChart2').hide();
+    		$('#myAreaChart3').hide();
+    		$('#myAreaChart').show();
+		});
+    	
+    	$('#earnings_btn').click(function() {
+    		$('#myAreaChart').hide();
+    		$('#myAreaChart3').hide();
+    		$('#myAreaChart2').show();
+		});
+    	
+    	$('#visitors_btn').click(function() {
+    		$('#myAreaChart').hide();
+    		$('#myAreaChart2').hide();
+    		$('#myAreaChart3').show();
+		});
+	});
+  
+  </script>
 </head>
 
 
@@ -127,11 +155,15 @@
             </c:forEach>
             <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
+              
+              
+              
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary" id="chartName">
                   	Overview
                   </h6>
+                  
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -149,8 +181,12 @@
                 <div class="card-body">
                   <div class="chart-area">
                     <canvas id="myAreaChart"></canvas>
+                    <canvas id="myAreaChart2"></canvas>
+                    <canvas id="myAreaChart3"></canvas>
                   </div>
                 </div>
+                
+                
               </div>
             </div>
 
@@ -201,7 +237,7 @@
           <div class="row">
 
             <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
+            <div class="col-lg-12 mb-4">
 
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
@@ -290,7 +326,7 @@
             <div class="col-lg-6 mb-4">
 
               <!-- Illustrations -->
-              <div class="card shadow mb-4">
+              <!-- <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
                 </div>
@@ -301,10 +337,10 @@
                   <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
                   <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
                 </div>
-              </div>
+              </div> -->
 
               <!-- Approach -->
-              <div class="card shadow mb-4">
+              <!-- <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
                 </div>
@@ -312,7 +348,7 @@
                   <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
                   <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
                 </div>
-              </div>
+              </div> -->
 
             </div>
           </div>
@@ -327,7 +363,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; 쌍용백병원 2019</span>
           </div>
         </div>
       </footer>

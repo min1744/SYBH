@@ -123,30 +123,7 @@ $(function() {
 	//$('#sponsor').load('./pay/donationPeopleTotal');
 	
 	
-	//////////////////////////// 지도 API
 	
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(37.556558, 126.919545), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
-
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	var iwContent = '<div style="padding:5px;">쌍용백병원</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-	iwPosition = new kakao.maps.LatLng(37.556558, 126.919545), //인포윈도우 표시 위치입니다
-	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-	
-	//인포윈도우를 생성하고 지도에 표시합니다
-	var infowindow = new kakao.maps.InfoWindow({
-	map: map, // 인포윈도우가 표시될 지도
-	position : iwPosition, 
-	content : iwContent,
-	removable : iwRemoveable
-	});
-	  
-	//아래 코드는 인포윈도우를 지도에서 제거합니다
-	//infowindow.close();
 }); 
 </script>
 <body>
@@ -446,10 +423,73 @@ $(function() {
 			<p class="sub_h3">쌍용백병원으로 오시는 길을 알려드립니다.</p>
 		</div>
 		
-		<div id="map">
-		
-		
-		</div>
+		<!-- 지도 API -->
+			<div class="map_wrap">
+			    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">
+			    </div>
+			    <!-- 지도타입 컨트롤 div 입니다 -->
+			    <div class="custom_typecontrol radius_border">
+			        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+			        <span id="btnSkyview" class="sky_btn" onclick="setMapType('skyview')">스카이뷰</span>
+			    </div>
+			    <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+			    <div class="custom_zoomcontrol radius_border"> 
+			        <span onclick="zoomIn()"><img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>  
+			        <span onclick="zoomOut()"><img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+			    </div>
+			    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9963d068218228f27bdac8c9618c4a07"></script>
+			<script>
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+					    mapOption = { 
+					        center: new kakao.maps.LatLng(37.556558, 126.919545), // 지도의 중심좌표
+					        level: 3 // 지도의 확대 레벨
+					    };  
+					
+					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+					
+					var imageSrc = './resources/images/marker.png', // 마커이미지의 주소입니다    
+				    imageSize = new kakao.maps.Size(170, 64), // 마커이미지의 크기입니다
+				    imageOption = {offset: new kakao.maps.Point(110, 64)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+				      
+					// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+					var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+					    markerPosition = new kakao.maps.LatLng(37.556558, 126.919545); // 마커가 표시될 위치입니다
+					    
+					 // 마커를 생성합니다
+					    var marker = new kakao.maps.Marker({
+					        position: markerPosition, 
+					        image: markerImage // 마커이미지 설정 
+					    });
+					    
+					    marker.setMap(map);  
+					    
+					// 지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
+					function setMapType(maptype) { 
+					    var roadmapControl = document.getElementById('btnRoadmap');
+					    var skyviewControl = document.getElementById('btnSkyview'); 
+					    if (maptype === 'roadmap') {
+					        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+					        roadmapControl.className = 'selected_btn';
+					        skyviewControl.className = 'btn';
+					    } else {
+					        map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+					        skyviewControl.className = 'selected_btn';
+					        roadmapControl.className = 'btn';
+					    }
+					}
+					
+					// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+					function zoomIn() {
+					    map.setLevel(map.getLevel() - 1);
+					}
+					
+					// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+					function zoomOut() {
+					    map.setLevel(map.getLevel() + 1);
+					}
+					
+			</script>
+			</div>
 		
 		<script type="text/javascript">
 		
@@ -482,9 +522,9 @@ $(function() {
 		</div>
 		
 		<div id="footer_sns">
-			<a href=""><img alt="" src="./resources/images/t.png"></a>
-			<a href=""><img alt="" src="./resources/images/i.png"></a>
-			<a href=""><img alt="" src="./resources/images/f.png"></a>
+			<a href="https://twitter.com/myKBSMC" target="_blank"><img alt="" src="./resources/images/t.png"></a>
+			<a href="http://www.mykbsmc.com/" target="_blank"><img alt="" src="./resources/images/b.png"></a>
+			<a href="https://www.facebook.com/myKBSMC" target="_blank"><img alt="" src="./resources/images/f.png"></a>
 		</div>
 		
 		
