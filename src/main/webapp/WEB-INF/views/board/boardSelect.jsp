@@ -22,21 +22,20 @@
 						
 		});
 		
-		console.log($('#qnum').val());
 		
-		//qna 부분
+		/////////////////////////////////qna 원본 글 삭제 관련▼
 		$("#q_delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
-			var num = $('#qnum').val();
+			var ref = $('#qref').val();
 			var menu = $('#qmenu').val();
 			if(result){
 				
-				post({'num':num,'menu':menu});
+				post({'ref':ref,'menu':menu});
 			}
 						
 		});
 		
-		//post방식으로 넘기기
+		//원본 글 삭제 post방식으로 넘기기
 		function post(params){
 			var form = document.createElement("form");
 			form.setAttribute("method","POST");
@@ -51,6 +50,37 @@
 			document.body.appendChild(form);
 			form.submit();
 		}
+		
+		/////////////////////////////////qna 답글 삭제 관련▼
+		$("#reply_delete").click(function() {
+			var result = confirm("삭제하시겠습니까?");
+			var num = $('#qnum').val();
+			var menu = $('#qmenu').val();
+			if(result){
+				
+				replypost({'num':num,'menu':menu});
+			}
+						
+		});
+		
+		//답글 삭제 post방식으로 넘기기
+		function replypost(params){
+			var form = document.createElement("form");
+			form.setAttribute("method","POST");
+			form.setAttribute("action","./replyDelete");
+			for(var key in params){
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type","hidden");
+				hiddenField.setAttribute("name",key);
+				hiddenField.setAttribute("value",params[key]);
+				form.appendChild(hiddenField);
+			}
+			document.body.appendChild(form);
+			form.submit();
+		}
+		
+		
+		///////////////////////////////////////////////////////
 		
 		///////////////////////////////////////////// 댓글 관련▼
 		
@@ -441,6 +471,7 @@
 		
 				<input type="hidden" name="num" value="${vo.num}" id="qnum">
 				<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
+				<input type="hidden" name="num" value="${vo.ref}" id="qref">
 				<div class="title">${vo.title}</div>
 					<div id="qsub">
 						<ul style="width: 30%; float: left;">
@@ -563,9 +594,25 @@
 					<!-- 댓글 끝 -->
 					
 				<div id="btn_box">
-					<a href="./complaint" id="list">목록</a>
-						
-					<button id="q_delete">삭제</button>
+				<c:choose>
+					<c:when test="${menu eq 'complaint'}">
+						<a href="./complaint" id="list">목록</a>
+					</c:when>
+					<c:when test="${menu eq 'praise'}">
+						<a href="./praise" id="list">목록</a>
+					</c:when>
+					<c:otherwise>
+						<a href="./qnaList" id="list">목록</a>
+					</c:otherwise>
+				</c:choose>
+					<c:choose>
+						<c:when test="${vo.depth eq '1'}">
+						<button id="reply_delete">삭제</button>
+						</c:when>
+						<c:when test="${vo.depth eq '0'}">
+						<button id="q_delete">삭제</button>
+						</c:when>
+					</c:choose>
 					<a href="./complaintUpdate?num=${vo.num}" id="update">수정</a>
 					<c:if test="${memberVO.grade eq '2'}">
 					<a href="./complaintReply?num=${vo.num}" id="reply">답글달기</a>

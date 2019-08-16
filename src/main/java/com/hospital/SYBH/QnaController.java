@@ -107,14 +107,14 @@ public class QnaController {
 	}
 	
 	
-	//////////////////공통 delete
+	//////////////////원본 글 공통 delete
 	//delete
 	
 	@RequestMapping(value = "qnaDelete", method = RequestMethod.POST)
-	public ModelAndView complaintDelete(QnAVO qnaVO, int num, HttpSession session) throws Exception {
+	public ModelAndView setDelete(QnAVO qnaVO, int ref, HttpSession session) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
-		int result = qnaService.setDelete(num, session);
+		int result = qnaService.setDelete(ref, session);
 		
 		if(result > 0 && qnaVO.getMenu().equals("complaint")) {
 			mv.setViewName("redirect:./complaint");
@@ -130,6 +130,31 @@ public class QnaController {
 		
 		return mv;
 	}
+	
+	
+		//////////////////원본 글 공통 delete
+		//delete
+		
+		@RequestMapping(value = "replyDelete", method = RequestMethod.POST)
+		public ModelAndView replyDelete(QnAVO qnaVO, int num, HttpSession session) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		int result = qnaService.replyDelete(num, session);
+		
+		if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+		mv.setViewName("redirect:./complaint");
+		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+		mv.setViewName("redirect:./praise");
+		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+		mv.setViewName("redirect:./qnaList");
+		} else {
+		mv.addObject("message", "Delete Fail");
+		mv.addObject("path", "./complaint");
+		mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+		}
 	
 	
 	

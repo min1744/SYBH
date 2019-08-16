@@ -65,8 +65,13 @@
   </update>
   
   
-  <!-- 글 삭제 -->
-  <delete id="setDelete" parameterType="Integer">
+  <!-- 원본 글 삭제 -->
+  <delete id="boardDelete" parameterType="Integer">
+  	delete qna where ref=#{ref}
+  </delete>
+  
+   <!-- 답글 글 삭제 -->
+  <delete id="replyDelete" parameterType="Integer">
   	delete qna where num=#{num}
   </delete>
   
