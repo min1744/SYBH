@@ -12,9 +12,37 @@
   <meta name="author" content="">
   <!-- Custom fonts for this template-->
   <link href="../resources/css/all.min.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
+  <script type="text/javascript">
+  
+  $(function() {
+    	$('#myAreaChart2').hide();
+    	$('#myAreaChart3').hide();
+    	
+    	$('#membership_btn').click(function() {
+    		$('#myAreaChart2').hide();
+    		$('#myAreaChart3').hide();
+    		$('#myAreaChart').show();
+		});
+    	
+    	$('#earnings_btn').click(function() {
+    		$('#myAreaChart').hide();
+    		$('#myAreaChart3').hide();
+    		$('#myAreaChart2').show();
+		});
+    	
+    	$('#visitors_btn').click(function() {
+    		$('#myAreaChart').hide();
+    		$('#myAreaChart2').hide();
+    		$('#myAreaChart3').show();
+		});
+	});
+  
+  </script>
 </head>
 <body id="page-top">
 
@@ -38,8 +66,8 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="javascript:generateReport()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <h1 class="h3 mb-0 index_title">쌍용백병원 관리자페이지</h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
           <!-- Content Row -->
@@ -125,11 +153,15 @@
             </c:forEach>
             <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
+              
+              
+              
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary" id="chartName">
                   	Overview
                   </h6>
+                  
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -147,8 +179,12 @@
                 <div class="card-body">
                   <div class="chart-area">
                     <canvas id="myAreaChart"></canvas>
+                    <canvas id="myAreaChart2"></canvas>
+                    <canvas id="myAreaChart3"></canvas>
                   </div>
                 </div>
+                
+                
               </div>
             </div>
 
@@ -187,7 +223,7 @@
           <div class="row">
 
             <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
+            <div class="col-lg-12 mb-4">
 
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
@@ -264,7 +300,7 @@
             <div class="col-lg-6 mb-4">
 
               <!-- Illustrations -->
-              <div class="card shadow mb-4">
+              <!-- <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Pledge</h6>
                 </div>
@@ -275,7 +311,7 @@
                   <p><strong>Of the People, By the People, For the People</strong></p>
                   <p>세계는 오늘 우리가 여기 모여 무슨 말을 했는가를 별로 주목하지도, 오래 기억하지도 않겠지만 여기서 수행한 일이 어떤 것이었던가는 결코 잊지 않을 것입니다. 우리 앞에 남겨진 미완의 큰 과업을 다 하기 위해 지금 여기 이곳에 바쳐져야 하는 것은 우리들 자신입니다. 우리는 생명이라는 존엄성 앞에서 최선을 다 할 것을 굳게 다짐하겠습니다.</p>
                 </div>
-              </div>
+              </div> -->
 
               <!-- Approach -->
               <!-- <div class="card shadow mb-4">
@@ -302,6 +338,7 @@
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>COPYRIGHT©1996-2019 BY SSANGYONG MEDICAL CENTER. ALL RIGHTS RESERVED.</span>
+
           </div>
         </div>
       </footer>

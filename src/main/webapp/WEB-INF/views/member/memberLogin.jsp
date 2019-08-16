@@ -39,6 +39,7 @@
 					</div>
 				</form>
 				<button id="login">로그인</button>
+				<img id="kakaoLogin" src="../resources/images/kakao_account_login_btn_medium_narrow.png">
 				<div class="g-recaptcha" data-sitekey="6LeDI7EUAAAAAGkmcXlqsEb9zLw7i7ShMS0eAI8B"></div>
 				<ul>
 					<li><a href="./memberIdFind">아이디</a></li>
@@ -47,7 +48,6 @@
 					<li style="margin: 0 5px;">│</li>
 					<li><a href="./memberAgree">회원가입</a></li>
 				</ul>
-				<img id="kakaoLogin" src="../resources/images/kakao_account_login_btn_medium_narrow.png">
 			</div>
 		</div>
 	</div>

@@ -80,11 +80,11 @@
             </li> -->
 
             <!-- Nav Item - Messages -->
-            <li class="nav-item dropdown no-arrow mx-1">
+            <li class="nav-item dropdown no-arrow mx-1" style="overflow: hidden; width: 125px;">
               <a class="nav-link dropdown-toggle" href="http://tocplus007.com/consoleFrame.do;jsessionid=C2237522F111E9A226E81725066A6569?viewName=testPage1" id="messagesDropdown" role="button" target="_blank">
-                <i class="fas fa-envelope fa-fw"></i>
+                1:1 상담 관리
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">N</span>
+                <span class="badge badge-danger badge-counter" style="top:33px; right: 4px;">N</span>
               </a>
             </li>
 
