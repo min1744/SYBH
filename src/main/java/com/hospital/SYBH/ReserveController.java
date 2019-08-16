@@ -30,10 +30,18 @@ public class ReserveController {
 	
 	
 	@RequestMapping(value = "reserveNomal", method = RequestMethod.GET)
-	public ModelAndView nomal(Integer mid) throws Exception {
+	public ModelAndView nomal(Integer mid,String name) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		MedicalTeamVO medic = null;
 		if(mid == null) {
 			mid = 1;
+		}
+		if(name == null) {
+			name= "";
+		}else {
+			medic = new MedicalTeamVO();
+			medic = medicalTeamService.getSelect(name);
+			mv.addObject("medic",medic);
 		}
 		List<MedicalTeamVO> list = medicalTeamService.getList(mid);
 		

@@ -23,4 +23,9 @@ public class MedicalTeamService {
 	public List<MedicalTeamVO> getSearch(String name) throws Exception{
 		return medicalTeamDAO.getSearch(name);
 	}
+	
+	//한명
+	public MedicalTeamVO getSelect(String name) throws Exception{
+		return medicalTeamDAO.getSelect(name);
+	}
 }

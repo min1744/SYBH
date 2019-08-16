@@ -588,10 +588,50 @@ button{
 }
 
 
-
-
 .modal_career {
 	
 	clear: both;
+	width: 100%;
+	overflow: hidden;
+	margin: 40px 0;
+}
+
+.career h3, .major_act h3 {
+	
+	color: black;
+	font-weight: 900;
+	margin-bottom: 10px;
+}
+
+
+.career {
+	
+	padding-left: 20px;
+}
+
+
+.career, .major_act {
+	
+	float: left;
+	letter-spacing: -1px;
+	color: #808080;
+	width: 46%;
+}
+
+
+.career:before, .major_act:before {
+	
+	content: '';
+	display: block;
+	width: 20px;
+	height: 2px;
+	margin-bottom: 9px;
+	background-color: #153F91;
+}
+
+
+.major_act {
+	
+	margin-left: 70px;
 }
 

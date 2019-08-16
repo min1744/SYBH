@@ -39,7 +39,12 @@
 	
 </select>
 
-
+<select id="getSelect" resultMap="medicalTeam" parameterType="String">
+	select M.*, F.fnum, F.fname, F.oname from medicalteam M
+	FULL JOIN doctorImages F
+	on (M.num = F.num)
+	where M.name = #{name}
+</select>
 
 
 </mapper>
