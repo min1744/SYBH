@@ -29,7 +29,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <c:import url="../common/sidebar.jsp" />
+    <c:import url="../../common/sidebar.jsp" />
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -39,7 +39,7 @@
       <div id="content">
 
         <!-- Topbar -->
-        <c:import url="../common/topbar.jsp" />
+        <c:import url="../../common/topbar.jsp" />
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
@@ -54,6 +54,7 @@
               <div class="table-responsive">
               	<div id="controller_div">
          			<input type="button" value="DELETE" id="delete_btn" class="btn btn-danger">
+					<a href="./${board}Write" id="write_btn" class="btn btn-primary">WRITE</a>
          		</div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -135,7 +136,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; SYBH 2019</span>
           </div>
         </div>
       </footer>
@@ -219,19 +220,16 @@
 				jQuery.ajaxSettings.traditional = true;
 				
 				$.ajax({
-					url : "./noticeDelete",
+					url : "./noticeListDelete",
 					type : "POST",
 					data : {
 						num : nums
 					},
 					success : function(data) {
-						data = data.trim();
-						if (data == '0') {
-							alert("삭제 실패");
-						} else {
-							alert("삭제 되었습니다.");
-							location.reload();
-						}
+						location.reload();
+					},
+					error:function(){
+						alert('Delete Fail');
 					}
 				});
 			}
