@@ -22,21 +22,20 @@
 						
 		});
 		
-		console.log($('#qnum').val());
 		
-		//qna 부분
+		/////////////////////////////////qna 원본 글 삭제 관련▼
 		$("#q_delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
-			var num = $('#qnum').val();
+			var ref = $('#qref').val();
 			var menu = $('#qmenu').val();
 			if(result){
 				
-				post({'num':num,'menu':menu});
+				post({'ref':ref,'menu':menu});
 			}
 						
 		});
 		
-		//post방식으로 넘기기
+		//원본 글 삭제 post방식으로 넘기기
 		function post(params){
 			var form = document.createElement("form");
 			form.setAttribute("method","POST");
@@ -51,6 +50,37 @@
 			document.body.appendChild(form);
 			form.submit();
 		}
+		
+		/////////////////////////////////qna 답글 삭제 관련▼
+		$("#reply_delete").click(function() {
+			var result = confirm("삭제하시겠습니까?");
+			var num = $('#qnum').val();
+			var menu = $('#qmenu').val();
+			if(result){
+				
+				replypost({'num':num,'menu':menu});
+			}
+						
+		});
+		
+		//답글 삭제 post방식으로 넘기기
+		function replypost(params){
+			var form = document.createElement("form");
+			form.setAttribute("method","POST");
+			form.setAttribute("action","./replyDelete");
+			for(var key in params){
+				var hiddenField = document.createElement("input");
+				hiddenField.setAttribute("type","hidden");
+				hiddenField.setAttribute("name",key);
+				hiddenField.setAttribute("value",params[key]);
+				form.appendChild(hiddenField);
+			}
+			document.body.appendChild(form);
+			form.submit();
+		}
+		
+		
+		///////////////////////////////////////////////////////
 		
 		///////////////////////////////////////////// 댓글 관련▼
 		
@@ -116,7 +146,6 @@
 				},
 				success:function(data) {
 					if(data=='1') {
-						alert('등록성공');
 						location.reload();
 						getList(1);
 					} else {
@@ -142,15 +171,37 @@
 		
 		
 		
-		//댓글 삭제
+		//원본 댓글 삭제
 		$('.commentslist').on('click', '.c_delete', function() {
-			var qcnum = $(this).attr('id');
+			var ref = $(this).attr('id');
 			var check = confirm("삭제하시겠습니까?");
 			if (check == true) {
 				
 				$.ajax({
 					
 					url:"../comments/commentsDelete",
+					type:"POST",
+					data: {
+						ref : ref
+					},
+					success:function(data) {
+							location.reload();
+							getList(1); //append가 아니라 html로 덮어씌우기
+					}
+				});
+				
+			}
+		});
+		
+		//원본 댓글 삭제
+		$('.commentslist').on('click', '.reply_delete', function() {
+			var qcnum = $(this).attr('id');
+			var check = confirm("삭제하시겠습니까?");
+			if (check == true) {
+				
+				$.ajax({
+					
+					url:"../comments/commentsReplyDelete",
 					type:"POST",
 					data: {
 						qcnum : qcnum
@@ -202,7 +253,6 @@
 					contents : reContents
 				},
 				success:function(data) {
-					console.log(data);
 					if(data=='1') {
 						getList(1);
 					} else {
@@ -213,112 +263,38 @@
 		});
 		
 		var likeQcnum = 0;
-		var likeId = null;
+		var likeId = '${memberVO.id}';
 		var likeResult = null;
 		var hateResult = null;
+		console.log(likeId);
 		
 		///////////////////////////////////////좋아요
 		$('.commentslist').on('click', '.like', function(e) {
 			e.preventDefault();
-			hate_check();
-			if(hateResult==1){
-				alert('싫어요는 한번');
-			} else if(hateResult ==0 && hateResult == null){
-			likeQcnum = $(this).attr('title');
-			likeId = '${memberVO.id}';
-			$.ajax({
-				
-				url:"../comments/commentsLike",
-				type:"POST",
-				data: {
-					qcnum : likeQcnum,
-					num : likeQcnum,
-					id : likeId
-				},
-				success:function(data) {
-					if(data=='1') {
-						
-						
-						getList(1);
-					} else {
-						alert('like error');
-					}
-				}
-			});
-			}
-		});
-		
-		//////////////좋아요 like_check
-		function like_check() {
-			$.ajax({
-				
-				url:"../comments/commentsLikeCheck",
-				type:"POST",
-				data: {
-					num : likeQcnum,
-					id: likeId
-				},
-				success:function(data) {
+			if(likeId == '') {
+				alert('로그인 하셔야 이용 가능합니다.');
+				location.href="../member/memberLogin";
+			} else {
+				likeQcnum = $(this).attr('title');
+				$.ajax({
 					
-					likeResult = data;
-					//alert(likeResult);
-					//$('#like_check').val(likeResult);
-				}
-			});
-		}
-		
-		
-		///////////////////////////////////////싫어요
-		$('.commentslist').on('click', '.hate', function(e) {
-			e.preventDefault();
-			likeQcnum = $(this).attr('title');
-			likeId = '${memberVO.id}';
-			like_check();
-			if(likeResult==1){
-				alert('좋아요는 한번');
-			} else if(likeResult ==0 && likeResult == null){
-			var hateQcnum = $(this).attr('title');
-			var hateId = '${memberVO.id}';
-			$.ajax({
-				
-				url:"../comments/commentsHate",
-				type:"POST",
-				data: {
-					qcnum : hateQcnum,
-					num : hateQcnum,
-					id : hateId
-				},
-				success:function(data) {
-					if(data=='1') {
-						getList(1);
-					} else {
-						alert('hate error');
+					url:"../comments/commentsLike",
+					type:"POST",
+					data: {
+						qcnum : likeQcnum,
+						num : likeQcnum,
+						id : likeId
+					},
+					success:function(data) {
+						if(data=='1') {
+							getList(1);
+						} else {
+							alert('like error');
+						}
 					}
-				}
-			});
+				});
 			}
 		});
-		
-		
-
-		//////////////싫어요 hate_check
-		function hate_check() {
-			$.ajax({
-				
-				url:"../comments/commentsHateCheck",
-				type:"POST",
-				data: {
-					num : likeQcnum,
-					id: likeId
-				},
-				success:function(data) {
-					alert(data);
-					hateResult = data;
-					alert(heateResult);
-				}
-			});
-		}
-				
 		
 	});
 </script>
@@ -441,6 +417,7 @@
 		
 				<input type="hidden" name="num" value="${vo.num}" id="qnum">
 				<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
+				<input type="hidden" name="num" value="${vo.ref}" id="qref">
 				<div class="title">${vo.title}</div>
 					<div id="qsub">
 						<ul style="width: 30%; float: left;">
@@ -539,8 +516,8 @@
 						        </div>
 						        <div class="modal-body">
 						        	<div class="form-group">
-								      <label for="contents">작성자 :</label>
-								      <input class="form-control" type="text" id="reid" value="${memberVO.id}" readonly>
+								      <label for="reid">작성자 :</label>
+								      <input class="form-control" type="text" name="reid" id="reid" value="${memberVO.id}" readonly>
 								    </div>
 						          <div class="form-group">
 								      <label for="contents">댓글 :</label>
@@ -563,9 +540,25 @@
 					<!-- 댓글 끝 -->
 					
 				<div id="btn_box">
-					<a href="./complaint" id="list">목록</a>
-						
-					<button id="q_delete">삭제</button>
+				<c:choose>
+					<c:when test="${menu eq 'complaint'}">
+						<a href="./complaint" id="list">목록</a>
+					</c:when>
+					<c:when test="${menu eq 'praise'}">
+						<a href="./praise" id="list">목록</a>
+					</c:when>
+					<c:otherwise>
+						<a href="./qnaList" id="list">목록</a>
+					</c:otherwise>
+				</c:choose>
+					<c:choose>
+						<c:when test="${vo.depth eq '1'}">
+						<button id="reply_delete">삭제</button>
+						</c:when>
+						<c:when test="${vo.depth eq '0'}">
+						<button id="q_delete">삭제</button>
+						</c:when>
+					</c:choose>
 					<a href="./complaintUpdate?num=${vo.num}" id="update">수정</a>
 					<c:if test="${memberVO.grade eq '2'}">
 					<a href="./complaintReply?num=${vo.num}" id="reply">답글달기</a>

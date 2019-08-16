@@ -30,6 +30,11 @@ public class QnAService implements BoardService{
 		return result;
 	}
 	
+	//답글 delete
+	public int replyDelete(int num, HttpSession session) throws Exception {
+		return qnaDAO.replyDelete(num);
+	}
+	
 	//write
 	public int setWrite(QnAVO qnaVO, HttpSession session) throws Exception {
 		return qnaDAO.setWrite(qnaVO);
@@ -42,8 +47,8 @@ public class QnAService implements BoardService{
 
 	//delete
 	@Override
-	public int setDelete(int num, HttpSession session) throws Exception {
-		return qnaDAO.setDelete(num);
+	public int setDelete(int ref, HttpSession session) throws Exception {
+		return qnaDAO.setDelete(ref);
 	}
 	
 	//select

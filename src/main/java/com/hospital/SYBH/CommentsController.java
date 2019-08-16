@@ -60,11 +60,20 @@ public class CommentsController {
 	}
 	
 	
-	//댓글 삭제
+	//원본 댓글 삭제
 	@RequestMapping(value = "commentsDelete", method = RequestMethod.POST)
 	@ResponseBody
-	public int setUpdate(int qcnum) throws Exception {
-		int result = qnACommentsService.setDelete(qcnum);
+	public int setDelete(int ref) throws Exception {
+		int result = qnACommentsService.setDelete(ref);
+		System.out.println(result);
+		return result;
+	}
+	
+	//댓글 답글 삭제
+	@RequestMapping(value = "commentsReplyDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public int replyDelete(int qcnum) throws Exception {
+		int result = qnACommentsService.replyDelete(qcnum);
 		return result;
 	}
 	
@@ -91,36 +100,7 @@ public class CommentsController {
 	}
 	
 	
-	//좋아요 like_check 값
-	@RequestMapping(value = "commentsLikeCheck", method = RequestMethod.POST)
-	@ResponseBody
-	public int likeList(int num, String id) throws Exception {
-		
-		int like_check = qnACommentsService.likeCheck(num, id);
-			
-		return like_check;
-	}
 	
-	
-	//싫어요
-	@RequestMapping(value = "commentsHate", method = RequestMethod.POST)
-	@ResponseBody
-	public int likeUpdate(int qcnum, int num, String id, HateVO hateVO, QnACommentsVO qnACommentsVO) throws Exception {
-		
-		int result = qnACommentsService.hateUpdate(qcnum, num, id, hateVO, qnACommentsVO);
-		
-		return result;
-	}
-	
-	//좋아요 hate_check 값
-	@RequestMapping(value = "commentsHateCheck", method = RequestMethod.POST)
-	@ResponseBody
-	public int hateList(int num, String id) throws Exception {
-			
-		int hate_check = qnACommentsService.hateCheck(num, id);
-				
-		return hate_check;
-	}
 	
 	
 

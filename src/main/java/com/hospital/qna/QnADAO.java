@@ -30,6 +30,11 @@ public class QnADAO implements BoardDAO{
 		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnaVO);
 	}
 	
+	//답글 delete
+	public int replyDelete(int num) throws Exception {
+		return sqlSession.delete(NAMESPACE+"replyDelete", num);
+	}
+	
 	//totalCount
 	@Override
 	public int getTotalCount(PageMaker pageMaker) throws Exception {
@@ -63,10 +68,10 @@ public class QnADAO implements BoardDAO{
 		return sqlSession.selectOne(NAMESPACE+"getSelect", num);
 	}
 
-	//delete
+	//원본 글 delete
 	@Override
-	public int setDelete(int num) throws Exception {
-		return sqlSession.delete(NAMESPACE+"setDelete", num);
+	public int setDelete(int ref) throws Exception {
+		return sqlSession.delete(NAMESPACE+"boardDelete", ref);
 	}
 
 	/////////////////////////////////////////////////////////////////
