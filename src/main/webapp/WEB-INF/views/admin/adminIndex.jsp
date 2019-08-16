@@ -12,37 +12,10 @@
   <meta name="author" content="">
   <!-- Custom fonts for this template-->
   <link href="../resources/css/all.min.css" rel="stylesheet" type="text/css">
-  <script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
-  <script type="text/javascript">
-  
-  $(function() {
-    	$('#myAreaChart2').hide();
-    	$('#myAreaChart3').hide();
-    	
-    	$('#membership_btn').click(function() {
-    		$('#myAreaChart2').hide();
-    		$('#myAreaChart3').hide();
-    		$('#myAreaChart').show();
-		});
-    	
-    	$('#earnings_btn').click(function() {
-    		$('#myAreaChart').hide();
-    		$('#myAreaChart3').hide();
-    		$('#myAreaChart2').show();
-		});
-    	
-    	$('#visitors_btn').click(function() {
-    		$('#myAreaChart').hide();
-    		$('#myAreaChart2').hide();
-    		$('#myAreaChart3').show();
-		});
-	});
-  
-  </script>
 </head>
 <body id="page-top">
 
@@ -67,7 +40,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 index_title">쌍용백병원 관리자페이지</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <a href="javascript:generateReport()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
           <!-- Content Row -->
@@ -148,6 +121,7 @@
 
             <!-- Area Chart -->
             <!-- Membership data -->
+            <input type="hidden" id="monthData" value="${monthData}">
             <c:forEach items="${monthData}" var="monthdata">
             	<input type="hidden" class="monthData" value="${monthdata}">
             </c:forEach>
@@ -159,7 +133,7 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary" id="chartName">
-                  	Overview
+                  	Membership Overview
                   </h6>
                   
                   <div class="dropdown no-arrow">
@@ -205,13 +179,13 @@
                   </div>
                   <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Member
+                      <i class="fas fa-circle text-primary"></i> Member 
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Doctor
+                      <i class="fas fa-circle text-success"></i> Doctor 
                     </span>
                     <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Admin
+                      <i class="fas fa-circle text-info"></i> Admin 
                     </span>
                   </div>
                 </div>
@@ -232,11 +206,11 @@
                 </div>
                 <div class="card-body">
                   <input type="hidden">
-                  <h4 class="small font-weight-bold">Annual Membership<span class="float-right" id="annualMemberCount">${annualMemberCount}%</span></h4>
+                  <h4 class="small font-weight-bold">Annual Membership (100 people : 100%)<span class="float-right" id="annualMemberCount">${annualMemberCount}%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar bg-danger" role="progressbar" style="width: ${annualMemberCount}%" aria-valuenow="${annualMemberCount}" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">Annual Earnings (Online Earnings/Total Earings : 0.02%)<span class="float-right" id="earningsNum">${earningsNum}%</span></h4>
+                  <h4 class="small font-weight-bold">Annual Earnings (Online Earnings/Total Earings : 0.02% (￦20,000,000,000))<span class="float-right" id="earningsNum">${earningsNum}%</span></h4>
                   <div class="progress mb-4">
                     <div class="progress-bar bg-warning" role="progressbar" style="width: ${earningsNum}%" aria-valuenow="${earningsNum}" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
