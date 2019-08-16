@@ -34,7 +34,6 @@ $(".monthData").each(function() {
 });
 setChartAreaData(monthData);
 
-
 var monthData2 = [];
 $(".monthData").each(function() {
 	monthData2.push($(this).val());
@@ -49,6 +48,7 @@ setChartAreaData(monthData3);
 
 //Data of membership chart
 $('#membership_btn').click(function() {
+	$('#chartName').html('Membership Overview');
 	$.ajax({
 		url : "./getMemberData",
 		type : "GET",
@@ -64,10 +64,14 @@ $('#membership_btn').click(function() {
 			setChartAreaData(monthData);
 		}
 	});
+	$('#myAreaChart2').hide();
+	$('#myAreaChart3').hide();
+	$('#myAreaChart').show();
 });
 
 //Data of Annual earnings chart
 $('#earnings_btn').click(function() {
+	$('#chartName').html('Earnings Overview');
 	$.ajax({
 		url : "./getEarningsData",
 		type : "GET",
@@ -83,10 +87,14 @@ $('#earnings_btn').click(function() {
 			setChartAreaData2(monthData2);
 		}
 	});
+	$('#myAreaChart').hide();
+	$('#myAreaChart3').hide();
+	$('#myAreaChart2').show();
 });
 
 //Data of visitors chart
 $('#visitors_btn').click(function() {
+	$('#chartName').html('The Member of Visitors Overview');
 	$.ajax({
 		url : "./getVisitorsData",
 		type : "GET",
@@ -102,6 +110,9 @@ $('#visitors_btn').click(function() {
 			setChartAreaData3(monthData3);
 		}
 	});
+	$('#myAreaChart').hide();
+	$('#myAreaChart2').hide();
+	$('#myAreaChart3').show();
 });
 
 function setChartAreaData(monthData) {
@@ -383,6 +394,3 @@ function setChartAreaData3(monthData3) {
 		}
 	});
 }
-
-
-

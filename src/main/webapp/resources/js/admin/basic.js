@@ -7,6 +7,11 @@ function generateReport() {
 	var allAdminCount = $('#allAdminCount').val();
 	var annualMemberCount = $('#annualMemberCount').html();
 	var earningsNum = $('#earningsNum').html();
+	var monthData = [];
+	$(".monthData").each(function() {
+		monthData.push($(this).val());
+	});
+	setChartAreaData(monthData);
 	
 	var pdf = new jsPDF('p', 'pt', 'portrait');
 	source = '<html>'+
@@ -17,9 +22,9 @@ function generateReport() {
 	  '<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">'+
 	  '<meta name="description" content="">'+
 	  '<meta name="author" content="">'+
-	  '<link href="../css/all.min.css" rel="stylesheet" type="text/css">'+
+	  '<link href="../../css/all.min.css" rel="stylesheet" type="text/css">'+
 	  '<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">'+
-	  '<link href="../css/sb-admin-2.min.css" rel="stylesheet">'+
+	  '<link href="../../css/sb-admin-2.min.css" rel="stylesheet">'+
 	'</head>'+
 	'<body id="page-top">'+
 	  '<div id="wrapper">'+
@@ -92,9 +97,6 @@ function generateReport() {
 	            '</div>'+
 	          '</div>'+
 	          '<div class="row">'+
-	            //<c:forEach items="${monthData}" var="monthdata">
-	            	//<input type="hidden" class="monthData" value="${monthdata}">
-	            //</c:forEach>
 	            '<div class="col-xl-8 col-lg-7">'+
 	              '<div class="card shadow mb-4">'+
 	                '<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">'+
@@ -268,6 +270,128 @@ function generateReport() {
 	function(dispose) {
         // dispose: object with X, Y of the last line add to the PDF 
         //          this allow the insertion of new lines after html
-        pdf.save('Generate_Report.pdf');
+		pdf.save('Generate_Report.pdf');
+    }, margins);
+}
+
+function setChartAreaData(monthData) {
+	var ctx = document.getElementById("myAreaChart");
+	var myLineChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+			datasets: [{
+				label: "index",
+				lineTension: 0.3,
+				backgroundColor: "rgba(78, 115, 223, 0.05)",
+				borderColor: "rgba(78, 115, 223, 1)",
+				pointRadius: 3,
+				pointBackgroundColor: "rgba(78, 115, 223, 1)",
+				pointBorderColor: "rgba(78, 115, 223, 1)",
+				pointHoverRadius: 3,
+				pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+				pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+				pointHitRadius: 10,
+				pointBorderWidth: 2,
+				data: monthData,
+			}],
+		},
+		options: {
+			maintainAspectRatio: false,
+			layout: {
+				padding: {
+					left: 10,
+					right: 25,
+					top: 25,
+					bottom: 0
+				}
+			},
+			scales: {
+				xAxes: [{
+					time: {
+						unit: 'date'
+					},
+					gridLines: {
+						display: false,
+						drawBorder: false
+					},
+					ticks: {
+						maxTicksLimit: 7
+					}
+				}],
+				yAxes: [{
+					ticks: {
+						maxTicksLimit: 5,
+						padding: 10,
+						// Include a dollar sign in the ticks
+						callback: function(value, index, values) {
+							return number_format(value);
+						}
+					},
+					gridLines: {
+						color: "rgb(234, 236, 244)",
+						zeroLineColor: "rgb(234, 236, 244)",
+						drawBorder: false,
+						borderDash: [2],
+						zeroLineBorderDash: [2]
+					}
+				}],
+			},
+			legend: {
+				display: false
+			},
+			tooltips: {
+				backgroundColor: "rgb(255,255,255)",
+				bodyFontColor: "#858796",
+				titleMarginBottom: 10,
+				titleFontColor: '#6e707e',
+				titleFontSize: 14,
+				borderColor: '#dddfeb',
+				borderWidth: 1,
+				xPadding: 15,
+				yPadding: 15,
+				displayColors: false,
+				intersect: false,
+				mode: 'index',
+				caretPadding: 10,
+				callbacks: {
+					label: function(tooltipItem, chart) {
+						var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+						return datasetLabel + ' : ' + number_format(tooltipItem.yLabel);
+					}
+				}
+			}
+		}
+	});
+}
+
+function images() {
+    var pdf = new jsPDF('p', 'pt', 'portrait');
+
+    source = '<html>'+
+    			'<body>'+
+    				'<img src="../images/adminIndexImage1.PNG">'+
+    				'<img src="../images/adminIndexImage2.PNG">'+
+    			'</body>'+
+    		'</html>'
+
+    margins = {
+        top : 80,
+        bottom : 60,
+        left : 60,
+        width : 522
+    };
+    // all coords and widths are in jsPDF instance's declared units
+    // 'inches' in this case
+    pdf.fromHTML(source, // HTML string or DOM elem ref.
+    margins.left, // x coord
+    margins.top, { // y coord
+        'width' : margins.width, // max width of content on PDF
+    },
+
+    function(dispose) {
+        // dispose: object with X, Y of the last line add to the PDF 
+        //          this allow the insertion of new lines after html
+        pdf.save('fileNameOfGeneretedPdf.pdf');
     }, margins);
 }
