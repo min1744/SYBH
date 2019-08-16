@@ -3,6 +3,7 @@ package com.hospital.news;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -70,6 +71,13 @@ public class NewsService {
 		pageMaker.makePage(totalCount);
 		
 		return newsDAO.getList(map);
+	}
+	
+	public List<NewsVO> newsAll(PageMaker pageMaker)throws Exception{
+		pageMaker.setPerPage(3);
+		pageMaker.setCurPage(1);
+		pageMaker.makeRow();
+		return newsDAO.newsAll(pageMaker);
 	}
 	
 	

@@ -33,15 +33,18 @@ public class NewsController {
 	
 		
 	@RequestMapping(value = "newsAll", method = RequestMethod.GET)
-	public ModelAndView allList(PageMaker pageMaker,String menu) throws Exception {
-		if(menu == null) {
-			menu = "";
-		}
-		List<NewsVO> alist=newsService.getList(pageMaker, menu);
+	public ModelAndView allList(PageMaker pageMaker) throws Exception {
+		
+		List<NewsVO> alist=newsService.newsAll(pageMaker);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", alist);
 		mv.addObject("pager", pageMaker);
 		mv.setViewName("news/newsAll");
+		for(int i = 0; i < alist.size(); i++) {
+			System.out.println(alist.get(i).getTitle());
+			System.out.println(alist.get(i).getWriter());
+		}
+		
 		return mv;
 	}
 	
