@@ -27,6 +27,13 @@
   	delete notice where num=#{num}
   </delete>
   
+  <delete id="setListDelete" parameterType="java.util.List">
+  	delete notice where num in
+  	<foreach collection="list" item="item" open="(" separator="," close=")">
+  		#{item}
+  	</foreach>
+  </delete>
+  
   <!-- list -->
   <select id="getList" parameterType="PageMaker" resultType="NoticeVO">
   	select * from 

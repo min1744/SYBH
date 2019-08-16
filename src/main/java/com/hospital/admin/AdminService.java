@@ -194,6 +194,15 @@ public class AdminService {
 		
 		return map;
 	}
+	//재혁 작업
+	//notice 하나 선택
+	public NoticeVO getNoticeSelect(int num) throws Exception{
+		NoticeVO noticeVO = noticeDAO.getSelect(num);
+		noticeDAO.setHitUpdate(num);
+		return noticeVO;
+	}
+	
+	//재혁 작업 끝
 	
 	//getAccessInfoList
 	public List<AccessInfoVO> getAccessInfoList() throws Exception{

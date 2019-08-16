@@ -56,7 +56,11 @@ public class NoticeDAO implements BoardDAO {
 	public int fixCount()throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"fixCount");
 	}
-
+	//delete all
+	public int setListDelete(List<Integer> list) {
+		return sqlSession.delete(NAMESPACE+"setListDelete",list);
+	}
+	
 	@Override
 	public int setWrite(BoardVO boardVO) throws Exception {
 		// TODO Auto-generated method stub

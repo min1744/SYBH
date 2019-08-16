@@ -40,8 +40,8 @@
 		//////////////재혁 후원
 		$(".check_modules").click(function() {
 			var price = document.getElementById('price').value;
-			if(price<10000){
-				alert('10,000원 이상부터 후원 가능합니다.');
+			if(price<100){
+				alert('100원 이상부터 후원 가능합니다.');
 				return false;
 			}
 			var check = $('.check').prop("checked");
@@ -158,7 +158,7 @@
 				
 				<div id="donation_price">
 					<span>후원금액</span>
-					<span><input type="text" name="price" id="price" placeholder="10,000원 이상부터 후원가능합니다"></span>
+					<span><input type="text" name="price" id="price" placeholder="100원 이상부터 후원가능합니다"></span>
 					<span>원</span>
 				</div>
 				

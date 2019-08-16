@@ -8,15 +8,20 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.admin.AccessInfoVO;
 import com.hospital.admin.AccessVO;
 import com.hospital.admin.AdminService;
+import com.hospital.board.BoardVO;
 import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
+import com.hospital.notice.NoticeService;
+import com.hospital.notice.NoticeVO;
 import com.hospital.util.PageMaker;
 
 @Controller
@@ -25,6 +30,8 @@ public class AdminController {
 	
 	@Inject
 	private AdminService adminService;
+	@Inject
+	private NoticeService noticeService;
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
@@ -115,7 +122,7 @@ public class AdminController {
 			mv.addObject("board", "notice");
 			mv.addObject("list", map.get("list"));
 			mv.addObject("fixedList", map.get("fixedList"));
-			mv.setViewName("admin/boardList");
+			mv.setViewName("admin/board/boardList");
 		} else {
 			mv.addObject("message", "데이터가 없습니다.");
 			mv.addObject("path", "./adminIndex");
@@ -124,6 +131,95 @@ public class AdminController {
 		
 		return mv;
 	}
+
+	/*재혁 작업 */
+	@RequestMapping(value = "noticeSelect",method = RequestMethod.GET)
+	public ModelAndView getNoticeSelect(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = adminService.getNoticeSelect(num);
+		if(boardVO != null) {
+		mv.addObject("board","notice");
+		mv.addObject("vo",boardVO);
+		mv.setViewName("admin/board/boardSelect");
+		}else {
+			mv.addObject("message", "데이터가 없습니다.");
+			mv.addObject("path", "./adminIndex");
+			mv.setViewName("common/messageMove");
+		}
+		return mv;
+	}
+	//notice Write
+	@RequestMapping(value = "noticeWrite",method = RequestMethod.GET)
+	public ModelAndView setNoticeWrite() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = noticeService.fixCount();
+		mv.addObject("result",result);
+		mv.addObject("board","notice");
+		mv.setViewName("admin/board/boardWrite");
+		return mv;
+	}
+	@RequestMapping(value ="noticeWrite",method = RequestMethod.POST)
+	public ModelAndView setNoticeWrite(NoticeVO noticeVO,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = noticeService.setWrite(noticeVO, session);
+		if(result>0) {
+			mv.setViewName("redirect:./noticeList");
+		}else {
+			mv.addObject("message","Write Fail");
+			mv.addObject("path","./noticeList");
+			mv.setViewName("common/messageMove");
+		}
+		return mv;
+	}
+	
+	//notice update
+	@RequestMapping(value = "noticeUpdate",method = RequestMethod.GET)
+	public ModelAndView setUpdate(int num)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		NoticeVO noticeVO = noticeService.getSelect(num);
+		int result = noticeService.fixCount();
+		if(noticeVO != null) {
+			mv.addObject("board","notice");
+			mv.addObject("vo",noticeVO);
+			mv.addObject("result", result);
+			mv.setViewName("admin/board/boardUpdate");
+		}else {
+			mv.addObject("message","No data");
+			mv.addObject("path","./noticeList");
+			mv.setViewName("common/messageMove");
+		}
+		return mv;
+	}
+	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
+	public ModelAndView setUpdate(NoticeVO noticeVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = noticeService.setUpdate(noticeVO);
+		if(result>0) {
+		mv.setViewName("redirect:./noticeList");
+		}else {
+			mv.addObject("message","Update Fail");
+			mv.addObject("path","./noticeList");
+			mv.setViewName("common/messageMove");
+		}
+		return mv;
+	}
+	//한개씩 삭제
+	@RequestMapping(value = "noticeDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public int setDelete(int num,HttpSession session)throws Exception{
+		return noticeService.setDelete(num, session);
+	}
+	//여러개 삭제
+	@RequestMapping(value = "noticeListDelete",method = RequestMethod.POST)
+	@ResponseBody
+	public int noticeListDelete(Integer [] num) throws Exception{
+		return noticeService.setDelete(num);
+		
+	}
+	
+	/*재혁 작업 끝	*/
+	
+	
 	
 	@RequestMapping(value = "memberAccessInfo", method = RequestMethod.GET)
 	public ModelAndView memberAccessInfo(ModelAndView mv) throws Exception {
