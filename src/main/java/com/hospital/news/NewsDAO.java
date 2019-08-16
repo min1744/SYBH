@@ -49,8 +49,8 @@ public class NewsDAO {
 	public int addHit(int num) throws Exception{
 		return sqlSession.update(NAMESPACE+"setHitUpdate", num);
 	}
-	public List<NewsVO> newsAll(PageMaker pageMaker)throws Exception{
-		return sqlSession.selectList(NAMESPACE+"newsAll",pageMaker);
+	public List<NewsVO> newsAll(String menu)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"newsAll",menu);
 	}
 	
 	

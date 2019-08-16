@@ -73,11 +73,8 @@ public class NewsService {
 		return newsDAO.getList(map);
 	}
 	
-	public List<NewsVO> newsAll(PageMaker pageMaker)throws Exception{
-		pageMaker.setPerPage(3);
-		pageMaker.setCurPage(1);
-		pageMaker.makeRow();
-		return newsDAO.newsAll(pageMaker);
+	public List<NewsVO> newsAll(String menu)throws Exception{
+		return newsDAO.newsAll(menu);
 	}
 	
 	
