@@ -134,14 +134,24 @@
 	        	$('#cal_box').hide();
 	        	$('#time_box').hide();
 	        	$('#reserve_ok').hide();
+	        	var medic = '${medic}';
+	        	var name = '${medic.name}';
+	        	var med_office ='${medic.med_office}';
+	        	var docnum='${medic.num}';
+	        	if(medic!=''){
+	        		$('#cal_box').show();
+	        		$('#reserve_ok').show();
+	        		$('#doc').html(name);
+	        		$('#off').html(med_office);
+	        		$('#docnum').val(docnum+1);
+	        	} 
 	        	
 	        	$('.select_btn').click(function() {
 					$('#cal_box').show();
 					$('#reserve_ok').show();
 				});
 	        	
-	        var name = '';
-	        var med_office='';
+	        
 			/* 재혁 */
 			$('.select_btn').click(function(){
 				
@@ -149,9 +159,11 @@
 				//의사 이름 불러오기
 				name = $("#name"+index).attr('title');
 				$('#doc').html(name);
+				name = $('#doc').text();
 				//진료과 불러오기
 				med_office = $('#med'+index).attr('title');
 				$('#off').html(med_office);
+				med_office = $('#off').text();
 				var docnum = $("#name"+index).attr('data-toggle');
 				$('#docnum').val(docnum);
 				$.ajax({
@@ -284,7 +296,7 @@
 			<ul>
 				<li>진료 예약/조회</li>
 				<li><a href="./reserveInfo">예약안내</a></li>
-				<li><a href="#" style="color:#6BB5DB;">일반진료 예약</a></li>
+				<li><a href="./reserveNomal" style="color:#6BB5DB;">일반진료 예약</a></li>
 				<li><a href="./reserveMedical">건강검진 예약</a></li>
 				<li><a href="../member/memberNomal">진료 예약 조회</a></li>
 			</ul>
@@ -311,6 +323,8 @@
 				<div id="doctor_select">
 				
 					<!-- 의사 리스트 시작 -->
+					<c:choose>
+					<c:when test="${medic eq null}">
 					<c:forEach items="${list }" var="list" varStatus="i">
 					<div class="list" id="list${i}">
 						<div class="list_profile">
@@ -329,7 +343,26 @@
 						</div>
 					</div>
 					</c:forEach>
+					</c:when>
+					<c:otherwise>
 					
+						<div class="list" id="list">
+							<div class="list_profile">
+							<img alt="" src="../resources/images/${medic.doctorImagesVO.fname}">
+						</div>
+						
+						<div class="list_info">
+							<h2 class="name" id="name" title="${medic.name}" data-toggle="${medic.num}">${medic.name}</h2>
+							<p class="med_office" id="med" title="${medic.med_office}">진료과</p><span>${medic.med_office}</span><br>
+							<p class="pro_field">전문분야</p><span>${medic.pro_field}</span>
+							</div>
+						<div class="list_btn">
+							<button class="info_btn" data-toggle="modal" data-target="#myModal_${medic.num }">의료진 소개</button>
+						</div>
+						</div>
+					</c:otherwise>
+					
+					</c:choose>
 					<!-- --------------------------- -->
 				
 				</div>
@@ -410,6 +443,64 @@
 
 <!-- 모달창 -->
 	<!-- 나중에 foreach로 id 뒤 숫자 varstatus 값으로 구분 -->
+	<!--한명 선택했을 때 모달창  -->
+	<c:choose>
+		<c:when test="${medic ne null }">
+		 <div class="modal fade" id="myModal_${medic.num}" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">의료진 소개</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<div class="modal_title_box">
+		        	<p class="modal_med_office_title" id="med" id="med" title="${medic.med_office }">${medic.med_office}</p>
+		        	<h2 class="modal_med_office" id="name" title="${medic.name}" data-toggle="${medic.num }">${medic.name } 교수</h2>
+		        </div>
+	        		<hr>
+				
+				<div class="modal_profile">
+					<img alt="" src="../resources/images/${medic.doctorImagesVO.fname}">
+				</div>
+				
+				<div class="modal_info">
+					<h3 class="modal_pro_field_title">전문분야</h3>
+					<p class="modal_pro_field">${medic.pro_field }</p>
+				</div>	
+				
+				
+				<div class="modal_career">
+					
+					<div class="career">
+						<h3>경력</h3>
+						<ul>
+							<c:forTokens items="${medic.career }" delims="," var="item">
+								<li>· ${item }</li>
+							</c:forTokens>
+						</ul>
+					</div>
+					
+					<div class="major_act">
+						<h3>주요활동</h3>
+						<ul>
+							<c:forTokens items="${medic.major_act}" delims="," var="item2">
+								<li>· ${item2}</li>
+							</c:forTokens>
+						</ul>
+					</div>
+				
+				</div>          
+	          
+	          
+	        </div>
+	      </div>
+    	</div>
+ 	 </div>
+		</c:when>
+	</c:choose>
 	<c:forEach items="${list}" var="list" varStatus="i">
 	  <div class="modal fade" id="myModal_${i.index+1}" role="dialog">
 	    <div class="modal-dialog">
@@ -472,9 +563,11 @@
  	 			var index = $(this).attr('data-num');
 				//의사 이름 불러오기
 				name = $("#name"+index).attr('title');
+				
 				$('#doc').html(name);
 				//진료과 불러오기
 				med_office = $('#med'+index).attr('title');
+				
 				$('#off').html(med_office);
 				$('#cal_box').show();
 				$('#reserve_ok').show();
@@ -487,3 +580,12 @@
 <c:import url="../common/footer.jsp" />
 </body>
 </html>
+							
+							
+							
+							
+						
+						
+						
+						
+						

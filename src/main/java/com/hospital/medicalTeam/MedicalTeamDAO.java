@@ -22,5 +22,9 @@ public class MedicalTeamDAO {
 	public List<MedicalTeamVO> getSearch(String name) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getSearch",name);
 	}
-
+	
+	//한명
+	public MedicalTeamVO getSelect(String name) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getSelect", name);
+	}
 }

@@ -128,7 +128,7 @@ function printWeek() {
 					</div>
 					
 					<div class="list_btn">
-						<a href="">진료예약</a>
+						<a href="../reserve/reserveNomal?name=${list.name}">진료예약</a>
 						<a href="" data-toggle="modal" data-target="#myModal_${i.index+1}">의료진소개</a>
 						<a href="">진료일정표</a>
 					</div>
@@ -171,7 +171,7 @@ function printWeek() {
 				</div>	
 				
 				<!-- 진료예약 버튼 -->
-				<a href="../reserve/reserveNomal" id="reserve_btn">진료예약</a>
+				<a href="../reserve/reserveNomal?name=${list.name}" id="reserve_btn">진료예약</a>
 				
 				
 				<!-- 진료 스케줄 -->
