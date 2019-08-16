@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+
+
+#board {
+	
+	width: 1920px;
+	overflow: hidden;
+}
+
+
+
+#board_box {
+	
+	width: 60%;
+	overflow: hidden;
+	position: relative;
+	margin: 80px auto;
+	border: 1px solid #ddd;
+	border-top: 3px solid #153f91;
+	padding: 5% 10%;
+	box-sizing: border-box;
+
+}
+
+
+#boardList {
+	
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+	letter-spacing: -1px;
+}
+
+
+
+/* 개인정보처리방침 */
+
+#boardList>h3{
+	
+	color: #153f91;
+	text-align: center;
+	font-size: 1.5em;
+	margin-bottom: 20px;
+}
+
+
+#boardList>p {
+	
+	color: #808080;
+}
+
+
+.modal-body {
+	
+	padding: 5% 10%;
+	overflow: hidden;
+	letter-spacing: -1px;
+	font-size: 0.9em;
+}
+
+
+
+
+
+
+.patientRight_contents {
+	
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	margin-top: 40px;
+}
+
+
+.patientRight_contents h4 {
+	
+	font-size: 1.5em;
+	color: #153f91;
+	margin-top: 40px;
+	margin-bottom: 15px;
+}
+
+
+.patientRight_contents p {
+	
+	color: #808080;
+	margin-bottom: 40px;
+	line-height: 35px;
+}
+
+
+.patientRight_contents span {
+	
+	font-weight: 700;
+}

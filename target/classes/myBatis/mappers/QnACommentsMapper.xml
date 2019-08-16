@@ -53,7 +53,7 @@
   <select id="getList" parameterType="java.util.Map" resultType="QnACommentsVO">
 	select * from
 	(select rownum R, C.* from
-	(select * from QnAComments where num=#{num} order by like_cnt desc, ref desc, step asc) C)
+	(select * from QnAComments where num=#{num} order by ref desc, step asc) C)
 	where R between #{pager.startRow} and #{pager.lastRow}
   </select>
   

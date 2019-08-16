@@ -196,13 +196,19 @@
 
 .news {
 	
-	width: 30%;
+	width: 31%;
 	float: left;
 	display: inline-block;
-	margin-right: 20px;
+	margin-right: 29px;
 	margin-top: 30px;
 	border: 1px solid #ddd;
 	
+}
+
+
+.news:nth-child(3n) {
+	
+	margin-right: 0;
 }
 
 
