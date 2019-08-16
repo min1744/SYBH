@@ -76,15 +76,6 @@ public class QnACommentsDAO {
 	}
 	
 	
-	//댓글 싫어요 update
-	public int hateUpdate(QnACommentsVO qnACommentsVO) throws Exception {
-		return sqlSession.update(NAMESPACE+"hateUpdate", qnACommentsVO);
-	}
-		
-	//댓글 싫어요 delete
-	public int hateDelete(QnACommentsVO qnACommentsVO) throws Exception {
-		return sqlSession.update(NAMESPACE+"hateDelete", qnACommentsVO);
-	}
 	
 	
 	

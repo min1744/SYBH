@@ -42,11 +42,13 @@
 							</ul>
 						</div>
 					</div>
-						<c:if test="${list.depth eq '1'}">
-						</c:if>
-						<c:if test="${list.depth eq '0'}">
-						<img alt="best" src="../resources/images/best.png" class="best_icon">
-						</c:if>
+					<c:choose>
+						<c:when test="${list.depth eq '0'}">
+							<c:if test="${list.like_cnt > '30'}">
+								<img alt="best" src="../resources/images/best.png" class="best_icon">
+							</c:if>
+						</c:when>
+					</c:choose>
 						<p class="c_contents" id="c${list.qcnum}">${list.contents}</p>
 						<!-- 답글 -->
 						<div class="c_list_box_bottom">
@@ -71,7 +73,6 @@
 						<c:if test="${list.depth eq '0'}">
 						<div class="c_like_bottom">
 							<a href="" class="like" title="${list.qcnum}"><img alt="like" src="../resources/images/like.png">${list.like_cnt}</a>
-							<a href="" class="hate" title="${list.qcnum}"><img alt="hate" src="../resources/images/hate.png">${list.hate_cnt}</a>
 						</div>
 						</c:if>
 						</div>

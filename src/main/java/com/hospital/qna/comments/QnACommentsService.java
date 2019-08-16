@@ -119,61 +119,6 @@ public class QnACommentsService {
 	}
 	
 	
-	/////////////////////////////////////댓글 싫어요
-	//댓글 t_hate 테이블의 hate_check 값 확인하는 select
-	public int hateUpdate(int qcnum, int num, String id, HateVO hateVO, QnACommentsVO qnACommentsVO) throws Exception {
-	
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("num", num);
-		map.put("id", id);
-		
-		String select = hateDAO.getSelect(map);
-		int result = 0;
-		
-		if(select == null) {
-			
-			result = hateDAO.hateWrite(hateVO);
-			result = qnACommentsDAO.hateUpdate(qnACommentsVO);
-		
-		} 
-		
-		if(select != null) {
-		
-			int updateSelect = hateDAO.updateSelect(map);
-		
-		if(updateSelect == 1){
-		
-			result = hateDAO.setUpdateDelete(hateVO);
-			result = qnACommentsDAO.hateDelete(qnACommentsVO);
-		
-		} else if(updateSelect == 0) {
-		
-			result = hateDAO.setUpdate(hateVO);
-			result = qnACommentsDAO.hateUpdate(qnACommentsVO);
-		} 
-	
-	}
-
-		return result;
-
-	}
-	
-	
-	
-	//// 댓글 like_check 값 가져오기
-	public int likeCheck(int num, String id) throws Exception {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("num", num);
-		map.put("id", id);
-		
-		int updateSelect = likeDAO.updateSelect(map);
-		
-		return updateSelect;
-		
-	}
 	
 	
 	/// 댓글 Like 테이블 리스트 가져오기
@@ -190,33 +135,5 @@ public class QnACommentsService {
 	}
 	
 	
-	////댓글 hate_check 값 가져오기
-	public int hateCheck(int num, String id) throws Exception {
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("num", num);
-		map.put("id", id);
-		
-		int updateSelect = hateDAO.updateSelect(map);
-		System.out.println(updateSelect);
-		
-		return updateSelect;
-		
-	}
-	
-	
-	/// 댓글 Hate 테이블 리스트 가져오기
-	public List<HateVO> hateList(int num, String id) throws Exception {
-			
-		Map<String, Object> map = new HashMap<String, Object>();
-			
-		map.put("num", num);
-		map.put("id", id);
-			
-		List<HateVO> hateList = hateDAO.hateList(map);
-			
-		return hateList;
-	}
 
 }

@@ -263,112 +263,38 @@
 		});
 		
 		var likeQcnum = 0;
-		var likeId = null;
+		var likeId = '${memberVO.id}';
 		var likeResult = null;
 		var hateResult = null;
+		console.log(likeId);
 		
 		///////////////////////////////////////좋아요
 		$('.commentslist').on('click', '.like', function(e) {
 			e.preventDefault();
-			hate_check();
-			if(hateResult==1){
-				alert('싫어요는 한번');
-			} else if(hateResult ==0 && hateResult == null){
-			likeQcnum = $(this).attr('title');
-			likeId = '${memberVO.id}';
-			$.ajax({
-				
-				url:"../comments/commentsLike",
-				type:"POST",
-				data: {
-					qcnum : likeQcnum,
-					num : likeQcnum,
-					id : likeId
-				},
-				success:function(data) {
-					if(data=='1') {
-						
-						
-						getList(1);
-					} else {
-						alert('like error');
-					}
-				}
-			});
-			}
-		});
-		
-		//////////////좋아요 like_check
-		function like_check() {
-			$.ajax({
-				
-				url:"../comments/commentsLikeCheck",
-				type:"POST",
-				data: {
-					num : likeQcnum,
-					id: likeId
-				},
-				success:function(data) {
+			if(likeId == '') {
+				alert('로그인 하셔야 이용 가능합니다.');
+				location.href="../member/memberLogin";
+			} else {
+				likeQcnum = $(this).attr('title');
+				$.ajax({
 					
-					likeResult = data;
-					//alert(likeResult);
-					//$('#like_check').val(likeResult);
-				}
-			});
-		}
-		
-		
-		///////////////////////////////////////싫어요
-		$('.commentslist').on('click', '.hate', function(e) {
-			e.preventDefault();
-			likeQcnum = $(this).attr('title');
-			likeId = '${memberVO.id}';
-			like_check();
-			if(likeResult==1){
-				alert('좋아요는 한번');
-			} else if(likeResult ==0 && likeResult == null){
-			var hateQcnum = $(this).attr('title');
-			var hateId = '${memberVO.id}';
-			$.ajax({
-				
-				url:"../comments/commentsHate",
-				type:"POST",
-				data: {
-					qcnum : hateQcnum,
-					num : hateQcnum,
-					id : hateId
-				},
-				success:function(data) {
-					if(data=='1') {
-						getList(1);
-					} else {
-						alert('hate error');
+					url:"../comments/commentsLike",
+					type:"POST",
+					data: {
+						qcnum : likeQcnum,
+						num : likeQcnum,
+						id : likeId
+					},
+					success:function(data) {
+						if(data=='1') {
+							getList(1);
+						} else {
+							alert('like error');
+						}
 					}
-				}
-			});
+				});
 			}
 		});
-		
-		
-
-		//////////////싫어요 hate_check
-		function hate_check() {
-			$.ajax({
-				
-				url:"../comments/commentsHateCheck",
-				type:"POST",
-				data: {
-					num : likeQcnum,
-					id: likeId
-				},
-				success:function(data) {
-					alert(data);
-					hateResult = data;
-					alert(heateResult);
-				}
-			});
-		}
-				
 		
 	});
 </script>
@@ -590,8 +516,8 @@
 						        </div>
 						        <div class="modal-body">
 						        	<div class="form-group">
-								      <label for="contents">작성자 :</label>
-								      <input class="form-control" type="text" id="reid" value="${memberVO.id}" readonly>
+								      <label for="reid">작성자 :</label>
+								      <input class="form-control" type="text" name="reid" id="reid" value="${memberVO.id}" readonly>
 								    </div>
 						          <div class="form-group">
 								      <label for="contents">댓글 :</label>
