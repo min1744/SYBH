@@ -35,12 +35,12 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container-fluid" id="pdfContents">
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 index_title">쌍용백병원 관리자페이지</h1>
-            <a href="javascript:generateReport()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="pdfDownload"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</button>
           </div>
 
           <!-- Content Row -->
@@ -361,10 +361,9 @@
   <script src="../resources/js/admin/chart-area-demo.js"></script>
   <script src="../resources/js/admin/chart-pie-demo.js"></script>
   
-  <!-- jsPDF -->
-  <script type="text/javascript" src="../resources/js/admin/jquery-1.7.1.min.js"></script>
-  <script type="text/javascript" src="../resources/js/admin/jquery-ui-1.8.17.custom.min.js"></script>
-  <script type="text/javascript" src="../resources/js/admin/jspdf.debug.js"></script>
-  <script type="text/javascript" src="../resources/js/admin/basic.js"></script>
+  <!-- PDF Download -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script src="../resources/js/admin/pdfdownload.js"></script>
 </body>
 </html>
