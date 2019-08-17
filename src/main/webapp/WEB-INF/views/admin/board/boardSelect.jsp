@@ -29,24 +29,30 @@
 }
 </style>
 <script type="text/javascript">
-	$(function(){
-		$('#delete_btn').click(function(){
-			var num = '${param.num}';
-			$.ajax({
-				url:'./noticeDelete',
-				type: 'POST',
-				data:{
-					num:num
-				},
-			success:function(data){
-				if(data==1){
-					location.href='./noticeList';
-				}
-			}			
-			})
+
+	$(function() {
+		$('#delete_btn').click(function() {
+
+			var result = confirm('정말로 삭제하시겠습니까?');
+			if (result) {
+				var num = '${param.num}';
+				$.ajax({
+					url : './noticeDelete',
+					type : 'POST',
+					data : {
+						num : num
+					},
+					success : function(data) {
+						if (data == 1) {
+							location.href = './noticeList';
+						}
+					}
+				})
+			} else{
+				alert('취소되었습니다');
+			}
 		});
 	});
-
 </script>
 </head>
 <body id="page-top">

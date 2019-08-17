@@ -12,12 +12,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.admin.AccessInfoVO;
 import com.hospital.admin.AccessVO;
 import com.hospital.admin.AdminService;
 import com.hospital.board.BoardVO;
+import com.hospital.medicalTeam.MedicalTeamService;
+import com.hospital.medicalTeam.MedicalTeamVO;
 import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
 import com.hospital.notice.NoticeService;
@@ -32,6 +35,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Inject
 	private NoticeService noticeService;
+	@Inject
+	private MedicalTeamService medicalTeamService;
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
@@ -144,7 +149,7 @@ public class AdminController {
 		mv.setViewName("admin/board/boardSelect");
 		}else {
 			mv.addObject("message", "데이터가 없습니다.");
-			mv.addObject("path", "./adminIndex");
+			mv.addObject("path", "./noticeList");
 			mv.setViewName("common/messageMove");
 		}
 		return mv;
@@ -218,6 +223,102 @@ public class AdminController {
 		
 	}
 	
+	//의사
+	//의사리스트
+	@RequestMapping(value = "medicalList",method = RequestMethod.GET)
+	public ModelAndView medicalList(PageMaker pageMaker) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<MedicalTeamVO> list =  medicalTeamService.getMedicalList(pageMaker);
+		mv.addObject("list", list);
+		mv.addObject("pager",pageMaker);
+		mv.setViewName("admin/medical/medicalList");
+		return mv;
+	}
+	
+	//의사 select
+	@RequestMapping(value = "medicalSelect", method = RequestMethod.GET)
+	public ModelAndView medicalSelect(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MedicalTeamVO medicalTeamVO = new MedicalTeamVO();
+		medicalTeamVO = medicalTeamService.getMedicalSelect(num);
+		if(medicalTeamVO != null) {
+			mv.addObject("vo",medicalTeamVO);
+			mv.setViewName("admin/medical/medicalSelect");
+			}else {
+				mv.addObject("message", "데이터가 없습니다.");
+				mv.addObject("path", "./medicalList");
+				mv.setViewName("common/messageMove");
+			}
+		return mv;
+	}
+	//의사 write
+	@RequestMapping(value="medicalWrite", method = RequestMethod.GET)
+	public String medicalWrite() throws Exception{
+		return "admin/medical/medicalWrite";
+	}
+	
+	@RequestMapping(value = "medicalWrite", method = RequestMethod.POST)
+	public ModelAndView medicalWrite(MedicalTeamVO medicalTeamVO,HttpSession session, MultipartFile multipartFile) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = medicalTeamService.setWrite(medicalTeamVO, session, multipartFile);
+		if(result>0) {
+			mv.setViewName("redirect:./medicalList");
+		}else {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./medicalList");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+	}
+	
+	//의사 delete 여러개 삭제
+	@RequestMapping(value = "medicalListDelete",method = RequestMethod.POST)
+	@ResponseBody
+	public int medicalListDelete(Integer [] num) throws Exception{
+		return medicalTeamService.setDelete(num);
+		
+	}
+	
+	//한개씩 삭제
+		@RequestMapping(value = "medicalDelete", method = RequestMethod.POST)
+		@ResponseBody
+		public int medicalDelete(int num,HttpSession session)throws Exception{
+			return medicalTeamService.setDelete(num,session);
+		}
+	//업뎃
+	@RequestMapping(value = "medicalUpdate",method = RequestMethod.GET)
+	public ModelAndView medicalUpdate(int num)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MedicalTeamVO medicalTeamVO = new MedicalTeamVO();
+		medicalTeamVO = medicalTeamService.getMedicalSelect(num);
+		if(medicalTeamVO != null) {
+			mv.addObject("vo",medicalTeamVO);
+			mv.setViewName("admin/medical/medicalUpdate");
+		}else {
+			mv.addObject("message", "데이터가 없습니다.");
+			mv.addObject("path", "./medicalList");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "medicalUpdate", method = RequestMethod.POST)
+	public ModelAndView medicalUpdate(MedicalTeamVO medicalTeamVO,MultipartFile multipartFile, HttpSession session)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = medicalTeamService.setUpdate(medicalTeamVO,multipartFile,session);
+		if(result>0) {
+			mv.setViewName("redirect:./medicalList");
+		}else {
+			mv.addObject("message", "Update Fail");
+			mv.addObject("path", "./medicalList");
+			mv.setViewName("common/messageMove");
+		}
+		return mv;
+	}
+		
+		
 	/*재혁 작업 끝	*/
 	
 	
