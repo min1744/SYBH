@@ -29,7 +29,62 @@
 	on (M.num = F.num)
 	where mid=#{mid}
 </select>
+<select id="getTotalCount" parameterType="PageMaker" resultType="Integer">
+	select count(num) from medicalTeam
+	where
+	<choose>
+		<when test="kind ==1">
+			name
+		</when>
+		<when test="kind ==2">
+			med_office
+		</when>
+		<otherwise>
+			name
+		</otherwise>
+	</choose>
+	like '%'||#{search}||'%'
+</select>
 
+<!-- 관리자 -->
+<select id="getMedicalList" resultMap="medicalTeam" parameterType="PageMaker">
+	select * from
+	(select rownum R, Me.* from
+	(select M.*,F.fnum,F.fname,F.oname from medicalteam M  
+	FULL JOIN doctorImages F 
+	on (M.num = F.num)
+	where
+	<choose>
+		<when test="kind ==1">
+			name
+		</when>
+		<when test="kind ==2">
+			med_office
+		</when>
+		<otherwise>
+			name
+		</otherwise>
+	</choose>
+	like '%'|| #{search} ||'%'
+	 order by M.num asc) Me)
+	where R between #{startRow} and #{lastRow}
+</select>
+
+<select id="getMedicalSelect" resultMap="medicalTeam" parameterType="Integer">
+	select M.*, F.fnum, F.fname, F.oname from medicalteam M
+	FULL JOIN doctorImages F
+	on (M.num = F.num)
+	where M.num = #{num}
+</select>
+
+<insert id="setWrite" parameterType="MedicalTeamVO">
+<selectKey keyProperty="num" order="BEFORE" resultType="Integer">
+	select medicalteam_seq.nextval from dual
+</selectKey>
+insert into medicalteam values(#{num},#{name},#{med_office},#{pro_field},#{career},#{major_act},#{mid})
+</insert>
+
+<!-- 관리자 끝 -->
 <select id="getSearch" resultMap="medicalTeam" parameterType="String">
 	select M.*,F.fnum,F.fname,F.oname from medicalteam M 
 	FULL JOIN doctorImages F 
@@ -46,5 +101,19 @@
 	where M.name = #{name}
 </select>
 
+  <delete id="setDelete" parameterType="Integer">
+  	delete medicalteam where num=#{num}
+  </delete>
+  
+  <delete id="setListDelete" parameterType="java.util.List">
+  	delete medicalteam where num in
+  	<foreach collection="list" item="item" open="(" separator="," close=")">
+  		#{item}
+  	</foreach>
+  </delete>
+
+ <update id="setUpdate" parameterType="MedicalTeamVO">
+  	update medicalteam set name=#{name}, med_office=#{med_office}, pro_field=#{pro_field}, career=#{career}, major_act=#{major_act}, mid=#{mid} where num=#{num}  
+  </update>
 
 </mapper>

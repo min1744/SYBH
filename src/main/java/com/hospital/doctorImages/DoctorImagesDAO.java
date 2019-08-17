@@ -1,5 +1,7 @@
 package com.hospital.doctorImages;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -21,7 +23,14 @@ public class DoctorImagesDAO {
 		return sqlSession.selectOne(NAMESPACE+"getSelect",medicalTeamVO);
 	}
 	
-	public int setDelete(int fnum) throws Exception{
-		return sqlSession.delete(NAMESPACE+"setDelete",fnum);
+	public int setDelete(int num) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setDelete",num);
+	}
+	
+	public int setUpdate(DoctorImagesVO doctorImagesVO)throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpdate",doctorImagesVO);
+	}
+	public List<DoctorImagesVO> getList(int num) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getList", num);
 	}
 }

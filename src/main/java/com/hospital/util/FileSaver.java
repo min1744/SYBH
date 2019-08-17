@@ -16,7 +16,9 @@ public class FileSaver {
 			file.mkdirs();
 		}
 		String fileSystemName = UUID.randomUUID().toString();
+		
 		String originalName = multipartFile.getOriginalFilename();
+		
 		originalName = originalName.substring(originalName.lastIndexOf('.'));
 		fileSystemName = fileSystemName + originalName;
 		System.out.println(fileSystemName);

@@ -57,7 +57,7 @@ public class NoticeDAO implements BoardDAO {
 		return sqlSession.selectOne(NAMESPACE+"fixCount");
 	}
 	//delete all
-	public int setListDelete(List<Integer> list) {
+	public int setListDelete(List<Integer> list)throws Exception {
 		return sqlSession.delete(NAMESPACE+"setListDelete",list);
 	}
 	
