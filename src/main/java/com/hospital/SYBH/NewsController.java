@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.news.NewsService;
 import com.hospital.news.NewsVO;
+import com.hospital.news.comments.NewsCommentsService;
 import com.hospital.util.PageMaker;
 
 @Controller
@@ -23,6 +24,8 @@ public class NewsController {
 	
 	@Inject
 	private NewsService newsService;
+	@Inject
+	private NewsCommentsService newsCommentsService;
 	
 	@ModelAttribute
 	public NewsVO getNewsVO() throws Exception{
@@ -149,6 +152,9 @@ public class NewsController {
 	
 		ModelAndView mv = new ModelAndView();
 		NewsVO newsVO = newsService.getSelect(num);
+		int totalCount = newsCommentsService.getTotalCount(num);
+		
+		mv.addObject("totalCount", totalCount);
 		mv.addObject("vo", newsVO);
 		mv.addObject("menu", "disease");
 		mv.setViewName("news/newsSelect");
@@ -200,7 +206,9 @@ public class NewsController {
 	public ModelAndView nutritionSelect(int num) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		NewsVO newsVO = newsService.getSelect(num);
+		int totalCount = newsCommentsService.getTotalCount(num);
 		
+		mv.addObject("totalCount", totalCount);
 		mv.addObject("vo", newsVO);
 		mv.addObject("menu", "nutrition");
 		mv.setViewName("news/newsSelect");
@@ -247,7 +255,9 @@ public class NewsController {
 		public ModelAndView exerciseSelect(int num) throws Exception{
 			ModelAndView mv = new ModelAndView();
 			NewsVO newsVO = newsService.getSelect(num);
+			int totalCount = newsCommentsService.getTotalCount(num);
 			
+			mv.addObject("totalCount", totalCount);
 			mv.addObject("vo", newsVO);
 			mv.addObject("menu", "exercise");
 			mv.setViewName("news/newsSelect");

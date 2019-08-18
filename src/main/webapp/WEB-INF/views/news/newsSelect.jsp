@@ -6,6 +6,7 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/newsSelect.css" rel="stylesheet">
+<c:import url="../temp/commentBootstrap.jsp" />
 <script type="text/javascript">
 	$(function() {
 		
@@ -87,7 +88,7 @@
 		
 		//댓글 등록하기 코드
 		$('#comment_btn').click(function() {
-			var num = $('#qnum').val();
+			var num = $('#nnum').val();
 			var id = $('#c_writer').text();
 			var contents = $('.c_area').val();
 			$.ajax({
@@ -195,7 +196,7 @@
 		$('#replyBtn').click(function() {
 			var recnum2 = recnum;
 			var reContents = $('#replyContents').val();
-			var renum = $('#qnum').val();
+			var renum = $('#nnum').val();
 			var reid = $('#reid').val();
 			$.ajax({
 				
@@ -233,7 +234,7 @@
 				likecnum = $(this).attr('title');
 				$.ajax({
 					
-					url:"../comments/cnewsCommentsLike",
+					url:"../comments/newsCommentsLike",
 					type:"POST",
 					data: {
 						cnum : likecnum,
