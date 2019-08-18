@@ -145,7 +145,7 @@ $(function() {
 				<li><a href="./notice/noticeList">병원안내</a></li>
 				<li><a href="./qna/complaint">고객의 소리</a></li>
 				<li><a href="./community/communityList">커뮤니티</a></li>
-				<li id="last_menu"><a href="">주말약국</a></li>			
+				<li id="last_menu"><a href="./pharmacy/pharmacyInfo">약국</a></li>			
 			</ul>
 		</div>
 		
