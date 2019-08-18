@@ -1,10 +1,8 @@
-package com.hospital.qna.comments;
+package com.hospital.news.comments;
 
-import java.sql.Date;
-
-public class QnACommentsVO {
+public class NewsCommentsVO {
 	
-	private int qcnum;
+	private int cnum;
 	private int num;
 	private String id;
 	private String contents;
@@ -14,11 +12,12 @@ public class QnACommentsVO {
 	private int depth;
 	private int like_cnt;
 	
-	public int getQcnum() {
-		return qcnum;
+	
+	public int getCnum() {
+		return cnum;
 	}
-	public void setQcnum(int qcnum) {
-		this.qcnum = qcnum;
+	public void setCnum(int cnum) {
+		this.cnum = cnum;
 	}
 	public int getNum() {
 		return num;
@@ -70,5 +69,6 @@ public class QnACommentsVO {
 	}
 	
 	
-}
 	
+	
+}
