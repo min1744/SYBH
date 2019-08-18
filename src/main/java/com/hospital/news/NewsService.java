@@ -41,6 +41,7 @@ public class NewsService {
 		newsImagesVO.setNum(newsVO.getNum());
 		newsImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
 		newsImagesVO.setOname(multipartFile.getOriginalFilename());
+		//newsVO.setNewsImagesVO(newsImagesVO);
 		result = newsImagesDAO.setWrite(newsImagesVO);
 		
 		return result;
@@ -74,7 +75,9 @@ public class NewsService {
 	}
 	
 	public List<NewsVO> newsAll(String menu)throws Exception{
-		return newsDAO.newsAll(menu);
+		List<NewsVO> list = newsDAO.newsAll(menu);
+		
+		return list;
 	}
 	
 	

@@ -35,7 +35,7 @@
 				<c:forEach items="${disease}" var="disease">
 				<a href="./diseaseSelect?num=${disease.num}" class="news">
 					<div class="news_img">
-					<img src="../resources/images/news_all_1.jpg">
+					<img src="../resources/file/${disease.newsImagesVO.fname}">
 					</div>
 					<p class="news_title">${disease.title}</p>
 					<p class="news_sub">${disease.sub_contents}</p>
@@ -56,20 +56,18 @@
 			</div>
 			
 			<div class="news_contents">
-				
 				<c:forEach items="${nutrition}" var="nutrition">
 				<a href="./nutritionSelect?num=${nutrition.num}" class="news">
 					<div class="news_img">
-					<img src="../resources/images/news_all_1.jpg">
+					<img src="../resources/file/${nutrition.newsImagesVO.fname}">
 					</div>
 					<p class="news_title">${nutrition.title}</p>
 					<p class="news_sub">${nutrition.sub_contents}</p>
 					<p class="news_date">${nutrition.reg_date}</p>
 				</a>
 				</c:forEach>
-				
-			
-			</div>			
+							
+			</div>				
 			
 			
 			
@@ -85,16 +83,16 @@
 				<c:forEach items="${exercise}" var="exercise">
 				<a href="./exerciseSelect?num=${exercise.num}" class="news">
 					<div class="news_img">
-					<img src="../resources/images/news_1.jpg">
+					<img src="../resources/file/${exercise.newsImagesVO.fname}">
 					</div>
 					<p class="news_title">${exercise.title}</p>
 					<p class="news_sub">${exercise.sub_contents}</p>
 					<p class="news_date">${exercise.reg_date}</p>
 				</a>
 				</c:forEach>
-				
-				
-			</div>			
+							
+			</div>				
+					
 				
 			
 			

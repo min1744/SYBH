@@ -2,6 +2,8 @@ package com.hospital.news;
 
 import java.sql.Date;
 
+import com.hospital.news.newsimages.NewsImagesVO;
+
 public class NewsVO {
 	
 	private int num;
@@ -12,8 +14,18 @@ public class NewsVO {
 	private Date reg_date;
 	private int hit;
 	private String menu;
+	private NewsImagesVO newsImagesVO;
 	
 	
+	
+	
+	
+	public NewsImagesVO getNewsImagesVO() {
+		return newsImagesVO;
+	}
+	public void setNewsImagesVO(NewsImagesVO newsImagesVO) {
+		this.newsImagesVO = newsImagesVO;
+	}
 	public int getNum() {
 		return num;
 	}
