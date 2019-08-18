@@ -53,8 +53,8 @@ public class NewsCommentsDAO {
 	}
 	
 	//댓글 답글 삭제
-	public int replyDelete (int qcnum) throws Exception {
-		return sqlSession.delete(NAMESPACE+"replyDelete", qcnum);
+	public int replyDelete (int cnum) throws Exception {
+		return sqlSession.delete(NAMESPACE+"replyDelete", cnum);
 	}
 	
 	

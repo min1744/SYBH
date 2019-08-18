@@ -54,8 +54,8 @@ public class NewsCommentsService {
 		}
 		
 		//댓글 답글 삭제
-		public int replyDelete(int qcnum) throws Exception {
-			return newsCommentsDAO.replyDelete(qcnum);
+		public int replyDelete(int cnum) throws Exception {
+			return newsCommentsDAO.replyDelete(cnum);
 		}
 		
 		
@@ -75,7 +75,7 @@ public class NewsCommentsService {
 		
 		/////////////////////////////////////댓글 좋아요
 		//댓글 t_like 테이블의 like_check 값 확인하는 select
-		public int likeUpdate(int qcnum, int num, String id, LikeVO likeVO, NewsCommentsVO newsCommentsVO) throws Exception {
+		public int likeUpdate(int cnum, int num, String id, LikeVO likeVO, NewsCommentsVO newsCommentsVO) throws Exception {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			
