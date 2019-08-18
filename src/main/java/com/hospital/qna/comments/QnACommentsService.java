@@ -8,8 +8,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.hospital.qna.comments.hate.HateDAO;
-import com.hospital.qna.comments.hate.HateVO;
 import com.hospital.qna.comments.like.LikeDAO;
 import com.hospital.qna.comments.like.LikeVO;
 import com.hospital.util.PageMaker;
@@ -21,8 +19,6 @@ public class QnACommentsService {
 	private QnACommentsDAO qnACommentsDAO;
 	@Inject
 	private LikeDAO likeDAO;
-	@Inject
-	private HateDAO hateDAO;
 	
 	//댓글 등록
 	public int setWrite(QnACommentsVO qnACommentsVO) throws Exception {
