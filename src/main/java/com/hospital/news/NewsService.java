@@ -64,6 +64,7 @@ public class NewsService {
 	}
 	//list
 	public List<NewsVO> getList(PageMaker pageMaker, String menu) throws Exception{
+		pageMaker.setPerPage(6);
 		pageMaker.makeRow();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("menu", menu);

@@ -19,18 +19,12 @@
 		</div>
 	</div>
 	<div id="news_wrap">
-		
 		<div id="news_box">
-			
-			
 			<!-- 질환 정보 -->
 			<div class="news_nav">
-			
 				<h3>질환 정보</h3>
 				<a href="./disease">전체 목록 보기</a>
-			
 			</div>
-			
 			<div class="news_contents">
 				<c:forEach items="${disease}" var="disease">
 				<a href="./diseaseSelect?num=${disease.num}" class="news">
@@ -42,17 +36,12 @@
 					<p class="news_date">${disease.reg_date}</p>
 				</a>
 				</c:forEach>
-							
 			</div>		
-			
-			
 			
 			<!-- 영양 정보 -->
 			<div class="news_nav">
-			
 				<h3>영양 정보</h3>
 				<a href="./nutrition">전체 목록 보기</a>
-				
 			</div>
 			
 			<div class="news_contents">
@@ -66,17 +55,12 @@
 					<p class="news_date">${nutrition.reg_date}</p>
 				</a>
 				</c:forEach>
-							
 			</div>				
-			
-			
 			
 			<!-- 운동 정보 -->
 			<div class="news_nav">
-			
 				<h3>운동 정보</h3>
 				<a href="./exercise">전체 목록 보기</a>
-				
 			</div>
 			
 			<div class="news_contents">
@@ -90,12 +74,7 @@
 					<p class="news_date">${exercise.reg_date}</p>
 				</a>
 				</c:forEach>
-							
 			</div>				
-					
-				
-			
-			
 			
 		</div>
 

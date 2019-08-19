@@ -37,12 +37,12 @@
  
  
  
- <select id="getList" parameterType="java.util.Map" resultType="NewsVO">
+ <select id="getList" parameterType="java.util.Map" resultMap="newsResult">
   	select * from 
   	(select rownum R, M.* from
-  	(select N.*, I.fnum, I.fname, I.oname 
-  	from news N FULL JOIN newsimages I
-  	on (N.num = I.num)
+  	(select N.*, NI.fnum, NI.fname, NI.oname 
+  	from news N FULL JOIN newsimages NI
+  	on (N.num = NI.num)
   	where menu=#{menu} and	
   <choose>
   		<when test="kind = 1">
