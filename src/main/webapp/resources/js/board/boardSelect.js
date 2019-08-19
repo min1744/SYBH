@@ -2,7 +2,7 @@ $(function() {
 		var board = $("#board").val();
 		$("#delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
-			var num = $("#nnum").val();
+			var num = $("#num").val();
 			if(result){
 				post({'num':num});
 			}

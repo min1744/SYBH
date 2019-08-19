@@ -18,7 +18,7 @@
 		
 		$('#add').click(function() {
 			if(count < 5) {
-				var result = '<input type="file" name="f1" class="form-control f1"><span style="cursor:pointer;" class="del">X</span>';
+				var result ='<div class="input-group col-xs-3"><input type="file" name="f1" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-remove del"></i></span> </div>';
 				$('#files').append(result);
 				count++;
 			} else {
