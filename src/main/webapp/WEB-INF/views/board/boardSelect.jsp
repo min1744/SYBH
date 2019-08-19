@@ -18,11 +18,13 @@
 		<div id="board_title">
 		<c:choose>
 			<c:when test="${board eq 'notice'}">
+			<!------------ notice ------------>
 				<input type="hidden" id="board" value="${board}"> 
 				<input type="hidden" id="num" value="${vo.num}">
 				<p id="wtitle">공지사항</p>
 			</c:when>
 			<c:when test="${board eq 'qna'}">
+			<!------------ qna ------------>
 				<c:choose>
 					<c:when test="${menu eq 'complaint'}">
 						<p id="wtitle">건의합니다</p>
@@ -93,6 +95,7 @@
 		
 			<c:choose>
 				<c:when test="${board eq 'notice'}">
+				<!------------ notice ------------>
 					<div class="title">${vo.title}</div>
 					<div id="sub">
 						<ul>
@@ -106,6 +109,7 @@
 					<div id="contents">${vo.contents}</div>
 				</c:when>
 				<c:when test="${board eq 'qna'}">
+				<!------------ qna ------------>
 					<input type="hidden" name="num" value="${vo.num}" id="qnum">
 					<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
 					<input type="hidden" name="num" value="${vo.ref}" id="qref">
@@ -130,11 +134,13 @@
 			<div id="btn_box">
 			<c:choose>
 				<c:when test="${board eq 'notice'}">
+				<!------------ notice ------------>
 					<a href="./${board}List" id="list">목록</a>
 					<button id="delete">삭제</button>
 					<a href="./${board}Update?num=${vo.num}" id="update">수정</a>
 				</c:when>
 				<c:when test="${board eq 'qna'}">
+				<!------------ qna ------------>
 						<a href="./${menu}" id="list">목록</a>
 						<c:choose>
 							<c:when test="${vo.depth eq '1'}">

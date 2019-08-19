@@ -189,15 +189,15 @@ $(function() {
 		<c:when test="${not empty memberVO}">
 			<c:choose>
 				<c:when test="${memberVO.grade eq '2'}">
-					<div id="sub_nav_box" style="padding-left: 657px;">
+					<div id="sub_nav_box" style="padding-left: 688px;">
 				</c:when>
 				<c:otherwise>
-				<div id="sub_nav_box" style="padding-left: 671px;">
+				<div id="sub_nav_box" style="padding-left: 702px;">
 				</c:otherwise>
 			</c:choose>
 		</c:when>
 		<c:otherwise>
-			<div id="sub_nav_box" style="padding-left: 696px;">
+			<div id="sub_nav_box" style="padding-left: 726px;">
 		</c:otherwise>
 	</c:choose>
 		<ul id="ul_1">

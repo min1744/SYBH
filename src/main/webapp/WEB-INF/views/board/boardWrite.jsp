@@ -107,7 +107,6 @@
 							</div>
 						</c:when>
 					</c:choose>
-					
 					<div id="write_btn">
 						<input id="write" type="button" value="글등록">
 					</div>
