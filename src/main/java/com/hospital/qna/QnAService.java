@@ -19,6 +19,29 @@ public class QnAService implements BoardService{
 	@Inject
 	private QnADAO qnaDAO;
 	
+	//내 문의내역 리스트
+	public List<QnAVO> getMemberQnaList(PageMaker pageMaker, QnAVO qnaVO) throws Exception {
+		
+		pageMaker.setKind(qnaVO.getWriter());
+		pageMaker.makeRow();
+		int totalCount = qnaDAO.getMemberQnaTotalCount(qnaVO);
+		pageMaker.makePage(totalCount);
+		List<QnAVO> list = qnaDAO.getMemberQnaList(pageMaker);
+		
+		return list;
+	}
+	
+	//내 문의내역 갯수
+	public int getMemberTotalCount(QnAVO qnaVO) throws Exception {
+		int total;
+		try {
+			total = qnaDAO.getMemberQnaTotalCount(qnaVO);
+		} catch (Exception e) {
+			total = 0;
+		}
+		return total;
+	}
+	
 	//답글
 	public int setReply(QnAVO qnaVO) throws Exception {
 		

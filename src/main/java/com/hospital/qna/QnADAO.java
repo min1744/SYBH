@@ -18,7 +18,16 @@ public class QnADAO implements BoardDAO{
 	@Inject
 	private SqlSession sqlSession;
 	private static final String NAMESPACE="QnaMapper.";
-
+	
+	//내 문의내역 갯수
+	public int getMemberQnaTotalCount(QnAVO qnaVO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"memberQnaTotalCount", qnaVO);
+	}
+	
+	//내 문의내역 리스트
+	public List<QnAVO> getMemberQnaList(PageMaker pageMaker) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"memberQnaList", pageMaker);
+	}
 	
 	//답글 insert
 	public int setReply(QnAVO qnaVO) throws Exception {

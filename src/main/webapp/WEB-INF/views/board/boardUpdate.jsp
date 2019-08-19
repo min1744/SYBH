@@ -63,7 +63,7 @@
 							</div>
 							<div class="float">
 								<span class="writer">작성자</span> <input class="form-control"
-									type="text" id="q_writer" name="writer" value="admin" readonly>
+									type="text" id="q_writer" name="writer" value="admin1" readonly>
 							</div>
 								<div class="float">
 									<span class="category">구분</span> 
@@ -90,7 +90,7 @@
 								<c:when test="${board eq 'notice'}">
 									<div class="float">
 										<span class="writer">작성자</span> <input class="form-control"
-											type="text" id="writer" name="writer" value="admin" readonly>
+											type="text" id="writer" name="writer" value="admin1" readonly>
 									</div>
 								</c:when>
 								<c:when test="${board eq 'community'}">
