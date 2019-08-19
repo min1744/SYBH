@@ -26,6 +26,8 @@ import com.hospital.member.MemberVO;
 import com.hospital.member.mail.MailVO;
 import com.hospital.pay.PayService;
 import com.hospital.pay.PayVO;
+import com.hospital.qna.QnAService;
+import com.hospital.qna.QnAVO;
 import com.hospital.treatbreakdown.TreatBreakDownService;
 import com.hospital.treatbreakdown.TreatBreakDownVO;
 import com.hospital.util.PageMaker;
@@ -44,6 +46,8 @@ public class MemberController {
 	private CheckUpService checkUpService;
 	@Inject
 	private TreatBreakDownService treatBreakDownService;
+	@Inject
+	private QnAService qnaService;
 	
 	@RequestMapping(value = "memberMyPage", method = RequestMethod.GET)
 	public ModelAndView myPage(ModelAndView mv, HttpSession session) throws Exception {
@@ -107,6 +111,26 @@ public class MemberController {
 		mv.setViewName("member/memberBreakdown");
 		return mv;
 	}
+	
+	
+	//내 문의 내역
+	@RequestMapping(value = "memberQna", method = RequestMethod.GET)
+	public ModelAndView getQna(PageMaker pageMaker, QnAVO qnaVO, HttpSession session) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		qnaVO.setWriter(id);
+		List<QnAVO> list = qnaService.getMemberQnaList(pageMaker, qnaVO);
+		int totalCount = qnaService.getMemberTotalCount(qnaVO);
+		mv.addObject("list", list);
+		mv.addObject("pager", pageMaker);
+		mv.addObject("count", totalCount);
+		mv.addObject("board", "Qna");
+		mv.setViewName("member/memberBreakdown");
+		
+		return mv;
+	}
+	
+	
 	
 	@RequestMapping(value = "memberIdFind", method = RequestMethod.GET)
 	public void memberIdFind() throws Exception {}
