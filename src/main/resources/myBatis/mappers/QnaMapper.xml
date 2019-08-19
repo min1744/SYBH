@@ -95,6 +95,20 @@
   	select * from qna where num=#{num}
   </select>
   
+  <!-- 내 문의내역 -->
+  <select id="memberQnaList" parameterType="PageMaker" resultType="QnAVO"> 
+  	select * from
+	(select rownum R, Q.* from
+	(select * from qna
+	where writer=#{kind} order by num desc) Q)
+	where R between #{startRow} and #{lastRow}
+  </select>
+  
+  <!-- 한사람 모든 문의내역 갯수 -->
+  <select id="memberQnaTotalCount" parameterType="QnAVO" resultType="Integer">
+  	select count(num) from qna where writer=#{writer}
+  </select>
+  
   
   <!-- list -->
   <select id="getList" parameterType="java.util.Map" resultType="QnAVO">

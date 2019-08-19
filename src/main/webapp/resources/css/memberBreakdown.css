@@ -149,6 +149,21 @@
 	border-bottom: 1px solid #153F91;
 }
 
+#info_list table tbody .q_td {
+	
+	font-size: 0.9em;
+	color: #808080;
+	letter-spacing: -1px;
+}
+
+
+#info_list table tbody .q_title a{
+	
+	font-weight: 700;
+	color: #153F91;
+	font-size: 1.1em;
+}
+
 
 #info_list .cancel {
 	

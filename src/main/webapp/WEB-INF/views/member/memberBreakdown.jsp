@@ -14,6 +14,24 @@
 
 <div id="board">
 		<c:choose>
+			<c:when test="${board eq 'Qna' }">
+			<div id="board_title">
+			<p>고객의소리 조회</p>
+		</div>
+
+	<div id="board_box">
+	
+		<div id="board_nav">
+		
+			<ul>
+				<li>조회 내역</li>
+				<li><a href="./memberUpdate">내정보 수정</a></li>
+				<li><a href="./memberNomal">진료예약 조회</a></li>
+				<li><a href="./memberMedical">건강검진 조회</a></li>
+				<li><a href="./memberDonation">후원내역 조회</a></li>
+				<li><a href="./memberQna" style="color:#6BB5DB;">고객의소리 조회</a></li>
+			</ul>
+			</c:when>
 			<c:when test="${board eq 'Nomal'}">
 		<div id="board_title">
 			<p>진료 예약 조회</p>
@@ -29,7 +47,7 @@
 				<li><a href="./memberNomal" style="color:#6BB5DB;">진료예약 조회</a></li>
 				<li><a href="./memberMedical">건강검진 조회</a></li>
 				<li><a href="./memberDonation">후원내역 조회</a></li>
-				<li><a href="./memberBreakdown">문의내역 조회</a></li>
+				<li><a href="./memberQna">고객의소리 조회</a></li>
 			</ul>
 			</c:when>
 			<c:when test="${board eq 'Medical'}">
@@ -46,7 +64,7 @@
 				<li><a href="./memberNomal">진료예약 조회</a></li>
 				<li><a href="./memberMedical" style="color:#6BB5DB;">건강검진 조회</a></li>
 				<li><a href="./memberDonation">후원내역 조회</a></li>
-				<li><a href="./memberBreakdown">문의내역 조회</a></li>
+				<li><a href="./memberQna">고객의소리 조회</a></li>
 			</ul>
 			</c:when>
 			<c:otherwise>
@@ -63,7 +81,7 @@
 				<li><a href="./memberNomal">진료예약 조회</a></li>
 				<li><a href="./memberMedical">건강검진 조회</a></li>
 				<li><a href="./memberDonation" style="color:#6BB5DB;">후원내역 조회</a></li>
-				<li><a href="./memberBreakdown">문의내역 조회</a></li>
+				<li><a href="./memberQna">고객의소리 조회</a></li>
 			</ul>
 			</c:otherwise>
 		</c:choose>
@@ -75,6 +93,74 @@
 			<div id="info_list">
 				
 			<c:choose>
+				<c:when test="${board eq 'Qna'}">
+				<p>총 게시물 : <span>${count}</span></p>
+			
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 75px;">글번호</th>
+							<th style="width: 95px;">글메뉴</th>
+							<th style="width: 95px;">구분</th>
+							<th style="width: 350px;">제목</th>
+							<th style="width: 110px;">작성날짜</th>
+							<th style="width: 95px;">조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list }" var="list" varStatus="i">
+						<tr>
+
+							<td>${list.num}</td>
+							<td class="q_td">
+							<c:choose>
+								<c:when test="${list.menu eq 'complaint'}">
+									건의합니다
+								</c:when>
+								<c:when test="${list.menu eq 'praise'}">
+									칭찬합니다
+								</c:when>
+								<c:otherwise>
+									질문과답변
+								</c:otherwise>
+							</c:choose>
+							</td>
+							<td class="q_td">
+							[<c:choose>
+									<c:when test="${list.category eq 'site'}">사이트이용</c:when>
+									<c:when test="${list.category eq 'web'}">병원이용</c:when>
+									<c:otherwise>기타</c:otherwise>
+							</c:choose>]
+							</td>
+							<td class="q_title"><a href="../qna/${list.menu}Select?num=${list.num}">${list.title}</a></td>
+							<td>${list.reg_date }</td>
+							<td>${list.hit}</td>
+						</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div id="paging">
+					<ul>
+						<c:if test="${pager.curBlock>1 }">
+						<li><a href="./member${board}?curPage=${pager.startNum-1}&kind=${pager.kind}" id="prev">◀</a></li>
+						</c:if>
+						<c:choose>
+							<c:when test="${pager.totalCount == 0 }">
+								<li><a href="./member${board }?curPage=1&kind=${pager.kind}">1</a></li>
+							</c:when>
+							<c:otherwise>
+								<c:forEach begin="${pager.startNum }" end="${pager.lastNum }" var="i">
+									<li><a href="./member${board }?curPage=${i}&kind=${pager.kind}">${i}</a></li>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${pager.curBlock<pager.totalBlock }">
+						<li><a href="./member${board }?curPage=${pager.lastNum+1 }&kind=${pager.kind}" id="next">▶</a></li>
+						</c:if>
+					</ul>				
+				
+				</div>
+				</c:when>
 				<c:when test="${board eq 'Nomal'}">
 				<!-- 일반진료 예약 내역 -->
 				<p>총 게시물 : <span>${count }</span></p>

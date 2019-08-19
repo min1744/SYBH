@@ -214,18 +214,19 @@
 					</div>
 					<!-- 문의내역 -->
 					<div id="qna_info" class="common_div">
-						<h3>문의내역 조회</h3>
+						<h3>고객의소리 조회</h3>
 						<p>
-							내가 남긴 문의 내역을<br> 확인하실 수 있습니다.
+							내가 남긴 고객의소리 내역을<br> 확인하실 수 있습니다.
 						</p>
 
 						<div class="info_btn_2">
-							<a href="./memberBreakdown">조회하기</a>
+							<a href="./memberQna">조회하기</a>
 						</div>
 					</div>
 					<!-- 대표전화 -->
 					<div id="main_info">
-						<h3>대표전화</h3>
+						<h3>사이트 문의관련</h3>
+						<p>대표전화 : 1588-5700</p>
 					</div>
 				</div>
 			</div>
