@@ -12,14 +12,13 @@
 <body>
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
-
-
+<input type="hidden" id="board" value="${board}"> 
 <div id="board">
 		<div id="board_title">
 		<c:choose>
 			<c:when test="${board eq 'notice'}">
 			<!------------ notice ------------>
-				<input type="hidden" id="board" value="${board}"> 
+				
 				<input type="hidden" id="num" value="${vo.num}">
 				<p id="wtitle">공지사항</p>
 			</c:when>
@@ -161,8 +160,6 @@
 		</div>
 	</div>
 </div>
-
-
 <!-- footer 추가 -->
 <c:import url="../common/footer.jsp" />
 </body>

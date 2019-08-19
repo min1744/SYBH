@@ -335,15 +335,7 @@
 				</ul>
 			</div>
 			
-			<div id="file">
-					<table>
-						<tr>
-							<th><img src="../resources/images/clip.png">첨부파일</th>
-							<td><a href="">파일명.jpg</a></td>
-							<td><a href="">파일명sdfsdfsdf.jpg</a></td>
-						</tr>
-					</table>
-				</div>
+		
 			
 			<div id="main_contents">${vo.main_contents}</div>
 			<div id="sub_contents">${vo.sub_contents}</div>
@@ -456,7 +448,7 @@
 			
 			
 			<div id="btn_box">
-				<a href="./newsList" id="list">목록</a>
+				<a href="./newsAll" id="list">목록</a>
 				
 				<button id="delete">삭제</button>
 				<a href="./${vo.menu}Update?num=${vo.num}" id="update">수정</a>
