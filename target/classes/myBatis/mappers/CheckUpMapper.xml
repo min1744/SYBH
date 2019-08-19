@@ -26,6 +26,8 @@
   	<result property="pay_date" column="pay_date"/>
   	<result property="opt" column="opt"/>
   	<result property="price" column="price"/>
+  	<result property="name" column="name"/>
+  	<result property="phone" column="phone"/>
   </resultMap> 
   
   <!-- 건강검진 내역 --> 
@@ -45,6 +47,32 @@
   	update checkup set check_status=#{check_status} where num=#{num}
   </update>
   
-
-
+	<!--관리자용  -->
+	 <select id="getAllTotalCount" resultType="Integer">
+  	select count(num) from checkup
+  </select>
+	<select id="getAllList" parameterType="PageMaker" resultMap="checkUpList">
+  		select * from
+  		(select rownum R, Ch.* from
+  		(select C.*, P.pay_date, P.opt, P.price,M.phone,M.name from checkup C 
+  		FULL JOIN pay P	on (C.id = P.id)
+  		FULL JOIN member M on (P.id = M.id)
+  		where P.category=0 and (C.num-1) = P.num and
+  		<choose>
+			<when test="kind ==1">
+				C.id
+			</when>
+			<when test="kind ==2">
+				C.contents
+			</when>
+			<otherwise>
+				C.id
+			</otherwise>
+		</choose>
+		like '%'||#{search}||'%'
+  		order by C.num desc) Ch)
+  		where R between #{startRow} and #{lastRow}
+  	</select>
+	
+	
   </mapper>

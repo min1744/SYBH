@@ -13,12 +13,25 @@ public class TreatBreakDownVO {
 	private String contents;
 	private String reserve_date;
 	private Date apply_date;
-	
+	//멤버 결합
 	private String name;
+	private String phone;
 	
 	
 	
+	public int getTnum() {
+		return tnum;
+	}
+	public void setTnum(int tnum) {
+		this.tnum = tnum;
+	}
 	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public Date getApply_date() {
 		return apply_date;
 	}
@@ -31,12 +44,7 @@ public class TreatBreakDownVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getTnum() {
-		return tnum;
-	}
-	public void setTnum(int tnum) {
-		this.tnum = tnum;
-	}
+	
 	public String getId() {
 		return id;
 	}

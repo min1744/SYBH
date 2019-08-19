@@ -12,6 +12,22 @@ public class CheckUpVO {
 	private Date pay_date;
 	private String opt;
 	private int price;
+	//멤버테이블 결합
+	private String name;
+	private String phone;
+	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getNum() {
 		return num;
 	}

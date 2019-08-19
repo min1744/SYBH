@@ -44,4 +44,16 @@ public class CheckUpService {
 		}
 		return total;
 	}
+	//관리자
+	public int getAllTotalCount() throws Exception{
+		return checkUpDAO.getAllTotalCount();
+	}
+	
+	public List<CheckUpVO> getAllList(PageMaker pageMaker)throws Exception{
+		pageMaker.makeRow();
+		int totalCount = checkUpDAO.getAllTotalCount();
+		pageMaker.makePage(totalCount);
+		List<CheckUpVO> list = checkUpDAO.getAllList(pageMaker);
+		return list;
+	}
 }
