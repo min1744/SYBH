@@ -128,7 +128,7 @@ public class NewsController {
 		menu = "disease";
 		List<NewsVO> list = newsService.getList(pageMaker, menu);
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("list",list);
+		mv.addObject("disease",list);
 		mv.addObject("pager", pageMaker);
 		mv.addObject("menu","disease");
 		mv.setViewName("news/newsList");

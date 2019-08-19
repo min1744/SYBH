@@ -10,39 +10,13 @@
 <c:import url="../temp/summernote.jsp" />
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
 <script type="text/javascript">
-	$(function() {
-		
-		
-		//file 추가
-		var count = 0;
-		
-		$('#add').click(function() {
-			if(count < 5) {
-				var result ='<div class="input-group col-xs-3"><input type="file" name="f1" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-remove del"></i></span> </div>';
-				$('#files').append(result);
-				count++;
-			} else {
-				alert('첨부파일은 최대 5개까지만 가능합니다.');
-			}
-		});	
-		
-			$('#files').on('click', '.del', function() {
-				$(this).prev().remove();
-				$(this).remove();
-				count--;
-			});
-			
-			
-		//폼 검증				
-		$("#write").click(function() {
-			//다른 input들 검증
-			
-				$('#frm').submit();				
-			
-		});
-			
-			
+$(function() {
+	//폼 검증				
+	$("#write").click(function() {
+		//다른 input들 검증
+		$('#frm').submit();				
 	});
+});
 </script>
 </head>
 <body>
