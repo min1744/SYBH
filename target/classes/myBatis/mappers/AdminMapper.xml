@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- id, pw, name, res_reg_num, phone, email, gender, age, grade -->
+<mapper namespace="AdminMapper">
+	<!-- 회원 관리용 리스트 -->
+	<select id="getList" resultType="MemberVO">
+		SELECT * FROM MEMBER WHERE GRADE != 2
+	</select>
+	
+	<!-- 월 별 회원가입 수-->
+	<select id="getAnnualMemberCount" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 2 AND SUBSTR(REG_DATE, 1, 2) = #{year}
+	</select>
+	
+	<!-- 관리자를 제외한 모든 회원들의 수 -->
+	<select id="getAllMemberCount" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 2
+	</select>
+	
+	<!-- 의사 수 -->
+	<select id="getAllDoctorCount" resultType="Integer">
+		SELECT COUNT(*) FROM MEDICALTEAM
+	</select>
+	
+	<!-- 관리자 수 -->
+	<select id="getAllAdminCount" resultType="Integer">
+		SELECT COUNT(*) FROM MEMBER WHERE GRADE = 2
+	</select>
+	
+	<!-- 가입 날짜 모두 select -->
+	<select id="getRegDate" parameterType="String" resultType="Date">
+		SELECT REG_DATE FROM MEMBER WHERE GRADE != 2 AND SUBSTR(REG_DATE, 1, 2) = #{year}
+	</select>
+	
+	<!-- 결제 날짜 모두 select -->
+	<select id="getPayDate" parameterType="String" resultType="PayVO">
+		SELECT PAY_DATE, PRICE FROM PAY WHERE CATEGORY != 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
+	</select>
+	
+	<!-- 방문객들의 방문 날짜 모두 select -->
+	<select id="getAccessDate" parameterType="String" resultType="Date">
+		SELECT A.REG_DATE FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID) WHERE M.GRADE != 2 AND SUBSTR(A.REG_DATE, 1, 2) = #{year}
+	</select>
+	
+	<!-- 회원 관리(삭제) -->
+	<delete id="setDeletes" parameterType="List">
+		DELETE MEMBER
+		WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 등급 상향 -->
+	<update id="setUpgrade" parameterType="List">
+		UPDATE MEMBER SET GRADE = GRADE + 1 WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 등급 하향 -->
+	<update id="setDowngrade" parameterType="List">
+		UPDATE MEMBER SET GRADE = GRADE - 1 WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 주민번호를 활용해서 회원탈퇴를 당한 사람이 로그인하지 못하도록 기록남기기 -->
+	<insert id="setUnserviceability" parameterType="UnserviceabilityVO">
+		<selectKey keyProperty="unum" order="BEFORE" resultType="Integer">
+			SELECT UNSERVICEABILITY_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO UNSERVICEABILITY
+		VALUES(
+			#{unum},
+			#{id},
+			#{email},
+			#{name},
+			#{res_reg_num},
+			#{reason}
+		)
+	</insert>
+	
+	<!-- 차단된 사람인지 조사 -->
+	<select id="getUnserviceability" parameterType="String" resultType="Integer">
+		SELECT COUNT(*)
+		FROM UNSERVICEABILITY
+		WHERE RES_REG_NUM = #{res_reg_num}
+	</select>
+	
+	<!-- 차된 된 사람들 리스트 -->
+	<select id="getUnserviceabilityList" resultType="UnserviceabilityVO">
+		SELECT * FROM UNSERVICEABILITY
+	</select>
+	
+	<!-- 차단 해제 -->
+	<delete id="setDeleteUnserviceability" parameterType="List">
+		DELETE UNSERVICEABILITY
+		WHERE ID IN
+		<foreach collection="list" item="item" open="(" separator=", " close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 후원을 제외한 총 earnings 구하기 -->
+	<select id="getEarnings" parameterType="String" resultType="Integer">
+		SELECT PRICE FROM PAY WHERE CATEGORY != 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
+	</select>
+	
+	<!-- 총 후원 금액 구하기 -->
+	<select id="getDonations" parameterType="String" resultType="Integer">
+		SELECT PRICE FROM PAY WHERE CATEGORY = 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
+	</select>
+	
+	<!-- AccessInfo table insert -->
+	<insert id="setAccess" parameterType="AccessVO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Integer">
+			SELECT ACCESSINFO_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO ACCESSINFO
+		VALUES(
+			#{num},
+			#{id},
+			#{ip},
+			#{country},
+			#{location},
+			#{latitude},
+			#{longitude},
+			SYSDATE
+		)
+	</insert>
+	
+	<!-- AccessInfo TotalCount -->
+	<select id="getAllAccessCounts" parameterType="Map" resultType="Integer">
+		SELECT COUNT(*) FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID) WHERE SUBSTR(A.REG_DATE, 1, 2) = #{year} AND SUBSTR(A.REG_DATE, 4, 2) = #{month} AND SUBSTR(A.REG_DATE, 7, 2) = #{date} AND M.GRADE != 2
+	</select>
+	
+	<!-- AccessInfo List -->
+	<select id="getAccessInfoList" resultType="AccessInfoVO">
+		SELECT ROWNUM NUM, A.* FROM
+		(SELECT ID, M.NAME, M.PHONE, M.EMAIL, A.COUNTRY, A.LOCATION, A.REG_DATE
+		FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID)) A
+	</select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DoctorImagesMapper">
+
+	<insert id="setWrite" parameterType="com.hospital.doctorImages.DoctorImagesVO">
+		insert into doctorimages values(doctorimages_seq.nextval, #{num}, #{fname}, #{oname})
+	</insert>
+	
+	<select id="getSelect" parameterType="com.hospital.medicalTeam.MedicalTeamVO" resultType="com.hospital.doctorImages.DoctorImagesVO">
+		select * from doctorimages where num=#{num}
+	</select>
+	
+	<delete id="setDelete" parameterType="Integer">
+		delete doctorimages where fnum=#{fnum}
+	</delete>
+	
+		
+</mapper>

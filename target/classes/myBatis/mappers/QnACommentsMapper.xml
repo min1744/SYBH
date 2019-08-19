@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="QnACommentsMapper">
+  
+  <!-- <![CDATA[ 쿼리문   ]]> -->
+	<!-- query piece -->
+	<sql id="subRef">
+	<![CDATA[
+		select ref from QnaComments where qcnum=#{qcnum}
+	]]>	
+	</sql>
+	<sql id="subStep">
+		select step from QnaComments where qcnum=#{qcnum}
+	</sql>
+	
+	<!-- 댓글 답글 사전 작업 -->
+  <update id="setReplyUpdate" parameterType="QnACommentsVO">
+  	update QnaComments set step=step+1
+  	where ref=(<include refid="subRef"/>)
+	and step>(<include refid="subStep"/>)
+  </update>
+  
+  <!-- 댓글 답글 insert -->
+  <insert id="setReply" parameterType="QnACommentsVO">
+		insert into QnaComments values
+		(
+			QnaComments_SEQ.nextval, #{num}, #{id}, #{contents}, sysdate,
+			(<include refid="subRef"/>),
+			(<include refid="subStep"/>)+1,
+			1, 0, 0
+		)
+	</insert>
+	
+	<!-- 댓글 답글 delete -->
+  <delete id="replyDelete" parameterType="Integer">
+  	delete QnaComments where qcnum=#{qcnum}
+  </delete>
+  
+  <!-- write -->
+  <insert id="setWrite" parameterType="QnACommentsVO">
+  <selectKey keyProperty="qcnum" order="BEFORE" resultType="Integer">
+  		select QnaComments_SEQ.nextval from dual
+  </selectKey>
+  	insert into QnaComments values(#{qcnum}, #{num}, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0, 0, 0)
+  </insert>
+  
+  
+    <!-- list -->
+  <select id="getList" parameterType="java.util.Map" resultType="QnACommentsVO">
+	select * from
+	(select rownum R, C.* from
+	(select * from QnAComments where num=#{num} order by like_cnt desc, ref desc, step asc) C)
+	where R between #{pager.startRow} and #{pager.lastRow}
+  </select>
+  
+  <!-- totalCount -->
+  <select id="getCount" parameterType="Integer" resultType="Integer">
+  	select count(num) from QnaComments where num=#{num}
+  </select>
+  
+  <!-- update -->
+  <update id="setUpdate" parameterType="QnAVO">
+  	update QnaComments set contents=#{contents} where qcnum=#{qcnum}
+  </update>
+  
+  
+  <!-- 원본 댓글 delete -->
+  <delete id="setDelete" parameterType="Integer">
+  	delete QnaComments where ref=#{ref}
+  </delete>
+  
+  <!-- 좋아요 카운트 수정 -->
+  <update id="likeUpdate" parameterType="QnACommentsVO">
+  	update QnaComments set like_cnt=like_cnt+1 where qcnum=#{qcnum}
+  </update>
+  
+  <!-- 좋아요 취소 카운트 수정 -->
+  <update id="likeDelete" parameterType="QnACommentsVO">
+  	update QnaComments set like_cnt=like_cnt-1 where qcnum=#{qcnum}
+  </update>
+  
+  <!-- 싫어요 카운트 수정 -->
+  <update id="hateUpdate" parameterType="QnACommentsVO">
+  	update QnaComments set hate_cnt=hate_cnt+1 where qcnum=#{qcnum}
+  </update>
+  
+  <!-- 싫어요 취소 카운트 수정 -->
+  <update id="hateDelete" parameterType="QnACommentsVO">
+  	update QnaComments set hate_cnt=hate_cnt-1 where qcnum=#{qcnum}
+  </update>
+  
+</mapper>  

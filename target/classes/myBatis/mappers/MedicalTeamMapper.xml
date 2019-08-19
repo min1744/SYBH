@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="MedicalTeamMapper">
+
+	<resultMap type="com.hospital.doctorImages.DoctorImagesVO" id="fileResult">
+		<id property="fnum" column="fnum"/>
+		<result property="fname" column="fname"/>
+		<result property="oname" column="oname"/>
+	</resultMap>
+	
+	<resultMap type="MedicalTeamVO" id="medicalTeam">
+		<id property="num" column="num"/>
+		<result property="name" column="name"/>
+		<result property="med_office" column="med_office"/>
+		<result property="pro_field" column="pro_field"/>
+		<result property="career" column="career"/>
+		<result property="major_act" column="major_act"/>
+		<result property="mid" column="mid"/>
+		<association property="doctorImagesVO" resultMap="fileResult" javaType="com.hospital.doctorImages.DoctorImagesVO">
+		</association>
+	</resultMap>
+
+
+<select id="getList" resultMap="medicalTeam" parameterType="Integer">
+	select M.*,F.fnum,F.fname,F.oname from medicalteam M  FULL JOIN doctorImages F 
+	on (M.num = F.num)
+	where mid=#{mid}
+</select>
+
+<select id="getSearch" resultMap="medicalTeam" parameterType="String">
+	select M.*,F.fnum,F.fname,F.oname from medicalteam M 
+	FULL JOIN doctorImages F 
+	on(M.num = F.num)
+	where name
+	like '%' || #{name} || '%' order by name asc
+	
+</select>
+
+<select id="getSelect" resultMap="medicalTeam" parameterType="String">
+	select M.*, F.fnum, F.fname, F.oname from medicalteam M
+	FULL JOIN doctorImages F
+	on (M.num = F.num)
+	where M.name = #{name}
+</select>
+
+
+</mapper>

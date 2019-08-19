@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="NewsMapper">
+ 
+ <insert id="setWrite" parameterType="NewsVO">
+ <selectKey keyProperty="num" order="BEFORE" resultType="Integer">
+  		select news_seq.nextval from dual
+ </selectKey>
+ 	insert into news values(#{num},#{title},#{writer},#{main_contents},#{sub_contents},sysdate,0,#{menu})
+ </insert> 
+ 
+ <update id="setUpdate" parameterType="NewsVO">
+ 	update news set title=#{title}, main_contents=#{main_contents}, sub_contents=#{sub_contents}, menu=#{menu} where num=#{num}
+ </update>
+ 
+ <update id="setHitUpdate" parameterType="Integer">
+ 	update news set hit=hit+1 where num=#{num}
+ </update>
+  
+ <delete id="setDelete" parameterType="Integer">
+ 	delete news where num=#{num}
+ </delete> 
+ 
+ <select id="newsAll" parameterType="String" resultType="NewsVO">
+   select * from 
+  (select * from news
+  where menu=#{menu} order by num desc)
+  where rownum between 1 and 3	
+  </select> 	
+ 	
+
+ 
+ 
+ 
+ <select id="getList" parameterType="java.util.Map" resultType="NewsVO">
+  	select * from 
+  	(select rownum R, M.* from
+  	(select N.*, I.fnum, I.fname, I.oname 
+  	from news N FULL JOIN newsimages I
+  	on (N.num = I.num)
+  	where menu=#{menu} and	
+  <choose>
+  		<when test="kind = 1">
+  			 title
+  		</when>
+  		<when test="kind = 2">
+  			 main_contents
+  		</when>
+  		<when test="kind = 3">
+  			 sub_contents
+  		</when>
+  		
+  		<otherwise>
+  			writer
+  		</otherwise>
+   </choose>
+   		
+  	 	 like '%'||#{pager.search}||'%'
+  	 	 order by N.num desc) M)
+  	 	 where R between #{pager.startRow} and #{pager.lastRow}
+  </select>
+  
+ <select id="getCount" parameterType="java.util.Map" resultType="Integer">
+ 	select count(num) from news
+ 	where menu=#{menu} and
+ <choose>
+  		<when test="kind = 1">
+  			 title
+  		</when>
+  		<when test="kind = 2">
+  			 writer
+  		</when>
+  		<when test="kind = 3">
+  			 main_contents
+  		</when>
+  		  		
+  		<otherwise>
+  			sub_contents
+  		</otherwise>
+  </choose>
+  	like '%'||#{pager.search}||'%'
+  	
+ </select>
+  
+ 
+  <select id="getSelect" parameterType="NewsVO" resultType="NewsVO">
+ 	select N.*, I.* 
+ 	 from news N Full join newsimages I 
+ 	 on (N.num=I.num)
+ 	 where N.num=#{num}
+ 	 
+ </select>
+ 
+ <resultMap type="NewsVO" id="newsResult">
+	 <id property="num" column="num"/>
+	 <result property="title" column="title"/>
+	 <result property="writer" column="writer"/>
+	 <result property="main_contents" column="main_contents"/>
+	 <result property="sub_contents" column="sub_contents"/>
+	 <result property="reg_date" column="reg_date"/>
+	 <result property="hit" column="hit"/>
+	 <result property="menu" column="menu"/>
+	 <collection property="imagesVOs" javaType="List">
+	 	<id property="fnum" column="fnum"/>
+	 	<result property="fname" column="fname"/>
+	 	<result property="oname" column="oname"/>
+	 </collection>
+ </resultMap>
+    
+  </mapper>
