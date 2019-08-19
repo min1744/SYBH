@@ -39,8 +39,17 @@
 				}
 			});
 		});
+		var kind = '${vo.med_office}';
+		$('.k').each(function() {
+			if($(this).attr('title')==kind){
+				$(this).prop("selected", true);
+			}
+		});	
+		
 		
 	});
+	
+	
 	</script>
 </head>
 <body id="page-top">
@@ -75,11 +84,11 @@
 								<div class="form-group">
 									<span class="writer">진료과</span> 
 									 <select class="form-control" id="sel1" name="med_office">
-									    <option value="1" >이비인후과</option>
-									    <option value="2">외과</option>
-									    <option value="3">비뇨의학과</option>
-									    <option value="4">호흡기내과</option>
-									    <option value="5">신경과</option>
+									    <option class="k" title="이비인후과" value="1" >이비인후과</option>
+									    <option class="k" title="외과" value="2">외과</option>
+									    <option class="k" title="비뇨의학과" value="3">비뇨의학과</option>
+									    <option class="k" title="호흡기내과" value="4">호흡기내과</option>
+									    <option class="k" title="신경과" value="5">신경과</option>
 									 </select>
 								</div>
 								<div class="form-group">

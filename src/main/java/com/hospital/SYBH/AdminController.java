@@ -30,6 +30,8 @@ import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
 import com.hospital.notice.NoticeService;
 import com.hospital.notice.NoticeVO;
+import com.hospital.pay.PayService;
+import com.hospital.pay.PayVO;
 import com.hospital.treatbreakdown.TreatBreakDownService;
 import com.hospital.treatbreakdown.TreatBreakDownVO;
 import com.hospital.util.PageMaker;
@@ -48,6 +50,8 @@ public class AdminController {
 	private TreatBreakDownService treatBreakDownService;
 	@Inject
 	private CheckUpService checkUpService;
+	@Inject
+	private PayService payService;
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
@@ -131,7 +135,8 @@ public class AdminController {
 		
 		return mv;
 	}
-	
+	/*재혁 작업 */
+	//관리자용 후원 리스트
 	@RequestMapping(value = "noticeList", method = RequestMethod.GET)
 	public ModelAndView noticeList(PageMaker pageMaker, ModelAndView mv) throws Exception{
 		HashMap<String, List> map = adminService.getNoticeList(pageMaker);
@@ -149,7 +154,25 @@ public class AdminController {
 		return mv;
 	}
 
-	/*재혁 작업 */
+
+	@RequestMapping(value = "adminDonation", method = RequestMethod.GET)
+	public ModelAndView donationList(PageMaker pageMaker,PayVO payVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		payVO.setCategory(1);
+		List<PayVO> list = payService.adminDonation(pageMaker, payVO);
+		//후원 금액
+		int total = payService.getDonationTotal();
+		//후원인 총 인원
+		int people = payService.getDonationPeopleTotal();
+		mv.addObject("total",total);
+		mv.addObject("people",people);
+		mv.addObject("list",list);
+		mv.addObject("pager",pageMaker);
+		mv.setViewName("admin/pay/payList");
+		return mv;
+		
+	}
+	
 	@RequestMapping(value = "noticeSelect",method = RequestMethod.GET)
 	public ModelAndView getNoticeSelect(int num) throws Exception{
 		ModelAndView mv = new ModelAndView();
