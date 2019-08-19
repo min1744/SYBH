@@ -279,6 +279,7 @@
 	box-sizing: border-box;
 	text-align: center;
 	float: right;
+	font-size: 1em;
 }
 
 #q_delete {

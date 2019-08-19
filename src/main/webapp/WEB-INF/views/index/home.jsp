@@ -219,7 +219,7 @@ $(function() {
 		<ul id="ul_4">
 			<li><a href="./qna/complaint">건의합니다</a></li>
 			<li><a href="./qna/praise">칭찬합니다</a></li>
-			<li><a href="./qna/qnaList">질문과답변</a></li>
+			<li><a href="./qna/qna">질문과답변</a></li>
 		</ul>
 	</div>
 </div>
