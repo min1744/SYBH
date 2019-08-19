@@ -19,9 +19,11 @@
 					<p id="title">공지사항</p>
 					<p id="sub_title">쌍용백병원의 새로운 소식을 알려드립니다.</p>
 				</div>
-				<div id="write_btn">
-					<a href="./${board}Write" id="write">공지등록</a>
-				</div>
+					<div id="write_btn">
+				<c:if test="${memberVO.grade eq '2'}">
+						<a href="./${board}Write" id="write">공지등록</a>
+				</c:if>
+					</div>
 			</c:when>
 			<c:when test="${board eq 'qna'}">
 			<!------------ qna ------------>
@@ -46,7 +48,9 @@
 					</c:otherwise>
 				</c:choose>
 				<div id="write_btn">
+				<c:if test="${memberVO.grade eq '1' || memberVO.grade eq '2'}">
 					<a href="./${menu}Write" id="write">글쓰기</a>
+				</c:if>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -56,7 +60,9 @@
 					<p id="sub_title">쌍용백병원의 커뮤니티 게시판 입니다.</p>
 				</div>
 				<div id="write_btn">
+				<c:if test="${memberVO.grade eq '1' || memberVO.grade eq '2'}">
 					<a href="./${board}Write" id="write">글등록</a>
+				</c:if>
 				</div>
 			</c:otherwise>
 		</c:choose>

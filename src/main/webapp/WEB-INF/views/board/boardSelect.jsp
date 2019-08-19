@@ -161,23 +161,37 @@
 				<!------------ qna ------------>
 						<a href="./${menu}" id="list">목록</a>
 						<c:choose>
-							<c:when test="${vo.depth eq '1'}">
+							<c:when test="${vo.depth eq '1' && memberVO.grade eq '2'}">
 							<button id="reply_delete">삭제</button>
 							</c:when>
-							<c:when test="${vo.depth eq '0'}">
+							<c:when test="${vo.depth eq '0' && memberVO.id eq vo.writer || memberVO.grade eq '2'}">
 							<button id="q_delete">삭제</button>
 							</c:when>
 						</c:choose>
+						<c:if test="${memberVO.id eq vo.writer || memberVO.grade eq '2'}">
 						<a href="./${menu}Update?num=${vo.num}" id="update">수정</a>
+						</c:if>
 						<c:if test="${memberVO.grade eq '2'}">
 						<a href="./${menu}Reply?num=${vo.num}" id="reply">답글달기</a>
 						</c:if>
 				</c:when>
 				<c:otherwise>
-					<!------------ notice ------------>
-						<a href="./${board}List" id="list">목록</a>
-						<button id="delete">삭제</button>
-						<a href="./${board}Update?num=${vo.num}" id="update">수정</a>
+							<!------------ notice ------------>
+								<a href="./${board}List" id="list">목록</a>
+						<c:choose>
+							<c:when test="${board eq 'notice'}">
+								<c:if test="${memberVO.grade eq '2'}">
+									<button id="delete">삭제</button>
+									<a href="./${board}Update?num=${vo.num}" id="update">수정</a>
+								</c:if>
+							</c:when>
+							<c:otherwise>
+								<c:if test="${memberVO.id eq vo.writer || memberVO.grade eq '2'}">
+									<button id="delete">삭제</button>
+									<a href="./${board}Update?num=${vo.num}" id="update">수정</a>
+								</c:if>
+							</c:otherwise>
+						</c:choose>
 				</c:otherwise>
 			</c:choose>
 			</div>
