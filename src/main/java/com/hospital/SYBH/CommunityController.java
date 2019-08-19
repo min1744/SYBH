@@ -85,7 +85,7 @@ public class CommunityController {
 
 	// ** 게시판 - 삭제 *
 	// String 리턴 타입 완벽한 View 이름을 문자열로 리턴
-	@RequestMapping(value = "communityDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "communityDelete", method = RequestMethod.POST)
 	public String setDelete(int num, HttpSession session) throws Exception {
 		int result = communityService.setDelete(num, session);
 		return "redirect:./communityList";
