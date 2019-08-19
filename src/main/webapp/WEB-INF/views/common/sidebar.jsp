@@ -84,7 +84,6 @@
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">DOCTOR MEMBER:</h6>
             <a class="collapse-item" href="./medicalList">의사 리스트 관리</a>
-            <a class="collapse-item" href="#">등록하기</a>
           </div>
         </div>
       </li>
