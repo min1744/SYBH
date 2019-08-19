@@ -13,7 +13,6 @@ public class QnACommentsVO {
 	private int step;
 	private int depth;
 	private int like_cnt;
-	private int hate_cnt;
 	
 	public int getQcnum() {
 		return qcnum;
@@ -68,12 +67,6 @@ public class QnACommentsVO {
 	}
 	public void setLike_cnt(int like_cnt) {
 		this.like_cnt = like_cnt;
-	}
-	public int getHate_cnt() {
-		return hate_cnt;
-	}
-	public void setHate_cnt(int hate_cnt) {
-		this.hate_cnt = hate_cnt;
 	}
 	
 	

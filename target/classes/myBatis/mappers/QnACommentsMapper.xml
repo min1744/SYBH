@@ -31,7 +31,7 @@
 			QnaComments_SEQ.nextval, #{num}, #{id}, #{contents}, sysdate,
 			(<include refid="subRef"/>),
 			(<include refid="subStep"/>)+1,
-			1, 0, 0
+			1, 0
 		)
 	</insert>
 	
@@ -45,7 +45,7 @@
   <selectKey keyProperty="qcnum" order="BEFORE" resultType="Integer">
   		select QnaComments_SEQ.nextval from dual
   </selectKey>
-  	insert into QnaComments values(#{qcnum}, #{num}, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0, 0, 0)
+  	insert into QnaComments values(#{qcnum}, #{num}, #{id}, #{contents}, sysdate, QnaComments_SEQ.currval, 0, 0, 0)
   </insert>
   
   
@@ -53,7 +53,7 @@
   <select id="getList" parameterType="java.util.Map" resultType="QnACommentsVO">
 	select * from
 	(select rownum R, C.* from
-	(select * from QnAComments where num=#{num} order by like_cnt desc, ref desc, step asc) C)
+	(select * from QnAComments where num=#{num} order by ref desc, step asc) C)
 	where R between #{pager.startRow} and #{pager.lastRow}
   </select>
   
@@ -83,14 +83,6 @@
   	update QnaComments set like_cnt=like_cnt-1 where qcnum=#{qcnum}
   </update>
   
-  <!-- 싫어요 카운트 수정 -->
-  <update id="hateUpdate" parameterType="QnACommentsVO">
-  	update QnaComments set hate_cnt=hate_cnt+1 where qcnum=#{qcnum}
-  </update>
-  
-  <!-- 싫어요 취소 카운트 수정 -->
-  <update id="hateDelete" parameterType="QnACommentsVO">
-  	update QnaComments set hate_cnt=hate_cnt-1 where qcnum=#{qcnum}
-  </update>
+ 
   
 </mapper>  

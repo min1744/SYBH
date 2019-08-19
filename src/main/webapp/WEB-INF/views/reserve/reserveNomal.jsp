@@ -328,7 +328,7 @@
 					<c:forEach items="${list }" var="list" varStatus="i">
 					<div class="list" id="list${i}">
 						<div class="list_profile">
-							<img alt="" src="../resources/images/${list.doctorImagesVO.fname}">
+							<img alt="" src="../resources/file/${list.doctorImagesVO.fname}">
 						</div>
 						
 						<div class="list_info">
@@ -348,7 +348,7 @@
 					
 						<div class="list" id="list">
 							<div class="list_profile">
-							<img alt="" src="../resources/images/${medic.doctorImagesVO.fname}">
+							<img alt="" src="../resources/file/${medic.doctorImagesVO.fname}">
 						</div>
 						
 						<div class="list_info">
@@ -464,7 +464,7 @@
 	        		<hr>
 				
 				<div class="modal_profile">
-					<img alt="" src="../resources/images/${medic.doctorImagesVO.fname}">
+					<img alt="" src="../resources/file/${medic.doctorImagesVO.fname}">
 				</div>
 				
 				<div class="modal_info">

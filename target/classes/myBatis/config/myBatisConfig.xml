@@ -21,11 +21,11 @@
 		<typeAlias type="com.hospital.checkup.CheckUpVO" alias="CheckUpVO"/>
 		<typeAlias type="com.hospital.qna.comments.QnACommentsVO" alias="QnACommentsVO"/>
 		<typeAlias type="com.hospital.news.NewsVO" alias="NewsVO"/>
+		<typeAlias type="com.hospital.news.comments.NewsCommentsVO" alias="NewsCommentsVO"/>
 		<typeAlias type="com.hospital.news.newsimages.NewsImagesVO" alias="NewsImagesVO"/>
 		<typeAlias type="com.hospital.qna.QnAVO" alias="QnAVO"/>
 		<typeAlias type="com.hospital.member.unserviceability.UnserviceabilityVO" alias="UnserviceabilityVO"/>
 		<typeAlias type="com.hospital.qna.comments.like.LikeVO" alias="LikeVO"/>
-		<typeAlias type="com.hospital.qna.comments.hate.HateVO" alias="HateVO"/>
 		<typeAlias type="com.hospital.treatbreakdown.TreatBreakDownVO" alias="TreatBreakDownVO"/>
 		<typeAlias type="com.hospital.schedule.ScheduleVO" alias="ScheduleVO"/>
 		<typeAlias type="com.hospital.admin.AccessVO" alias="AccessVO"/>

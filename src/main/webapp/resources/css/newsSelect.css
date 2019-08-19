@@ -135,7 +135,16 @@
 }
 
 
-#contents {
+#main_contents {
+	
+	text-align: left;
+	overflow: hidden;
+	clear: both;
+}
+
+
+
+#sub_contents {
 	
 	overflow: hidden;
 	padding-bottom: 40px;
@@ -147,13 +156,18 @@
 
 #file{
 	
-	text-align: right;
+	width: 100%;
 	overflow: hidden;
-	float: right;
 	display: block;
 	margin: 20px 0;
 	font-size: 0.9em;
 	
+}
+
+
+#file table {
+	
+	float: right;
 }
 
 
@@ -238,6 +252,7 @@
 	box-sizing: border-box;
 	text-align: center;
 	float: right;
+	font-size: 1em;
 }
 
  
@@ -370,14 +385,274 @@
 
 
 
+
+
+
+
+
+
+
+
+
+/* 댓글 / 건들지 마시오 */
+
+
+.c_re {
+	
+	border-top: 1px solid #ddd;
+}
+
+#comment_box {
+	
+	width: 100%;
+	overflow: hidden;
+	text-align: left;
+	border-top : 1px solid #153F91;
+}
+
+
+#comment {
+	
+	width: 100%;
+	overflow: hidden;
+	letter-spacing: -1px;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 30px;
+
+}
+
+#c_top {
+	
+	width: 100%;
+	margin: 20px 0;
+	overflow: hidden;
+}
+
+
+#c_count_title {
+	
+	font-size: 1em;
+	color: #808080;
+}
+
+
+#c_count {
+	
+	font-size: 1.2em;
+	color: #153F91;
+	font-weight: 700;
+	margin-left: 5px;
+}
+
+
+#c_write_box {
+	
+	width: 87%;
+	background-color: white;
+	border: 1px solid #ddd;
+	float: left;
+	margin-right: 3%;
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 15px 20px;
+}
+
+
+#c_write_box2 {
+	
+	width: 100%;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	float: left;
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 15px 20px;
+	
+}
+
+#c_btn {
+	
+	float: left;
+	width: 10%;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+
+
+#comment_btn {
+	
+	width: 100%;
+	border: none;
+	padding: 15% 4%;
+	border-radius: 5px;
+	background-color: #153F91;
+	color: white;
+	font-size: 0.9em;
+	box-sizing: border-box;
+	text-align: center;
+	cursor: pointer;
+	
+}
+
+
+#c_writer {
+	
+	color: #2f2f2f;
+	font-weight: 500;
+}
+
+#c_write_box textarea {
+	
+	background-color: rgba(255,255,255,.001);
+	width: 100%;
+	border: none;
+	margin-top: 10px;
+	color: #808080;
+	display: block;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 1;
+	padding: 6px 0 0;
+	padding-right: 16px;
+	line-height: 18px;
+	vertical-align: top;
+	resize: none;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+}
+
+
+#c_write_box textarea::placeholder {
+	
+	color: #bcbcbc;
+}
+
+
+
+#c_write_box2 textarea {
+	
+	background-color: rgba(255,255,255,.001);
+	width: 100%;
+	border: none;
+	margin-top: 10px;
+	color: #808080;
+	display: block;
+	overflow-x: hidden;
+	overflow-y: auto;
+	z-index: 1;
+	padding: 6px 0 0;
+	padding-right: 16px;
+	line-height: 18px;
+	vertical-align: top;
+	resize: none;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+}
+
+#c_write_box2 textarea::placeholder {
+	
+	color: #bcbcbc;
+}
+
+
+
+#counter {
+	
+	display: block;
+	text-align: right;
+	font-size: 0.8em;
+	color: #a0a0a0;
+}
+
+
+
+#more_box {
+	
+	width: 100%;
+	text-align: center;
+}
+
+
+#more {
+	
+	margin: 15px 0;
+	border: none;
+	border-radius: 10px;
+	padding: 1.3% 4%;
+	background-color: #153F91;
+	color: white;
+	letter-spacing: -1px;
+	font-size: 1em;
+	font-weight: 500;
+	
+}
+
+#updateContents {
+	
+	resize: vertical;
+}
+
+
+#updateBtn {
+	
+	padding: 1.5% 2.2%;
+	border: none;
+	border-radius: 5px;
+	background-color: #153F91;
+	color: white;
+	font-weight: 500;
+	box-sizing: border-box;
+	text-align: center;
+	margin-right: 5px;
+	font-size: 0.9em;
+	
+}
+
+
+#cancleBtn {
+	
+	padding: 1.5% 2.2%;
+	border: 1px solid #c5c5c5;
+	border-radius: 5px;
+	background-color: white;
+	color: #808080;
+	font-weight: 500;
+	box-sizing: border-box;
+	text-align: center;
+	margin-right: 5px;
+	font-size: 0.9em;
+	
+	
+}
+
+
+.c_re {
+	
+	border-top: 1px solid #ddd;
+}
+
+
+
 /* 댓글 리스트 */
+
+
+.redepth {
+	
+	background-color: #f8f8f8;
+	width: 100%;
+	overflow: hidden;
+	padding: 15px 0 5px 40px;
+	letter-spacing: -1px;
+	border-bottom: 1px solid #ddd;
+}
 
 
 .c_list_box {
 	
 	width: 100%;
 	overflow: hidden;
-	padding: 30px 0;
+	padding: 15px 0 15px 10px;;
 	letter-spacing: -1px;
 	border-bottom: 1px solid #ddd;
 }
@@ -395,6 +670,17 @@
 .best_icon {
 	
 	margin-right: 10px;
+	display: inline-block;
+}
+
+
+.c_reicon {
+	
+	float: left;
+	width: 15px;
+	display: inline-block;
+	margin-top: 8px;
+	margin-right: 10px;
 }
 
 
@@ -402,14 +688,17 @@
 	
 	font-weight: 600;
 	margin-bottom: 10px;
+	margin-top: 3px;
 	font-size: 0.95em;
 	float: left;
+	margin-right: 10px;
 }
 
 
 .c_list_ud {
 	
 	float: right;
+	margin-right: 15px;
 }
 
 
@@ -419,10 +708,11 @@
 	font-size: 0.9em;
 }
 
-.c_list_ud li:nth-child(2) {
+.c_list_ud li:nth-child(2),
+.c_list_ud li:nth-child(4) {
 	
 	color: #ddd;
-	line-height: 24px;
+	line-height: 23px;
 	margin: 0 5px;
 }
 
@@ -440,6 +730,9 @@
 	font-size: 0.95em;
 	margin-bottom: 5px;
 	clear: both;
+	width: 94%;
+	display: initial;
+	word-break:break-all;
 }
 
 
@@ -465,13 +758,15 @@
 	
 	float: left;
 	width: 40%;
+	margin-right: 10px;
 }
 
 
 .c_list_bottom li {
 	
 	float: left;
-	font-size: 0.9em;
+	font-size: 0.8em;
+	line-height: 35px;
 }
 
 
@@ -479,7 +774,7 @@
 .c_list_bottom li:nth-child(4) {
 	
 	color: #ddd;
-	line-height: 20px;
+	line-height: 33px;
 	margin: 0 10px;
 	
 }
@@ -488,10 +783,12 @@
 .c_date {
 	
 	letter-spacing: 0;
+	color: #b0b0b0;
+	font-size: 0.75em;
 }
 
 
-.c_date, .c_report, .c_reply {
+.c_report, .c_reply {
 	
 	color: #b0b0b0;
 	font-size: 0.9em;

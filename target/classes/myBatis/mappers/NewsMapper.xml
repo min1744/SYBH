@@ -24,10 +24,12 @@
  	delete news where num=#{num}
  </delete> 
  
- <select id="newsAll" parameterType="String" resultType="NewsVO">
-   select * from 
-  (select * from news
-  where menu=#{menu} order by num desc)
+ <select id="newsAll" parameterType="String" resultMap="newsResult">
+   select A.* from 
+  (select N.*, NI.fnum, NI.fname, NI.oname from news N
+  FULL JOIN newsimages NI
+  on( N.num = NI.num)
+  where menu=#{menu} order by N.num desc) A
   where rownum between 1 and 3	
   </select> 	
  	
@@ -93,6 +95,11 @@
  	 where N.num=#{num}
  	 
  </select>
+ <resultMap type="newsImagesVO" id="fileResult">
+ <id property="fnum" column="fnum"/>
+	 	<result property="fname" column="fname"/>
+	 	<result property="oname" column="oname"/>
+ </resultMap>
  
  <resultMap type="NewsVO" id="newsResult">
 	 <id property="num" column="num"/>
@@ -103,11 +110,8 @@
 	 <result property="reg_date" column="reg_date"/>
 	 <result property="hit" column="hit"/>
 	 <result property="menu" column="menu"/>
-	 <collection property="imagesVOs" javaType="List">
-	 	<id property="fnum" column="fnum"/>
-	 	<result property="fname" column="fname"/>
-	 	<result property="oname" column="oname"/>
-	 </collection>
+	 <association property="newsImagesVO" resultMap="fileResult" javaType="com.hospital.news.newsimages.NewsImagesVO">
+	 </association>
  </resultMap>
     
   </mapper>

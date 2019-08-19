@@ -8,6 +8,10 @@ public class NewsImagesVO {
 	private String oname;
 	
 	
+	
+	
+	
+
 	public int getFnum() {
 		return fnum;
 	}

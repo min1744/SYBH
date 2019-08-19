@@ -120,12 +120,18 @@
 
 .news {
 	
-	width: 30%;
+	width: 29%;
 	float: left;
 	display: inline-block;
-	margin-right: 20px;
+	margin-right: 27px;
 	margin-top: 30px;
 	
+}
+
+
+.news:nth-child(3n) {
+	
+	margin-right: 0;
 }
 
 .last_box {
@@ -140,6 +146,7 @@
 	height: 150px;
 	overflow: hidden;
 	border: 1px solid #ddd;
+	box-sizing: border-box;
 }
 
 
