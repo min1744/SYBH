@@ -43,4 +43,17 @@ public class TreatBreakDownService {
 	public int setUpdate(TreatBreakDownVO treatBreakDownVO)throws Exception{
 		return treatBreakDownDAO.setUpdate(treatBreakDownVO);
 	}
+	
+	//관리자용
+	public int getAllTotalCount() throws Exception{
+		return treatBreakDownDAO.getAllTotalCount();
+	}
+	
+	public List<TreatBreakDownVO> getAllList(PageMaker pageMaker)throws Exception{
+		pageMaker.makeRow();
+		int totalCount = treatBreakDownDAO.getAllTotalCount();
+		pageMaker.makePage(totalCount);
+		List<TreatBreakDownVO> list = treatBreakDownDAO.getAllList(pageMaker);
+		return list;
+	}
 }

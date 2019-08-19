@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,16 +16,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.hospital.admin.AccessInfoVO;
 import com.hospital.admin.AccessVO;
 import com.hospital.admin.AdminService;
 import com.hospital.board.BoardVO;
+import com.hospital.checkup.CheckUpDAO;
+import com.hospital.checkup.CheckUpService;
+import com.hospital.checkup.CheckUpVO;
 import com.hospital.medicalTeam.MedicalTeamService;
 import com.hospital.medicalTeam.MedicalTeamVO;
 import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
 import com.hospital.notice.NoticeService;
 import com.hospital.notice.NoticeVO;
+import com.hospital.treatbreakdown.TreatBreakDownService;
+import com.hospital.treatbreakdown.TreatBreakDownVO;
 import com.hospital.util.PageMaker;
 
 @Controller
@@ -37,6 +44,10 @@ public class AdminController {
 	private NoticeService noticeService;
 	@Inject
 	private MedicalTeamService medicalTeamService;
+	@Inject
+	private TreatBreakDownService treatBreakDownService;
+	@Inject
+	private CheckUpService checkUpService;
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
@@ -317,8 +328,39 @@ public class AdminController {
 		}
 		return mv;
 	}
+	//관리자 일반진료
+	@RequestMapping(value = "adminNormal", method = RequestMethod.GET)
+	public ModelAndView adminNormal(PageMaker pageMaker)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int count = treatBreakDownService.getAllTotalCount();
+		List<TreatBreakDownVO> list = treatBreakDownService.getAllList(pageMaker);
+		
+		mv.setViewName("admin/reserve/reserve");
+		mv.addObject("board","Normal");
+		mv.addObject("list",list);
+		mv.addObject("pager",pageMaker);
+		mv.addObject("count",count);
 		
 		
+		
+		return mv;
+	}
+	
+	//관리자 건강검진
+	@RequestMapping(value = "adminCheckUp", method = RequestMethod.GET)
+	public ModelAndView adminCheckUp(PageMaker pageMaker)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int count = checkUpService.getAllTotalCount();
+		List<CheckUpVO> list = checkUpService.getAllList(pageMaker);
+		
+		mv.addObject("list",list);
+		mv.addObject("pager",pageMaker);
+		mv.addObject("board","Medical");
+		mv.setViewName("admin/reserve/reserve");
+		mv.addObject("count",count);
+		
+		return mv;
+	}
 	/*재혁 작업 끝	*/
 	
 	

@@ -34,4 +34,12 @@ public class CheckUpDAO {
 	public int setUpdate(CheckUpVO checkUpVO)throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate",checkUpVO);
 	}
+	
+	//관리자용
+	public int getAllTotalCount() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getAllTotalCount");
+	}
+	public List<CheckUpVO> getAllList(PageMaker pageMaker)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getAllList", pageMaker);
+	}
 }

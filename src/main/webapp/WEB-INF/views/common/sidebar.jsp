@@ -96,8 +96,8 @@
         <div id="collapseBoardPages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">RESERVE:</h6>
-            <a class="collapse-item" href="#">일반진료 예약 관리</a>
-            <a class="collapse-item" href="#">건강검진 예약 관리</a>
+            <a class="collapse-item" href="./adminNormal">일반진료 예약 관리</a>
+            <a class="collapse-item" href="./adminCheckUp">건강검진 예약 관리</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">NEWS:</h6>
             <a class="collapse-item" href="#">질환 정보 관리</a>

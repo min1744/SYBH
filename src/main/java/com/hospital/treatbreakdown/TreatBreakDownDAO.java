@@ -33,4 +33,12 @@ public class TreatBreakDownDAO {
 	public int setUpdate(TreatBreakDownVO treatBreakDownVO)throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate",treatBreakDownVO);
 	}
+	//관리자용 출력
+	public int getAllTotalCount() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getAllTotalCount");
+	}
+	
+	public List<TreatBreakDownVO> getAllList(PageMaker pageMaker)throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getAllList",pageMaker);
+	}
 }
