@@ -48,7 +48,7 @@ public class QnaController {
 		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
 			mv.setViewName("redirect:./praise");
 		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
-			mv.setViewName("redirect:./qnaList");
+			mv.setViewName("redirect:./qna");
 		} else {
 			mv.addObject("message", "Write Fail");
 			mv.addObject("path", "./complaint");
@@ -71,7 +71,7 @@ public class QnaController {
 		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
 			mv.setViewName("redirect:./praise");
 		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
-			mv.setViewName("redirect:./qnaList");
+			mv.setViewName("redirect:./qna");
 		} else {
 			mv.addObject("message", "Update Fail");
 			mv.addObject("path", "./complaint");
@@ -96,7 +96,7 @@ public class QnaController {
 		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
 			mv.setViewName("redirect:./praise");
 		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
-			mv.setViewName("redirect:./qnaList");
+			mv.setViewName("redirect:./qna");
 		} else {
 			mv.addObject("message", "Reply Fail");
 			mv.addObject("path", "./complaint");
@@ -121,7 +121,7 @@ public class QnaController {
 		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
 			mv.setViewName("redirect:./praise");
 		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
-			mv.setViewName("redirect:./qnaList");
+			mv.setViewName("redirect:./qna");
 		} else {
 			mv.addObject("message", "Delete Fail");
 			mv.addObject("path", "./complaint");
@@ -146,7 +146,7 @@ public class QnaController {
 		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
 		mv.setViewName("redirect:./praise");
 		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
-		mv.setViewName("redirect:./qnaList");
+		mv.setViewName("redirect:./qna");
 		} else {
 		mv.addObject("message", "Delete Fail");
 		mv.addObject("path", "./complaint");
@@ -211,7 +211,7 @@ public class QnaController {
 			
 		ModelAndView mv = new ModelAndView();
 		QnAVO qnaVO = qnaService.getSelect(num);
-		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("vo", qnaVO);
 		mv.addObject("menu", "complaint");
 		mv.setViewName("board/boardUpdate");
 			
@@ -295,7 +295,7 @@ public class QnaController {
 		
 		ModelAndView mv = new ModelAndView();
 		QnAVO qnaVO = qnaService.getSelect(num);
-		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("vo", qnaVO);
 		mv.addObject("menu", "praise");
 		mv.setViewName("board/boardUpdate");
 		
@@ -327,15 +327,15 @@ public class QnaController {
 	////////////////////////////////////////질문과답변
 	
 	//list
-	@RequestMapping(value = "qnaList", method = RequestMethod.GET)
-	public ModelAndView qnaList(PageMaker pageMaker, String menu) throws Exception {
+	@RequestMapping(value = "qna", method = RequestMethod.GET)
+	public ModelAndView qna(PageMaker pageMaker, String menu) throws Exception {
 		
 		menu = "qna";
 		List<QnAVO> list = qnaService.getList(pageMaker, menu);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);
 		mv.addObject("pager", pageMaker);
-		mv.addObject("menu", "qnaList");
+		mv.addObject("menu", "qna");
 		mv.setViewName("board/boardList");
 				
 		return mv;
@@ -377,7 +377,7 @@ public class QnaController {
 			
 		ModelAndView mv = new ModelAndView();
 		QnAVO qnaVO = qnaService.getSelect(num);
-		mv.addObject("qnaVO", qnaVO);
+		mv.addObject("vo", qnaVO);
 		mv.addObject("menu", "qna");
 		mv.setViewName("board/boardUpdate");
 			
