@@ -51,6 +51,13 @@
 			</c:when>
 			<c:otherwise>
 			<!------------ community ------------>
+				<div id="board_title">
+					<p id="title">커뮤니티</p>
+					<p id="sub_title">쌍용백병원의 커뮤니티 게시판 입니다.</p>
+				</div>
+				<div id="write_btn">
+					<a href="./${board}Write" id="write">글등록</a>
+				</div>
 			</c:otherwise>
 		</c:choose>
 		<div id="board_box">
@@ -98,6 +105,10 @@
 					</c:when>
 					<c:otherwise>
 					<!------------ community ------------>
+						<ul>
+							<li>병원커뮤니티</li>
+							<li><a href="./communityList" style="color: #6bb5db;">커뮤니티</a></li>
+						</ul>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -105,7 +116,7 @@
 				<table>
 					<thead>
 					<c:choose>
-						<c:when test="${board eq 'notice'}">
+						<c:when test="${board eq 'notice' || board eq 'community'}">
 						<!------------ notice ------------>
 						<tr>
 							<th style="width: 95px;">번호</th>
@@ -155,7 +166,7 @@
 							<c:otherwise>
 								<c:if test="${board eq 'notice'}">
 								<!------------ notice ------------>
-									<c:forEach items="${fixedList}" var="vo">
+									<c:forEach items="${list2}" var="vo">
 										<tr class="position">
 											<td class="num"><img
 												src="../resources/images/notice_icon.png"></td>
@@ -167,6 +178,7 @@
 									</c:forEach>
 								</c:if>
 								<c:forEach items="${list}" var="vo">
+								<!------------ community & notice ------------>
 									<tr class="position_2">
 										<td class="num">${vo.num}</td>
 										<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
@@ -239,8 +251,9 @@
 					</c:choose>
 				</div>
 				<c:choose>
-					<c:when test="${board eq 'notice'}">
-					<!------------ notice ------------>
+					<c:when test="${board eq 'notice' || board eq 'community'}">
+					<!------------ notice && commu ------------>
+					<form action="./${board}List">
 						<div id="search_box">
 							<select name="kind" id="select">
 								<option value="1">제목</option>
@@ -249,6 +262,7 @@
 							</select> <input type="text" name="search" id="search">
 							<button id="btn">검색</button>
 						</div>
+					</form>
 					</c:when>
 					<c:when test="${board eq 'qna'}">
 					<!------------ qna ------------>

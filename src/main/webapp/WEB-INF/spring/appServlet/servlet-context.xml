@@ -83,6 +83,7 @@
 	<context:component-scan base-package="com.hospital.schedule"/>
 	<context:component-scan base-package="com.hospital.util"/>
 	<context:component-scan base-package="com.hospital.pharmacy"/>
+	<context:component-scan base-package="com.hospital.community"/>
 	
 	<!--뭐하는건지 정확히 기억안남  -->
 	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
