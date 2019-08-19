@@ -225,8 +225,18 @@
 					</div>
 					<!-- 대표전화 -->
 					<div id="main_info">
-						<h3>사이트 문의관련</h3>
-						<p>대표전화 : 1588-5700</p>
+						<h3>사람을 찾습니다.</h3>
+					<div id="jh_box">
+						<div id="jh_img">
+							<img alt="사람찾기" src="../resources/images/jh_img.png">
+						</div>
+						<div id="jh_info">
+							<p>이름 : 최재혁</p>
+							<p>나이 : 26세(정신연령:7세)</p>
+							<p>특징 : 오전에 안나옴</p>
+							<p>이력 : 성영주 - 그냥떠나자 M/V (친구3 역할)</p>
+						</div>
+					</div>
 					</div>
 				</div>
 			</div>
