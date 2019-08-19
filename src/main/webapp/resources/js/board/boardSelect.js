@@ -1,15 +1,13 @@
 $(function() {
-		
+		var board = $("#board").val();
 		$("#delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
+			var num = $("#nnum").val();
 			if(result){
-				
-				location.href="./boardList";
+				post({'num':num});
 			}
-						
 		});
-		
-		
+				
 		/////////////////////////////////qna 원본 글 삭제 관련▼
 		$("#q_delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
@@ -26,7 +24,7 @@ $(function() {
 		function post(params){
 			var form = document.createElement("form");
 			form.setAttribute("method","POST");
-			form.setAttribute("action","./qnaDelete");
+			form.setAttribute("action","./"+board+"Delete");
 			for(var key in params){
 				var hiddenField = document.createElement("input");
 				hiddenField.setAttribute("type","hidden");
