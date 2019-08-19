@@ -19,11 +19,22 @@ public class ReserveController {
 	public MedicalTeamService medicalTeamService;
 	
 	
+	//진료 예약 안내
 	@RequestMapping(value = "reserveInfo", method = RequestMethod.GET)
 	public ModelAndView info() throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("reserve/reserveInfo");
+		
+		return mv;
+	}
+	
+	//외래 안내
+	@RequestMapping(value = "outgoingInfo", method = RequestMethod.GET)
+	public ModelAndView outgoingInfo() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("reserve/outgoingInfo");
 		
 		return mv;
 	}

@@ -18,13 +18,21 @@
 	border-bottom: 1px solid #ddd;
 }
 
-#board_title p {
-	
+
+
+#title {
 	text-align: center;
 	font-size: 1.5em;
 	font-weight: 900;
 	letter-spacing: -1px;
-	
+}
+
+#sub_title {
+	text-align: center;
+	font-size: 1em;
+	color: #808080;
+	letter-spacing: -1px;
+	margin-top: 5px;
 }
 
 #board_box {

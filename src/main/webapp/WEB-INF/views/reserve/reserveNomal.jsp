@@ -285,7 +285,7 @@
 <div id="board">
 		<div id="board_title">
 			<p id="title">일반 진료 예약</p>
-			<p id="sub_title">빠르고 편리한 온라인진료예약이 가능합니다.</p>
+			<p id="sub_title">빠르고 편리한 온라인 진료 예약이 가능합니다.</p>
 		</div>
 
 	<div id="board_box">
@@ -295,6 +295,7 @@
 		
 			<ul>
 				<li>진료 예약/조회</li>
+				<li><a href="./outgoingInfo">외래안내</a></li>
 				<li><a href="./reserveInfo">예약안내</a></li>
 				<li><a href="./reserveNomal" style="color:#6BB5DB;">일반진료 예약</a></li>
 				<li><a href="./reserveMedical">건강검진 예약</a></li>
