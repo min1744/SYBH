@@ -52,6 +52,14 @@ public class PayService {
 		
 		return payDAO.getAllList(pageMaker);
 	}
+	public List<PayVO> adminDonation(PageMaker pageMaker,PayVO payVO)throws Exception{
+		pageMaker.setSearch(Integer.toString(payVO.getCategory()));
+		pageMaker.makeRow();
+		int totalCount = payDAO.getAllTotalCount(payVO);
+		pageMaker.makePage(totalCount);
+		
+		return payDAO.getAllList(pageMaker);
+	}
 	
 	//총 횟수
 	public int getOneTotalCount(PayVO payVO) throws Exception{
