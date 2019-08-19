@@ -50,7 +50,17 @@
 		<!-- 현아  인터셉터 -->
 		
 		<!-- 민근 인터셉터 -->
-		
+		<interceptor>
+			<mapping path="/member/memberMyPage"/>
+			<mapping path="/member/memberReLogin"/>
+			<mapping path="/member/memberDelete"/>
+			<mapping path="/member/memberLogout"/>
+			<beans:bean class="com.hospital.interceptor.MemberInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/admin/*"/>
+			<beans:bean class="com.hospital.interceptor.AdminInterceptor"></beans:bean>
+		</interceptor>
 		<!-- 전묵 인터셉터 -->
 	</interceptors>
 	
