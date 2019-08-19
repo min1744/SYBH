@@ -124,6 +124,42 @@
 							<ul style="width: 30%; float: left;">
 								<li>작성자</li>
 								<li>${vo.writer}</li>
+								<li>│</li>
+								<li>구분</li>
+								<li>
+								<c:choose>
+													<c:when test="${vo.category eq 'site'}">
+														<c:choose>
+															<c:when test="${vo.depth eq '1'}">
+																답변
+															</c:when>
+															<c:otherwise>
+																사이트이용
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+													<c:when test="${vo.category eq 'web'}">
+													<c:choose>
+															<c:when test="${vo.depth eq '1'}">
+																답변
+															</c:when>
+															<c:otherwise>
+																병원이용
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+													<c:when test="${vo.category eq 'etc'}">
+													<c:choose>
+															<c:when test="${vo.depth eq '1'}">
+																답변
+															</c:when>
+															<c:otherwise>
+																기타
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+												</c:choose>
+								</li>
 							</ul>
 							<ul style="width: 27%; float: right;">
 								<li>등록일</li>
