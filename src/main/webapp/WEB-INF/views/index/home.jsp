@@ -201,8 +201,11 @@ $(function() {
 		</c:otherwise>
 	</c:choose>
 		<ul id="ul_1">
+			<li><a href="./reserve/outgoingInfo">외래안내</a></li>
+			<li><a href="./reserve/reserveInfo">예약안내</a></li>
 			<li><a href="./reserve/reserveNomal">일반진료 예약</a></li>
 			<li><a href="./reserve/reserveMedical">건강검진 예약</a></li>
+			<li><a href="./member/memberNomal">진료예약 조회</a></li>
 		</ul>
 		<ul id="ul_2">
 			<li><a href="./news/disease">질환 정보</a></li>
@@ -300,8 +303,8 @@ $(function() {
 				<p>암환자 상담 <span>02-2072-0707</span></p>
 				</div>
 				<div class="list_btn">
-				<a href="" class="first_a btn_a">외래안내</a>
-				<a href="" class="btn_a">외래시간표</a>
+				<a href="./reserve/outgoingInfo" class="first_a btn_a">외래안내</a>
+				<a href="" class="btn_a">진료접수안내</a>
 				</div>
 			</div>
 			

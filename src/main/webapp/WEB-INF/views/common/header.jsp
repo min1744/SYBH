@@ -102,8 +102,11 @@ $(function() {
 		</c:otherwise>
 	</c:choose>
 		<ul id="ul_1">
+			<li><a href="../reserve/outgoingInfo">외래안내</a></li>
+			<li><a href="../reserve/reserveInfo">예약안내</a></li>
 			<li><a href="../reserve/reserveNomal">일반진료 예약</a></li>
 			<li><a href="../reserve/reserveMedical">건강검진 예약</a></li>
+			<li><a href="../member/memberNomal">진료예약 조회</a></li>
 		</ul>
 		<ul id="ul_2">
 			<li><a href="../news/disease">질환 정보</a></li>
