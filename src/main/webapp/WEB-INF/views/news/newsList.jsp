@@ -11,18 +11,12 @@
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
 
-
-
 <div id="board">
 		<c:choose>
 			<c:when test="${menu eq 'disease'}">
 				<div id="board_title">
 					<p id="title">질환 정보</p>
 					<p id="sub_title">쌍용백병원의 전문 의료진들이 질환 정보에 관해 알려드립니다.</p>
-				</div>
-
-				<div id="write_btn">
-					<a href="./diseaseWrite" id="write">뉴스 등록</a>
 				</div>
 			</c:when>
 
@@ -31,20 +25,18 @@
 					<p id="title">영양 정보</p>
 					<p id="sub_title">쌍용백병원의 전문 의료진들이 건강한 식이요법에 관해 알려드립니다.</p>
 				</div>
-				<div id="write_btn">
-					<a href="./nutritionWrite" id="write">뉴스 등록</a>
-				</div>
 			</c:when>
 			<c:otherwise>
 				<div id="board_title">
 					<p id="title">운동 정보</p>
 					<p id="sub_title">쌍용백병원의 전문 의료진들이 운동 정보에 관해 알려드립니다.</p>
 				</div>
-				<div id="write_btn">
-					<a href="./exerciseWrite" id="write">뉴스 등록</a>
-				</div>
+				
 			</c:otherwise>
 		</c:choose>
+		<div id="write_btn">
+					<a href="./${menu}Write" id="write">뉴스 등록</a>
+				</div>
 	<div id="board_box">
 			
 		<div id="board_nav">
@@ -79,35 +71,12 @@
 	    
 <!-- 검색 -->			
 		<div id="newsList">
-				
-		
-		<c:choose>
-					<c:when test="${menu eq 'disease'}">
-						<form action="./disease">
+						<form action="./${menu}">
 							<div id="news_search">
 								<input type="text" name="search" id="search" placeholder="제목을 입력해주세요">
 								<button id="search_btn">검색</button>
 							</div>
 						</form>
-					</c:when>
-					<c:when test="${menu eq 'nutrition'}">
-						<form action="./nutrition">
-							<div id="news_search">
-								<input type="text" name="search" id="search"	placeholder="제목을 입력해주세요">
-								<button id="search_btn">검색</button>
-							</div>
-						</form>
-					</c:when>
-					<c:otherwise>
-						<form action="./exercise">
-							<div id="news_search">
-								<input type="text" name="search" id="search"	placeholder="제목을 입력해주세요">
-								<button id="search_btn">검색</button>
-							</div>
-						</form>
-					</c:otherwise>
-			</c:choose>
-			
 			<div id="newsContents">
 			<c:choose>
 				<c:when test="${menu eq 'disease'}">
@@ -135,7 +104,6 @@
 				</a>
 				</c:forEach>
 				</c:when>
-				
 				
 				<c:when test="${menu eq 'exercise'}">
 					<c:forEach items="${list}" var="exercise">

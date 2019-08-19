@@ -14,17 +14,16 @@
 <body>
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
-
-
+<input type="hidden" id="board" value="${board}">
+<input type="hidden" id="fixCount" value="${result}">
+<input type="hidden" id="dbFix" value="${vo.fix}">
 
 	<div id="board">
 		<div id="board_title">
 			<c:choose>
 			<c:when test="${board eq 'notice'}">
 			<!------------ notice ------------>
-				<input type="hidden" id="board" value="${board}">
-				<input type="hidden" id="fixCount" value="${result}">
-				<input type="hidden" id="dbFix" value="${vo.fix}">
+				
 				<p id="wtitle">공지수정</p>
 			</c:when>
 			<c:when test="${board eq 'qna'}">
