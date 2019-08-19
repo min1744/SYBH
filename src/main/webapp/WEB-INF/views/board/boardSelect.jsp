@@ -40,6 +40,11 @@
 					</c:otherwise>
 					</c:choose>
 			</c:when>
+			<c:otherwise>
+				<input type="hidden" id="num" value="${vo.num}">
+				<p id="wtitle">커뮤니티</p>
+				<p id="sub_title">쌍용백병원의 커뮤니티 게시판 입니다.</p>
+			</c:otherwise>
 		</c:choose>
 		</div>
 	<div id="board_box">
@@ -87,6 +92,10 @@
 					</c:when>
 					<c:otherwise>
 					<!------------ community ------------>
+						<ul>
+							<li>병원커뮤니티</li>
+							<li><a href="./communityList" style="color: #6bb5db;">커뮤니티</a></li>
+						</ul>
 					</c:otherwise>
 				</c:choose>
 		</div>
@@ -94,20 +103,6 @@
 		<div id="boardSelect">
 		
 			<c:choose>
-				<c:when test="${board eq 'notice'}">
-				<!------------ notice ------------>
-					<div class="title">${vo.title}</div>
-					<div id="sub">
-						<ul>
-							<li>등록일</li>
-							<li>${vo.reg_date}</li>
-							<li>│</li>
-							<li>조회수</li>
-							<li>${vo.hit}</li>
-						</ul>
-					</div>
-					<div id="contents">${vo.contents}</div>
-				</c:when>
 				<c:when test="${board eq 'qna'}">
 				<!------------ qna ------------>
 					<input type="hidden" name="num" value="${vo.num}" id="qnum">
@@ -129,11 +124,25 @@
 						</div>		
 					<div id="contents">${vo.contents}</div>		
 				</c:when>
+				<c:otherwise>
+					<!------------ notice & commu ------------>
+						<div class="title">${vo.title}</div>
+						<div id="sub">
+							<ul>
+								<li>등록일</li>
+								<li>${vo.reg_date}</li>
+								<li>│</li>
+								<li>조회수</li>
+								<li>${vo.hit}</li>
+							</ul>
+						</div>
+						<div id="contents">${vo.contents}</div>
+				</c:otherwise>
 			</c:choose>
 			
 			<div id="btn_box">
 			<c:choose>
-				<c:when test="${board eq 'notice'}">
+				<c:when test="${board eq 'notice' || board eq 'community'}">
 				<!------------ notice ------------>
 					<a href="./${board}List" id="list">목록</a>
 					<button id="delete">삭제</button>

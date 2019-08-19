@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="CommunityMapper">
+
+	<!-- list -->
+	<select id="getList" parameterType="PageMaker"
+		resultType="CommunityVO">
+		SELECT * FROM
+		(SELECT ROWNUM R, N.* FROM
+		(SELECT * FROM COMMUNITY
+		WHERE
+
+		<choose>
+			<when test="kind = 1">
+				TITLE
+			</when>
+			<when test="kind = 2">
+				WRITER
+			</when>
+
+			<otherwise>
+				CONTENTS
+			</otherwise>
+		</choose>
+
+		LIKE '%'|| #{search} || '%'
+		ORDER BY NUM DESC) N)
+		WHERE R BETWEEN
+		#{startRow} AND #{lastRow}
+
+	</select>
+
+	<select id="getSelect" parameterType="Integer"
+		resultMap="communityResult">
+		SELECT * FROM COMMUNITY WHERE NUM=#{num}
+	</select>
+	<insert id="setWrite" parameterType="CommunityVO">
+
+		INSERT INTO COMMUNITY
+		VALUES(community_seq.nextval,#{title},#{writer},#{contents},SYSDATE,0)
+	</insert>
+
+	<delete id="setDelete" parameterType="Integer">
+		DELETE COMMUNITY WHERE
+		NUM=#{num}
+	</delete>
+
+	<update id="setUpdate" parameterType="CommunityVO">
+		UPDATE COMMUNITY SET
+		TITLE=#{title}, CONTENTS=#{contents} WHERE
+		NUM=#{num}
+	</update>
+
+	<update id="setHitUpdate" parameterType="Integer">
+		UPDATE COMMUNITY SET
+		HIT=HIT+1 WHERE NUM=#{num}
+	</update>
+
+	<resultMap type="CommunityVO" id="communityResult">
+		<id property="num" column="num" />
+		<result property="title" column="title" />
+		<result property="contents" column="contents" />
+		<result property="reg_date" column="reg_date" />
+		<result property="hit" column="hit" />
+	</resultMap>
+
+	<!-- search -->
+	<select id="getCount" parameterType="PageMaker"
+		resultType="Integer">
+		SELECT COUNT(NUM) FROM COMMUNITY WHERE
+		<choose>
+			<when test="kind=1">
+				TITLE
+			</when>
+			<when test="kind=2">
+				WRITER
+			</when>
+			<otherwise>
+				CONTENTS
+			</otherwise>
+		</choose>
+		LIKE '%' || #{search} || '%'
+	</select>
+
+
+</mapper>  

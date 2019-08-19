@@ -30,5 +30,6 @@
 		<typeAlias type="com.hospital.schedule.ScheduleVO" alias="ScheduleVO"/>
 		<typeAlias type="com.hospital.admin.AccessVO" alias="AccessVO"/>
 		<typeAlias type="com.hospital.admin.AccessInfoVO" alias="AccessInfoVO"/>
+		<typeAlias type="com.hospital.community.CommunityVO" alias="CommunityVO" />
 	</typeAliases>
 </configuration>
