@@ -116,7 +116,7 @@
 				<table>
 					<thead>
 					<c:choose>
-						<c:when test="${board eq 'notice' || board eq 'community'}">
+						<c:when test="${board eq 'notice'}">
 						<!------------ notice ------------>
 						<tr>
 							<th style="width: 95px;">번호</th>
@@ -125,7 +125,7 @@
 							<th style="width: 100Px;">조회수</th>
 						</tr>
 						</c:when>
-						<c:when test="${board eq 'qna'}">
+						<c:when test="${board eq 'qna' || board eq 'community'}">
 						<!------------ qna ------------>
 						<tr>
 							<th style="width: 95px;">번호</th>
@@ -139,6 +139,26 @@
 					</thead>
 					<tbody>
 						<c:choose>
+							<c:when test="${board eq 'notice'}">
+							<!-- fix -->
+							<c:forEach items="${fixedList}" var="vo">
+								<tr class="position">
+								<td class="num"><img src="../resources/images/notice_icon.png"></td>
+								<td class="title"><a href="./${board}Select?num=${vo.num}">${vo.title}</a>	</td>
+								<td class="date">${vo.reg_date}</td>
+								<td class="hit">${vo.hit}</td>
+								</tr>
+							</c:forEach>  
+							<c:forEach items="${list}" var="vo">
+							<!------------ notice ------------>
+								<tr class="position_2">
+									<td class="num">${vo.num}</td>
+									<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
+									<td class="date">${vo.reg_date}</td>
+									<td class="hit">${vo.hit}</td>
+								</tr>
+							</c:forEach>
+							</c:when>
 							<c:when test="${board eq 'qna'}">
 							<!------------ qna ------------>
 								<c:forEach items="${list}" var="vo">
@@ -164,28 +184,16 @@
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
-								<c:if test="${board eq 'notice'}">
-								<!------------ notice ------------>
-									<c:forEach items="${list2}" var="vo">
-										<tr class="position">
-											<td class="num"><img
-												src="../resources/images/notice_icon.png"></td>
-											<td class="title"><a
-												href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
-											<td class="date">${vo.reg_date}</td>
-											<td class="hit">${vo.hit}</td>
-										</tr>
-									</c:forEach>
-								</c:if>
 								<c:forEach items="${list}" var="vo">
-								<!------------ community & notice ------------>
-									<tr class="position_2">
-										<td class="num">${vo.num}</td>
-										<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
-										<td class="date">${vo.reg_date}</td>
-										<td class="hit">${vo.hit}</td>
-									</tr>
-								</c:forEach>
+								<!------------ community ------------>
+								<tr class="position_2">
+									<td class="num">${vo.num}</td>
+									<td><a href="./${board}Select?num=${vo.num}">${vo.title}</a></td>
+									<td class="date">${vo.writer}</td>
+									<td class="date">${vo.reg_date}</td>
+									<td class="hit">${vo.hit}</td>
+								</tr>
+							</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</tbody>

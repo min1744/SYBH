@@ -12,13 +12,12 @@
 <body>
 <!-- header 추가 -->
 <c:import url="../common/header.jsp" />
-<input type="hidden" id="board" value="${board}"> 
-<div id="board">
+<div id="board_wrap">
 		<div id="board_title">
 		<c:choose>
 			<c:when test="${board eq 'notice'}">
 			<!------------ notice ------------>
-				
+				<input type="hidden" id="board" value="${board}"> 
 				<input type="hidden" id="num" value="${vo.num}">
 				<p id="wtitle">공지사항</p>
 			</c:when>
@@ -40,6 +39,7 @@
 					</c:choose>
 			</c:when>
 			<c:otherwise>
+				<input type="hidden" id="board" value="${board}">
 				<input type="hidden" id="num" value="${vo.num}">
 				<p id="wtitle">커뮤니티</p>
 				<p id="sub_title">쌍용백병원의 커뮤니티 게시판 입니다.</p>
@@ -100,8 +100,20 @@
 		</div>
 		
 		<div id="boardSelect">
-		
 			<c:choose>
+				<c:when test="${board eq 'notice'}">
+					<div class="title">${vo.title}</div>
+						<div id="sub">
+							<ul>
+								<li>등록일</li>
+								<li>${vo.reg_date}</li>
+								<li>│</li>
+								<li>조회수</li>
+								<li>${vo.hit}</li>
+							</ul>
+						</div>
+						<div id="contents">${vo.contents}</div>
+				</c:when>
 				<c:when test="${board eq 'qna'}">
 				<!------------ qna ------------>
 					<input type="hidden" name="num" value="${vo.num}" id="qnum">
@@ -124,29 +136,27 @@
 					<div id="contents">${vo.contents}</div>		
 				</c:when>
 				<c:otherwise>
-					<!------------ notice & commu ------------>
-						<div class="title">${vo.title}</div>
-						<div id="sub">
-							<ul>
+					<!------------ commu ------------>
+					<div class="title">${vo.title}</div>
+						<div id="qsub">
+							<ul style="width: 30%; float: left;">
+								<li>작성자</li>
+								<li>${vo.writer}</li>
+							</ul>
+							<ul style="width: 27%; float: right;">
 								<li>등록일</li>
 								<li>${vo.reg_date}</li>
 								<li>│</li>
 								<li>조회수</li>
 								<li>${vo.hit}</li>
 							</ul>
-						</div>
-						<div id="contents">${vo.contents}</div>
+						</div>		
+					<div id="contents">${vo.contents}</div>		
 				</c:otherwise>
 			</c:choose>
 			
 			<div id="btn_box">
 			<c:choose>
-				<c:when test="${board eq 'notice' || board eq 'community'}">
-				<!------------ notice ------------>
-					<a href="./${board}List" id="list">목록</a>
-					<button id="delete">삭제</button>
-					<a href="./${board}Update?num=${vo.num}" id="update">수정</a>
-				</c:when>
 				<c:when test="${board eq 'qna'}">
 				<!------------ qna ------------>
 						<a href="./${menu}" id="list">목록</a>
@@ -163,6 +173,12 @@
 						<a href="./${menu}Reply?num=${vo.num}" id="reply">답글달기</a>
 						</c:if>
 				</c:when>
+				<c:otherwise>
+					<!------------ notice ------------>
+						<a href="./${board}List" id="list">목록</a>
+						<button id="delete">삭제</button>
+						<a href="./${board}Update?num=${vo.num}" id="update">수정</a>
+				</c:otherwise>
 			</c:choose>
 			</div>
 		
