@@ -19,9 +19,11 @@
 					<p id="title">공지사항</p>
 					<p id="sub_title">쌍용백병원의 새로운 소식을 알려드립니다.</p>
 				</div>
-				<div id="write_btn">
-					<a href="./${board}Write" id="write">공지등록</a>
-				</div>
+					<div id="write_btn">
+				<c:if test="${memberVO.grade eq '2'}">
+						<a href="./${board}Write" id="write">공지등록</a>
+				</c:if>
+					</div>
 			</c:when>
 			<c:when test="${board eq 'qna'}">
 			<!------------ qna ------------>
@@ -46,7 +48,9 @@
 					</c:otherwise>
 				</c:choose>
 				<div id="write_btn">
+				<c:if test="${memberVO.grade eq '1' || memberVO.grade eq '2'}">
 					<a href="./${menu}Write" id="write">글쓰기</a>
+				</c:if>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -56,7 +60,9 @@
 					<p id="sub_title">쌍용백병원의 커뮤니티 게시판 입니다.</p>
 				</div>
 				<div id="write_btn">
+				<c:if test="${memberVO.grade eq '1' || memberVO.grade eq '2'}">
 					<a href="./${board}Write" id="write">글등록</a>
+				</c:if>
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -125,8 +131,18 @@
 							<th style="width: 100Px;">조회수</th>
 						</tr>
 						</c:when>
-						<c:when test="${board eq 'qna' || board eq 'community'}">
+						<c:when test="${board eq 'qna'}">
 						<!------------ qna ------------>
+						<tr>
+							<th style="width: 95px;">번호</th>
+							<th style="width: 150px;">구분</th>
+							<th style="width: 510px;">제목</th>
+							<th style="width: 150px;">작성자</th>
+							<th style="width: 150px;">작성일</th>
+							<th style="width: 100Px;">조회수</th>
+						</tr>
+						</c:when>
+						<c:otherwise>
 						<tr>
 							<th style="width: 95px;">번호</th>
 							<th style="width: 510px;">제목</th>
@@ -134,7 +150,7 @@
 							<th style="width: 150px;">작성일</th>
 							<th style="width: 100Px;">조회수</th>
 						</tr>
-						</c:when>
+						</c:otherwise>
 					</c:choose>
 					</thead>
 					<tbody>
@@ -164,19 +180,53 @@
 								<c:forEach items="${list}" var="vo">
 									<tr class="position_2">
 										<td class="num">${vo.num}</td>
-										<td title="${vo.depth}"><c:forEach begin="1"
-												end="${vo.depth}">
-												<img width="20px" src="../resources/images/reply.png"
-													style="transform: rotate(-180deg);">
-											</c:forEach> <c:choose>
-												<c:when test="${vo.depth eq '1'}">
-													<a href="./${menu}Select?num=${vo.num}"
-														class="depth_a">${vo.title}</a>
-												</c:when>
-												<c:otherwise>
-													<a href="./${menu}Select?num=${vo.num}">${vo.title}</a>
-												</c:otherwise>
-											</c:choose></td>
+										<td class="q_ca">
+												[<c:choose>
+													<c:when test="${vo.category eq 'site'}">
+														<c:choose>
+															<c:when test="${vo.depth eq '1'}">
+																답변
+															</c:when>
+															<c:otherwise>
+																사이트이용
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+													<c:when test="${vo.category eq 'web'}">
+													<c:choose>
+															<c:when test="${vo.depth eq '1'}">
+																답변
+															</c:when>
+															<c:otherwise>
+																병원이용
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+													<c:when test="${vo.category eq 'etc'}">
+													<c:choose>
+															<c:when test="${vo.depth eq '1'}">
+																답변
+															</c:when>
+															<c:otherwise>
+																기타
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+												</c:choose>]
+										</td>
+										<td title="${vo.depth}">
+										<c:forEach begin="1" end="${vo.depth}">
+											<img width="20px" src="../resources/images/reply.png" style="transform: rotate(-180deg);">
+										</c:forEach> 
+										<c:choose>
+											<c:when test="${vo.depth eq '1'}">
+												<a href="./${menu}Select?num=${vo.num}" class="depth_a">${vo.title}</a>
+											</c:when>
+											<c:otherwise>
+												<a href="./${menu}Select?num=${vo.num}">${vo.title}</a>
+											</c:otherwise>
+										</c:choose>
+										</td>
 										<td class="date">${vo.writer}</td>
 										<td class="date">${vo.reg_date }</td>
 										<td class="hit">${vo.hit}</td>

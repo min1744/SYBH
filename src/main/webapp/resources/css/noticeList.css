@@ -169,6 +169,16 @@
 }
 
 
+.q_ca {
+	
+	font-size: 0.8em;
+	letter-spacing: -1px;
+	color: #808080;
+	text-align: center;
+	
+}
+
+
 .title {
 	
 	font-weight: 700;
@@ -209,6 +219,9 @@
 	padding: 15px 0;
 	border-top: 1px solid #ddd;
 }
+
+
+
 
 #boardList tr:last-child {
 	
