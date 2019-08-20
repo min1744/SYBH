@@ -107,7 +107,7 @@
 	                  //달력에 있는 년,달과 내 컴퓨터의 로컬 년,달이 같고, 일이 오늘의 일과 같으면
 	               		// cell.bgColor = "#FAF58C"; //셀의 배경색을 노랑으로 
 	                cell.style.color = "white";
-	                cell.style.background = "#153F91";
+	                cell.style.background = "#6BB5DB";
 	               }
 	             }
 	        }

@@ -130,7 +130,6 @@ function printWeek() {
 					<div class="list_btn">
 						<a href="../reserve/reserveNomal?name=${list.name}">진료예약</a>
 						<a href="" data-toggle="modal" data-target="#myModal_${i.index+1}">의료진소개</a>
-						<a href="">진료일정표</a>
 					</div>
 				</div>
 				</c:forEach>
@@ -158,24 +157,15 @@ function printWeek() {
 		        	<p class="modal_med_office_title">${list.med_office}</p>
 		        	<h2 class="modal_med_office">${list.name } 교수</h2>
 		        </div>
-	        		<hr>
-				<!-- 교수 프로필 -->
-				<div class="modal_profile">
-					<img alt="" src="../resources/file/${list.doctorImagesVO.fname}">
-				</div>
-				
 				<!-- 진료과목 -->
 				<div class="modal_info">
 					<h3 class="modal_pro_field_title">전문분야</h3>
 					<p class="modal_pro_field">${list.pro_field }</p>
 				</div>	
-				
-				<!-- 진료예약 버튼 -->
-				<a href="../reserve/reserveNomal?name=${list.name}" id="reserve_btn">진료예약</a>
-				
-				
-				<!-- 진료 스케줄 -->
-				<div id="modal_cal">
+	        		<hr>
+				<!-- 교수 프로필 -->
+				<div class="modal_profile">
+					<img alt="" src="../resources/file/${list.doctorImagesVO.fname}">
 				</div>
 				
 				<!-- 경력/활동 -->
@@ -198,8 +188,14 @@ function printWeek() {
 							</c:forTokens>
 						</ul>
 					</div>
-				</div>          
+				</div>   
+				
 	        </div>
+	        
+				<!-- 진료예약 버튼 -->
+				<div id="btn_box">
+				<a href="../reserve/reserveNomal?name=${list.name}" id="reserve_btn">진료예약</a>
+				</div>       
 	      </div>
     	</div>
  	 </div>
