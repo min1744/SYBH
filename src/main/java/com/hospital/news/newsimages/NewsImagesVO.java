@@ -6,11 +6,6 @@ public class NewsImagesVO {
 	private int num;
 	private String fname;
 	private String oname;
-	
-	
-	
-	
-	
 
 	public int getFnum() {
 		return fnum;

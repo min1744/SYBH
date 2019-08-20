@@ -41,8 +41,16 @@
   where rownum between 1 and 3	
   </select> 	
  	
+<select id="newsIndex"  resultMap="newsResult">
+  select A.* from 
+  (select N.*, NI.fnum, NI.fname, NI.oname from news N
+  FULL JOIN newsimages NI
+  on( N.num = NI.num)
+  order by N.num desc) A
+  where rownum between 1 and 4
+</select>
 
- 
+
  
  
  <select id="getList" parameterType="java.util.Map" resultMap="newsResult">
@@ -96,13 +104,14 @@
  </select>
   
  
-  <select id="getSelect" parameterType="NewsVO" resultMap="newsResult">
+  <select id="getSelect" parameterType="Integer" resultMap="newsResult">
  	select N.*, I.* 
  	 from news N Full join newsimages I 
  	 on (N.num=I.num)
  	 where N.num=#{num}
  	 
  </select>
+ 
  <resultMap type="newsImagesVO" id="fileResult">
  <id property="fnum" column="fnum"/>
 	 	<result property="fname" column="fname"/>

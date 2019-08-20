@@ -327,43 +327,26 @@ $(function() {
 			<h3>건강뉴스</h3>
 			<p class="sub_h3">질병, 영양, 운동, 생활 속 관리 등 건강에 대한 모든 것</p>
 		</div>
-		
 		<div class="news_box">
-			<img alt="" src="./resources/images/news_1.jpg">
-			<div class="news_contents">
-				<p class="category">운동</p>
-				<p><a href="./news/newsSelect?num=${vo.num}">${vo.title}</a></p>
-				<p class="news_date">${vo.reg_date}</p>
+
+				<c:forEach items="${ilist}" var="newsVO">
+					<span class="news_contents"> <img
+						src="./resources/file/${newsVO.newsImagesVO.oname}">
+						<p class="category">
+							<c:choose>
+								<c:when test="${newsVO.menu eq 'disease'}">질병</c:when>
+								<c:when test="${nesVO.menu eq 'nutrition'}">영양</c:when>
+								<c:otherwise>운동</c:otherwise>
+							</c:choose>
+						</p>
+						<p>
+							<a href="./news/${newsVO.menu}Select?num=${newsVO.num}">${newsVO.title}</a>
+						</p>
+						<p class="news_date">${newsVO.reg_date}</p>
+					</span>
+				</c:forEach>
+
 			</div>
-		</div>
-		
-		<div class="news_box">
-			<img alt="" src="./resources/images/news_2.jpg">
-			<div class="news_contents">
-				<p class="category">운동</p>
-				<p><a href="./news/newsSelect?num=${vo.num}">${vo.title}</a></p>
-				<p class="news_date">${vo.reg_date}</p>
-			</div>
-		</div>
-		
-		<div class="news_box">
-			<img alt="" src="./resources/images/news_3.jpg">
-			<div class="news_contents">
-				<p class="category">운동</p>
-				<p><a href="./news/newsSelect?num=${vo.num}">${vo.title}</a></p>
-				<p class="news_date">${vo.reg_date}</p>
-			</div>
-		</div>
-		
-		<div class="news_box last_box">
-			<img alt="" src="./resources/images/news_4.jpg">
-			<div class="news_contents">
-				<p class="category">운동</p>
-				<p><a href="./news/newsSelect?num=${vo.num}">${vo.title}</a></p>
-				<p class="news_date">${vo.reg_date}</p>
-			</div>
-		</div>
-		
 	</div>
 	
 </div>

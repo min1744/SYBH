@@ -11,10 +11,13 @@
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
 <script type="text/javascript">
 $(function() {
-	//폼 검증				
 	$("#write").click(function() {
 		//다른 input들 검증
-		$('#frm').submit();				
+		if($('#contents').summernote('isEmpty')) {
+			alert('모두 입력해주세요.');
+		} else {
+			$('#frm').submit();				
+		}
 	});
 });
 </script>
