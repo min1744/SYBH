@@ -24,6 +24,14 @@
  	delete news where num=#{num}
  </delete> 
  
+ <!--여러개 삭제  -->
+ <delete id="setListDelete" parameterType="java.util.List">
+  	delete news where num in
+  	<foreach collection="list" item="item" open="(" separator="," close=")">
+  		#{item}
+  	</foreach>
+  </delete>
+ 
  <select id="newsAll" parameterType="String" resultMap="newsResult">
    select A.* from 
   (select N.*, NI.fnum, NI.fname, NI.oname from news N

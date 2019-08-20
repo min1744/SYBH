@@ -42,7 +42,9 @@
 			<beans:bean class="com.hospital.interceptor.PayPopupInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/reserve/*"/>
+			<mapping path="/reserve/reserveNomal"/>
+			<mapping path="/reserve/reserveMedical"/>
+			<mapping path="/member/memberNomal"/>
 			<beans:bean class="com.hospital.interceptor.ReserveInterceptor"/>
 		</interceptor>
 		<!-- 진우 인터셉터  -->

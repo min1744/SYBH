@@ -71,7 +71,7 @@
 					IMP.init('imp95286508');
 
 					IMP.request_pay({
-						pg : 'kakaopay', //결제 방법 카카오페이 계좌입금 등 
+						pg : 'kakaopay', //결제 방법 카카오페이 계좌입금 등 inicis,kakaopay
 						pay_method : 'card', //결제 수단
 						merchant_uid : 'merchant_' + new Date().getTime(),
 						name : '쌍용백병원 건강검진', //주문 창에서 보일 이름
