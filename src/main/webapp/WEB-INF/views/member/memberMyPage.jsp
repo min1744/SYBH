@@ -171,6 +171,24 @@
 											</c:otherwise>
 										</c:choose>
 									</tr>
+									<tr>
+										<th>이메일 인증</th>
+										<c:choose>
+											<c:when test="${not empty memberVO.authStatus}">
+												<c:choose>
+													<c:when test="${memberVO.authStatus eq 2}">
+														<td>O</td>
+													</c:when>
+													<c:otherwise>
+														<td>X</td>
+													</c:otherwise>
+												</c:choose>
+											</c:when>
+											<c:otherwise>
+												<td>정보가 없습니다.</td>
+											</c:otherwise>
+										</c:choose>
+									</tr>
 								</c:otherwise>
 							</c:choose>
 						</table>
