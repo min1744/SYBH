@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.hospital.community.like.CommuLikeDAO;
 import com.hospital.community.like.CommuLikeVO;
-import com.hospital.qna.comments.like.LikeVO;
 import com.hospital.util.PageMaker;
 
 @Service
@@ -54,8 +53,8 @@ public class CommunityCommentsService {
 			}
 			
 			//댓글 답글 삭제
-			public int replyDelete(int cnum) throws Exception {
-				return communityCommentsDAO.replyDelete(cnum);
+			public int replyDelete(int ccnum) throws Exception {
+				return communityCommentsDAO.replyDelete(ccnum);
 			}
 			
 			
@@ -75,7 +74,7 @@ public class CommunityCommentsService {
 			
 			/////////////////////////////////////댓글 좋아요
 			//댓글 t_like 테이블의 like_check 값 확인하는 select
-			public int likeUpdate(int cnum, int num, String id, CommuLikeVO commuLikeVO, CommunityCommentsVO communityCommentsVO) throws Exception {
+			public int likeUpdate(int ccnum, int num, String id, CommuLikeVO commuLikeVO, CommunityCommentsVO communityCommentsVO) throws Exception {
 				
 				Map<String, Object> map = new HashMap<String, Object>();
 				

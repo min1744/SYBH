@@ -104,19 +104,20 @@ $(function() {
 		
 		
 		var curPage = 1;
+		var c_num = $('#c_num').val();
 		
 		getList(curPage); //함수호출
 		
 		// 댓글 수정 코드
 		$('#updateBtn').click(function() {
 			var upContents = $('#updateContents').val();
-			var cnumId = $('#cnum').val();
+			var ccnumId = $('#ccnum').val();
 			$.ajax({
 				
-				url:"../comments/newsCommentsUpdate",
+				url:"../comments/commuCommentsUpdate",
 				type:"POST",
 				data: {
-					cnum : cnumId,
+					ccnum : ccnumId,
 					contents : upContents
 				},
 				success:function(data) {
@@ -133,17 +134,17 @@ $(function() {
 			var id = $(this).attr('title');
 			var con = $('#c' + id).html();
 			$('#updateContents').val(con);
-			$('#cnum').val(id);
+			$('#ccnum').val(id);
 		});
 		
 		//댓글 등록하기 코드
 		$('#comment_btn').click(function() {
-			var num = $('#nnum').val();
+			var num = $('#c_num').val();
 			var id = $('#c_writer').text();
 			var contents = $('.c_area').val();
 			$.ajax({
 				
-				url:"../comments/newsCommentsWrite",
+				url:"../comments/commuCommentsWrite",
 				type:"POST",
 				data: {
 					num : num,
@@ -165,7 +166,7 @@ $(function() {
 		
 		//리스트 가져오기
 		function getList(curPage) {
-			$.get("../comments/newsCommentsList?num=${vo.num}&curPage="+curPage,
+			$.get("../comments/commuCommentsList?num="+c_num+"&curPage="+curPage,
 					function(data) {
 						if (curPage == 1) {
 							$('.commentslist').html(data);
@@ -185,7 +186,7 @@ $(function() {
 				
 				$.ajax({
 					
-					url:"../comments/newsCommentsDelete",
+					url:"../comments/commuCommentsDelete",
 					type:"POST",
 					data: {
 						ref : ref
@@ -201,16 +202,16 @@ $(function() {
 		
 		//원본 댓글 삭제
 		$('.commentslist').on('click', '.reply_delete', function() {
-			var cnum = $(this).attr('id');
+			var ccnum = $(this).attr('id');
 			var check = confirm("삭제하시겠습니까?");
 			if (check == true) {
 				
 				$.ajax({
 					
-					url:"../comments/newsCommentsReplyDelete",
+					url:"../comments/commuCommentsReplyDelete",
 					type:"POST",
 					data: {
-						cnum : cnum
+						ccnum : ccnum
 					},
 					success:function(data) {
 						if(data=='1') {
@@ -236,24 +237,24 @@ $(function() {
 		
 		
 		////////////////////////////대댓글 관련 코드
-		var recnum = 0;
+		var reccnum = 0;
 		$('.commentslist').on('click', '.c_replyBtn', function() {
 				
-			recnum = $(this).attr('title');
+			reccnum = $(this).attr('title');
 			
 		});
 		///댓글 답글 
 		$('#replyBtn').click(function() {
-			var recnum2 = recnum;
+			var reccnum2 = reccnum;
 			var reContents = $('#replyContents').val();
 			var renum = $('#nnum').val();
 			var reid = $('#reid').val();
 			$.ajax({
 				
-				url:"../comments/newsCommentsReply",
+				url:"../comments/commuCommentsReply",
 				type:"POST",
 				data: {
-					cnum : recnum2,
+					ccnum : reccnum2,
 					num : renum,
 					id : reid,
 					contents : reContents
@@ -268,7 +269,7 @@ $(function() {
 			});
 		});
 		
-		var likecnum = 0;
+		var likeccnum = 0;
 		var likeId = '${memberVO.id}';
 		var likeResult = null;
 		var hateResult = null;
@@ -281,14 +282,14 @@ $(function() {
 				alert('로그인 하셔야 이용 가능합니다.');
 				location.href="../member/memberLogin";
 			} else {
-				likecnum = $(this).attr('title');
+				likeccnum = $(this).attr('title');
 				$.ajax({
 					
-					url:"../comments/newsCommentsLike",
+					url:"../comments/commuCommentsLike",
 					type:"POST",
 					data: {
-						cnum : likecnum,
-						num : likecnum,
+						ccnum : likeccnum,
+						num : likeccnum,
 						id : likeId
 					},
 					success:function(data) {

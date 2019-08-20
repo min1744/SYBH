@@ -14,7 +14,7 @@ public class CommunityCommentsDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
-	private static final String NAMESPACE="CommuCommentsMapper.";
+	private static final String NAMESPACE="CommunityCommentsMapper.";
 	
 	//댓글등록
 	public int setWrite(CommunityCommentsVO communityCommentsVO) throws Exception {
@@ -52,8 +52,8 @@ public class CommunityCommentsDAO {
 	}
 	
 	//댓글 답글 삭제
-	public int replyDelete (int cnum) throws Exception {
-		return sqlSession.delete(NAMESPACE+"replyDelete", cnum);
+	public int replyDelete (int ccnum) throws Exception {
+		return sqlSession.delete(NAMESPACE+"replyDelete", ccnum);
 	}
 	
 	

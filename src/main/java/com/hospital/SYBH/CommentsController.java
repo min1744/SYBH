@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.community.comments.CommunityCommentsService;
+import com.hospital.community.comments.CommunityCommentsVO;
+import com.hospital.community.like.CommuLikeVO;
 import com.hospital.news.comments.NewsCommentsService;
 import com.hospital.news.comments.NewsCommentsVO;
 import com.hospital.qna.comments.QnACommentsService;
@@ -30,8 +32,88 @@ public class CommentsController {
 	private CommunityCommentsService communityCommentsService;
 	
 	
+	////////////////////커뮤니티 코멘트 관련
+		
+	//댓글 등록
+	@RequestMapping(value = "commuCommentsWrite", method = RequestMethod.POST)
+	@ResponseBody
+	public int setWrite(CommunityCommentsVO communityCommentsVO) throws Exception {
+	int result = communityCommentsService.setWrite(communityCommentsVO);
+	return result;
+	}
 	
-	//////////////////// news 코멘트 관련
+	//댓글 리스트
+	@RequestMapping(value = "commuCommentsList", method = RequestMethod.GET)
+	public ModelAndView commuGetList(int num, String id, PageMaker pageMaker) throws Exception {
+	
+	ModelAndView mv = new ModelAndView();
+	List<CommunityCommentsVO> list = communityCommentsService.getList(num, pageMaker);
+	int totalCount = communityCommentsService.getTotalCount(num);
+	mv.addObject("list", list);
+	mv.addObject("totalCount", totalCount);
+	mv.setViewName("common/commuCommentsList");
+	
+	return mv;
+	}
+	
+	
+	//댓글 수정
+	@RequestMapping(value = "commuCommentsUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public int commuSetUpdate(CommunityCommentsVO communityCommentsVO) throws Exception {
+	int result = communityCommentsService.setUpdate(communityCommentsVO);
+	return result;
+	}
+	
+	
+	//원본 댓글 삭제
+	@RequestMapping(value = "commuCommentsDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public int commuSetDelete(int ref) throws Exception {
+	int result = communityCommentsService.setDelete(ref);
+	System.out.println(result);
+	return result;
+	}
+	
+	//댓글 답글 삭제
+	@RequestMapping(value = "commuCommentsReplyDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public int commuReplyDelete(int cnum) throws Exception {
+	int result = communityCommentsService.replyDelete(cnum);
+	return result;
+	}
+	
+	
+	//답글
+	@RequestMapping(value = "commuCommentsReply", method = RequestMethod.POST)
+	@ResponseBody
+	public int setReply(CommunityCommentsVO communityCommentsVO) throws Exception {
+	int result = communityCommentsService.setReply(communityCommentsVO);
+	
+	return result;
+	}
+	
+	
+	
+	//좋아요
+	@RequestMapping(value = "commuCommentsLike", method = RequestMethod.POST)
+	@ResponseBody
+	public int likeUpdate(int cnum, int num, String id, CommuLikeVO commuLikeVO, CommunityCommentsVO communityCommentsVO) throws Exception {
+	
+	int result = communityCommentsService.likeUpdate(cnum, num, id, commuLikeVO, communityCommentsVO);
+	
+	return result;
+	}
+	
+	
+	////////////////////////////////////
+	
+	
+	
+	
+	
+	
+	//////////////////////////////////////////////////////// news 코멘트 관련
 	
 	//댓글 등록
 	@RequestMapping(value = "newsCommentsWrite", method = RequestMethod.POST)

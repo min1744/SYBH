@@ -41,7 +41,7 @@
 			</c:when>
 			<c:otherwise>
 				<input type="hidden" id="board" value="${board}">
-				<input type="hidden" id="num" value="${vo.num}">
+				<input type="hidden" id="c_num" value="${vo.num}">
 				<p id="wtitle">커뮤니티</p>
 				<p id="sub_title">쌍용백병원의 커뮤니티 게시판 입니다.</p>
 			</c:otherwise>
@@ -195,7 +195,6 @@
 						<div id="comment">
 							<div id="c_top">
 								<input type="hidden" id="like_check">
-								<input type="hidden" name="num" id="num" value="1">
 								<span id="c_count_title">전체댓글</span><span id="c_count">${totalCount}</span>
 							</div>
 							<c:choose>
