@@ -49,8 +49,23 @@ public class NewsService {
 		
 	}
 	//update
-	public int setUpdate(NewsVO newsVO) throws Exception{
-		return newsDAO.setUpdate(newsVO);
+	public int setUpdate(NewsVO newsVO,HttpSession session,MultipartFile multipartFile) throws Exception{
+		NewsImagesVO newsImagesVO = new NewsImagesVO();
+		
+		String realPath = session.getServletContext().getRealPath("/resources/file");
+		int result = newsDAO.setUpdate(newsVO);
+		
+		if(result < 1) {
+			throw new Exception();
+		}
+		if(multipartFile.getOriginalFilename().length()>0) {
+		newsImagesVO.setNum(newsVO.getNum());
+		newsImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
+		newsImagesVO.setOname(multipartFile.getOriginalFilename());
+		result = newsImagesDAO.setWrite(newsImagesVO);
+		}
+		
+		return result;
 	}
 	//delete
 	public int setDelete(int num,HttpSession session) throws Exception{
