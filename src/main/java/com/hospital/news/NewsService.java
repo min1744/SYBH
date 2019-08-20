@@ -80,7 +80,18 @@ public class NewsService {
 		
 		return list;
 	}
-	
+	//재혁작업
+	public List<NewsVO> getNewsList(PageMaker pageMaker, String menu) throws Exception{
+		pageMaker.makeRow();
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("menu", menu);
+		map.put("pager", pageMaker);
+		int totalCount = newsDAO.getTotalCount(map);
+		System.out.println(totalCount);
+		pageMaker.makePage(totalCount);
+		List<NewsVO> list = newsDAO.getList(map);
+		return list;
+	}
 	
 	
 }
