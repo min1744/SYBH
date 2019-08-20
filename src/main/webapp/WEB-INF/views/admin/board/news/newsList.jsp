@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +17,11 @@
   <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">
   <!-- Custom styles for this page -->
   <link href="../resources/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-<meta charset="UTF-8">
+  <style type="text/css">
+  	#controller_div{
+  		height: 50px;
+  	}
+  </style>
 </head>
 <body id="page-top">
 
@@ -26,7 +29,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <c:import url="../../common/sidebar.jsp" />
+    <c:import url="../../../common/sidebar.jsp" />
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -36,42 +39,80 @@
       <div id="content">
 
         <!-- Topbar -->
-        <c:import url="../../common/topbar.jsp" />
+        <c:import url="../../../common/topbar.jsp" />
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">후원 관리</h1>
+          <h1 class="h3 mb-2 text-gray-800">${menu} 게시판 관리</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
               	<div id="controller_div">
-              	후원 총 금액: <fmt:formatNumber value="${total}" pattern="#,###"/> 원
+         			<input type="button" value="DELETE" id="delete_btn" class="btn btn-danger">
+					<a href="./${menu}Write" id="write_btn" class="btn btn-primary">WRITE</a>
          		</div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>후원번호</th>
-                      <th>입금자명</th>
-                      <th>후원금액</th>
-                      <th>후원날짜</th>
-                      <th>결제정보</th>
+                      <th><input type="checkbox" id="checkAll"></th>
+                      <th>번호</th>
+                      <th>제목</th>
+                      <th>작성자</th>
+                      <th>작성일</th>
+                      <th>조회수</th>
                     </tr>
                   </thead>
                   <tbody>
-					<c:forEach items="${list}" var="vo">
-						<tr class="position_2">
-							<td class="num">${vo.num}</td>
-							<td>${vo.name }</td>
-							<td class="date">${vo.pay_date}</td>
-							<td class="date">${vo.price }</td>
-							<td class="hit">${vo.opt}</td>
-						</tr>
-					</c:forEach>
+                    <c:choose>
+							<c:when test="${menu eq 'disease'}">
+								<c:forEach items="${list}" var="vo">
+									<tr class="position_2">
+										<td><input type="checkbox" class="check" name="num" value="${vo.num}"></td>
+										<td class="num">${vo.num}</td>
+										<td>
+										<a href="./${menu}Select?num=${vo.num}">${vo.title}</a>
+										</td>
+										<td class="date">${vo.writer}</td>
+										<td class="date">${vo.reg_date }</td>
+										<td class="hit">${vo.hit}</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:when test="${menu eq 'nutrition'}">
+								<c:forEach items="${list}" var="vo">
+									<tr class="position_2">
+										<td><input type="checkbox" class="check" name="num" value="${vo.num}"></td>
+										<td class="num">${vo.num}</td>
+										<td>
+										<a href="./${menu}Select?num=${vo.num}">${vo.title}</a>
+										</td>
+										<td class="date">${vo.writer}</td>
+										<td class="date">${vo.reg_date }</td>
+										<td class="hit">${vo.hit}</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							
+							<c:when test="${menu eq 'exercise'}">
+								<c:forEach items="${list}" var="vo">
+									<tr class="position_2">
+										<td><input type="checkbox" class="check" name="num" value="${vo.num}"></td>
+										<td class="num">${vo.num}</td>
+										<td>
+										<a href="./${menu}Select?num=${vo.num}">${vo.title}</a>
+										</td>
+										<td class="date">${vo.writer}</td>
+										<td class="date">${vo.reg_date }</td>
+										<td class="hit">${vo.hit}</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+						</c:choose>
                   </tbody>
                 </table>
               </div>
@@ -136,6 +177,59 @@
   <script src="../resources/js/admin/dataTables.bootstrap4.min.js"></script>
   <!-- Page level custom scripts -->
   <script src="../resources/js/admin/datatables-demo.js"></script>
-
+  <script type="text/javascript">
+    var checkMoreZero = false;
+  	$("#checkAll").click(function() {
+		var checkAll = $(this).prop("checked");
+		$(".check").prop("checked", checkAll);
+		checkMoreZero = checkAll;
+	});
+	
+	//All check control & Check More Zero
+	$(".check").click(function() {
+		var check = true;
+		checkMoreZero = false;
+		$(".check").each(function() {
+			if (!$(this).prop("checked")) {
+				check = false;
+			} else {
+				checkMoreZero = true;
+			}
+		});
+		$("#checkAll").prop("checked", check);
+	});  
+  
+  	$('#delete_btn').click(function() {
+		if(checkMoreZero){
+			var result = confirm("삭제 하시겠습니까?");
+			if(result){
+				var nums = [];
+				$(".check").each(function() {
+					if($(this).prop("checked")){
+						nums.push($(this).val());
+					}
+				});
+				//ajax로 배열을 전송하고자 할때 추가
+				jQuery.ajaxSettings.traditional = true;
+				
+				$.ajax({
+					url : "./noticeListDelete",
+					type : "POST",
+					data : {
+						num : nums
+					},
+					success : function(data) {
+						location.reload();
+					},
+					error:function(){
+						alert('Delete Fail');
+					}
+				});
+			}
+		} else {
+			alert("선택된 것이 없습니다.");
+		}
+	});
+  </script>
 </body>
 </html>
