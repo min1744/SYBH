@@ -515,22 +515,21 @@
 	        </div>
 	        <div class="modal-body">
 	        	<div class="modal_title_box">
-		        	<p class="modal_med_office_title" id="med${i.index }" id="med${i.index}" title="${list.med_office }">${list.med_office}</p>
-		        	<h2 class="modal_med_office" id="name${i.index }" title="${list.name}" data-toggle="${list.num }">${list.name } 교수</h2>
+		        	<p class="modal_med_office_title">${list.med_office}</p>
+		        	<h2 class="modal_med_office">${list.name } 교수</h2>
 		        </div>
-	        		<hr>
-				
-				<div class="modal_profile">
-					<img alt="" src="../resources/images/${list.doctorImagesVO.fname}">
-				</div>
-				
+				<!-- 진료과목 -->
 				<div class="modal_info">
 					<h3 class="modal_pro_field_title">전문분야</h3>
 					<p class="modal_pro_field">${list.pro_field }</p>
 				</div>	
+	        		<hr>
+				<!-- 교수 프로필 -->
+				<div class="modal_profile">
+					<img alt="" src="../resources/file/${list.doctorImagesVO.fname}">
+				</div>
 				
-				<button id="reserve_btn" data-num="${i.index }" class="reserve_btn class" data-dismiss="modal">진료예약</button>
-				
+				<!-- 경력/활동 -->
 				<div class="modal_career">
 					
 					<div class="career">
@@ -550,10 +549,8 @@
 							</c:forTokens>
 						</ul>
 					</div>
+				</div>   
 				
-				</div>          
-	          
-	          
 	        </div>
 	      </div>
     	</div>
