@@ -63,15 +63,8 @@ public class AdminController {
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
 		HashMap<String, Object> map = adminService.getData();
-		mv.addObject("allMemberCount", (Integer)map.get("allMemberCount"));
-		mv.addObject("allDoctorCount", (Integer)map.get("allDoctorCount"));
-		mv.addObject("allAdminCount", (Integer)map.get("allAdminCount"));
-		mv.addObject("earnings", (String)map.get("earnings"));
-		mv.addObject("earningsNum", (Long)map.get("earningsNum"));
-		mv.addObject("access_count", (Integer)map.get("access_count"));
-		mv.addObject("donations", (String)map.get("donations"));
+		mv.addAllObjects(map);
 		mv.addObject("monthData", (int [])map.get("monthMembershipData"));
-		mv.addObject("annualMemberCount", (Integer)map.get("annualMemberCount"));
 		mv.setViewName("admin/adminIndex");
 		
 		return mv;
