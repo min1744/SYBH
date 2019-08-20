@@ -84,12 +84,15 @@ public class MedicalTeamService {
 		if(result<1) {
 			throw new Exception();
 		}
-		if(multipartFile.getOriginalFilename().length()>0) {
-		doctorImagesVO.setNum(medicalTeamVO.getNum());
-		doctorImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
-		doctorImagesVO.setOname(multipartFile.getOriginalFilename());
+		try {
+			doctorImagesVO.setNum(medicalTeamVO.getNum());
+			doctorImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
+			doctorImagesVO.setOname(multipartFile.getOriginalFilename());
+			result = doctorImagesDAO.setWrite(doctorImagesVO);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		result = doctorImagesDAO.setWrite(doctorImagesVO);
+		
 		if(result<1) {
 			throw new Exception();
 		}
@@ -140,16 +143,17 @@ public class MedicalTeamService {
 			throw new Exception();
 		}
 		String realPath = session.getServletContext().getRealPath("/resources/file");
-		DoctorImagesVO doctorImagesVO = null;
-		if(multipartFile.getOriginalFilename().length()>0) {
+		DoctorImagesVO doctorImagesVO = new DoctorImagesVO();
+		try {
 			doctorImagesVO = new DoctorImagesVO();
 			doctorImagesVO.setNum(medicalTeamVO.getNum());
 			doctorImagesVO.setOname(multipartFile.getOriginalFilename());
 			doctorImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
+			result = doctorImagesDAO.setWrite(doctorImagesVO);
+		}catch (Exception e) {
+			// TODO: handle exception
 		}
-		if(doctorImagesVO != null) {
-			result = doctorImagesDAO.setUpdate(doctorImagesVO);
-		}
+		
 		return result;
 	}
 	

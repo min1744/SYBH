@@ -27,17 +27,34 @@
 	rel="stylesheet">
 	<script type="text/javascript">
 	$(function() {
+		var f = document.boardform;
 		$("#write").click(function() {
 		//다른 input들 검증
-			$('.empty').each(function(){
-				if($(this).val()==''){
-					alert('내용을 입력해주세요');
-					$(this).focus();
-					return false;
-				} else{
-					$('#frm').submit();
-				}
-			});
+		var str = f.title.value;
+		if(!str){
+			alert('제목을 입력하세요');
+			f.title.focus();
+			return false;
+		}
+		str = f.pro_field.value;
+		if(!str){
+			alert('전문분야를 입력하세요');
+			f.pro_field.focus();
+			return false;
+		}
+		str = f.career.value;
+		if(!str){
+			alert('경력을 입력하세요');
+			f.career.focus();
+			return false;
+		}
+		str = f.major_act.value;
+		if(!str){
+			alert('주요활동을 입력하세요');
+			f.major_act.focus();
+			return false;
+		}
+		$("#frm").submit();
 		});
 		
 	});
@@ -66,14 +83,14 @@
 					<h1 class="h3 mb-2 text-gray-800">의료진 관리</h1>
 					<div id="board_box">
 						<div id="form_box">
-							<form id="frm" action="./medicalWrite" method="post" enctype="multipart/form-data">
+							<form id="frm" action="./medicalWrite" name = "boardform" method="post" enctype="multipart/form-data">
 								<div class="form-group">
 									<span class="title">이름</span> 
 									<input class="form-control empty"	type="text" id="title" name="name">
 								</div>
 								<div class="form-group">
 									<span class="writer">진료과</span> 
-									 <select class="form-control" id="sel1" name="med_office">
+									 <select class="form-control" id="med_office" name="med_office">
 									    <option value="1" >이비인후과</option>
 									    <option value="2">외과</option>
 									    <option value="3">비뇨의학과</option>

@@ -7,6 +7,18 @@
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/reserveNomal.css" rel="stylesheet">
 <c:import url="../temp/boot.jsp" />
+<link rel="stylesheet" href="../resources/css/bootstrap-material-datetimepicker.css" />
+<link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+<!--<link rel="stylesheet" href="../resources/css/material.min.css" /> -->
+
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../resources/js/material.min.js"></script>
+<script type="text/javascript" src="../resources/js/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="../resources/js/bootstrap-material-datetimepicker.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 
 		
@@ -18,99 +30,11 @@
 	        var date = new Date();//today의 Date를 세어주는 역할
 	        
 	        
-	        function prevCalendar() {//이전 달
-	        // 이전 달을 today에 값을 저장하고 달력에 today를 넣어줌
-	        //today.getFullYear() 현재 년도//today.getMonth() 월  //today.getDate() 일 
-	        //getMonth()는 현재 달을 받아 오므로 이전달을 출력하려면 -1을 해줘야함
-	         today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-	         buildCalendar(); //달력 cell 만들어 출력 
-	        }
+	      
 	 
-	        function nextCalendar() {//다음 달
-	            // 다음 달을 today에 값을 저장하고 달력에 today 넣어줌
-	            //today.getFullYear() 현재 년도//today.getMonth() 월  //today.getDate() 일 
-	            //getMonth()는 현재 달을 받아 오므로 다음달을 출력하려면 +1을 해줘야함
-	             today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-	             buildCalendar();//달력 cell 만들어 출력
-	        }
-	        var too ='';
-	        function buildCalendar(){//현재 달 달력 만들기
-	            var doMonth = new Date(today.getFullYear(),today.getMonth(),1);
-	            //이번 달의 첫째 날,
-	            //new를 쓰는 이유 : new를 쓰면 이번달의 로컬 월을 정확하게 받아온다.     
-	            //new를 쓰지 않았을때 이번달을 받아오려면 +1을 해줘야한다. 
-	            //왜냐면 getMonth()는 0~11을 반환하기 때문
-	            var lastDate = new Date(today.getFullYear(),today.getMonth()+1,0);
-	            //이번 달의 마지막 날
-	            //new를 써주면 정확한 월을 가져옴, getMonth()+1을 해주면 다음달로 넘어가는데
-	            //day를 1부터 시작하는게 아니라 0부터 시작하기 때문에 
-	            //대로 된 다음달 시작일(1일)은 못가져오고 1 전인 0, 즉 전달 마지막일 을 가져오게 된다
-	            var tbCalendar = document.getElementById("calendar");
-	            //날짜를 찍을 테이블 변수 만듬, 일 까지 다 찍힘
-	            var tbCalendarYM = document.getElementById("tbCalendarYM");
-	            //테이블에 정확한 날짜 찍는 변수
-	            //innerHTML : js 언어를 HTML의 권장 표준 언어로 바꾼다
-	            //new를 찍지 않아서 month는 +1을 더해줘야 한다. 
-	            var month = today.getMonth()+1;
-	            if(month <10){
-	    			month = "0"+month;
-	    		}
-	             tbCalendarYM.innerHTML = today.getFullYear() + "년 " + month + "월"; 
-	 			var to = today.getFullYear()+"-"+month;
-	             /*while은 이번달이 끝나면 다음달로 넘겨주는 역할*/
-	            while (tbCalendar.rows.length > 2) {
-	            //열을 지워줌
-	            //기본 열 크기는 body 부분에서 2로 고정되어 있다.
-	                  tbCalendar.deleteRow(tbCalendar.rows.length-1);
-	                  //테이블의 tr 갯수 만큼의 열 묶음은 -1칸 해줘야지 
-	                //30일 이후로 담을달에 순서대로 열이 계속 이어진다.
-	             }
-	             var row = null;
-	             row = tbCalendar.insertRow();
-	             //테이블에 새로운 열 삽입//즉, 초기화
-	             var cnt = 0;// count, 셀의 갯수를 세어주는 역할
-	            // 1일이 시작되는 칸을 맞추어 줌
-	             for (i=0; i<doMonth.getDay(); i++) {
-	             /*이번달의 day만큼 돌림*/
-	                  cell = row.insertCell();//열 한칸한칸 계속 만들어주는 역할
-	                  cnt = cnt + 1;//열의 갯수를 계속 다음으로 위치하게 해주는 역할
-	             }
-	            /*달력 출력*/
-	             for (i=1; i<=lastDate.getDate(); i++) { 
-	             //1일부터 마지막 일까지 돌림
-	                  cell = row.insertCell();//열 한칸한칸 계속 만들어주는 역할
-	                  var day = i;
-	                  if(day<10){
-	                	  day= "0"+day;
-	                  }
-	                  too = to;
-	                  too += '-'+day;
-	                  cell.innerHTML = '<button dt-data="'+too+'" class="doctor">'+i+'</button>';//셀을 1부터 마지막 day까지 HTML 문법에 넣어줌
-	                  cnt = cnt + 1;//열의 갯수를 계속 다음으로 위치하게 해주는 역할
-	              if (cnt % 7 == 1) {/*일요일 계산*/
-	                  //1주일이 7일 이므로 일요일 구하기
-	                  //월화수목금토일을 7로 나눴을때 나머지가 1이면 cnt가 1번째에 위치함을 의미한다
-	                cell.innerHTML = "<font color=red>" + '<button dt-data="'+too+'"class="doctor">'+"<font color=red>"+i+'</button>'
-	                //1번째의 cell에만 색칠
-	            }    
-	              if (cnt%7 == 0){/* 1주일이 7일 이므로 토요일 구하기*/
-	                  //월화수목금토일을 7로 나눴을때 나머지가 0이면 cnt가 7번째에 위치함을 의미한다
-	                  cell.innerHTML =  '<button dt-data="'+too+'" class="doctor">'+"<font color=#153F91>"+i+'</button>'
-	                  //7번째의 cell에만 색칠
-	                   row = calendar.insertRow();
-	                   //토요일 다음에 올 셀을 추가
-	              }
-	              /*오늘의 날짜에 노란색 칠하기*/
-	              if (today.getFullYear() == date.getFullYear()
-	                 && today.getMonth() == date.getMonth()
-	                 && i == date.getDate()) {
-	                  //달력에 있는 년,달과 내 컴퓨터의 로컬 년,달이 같고, 일이 오늘의 일과 같으면
-	               		// cell.bgColor = "#FAF58C"; //셀의 배경색을 노랑으로 
-	                cell.style.color = "white";
-	                cell.style.background = "#6BB5DB";
-	               }
-	             }
-	        }
+	        
+
+
 	        
 	        
 	        ////////////////////// 캘린더 끝
@@ -131,7 +55,6 @@
 		      	var today = year+"-"+month+"-"+day;
 	        	
 	        	
-	        	$('#cal_box').hide();
 	        	$('#time_box').hide();
 	        	$('#reserve_ok').hide();
 	        	var medic = '${medic}';
@@ -139,7 +62,6 @@
 	        	var med_office ='${medic.med_office}';
 	        	var docnum='${medic.num}';
 	        	if(medic!=''){
-	        		$('#cal_box').show();
 	        		$('#reserve_ok').show();
 	        		$('#doc').html(name);
 	        		$('#off').html(med_office);
@@ -147,14 +69,13 @@
 	        	} 
 	        	
 	        	$('.select_btn').click(function() {
-					$('#cal_box').show();
 					$('#reserve_ok').show();
 				});
 	        	
 	        
 			/* 재혁 */
 			$('.select_btn').click(function(){
-				
+				//$('#ti').text('');
 				var index = $(this).attr('data-num');
 				//의사 이름 불러오기
 				name = $("#name"+index).attr('title');
@@ -204,35 +125,36 @@
 				});//ajax
 			});
 			var date ='';
-			$('.doctor').click(function(){
+			$('#date').click(function(){
 				//this.style.color="white";
 				//this.style.backgroundColor="#153f91";
-				
-				date = $(this).attr('dt-data');
-				$('#ti').html(date);
 				$('#time_box').show();
 
 			});
 			var time ='';
 			$('.time').click(function(){
+				date = $('#date').val();
 				time = $(this).val();
 				if(date ==''){
 					alert('날짜를 먼저 선택해 주세요');
 					return false;
 				}
-				$('#ti').html(date+" "+time);
+				$('#ti').html(time);
 			})
 			var reserve = '';
 			$('#reserve_ok').click(function() {
+				date = $('#date').val();
         		if(date ==''){
         			alert('날짜를 선택해 주세요');
         			return false;
         		}
+        		//alert(date);
         		if(date<today){
         			alert(today +' 이후로 선택 가능합니다.');
         			time ='';
         			return false;
         		}
+        		time = $('#ti').text();
         		if(time ==''){
         			alert('시간을 선택해 주세요');
         			return false;
@@ -248,7 +170,7 @@
 					var doc = $('#doc').text();
 					var off = $('#off').text();
 					var contents = doc+"/"+off;
-					var reserve_date = $('#ti').text();
+					var reserve_date = reserve;
 					$.ajax({
 						url: "../treatBreakDown/treatWrite",
 						type: "POST",
@@ -378,45 +300,26 @@
 					<p class="user_name">환자명 : </p><span>${memberVO.name}</span><br>
 					<p id="user_office">병원/진료과 : </p><span id="off"></span><br>
 					<p id="user_doctor">의료진 : </p><span id="doc"></span><br>
-					<p id="user_date">진료일시 :</p><span id="ti"></span><br>
+					<p id="user_date">진료날짜 : </p><span id="day"><input type="text" id="date" class="floating-label" placeholder="날짜를 선택하세요" style="border: inherit; background: inherit; width: 130px;"></span><br>
+					<p>진료시간 : </p><span id="ti"></span><br>
 					<input type="hidden" id="docnum">						
 				</div>
 				
 			</div>
+
+			<script type="text/javascript">
+		$(document).ready(function()
+		{
 			
-			<!-- 달력 -->
-			<div id="reserve_cal">
-				<h3>진료 날짜/시간 선택</h3>
-				
-				<div id="cal_box">
-				
-					<!-- 달력 테이블 -->
-					<table id="calendar" align="center">
-						<thead>
-					    <tr><!-- label은 마우스로 클릭을 편하게 해줌 -->
-					        <td><label onclick="prevCalendar()"><img alt="이전 달" src="../resources/images/prev.png"></label></td>
-					        <td align="center" id="tbCalendarYM" colspan="5" style="margin-bottom: 10px;">
-					        yyyy년 m월</td>
-					        <td><label onclick="nextCalendar()"><img alt="다음 달" src="../resources/images/next.png"></label></td>
-					    </tr>
-					    </thead>
-					    <tr class="tr">
-					        <td align="center"><font color ="red">일</td>
-					        <td align="center">월</td>
-					        <td align="center">화</td>
-					        <td align="center">수</td>
-					        <td align="center">목</td>
-					        <td align="center">금</td>
-					        <td align="center"><font color ="#153F91">토</td>
-					    </tr> 
-					</table>
-					<script language="javascript" type="text/javascript">
-					    buildCalendar();//캘린더 함수 호출
-					</script>
-				</div>
-			</div>
-			<!-- 달력 끝 -->
+			$('#date').bootstrapMaterialDatePicker
+			({
+				time: false
+			});
 			
+	
+		});
+		
+		</script>
 			<div id="select_time">
 				
 				<div id="time_box">
@@ -436,7 +339,6 @@
 			<!-- 예약확인 버튼 -->
 			<button type="submit" id="reserve_ok" >예약하기</button>
 		</div>	
-			
 			
 		</div>
 		
@@ -568,7 +470,6 @@
 				med_office = $('#med'+index).attr('title');
 				
 				$('#off').html(med_office);
-				$('#cal_box').show();
 				$('#reserve_ok').show();
  	 		});
  	 	});

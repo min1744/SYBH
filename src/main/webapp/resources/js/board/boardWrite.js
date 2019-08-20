@@ -7,6 +7,7 @@ $(function() {
 	var title = $('#title').val();
 	if($('#contents').summernote('isEmpty') || q_title == '' || title == '') {
 		alert('모두 입력해주세요.');
+		return false;
 	} else {
 		if($('#fix').prop("checked")){
 			var fixCount = $('#fixCount').val();

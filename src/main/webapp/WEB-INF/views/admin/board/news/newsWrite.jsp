@@ -32,23 +32,31 @@
 </style>
 <script type="text/javascript">
 $(function() {
+	var f = document.boardform;
 	$("#write").click(function() {
 	//다른 input들 검증
-		$('.empty').each(function(){
-			if($(this).val()==''){
-				alert('내용을 입력해주세요');
-				$(this).focus();
-				return false;
-			} else{
-				$('#frm').submit();
-			}
-		});
+	var str = f.title.value;
+	if(!str){
+		alert('제목을 입력하세요');
+		f.title.focus();
+		return false;
+	}
+	str = f.sub_contents.value;
+	if(!str){
+		alert('Sub내용을 입력하세요');
+		f.sub_contents.focus();
+		return false;
+	}
+	if($('#contents').summernote('isEmpty')) {
+		alert('Main내용을 입력해주세요.');
+		return false;
+	}
+	$("#frm").submit();
 	});
 	
 });
 </script>
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
-<script type="text/javascript" src="../resources/js/board/boardWrite.js"></script>
 </head>
 <body id="page-top">
 	<div id="wrapper">
@@ -90,7 +98,7 @@ $(function() {
 					<div id="board">
 						<div id="board_box">
 							<div id="form_box">
-								<form id="frm" action="./newsWrite" method="post" enctype="multipart/form-data">
+								<form id="frm" action="./newsWrite" name="boardform" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="menu" value="${menu}">
 									<div class="float">
 										<span class="title">제목</span>

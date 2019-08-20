@@ -76,12 +76,12 @@
 						<div class="card-body">
 							<div class="table-responsive">
 								<div id="controller_div">
-									<input type="button" value="DELETE" id="delete_btn"	class="btn btn-danger">
-									<a href="./medicalUpdate?num=${vo.num }" id="write_btn" class="btn btn-primary">UPDATE</a>
+									<input type="button" value="삭제" id="delete_btn"	class="btn btn-danger">
+									<a href="./medicalUpdate?num=${vo.num }" id="write_btn" class="btn btn-primary">수정</a>
 								</div>
 								<table class="table table-bordered" width="100%" cellspacing="0">
 									<tr>
-										<td rowspan="6"><img alt="" src="../resources/file/${vo.doctorImagesVO.fname}"></td>
+										<td rowspan="6"><img alt="" src="../resources/file/${vo.doctorImagesVO.oname}"></td>
 									</tr>
 									<tr>
 										<td>성함</td>
@@ -114,6 +114,7 @@
 								</table>
 							</div>
 						</div>
+						<a href="./medicalList">목록</a>
 					</div>
 				</div>
 			</div>
