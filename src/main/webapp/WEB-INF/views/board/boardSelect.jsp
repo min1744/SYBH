@@ -197,6 +197,7 @@
 							<div id="c_top">
 								<input type="hidden" id="like_check">
 								<input type="hidden" id="c_num" value="${vo.num}">
+								<input type="hidden" id="likeId" value="${memberVO.id}">
 								<span id="c_count_title">전체댓글</span><span id="c_count">${totalCount}</span>
 							</div>
 							<c:choose>

@@ -272,7 +272,7 @@ $(function() {
 		});
 		
 		var likeccnum = 0;
-		var likeId = '${memberVO.id}';
+		var likeId = $('#likeId').val();
 		var likeResult = null;
 		var hateResult = null;
 		
