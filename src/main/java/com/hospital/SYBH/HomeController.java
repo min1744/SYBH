@@ -14,6 +14,8 @@ import com.hospital.board.BoardVO;
 import com.hospital.member.MemberDAO;
 import com.hospital.member.MemberService;
 import com.hospital.member.MemberVO;
+import com.hospital.news.NewsService;
+import com.hospital.news.NewsVO;
 import com.hospital.notice.NoticeService;
 import com.hospital.util.PageMaker;
 
@@ -23,7 +25,8 @@ public class HomeController {
 	private NoticeService noticeService;
 	@Inject
 	private MemberService memberService;
-	
+	@Inject
+	private NewsService newsService;
 	//진우 : noticeList
 	//민근 : variety(member or kakao)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -32,11 +35,14 @@ public class HomeController {
 		pageMaker.setCurPage(1);
 		pageMaker.setPerPage(5);
 		List<BoardVO> indexlist= noticeService.getList(pageMaker);
+		List<NewsVO> ilist =newsService.newsIndex();
 		String variety = (String)session.getAttribute("variety");
+		mv.addObject("ilist", ilist);
 		mv.addObject("list", indexlist);
 		mv.addObject("variety", variety);
 		mv.setViewName("index/home");
 		
 		return mv;
 	}
+
 }

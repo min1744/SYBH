@@ -105,6 +105,12 @@ public class NewsService {
 		
 		return list;
 	}
+	
+	public List<NewsVO> newsIndex()throws Exception{
+		List<NewsVO> list = newsDAO.newsIndex();
+		return list;
+	}
+	
 	//재혁작업
 	public List<NewsVO> getNewsList(PageMaker pageMaker, String menu) throws Exception{
 		pageMaker.makeRow();
