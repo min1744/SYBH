@@ -52,7 +52,10 @@ public class NewsDAO {
 	public List<NewsVO> newsAll(String menu)throws Exception{
 		return sqlSession.selectList(NAMESPACE+"newsAll",menu);
 	}
-	
+	//여러개 삭제
+	public int setListDelete(List<Integer> list)throws Exception{
+		return sqlSession.delete(NAMESPACE+"setListDelete",list);
+	}
 	
 	//list
 	

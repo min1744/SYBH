@@ -1,5 +1,6 @@
 package com.hospital.news;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,12 +38,15 @@ public class NewsService {
 		if(result < 1) {
 			throw new Exception();
 		}
-		
+		if(multipartFile.getOriginalFilename().length()>0) {
 		newsImagesVO.setNum(newsVO.getNum());
 		newsImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
 		newsImagesVO.setOname(multipartFile.getOriginalFilename());
-		//newsVO.setNewsImagesVO(newsImagesVO);
 		result = newsImagesDAO.setWrite(newsImagesVO);
+		}
+		if(result<1) {
+			throw new Exception();
+		}
 		
 		return result;
 		
@@ -102,10 +106,14 @@ public class NewsService {
 		map.put("menu", menu);
 		map.put("pager", pageMaker);
 		int totalCount = newsDAO.getTotalCount(map);
-		System.out.println(totalCount);
 		pageMaker.makePage(totalCount);
 		List<NewsVO> list = newsDAO.getList(map);
 		return list;
+	}
+	//여러개 삭제
+	public int setDelete(Integer[] num)throws Exception{
+		List<Integer> list = Arrays.asList(num);
+		return newsDAO.setListDelete(list);
 	}
 	
 	
