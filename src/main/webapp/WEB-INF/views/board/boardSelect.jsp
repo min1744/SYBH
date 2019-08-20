@@ -20,6 +20,7 @@
 				<input type="hidden" id="board" value="${board}"> 
 				<input type="hidden" id="num" value="${vo.num}">
 				<p id="wtitle">공지사항</p>
+				<p id="sub_title">쌍용백병원의 새로운 소식을 알려드립니다.</p>
 			</c:when>
 			<c:when test="${board eq 'qna'}">
 			<!------------ qna ------------>
