@@ -84,7 +84,6 @@
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">DOCTOR MEMBER:</h6>
             <a class="collapse-item" href="./medicalList">의사 리스트 관리</a>
-            <a class="collapse-item" href="#">등록하기</a>
           </div>
         </div>
       </li>
@@ -103,9 +102,9 @@
             <a class="collapse-item" href="./adminDonation">후원 정보 관리</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">NEWS:</h6>
-            <a class="collapse-item" href="#">질환 정보 관리</a>
-            <a class="collapse-item" href="#">영양 정보 관리</a>
-            <a class="collapse-item" href="#">운동 정보 관리</a>
+            <a class="collapse-item" href="./disease">질환 정보 관리</a>
+            <a class="collapse-item" href="./nutrition">영양 정보 관리</a>
+            <a class="collapse-item" href="./exercise">운동 정보 관리</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">NOTICE:</h6>
             <a class="collapse-item" href="../admin/noticeList">공지사항 관리</a>

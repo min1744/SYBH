@@ -117,7 +117,7 @@
 #info_btn {
 	
 	text-align: center;
-	margin-top: 20px;
+	margin: 40px 0;
 }
 
 
@@ -225,7 +225,7 @@
 #main_info {
 	
 	width: 52%;
-	height: 180px;
+	height: 245px;
 	overflow: hidden;
 	margin-bottom: 3%;
 	float: left;
@@ -248,5 +248,54 @@
 	
 }
 
+
+#jh_box {
+	
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+
+#jh_img, #jh_info {
+	
+	float: left;
+	margin: 0 auto;
+	text-align: center;
+	
+}
+
+
+#jh_img {
+	
+	width: 25%;
+	overflow: hidden;
+	margin-left: 53px;
+}
+
+#jh_img img {
+	
+	width: 100%;
+	box-sizing: border-box;
+	vertical-align: middle;
+}
+
+
+#jh_info {
+	
+	width: 60%;
+	overflow: hidden;
+	margin-left: 30px;
+}
+
+
+#jh_info p {
+	
+	text-align: left;
+	line-height: 35px;
+	letter-spacing: -1px;
+	font-weight: 500;
+	color: #808080;
+}
 
 

@@ -72,7 +72,7 @@
 										<tr class="position_2">
 											<td><input type="checkbox" class="check" name="num" value="${list.num}"></td>
 											<td class="num">${list.num }</td>
-											<td><img alt="" src="../resources/file/${list.doctorImagesVO.fname}" style="width:100px"></td>
+											<td><img alt="" src="../resources/file/${list.doctorImagesVO.oname}" style="width:100px"></td>
 											<td><a href="./medicalSelect?num=${list.num }" class="depth_a">${list.name } 교수</a></td>
 											
 											<th>${list.med_office }</th>

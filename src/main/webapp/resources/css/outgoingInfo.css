@@ -18,6 +18,8 @@
 	border-bottom: 1px solid #ddd;
 }
 
+
+
 #title {
 	text-align: center;
 	font-size: 1.5em;
@@ -94,10 +96,6 @@
 }
 
 
-
-
-
-
 #boardList {
 	
 	width: 80%;
@@ -105,73 +103,11 @@
 }
 
 
-
-.float_box {
-	
-	width: 100%;
-	overflow: hidden;
-	margin-bottom: 40px;
-	letter-spacing: -1px;
-	background: url(../images/bg_search02.png) no-repeat;
-	background-position: 0px -30px;
-	margin-right: 10px;
-	height: 200px;
-	box-sizing: border-box;
-	padding: 3% 10%;
-}
-
-.float_box h2 {
-	
-	color: #153f91;
-}
-
-
-.doctor_search {
-	
-	color: black;
-	margin: 10px 0;
-}
-
-
-#search_box {
-	
-	margin-top: 20px;
-}
-
-
-#search_box input {
-	
-	width: 200px;
-	padding: 10px 10px;
-	border: 2px solid #153f91;
-}
-
-
-#search_box input::placeholder {
-	
-	color: #808080;
-}
-
-
-#search_box button {
-	
-	padding: 10px 15px;
-	background-color: #153f91;
-	border: 2px solid #153f91;
-	color: white;
-	cursor: pointer;
-	
-}
-
-
-
-
 .info_box {
 	
 	width: 100%;
-	margin: 40px 0;
+	margin-bottom: 40px;
 	overflow: hidden;
-	padding: 2%;
 	margin-bottom: 40px;
 	letter-spacing: -1px;
 }
@@ -197,28 +133,67 @@
 }
 
 
+#info_list {
+	
+	width: 100%;
+	overflow: hidden;
+}
 
-.info_box ul li {
+
+#info_list table {
+	
+	width: 100%;
+	overflow: hidden;
+	border-collapse: collapse;
+	letter-spacing: -1px;
+	margin-top: 30px;
+}
+
+
+#info_list table tr {
+	
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 50px;
+	display: block;
+}
+
+
+#info_list table td {
+	
+	padding-left: 50px;
+}
+
+
+.info_img {
+	
+	width: 180px;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.info_img img {
+	
+	width: 100%;
+	box-sizing: border-box;
+	vertical-align: middle;
+}
+
+
+#info_list h2 {
+	
+	color: #153F91;
+}
+
+
+#info_list h3 {
 	
 	color: #808080;
-	padding: 3px 0;
-	padding-left: 10px;
-	position: relative;
+	margin: 5px 0 10px 0;
 }
 
 
-.info_box ul li:before {
+#info_list p {
 	
-	content: '';
-	display: block;
-	position: absolute;
-	top: 15px;
-	left: 0;
-	width: 3px;
-	height: 3px;
-	background-color: #153F91;
-	border-radius: 3px;
-	margin-right: 5px;
+	color: #9d9d9d;
 }
-
-

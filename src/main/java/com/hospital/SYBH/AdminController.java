@@ -28,6 +28,9 @@ import com.hospital.medicalTeam.MedicalTeamService;
 import com.hospital.medicalTeam.MedicalTeamVO;
 import com.hospital.member.MemberVO;
 import com.hospital.member.unserviceability.UnserviceabilityVO;
+import com.hospital.news.NewsService;
+import com.hospital.news.NewsVO;
+import com.hospital.news.comments.NewsCommentsService;
 import com.hospital.notice.NoticeService;
 import com.hospital.notice.NoticeVO;
 import com.hospital.pay.PayService;
@@ -52,6 +55,10 @@ public class AdminController {
 	private CheckUpService checkUpService;
 	@Inject
 	private PayService payService;
+	@Inject
+	private NewsService newsService;
+	@Inject
+	private NewsCommentsService newsCommentsService;
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
@@ -136,7 +143,7 @@ public class AdminController {
 		return mv;
 	}
 	/*재혁 작업 */
-	//관리자용 후원 리스트
+	
 	@RequestMapping(value = "noticeList", method = RequestMethod.GET)
 	public ModelAndView noticeList(PageMaker pageMaker, ModelAndView mv) throws Exception{
 		HashMap<String, List> map = adminService.getNoticeList(pageMaker);
@@ -154,7 +161,7 @@ public class AdminController {
 		return mv;
 	}
 
-
+	//관리자용 후원 리스트
 	@RequestMapping(value = "adminDonation", method = RequestMethod.GET)
 	public ModelAndView donationList(PageMaker pageMaker,PayVO payVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -384,6 +391,99 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	
+	
+	
+	///////////////////////////////뉴스 CRUD/////////////////////////
+	////////////////질환정보 ////////////////
+	////List
+	@RequestMapping(value = "disease", method = RequestMethod.GET)
+	public ModelAndView getList(PageMaker pageMaker,String menu) throws Exception {
+		menu = "disease";
+		List<NewsVO> list = newsService.getNewsList(pageMaker, menu);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list",list);
+		mv.addObject("menu","disease");
+		mv.setViewName("admin/board/news/newsList");
+		return mv;
+	}
+	//select
+		@RequestMapping(value = "diseaseSelect", method = RequestMethod.GET)
+		public ModelAndView diseaseSelect(int num) throws Exception {
+		
+			ModelAndView mv = new ModelAndView();
+			NewsVO newsVO = newsService.getSelect(num);
+			int totalCount = newsCommentsService.getTotalCount(num);
+			
+			mv.addObject("totalCount", totalCount);
+			mv.addObject("vo", newsVO);
+			mv.addObject("menu", "disease");
+			mv.setViewName("admin/board/news/newsSelect");
+			return mv;
+		}
+	
+	
+	
+	///////////////영양정보///////////////
+	////List
+	@RequestMapping(value = "nutrition", method = RequestMethod.GET)
+	public ModelAndView nutritionList(PageMaker pageMaker,String menu,String search) throws Exception {
+		
+		menu = "nutrition";
+		List<NewsVO> list=newsService.getNewsList(pageMaker, menu);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list",list);
+		mv.addObject("pager", pageMaker);
+		mv.addObject("menu","nutrition");
+		mv.setViewName("admin/board/news/newsList");
+		return mv;
+	}
+	
+	//select 
+	@RequestMapping(value = "nutritionSelect",method = RequestMethod.GET)
+	public ModelAndView nutritionSelect(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		NewsVO newsVO = newsService.getSelect(num);
+		int totalCount = newsCommentsService.getTotalCount(num);
+		
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("vo", newsVO);
+		mv.addObject("menu", "nutrition");
+		mv.setViewName("admin/board/news/newsSelect");
+		return mv;
+	}
+	
+	/////////////////////////운동정보//////////////////
+	//list
+	@RequestMapping(value = "exercise", method = RequestMethod.GET)
+	public ModelAndView exerciseList(PageMaker pageMaker,String menu) throws Exception {
+	
+	menu = "exercise";
+	List<NewsVO> list=newsService.getNewsList(pageMaker, menu);
+	ModelAndView mv = new ModelAndView();
+	mv.addObject("list",list);
+	mv.addObject("pager", pageMaker);
+	mv.addObject("menu","exercise");
+	mv.setViewName("admin/board/news/newsList");
+	return mv;
+	}
+	
+	
+	//select 
+	@RequestMapping(value = "exerciseSelect",method = RequestMethod.GET)
+	public ModelAndView exerciseSelect(int num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		NewsVO newsVO = newsService.getSelect(num);
+		int totalCount = newsCommentsService.getTotalCount(num);
+		
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("vo", newsVO);
+		mv.addObject("menu", "exercise");
+		mv.setViewName("admin/board/news/newsSelect");
+		return mv;
+	}
+	
 	/*재혁 작업 끝	*/
 	
 	
