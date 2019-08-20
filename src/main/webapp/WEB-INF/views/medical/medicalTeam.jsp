@@ -119,7 +119,7 @@ function printWeek() {
 				<!-- 의사 리스트 시작 -->
 				<div class="list" id="list${i }">
 					<div class="list_profile">
-							<img alt="" src="../resources/file/${list.doctorImagesVO.fname}">
+							<img alt="" src="../resources/file/${list.doctorImagesVO.oname}">
 					</div>
 					<div class="list_info">
 						<h2 class="name">${list.name } 교수</h2>
@@ -165,7 +165,7 @@ function printWeek() {
 	        		<hr>
 				<!-- 교수 프로필 -->
 				<div class="modal_profile">
-					<img alt="" src="../resources/file/${list.doctorImagesVO.fname}">
+					<img alt="" src="../resources/file/${list.doctorImagesVO.oname}">
 				</div>
 				
 				<!-- 경력/활동 -->
