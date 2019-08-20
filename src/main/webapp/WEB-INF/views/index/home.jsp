@@ -332,14 +332,22 @@ $(function() {
 				<c:forEach items="${ilist}" var="newsVO">
 					<span class="news_contents"> <img
 						src="./resources/file/${newsVO.newsImagesVO.oname}">
-						<p class="category">
+						<%-- <p class="category">
 							<c:choose>
 								<c:when test="${newsVO.menu eq 'disease'}">질병</c:when>
 								<c:when test="${nesVO.menu eq 'nutrition'}">영양</c:when>
 								<c:otherwise>운동</c:otherwise>
 							</c:choose>
-						</p>
+						</p> --%>
 						<p>
+							
+							<span class="category">
+							<c:choose>
+								<c:when test="${newsVO.menu eq 'disease'}">질병</c:when>
+								<c:when test="${nesVO.menu eq 'nutrition'}">영양</c:when>
+								<c:otherwise>운동</c:otherwise>
+							</c:choose>
+							</span>
 							<a href="./news/${newsVO.menu}Select?num=${newsVO.num}">${newsVO.title}</a>
 						</p>
 						<p class="news_date">${newsVO.reg_date}</p>

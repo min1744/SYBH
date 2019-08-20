@@ -743,10 +743,8 @@ a:active {
 
 .news_box {
 	
-	width: 23.31%;
-	float: left;
+	width: 100%;
 	overflow: hidden;
-	margin-right: 30px;
 } 
 
 .last_box {
@@ -771,7 +769,6 @@ a:active {
 	color: white;
 	width: 25px;
 	text-align: center;
-	margin: 10px 0;
 }
 
 
@@ -779,6 +776,21 @@ a:active {
 	
 	color: #808080;
 	font-size: 0.9em;
+}
+
+
+
+.news_contents {
+	
+	width: 23.3%;
+	margin-right: 30px;
+	float: left;
+	overflow: hidden;
+}
+
+
+.news_contents:last-child {
+	margin-right: 0;
 }
 
 
@@ -790,6 +802,9 @@ a:active {
 	letter-spacing: -1px;
 	font-size: 1.1em;
 	margin: 15px 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 
