@@ -11,23 +11,10 @@
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
 <script type="text/javascript">
 	$(function() {
-	
-		//file 추가
-		var count = 0;
-		
-		$('#add').click(function() {
-			if(count < 5) {
-				var result = '<input type="file" name="f1" class="form-control f1"><span style="cursor:pointer;" class="del">X</span>';
-				$('#files').append(result);
-				count++;
-			} else {
-				alert('첨부파일은 최대 5개까지만 가능합니다.');
-			}
-		});	
-			
+					
 		$("#write").click(function() {
 			//다른 input들 검증
-			if($('#main_contents').summernote('isEmpty')) {
+			if($('#contents').summernote('isEmpty')) {
 				alert('Empty');
 			} else if($('#sub_contents').summernote('isEmpty')){
 				alert('Empty');				
@@ -81,7 +68,7 @@
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">main</span>
- 		 <textarea class="form-control" rows="5" cols="15" id="main_contents" name="main_contents">${newsVO.main_contents}</textarea>
+ 		 <textarea class="form-control" rows="5" cols="15" id="contents" name="main_contents">${newsVO.main_contents}</textarea>
 		</div>
 		<div class="form-group" id="box">
 			<input type="button" id="add" value="ADD FILE" class="btn btn-primary">
