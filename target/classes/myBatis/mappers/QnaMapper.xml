@@ -16,10 +16,10 @@
 	</sql>
   	<sql id="subChoose">
   		<choose>
-  			<when test="kind==1">
+  			<when test="kind == 1">
   				where title
   			</when>
-  			<when test="kind==2">
+  			<when test="kind == 2">
   				where writer
   			</when>
   			<otherwise>
@@ -117,10 +117,10 @@
   	(select * from qna
   	where menu=#{menu} and 
   	<choose>
-  			<when test="kind==1">
+  			<when test="kind == 1">
   				title
   			</when>
-  			<when test="kind==2">
+  			<when test="kind == 2">
   				writer
   			</when>
   			<otherwise>
@@ -136,10 +136,10 @@
   <select id="getCount" parameterType="PageMaker" resultType="Integer">
   	select count(num) from qna
   	<choose>
-  			<when test="kind==1">
+  			<when test="kind == 1">
   				where title
   			</when>
-  			<when test="kind==2">
+  			<when test="kind == 2">
   				where writer
   			</when>
   			<otherwise>
