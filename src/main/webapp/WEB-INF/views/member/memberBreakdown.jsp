@@ -174,7 +174,6 @@
 							<th>신청일자</th>
 							<th>진료예약날짜</th>
 							<th>예약여부</th>
-							<th>처방전</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -196,12 +195,6 @@
 							</c:choose>
 							</td>
 							<!-- 처방전은 진료완료일때만 뜨게끔 -->
-							<c:choose>
-								<c:when test="${list.status eq 2 }">
-									<td>처방전파일.pdf</td> 
-								</c:when>
-								<c:otherwise><td></td></c:otherwise>
-							</c:choose>				
 
 						</tr>
 						</c:forEach>
