@@ -46,7 +46,21 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">${menu} 게시판 관리</h1>
+          <h1 class="h3 mb-2 text-gray-800">
+          <c:choose>
+						<c:when test="${menu eq 'disease'}">
+							<p id="wtitle">질환 정보 관리</p>
+						</c:when>
+						<c:when test="${menu eq 'nutrition'}">
+							<p id="wtitle">영양 정보 관리</p>
+						</c:when>
+						<c:otherwise>
+							<p id="wtitle">운동 정보 관리</p>
+						</c:otherwise>
+
+					</c:choose>
+          
+          </h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -213,7 +227,7 @@
 				jQuery.ajaxSettings.traditional = true;
 				
 				$.ajax({
-					url : "./noticeListDelete",
+					url : "./newsListDelete",
 					type : "POST",
 					data : {
 						num : nums
