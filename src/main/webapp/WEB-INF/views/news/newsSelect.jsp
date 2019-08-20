@@ -126,10 +126,10 @@
 		}
 		
 		
-		
 		//원본 댓글 삭제
 		$('.commentslist').on('click', '.c_delete', function() {
 			var ref = $(this).attr('id');
+			console.log(ref);
 			var check = confirm("삭제하시겠습니까?");
 			if (check == true) {
 				
@@ -149,7 +149,7 @@
 			}
 		});
 		
-		//원본 댓글 삭제
+		//답글 댓글 삭제
 		$('.commentslist').on('click', '.reply_delete', function() {
 			var cnum = $(this).attr('id');
 			var check = confirm("삭제하시겠습니까?");

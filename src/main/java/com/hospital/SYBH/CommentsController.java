@@ -151,6 +151,7 @@ public class CommentsController {
 	@RequestMapping(value = "newsCommentsDelete", method = RequestMethod.POST)
 	@ResponseBody
 	public int setDelete(int ref) throws Exception {
+		System.out.println(ref);
 		int result = newsCommentsService.setDelete(ref);
 		System.out.println(result);
 		return result;

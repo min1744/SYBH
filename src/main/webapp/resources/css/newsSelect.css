@@ -140,6 +140,9 @@
 	text-align: left;
 	overflow: hidden;
 	clear: both;
+	padding: 30px 20px;
+	letter-spacing: -1px;
+	font-size: 1em;
 }
 
 
@@ -151,6 +154,8 @@
 	border-bottom: 1px solid #153F91;
 	clear: both;
 	text-align: left;
+	letter-spacing: -1px;
+	padding: 30px 20px;
 }
 
 

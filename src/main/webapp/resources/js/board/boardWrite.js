@@ -1,8 +1,11 @@
 
 $(function() {
+	
 	$("#write").click(function() {
 	//다른 input들 검증
-	if($('#contents').summernote('isEmpty')) {
+	var q_title = $('#q_title').val();
+	var title = $('#title').val();
+	if($('#contents').summernote('isEmpty') || q_title == '' || title == '') {
 		alert('모두 입력해주세요.');
 	} else {
 		if($('#fix').prop("checked")){
@@ -21,8 +24,10 @@ $(function() {
 	
 	//qna부분 form 검증
 	$("#q_write").click(function() {
+			var title = $('#q_title').val();
+			console.log(title);
 			//다른 input들 검증
-			if($('#contents').summernote('isEmpty')) {
+			if($('#contents').summernote('isEmpty') || title == '') {
 				alert('모두 입력해주세요.');
 			} else {
 				$('#frm').submit();				

@@ -26,11 +26,22 @@
 				'color': '#153F91'
 				});
 			}
-		
 		$(this).mouseover(function() {
 			$(this).removeAttr('title');
 		});
+		});
 		
-	});
+		
+		$('#btn').click(function() {
+			var result = $('#search').val();
+			if(result == '') {
+				alert('검색어를 입력해주세요.');
+			} else {
+				$('#frm').submit();
+			}
+			
+		});
+		
+		
 	
 });

@@ -5,8 +5,10 @@ $(function() {
 	}
 	
 	$("#write").click(function() {
+		var q_title = $('#q_title').val();
+		var title = $('#title').val();
 		//다른 input들 검증
-		if($('#contents').summernote('isEmpty')) {
+		if($('#contents').summernote('isEmpty') || q_title == '' || title == '') {
 			alert('모두 입력해주세요.');
 		} else {
 			var board = $('#board').val();

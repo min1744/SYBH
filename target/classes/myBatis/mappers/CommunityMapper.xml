@@ -15,10 +15,10 @@
 		WHERE
 
 		<choose>
-			<when test="kind = 1">
+			<when test="kind==1">
 				TITLE
 			</when>
-			<when test="kind = 2">
+			<when test="kind==2">
 				WRITER
 			</when>
 
@@ -73,10 +73,10 @@
 		resultType="Integer">
 		SELECT COUNT(NUM) FROM COMMUNITY WHERE
 		<choose>
-			<when test="kind=1">
+			<when test="kind==1">
 				TITLE
 			</when>
-			<when test="kind=2">
+			<when test="kind==2">
 				WRITER
 			</when>
 			<otherwise>

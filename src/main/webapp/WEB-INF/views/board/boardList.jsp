@@ -309,14 +309,13 @@
 					</c:choose>
 				</div>
 				<c:choose>
-					<c:when test="${board eq 'notice' || board eq 'community'}">
+					<c:when test="${board eq 'notice'}">
 					<!------------ notice && commu ------------>
-					<form action="./${board}List">
+					<form id="frm" action="./${board}List">
 						<div id="search_box">
 							<select name="kind" id="select">
 								<option value="1">제목</option>
-								<option value="2">작성자</option>
-								<option value="3">내용</option>
+								<option value="2">내용</option>
 							</select> <input type="text" name="search" id="search">
 							<button id="btn">검색</button>
 						</div>
@@ -324,7 +323,7 @@
 					</c:when>
 					<c:when test="${board eq 'qna'}">
 					<!------------ qna ------------>
-					<form action="./${menu}">
+					<form id="frm" action="./${menu}">
 						<div id="search_box">
 							<select name="kind" id="select">
 								<option value="1">제목</option>
@@ -337,6 +336,16 @@
 					</c:when>
 					<c:otherwise>
 					<!------------ community ------------>
+					<form id="frm" action="./${board}List">
+						<div id="search_box">
+							<select name="kind" id="select">
+								<option value="1">제목</option>
+								<option value="2">작성자</option>
+								<option value="3">내용</option>
+							</select> <input type="text" name="search" id="search">
+							<button id="btn">검색</button>
+						</div>
+					</form>
 					</c:otherwise>
 				</c:choose>
 			</div>

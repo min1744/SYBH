@@ -63,14 +63,28 @@
 							</div>
 							<div class="float">
 								<span class="writer">작성자</span> <input class="form-control"
-									type="text" id="q_writer" name="writer" value="admin1" readonly>
+									type="text" id="q_writer" name="writer" value="${vo.writer}" readonly>
 							</div>
 								<div class="float">
 									<span class="category">구분</span> 
 									<select name="category" id="select" class="form-control">
-										<option value="site">사이트이용</option>
+											<c:choose>
+													<c:when test="${vo.category eq 'site'}">
+										<option value="site" selected="selected">사이트이용</option>
 										<option value="web">병원이용</option>
 										<option value="etc">기타</option>
+													</c:when>
+													<c:when test="${vo.category eq 'web'}">
+										<option value="web" selected="selected">병원이용</option>
+										<option value="site">사이트이용</option>
+										<option value="etc">기타</option>
+													</c:when>
+													<c:when test="${vo.category eq 'etc'}">
+										<option value="etc" selected="selected">기타</option>
+										<option value="site">사이트이용</option>
+										<option value="web">병원이용</option>
+													</c:when>
+												</c:choose>
 									</select>
 								</div>
 							<div class="form-group" id="contents_box">
@@ -90,7 +104,7 @@
 								<c:when test="${board eq 'notice'}">
 									<div class="float">
 										<span class="writer">작성자</span> <input class="form-control"
-											type="text" id="writer" name="writer" value="admin1" readonly>
+											type="text" id="writer" name="writer" value="관리자" readonly>
 									</div>
 								</c:when>
 								<c:when test="${board eq 'community'}">

@@ -31,12 +31,14 @@
 										<li><a href="" class="c_update" title="${list.cnum}"
 										data-toggle="modal" data-target="#myModal">수정</a></li>
 										<li>│</li>
-										<c:if test="${list.depth eq '0'}">
-										<li><a href="" class="c_delete" id="${list.ref}">삭제</a></li>
-										</c:if>
-										<c:if test="${list.depth eq '1'}">
-										<li><a href="" class="reply_delete" id="${list.cnum}">삭제</a></li>
-										</c:if>
+										<c:choose>
+											<c:when test="${list.depth eq '0'}">
+											<li><a href="" class="c_delete" id="${list.ref}">삭제</a></li>
+											</c:when>
+											<c:when test="${list.depth eq '1'}">
+											<li><a href="" class="reply_delete" id="${list.cnum}">삭제</a></li>
+											</c:when>
+										</c:choose>
 									</c:when>
 								</c:choose>
 							</ul>
