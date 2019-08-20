@@ -33,8 +33,9 @@ public class AdminService {
 	private NoticeDAO noticeDAO;
 	
 	//Admin페이지 List
-	public List<MemberVO> getMemberList() throws Exception{
-		List<MemberVO> list = adminDAO.getList();
+	public List<MemberVO> getMemberList(HttpSession session) throws Exception{
+		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
+		List<MemberVO> list = adminDAO.getList(id);
 		for(MemberVO memberVO : list) {
 			//주민등록번호 복호화 및 뒷자리 *처리
 			String res_reg_num = memberDAO.setResDecryption(memberVO.getRes_reg_num());

@@ -100,7 +100,7 @@ if(variety == 'normal'){
 					}
 				});
 			} else {
-				alert("더 이상 상향할 수 없는 아이디가 포함되어 있습니다.(일반회원 : 1 / 관리자등급 : 2)");
+				alert("더 이상 상향할 수 없는 아이디가 포함되어 있습니다.");
 			}
 		} else {
 			alert("선택된 것이 없습니다.");
@@ -122,7 +122,7 @@ if(variety == 'normal'){
 			
 			var check = false;
 			for(var i = 0; i < grades.length; i++){
-				if(grades[i] < 2){
+				if(grades[i] > 1){
 					check = true;
 				} else {
 					check = false;
@@ -148,7 +148,7 @@ if(variety == 'normal'){
 					}
 				});
 			} else {
-				alert("더 이상 하향할 수 없는 아이디가 포함되어 있습니다.(일반회원 : 1 / 관리자등급 : 2)");
+				alert("더 이상 하향할 수 없는 아이디가 포함되어 있습니다.");
 			}
 		} else {
 			alert("선택된 것이 없습니다.");

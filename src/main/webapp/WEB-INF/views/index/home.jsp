@@ -137,7 +137,7 @@ $(function() {
 								<li><a href="./admin/adminIndex" target="_blank">관리자페이지</a></li>
 							</c:when>
 							<c:otherwise>
-							<!-- 민근 : 일반로그아웃과 KAKAO로그아웃의 구별 -->
+							<!-- 민근 : 일반 로그아웃과 KAKAO 로그아웃의 구별 -->
 							<!-- variety : member / kakao -->
 							<li><a href="./member/${variety}Logout">로그아웃</a></li>
 							<li style="padding: 0 10px;">│<li>
