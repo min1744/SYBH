@@ -98,9 +98,9 @@ public class CommentsController {
 	//좋아요
 	@RequestMapping(value = "commuCommentsLike", method = RequestMethod.POST)
 	@ResponseBody
-	public int likeUpdate(int cnum, int num, String id, CommuLikeVO commuLikeVO, CommunityCommentsVO communityCommentsVO) throws Exception {
+	public int likeUpdate(int ccnum, int num, String id, CommuLikeVO commuLikeVO, CommunityCommentsVO communityCommentsVO) throws Exception {
 	
-	int result = communityCommentsService.likeUpdate(cnum, num, id, commuLikeVO, communityCommentsVO);
+	int result = communityCommentsService.likeUpdate(ccnum, num, id, commuLikeVO, communityCommentsVO);
 	
 	return result;
 	}

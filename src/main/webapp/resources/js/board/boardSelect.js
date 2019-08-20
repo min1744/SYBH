@@ -88,7 +88,7 @@ $(function() {
 		
 		
 		
-///////////////////////////////////////////// 커뮤니티 댓글 관련▼
+		///////////////////////////////////////////// 커뮤니티 댓글 관련▼
 		
 		//글자수 textarea 체크
 		$('.c_area').keyup(function (e){
@@ -200,7 +200,7 @@ $(function() {
 			}
 		});
 		
-		//원본 댓글 삭제
+		//답글 댓글 삭제
 		$('.commentslist').on('click', '.reply_delete', function() {
 			var ccnum = $(this).attr('id');
 			var check = confirm("삭제하시겠습니까?");
@@ -243,11 +243,13 @@ $(function() {
 			reccnum = $(this).attr('title');
 			
 		});
+		
 		///댓글 답글 
 		$('#replyBtn').click(function() {
 			var reccnum2 = reccnum;
+			console.log(reccnum2);
 			var reContents = $('#replyContents').val();
-			var renum = $('#nnum').val();
+			var renum = $('#c_num').val();
 			var reid = $('#reid').val();
 			$.ajax({
 				
@@ -273,7 +275,6 @@ $(function() {
 		var likeId = '${memberVO.id}';
 		var likeResult = null;
 		var hateResult = null;
-		console.log(likeId);
 		
 		///////////////////////////////////////좋아요
 		$('.commentslist').on('click', '.like', function(e) {
