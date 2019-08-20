@@ -63,7 +63,7 @@
   </select>
   
   <!-- update -->
-  <update id="setUpdate" parameterType="QnAVO">
+  <update id="setUpdate" parameterType="QnACommentsVO">
   	update QnaComments set contents=#{contents} where qcnum=#{qcnum}
   </update>
   

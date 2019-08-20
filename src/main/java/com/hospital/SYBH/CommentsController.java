@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hospital.community.comments.CommunityCommentsService;
-import com.hospital.community.like.CommuLikeService;
 import com.hospital.news.comments.NewsCommentsService;
 import com.hospital.news.comments.NewsCommentsVO;
 import com.hospital.qna.comments.QnACommentsService;
 import com.hospital.qna.comments.QnACommentsVO;
-import com.hospital.qna.comments.like.LikeService;
 import com.hospital.qna.comments.like.LikeVO;
 import com.hospital.util.PageMaker;
 
@@ -29,11 +27,8 @@ public class CommentsController {
 	@Inject
 	private NewsCommentsService newsCommentsService;
 	@Inject
-	private CommuLikeService commuLikeService;
-	@Inject
 	private CommunityCommentsService communityCommentsService;
-	@Inject
-	private LikeService likeService;
+	
 	
 	
 	//////////////////// news 코멘트 관련

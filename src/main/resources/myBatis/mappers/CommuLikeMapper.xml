@@ -6,7 +6,7 @@
   
   <mapper namespace="CommuLikeMapper">
   
-  <insert id="setWrtie" parameterType="LikeVO">
+  <insert id="setWrtie" parameterType="CommuLikeVO">
   	<selectKey keyProperty="lcnum" order="BEFORE" resultType="Integer">
   		select c_like_seq.nextval from dual
 	  </selectKey>
@@ -16,14 +16,14 @@
   </insert>
   
   <!-- 좋아요 -->
-  <update id="like_check" parameterType="LikeVO">
+  <update id="like_check" parameterType="CommuLikeVO">
     UPDATE c_like
     SET like_check = like_check + 1 
     WHERE id=#{id} AND num=#{num}
   </update>
   
   <!-- 좋아요 취소 -->
-  <update id="like_check_cancel" parameterType="LikeVO">
+  <update id="like_check_cancel" parameterType="CommuLikeVO">
     UPDATE c_like
     SET like_check =0
     WHERE id=#{id} AND num=#{num}
@@ -42,7 +42,7 @@
 	</select>
 	
 	<!-- c_like 테이블 값 가져오기 -->
-	<select id="likeList" parameterType="java.util.Map" resultType="LikeVO">
+	<select id="likeList" parameterType="java.util.Map" resultType="CommuLikeVO">
 		select * from c_like where num=#{num} and id=#{id}
 	</select>
   

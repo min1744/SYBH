@@ -63,7 +63,7 @@
   </select>
   
   <!-- update -->
-  <update id="setUpdate" parameterType="NewsVO">
+  <update id="setUpdate" parameterType="NewsCommentsVO">
   	update NewsComments set contents=#{contents} where cnum=#{cnum}
   </update>
   

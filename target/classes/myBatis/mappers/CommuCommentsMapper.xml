@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="CommunityCommentsMapper">
+  
+  <!-- <![CDATA[ 쿼리문   ]]> -->
+	<!-- query piece -->
+	<sql id="subRef">
+	<![CDATA[
+		select ref from CommunityComments where ccnum=#{ccnum}
+	]]>	
+	</sql>
+	<sql id="subStep">
+		select step from CommunityComments where ccnum=#{ccnum}
+	</sql>
+	
+	<!-- 댓글 답글 사전 작업 -->
+  <update id="setReplyUpdate" parameterType="CommunityCommentsVO">
+  	update CommunityComments set step=step+1
+  	where ref=(<include refid="subRef"/>)
+	and step>(<include refid="subStep"/>)
+  </update>
+  
+  <!-- 댓글 답글 insert -->
+  <insert id="setReply" parameterType="CommunityCommentsVO">
+		insert into CommunityComments values
+		(
+			CommunityComments_SEQ.nextval, #{num}, #{id}, #{contents}, sysdate,
+			(<include refid="subRef"/>),
+			(<include refid="subStep"/>)+1,
+			1, 0
+		)
+	</insert>
+	
+	<!-- 댓글 답글 delete -->
+  <delete id="replyDelete" parameterType="Integer">
+  	delete CommunityComments where ccnum=#{ccnum}
+  </delete>
+  
+  <!-- write -->
+  <insert id="setWrite" parameterType="CommunityCommentsVO">
+  <selectKey keyProperty="ccnum" order="BEFORE" resultType="Integer">
+  		select CommunityComments_SEQ.nextval from dual
+  </selectKey>
+  	insert into CommunityComments values(#{ccnum}, #{num}, #{id}, #{contents}, sysdate, CommunityComments_SEQ.currval, 0, 0, 0)
+  </insert>
+  
+  
+    <!-- list -->
+  <select id="getList" parameterType="java.util.Map" resultType="CommunityCommentsVO">
+	select * from
+	(select rownum R, N.* from
+	(select * from CommunityComments where num=#{num} order by ref desc, step asc) N)
+	where R between #{pager.startRow} and #{pager.lastRow}
+  </select>
+  
+  <!-- totalCount -->
+  <select id="getCount" parameterType="Integer" resultType="Integer">
+  	select count(num) from CommunityComments where num=#{num}
+  </select>
+  
+  <!-- update -->
+  <update id="setUpdate" parameterType="CommunityCommentsVO">
+  	update CommunityComments set contents=#{contents} where ccnum=#{ccnum}
+  </update>
+  
+  
+  <!-- 원본 댓글 delete -->
+  <delete id="setDelete" parameterType="Integer">
+  	delete CommunityComments where ref=#{ref}
+  </delete>
+  
+  <!-- 좋아요 카운트 수정 -->
+  <update id="likeUpdate" parameterType="CommunityCommentsVO">
+  	update CommunityComments set like_cnt=like_cnt+1 where ccnum=#{ccnum}
+  </update>
+  
+  <!-- 좋아요 취소 카운트 수정 -->
+  <update id="likeDelete" parameterType="CommunityCommentsVO">
+  	update CommunityComments set like_cnt=like_cnt-1 where ccnum=#{ccnum}
+  </update>
+  
+ 
+  
+</mapper>  
