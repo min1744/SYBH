@@ -94,6 +94,8 @@
 	<context:component-scan base-package="com.hospital.util"/>
 	<context:component-scan base-package="com.hospital.pharmacy"/>
 	<context:component-scan base-package="com.hospital.community"/>
+	<context:component-scan base-package="com.hospital.community.comments"/>
+	<context:component-scan base-package="com.hospital.community.like"/>
 	
 	<!--뭐하는건지 정확히 기억안남  -->
 	<aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>

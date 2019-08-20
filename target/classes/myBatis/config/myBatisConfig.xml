@@ -31,5 +31,7 @@
 		<typeAlias type="com.hospital.admin.AccessVO" alias="AccessVO"/>
 		<typeAlias type="com.hospital.admin.AccessInfoVO" alias="AccessInfoVO"/>
 		<typeAlias type="com.hospital.community.CommunityVO" alias="CommunityVO" />
+		<typeAlias type="com.hospital.community.comments" alias="CommunityCommentsVO" />
+		<typeAlias type="com.hospital.community.like" alias="CommuLikeVO" />
 	</typeAliases>
 </configuration>

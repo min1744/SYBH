@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+  <mapper namespace="CommuLikeMapper">
+  
+  <insert id="setWrtie" parameterType="LikeVO">
+  	<selectKey keyProperty="lcnum" order="BEFORE" resultType="Integer">
+  		select c_like_seq.nextval from dual
+	  </selectKey>
+	  insert into c_like values(
+	 	 #{lcnum}, #{num}, #{id}, 1
+	  )
+  </insert>
+  
+  <!-- 좋아요 -->
+  <update id="like_check" parameterType="LikeVO">
+    UPDATE c_like
+    SET like_check = like_check + 1 
+    WHERE id=#{id} AND num=#{num}
+  </update>
+  
+  <!-- 좋아요 취소 -->
+  <update id="like_check_cancel" parameterType="LikeVO">
+    UPDATE c_like
+    SET like_check =0
+    WHERE id=#{id} AND num=#{num}
+  </update>
+  
+  
+  <!-- 최초 좋아요 눌렀을때 데이터가 있는지 확인하는 select -->
+  <select id="getSelect" parameterType="java.util.Map" resultType="String">
+  	select id from c_like where num=#{num} and id=#{id}
+  </select>
+  
+  
+  <!-- 좋아요 눌렀을때 check값이 0인지 1인지 확인하는 select -->
+	<select id="updateSelect" parameterType="java.util.Map" resultType="Integer">
+		select like_check from c_like where num=#{num} and id=#{id}
+	</select>
+	
+	<!-- c_like 테이블 값 가져오기 -->
+	<select id="likeList" parameterType="java.util.Map" resultType="LikeVO">
+		select * from c_like where num=#{num} and id=#{id}
+	</select>
+  
+</mapper>  
