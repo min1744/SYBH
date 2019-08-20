@@ -448,7 +448,7 @@
 			
 			
 			<div id="btn_box">
-				<a href="./newsAll" id="list">목록</a>
+				<a href="./${menu}" id="list">목록</a>
 				
 				<button id="delete">삭제</button>
 				<a href="./${vo.menu}Update?num=${vo.num}" id="update">수정</a>

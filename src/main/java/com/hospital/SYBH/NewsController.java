@@ -80,9 +80,9 @@ public class NewsController {
 	//공통 update post
 	
 	@RequestMapping(value = "newsUpdate", method = RequestMethod.POST)
-	public ModelAndView setUpdate(NewsVO newsVO)throws Exception{
+	public ModelAndView setUpdate(NewsVO newsVO,HttpSession session,MultipartFile multipartFile)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = newsService.setUpdate(newsVO);
+		int result = newsService.setUpdate(newsVO,session,multipartFile);
 		if(result > 0 && newsVO.getMenu().equals("disease")) {
 			mv.setViewName("redirect:./disease");
 		}else if(result > 0 && newsVO.getMenu().equals("nutrition")) {
