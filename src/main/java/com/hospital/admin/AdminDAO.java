@@ -21,8 +21,8 @@ public class AdminDAO {
 	private static final String NAMESPACE="AdminMapper.";
 	
 	//회원 List
-	public List<MemberVO> getList() throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getList");
+	public List<MemberVO> getList(String id) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getList", id);
 	}
 	
 	//관리자를 제외한 모든 회원들의 수

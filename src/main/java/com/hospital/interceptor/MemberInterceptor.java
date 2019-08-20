@@ -1,5 +1,7 @@
 package com.hospital.interceptor;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +18,10 @@ public class MemberInterceptor extends HandlerInterceptorAdapter {
 		if(obj != null) {
 			result = true;
 		} else {
-			response.sendRedirect("./memberLogin");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인 후 사용가능합니다.'); location.href='../member/memberLogin';</script>");
+			out.flush();
 		}
 		
 		return result;

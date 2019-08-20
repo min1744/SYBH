@@ -23,7 +23,7 @@ public class PharmacyService {
         urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=ekxcIW40jfP3mNoKiVK%2F%2F7u%2BZBTeUmL81nmB1UcLNU2CSNp8EoLC4nc2bLtpwOD6MP%2FFwiJ3%2FpxTHBLVd5fBfg%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("-", "UTF-8")); /*공공데이터포털에서 받은 인증키*/
         //urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
-        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("200", "UTF-8")); /*한 페이지 결과 수*/
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -62,7 +62,7 @@ public class PharmacyService {
         //System.out.println(wgs84LatList.getLength());
         //System.out.println(wgs84LonList.getLength());
 		for(int i = 0; i < rnumList.getLength(); i++) {
-			if(dutyAddrList.item(i).getTextContent().substring(0, 5).equals("서울특별시")) {
+			//if(dutyAddrList.item(i).getTextContent().substring(0, 5).equals("서울특별시")) {
 				map = new HashMap<String, String>();
 				map.put("dutyAddr", dutyAddrList.item(i).getTextContent());
 				map.put("dutyName", dutyNameList.item(i).getTextContent());
@@ -70,7 +70,7 @@ public class PharmacyService {
 				map.put("wgs84Lat", wgs84LatList.item(i).getTextContent());
 				map.put("wgs84Lon", wgs84LonList.item(i).getTextContent());
 				list.add(map);
-			}
+			//}
 		}
 		
 		return list;

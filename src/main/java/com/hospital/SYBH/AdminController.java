@@ -72,8 +72,8 @@ public class AdminController {
 	
 	
 	@RequestMapping(value = "memberNormal", method = RequestMethod.GET)
-	public ModelAndView memberNomal(ModelAndView mv) throws Exception {
-		List<MemberVO> list = adminService.getMemberList();
+	public ModelAndView memberNomal(ModelAndView mv, HttpSession session) throws Exception {
+		List<MemberVO> list = adminService.getMemberList(session);
 		mv.addObject("list", list);
 		mv.addObject("variety", "normal");
 		mv.setViewName("admin/memberManagement");

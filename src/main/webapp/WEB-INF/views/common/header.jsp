@@ -51,7 +51,6 @@ $(function() {
 				<li id="last_menu"><a href="../pharmacy/pharmacyInfo">약국</a></li>			
 			</ul>
 		</div>
-		
 		<!-- login / join -->
 		<div id="member">
 			<ul>
@@ -64,7 +63,7 @@ $(function() {
 								<li><a href="../admin/adminIndex" target="_blank">관리자페이지</a></li>
 							</c:when>
 							<c:otherwise>
-							<li><a href="../member/memberLogout">로그아웃</a></li>
+							<li><a href="../member/${variety}Logout">로그아웃</a></li>
 							<li style="padding: 0 10px;">│<li>
 							<li><a href="../member/memberMyPage">마이페이지</a></li>
 							</c:otherwise>

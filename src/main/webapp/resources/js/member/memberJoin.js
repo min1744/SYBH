@@ -544,7 +544,8 @@ $(function() {
 					}
 					$("#form").submit();
 				} else {
-					alert("회원가입 되었습니다. 이메일 인증 후 사용 가능합니다.");
+					alert("회원가입 되었습니다.");
+					alert("이메일 인증 후 사용 가능합니다.");
 					window.open(site, 'newWindow');//브라우저 새 창 열기
 					$("#form").submit();
 				}

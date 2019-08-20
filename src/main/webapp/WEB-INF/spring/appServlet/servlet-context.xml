@@ -57,6 +57,10 @@
 			<mapping path="/member/memberReLogin"/>
 			<mapping path="/member/memberDelete"/>
 			<mapping path="/member/memberLogout"/>
+			<mapping path="/member/memberNormal"/>
+			<mapping path="/member/memberMedical"/>
+			<mapping path="/member/memberDonation"/>
+			<mapping path="/member/memberQna"/>
 			<beans:bean class="com.hospital.interceptor.MemberInterceptor"/>
 		</interceptor>
 		<interceptor>
