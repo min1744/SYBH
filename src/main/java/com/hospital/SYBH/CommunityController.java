@@ -18,6 +18,7 @@ import com.hospital.board.BoardVO;
 import com.hospital.community.CommunityDAO;
 import com.hospital.community.CommunityService;
 import com.hospital.community.CommunityVO;
+import com.hospital.community.comments.CommunityCommentsService;
 import com.hospital.util.PageMaker;
 
 @Controller
@@ -25,6 +26,8 @@ import com.hospital.util.PageMaker;
 public class CommunityController {
 	@Inject
 	private CommunityService communityService;
+	@Inject
+	private CommunityCommentsService communityCommentsService;
 
 	@ModelAttribute("board")
 	public String board() {
@@ -78,6 +81,9 @@ public class CommunityController {
 	public ModelAndView getSelect(int num) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		BoardVO boardVO = communityService.getSelect(num);
+		int totalCount = communityCommentsService.getTotalCount(num);
+		
+		mv.addObject("totalCount", totalCount);
 		mv.addObject("vo", boardVO);
 		mv.setViewName("board/boardSelect");
 		return mv;
