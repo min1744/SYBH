@@ -54,7 +54,7 @@ public class PharmacyService {
         conn.disconnect();
         
         System.out.println(sb.toString());
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        /*DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
 		Document document = documentBuilder.parse(urlBuilder.toString());
 
@@ -62,11 +62,11 @@ public class PharmacyService {
 		for(int i = 0; i < nList.getLength(); i++) {
 			String info = nList.item(i).getTextContent();
 			//System.out.println(info);
-			/*String infoParse = info.substring(0, 5);
+			String infoParse = info.substring(0, 5);
 			if(infoParse.equals("서울특별시")) {
 				System.out.println(info);
-			}*/
+			}
 			Thread.sleep(10);
-		}
+		}*/
 	}
 }
