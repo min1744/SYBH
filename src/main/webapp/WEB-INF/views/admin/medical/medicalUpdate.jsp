@@ -27,18 +27,38 @@
 	rel="stylesheet">
 	<script type="text/javascript">
 	$(function() {
+		var f = document.boardform;
 		$("#write").click(function() {
 		//다른 input들 검증
-			$('.empty').each(function(){
-				if($(this).val()==''){
-					alert('내용을 입력해주세요');
-					$(this).focus();
-					return false;
-				} else{
-					$('#frm').submit();
-				}
-			});
+		var str = f.title.value;
+		if(!str){
+			alert('제목을 입력하세요');
+			f.title.focus();
+			return false;
+		}
+		str = f.pro_field.value;
+		if(!str){
+			alert('전문분야를 입력하세요');
+			f.pro_field.focus();
+			return false;
+		}
+		str = f.career.value;
+		if(!str){
+			alert('경력을 입력하세요');
+			f.career.focus();
+			return false;
+		}
+		str = f.major_act.value;
+		if(!str){
+			alert('주요활동을 입력하세요');
+			f.major_act.focus();
+			return false;
+		}
+		$("#frm").submit();
 		});
+		
+		
+		
 		var kind = '${vo.med_office}';
 		$('.k').each(function() {
 			if($(this).attr('title')==kind){
@@ -46,6 +66,41 @@
 			}
 		});	
 		
+		
+		
+		$(".fdel").click(function() {
+			var check = confirm("삭제 하시겠습니까? 복구 불가능");
+			var id = $(this).attr("id");
+			var title = $(this).attr("title");
+			var select = $(this);
+			if(check){
+				$.ajax({
+					url:"../ajax/medicalDelete",
+					type:"POST",
+					data:{
+						fnum:id,
+						fname:title,
+					},
+					success:function(data){
+						data=data.trim();
+						if(data=='1'){
+							select.parent().remove();
+							select.remove();
+							var result = '<input type="file" name="multipartFile" class="form-control">';
+							$("#files").append(result);
+						}else {
+							alert("File Delete Fail");
+						}
+					}
+				});
+			}
+		});
+		var img= '${vo.doctorImagesVO}';
+		if(img == ''){
+			$('.fdel').hide();
+			var result = '<input type="file" name="multipartFile" class="form-control">';
+			$("#files").append(result);
+		}
 		
 	});
 	
@@ -75,7 +130,7 @@
 					<h1 class="h3 mb-2 text-gray-800">의료진 관리</h1>
 					<div id="board_box">
 						<div id="form_box">
-							<form id="frm" action="./medicalUpdate" method="post" enctype="multipart/form-data">
+							<form id="frm" name="boardform" action="./medicalUpdate" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="num" value="${vo.num }">
 								<div class="form-group">
 									<span class="title">이름</span> 
@@ -108,7 +163,9 @@
 										name="major_act">${vo.major_act}</textarea>
 								</div>
 								<div class="form-group" id="box">
-								<input type="file" name="multipartFile" class="form-control f1">
+										<p>${vo.doctorImagesVO.oname} <span id="${vo.doctorImagesVO.fnum}" title="${vo.doctorImagesVO.fname}" class="fdel" style="cursor: pointer;">X</span>
+									<div id="files"></div>
+								
 								</div>
 
 								<div id="write_btn">

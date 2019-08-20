@@ -77,7 +77,6 @@
 													<th>신청일자</th>
 													<th>진료예약날짜</th>
 													<th>예약여부</th>
-													<th>처방전</th>
 													<th>전화번호</th>
 												</tr>
 											</thead>
@@ -98,16 +97,8 @@
 																		data-num="${i.index }">예약취소</button>
 																</c:when>
 																<c:when test="${list.status eq 1 }">예약취소</c:when>
-																<c:when test="${list.status eq 2 }">진료완료</c:when>
+																<c:when test="${list.status eq 2 }"><span style="color: blue;">진료완료</span></c:when>
 															</c:choose>
-														</td>
-														<!-- 처방전은 진료완료일때만 뜨게끔 -->
-														<td>
-														<c:choose>
-															<c:when test="${list.status eq 2 }">
-																처방전파일.pdf
-															</c:when>
-														</c:choose>
 														</td>
 														<td>${list.phone}<td>									
 													</tr>

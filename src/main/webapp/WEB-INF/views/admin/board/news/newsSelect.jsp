@@ -299,7 +299,7 @@
             <div class="card-body">
               <div class="table-responsive">
               	<div id="controller_div">
-         			<input type="button" value="DELETE" id="delete_btn" class="btn btn-danger">
+         			<input type="button" value="삭제" id="delete_btn" class="btn btn-danger">
 					<a href="./${menu}Update?num=${vo.num}" id="write_btn" class="btn btn-primary">글 수정</a>
          		</div>
          		<input type="hidden" name="num" value="${vo.num}" id="nnum">

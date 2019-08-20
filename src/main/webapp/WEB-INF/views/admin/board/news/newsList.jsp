@@ -67,8 +67,8 @@
             <div class="card-body">
               <div class="table-responsive">
               	<div id="controller_div">
-         			<input type="button" value="DELETE" id="delete_btn" class="btn btn-danger">
-					<a href="./${menu}Write" id="write_btn" class="btn btn-primary">WRITE</a>
+         			<input type="button" value="삭제" id="delete_btn" class="btn btn-danger">
+					<a href="./${menu}Write" id="write_btn" class="btn btn-primary">글 쓰기</a>
          		</div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>

@@ -52,10 +52,10 @@
 						<div class="card-body">
 							<div class="table-responsive">
 								<div id="controller_div">
-									<input type="button" value="DELETE" id="delete_btn"
+									<input type="button" value="삭제" id="delete_btn"
 										class="btn btn-danger"> 
 										<a href="./medicalWrite"
-										id="write_btn" class="btn btn-primary">WRITE</a>
+										id="write_btn" class="btn btn-primary">추가</a>
 								</div>
 								<table class="table table-bordered" width="100%" cellspacing="0">
 									<thead>

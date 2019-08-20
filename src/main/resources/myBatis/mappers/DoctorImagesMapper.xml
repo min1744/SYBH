@@ -15,7 +15,7 @@
 	</select>
 	
 	<delete id="setDelete" parameterType="Integer">
-		delete doctorimages where num=#{num}
+		delete doctorimages where fnum=#{fnum}
 	</delete>
 	<select id="getList" parameterType="Integer" resultType="com.hospital.doctorImages.DoctorImagesVO">
 		select * from doctorimages where num=#{num}
