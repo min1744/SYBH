@@ -58,12 +58,18 @@ public class NewsService {
 		if(result < 1) {
 			throw new Exception();
 		}
-		if(multipartFile.getOriginalFilename().length()>0) {
-		newsImagesVO.setNum(newsVO.getNum());
-		newsImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
-		newsImagesVO.setOname(multipartFile.getOriginalFilename());
-		result = newsImagesDAO.setWrite(newsImagesVO);
+		
+		try {
+			newsImagesVO.setNum(newsVO.getNum());
+			newsImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
+			newsImagesVO.setOname(multipartFile.getOriginalFilename());
+			result = newsImagesDAO.setWrite(newsImagesVO);
+		} catch (Exception e) {
+			
 		}
+		
+		
+		
 		
 		return result;
 	}

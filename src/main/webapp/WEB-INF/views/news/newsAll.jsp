@@ -48,7 +48,7 @@
 				<c:forEach items="${nutrition}" var="nutrition">
 				<a href="./nutritionSelect?num=${nutrition.num}" class="news">
 					<div class="news_img">
-					<img src="../resources/file/${nutrition.newsImagesVO.fname}">
+					<img src="../resources/file/${nutrition.newsImagesVO.oname}">
 					</div>
 					<p class="news_title">${nutrition.title}</p>
 					<p class="news_sub">${nutrition.sub_contents}</p>
