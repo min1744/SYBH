@@ -45,6 +45,40 @@ $(function() {
 		});
 	});
 	
+	$(".fdel").click(function() {
+		var check = confirm("삭제 하시겠습니까? 복구 불가능");
+		var id = $(this).attr("id");
+		var title = $(this).attr("title");
+		var select = $(this);
+		if(check){
+			$.ajax({
+				url:"../ajax/fileDelete",
+				type:"POST",
+				data:{
+					fnum:id,
+					fname:title,
+				},
+				success:function(data){
+					data=data.trim();
+					if(data=='1'){
+						select.parent().remove();
+						select.remove();
+						var result = '<input type="file" name="multipartFile" class="form-control">';
+						$("#files").append(result);
+					}else {
+						alert("File Delete Fail");
+					}
+				}
+			});
+		}
+	});
+	var img= '${newsVO.newsImagesVO}';
+	if(img == ''){
+		$('.fdel').hide();
+		var result = '<input type="file" name="multipartFile" class="form-control">';
+		$("#files").append(result);
+	}
+	
 });
 </script>
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
@@ -113,9 +147,7 @@ $(function() {
 									</div>
 									<div class="form-group" id="box">
 										<span class="images">이미지</span>
-										<p>${newsVO.newsImagesVO.oname}</p>
-										<input type="file" id="add" value="ADD FILE"
-											name="multipartFile" class="">
+										<p>${newsVO.newsImagesVO.oname} <span id="${newsVO.newsImagesVO.fnum}" title="${newsVO.newsImagesVO.fname}" class="fdel" style="cursor: pointer;">X</span>
 										<div id="files"></div>
 									</div>
 

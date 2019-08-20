@@ -333,18 +333,14 @@
 						<td colspan="5">${vo.main_contents}</td>
 						</tr>
 						<tr>
-							<td colspan="5">
-							<img alt="" src="../resources/file/${vo.newsImagesVO.fname}" style="width:100px">
+							<td>썸네일이미지</td>
+							<td colspan="4">
+							<img alt="" src="../resources/file/${vo.newsImagesVO.oname}" style="width:400px">
 							</td>
 						</tr>	
                   </tbody>
                 </table>
-                	<a href="./${menu}" id="list">목록</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
+           
         <!----------------------------- 댓글 시작 -------------------------------->
 					<div id="comment_box">
 						<div id="comment">
@@ -448,7 +444,12 @@
 						
 					</div>
 					<!----------------------------- 댓글 끝 -------------------------------->
-			
+			     	<a href="./${menu}" id="list">목록</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
         <!-- /.container-fluid -->
 
       </div>
