@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -13,7 +13,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9963d068218228f27bdac8c9618c4a07"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9963d068218228f27bdac8c9618c4a07&libraries=clusterer"></script>
 </head>
-
 <script type="text/javascript">
 
 $(function() {
@@ -40,12 +39,10 @@ $(function() {
 		pager:true,
 	});
 	
-	
 	/////////////////////플로팅코드
 	// 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 	var floatPosition = parseInt($("#floatMenu").css('top'));
 	// 250px 이런식으로 가져오므로 여기서 숫자만 가져온다. parseInt( 값 );
-
 	$(window).scroll(function() {
 		// 현재 스크롤 위치를 가져온다.
 		var scrollTop = $(window).scrollTop();
@@ -54,26 +51,18 @@ $(function() {
 		/* 애니메이션 없이 바로 따라감
 		 $("#floatMenu").css('top', newPosition);
 		 */
-
 		$("#floatMenu").stop().animate({
 			"top" : newPosition
 		}, 500);
-
 	}).scroll();
-	
-	
 	//////////////////TOP버튼 효과
-    
     $("#top").click(function() {
         $('html, body').animate({
             scrollTop : 0
         }, 400);
         return false;
     });
-	
-	
 	///////////////////////////////////////
-	
     $('#spon_btn').click(function(event){  //버튼을 클릭 했을시 popupOpen 함수 출력
     	var memberVO = '${memberVO}';
     	if(memberVO ==''){
@@ -83,7 +72,6 @@ $(function() {
         popupOpen();//Popup Open 함수
     	}
     });
-  
 	function popupOpen(){
 		var url= "./pay/payPopup";    //팝업창 페이지 URL
 		var winWidth = 1000;
@@ -93,11 +81,8 @@ $(function() {
 		 var popupY= 80;
 	 	 //&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
 	    var popupOption= "width="+winWidth+", height="+winHeight+", left="+popupX+", top="+popupY;    //팝업창 옵션(optoin)
-
 	  	//window.open('', '', 'status=no, height=300, width=200, left='+ popupX + ', top='+ popupY);
-	    
 	    window.open(url,"",popupOption, 'left='+ popupX + ', top='+ popupY);
-	    
 	}
 	//재혁 후원총금액
 	$.ajax({
@@ -116,12 +101,8 @@ $(function() {
 			$('#people').html(data+'<span>명</span>');
 		}
 	});
-	
 	//$('#sponsor').load('./pay/donationTotal');
 	//$('#sponsor').load('./pay/donationPeopleTotal');
-	
-	
-	
 }); 
 </script>
 <body>
@@ -132,8 +113,6 @@ $(function() {
 		<div id="header_logo">
 			<a href="./"><img alt="로고" src="./resources/images/logo.png"></a>
 		</div>
-		
-		
 		<div id="right_menu">
 		<!-- header 메뉴 -->
 		<div id="header_menu">
@@ -146,7 +125,6 @@ $(function() {
 				<li id="last_menu"><a href="./pharmacy/pharmacyInfo">약국</a></li>			
 			</ul>
 		</div>
-		
 		<!-- login / join -->
 		<div id="member">
 			<ul>
@@ -178,11 +156,8 @@ $(function() {
 		</div>
 	</div>
 </div>
-
 <!-- 서브메뉴 -->
-
 <div id="sub_nav">
-
 	<c:choose>
 		<c:when test="${not empty memberVO}">
 			<c:choose>
@@ -225,36 +200,24 @@ $(function() {
 	</div>
 </div>
 <!-- header 끝 -->
-
-
 <!-- 플로팅 -->
 <div id="floatMenu">
-	
 	<!-- <div id="floating_img">
 		<img src="./resources/images/nav_img.png">
 	</div>
-	
 	<div id="sponsor">
-		
 		<p class="spon_title">모인금액</p>
 		<p class="spon_num" id="donation"></p>
 		<p class="spon_title">후원자</p>
 		<p class="spon_num" id="people"></p>
 		<button id="spon_btn">후원하기</button>
-		
 	</div>
-	
 	<div id="top_btn">
-	
 		<a id="top" href="#">TOP<span>▲</span></a>
-	
 	</div>
-	
 	<div id="chat">
-		
 		<img src="./resources/images/chat.png">
 		
-	</div> -->
 	<!--1대1 대화  -->
 	<script type="text/javascript">
 	
@@ -270,14 +233,8 @@ $(function() {
 		tocplusFloatingWindow=true;
 		var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
 		document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr03.tocplus007.com/chatLoader.do?userId=hospital' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
-	
 	</script>
-	
 </div>
-
-
-
-
 <div id="contents">
 
 		<!-- 메인 슬라이드 -->
@@ -317,7 +274,6 @@ $(function() {
 				<a href="./reserve/reserveNomal" class="btn_b">진료예약하기</a>
 				</div>
 			</div>
-			
 			<div id="search">
 				<h2>의료진검색</h2>
 				<div class="doctor_search">
@@ -330,7 +286,6 @@ $(function() {
 				</form>
 				</div>
 			</div>
-			
 			<div id="notice">
 				<h2>병원소식/공지</h2>
 				<h3><a href="./notice/noticeList">더보기 +</a></h3>
@@ -411,10 +366,7 @@ $(function() {
 		
 	</div>
 	
-	
-	
 </div>
-
 	<!-- 오시는 길 -->
 <div id="contents_3">
 	<div id="location_box">
