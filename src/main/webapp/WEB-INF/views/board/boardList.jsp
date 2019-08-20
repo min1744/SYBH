@@ -315,7 +315,6 @@
 						<div id="search_box">
 							<select name="kind" id="select">
 								<option value="1">제목</option>
-								<option value="2">작성자</option>
 								<option value="3">내용</option>
 							</select> <input type="text" name="search" id="search">
 							<button id="btn">검색</button>
