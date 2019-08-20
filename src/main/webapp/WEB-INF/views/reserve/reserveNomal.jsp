@@ -107,7 +107,7 @@
 	                  //달력에 있는 년,달과 내 컴퓨터의 로컬 년,달이 같고, 일이 오늘의 일과 같으면
 	               		// cell.bgColor = "#FAF58C"; //셀의 배경색을 노랑으로 
 	                cell.style.color = "white";
-	                cell.style.background = "#153F91";
+	                cell.style.background = "#6BB5DB";
 	               }
 	             }
 	        }
@@ -295,7 +295,7 @@
 		
 			<ul>
 				<li>진료 예약/조회</li>
-				<li><a href="./outgoingInfo">외래안내</a></li>
+				<li><a href="./outgoingInfo">외래/접수안내</a></li>
 				<li><a href="./reserveInfo">예약안내</a></li>
 				<li><a href="./reserveNomal" style="color:#6BB5DB;">일반진료 예약</a></li>
 				<li><a href="./reserveMedical">건강검진 예약</a></li>
@@ -515,22 +515,21 @@
 	        </div>
 	        <div class="modal-body">
 	        	<div class="modal_title_box">
-		        	<p class="modal_med_office_title" id="med${i.index }" id="med${i.index}" title="${list.med_office }">${list.med_office}</p>
-		        	<h2 class="modal_med_office" id="name${i.index }" title="${list.name}" data-toggle="${list.num }">${list.name } 교수</h2>
+		        	<p class="modal_med_office_title">${list.med_office}</p>
+		        	<h2 class="modal_med_office">${list.name } 교수</h2>
 		        </div>
-	        		<hr>
-				
-				<div class="modal_profile">
-					<img alt="" src="../resources/images/${list.doctorImagesVO.fname}">
-				</div>
-				
+				<!-- 진료과목 -->
 				<div class="modal_info">
 					<h3 class="modal_pro_field_title">전문분야</h3>
 					<p class="modal_pro_field">${list.pro_field }</p>
 				</div>	
+	        		<hr>
+				<!-- 교수 프로필 -->
+				<div class="modal_profile">
+					<img alt="" src="../resources/file/${list.doctorImagesVO.fname}">
+				</div>
 				
-				<button id="reserve_btn" data-num="${i.index }" class="reserve_btn class" data-dismiss="modal">진료예약</button>
-				
+				<!-- 경력/활동 -->
 				<div class="modal_career">
 					
 					<div class="career">
@@ -550,10 +549,8 @@
 							</c:forTokens>
 						</ul>
 					</div>
+				</div>   
 				
-				</div>          
-	          
-	          
 	        </div>
 	      </div>
     	</div>

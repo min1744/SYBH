@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>쌍용백병원::관리자페이지::</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <c:import url="../../../temp/boot.jsp"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -25,32 +26,28 @@
   <script type="text/javascript">
 	$(function() {
 		
-		var board = $("#board").val();
-		
-		$("#delete").click(function() {
-			var result = confirm("삭제하시겠습니까?");
-			var num = $("#nnum").val();
-			var menu= $("#nmenu").val();
-			if(result){
-				post({'num':num, 'menu':menu});
+		$('#delete_btn').click(function() {
+
+			var result = confirm('정말로 삭제하시겠습니까?');
+			if (result) {
+				var num = '${param.num}';
+				var menu = '${menu}'
+				$.ajax({
+					url : './newsDelete',
+					type : 'POST',
+					data : {
+						num : num
+					},
+					success : function(data) {
+						if (data == 1) {
+							location.href = './'+menu;
+						}
+					}
+				})
+			} else{
+				alert('취소되었습니다');
 			}
 		});
-
-		//post방식으로 넘기기
-		function post(params){
-			var form = document.createElement("form");
-			form.setAttribute("method","POST");
-			form.setAttribute("action","./newsDelete");
-			for(var key in params){
-				var hiddenField = document.createElement("input");
-				hiddenField.setAttribute("type","hidden");
-				hiddenField.setAttribute("name",key);
-				hiddenField.setAttribute("value",params[key]);
-				form.appendChild(hiddenField);
-			}
-			document.body.appendChild(form);
-			form.submit();
-		}
 		
 		
 ///////////////////////////////////////////// 댓글 관련▼
@@ -303,7 +300,7 @@
               <div class="table-responsive">
               	<div id="controller_div">
          			<input type="button" value="DELETE" id="delete_btn" class="btn btn-danger">
-					<a href="./${menu}Write" id="write_btn" class="btn btn-primary">WRITE</a>
+					<a href="./${menu}Update?num=${vo.num}" id="write_btn" class="btn btn-primary">글 수정</a>
          		</div>
          		<input type="hidden" name="num" value="${vo.num}" id="nnum">
 				<input type="hidden" name="menu" value="${vo.menu}" id="nmenu">
@@ -312,7 +309,6 @@
                   
                   <thead>
                     <tr>
-                      <th><input type="checkbox" id="checkAll"></th>
                       <th>번호</th>
                       <th>제목</th>
                       <th>작성자</th>
@@ -336,7 +332,11 @@
 						<td>주내용</td>
 						<td colspan="5">${vo.main_contents}</td>
 						</tr>
-							
+						<tr>
+							<td colspan="5">
+							<img alt="" src="../resources/file/${vo.newsImagesVO.fname}" style="width:100px">
+							</td>
+						</tr>	
                   </tbody>
                 </table>
                 	<a href="./${menu}" id="list">목록</a>
@@ -506,59 +506,6 @@
   <script src="../resources/js/admin/dataTables.bootstrap4.min.js"></script>
   <!-- Page level custom scripts -->
   <script src="../resources/js/admin/datatables-demo.js"></script>
-  <script type="text/javascript">
-    var checkMoreZero = false;
-  	$("#checkAll").click(function() {
-		var checkAll = $(this).prop("checked");
-		$(".check").prop("checked", checkAll);
-		checkMoreZero = checkAll;
-	});
-	
-	//All check control & Check More Zero
-	$(".check").click(function() {
-		var check = true;
-		checkMoreZero = false;
-		$(".check").each(function() {
-			if (!$(this).prop("checked")) {
-				check = false;
-			} else {
-				checkMoreZero = true;
-			}
-		});
-		$("#checkAll").prop("checked", check);
-	});  
-  
-  	$('#delete_btn').click(function() {
-		if(checkMoreZero){
-			var result = confirm("삭제 하시겠습니까?");
-			if(result){
-				var nums = [];
-				$(".check").each(function() {
-					if($(this).prop("checked")){
-						nums.push($(this).val());
-					}
-				});
-				//ajax로 배열을 전송하고자 할때 추가
-				jQuery.ajaxSettings.traditional = true;
-				
-				$.ajax({
-					url : "./noticeListDelete",
-					type : "POST",
-					data : {
-						num : nums
-					},
-					success : function(data) {
-						location.reload();
-					},
-					error:function(){
-						alert('Delete Fail');
-					}
-				});
-			}
-		} else {
-			alert("선택된 것이 없습니다.");
-		}
-	});
-  </script>
+ 
 </body>
 </html>

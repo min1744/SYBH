@@ -24,7 +24,7 @@
 		
 			<ul>
 				<li>진료 예약/조회</li>
-				<li><a href="./outgoingInfo">외래안내</a></li>
+				<li><a href="./outgoingInfo">외래/접수안내</a></li>
 				<li><a href="#" style="color:#6BB5DB;">예약안내</a></li>
 				<li><a href="./reserveNomal">일반진료 예약</a></li>
 				<li><a href="./reserveMedical">건강검진 예약</a></li>

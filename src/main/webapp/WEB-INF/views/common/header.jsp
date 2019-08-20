@@ -102,7 +102,7 @@ $(function() {
 		</c:otherwise>
 	</c:choose>
 		<ul id="ul_1">
-			<li><a href="../reserve/outgoingInfo">외래안내</a></li>
+			<li><a href="../reserve/outgoingInfo">외래/접수안내</a></li>
 			<li><a href="../reserve/reserveInfo">예약안내</a></li>
 			<li><a href="../reserve/reserveNomal">일반진료 예약</a></li>
 			<li><a href="../reserve/reserveMedical">건강검진 예약</a></li>

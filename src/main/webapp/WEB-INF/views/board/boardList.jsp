@@ -342,5 +342,8 @@
 			</div>
 		</div>
 	</div>
+
+<!-- footer 추가 -->
+<c:import url="../common/footer.jsp" />
 </body>
 </html>

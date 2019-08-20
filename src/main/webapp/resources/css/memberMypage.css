@@ -68,6 +68,8 @@
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	box-sizing: border-box;
+	padding-bottom: 0;
+	
 	
 	
 }
@@ -225,7 +227,7 @@
 #main_info {
 	
 	width: 52%;
-	height: 245px;
+	height: 301px;
 	overflow: hidden;
 	margin-bottom: 3%;
 	float: left;
@@ -254,6 +256,7 @@
 	width: 100%;
 	margin: 0 auto;
 	overflow: hidden;
+	margin-top: 46px;
 }
 
 
@@ -268,7 +271,7 @@
 
 #jh_img {
 	
-	width: 25%;
+	width: 30%;
 	overflow: hidden;
 	margin-left: 53px;
 }
@@ -283,7 +286,7 @@
 
 #jh_info {
 	
-	width: 60%;
+	width: 53%;
 	overflow: hidden;
 	margin-left: 30px;
 }

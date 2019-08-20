@@ -389,6 +389,65 @@ public class AdminController {
 	
 	
 	///////////////////////////////뉴스 CRUD/////////////////////////
+	
+	//////////////////뉴스 공통 메소드////////
+	//공통 Delete 여러개 삭제
+	@RequestMapping(value = "newsListDelete",method = RequestMethod.POST)
+	@ResponseBody
+	public int newsListDelete(Integer [] num) throws Exception{
+		return newsService.setDelete(num);
+		
+	}
+	
+	//공통 Delete한개씩 삭제
+	@RequestMapping(value = "newsDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public int newsDelete(int num,HttpSession session)throws Exception{
+		return newsService.setDelete(num,session);
+	}
+	
+	//공통 Write post
+	@RequestMapping(value = "newsWrite", method = RequestMethod.POST)
+	public ModelAndView setWrite(NewsVO newsVO,HttpSession session,MultipartFile multipartFile)throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		int result = newsService.setWrite(newsVO, session, multipartFile);
+		if(result > 0 && newsVO.getMenu().equals("disease")) {
+			mv.setViewName("redirect:./disease");
+		}else if(result > 0 && newsVO.getMenu().equals("nutrition")) {
+			mv.setViewName("redirect:./nutrition");
+		}else if(result > 0 && newsVO.getMenu().equals("exercise")) {
+			mv.setViewName("redirect:./exercise");
+		}else {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./disease");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+	}
+	
+	//공통 Update Post
+	@RequestMapping(value = "newsUpdate", method = RequestMethod.POST)
+	public ModelAndView setUpdate(NewsVO newsVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = newsService.setUpdate(newsVO);
+		if(result > 0 && newsVO.getMenu().equals("disease")) {
+			mv.setViewName("redirect:./disease");
+		}else if(result > 0 && newsVO.getMenu().equals("nutrition")) {
+			mv.setViewName("redirect:./nutrition");
+		}else if(result > 0 && newsVO.getMenu().equals("exercise")) {
+			mv.setViewName("redirect:./exercise");
+		} else {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./disease");
+			mv.setViewName("common/messageMove");
+		}
+		
+		return mv;
+	}
+	
+	
 	////////////////질환정보 ////////////////
 	////List
 	@RequestMapping(value = "disease", method = RequestMethod.GET)
@@ -416,7 +475,26 @@ public class AdminController {
 			return mv;
 		}
 	
-	
+	//write
+		@RequestMapping(value = "diseaseWrite", method = RequestMethod.GET)
+		public ModelAndView dieaseWrite() throws Exception {
+			
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("menu", "disease");
+			mv.setViewName("admin/board/news/newsWrite");
+			return mv;
+		}
+		//update
+		@RequestMapping(value = "diseaseUpdate", method = RequestMethod.GET)
+		public ModelAndView diseaseUpdate(int num) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			NewsVO newsVO= newsService.getSelect(num);
+			mv.addObject("newsVO", newsVO);
+			mv.addObject("menu", "disease");
+			mv.setViewName("admin/board/news/newsUpdate");
+			return mv;
+		}
+		
 	
 	///////////////영양정보///////////////
 	////List
@@ -447,6 +525,26 @@ public class AdminController {
 		return mv;
 	}
 	
+	//write
+		@RequestMapping(value = "nutritionWrite", method = RequestMethod.GET)
+		public ModelAndView nutritionWrite() throws Exception {
+			
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("menu", "nutrition");
+			mv.setViewName("admin/board/news/newsWrite");
+			return mv;
+		}
+	//update
+		@RequestMapping(value = "nutritionUpdate", method = RequestMethod.GET)
+		public ModelAndView nutritionUpdate(int num) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			NewsVO newsVO= newsService.getSelect(num);
+			mv.addObject("newsVO", newsVO);
+			mv.addObject("menu", "nutrition");
+			mv.setViewName("admin/board/news/newsUpdate");
+			return mv;
+		}
+	
 	/////////////////////////운동정보//////////////////
 	//list
 	@RequestMapping(value = "exercise", method = RequestMethod.GET)
@@ -476,6 +574,26 @@ public class AdminController {
 		mv.setViewName("admin/board/news/newsSelect");
 		return mv;
 	}
+	
+	//write
+		@RequestMapping(value = "exerciseWrite", method = RequestMethod.GET)
+		public ModelAndView exerciseWrite() throws Exception {
+			
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("menu", "exercise");
+			mv.setViewName("admin/board/news/newsWrite");
+			return mv;
+		}
+	//update
+		@RequestMapping(value = "exerciseUpdate", method = RequestMethod.GET)
+		public ModelAndView exerciseUpdate(int num) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			NewsVO newsVO= newsService.getSelect(num);
+			mv.addObject("newsVO", newsVO);
+			mv.addObject("menu", "exercise");
+			mv.setViewName("admin/board/news/newsUpdate");
+			return mv;
+		}
 	
 	/*재혁 작업 끝	*/
 	

@@ -65,12 +65,16 @@ public class FileSaver {
 		return fileSystemName;
 	}
 
-	public boolean deleteFile(String realPath, String fname) throws Exception{
+	public int deleteFile(String realPath, String fname) throws Exception{
 		File file = new File(realPath, fname);
 		boolean result=false;
+		int check = 0;
 		if(file.exists()) {
 			result=file.delete();
 		}
-		return result;
+		if(result) {
+			check=1;
+		}
+		return check;
 	}
 }

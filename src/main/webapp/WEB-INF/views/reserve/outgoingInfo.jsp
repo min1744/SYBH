@@ -6,6 +6,7 @@
 <head>
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/outgoingInfo.css" rel="stylesheet">
+
 </head>
 <body>
 <!-- header 추가 -->
@@ -13,8 +14,8 @@
 
 <div id="board">
 		<div id="board_title">
-			<p id="title">외래 안내</p>
-			<p id="sub_title">쌍용백병원의 외래 진료에 대해 안내해드립니다.</p>
+			<p id="title">외래/접수안내</p>
+			<p id="sub_title">쌍용백병원의 외래/진료 접수에 대해 안내해드립니다.</p>
 		</div>
 
 	<div id="board_box">
@@ -24,7 +25,7 @@
 		
 			<ul>
 				<li>진료 예약/조회</li>
-				<li><a href="./outgoingInfo" style="color:#6BB5DB;">외래안내</a></li>
+				<li><a href="./outgoingInfo" style="color:#6BB5DB;">외래/접수안내</a></li>
 				<li><a href="./reserveInfo">예약안내</a></li>
 				<li><a href="./reserveNomal">일반진료 예약</a></li>
 				<li><a href="./reserveMedical">건강검진 예약</a></li>
@@ -36,7 +37,70 @@
 		
 		<div id="boardList">
 		
-			<div id="out_Info">
+		<!-- 진료 접수 안내 -->
+		<div id="change_1">
+		
+			<div class="info_box">
+				<h2>진료 접수 안내</h2>
+			</div>
+			
+			<div id="register_info">
+			
+				<h3>·&nbsp;진료 접수 절차</h3>
+				<h4>진료신청시 준비서류 : 진료의뢰서(가정의학과, 치과, 재활의학과는 제외)</h4>
+				
+				<h3>·&nbsp;진료 접수 시간</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>평일</th>
+							<th>토요일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>오전 : 08:00 ~12:00</td>
+							<td>오전 : 08:00 ~12:00</td>
+						</tr>
+						<tr>
+							<td>오후 :13:30 ~ 16:00</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<p>※&nbsp;접수 마감 시간은 당일 예약 및 진료신청 환자수에 따라 앞당겨질 수 있습니다.</p>
+				
+				
+				<h3>·&nbsp;진료시간</h3>
+				<table>
+					<thead>
+						<tr>
+							<th>평일</th>
+							<th>토요일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>오전 : 08:30 ~12:30</td>
+							<td>오전 : 08:30 ~12:30</td>
+						</tr>
+						<tr>
+							<td>오후 : 13:30 ~ 17:00</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<p>※&nbsp;진료시간은 진료과마다 다를수 있습니다. 분만 및 응급환자는 24시간 진료가능 합니다.</p>
+				
+			</div>
+				
+				
+				
+		
+		</div>
+		
+		<!-- 외래안내 -->
+			<div id="change_2">
 			
 				<div class="info_box">
 				<h2>외래 진료 안내</h2>
@@ -94,9 +158,14 @@
 					</table>
 				</div>
 		</div>
+		<!-- 외래 안내 끝 -->
+		
+		
+		
+		
 	</div>
-</div>
-
+		
+	</div>
 </div>
 
 <!-- footer 추가 -->

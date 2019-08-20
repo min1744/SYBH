@@ -1,5 +1,6 @@
 package com.hospital.news;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,20 +38,44 @@ public class NewsService {
 		if(result < 1) {
 			throw new Exception();
 		}
-		
+		if(multipartFile.getOriginalFilename().length()>0) {
 		newsImagesVO.setNum(newsVO.getNum());
 		newsImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
 		newsImagesVO.setOname(multipartFile.getOriginalFilename());
-		//newsVO.setNewsImagesVO(newsImagesVO);
 		result = newsImagesDAO.setWrite(newsImagesVO);
+		}
+		if(result<1) {
+			throw new Exception();
+		}
 		
 		return result;
 		
 		
 	}
 	//update
-	public int setUpdate(NewsVO newsVO) throws Exception{
-		return newsDAO.setUpdate(newsVO);
+	public int setUpdate(NewsVO newsVO,HttpSession session,MultipartFile multipartFile) throws Exception{
+		NewsImagesVO newsImagesVO = new NewsImagesVO();
+		
+		String realPath = session.getServletContext().getRealPath("/resources/file");
+		int result = newsDAO.setUpdate(newsVO);
+		
+		if(result < 1) {
+			throw new Exception();
+		}
+		
+		try {
+			newsImagesVO.setNum(newsVO.getNum());
+			newsImagesVO.setFname(fileSaver.saveFile(realPath, multipartFile));
+			newsImagesVO.setOname(multipartFile.getOriginalFilename());
+			result = newsImagesDAO.setWrite(newsImagesVO);
+		} catch (Exception e) {
+			
+		}
+		
+		
+		
+		
+		return result;
 	}
 	//delete
 	public int setDelete(int num,HttpSession session) throws Exception{
@@ -87,10 +112,14 @@ public class NewsService {
 		map.put("menu", menu);
 		map.put("pager", pageMaker);
 		int totalCount = newsDAO.getTotalCount(map);
-		System.out.println(totalCount);
 		pageMaker.makePage(totalCount);
 		List<NewsVO> list = newsDAO.getList(map);
 		return list;
+	}
+	//여러개 삭제
+	public int setDelete(Integer[] num)throws Exception{
+		List<Integer> list = Arrays.asList(num);
+		return newsDAO.setListDelete(list);
 	}
 	
 	

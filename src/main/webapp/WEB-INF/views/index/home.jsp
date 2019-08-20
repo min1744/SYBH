@@ -12,8 +12,6 @@
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9963d068218228f27bdac8c9618c4a07"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9963d068218228f27bdac8c9618c4a07&libraries=clusterer"></script>
-<link href="./resources/css/indexBootstrap.css" rel="stylesheet">
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 </head>
 
 <script type="text/javascript">
@@ -201,7 +199,7 @@ $(function() {
 		</c:otherwise>
 	</c:choose>
 		<ul id="ul_1">
-			<li><a href="./reserve/outgoingInfo">외래안내</a></li>
+			<li><a href="./reserve/outgoingInfo">외래/접수안내</a></li>
 			<li><a href="./reserve/reserveInfo">예약안내</a></li>
 			<li><a href="./reserve/reserveNomal">일반진료 예약</a></li>
 			<li><a href="./reserve/reserveMedical">건강검진 예약</a></li>
@@ -303,8 +301,8 @@ $(function() {
 				<p>암환자 상담 <span>02-2072-0707</span></p>
 				</div>
 				<div class="list_btn">
-				<a href="./reserve/outgoingInfo" class="first_a btn_a">외래안내</a>
-				<a href="" class="btn_a">진료접수안내</a>
+				<a href="./reserve/outgoingInfo#change_2" class="first_a btn_a">외래안내</a>
+				<a href="./reserve/outgoingInfo#change_1" class="btn_a">진료접수안내</a>
 				</div>
 			</div>
 			

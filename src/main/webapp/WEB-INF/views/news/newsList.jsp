@@ -83,7 +83,7 @@
 					<c:forEach items="${list}" var="disease">
 				<a href="./diseaseSelect?num=${disease.num}" class="news">
 					<div class="news_img">
-					<img src="../resources/file/${disease.newsImagesVO.fname}">
+					<img src="../resources/file/${disease.newsImagesVO.oname}">
 					</div>
 					<p class="news_title">${disease.title}</p>
 					<p class="news_sub">${disease.sub_contents}</p>
@@ -96,7 +96,7 @@
 					<c:forEach items="${list}" var="nutrition">
 				<a href="./nutritionSelect?num=${nutrition.num}" class="news">
 					<div class="news_img">
-					<img src="../resources/file/${nutrition.newsImagesVO.fname}">
+					<img src="../resources/file/${nutrition.newsImagesVO.oname}">
 					</div>
 					<p class="news_title">${nutrition.title}</p>
 					<p class="news_sub">${nutrition.sub_contents}</p>
@@ -109,7 +109,7 @@
 					<c:forEach items="${list}" var="exercise">
 				<a href="./exerciseSelect?num=${exercise.num}" class="news">
 					<div class="news_img">
-					<img src="../resources/file/${exercise.newsImagesVO.fname}">
+					<img src="../resources/file/${exercise.newsImagesVO.oname}">
 					</div>
 					<p class="news_title">${exercise.title}</p>
 					<p class="news_sub">${exercise.sub_contents}</p>
