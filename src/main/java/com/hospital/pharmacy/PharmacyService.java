@@ -54,6 +54,46 @@ public class PharmacyService {
         conn.disconnect();
         
         System.out.println(sb.toString());
+        //기관명
+        String dutyName = sb.toString().substring(sb.toString().indexOf("<dutyName>")+10, sb.toString().indexOf("</dutyName>"));
+        //주소
+        String dutyAddr = sb.toString().substring(sb.toString().indexOf("<dutyAddr>")+10, sb.toString().indexOf("</dutyAddr>"));
+        //대표전화
+        String dutyTel = sb.toString().substring(sb.toString().indexOf("<dutyTel1>")+10, sb.toString().indexOf("</dutyTel1>"));
+        //기관 설명 상세
+        String dutyInf = sb.toString().substring(sb.toString().indexOf("<dutyInf>")+9, sb.toString().indexOf("</dutyInf>"));
+        //월요일 진료시간
+        String dutyMonday = sb.toString().substring(sb.toString().indexOf("<dutyTime1s>")+12, sb.toString().indexOf("</dutyTime1s>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime1s>")+14, sb.toString().indexOf("</dutyTime1s>")) + " ~ " + sb.toString().substring(sb.toString().indexOf("<dutyTime1c>")+12, sb.toString().indexOf("</dutyTime1c>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime1c>")+14, sb.toString().indexOf("</dutyTime1c>"));
+        //화요일 진료시간
+        String dutyTuesday = sb.toString().substring(sb.toString().indexOf("<dutyTime2s>")+12, sb.toString().indexOf("</dutyTime2s>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime2s>")+14, sb.toString().indexOf("</dutyTime2s>")) + " ~ " + sb.toString().substring(sb.toString().indexOf("<dutyTime2c>")+12, sb.toString().indexOf("</dutyTime2c>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime2c>")+14, sb.toString().indexOf("</dutyTime2c>"));
+        //수요일 진료시간
+        String dutyWednesday = sb.toString().substring(sb.toString().indexOf("<dutyTime3s>")+12, sb.toString().indexOf("</dutyTime3s>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime3s>")+14, sb.toString().indexOf("</dutyTime3s>")) + " ~ " + sb.toString().substring(sb.toString().indexOf("<dutyTime3c>")+12, sb.toString().indexOf("</dutyTime3c>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime3c>")+14, sb.toString().indexOf("</dutyTime3c>"));
+        //목요일 진료시간
+        String dutyThursday = sb.toString().substring(sb.toString().indexOf("<dutyTime4s>")+12, sb.toString().indexOf("</dutyTime4s>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime4s>")+14, sb.toString().indexOf("</dutyTime4s>")) + " ~ " + sb.toString().substring(sb.toString().indexOf("<dutyTime4c>")+12, sb.toString().indexOf("</dutyTime4c>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime4c>")+14, sb.toString().indexOf("</dutyTime4c>"));
+        //금요일 진료시간
+        String dutyFriday = sb.toString().substring(sb.toString().indexOf("<dutyTime5s>")+12, sb.toString().indexOf("</dutyTime5s>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime5s>")+14, sb.toString().indexOf("</dutyTime5s>")) + " ~ " + sb.toString().substring(sb.toString().indexOf("<dutyTime5c>")+12, sb.toString().indexOf("</dutyTime5c>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime5c>")+14, sb.toString().indexOf("</dutyTime5c>"));
+        //토요일 진료시간
+        String dutySaturday = sb.toString().substring(sb.toString().indexOf("<dutyTime6s>")+12, sb.toString().indexOf("</dutyTime6s>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime6s>")+14, sb.toString().indexOf("</dutyTime6s>")) + " ~ " + sb.toString().substring(sb.toString().indexOf("<dutyTime6c>")+12, sb.toString().indexOf("</dutyTime6c>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime6c>")+14, sb.toString().indexOf("</dutyTime6c>"));
+        //일요일 진료시간
+        String dutySunday = sb.toString().substring(sb.toString().indexOf("<dutyTime7s>")+12, sb.toString().indexOf("</dutyTime7s>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime7s>")+14, sb.toString().indexOf("</dutyTime7s>")) + " ~ " + sb.toString().substring(sb.toString().indexOf("<dutyTime7c>")+12, sb.toString().indexOf("</dutyTime7c>")-2) + ":" + sb.toString().substring(sb.toString().indexOf("<dutyTime7c>")+14, sb.toString().indexOf("</dutyTime7c>"));
+        //경도
+        String wgs84Lat = sb.toString().substring(sb.toString().indexOf("<wgs84Lat>")+10, sb.toString().indexOf("</wgs84Lat>"));
+        //위도
+        String wgs84Lon = sb.toString().substring(sb.toString().indexOf("<wgs84Lon>")+10, sb.toString().indexOf("</wgs84Lon>"));
+        ArrayList<String> list = new ArrayList<String>();
+        list.add(dutyAddr);
+        list.add(dutyInf);
+        list.add(dutyName);
+        list.add(dutyTel);
+        list.add(dutyMonday);
+        list.add(dutyTuesday);
+        list.add(dutyWednesday);
+        list.add(dutyThursday);
+        list.add(dutyFriday);
+        list.add(dutySaturday);
+        list.add(dutySunday);
+        list.add(wgs84Lat);
+        list.add(wgs84Lon);
         /*DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = factory.newDocumentBuilder();
 		Document document = documentBuilder.parse(urlBuilder.toString());
