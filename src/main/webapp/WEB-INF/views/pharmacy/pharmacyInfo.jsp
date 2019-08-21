@@ -99,6 +99,7 @@ $(function() {
 	 
 	// 마커를 표시할 위치와 title 객체 배열입니다 
 	var positions = [];
+	var markers = [];
 	
 	//약국 정보
 	$('.location').each(function() {
@@ -134,21 +135,28 @@ $(function() {
 	        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 	        image : markerImage // 마커 이미지 
 	    });
-	    
-	    kakao.maps.event.addListener(marker, 'click', function() {
-	    	$('.info').each(function() {
-	    		console.log(positions[i]);
-	    		console.log($(this).val());
-	    		console.log($(this).prop("title"));
-	    		console.log($(this).prop("name"));
-	    		var pharmacy1 = positions[i].title;
-	    		var pharmacy2 = $(this).val();
-	    		if(pharmacy1 == pharmacy2){
-	    			$('#dutyName').html($(this).val());
-					$('#dutyAddr').html($(this).prop("title"));
-					$('#dutyTel').html($(this).prop("name"));
+	    markers.push(marker);
+	}
+	
+	for (var i = 0; i < positions.length; i ++) {
+		kakao.maps.event.addListener(markers[i], 'click', function() {
+	    	console.log(markers[i]);
+	    	/*$('.info').each(function() {
+	    		for (var j = 0; j < positions.length; j ++) {
+	    			console.log(positions[j]);
+		    		console.log($(this).val());
+		    		console.log($(this).prop("title"));
+		    		console.log($(this).prop("name"));
+	    			var pharmacy1 = positions[j].title;
+		    		var pharmacy2 = $(this).val();
+		    		if(pharmacy1 == pharmacy2){
+		    			$('#dutyName').html($(this).val());
+						$('#dutyAddr').html($(this).prop("title"));
+						$('#dutyTel').html($(this).prop("name"));
+						break;
+		    		}
 	    		}
-		    });
+		    });*/
 		});
 	}
 	</script>
