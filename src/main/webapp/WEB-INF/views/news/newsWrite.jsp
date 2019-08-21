@@ -9,18 +9,7 @@
 <c:import url="../temp/boot.jsp" />
 <c:import url="../temp/summernote.jsp" />
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
-<script type="text/javascript">
-$(function() {
-	$("#write").click(function() {
-		//다른 input들 검증
-		if($('#contents').summernote('isEmpty')) {
-			alert('모두 입력해주세요.');
-		} else {
-			$('#frm').submit();				
-		}
-	});
-});
-</script>
+<script type="text/javascript" src="../resources/js/news/newsWrite.js"></script>
 </head>
 <body>
 <!-- header 추가 -->
@@ -63,7 +52,7 @@ $(function() {
 		</div>
 		<div class="float">
 		 <span class="writer">작성자</span>
- 		 <input class="form-control" type="text" id="writer" name="writer" value="admin" readonly>
+ 		 <input class="form-control" type="text" id="writer" name="writer" value="관리자" readonly>
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">sub</span>
