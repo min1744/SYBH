@@ -104,7 +104,7 @@
 								<c:when test="${board eq 'notice'}">
 									<div class="float">
 										<span class="writer">작성자</span> <input class="form-control"
-											type="text" id="writer" name="writer" value="관리자" readonly>
+											type="text" id="writer" name="writer" value="${memberVO.name}" readonly>
 									</div>
 								</c:when>
 								<c:when test="${board eq 'community'}">

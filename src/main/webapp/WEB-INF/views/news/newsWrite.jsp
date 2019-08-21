@@ -52,7 +52,7 @@
 		</div>
 		<div class="float">
 		 <span class="writer">작성자</span>
- 		 <input class="form-control" type="text" id="writer" name="writer" value="관리자" readonly>
+ 		 <input class="form-control" type="text" id="writer" name="writer" value="${memberVO.name}" readonly>
 		</div>
 		<div class="form-group" id="contents_box">
 		  <span class="contents">sub</span>

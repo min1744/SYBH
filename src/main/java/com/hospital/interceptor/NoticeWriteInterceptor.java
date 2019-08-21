@@ -12,7 +12,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.hospital.board.BoardVO;
 import com.hospital.member.MemberVO;
 
-public class NoticeUpdateInterceptor extends HandlerInterceptorAdapter{
+public class NoticeWriteInterceptor extends HandlerInterceptorAdapter{
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -35,5 +35,5 @@ public class NoticeUpdateInterceptor extends HandlerInterceptorAdapter{
 			
 				
 	}
-
+	
 }

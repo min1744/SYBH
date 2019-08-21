@@ -48,7 +48,16 @@
 			<beans:bean class="com.hospital.interceptor.ReserveInterceptor"/>
 		</interceptor>
 		<!-- 진우 인터셉터  -->
-		
+		<interceptor>
+			<mapping path="/notice/noticeUpdate"/>
+			<mapping path="/notice/noticeWrite"/>
+			<beans:bean class="com.hospital.interceptor.NoticeInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/news/newsUpdate"/>
+			<mapping path="/news/newsWrite"/>
+			<beans:bean class="com.hospital.interceptor.NewsInterceptor"/>
+		</interceptor>
 		<!-- 현아  인터셉터 -->
 		
 		<!-- 민근 인터셉터 -->
