@@ -51,13 +51,21 @@
 		<interceptor>
 			<mapping path="/notice/noticeUpdate"/>
 			<mapping path="/notice/noticeWrite"/>
-			<beans:bean class="com.hospital.interceptor.NoticeInterceptor"/>
+			<beans:bean class="com.hospital.interceptor.NoticeWriteInterceptor"/>
 		</interceptor>
 		<interceptor>
-			<mapping path="/news/newsUpdate"/>
-			<mapping path="/news/newsWrite"/>
-			<beans:bean class="com.hospital.interceptor.NewsInterceptor"/>
+			<mapping path="/news/diseaseUpdate"/>
+			<mapping path="/news/nutritionUpdate"/>
+			<mapping path="/news/exerciseUpdate"/>
+			<beans:bean class="com.hospital.interceptor.NewsWriteInterceptor"/>
 		</interceptor>
+		<interceptor>
+		<mapping path="/news/nutritionWrite"/>
+			<mapping path="/news/exerciseWrite"/>
+			<mapping path="/news/diseaseWrite"/>
+			<beans:bean class="com.hospital.interceptor.NewsWriteAInterceptor"/>
+		</interceptor>
+		
 		<!-- 현아  인터셉터 -->
 		
 		<!-- 민근 인터셉터 -->

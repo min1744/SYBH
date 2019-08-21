@@ -62,7 +62,6 @@ public class NoticeController {
 		int result = noticeService.setWrite(noticeVO,session);
 		if(result>0) {
 			mv.setViewName("redirect:./noticeList");
-			
 		}else {
 			mv.addObject("message", "Write Fail");
 			mv.addObject("path", "./noticeList");

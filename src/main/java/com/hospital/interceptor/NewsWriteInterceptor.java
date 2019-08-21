@@ -9,32 +9,41 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.hospital.board.BoardVO;
 import com.hospital.member.MemberVO;
 import com.hospital.news.NewsVO;
 
 public class NewsWriteInterceptor extends HandlerInterceptorAdapter{
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 		String method = request.getMethod();
+		MemberVO memberVO = null;
 		if(method.equals("GET")) {
-			
 			HttpSession session = request.getSession();
-			MemberVO memberVO = (MemberVO)session.getAttribute("member");
+			memberVO = (MemberVO)session.getAttribute("memberVO");
 			Map<String, Object> map = modelAndView.getModel();
-			NewsVO newsVO = (NewsVO)map.get("vo");
-			
-			if(!memberVO.getId().equals(newsVO.getWriter())) {
+			NewsVO newsVO = (NewsVO)map.get("newsVO");
+			String writer = "";
+			Integer grade = 1;
+			try {
+				writer = memberVO.getId();
+				grade = memberVO.getGrade();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		
+			if(!grade.equals(2)) {
 				modelAndView.addObject("message", "No Access");
-				modelAndView.addObject("path", "./"+(String)map.get("news")+"List");
-				map.remove("vo");
+				modelAndView.addObject("path", "./"+(String)map.get("menu"));
+				map.remove("newsVO");
 				modelAndView.setViewName("common/messageMove");
 			}
 		}
+		
 			
 				
 	}
+
+	
 	
 }
