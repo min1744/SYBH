@@ -110,9 +110,9 @@
             <a class="collapse-item" href="../admin/noticeList">공지사항 관리</a>
             <div class="collapse-divider"></div>
             <h6 class="collapse-header">QNA:</h6>
-            <a class="collapse-item" href="../admin/complaint">건의합니다 관리</a>
-            <a class="collapse-item" href="../admin/praise">칭찬합니다 관리</a>
-            <a class="collapse-item" href="../admin/qnaList">질문과답변 관리</a>
+            <a class="collapse-item" href="./complaint">건의합니다 관리</a>
+            <a class="collapse-item" href="./praise">칭찬합니다 관리</a>
+            <a class="collapse-item" href="./qna">질문과답변 관리</a>
             <div class="collapse-divider"></div>
           </div>
         </div>

@@ -81,35 +81,281 @@
 						<div class="card-body">
 							<div class="table-responsive">
 								<div id="controller_div">
-									<input type="button" value="DELETE" id="delete_btn"
+								<c:choose>
+									<c:when test="${board eq 'notice'}">
+									<input type="button" value="삭제" id="delete_btn"
 										class="btn btn-danger">
-										<a href="./${board}Update?num=${vo.num}" id="write_btn" class="btn btn-primary">UPDATE</a>
+										<a href="./${board}Update?num=${vo.num}" id="write_btn" class="btn btn-primary">수정</a>
+									</c:when>
+									<c:when test="${board eq 'qna'}">
+											<c:choose>
+												<c:when test="${vo.depth eq '1'}">
+													<button id="reply_delete" class="btn btn-danger">삭제</button>
+													<a href="./${menu}Update?num=${vo.num}" id="update">수정</a>
+												<a href="./${menu}Reply?num=${vo.num}" id="reply">답글달기</a>
+												</c:when>
+												<c:when	test="${vo.depth eq '0'}">
+													<button id="q_delete">삭제</button>
+													<a href="./${menu}Update?num=${vo.num}" id="update">수정</a>
+												<a href="./${menu}Reply?num=${vo.num}" id="reply">답글달기</a>
+												</c:when>
+												
+											</c:choose>
+										</c:when>
+								</c:choose>
 								</div>
+								<c:choose>
+									<c:when test="${board eq 'notice'}">
+									<!------------ notice ------------>
+										<input type="hidden" id="board" value="${board}"> 
+										<input type="hidden" id="num" value="${vo.num}">
+										<p id="wtitle">공지사항</p>
+									</c:when>
+									<c:when test="${board eq 'qna'}">
+									<!------------ qna ------------>
+										<c:choose>
+											<c:when test="${menu eq 'complaint'}">
+												<p id="wtitle">건의합니다</p>
+											</c:when>
+											<c:when test="${menu eq 'praise'}">
+												<p id="wtitle">칭찬합니다</p>
+											</c:when>
+											<c:otherwise>
+												<p id="wtitle">질문과 답변</p>
+											</c:otherwise>
+											</c:choose>
+									</c:when>
+									<c:otherwise>
+									<!-- commnu -->
+										<input type="hidden" id="board" value="${board}">
+										<input type="hidden" id="num" value="${vo.num}">
+										<input type="hidden" id="c_num" value="${vo.num}">
+										<p id="wtitle">커뮤니티</p>
+									</c:otherwise>
+								</c:choose>
 								<table class="table table-bordered" id="dataTable" width="100%"
 									cellspacing="0">
-									<thead>
-										<tr>
-											
-											<th>번호</th>
-											<th>제목</th>
-											<th>작성자</th>
-											<th>작성일</th>
-											<th>조회수</th>
-										</tr>
+									
+									<c:choose>
+										<c:when test="${board eq 'notice'}">
+											<thead>
+												<tr>
+													<th>번호</th>
+													<th>제목</th>
+													<th>작성자</th>
+													<th>작성일</th>
+													<th>조회수</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>${vo.num }</td>
+													<td>${vo.title}</td>
+													<td>${vo.writer}</td>
+													<td>${vo.reg_date}</td>
+													<td>${vo.hit}</td>
+												</tr>
+												<tr>
+													<td colspan="5">${vo.contents }</td>
+												</tr>	
+											</tbody>
+										</c:when>
 										
-									</thead>
-									<tbody>
-										<tr>
-											<td>${vo.num }</td>
-											<td>${vo.title}</td>
-											<td>${vo.writer}</td>
-											<td>${vo.reg_date}</td>
-											<td>${vo.hit}</td>
-										</tr>
-										<tr >
-											<td colspan="5">${vo.contents }</td>
-										</tr>	
-									</tbody>
+										<c:when test="${board eq 'qna'}">
+											<!------------ qna ------------>
+											<input type="hidden" name="num" value="${vo.num}" id="qnum">
+											<input type="hidden" name="menu" value="${vo.menu}" id="qmenu">
+											<input type="hidden" name="num" value="${vo.ref}" id="qref">
+											<thead>
+											<tr>
+												<th colspan="8">${vo.title }</th>
+											</tr>
+											<tr>
+												<th>작성자</th>
+												<td>${vo.writer}</td>
+												<th>구분</th>
+											
+												<td>
+													<c:choose>
+															<c:when test="${vo.category eq 'site'}">
+																<c:choose>
+																	<c:when test="${vo.depth eq '1'}">
+																	답변
+																	</c:when>
+																	<c:otherwise>
+																	사이트이용
+																</c:otherwise>
+																</c:choose>
+															</c:when>
+															<c:when test="${vo.category eq 'web'}">
+																<c:choose>
+																	<c:when test="${vo.depth eq '1'}">
+																		답변
+																	</c:when>
+																	<c:otherwise>
+																		병원이용
+																	</c:otherwise>
+																</c:choose>
+															</c:when>
+															<c:when test="${vo.category eq 'etc'}">
+																<c:choose>
+																	<c:when test="${vo.depth eq '1'}">
+																		답변
+																	</c:when>
+																	<c:otherwise>
+																		기타
+																	</c:otherwise>
+																</c:choose>
+															</c:when>
+														</c:choose>
+													</td>
+													<th>등록일</th>
+													<td>${vo.reg_date}</td>
+													<th>조회수</th>
+													<td>${vo.hit}</td>
+												</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td colspan="8">${vo.contents}</td>
+													</tr>
+												</tbody>
+											</c:when>
+											<c:otherwise>
+												<!------------ commu ------------>
+												<thead>
+												<tr>
+												<th>${vo.title}</th>
+												</tr>
+												<tr>
+													<th>작성자</th>
+													<td>${vo.writer}</td>
+													<th>등록일</th>
+													<td>${vo.reg_date}</td>
+													<th>조회수</th>
+													<td>${vo.hit}</td>
+												</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>${vo.contents}</td>
+													</tr>
+												</tbody>
+												<!----------------------------- 댓글 시작 -------------------------------->
+												<div id="comment_box">
+													<div id="comment">
+														<div id="c_top">
+															<input type="hidden" id="like_check"> <input
+																type="hidden" id="c_num" value="${vo.num}"> <input
+																type="hidden" id="likeId" value="${memberVO.id}">
+															<span id="c_count_title">전체댓글</span><span id="c_count">${totalCount}</span>
+														</div>
+														<c:choose>
+															<c:when test="${not empty memberVO}">
+																<div id="c_write_box">
+																	<p id="c_writer">${memberVO.id}</p>
+																	<textarea class="c_area"
+																		placeholder="주제와 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
+																	<span id="counter">(0 / 500)</span>
+																</div>
+																<div id="c_btn">
+																	<button id="comment_btn">등록</button>
+																</div>
+															</c:when>
+															<c:otherwise>
+																<div id="c_write_box2">
+																	<textarea placeholder="로그인 후 사용하실 수 있습니다"
+																		disabled="disabled"></textarea>
+																</div>
+															</c:otherwise>
+														</c:choose>
+													</div>
+													<!-- 댓글 리스트 -->
+													<div class="commentslist"></div>
+													<c:if test="${totalCount > 10}">
+														<div id="more_box">
+															<button id="more">+ 댓글 더보기</button>
+														</div>
+													</c:if>
+													<!-- 댓글 수정 관련 modal -->
+													<div class="container">
+														<!-- Modal -->
+														<div class="modal fade" id="myModal" role="dialog">
+															<div class="modal-dialog">
+
+																<!-- Modal content-->
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h4 class="modal-title">댓글 수정</h4>
+																	</div>
+																	<div class="modal-body">
+																		<div class="form-group">
+																			<label for="contents">작성자 :</label> <input
+																				class="form-control" type="text"
+																				value="${memberVO.id}" disabled="disabled">
+																		</div>
+																		<div class="form-group">
+																			<label for="contents">댓글 :</label>
+																			<textarea class="form-control" rows="5"
+																				id="updateContents" name="contents"></textarea>
+																			<input type="hidden" id="ccnum">
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<button id="updateBtn" data-dismiss="modal">댓글
+																			수정</button>
+																		<button type="button" id="cancleBtn"
+																			data-dismiss="modal">취소</button>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+													<!-- modal 끝 -->
+
+													<!-- 댓글 답글 관련 modal -->
+													<div class="container">
+														<!-- Modal -->
+														<div class="modal fade" id="replyModal" role="dialog">
+															<div class="modal-dialog">
+
+																<!-- Modal content-->
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h4 class="modal-title">답글 달기</h4>
+																	</div>
+																	<div class="modal-body">
+																		<div class="form-group">
+																			<label for="reid">작성자 :</label> <input
+																				class="form-control" type="text" name="reid"
+																				id="reid" value="${memberVO.id}" readonly>
+																		</div>
+																		<div class="form-group">
+																			<label for="contents">댓글 :</label>
+																			<textarea class="form-control" rows="5"
+																				id="replyContents" name="contents"></textarea>
+																			<input type="hidden" id="cnum2" value="1">
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<button id="replyBtn" data-dismiss="modal">답글
+																			등록</button>
+																		<button type="button" id="cancleBtn"
+																			data-dismiss="modal">취소</button>
+																	</div>
+																</div>
+
+															</div>
+														</div>
+													</div>
+													<!-- modal 끝 -->
+
+												</div>
+												<!----------------------------- 댓글 끝 -------------------------------->
+											</c:otherwise>
+										</c:choose>
+									
 								</table>
 
 							</div>
