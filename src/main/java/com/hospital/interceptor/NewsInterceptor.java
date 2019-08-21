@@ -17,7 +17,7 @@ public class NewsInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		
 		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("member");
+		Object obj = session.getAttribute("memberVO");
 		boolean result=false;//이해안댐
 		if(obj !=null) {
 			result=true;

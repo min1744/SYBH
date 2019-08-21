@@ -17,8 +17,8 @@ public class NoticeInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		
 		HttpSession session = request.getSession();
-		Object obj = session.getAttribute("member");
-		boolean result=false;//이해안댐
+		Object obj = session.getAttribute("memberVO");
+		boolean result=false;
 		if(obj !=null) {
 			result=true;
 		}else {
@@ -32,7 +32,7 @@ public class NoticeInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	
-	//conroller 진입 후 
+	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
@@ -43,7 +43,7 @@ public class NoticeInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		// TODO Auto-generated method stub
+		
 		super.afterCompletion(request, response, handler, ex);
 	}
 
