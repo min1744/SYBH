@@ -97,13 +97,20 @@
 						<div id="comment">
 							<div id="c_top">
 								<input type="hidden" id="like_check">
-								<input type="hidden" name="num" id="num" value="1">
+								<input type="hidden" id="likeId" value="${memberVO.id}">
 								<span id="c_count_title">전체댓글</span><span id="c_count">${totalCount}</span>
 							</div>
 							<c:choose>
 								<c:when test="${not empty memberVO}">
 								<div id="c_write_box">
+									<c:choose>
+									<c:when test="${memberVO.grade eq '1'}">
 									<p id="c_writer">${memberVO.id}</p>
+									</c:when>
+									<c:otherwise>
+									<p id="c_writer">관리자</p>
+									</c:otherwise>
+								</c:choose>
 									<textarea class="c_area" placeholder="주제와 무관한 댓글이나 악플은 경고조치 없이 삭제되며 징계 대상이 될 수 있습니다."></textarea>
 									<span id="counter">(0 / 500)</span>
 								</div>

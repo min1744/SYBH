@@ -209,7 +209,7 @@ $(function() {
 		});
 		
 		var likecnum = 0;
-		var likeId = '${memberVO.id}';
+		var likeId = $('#likeId').val();
 		var likeResult = null;
 		var hateResult = null;
 		console.log(likeId);
