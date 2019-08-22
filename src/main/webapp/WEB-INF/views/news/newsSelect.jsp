@@ -208,9 +208,10 @@
 			
 			<div id="btn_box">
 				<a href="./${menu}" id="list">목록</a>
-				
+				<c:if test="${memberVO.grade eq '2'}">
 				<button id="delete">삭제</button>
 				<a href="./${vo.menu}Update?num=${vo.num}" id="update">수정</a>
+				</c:if>
 			</div>
 		
 		</div>

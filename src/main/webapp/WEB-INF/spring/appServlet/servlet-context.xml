@@ -65,14 +65,6 @@
 			<mapping path="/news/exerciseWrite"/>
 			<beans:bean class="com.hospital.interceptor.NewsWriteAInterceptor"/>
 		</interceptor>
-		
-		<interceptor>
-			<mapping path="/news/diseaseDelete"/>
-			<mapping path="/news/nutritionDelete"/>
-			<mapping path="/news/exerciseDelete"/>
-			<beans:bean class="com.hospital.interceptor.NewsDeleteInterceptor"/>
-		</interceptor>
-		
 		<!-- 현아  인터셉터 -->
 		<interceptor>
 			<mapping path="/qna/complaintWrite"/>
