@@ -52,13 +52,13 @@ public class ApiClient {
 
 	public static void main(final String[] args) {
 		if (args.length != 3) {
-			System.out.println("Usage : accessKey secretKey ip");
+			//System.out.println("Usage : accessKey secretKey ip");
 			return;
 		}
 
 		try {
 			/** args[0] => accessKey, args[1] => secretKey, args[2] => IP, **/
-			System.out.println(args[0] + args[1] + args[2]);
+			//System.out.println(args[0] + args[1] + args[2]);
 			final ApiClient apiClient = new ApiClient(args[0], args[1]);
 			apiClient.ApiClientRun(args[2]);
 		} catch (final Exception e) {
