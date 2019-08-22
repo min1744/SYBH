@@ -35,7 +35,9 @@
 			</c:otherwise>
 		</c:choose>
 		<div id="write_btn">
-					<a href="./${menu}Write" id="write">뉴스 등록</a>
+			<c:if test="${memberVO.grade eq '2'}">
+				<a href="./${menu}Write" id="write">뉴스등록</a>
+				</c:if>
 				</div>
 	<div id="board_box">
 			
