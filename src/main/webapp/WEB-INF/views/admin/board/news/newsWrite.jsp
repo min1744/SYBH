@@ -51,6 +51,11 @@ $(function() {
 		alert('Main내용을 입력해주세요.');
 		return false;
 	}
+	str = f.add.value;
+	if(!str){
+		alert('썸네일 이미지를 넣어주세요');
+		return false;
+	}
 	$("#frm").submit();
 	});
 	

@@ -18,185 +18,170 @@
 <script type="text/javascript" src="../resources/js/material.min.js"></script>
 <script type="text/javascript" src="../resources/js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../resources/js/bootstrap-material-datetimepicker.js"></script>
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
+	var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
+	var date = new Date();//today의 Date를 세어주는 역할
 
-		
-		
-		/////////////////////캘린더
-			
-		
-			var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
-	        var date = new Date();//today의 Date를 세어주는 역할
-	        
-	        
-	      
-	 
-	        
+	$(function() {
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = new String(date.getMonth() + 1);
+		var day = new String(date.getDate());
 
+		if (month.length == 1) {
+			month = "0" + month;
+		}
+		if (day.length == 1) {
+			day = "0" + day;
+		}
+		var today = year + "-" + month + "-" + day;
 
-	        
-	        
-	        ////////////////////// 캘린더 끝
-	        
-	        
-	        $(function() {
-	        	var date = new Date();
-	        	var year = date.getFullYear();
-		        var month = new String(date.getMonth()+1);
-		        var day = new String(date.getDate());
-		        
-		        if(month.length == 1){ 
-		      	  month = "0" + month; 
-		      	} 
-		      	if(day.length == 1){ 
-		      	  day = "0" + day; 
-		      	} 
-		      	var today = year+"-"+month+"-"+day;
-	        	
-	        	
-	        	$('#time_box').hide();
-	        	$('#reserve_ok').hide();
-	        	var medic = '${medic}';
-	        	var name = '${medic.name}';
-	        	var med_office ='${medic.med_office}';
-	        	var docnum='${medic.num}';
-	        	if(medic!=''){
-	        		$('#reserve_ok').show();
-	        		$('#doc').html(name);
-	        		$('#off').html(med_office);
-	        		$('#docnum').val(docnum+1);
-	        	} 
-	        	
-	        	$('.select_btn').click(function() {
-					$('#reserve_ok').show();
-				});
-	        	
-	        
-			/* 재혁 */
-			$('.select_btn').click(function(){
-				//$('#ti').text('');
-				var index = $(this).attr('data-num');
-				//의사 이름 불러오기
-				name = $("#name"+index).attr('title');
-				$('#doc').html(name);
-				name = $('#doc').text();
-				//진료과 불러오기
-				med_office = $('#med'+index).attr('title');
-				$('#off').html(med_office);
-				med_office = $('#off').text();
-				var docnum = $("#name"+index).attr('data-toggle');
-				$('#docnum').val(docnum);
-				$.ajax({
-					url:"../schedule/getOneList",
-					type:"POST",
-					data:{
-						num:docnum
-					},success: function(data) {
-						//var str = JSON.stringify(data);
-						//var list = $.parseJSON(data);
-						$.each(data,function(){
-							if(this["ddate"] != null){						
+		$('#time_box').hide();
+		$('#reserve_ok').hide();
+		var medic = '${medic}';
+		var name = '${medic.name}';
+		var med_office = '${medic.med_office}';
+		var docnum = '${medic.num}';
+		if (medic != '') {
+			$('#reserve_ok').show();
+			$('#doc').html(name);
+			$('#off').html(med_office);
+			$('#docnum').val(docnum + 1);
+		}
+
+		$('.select_btn').click(function() {
+			$('#reserve_ok').show();
+		});
+
+		/* 재혁 */
+		$('.select_btn').click(function() {
+			//$('#ti').text('');
+			var index = $(this).attr('data-num');
+			//의사 이름 불러오기
+			name = $("#name" + index).attr('title');
+			$('#doc').html(name);
+			name = $('#doc').text();
+			//진료과 불러오기
+			med_office = $('#med' + index).attr('title');
+			$('#off').html(med_office);
+			med_office = $('#off').text();
+			var docnum = $("#name" + index).attr('data-toggle');
+			$('#docnum').val(docnum);
+			$.ajax({
+				url : "../schedule/getOneList",
+				type : "POST",
+				data : {
+					num : docnum
+				},
+				success : function(data) {
+					//var str = JSON.stringify(data);
+					//var list = $.parseJSON(data);
+					$.each(data, function() {
+						if (this["ddate"] != null) {
 							var str = this["ddate"].split(' ');//일정표를 파싱
-							
-							$('.doctor').each(function(){ //휴진날짜, 진료 날짜를 먼저 찾음(위치)
+
+							$('.doctor').each(function() { //휴진날짜, 진료 날짜를 먼저 찾음(위치)
 								var dta = $(this).attr('dt-data');
-								
-								if(dta == str[0]){ //진료날짜와 캘린더에서 일치하는 버튼 찾음
-									$('.time').each(function(){
+
+								if (dta == str[0]) { //진료날짜와 캘린더에서 일치하는 버튼 찾음
+									$('.time').each(function() {
 										var time = $(this).val();
-										
-										if(time == str[1].substring(0,5)){ //버튼 의 시간을 찾아서 hidden 클래스 추가
+
+										if (time == str[1].substring(0, 5)) { //버튼 의 시간을 찾아서 hidden 클래스 추가
 											$(this).hide();
-											
+
 										}
 									});
 								}
 							});
-							
-							}
-							
-						});
-						//console.log(data);
-						
-						
-						
-					}
-				});//ajax
-			});
-			var date ='';
-			$('#date').click(function(){
-				//this.style.color="white";
-				//this.style.backgroundColor="#153f91";
-				$('#time_box').show();
 
-			});
-			var time ='';
-			$('.time').click(function(){
-				date = $('#date').val();
-				time = $(this).val();
-				if(date ==''){
-					alert('날짜를 먼저 선택해 주세요');
-					return false;
-				}
-				$('#ti').html(time);
-			})
-			var reserve = '';
-			$('#reserve_ok').click(function() {
-				date = $('#date').val();
-        		if(date ==''){
-        			alert('날짜를 선택해 주세요');
-        			return false;
-        		}
-        		//alert(date);
-        		if(date<today){
-        			alert(today +' 이후로 선택 가능합니다.');
-        			time ='';
-        			return false;
-        		}
-        		time = $('#ti').text();
-        		if(time ==''){
-        			alert('시간을 선택해 주세요');
-        			return false;
-        		}
-        		reserve = date+" "+time;
-        		
-				var result = confirm('[예약정보]\n환자명 : ${memberVO.name}\n병원/진료과 : '+name+'\n의료진 : '+med_office+'\n예약시간 : '+reserve+'\n예약하시겠습니까?');
-				
-				if(result) {
-					var id = '${memberVO.id}';
-					var num = $('#docnum').val();
-					var status = 0;
-					var doc = $('#doc').text();
-					var off = $('#off').text();
-					var contents = doc+"/"+off;
-					var reserve_date = reserve;
-					$.ajax({
-						url: "../treatBreakDown/treatWrite",
-						type: "POST",
-						data: {
-							id : id,
-							num : num,
-							status : status,
-							contents : contents,
-							reserve_date : reserve_date
-						},
-						success: function(data){
-							if(data=='1'){
-								console.log(data);
-								alert('예약이 완료되었습니다.');
-								location.href="../member/memberNomal";
-							}
 						}
-					});//ajax
-				} else {
-					alert('예약이 취소되었습니다.');
+
+					});
+					//console.log(data);
+
 				}
-				
-			});	
-	        	
-	        	
-			});
+			});//ajax
+		});
+		var date = '';
+		$('#date').click(function() {
+			//this.style.color="white";
+			//this.style.backgroundColor="#153f91";
+			$('#time_box').show();
+
+		});
+		var time = '';
+		$('.time').click(function() {
+			date = $('#date').val();
+			time = $(this).val();
+			if (date == '') {
+				alert('날짜를 먼저 선택해 주세요');
+				return false;
+			}
+			$('#ti').html(time);
+		})
+		var reserve = '';
+		$('#reserve_ok')
+				.click(
+						function() {
+							date = $('#date').val();
+							if (date == '') {
+								alert('날짜를 선택해 주세요');
+								return false;
+							}
+							//alert(date);
+							if (date < today) {
+								alert(today + ' 이후로 선택 가능합니다.');
+								time = '';
+								return false;
+							}
+							time = $('#ti').text();
+							if (time == '') {
+								alert('시간을 선택해 주세요');
+								return false;
+							}
+							reserve = date + " " + time;
+
+							var result = confirm('[예약정보]\n환자명 : ${memberVO.name}\n병원/진료과 : '
+									+ name
+									+ '\n의료진 : '
+									+ med_office
+									+ '\n예약시간 : ' + reserve + '\n예약하시겠습니까?');
+
+							if (result) {
+								var id = '${memberVO.id}';
+								var num = $('#docnum').val();
+								var status = 0;
+								var doc = $('#doc').text();
+								var off = $('#off').text();
+								var contents = doc + "/" + off;
+								var reserve_date = reserve;
+								$
+										.ajax({
+											url : "../treatBreakDown/treatWrite",
+											type : "POST",
+											data : {
+												id : id,
+												num : num,
+												status : status,
+												contents : contents,
+												reserve_date : reserve_date
+											},
+											success : function(data) {
+												if (data == '1') {
+													console.log(data);
+													alert('예약이 완료되었습니다.');
+													location.href = "../member/memberNomal";
+												}
+											}
+										});//ajax
+							} else {
+								alert('예약이 취소되었습니다.');
+							}
+
+						});
+
+	});
 </script>
 </head>
 <body>
@@ -428,7 +413,7 @@
 	        		<hr>
 				<!-- 교수 프로필 -->
 				<div class="modal_profile">
-					<img alt="" src="../resources/file/${list.doctorImagesVO.fname}">
+					<img alt="" src="../resources/file/${list.doctorImagesVO.oname}">
 				</div>
 				
 				<!-- 경력/활동 -->
@@ -454,6 +439,11 @@
 				</div>   
 				
 	        </div>
+	        
+				<!-- 진료예약 버튼 -->
+				<div id="btn_box">
+				<a href="../reserve/reserveNomal?name=${list.name}" id="reserve_btn">진료예약</a>
+				</div>       
 	      </div>
     	</div>
  	 </div>
