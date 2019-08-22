@@ -1,5 +1,6 @@
 package com.hospital.community;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,7 +47,11 @@ public class CommunityService implements BoardService{
 		int result = communityDAO.setDelete(num);
 		return result;
 	}
-
+	//여러개 삭제
+	public int setDelete(Integer[] num) throws Exception{
+		List<Integer> list = Arrays.asList(num);
+		return communityDAO.setListDelete(list);
+	}
 	public int setUpdate(CommunityVO communityVO) throws Exception {
 		int result = communityDAO.setUpdate(communityVO);
 		return result;

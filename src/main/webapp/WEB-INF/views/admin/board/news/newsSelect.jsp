@@ -8,6 +8,7 @@
 <title>쌍용백병원::관리자페이지::</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <c:import url="../../../temp/boot.jsp"/>
+  <link href="../resources/css/boardSelect.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -210,6 +211,7 @@
 			var reContents = $('#replyContents').val();
 			var renum = $('#nnum').val();
 			var reid = $('#reid').val();
+			
 			$.ajax({
 				
 				url:"../comments/newsCommentsReply",
@@ -399,8 +401,8 @@
 								    </div>
 						        </div>
 						        <div class="modal-footer">
-								      <button id="updateBtn" data-dismiss="modal">댓글 수정</button>
-						          <button type="button" id="cancleBtn" data-dismiss="modal">취소</button>
+								     <button id="updateBtn" data-dismiss="modal">댓글 수정</button>
+						          	<button type="button" id="cancleBtn" data-dismiss="modal">취소</button>
 						        </div>
 						      </div>
 						      

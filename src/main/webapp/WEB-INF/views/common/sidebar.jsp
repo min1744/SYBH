@@ -114,6 +114,9 @@
             <a class="collapse-item" href="./praise">칭찬합니다 관리</a>
             <a class="collapse-item" href="./qna">질문과답변 관리</a>
             <div class="collapse-divider"></div>
+            <h6 class="collapse-header">COMMUNITY:</h6>
+            <a class="collapse-item" href="./community">커뮤니티 관리</a>
+            <div class="collapse-divider"></div>
           </div>
         </div>
       </li>

@@ -114,7 +114,7 @@
 								</table>
 							</div>
 						</div>
-						<a href="./medicalList">목록</a>
+						<a href="./medicalList" class="btn btn-info">목록</a>
 					</div>
 				</div>
 			</div>

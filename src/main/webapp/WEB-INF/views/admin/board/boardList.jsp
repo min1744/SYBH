@@ -56,19 +56,18 @@
               		<c:when test="${board eq 'notice'}">
               		<div id="controller_div">
               		<!------------ notice ------------>
-         				<input type="button" value="DELETE" id="delete_notice" class="btn btn-danger">
-						<a href="./${board}Write" id="write_btn" class="btn btn-primary">WRITE</a>
+         				<input type="button" value="삭제" id="delete_btn" class="btn btn-danger">
+						<a href="./${board}Write" id="write_btn" class="btn btn-primary">글쓰기</a>
          			</div>
          			</c:when>
          			<c:when test="${board eq 'qna'}">
          				<!------------ qna ------------>
-         				<input type="button" value="DELETE" id="delete_qna" class="btn btn-danger">
-						<a href="./${menu}Write" id="write_btn" class="btn btn-primary">WRITE</a>
+						<a href="./${menu}Write" id="write_btn" class="btn btn-primary">글쓰기</a>
          			</c:when>
          			<c:otherwise>
          			<!------------ community ------------>
-         				<input type="button" value="DELETE" id="delete_community" class="btn btn-danger">
-						<a href="./${board}Write" id="write_btn" class="btn btn-primary">WRITE</a>
+         				<input type="button" value="삭제" id="delete_btn" class="btn btn-danger">
+						<a href="./${board}Write" id="write_btn" class="btn btn-primary">글쓰기</a>
          			</c:otherwise>
          		</c:choose>
          		<c:choose>
@@ -80,17 +79,17 @@
 						<c:choose>
 							<c:when test="${menu eq 'complaint'}">
 								<div id="board_title">
-									<p id="title">건의합니다</p>
+									<p id="title"><h1>건의합니다</h1></p>
 								</div>
 							</c:when>
 							<c:when test="${menu eq 'praise'}">
 								<div id="board_title">
-									<p id="title">칭찬합니다</p>
+									<p id="title"><h1>칭찬합니다</h1></p>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div id="board_title">
-									<p id="title">질문과 답변</p>
+									<p id="title"><h1>질문과 답변</h1></p>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -109,16 +108,16 @@
 						<!------------ notice ------------>
 						<tr>
 							<th><input type="checkbox" id="checkAll"></th>
-							<th style="width: 95px;">번호</th>
-							<th style="width: 510px;">제목</th>
-							<th style="width: 150px;">작성일</th>
-							<th style="width: 100Px;">조회수</th>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성일</th>
+							<th>조회수</th>
 						</tr>
 						</c:when>
 						<c:when test="${board eq 'qna'}">
 						<!------------ qna ------------>
 						<tr>
-							<th><input type="checkbox" id="checkAll"></th>
+							<th>구분</th>
 							<th style="width: 95px;">번호</th>
 							<th style="width: 150px;">구분</th>
 							<th style="width: 510px;">제목</th>
@@ -130,11 +129,11 @@
 						<c:otherwise>
 						<tr>
 							<th><input type="checkbox" id="checkAll"></th>
-							<th style="width: 95px;">번호</th>
-							<th style="width: 510px;">제목</th>
-							<th style="width: 150px;">작성자</th>
-							<th style="width: 150px;">작성일</th>
-							<th style="width: 100Px;">조회수</th>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>조회수</th>
 						</tr>
 						</c:otherwise>
 					</c:choose>
@@ -167,7 +166,7 @@
 							<!------------ qna ------------>
 								<c:forEach items="${list}" var="vo">
 									<tr class="position_2">
-										<td><input type="checkbox" class="check" name="num" value="${vo.num}"></td>
+										<td>-</td>
 										<td class="num">${vo.num}</td>
 										<td class="q_ca">
 												[<c:choose>
@@ -237,7 +236,68 @@
 							</c:otherwise>	
 					</c:choose>
                   </tbody>
+                  
                 </table>
+                <c:choose>
+						<c:when test="${board eq 'qna'}">
+						<div id="paging">
+									<ul class="pagination justify-content-center" >
+										<c:if test="${pager.curBlock>1}">
+											<li class="page-item"><a
+												href="./${menu}?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"
+												id="prev" class="page-link">◀</a></li>
+										</c:if>
+										<c:choose>
+											<c:when test="${pager.totalCount == 0 }">
+												<li class="page-item"><a
+													href="./${menu}?curPage=1&kind=${pager.kind}&search=${pager.search}" class="page-link">1</a></li>
+											</c:when>
+											<c:otherwise>
+												<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+													var="i">
+													<li class="page-item"><a
+														href="./${menu}?curPage=${i}&kind=${pager.kind}&search=${pager.search}" class="page-link">${i}</a></li>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+										<c:if test="${pager.curBlock<pager.totalBlock}">
+											<li class="page-item"><a
+												href="./${menu}?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}"
+												id="next" class="page-link">▶</a></li>
+										</c:if>
+									</ul>
+								</div>
+						</c:when>
+						<c:when test="${board eq 'community'}">
+						<div id="paging">
+									<ul class="pagination justify-content-center" >
+										<c:if test="${pager.curBlock>1}">
+											<li class="page-item"><a
+												href="./${board}?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"
+												id="prev" class="page-link">◀</a></li>
+										</c:if>
+										<c:choose>
+											<c:when test="${pager.totalCount == 0 }">
+												<li class="page-item"><a
+													href="./${board}?curPage=1&kind=${pager.kind}&search=${pager.search}" class="page-link">1</a></li>
+											</c:when>
+											<c:otherwise>
+												<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+													var="i">
+													<li class="page-item"><a
+														href="./${board}?curPage=${i}&kind=${pager.kind}&search=${pager.search}" class="page-link">${i}</a></li>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+										<c:if test="${pager.curBlock<pager.totalBlock}">
+											<li class="page-item"><a
+												href="./${board}?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}"
+												id="next" class="page-link">▶</a></li>
+										</c:if>
+									</ul>
+								</div>
+						</c:when>
+				</c:choose>
               </div>
             </div>
           </div>
@@ -334,9 +394,12 @@
 				});
 				//ajax로 배열을 전송하고자 할때 추가
 				jQuery.ajaxSettings.traditional = true;
-				
+				var board = '${board}';
+				if(board == 'qna'){
+					board = '${menu}';
+				}
 				$.ajax({
-					url : "./noticeListDelete",
+					url : "./"+board+"ListDelete",
 					type : "POST",
 					data : {
 						num : nums

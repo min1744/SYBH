@@ -87,9 +87,10 @@ public class QnAService implements BoardService{
 		
 		pageMaker.makeRow();
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 		map.put("menu", menu);
 		map.put("pager", pageMaker);
+		int totalCount = qnaDAO.getTotalCount(map);
+		pageMaker.makePage(totalCount);
 		
 		return qnaDAO.getList(map);
 	}

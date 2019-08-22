@@ -48,7 +48,14 @@
 		DELETE COMMUNITY WHERE
 		NUM=#{num}
 	</delete>
-
+	<!--여러개 삭제  -->
+	<delete id="setListDelete" parameterType="java.util.List">
+  	delete community where num in
+  	<foreach collection="list" item="item" open="(" separator="," close=")">
+  		#{item}
+  	</foreach>
+  </delete>
+ 
 	<update id="setUpdate" parameterType="CommunityVO">
 		UPDATE COMMUNITY SET
 		TITLE=#{title}, CONTENTS=#{contents} WHERE
