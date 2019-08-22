@@ -67,6 +67,24 @@
 		</interceptor>
 		
 		<!-- 현아  인터셉터 -->
+		<interceptor>
+			<mapping path="/qna/complaintWrite"/>
+			<mapping path="/qna/praiseWrite"/>
+			<mapping path="/qna/qnaWrite"/>
+			<beans:bean class="com.hospital.interceptor.QnaWriteInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/qna/complaintUpdate"/>
+			<mapping path="/qna/praiseUpdate"/>
+			<mapping path="/qna/qnaUpdate"/>
+			<beans:bean class="com.hospital.interceptor.QnaWriteInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/qna/complaintSelect"/>
+			<mapping path="/qna/praiseSelect"/>
+			<mapping path="/qna/qnaSelect"/>
+			<beans:bean class="com.hospital.interceptor.QnaWriteInterceptor"/>
+		</interceptor>
 		
 		<!-- 민근 인터셉터 -->
 		<interceptor>
