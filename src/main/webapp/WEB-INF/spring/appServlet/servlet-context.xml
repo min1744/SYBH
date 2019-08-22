@@ -60,10 +60,17 @@
 			<beans:bean class="com.hospital.interceptor.NewsWriteInterceptor"/>
 		</interceptor>
 		<interceptor>
-		<mapping path="/news/nutritionWrite"/>
-			<mapping path="/news/exerciseWrite"/>
 			<mapping path="/news/diseaseWrite"/>
+			<mapping path="/news/nutritionWrite"/>
+			<mapping path="/news/exerciseWrite"/>
 			<beans:bean class="com.hospital.interceptor.NewsWriteAInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/news/diseaseDelete"/>
+			<mapping path="/news/nutritionDelete"/>
+			<mapping path="/news/exerciseDelete"/>
+			<beans:bean class="com.hospital.interceptor.NewsDeleteInterceptor"/>
 		</interceptor>
 		
 		<!-- 현아  인터셉터 -->
