@@ -106,7 +106,7 @@ $(function() {
 									</div>
 									<div class="float">
 										<span class="writer">작성자</span>
-										 <input class="form-control empty" type="text" id="writer" name="writer" value="admin" readonly>
+										 <input class="form-control empty" type="text" id="writer" name="writer" value="${memberVO.name }" readonly>
 									</div>
 									<div class="form-group" id="contents_box">
 										<span class="contents">sub내용</span>

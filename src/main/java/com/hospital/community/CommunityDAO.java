@@ -37,13 +37,16 @@ public class CommunityDAO implements BoardDAO{
 		System.out.println("comu");
 		return sqlSession.insert(NAMESPACE + "setWrite", communityVO);
 	}
-
+	
 
 	@Override
 	public int setDelete(int num) throws Exception {
 		return sqlSession.delete(NAMESPACE + "setDelete", num);
 	}
-
+	//여러개 삭제
+	public int setListDelete(List<Integer> list) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setListDelete",list);
+	}
 	public int setUpdate(CommunityVO communityVO) throws Exception {
 		return sqlSession.update(NAMESPACE + "setUpdate", communityVO);
 	}

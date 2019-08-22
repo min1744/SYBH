@@ -129,6 +129,33 @@
 						</c:choose>
                   </tbody>
                 </table>
+                <div id="paging">
+									<ul class="pagination justify-content-center" >
+										<c:if test="${pager.curBlock>1}">
+											<li class="page-item"><a
+												href="./${menu}?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}"
+												id="prev" class="page-link">◀</a></li>
+										</c:if>
+										<c:choose>
+											<c:when test="${pager.totalCount == 0 }">
+												<li class="page-item"><a
+													href="./${menu}?curPage=1&kind=${pager.kind}&search=${pager.search}" class="page-link">1</a></li>
+											</c:when>
+											<c:otherwise>
+												<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+													var="i">
+													<li class="page-item"><a
+														href="./${menu}?curPage=${i}&kind=${pager.kind}&search=${pager.search}" class="page-link">${i}</a></li>
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>
+										<c:if test="${pager.curBlock<pager.totalBlock}">
+											<li class="page-item"><a
+												href="./${menu}?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}"
+												id="next" class="page-link">▶</a></li>
+										</c:if>
+									</ul>
+								</div>
               </div>
             </div>
           </div>

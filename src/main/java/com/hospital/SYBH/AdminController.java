@@ -24,6 +24,9 @@ import com.hospital.board.BoardVO;
 import com.hospital.checkup.CheckUpDAO;
 import com.hospital.checkup.CheckUpService;
 import com.hospital.checkup.CheckUpVO;
+import com.hospital.community.CommunityService;
+import com.hospital.community.CommunityVO;
+import com.hospital.community.comments.CommunityCommentsService;
 import com.hospital.medicalTeam.MedicalTeamService;
 import com.hospital.medicalTeam.MedicalTeamVO;
 import com.hospital.member.MemberVO;
@@ -35,6 +38,9 @@ import com.hospital.notice.NoticeService;
 import com.hospital.notice.NoticeVO;
 import com.hospital.pay.PayService;
 import com.hospital.pay.PayVO;
+import com.hospital.qna.QnAService;
+import com.hospital.qna.QnAVO;
+import com.hospital.qna.comments.QnACommentsService;
 import com.hospital.treatbreakdown.TreatBreakDownService;
 import com.hospital.treatbreakdown.TreatBreakDownVO;
 import com.hospital.util.PageMaker;
@@ -59,6 +65,15 @@ public class AdminController {
 	private NewsService newsService;
 	@Inject
 	private NewsCommentsService newsCommentsService;
+	@Inject
+	private QnAService qnaService;
+	@Inject
+	private QnACommentsService qnACommentsService;
+	@Inject
+	private CommunityService communityService;
+	@Inject
+	private CommunityCommentsService communityCommentsService;
+	
 	
 	@RequestMapping(value = "adminIndex", method = RequestMethod.GET)
 	public ModelAndView index(ModelAndView mv) throws Exception {
@@ -458,6 +473,7 @@ public class AdminController {
 		mv.addObject("list",list);
 		mv.addObject("menu","disease");
 		mv.setViewName("admin/board/news/newsList");
+		mv.addObject("pager",pageMaker);
 		return mv;
 	}
 	//select
@@ -594,6 +610,465 @@ public class AdminController {
 			mv.setViewName("admin/board/news/newsUpdate");
 			return mv;
 		}
+		
+	//////////////////////////QNA///////////////////////////////
+		//////////////공통 Write - post
+	@RequestMapping(value = "qnaWrite", method = RequestMethod.POST)
+	public ModelAndView setWrite(QnAVO qnaVO, HttpSession session) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		int result = qnaService.setWrite(qnaVO, session);
+		if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+			mv.setViewName("redirect:./complaint");
+			
+		} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+			mv.setViewName("redirect:./praise");
+		} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+			mv.setViewName("redirect:./qna");
+		} else {
+			mv.addObject("message", "Write Fail");
+			mv.addObject("path", "./complaint");
+			mv.setViewName("common/messageMove");
+		}
+		mv.addObject("board","qna");
+		
+		return mv;
+	}
+	
+	/////////////// 공통 update - post
+	//update - POST
+	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
+	public ModelAndView qnaUpdate(QnAVO qnaVO) throws Exception {
+		
+	ModelAndView mv = new ModelAndView();
+	int result = qnaService.setUpdate(qnaVO);
+	if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+		mv.setViewName("redirect:./complaint");
+	} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+		mv.setViewName("redirect:./praise");
+	} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+		mv.setViewName("redirect:./qna");
+	} else {
+		mv.addObject("message", "Update Fail");
+		mv.addObject("path", "./complaint");
+		mv.setViewName("common/messageMove");
+	}
+	mv.addObject("board","qna");
+	return mv;
+	}
+	
+	//////////////////공통 reply - post
+	//reply
+	
+	//reply - post
+	@RequestMapping(value = "qnaReply", method = RequestMethod.POST)
+	public ModelAndView setReply(QnAVO qnaVO) throws Exception {
+	
+	ModelAndView mv = new ModelAndView();
+	int result = qnaService.setReply(qnaVO);
+	
+	if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+	mv.setViewName("redirect:./complaint");
+	} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+	mv.setViewName("redirect:./praise");
+	} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+	mv.setViewName("redirect:./qna");
+	} else {
+	mv.addObject("message", "Reply Fail");
+	mv.addObject("path", "./complaint");
+	mv.setViewName("common/messageMove");
+	}
+	mv.addObject("board","qna");
+	return mv;
+	}
+	
+	//////////////////원본 글 공통 delete
+	/////////관리자 삭제
+	@RequestMapping(value = "qnaAdminDelete",method = RequestMethod.POST)
+	@ResponseBody
+	public int qnaAdminDelete(QnAVO qnAVO,int ref, HttpSession session)throws Exception{
+		int result = qnaService.setDelete(ref, session);
+		return result;
+	}
+	@RequestMapping(value ="replyAdminDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public int replyAdminDelete(QnAVO qnAVO,int num, HttpSession session)throws Exception{
+		int result =qnaService.replyDelete(num, session);
+		return result;
+	}
+	
+	//delete
+	
+	@RequestMapping(value = "qnaDelete", method = RequestMethod.POST)
+	public ModelAndView setDelete(QnAVO qnaVO, int ref, HttpSession session) throws Exception {
+	
+	ModelAndView mv = new ModelAndView();
+	int result = qnaService.setDelete(ref, session);
+	
+	if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+	mv.setViewName("redirect:./complaint");
+	} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+	mv.setViewName("redirect:./praise");
+	} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+	mv.setViewName("redirect:./qna");
+	} else {
+	mv.addObject("message", "Delete Fail");
+	mv.addObject("path", "./complaint");
+	mv.setViewName("common/messageMove");
+	}
+	mv.addObject("board","qna");
+	return mv;
+	}
+	//////////////////원본 글 공통 delete
+	//delete	
+	@RequestMapping(value = "replyDelete", method = RequestMethod.POST)
+	public ModelAndView replyDelete(QnAVO qnaVO, int num, HttpSession session) throws Exception {
+	
+	ModelAndView mv = new ModelAndView();
+	int result = qnaService.replyDelete(num, session);
+	
+	if(result > 0 && qnaVO.getMenu().equals("complaint")) {
+	mv.setViewName("redirect:./complaint");
+	} else if(result > 0 && qnaVO.getMenu().equals("praise")){
+	mv.setViewName("redirect:./praise");
+	} else if(result > 0 && qnaVO.getMenu().equals("qna")){
+	mv.setViewName("redirect:./qna");
+	} else {
+	mv.addObject("message", "Delete Fail");
+	mv.addObject("path", "./complaint");
+	mv.setViewName("common/messageMove");
+	}
+	mv.addObject("board","qna");
+	return mv;
+	}
+	/////////******건의합니다*********///////
+	//list
+		@RequestMapping(value = "complaint", method = RequestMethod.GET)
+		public ModelAndView complaintList(PageMaker pageMaker, String menu) throws Exception {
+			
+			menu = "complaint";
+			List<QnAVO> list = qnaService.getList(pageMaker, menu);
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("list", list);
+			mv.addObject("pager", pageMaker);
+			mv.addObject("menu", "complaint");
+			mv.setViewName("admin/board/boardList");
+			mv.addObject("board","qna");
+			return mv;
+		}	
+		
+		
+	//write - get
+	@RequestMapping(value = "complaintWrite", method = RequestMethod.GET)
+	public ModelAndView complaintWrite() throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("menu", "complaint");
+		mv.setViewName("admin/board/boardWrite");
+		mv.addObject("board","qna");
+		return mv;
+	}
+	
+	//select
+	@RequestMapping(value = "complaintSelect", method = RequestMethod.GET)
+	public ModelAndView complaintSelect(int num) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+		int totalCount = qnACommentsService.getTotalCount(num);
+		
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("vo", boardVO);
+		mv.addObject("menu", "complaint");
+		mv.setViewName("admin/board/boardSelect");
+		mv.addObject("board","qna");
+		return mv;
+		
+	}
+	
+	//update - get
+	@RequestMapping(value = "complaintUpdate", method = RequestMethod.GET)
+	public ModelAndView complaintUpdate(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		QnAVO qnaVO = qnaService.getSelect(num);
+		mv.addObject("vo", qnaVO);
+		mv.addObject("menu", "complaint");
+		mv.setViewName("admin/board/boardUpdate");
+		mv.addObject("board","qna");	
+		return mv;
+	}
+		
+	//reply
+	@RequestMapping(value = "complaintReply", method = RequestMethod.GET)
+	public ModelAndView setReply(int num) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+		
+		mv.addObject("vo", boardVO);
+		mv.addObject("num", num);
+		mv.addObject("menu", "complaint");
+		mv.setViewName("admin/board/boardReply");
+		mv.addObject("board","qna");
+		return mv;
+	}
+		
+	///////////////////칭찬합니다/////////////////////////
+	//list
+	@RequestMapping(value = "praise", method = RequestMethod.GET)
+	public ModelAndView praiseList(PageMaker pageMaker, String menu) throws Exception {
+		
+		menu = "praise";
+		List<QnAVO> list = qnaService.getList(pageMaker, menu);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.addObject("pager", pageMaker);
+		mv.addObject("menu", "praise");
+		mv.setViewName("admin/board/boardList");
+		mv.addObject("board","qna");	
+		return mv;
+			
+	}
+		
+	//write
+	@RequestMapping(value = "praiseWrite", method = RequestMethod.GET)
+	public ModelAndView praiseWrite() throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("menu", "praise");
+		mv.setViewName("admin/board/boardWrite");
+		mv.addObject("board","qna");	
+		return mv;
+	}
+		
+	//select
+	@RequestMapping(value = "praiseSelect", method = RequestMethod.GET)
+	public ModelAndView praiseSelect(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+		int totalCount = qnACommentsService.getTotalCount(num);
+		
+		mv.addObject("totalCount", totalCount);
+		mv.addObject("vo", boardVO);
+		mv.addObject("menu", "praise");
+		mv.setViewName("admin/board/boardSelect");
+		mv.addObject("board","qna");	
+		return mv;
+	}
+		
+	//update - get
+	@RequestMapping(value = "praiseUpdate", method = RequestMethod.GET)
+	public ModelAndView praiseUpdate(int num) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		QnAVO qnaVO = qnaService.getSelect(num);
+		mv.addObject("vo", qnaVO);
+		mv.addObject("menu", "praise");
+		mv.setViewName("admin/board/boardUpdate");
+		mv.addObject("board","qna");
+		return mv;
+	}
+		
+			
+		
+	//reply
+	@RequestMapping(value = "praiseReply", method = RequestMethod.GET)
+	public ModelAndView praiseReply(int num) throws Exception {
+			
+		ModelAndView mv = new ModelAndView();
+		BoardVO boardVO = qnaService.getSelect(num);
+			
+		mv.addObject("vo", boardVO);
+		mv.addObject("num", num);
+		mv.addObject("menu", "praise");
+		mv.setViewName("admin/board/boardReply");
+		mv.addObject("board","qna");
+		return mv;
+	}
+	
+	/////////**************질문과 답변//////////////////
+	//list
+		@RequestMapping(value = "qna", method = RequestMethod.GET)
+		public ModelAndView qna(PageMaker pageMaker, String menu) throws Exception {
+			
+			menu = "qna";
+			List<QnAVO> list = qnaService.getList(pageMaker, menu);
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("list", list);
+			mv.addObject("pager", pageMaker);
+			mv.addObject("menu", "qna");
+			mv.setViewName("admin/board/boardList");
+			mv.addObject("board","qna");		
+			return mv;
+					
+		}
+		
+		//write
+		@RequestMapping(value = "qnaWrite", method = RequestMethod.GET)
+		public ModelAndView setWrite() throws Exception {
+			
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("admin/board/boardWrite");
+			mv.addObject("board","qna");
+			return mv;
+		}
+		
+		
+		//select
+		@RequestMapping(value = "qnaSelect", method = RequestMethod.GET)
+		public ModelAndView qnaSelect(int num) throws Exception {
+					
+			ModelAndView mv = new ModelAndView();
+			BoardVO boardVO = qnaService.getSelect(num);
+			int totalCount = qnACommentsService.getTotalCount(num);
+			
+			mv.addObject("totalCount", totalCount);
+			mv.addObject("vo", boardVO);
+			mv.addObject("menu", "qna");
+			mv.setViewName("admin/board/boardSelect");
+			mv.addObject("board","qna");	
+			return mv;
+					
+		}
+		
+		
+		//update - get
+		@RequestMapping(value = "qnaUpdate", method = RequestMethod.GET)
+		public ModelAndView qnaUpdate(int num) throws Exception {
+				
+			ModelAndView mv = new ModelAndView();
+			QnAVO qnaVO = qnaService.getSelect(num);
+			mv.addObject("vo", qnaVO);
+			mv.addObject("menu", "qna");
+			mv.setViewName("admin/board/boardUpdate");
+			mv.addObject("board","qna");	
+			return mv;
+		}
+		
+		
+		//reply
+		@RequestMapping(value = "qnaReply", method = RequestMethod.GET)
+		public ModelAndView qnaReply(int num) throws Exception {
+					
+			ModelAndView mv = new ModelAndView();
+			BoardVO boardVO = qnaService.getSelect(num);
+					
+			mv.addObject("vo", boardVO);
+			mv.addObject("num", num);
+			mv.addObject("menu", "qna");
+			mv.setViewName("admin/board/boardReply");
+			mv.addObject("board","qna");
+			return mv;
+		}
+	
+	//////////////////*******커뮤니티************/////////////
+		@RequestMapping(value = "communityListDelete", method = RequestMethod.POST)
+		@ResponseBody
+		public int communityListDelete(Integer[] num) throws Exception{
+			return communityService.setDelete(num);
+		}
+		
+		// ** 게시판 - 목록 페이지 이동
+		@RequestMapping(value = "community", method = RequestMethod.GET)
+		public ModelAndView getCommuList(PageMaker pageMaker) throws Exception {
+
+			// ** 게시판 - 목록 조회
+			List<BoardVO> lists = communityService.getList(pageMaker);
+			ModelAndView mv = new ModelAndView();
+			
+			mv.addObject("list", lists);
+			mv.addObject("pager", pageMaker);
+			mv.setViewName("admin/board/boardList");
+			mv.addObject("board","community");
+			return mv;
+		}
+
+		// ** 게시판 - 작성 페이지 이동
+		// ModelAndView 리턴 타입 검색된 Model 데이터와 View 이름을 모두 저장하여 리턴
+		@RequestMapping(value = "communityWrite", method = RequestMethod.GET)
+		public ModelAndView setCommuWrite() throws Exception {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("admin/board/boardWrite");
+			mv.addObject("board","community");
+			return mv;
+
+		}
+
+		// ** 게시판 - 등록
+		@RequestMapping(value = "communityWrite", method = RequestMethod.POST)
+		public ModelAndView setCommuWrite(CommunityVO communityVO, HttpSession session) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			int result = communityService.setWrite(communityVO, session);
+			if (result > 0) {
+				mv.setViewName("redirect:./community");
+				mv.addObject("board","community");
+
+			} else {
+				mv.addObject("message", "Write Fail");
+				mv.addObject("path", "./community");
+				mv.setViewName("common/messageMove");
+			}
+			return mv;
+
+		}
+
+		// ** 게시판 - 상세 페이지 이동
+		@RequestMapping(value = "communitySelect", method = RequestMethod.GET)
+		public ModelAndView getCommuSelect(int num) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			BoardVO boardVO = communityService.getSelect(num);
+			int totalCount = communityCommentsService.getTotalCount(num);
+			
+			mv.addObject("totalCount", totalCount);
+			mv.addObject("vo", boardVO);
+			mv.setViewName("admin/board/boardSelect");
+			mv.addObject("board","community");
+			return mv;
+		}
+
+		// ** 게시판 - 삭제 *
+		// String 리턴 타입 완벽한 View 이름을 문자열로 리턴
+		@RequestMapping(value = "communityDelete", method = RequestMethod.POST)
+		public String setCommuDelete(int num, HttpSession session) throws Exception {
+			int result = communityService.setDelete(num, session);
+			return "redirect:./community";
+
+		}
+		//관리자 삭제
+		@RequestMapping(value = "adminCommunityDelete", method = RequestMethod.POST)
+		@ResponseBody
+		public int adminCommuDelete(int num,HttpSession session) throws Exception{
+			return communityService.setDelete(num, session);
+		}
+
+		// ** 게시판 - 수정 페이지 이동
+		@RequestMapping(value = "communityUpdate", method = RequestMethod.GET)
+		public ModelAndView setCommuUpdate(int num) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			CommunityVO communityVO = communityService.getSelect(num);
+			int result = communityService.setUpdate(communityVO);
+			mv.addObject("vo", communityVO);
+			mv.addObject("result", result);
+			mv.setViewName("admin/board/boardUpdate");
+			mv.addObject("board","community");
+			return mv;
+		}
+
+		// ** 게시판 - 수정
+		@RequestMapping(value = "communityUpdate", method = RequestMethod.POST)
+		public ModelAndView setCommuUpdate(CommunityVO communityVO) throws Exception {
+			ModelAndView mv = new ModelAndView();
+			int result = communityService.setUpdate(communityVO);
+			mv.setViewName("redirect:./community");
+			return mv;
+		}	
+	
+	
+	
+	
 	
 	/*재혁 작업 끝	*/
 	

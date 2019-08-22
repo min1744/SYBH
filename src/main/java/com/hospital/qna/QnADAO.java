@@ -45,9 +45,9 @@ public class QnADAO implements BoardDAO{
 	}
 	
 	//totalCount
-	@Override
-	public int getTotalCount(PageMaker pageMaker) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"getCount", pageMaker);
+	
+	public int getTotalCount(Map<String, Object> map) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"getCount", map);
 	}
 	
 	//write
@@ -102,6 +102,12 @@ public class QnADAO implements BoardDAO{
 		return 0;
 	}
 
+	@Override
+	public int getTotalCount(PageMaker pageMaker) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	
 	
 

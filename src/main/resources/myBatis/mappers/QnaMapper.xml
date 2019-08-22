@@ -133,20 +133,21 @@
   
   
   <!-- totalCount -->
-  <select id="getCount" parameterType="PageMaker" resultType="Integer">
+  <select id="getCount" parameterType="java.util.Map" resultType="Integer">
   	select count(num) from qna
+  	where menu=#{menu} and
   	<choose>
   			<when test="kind == 1">
-  				where title
+  				title
   			</when>
   			<when test="kind == 2">
-  				where writer
+  				writer
   			</when>
   			<otherwise>
-  				where contents
+  				contents
   			</otherwise>
   		</choose>
-  			like '%'||#{search}||'%'
+  			like '%'||#{pager.search}||'%'
   </select>
   
   
