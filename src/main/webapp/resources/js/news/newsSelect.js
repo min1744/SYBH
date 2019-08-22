@@ -28,7 +28,7 @@ $(function() {
 		}
 		
 		
-///////////////////////////////////////////// 댓글 관련▼
+		///////////////////////////////////////////// 댓글 관련▼
 		
 		//글자수 textarea 체크
 		$('.c_area').keyup(function (e){
@@ -44,6 +44,7 @@ $(function() {
 		
 		
 		var curPage = 1;
+		var nnum = $('#num').val();
 		
 		getList(curPage); //함수호출
 		
@@ -51,23 +52,32 @@ $(function() {
 		$('#updateBtn').click(function() {
 			var upContents = $('#updateContents').val();
 			var cnumId = $('#cnum').val();
-			$.ajax({
+			
+			if(upContents == '') {
 				
-				url:"../comments/newsCommentsUpdate",
-				type:"POST",
-				data: {
-					cnum : cnumId,
-					contents : upContents
-				},
-				success:function(data) {
-					console.log(data);
-					if(data=='1') {
-						getList(1);
-					} else {
-						alert('수정실패');
+				alert('수정할 내용을 입력해주세요.');
+			} else {
+				
+				$.ajax({
+					
+					url:"../comments/newsCommentsUpdate",
+					type:"POST",
+					data: {
+						cnum : cnumId,
+						contents : upContents
+					},
+					success:function(data) {
+						console.log(data);
+						if(data=='1') {
+							getList(1);
+						} else {
+							alert('수정실패');
+						}
 					}
-				}
-			});
+				});
+				
+			}
+			
 		});
 		$('.commentslist').on('click', '.c_update', function() {
 			var id = $(this).attr('title');
@@ -81,31 +91,39 @@ $(function() {
 			var num = $('#nnum').val();
 			var id = $('#c_writer').text();
 			var contents = $('.c_area').val();
-			$.ajax({
+			
+			if(contents == '') {
 				
-				url:"../comments/newsCommentsWrite",
-				type:"POST",
-				data: {
-					num : num,
-					id : id,
-					contents : contents
-				},
-				success:function(data) {
-					if(data=='1') {
-						location.reload();
-						getList(1);
-					} else {
-						alert('등록실패');
+				alert('내용을 입력해주세요');
+			} else {
+				
+				$.ajax({
+					
+					url:"../comments/newsCommentsWrite",
+					type:"POST",
+					data: {
+						num : num,
+						id : id,
+						contents : contents
+					},
+					success:function(data) {
+						if(data=='1') {
+							location.reload();
+							getList(1);
+						} else {
+							alert('등록실패');
+						}
 					}
-				}
-			});
+				});
+				
+			}
 			
 		});
 		//등록하기 코드 끝
 		
 		//리스트 가져오기
 		function getList(curPage) {
-			$.get("../comments/newsCommentsList?num=${vo.num}&curPage="+curPage,
+			$.get("../comments/newsCommentsList?num="+nnum+"&curPage="+curPage,
 					function(data) {
 						if (curPage == 1) {
 							$('.commentslist').html(data);
@@ -188,24 +206,33 @@ $(function() {
 			var reContents = $('#replyContents').val();
 			var renum = $('#nnum').val();
 			var reid = $('#reid').val();
-			$.ajax({
+			
+			if(reContents == '') {
 				
-				url:"../comments/newsCommentsReply",
-				type:"POST",
-				data: {
-					cnum : recnum2,
-					num : renum,
-					id : reid,
-					contents : reContents
-				},
-				success:function(data) {
-					if(data=='1') {
-						getList(1);
-					} else {
-						alert('등록실패');
+				alert('내용을 입력해주세요.');
+			} else {
+				
+				$.ajax({
+					
+					url:"../comments/newsCommentsReply",
+					type:"POST",
+					data: {
+						cnum : recnum2,
+						num : renum,
+						id : reid,
+						contents : reContents
+					},
+					success:function(data) {
+						if(data=='1') {
+							getList(1);
+						} else {
+							alert('등록실패');
+						}
 					}
-				}
-			});
+				});
+				
+			}
+			
 		});
 		
 		var likecnum = 0;

@@ -91,6 +91,16 @@
 			<mapping path="/qna/qnaReply"/>
 			<beans:bean class="com.hospital.interceptor.QnaReplyInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/comments/newsCommentsWrite"/>
+			<mapping path="/comments/commuCommentsWrite"/>
+			<beans:bean class="com.hospital.interceptor.CommentInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/comments/newsCommentsUpdate"/>
+			<mapping path="/comments/commuCommentsUpdate"/>
+			<beans:bean class="com.hospital.interceptor.CommentInterceptor"/>
+		</interceptor>
 		
 		<!-- 민근 인터셉터 -->
 		<interceptor>
