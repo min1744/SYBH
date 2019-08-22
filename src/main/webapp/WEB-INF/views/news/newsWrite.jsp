@@ -7,9 +7,9 @@
 <c:import url="../common/all.jsp" />
 <link href="../resources/css/boardWrite.css" rel="stylesheet">
 <c:import url="../temp/boot.jsp" />
+<script type="text/javascript" src="../resources/js/news/newsWrite.js"></script>
 <c:import url="../temp/summernote.jsp" />
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
-<script type="text/javascript" src="../resources/js/news/newsWrite.js"></script>
 </head>
 <body>
 <!-- header 추가 -->
@@ -33,7 +33,7 @@
 <div id="board_box">
 	
 	<div id="form_box">
-		<form id="frm" action="./newsWrite" method="post" enctype="multipart/form-data">
+		<form id="frm" action="./newsWrite" method="post" enctype="multipart/form-data" name="boardform">
 		<c:choose>
 			<c:when test="${menu eq 'disease'}">
 			<input type="hidden" name="menu" value="disease">
@@ -54,7 +54,7 @@
 		 <span class="writer">작성자</span>
  		 <input class="form-control" type="text" id="writer" name="writer" value="${memberVO.name}" readonly>
 		</div>
-		<div class="form-group" id="contents_box">
+		<div class="form-group" id="contents_sub">
 		  <span class="contents">sub</span>
  		 <textarea class="form-control" rows="5" cols="15" id="sub_contents" name="sub_contents"></textarea>
 		</div>

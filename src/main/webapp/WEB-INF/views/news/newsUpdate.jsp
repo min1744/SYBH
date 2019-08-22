@@ -35,7 +35,7 @@
 <div id="board_box">
 	
 	<div id="form_box">
-		<form id="frm" action="./newsUpdate" method="post" enctype="multipart/form-data">
+		<form id="frm" action="./newsUpdate" method="post" enctype="multipart/form-data" name="boardform">
 		<input type="hidden" name="num" value="${newsVO.num}">
 		<input type="hidden" name="menu" value="${newsVO.menu}">
 		<div class="float">
