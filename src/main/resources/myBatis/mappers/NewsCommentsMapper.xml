@@ -49,11 +49,25 @@
   </insert>
   
   
+  <resultMap type="NewsCommentsVO" id="newsCommentsResult">
+	 <id property="cnum" column="cnum"/>
+	 <result property="num" column="num"/>
+	 <result property="id" column="id"/>
+	 <result property="contents" column="contents"/>
+	 <result property="reg_date" column="reg_date"/>
+	 <result property="ref" column="ref"/>
+	 <result property="step" column="step"/>
+	 <result property="depth" column="depth"/>
+	 <result property="like_cnt" column="like_cnt"/>
+	 <result property="grade" column="grade"/>
+ </resultMap>
+  
+  
     <!-- list -->
-  <select id="getList" parameterType="java.util.Map" resultType="NewsCommentsVO">
+  <select id="getList" parameterType="java.util.Map" resultMap="newsCommentsResult">
 	select * from
 	(select rownum R, N.* from
-	(select * from NewsComments where num=#{num} order by ref desc, step asc) N)
+	(select N.*, M.grade from NewsComments N inner join member M on(N.id=M.id) where num=#{num} order by ref desc, step asc) N)
 	where R between #{pager.startRow} and #{pager.lastRow}
   </select>
   

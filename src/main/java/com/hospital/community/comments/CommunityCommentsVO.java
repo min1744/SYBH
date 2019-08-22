@@ -11,7 +11,16 @@ public class CommunityCommentsVO {
 	private int step;
 	private int depth;
 	private int like_cnt;
+	private int grade;
 	
+	
+	
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
 	public int getCcnum() {
 		return ccnum;
 	}

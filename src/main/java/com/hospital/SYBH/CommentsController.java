@@ -129,6 +129,7 @@ public class CommentsController {
 				
 		ModelAndView mv = new ModelAndView();
 		List<NewsCommentsVO> list = newsCommentsService.getList(num, pageMaker);
+		System.out.println(list);
 		int totalCount = newsCommentsService.getTotalCount(num);
 		mv.addObject("list", list);
 		mv.addObject("totalCount", totalCount);

@@ -15,9 +15,14 @@
 						<c:forEach begin="1" end="${list.depth}">
 							<img class="c_reicon" width="20px" src="../resources/images/reply.png" style="transform: rotate(-180deg);">
 						</c:forEach>
-						<span class="c_list_writer">
-						${list.id}
-						</span>
+						<c:choose>
+							<c:when test="${list.grade eq '2'}">
+								<span class="c_list_writer">관리자</span>
+							</c:when>
+							<c:otherwise>
+								<span class="c_list_writer">${list.id}</span>
+							</c:otherwise>
+						</c:choose>
 						<span class="c_date">
 						${list.reg_date}
 						</span>
