@@ -112,23 +112,31 @@ $(function() {
 		$('#updateBtn').click(function() {
 			var upContents = $('#updateContents').val();
 			var ccnumId = $('#ccnum').val();
-			$.ajax({
+			
+			if(upContents == '') {
 				
-				url:"../comments/commuCommentsUpdate",
-				type:"POST",
-				data: {
-					ccnum : ccnumId,
-					contents : upContents
-				},
-				success:function(data) {
-					console.log(data);
-					if(data=='1') {
-						getList(1);
-					} else {
-						alert('수정실패');
+				alert('수정할 내용을 입력해주세요.');
+				
+			} else {
+				
+				$.ajax({
+					
+					url:"../comments/commuCommentsUpdate",
+					type:"POST",
+					data: {
+						ccnum : ccnumId,
+						contents : upContents
+					},
+					success:function(data) {
+						console.log(data);
+						if(data=='1') {
+							getList(1);
+						} else {
+							alert('수정실패');
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 		$('.commentslist').on('click', '.c_update', function() {
 			var id = $(this).attr('title');
@@ -142,24 +150,33 @@ $(function() {
 			var num = $('#c_num').val();
 			var id = $('#c_writer').text();
 			var contents = $('.c_area').val();
-			$.ajax({
+			
+			if(contents == '') {
 				
-				url:"../comments/commuCommentsWrite",
-				type:"POST",
-				data: {
-					num : num,
-					id : id,
-					contents : contents
-				},
-				success:function(data) {
-					if(data=='1') {
-						location.reload();
-						getList(1);
-					} else {
-						alert('등록실패');
+				alert('내용을 입력해주세요');
+			} else {
+				
+				$.ajax({
+					
+					url:"../comments/commuCommentsWrite",
+					type:"POST",
+					data: {
+						num : num,
+						id : id,
+						contents : contents
+					},
+					success:function(data) {
+						if(data=='1') {
+							location.reload();
+							getList(1);
+						} else {
+							alert('등록실패');
+						}
 					}
-				}
-			});
+				});
+				
+			}
+			
 			
 		});
 		//등록하기 코드 끝
@@ -251,24 +268,34 @@ $(function() {
 			var reContents = $('#replyContents').val();
 			var renum = $('#c_num').val();
 			var reid = $('#reid').val();
-			$.ajax({
+			
+			if(reContents == '') {
 				
-				url:"../comments/commuCommentsReply",
-				type:"POST",
-				data: {
-					ccnum : reccnum2,
-					num : renum,
-					id : reid,
-					contents : reContents
-				},
-				success:function(data) {
-					if(data=='1') {
-						getList(1);
-					} else {
-						alert('등록실패');
+				alert('내용을 입력해주세요.');
+				
+			} else {
+				
+				$.ajax({
+					
+					url:"../comments/commuCommentsReply",
+					type:"POST",
+					data: {
+						ccnum : reccnum2,
+						num : renum,
+						id : reid,
+						contents : reContents
+					},
+					success:function(data) {
+						if(data=='1') {
+							getList(1);
+						} else {
+							alert('등록실패');
+						}
 					}
-				}
-			});
+				});
+				
+			}
+			
 		});
 		
 		var likeccnum = 0;
