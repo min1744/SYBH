@@ -21,14 +21,22 @@ public class NoticeWriteInterceptor extends HandlerInterceptorAdapter{
 		if(method.equals("GET")) {
 			
 			HttpSession session = request.getSession();
-			MemberVO memberVO = (MemberVO)session.getAttribute("member");
+			MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
 			Map<String, Object> map = modelAndView.getModel();
-			BoardVO boardVO = (BoardVO)map.get("vo");
+			BoardVO boardVO = (BoardVO)map.get("boardVO");
+			String writer = "";
+			String grade = "1";
+			try {
+				writer = memberVO.getId();
+				grade = Integer.toString(memberVO.getGrade());
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			
-			if(!memberVO.getId().equals(boardVO.getWriter())) {
+			if(!grade.equals("2")) {
 				modelAndView.addObject("message", "No Access");
 				modelAndView.addObject("path", "./"+(String)map.get("board")+"List");
-				map.remove("vo");
+				map.remove("boardVO");
 				modelAndView.setViewName("common/messageMove");
 			}
 		}

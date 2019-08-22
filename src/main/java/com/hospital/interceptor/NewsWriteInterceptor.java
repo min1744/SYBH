@@ -39,8 +39,6 @@ public class NewsWriteInterceptor extends HandlerInterceptorAdapter{
 				modelAndView.setViewName("common/messageMove");
 			}
 		}
-		
-			
 				
 	}
 
