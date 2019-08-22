@@ -116,6 +116,16 @@
 			<beans:bean class="com.hospital.interceptor.AdminInterceptor"></beans:bean>
 		</interceptor>
 		<!-- 전묵 인터셉터 -->
+		<interceptor>
+			<mapping path="/community/*" />
+			<beans:bean
+				class="com.hospital.interceptor.CommunityInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/community/communityUpdate" />
+			<beans:bean
+				class="com.hospital.interceptor.CommunityUpdateInterceptor" />
+		</interceptor>
 	</interceptors>
 	
 	
