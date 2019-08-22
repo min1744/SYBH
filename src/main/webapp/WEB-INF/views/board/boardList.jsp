@@ -310,17 +310,15 @@
 				</div>
 				<c:choose>
 					<c:when test="${board eq 'notice'}">
-					<!------------ notice && commu ------------>
+					<!------------ notice ------------>
 					<form id="frm" action="./${board}List">
 						<div id="search_box">
+							<input type="hidden" id="kind" value="${pager.kind}">
 							<select name="kind" id="select">
-								<option value="1">제목</option>
-
-								<option value="2">내용</option>
-
-
+								<option value="1" id="title_option">제목</option>
+								<option value="3" id="contents_option">내용</option>
 							</select> <input type="text" name="search" id="search">
-							<button id="btn">검색</button>
+							<input type="button" id="btn" value="검색">
 						</div>
 					</form>
 					</c:when>
@@ -328,12 +326,14 @@
 					<!------------ qna ------------>
 					<form id="frm" action="./${menu}">
 						<div id="search_box">
+							<input type="hidden" id="kind" value="${pager.kind}">
 							<select name="kind" id="select">
-								<option value="1">제목</option>
-								<option value="2">작성자</option>
-								<option value="3">내용</option>
-							</select> <input type="text" name="search" id="search">
-							<button id="btn">검색</button>
+								<option value="1" id="title_option">제목</option>
+								<option value="2" id="writer_option">작성자</option>
+								<option value="3" id="contents_option">내용</option>
+							</select>
+							<input type="text" name="search" id="search" value="${pager.search}">
+							<input type="button" id="btn" value="검색">
 						</div>
 					</form>
 					</c:when>
@@ -341,12 +341,13 @@
 					<!------------ community ------------>
 					<form id="frm" action="./${board}List">
 						<div id="search_box">
+							<input type="hidden" id="kind" value="${pager.kind}">
 							<select name="kind" id="select">
-								<option value="1">제목</option>
-								<option value="2">작성자</option>
-								<option value="3">내용</option>
+								<option value="1" id="title_option">제목</option>
+								<option value="2" id="writer_option">작성자</option>
+								<option value="3" id="contents_option">내용</option>
 							</select> <input type="text" name="search" id="search">
-							<button id="btn">검색</button>
+							<input type="button" id="btn" value="검색">
 						</div>
 					</form>
 					</c:otherwise>
@@ -354,7 +355,6 @@
 			</div>
 		</div>
 	</div>
-
 <!-- footer 추가 -->
 <c:import url="../common/footer.jsp" />
 </body>

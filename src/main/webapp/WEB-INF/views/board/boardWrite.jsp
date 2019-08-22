@@ -71,8 +71,15 @@
 									type="text" id="q_title" value="${vo.title}" name="title">
 							</div>
 							<div class="float">
-								<span class="writer">작성자</span> <input class="form-control"
-									type="text" id="q_writer" name="writer" value="${memberVO.id}" readonly>
+								<span class="writer">작성자</span>
+								<c:choose>
+									<c:when test="${memberVO.grade eq 2}">
+										<input class="form-control" type="text" id="q_writer" name="writer" value="관리자" readonly>
+									</c:when>
+									<c:otherwise>
+										<input class="form-control" type="text" id="q_writer" name="writer" value="${memberVO.id}" readonly>
+									</c:otherwise>
+								</c:choose>
 							</div>
 								<div class="float">
 									<span class="category">구분</span> 

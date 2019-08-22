@@ -111,23 +111,26 @@
   
   
   <!-- list -->
-  <select id="getList" parameterType="java.util.Map" resultType="QnAVO">
+  <select id="getList" parameterType="Map" resultType="QnAVO">
   	select * from
   	(select rownum R, Q.* from
-  	(select * from qna
+  	(select * from qna where ref in
+  	(select ref from qna
   	where menu=#{menu} and 
   	<choose>
-  			<when test="kind == 1">
-  				title
-  			</when>
-  			<when test="kind == 2">
-  				writer
-  			</when>
-  			<otherwise>
-  				contents
-  			</otherwise>
-  		</choose>
-  	like '%'||#{pager.search}||'%' order by ref desc, step asc) Q)
+		<when test="pager.kind == 2">
+			writer
+		</when>
+		<when test="pager.kind == 3">
+			contents
+		</when>
+		<otherwise>
+			title
+		</otherwise>
+	</choose>
+  	like '%'||#{pager.search}||'%')
+  	order by ref desc, step asc)
+  	Q)
   	where R between #{pager.startRow} and #{pager.lastRow}
   </select>
   
