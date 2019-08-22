@@ -42,10 +42,7 @@
   	where fix != 1 and
   	
   <choose>
-  		<when test="kind == 1">
-  			title
-  		</when>
-  		<when test="kind == 2">
+  		<when test="kind == 3">
   			 contents
   		</when>
   		<otherwise>
@@ -73,14 +70,11 @@ select count(fix) from notice where fix=1
   	select count(num) from notice
   	where
   	<choose>
-  		<when test="kind==1">
-  			 title 		
-  		</when>
-  		<when test="kind==2">
-  			 writer
+  		<when test="kind==3">
+  			 contents
   		</when>
   		<otherwise>
-  			 contents
+  			title
   		</otherwise>
   	</choose>
 	  like '%' || #{search} || '%'

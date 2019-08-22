@@ -84,8 +84,9 @@ public class QnAService implements BoardService{
 	
 	//list
 	public List<QnAVO> getList(PageMaker pageMaker, String menu) throws Exception {
-		
 		pageMaker.makeRow();
+		int totalCount = qnaDAO.getTotalCount(pageMaker);
+		pageMaker.makePage(totalCount);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("menu", menu);
 		map.put("pager", pageMaker);
