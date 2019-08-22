@@ -110,8 +110,13 @@
 								</c:when>
 								<c:when test="${board eq 'community'}">
 									<div class="float">
-										<span class="writer">작성자</span> <input class="form-control"
-											type="text" id="writer" name="writer" value="${memberVO.id}" readonly>
+										<span class="writer">작성자</span>
+										<c:if test="${memberVO.grade eq 1}">
+										 <input class="form-control" type="text" id="writer" name="writer" value="${memberVO.id}" readonly>
+										</c:if>
+										<c:if test="${memberVO.grade eq 2}">
+										 <input class="form-control" type="text" id="writer" name="writer" value="${memberVO.name}" readonly>
+										</c:if>
 									</div>
 								</c:when>
 							</c:choose>
