@@ -54,6 +54,10 @@
 		  <span class="contents">main</span>
  		 <textarea class="form-control" rows="5" cols="15" id="contents" name="main_contents">${newsVO.main_contents}</textarea>
 		</div>
+		<div id="info_box">
+			<img src="../resources/images/info.png">
+			<span>썸네일에 등록할 이미지를 첨부해주세요.</span>
+		</div>
 		<div class="form-group" id="box">
 				<p>${newsVO.newsImagesVO.oname} <span id="${newsVO.newsImagesVO.fnum}" title="${newsVO.newsImagesVO.fname}" class="fdel" style="cursor: pointer;">X</span>
 			<div id="files"></div>
