@@ -32,6 +32,7 @@
 </style>
 <script type="text/javascript">
 $(function() {
+	
 	var f = document.boardform;
 	$("#write").click(function() {
 	//다른 input들 검증
