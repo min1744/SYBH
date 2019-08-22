@@ -41,8 +41,8 @@ public class MemberService {
 	//일반회원 login
 	public HashMap<String, Object> login(MemberVO memberVO) throws Exception{
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		//int loginCheck = memberDAO.loginCheck(memberVO.getId());
-		//if(loginCheck > 0) {
+		int loginCheck = memberDAO.loginCheck(memberVO.getId());
+		if(loginCheck > 0) {
 			memberVO = memberDAO.login(memberVO);
 			if(memberVO != null) {
 				int result = memberDAO.setLoginStatus(memberVO.getId());
@@ -86,10 +86,10 @@ public class MemberService {
 				}
 			}
 			map.put("memberVO", memberVO);
-			/*map.put("loginCheck", loginCheck);
+			map.put("loginCheck", loginCheck);
 		} else {
 			throw new Exception();
-		}*/
+		}
 		
 		return map;
 	}

@@ -197,17 +197,17 @@ public class MemberController {
 	public ModelAndView login(MemberVO memberVO, HttpSession session, ModelAndView mv) throws Exception{
 		HashMap<String, Object> map = memberService.login(memberVO);
 		memberVO = (MemberVO)map.get("memberVO");
-		//int loginCheck = (Integer)map.get("loginCheck");
+		int loginCheck = (Integer)map.get("loginCheck");
 		if(memberVO != null) {
-			//if(loginCheck == 2) {
+			if(loginCheck == 2) {
 				session.setAttribute("memberVO", memberVO);
 				session.setAttribute("variety", "member");
 				mv.setViewName("redirect:../");
-			/*} else {
+			} else {
 				mv.addObject("message", "다른 컴퓨터에서 사용하고 있는 아이디입니다.");
 				mv.addObject("path", "../member/memberLogin");
 				mv.setViewName("common/messageMove");
-			}*/
+			}
 		} else {
 			mv.addObject("message", "로그인 실패하셨습니다.");
 			mv.addObject("path", "../member/memberLogin");
