@@ -85,6 +85,12 @@
 			<mapping path="/qna/qnaSelect"/>
 			<beans:bean class="com.hospital.interceptor.QnaWriteInterceptor"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/qna/complaintReply"/>
+			<mapping path="/qna/praiseReply"/>
+			<mapping path="/qna/qnaReply"/>
+			<beans:bean class="com.hospital.interceptor.QnaReplyInterceptor"/>
+		</interceptor>
 		
 		<!-- 민근 인터셉터 -->
 		<interceptor>

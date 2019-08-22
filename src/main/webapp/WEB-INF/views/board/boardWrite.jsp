@@ -71,8 +71,16 @@
 									type="text" id="q_title" value="${vo.title}" name="title">
 							</div>
 							<div class="float">
+							<c:choose>
+								<c:when test="${memberVO.grade eq '1'}">
 								<span class="writer">작성자</span> <input class="form-control"
 									type="text" id="q_writer" name="writer" value="${memberVO.id}" readonly>
+								</c:when>
+								<c:when test="${memberVO.grade eq '2'}">
+								<span class="writer">작성자</span> <input class="form-control"
+									type="text" id="q_writer" name="writer" value="관리자" readonly>
+								</c:when>
+							</c:choose>
 							</div>
 								<div class="float">
 									<span class="category">구분</span> 
@@ -98,7 +106,7 @@
 								<c:when test="${board eq 'notice'}">
 									<div class="float">
 										<span class="writer">작성자</span> <input class="form-control"
-											type="text" id="writer" name="writer" value="${memberVO.name}" readonly>
+											type="text" id="writer" name="writer" value="관리자" readonly>
 									</div>
 								</c:when>
 								<c:when test="${board eq 'community'}">
