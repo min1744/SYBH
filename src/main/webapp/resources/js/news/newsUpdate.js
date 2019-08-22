@@ -19,10 +19,13 @@
 		      alert('Main내용을 입력해주세요.');
 		      return false;
 		   }
+		   var check = $('.fdel').attr('title');
+		   if(!check){
 		   str = f.add.value;
-		   if(!str){
-		      alert('썸네일 이미지를 넣어주세요');
-		      return false;
+			   if(!str){
+			      alert('썸네일 이미지를 넣어주세요');
+			      return false;
+			   }
 		   }
 		   $("#frm").submit();
 		   });
@@ -46,7 +49,7 @@
 						if(data=='1'){
 							select.parent().remove();
 							select.remove();
-							var result = '<input type="file" name="multipartFile" class="form-control formEmptyCheck">';
+							var result = '<input type="file" name="multipartFile" id="add" class="form-control formEmptyCheck">';
 							$("#files").append(result);
 						}else {
 							alert("File Delete Fail");
