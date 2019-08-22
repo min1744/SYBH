@@ -32,6 +32,7 @@
 </style>
 <script type="text/javascript" src="../resources/js/summernote.js"></script>
 <script type="text/javascript" src="../resources/js/board/boardWrite.js"></script>
+
 </head>
 <body id="page-top">
 	<div id="wrapper">
