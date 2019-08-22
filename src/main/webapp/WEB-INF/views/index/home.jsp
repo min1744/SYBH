@@ -330,10 +330,17 @@ $(function() {
 		<div class="news_box">
 
 				<c:forEach items="${ilist}" var="newsVO">
-					<span class="news_contents">
-					<a href="./news/${newsVO.menu}Select?num=${newsVO.num}"><img src="./resources/file/${newsVO.newsImagesVO.oname}"></a>
-						
+					<span class="news_contents"> <img
+						src="./resources/file/${newsVO.newsImagesVO.oname}">
+						<%-- <p class="category">
+							<c:choose>
+								<c:when test="${newsVO.menu eq 'disease'}">질병</c:when>
+								<c:when test="${nesVO.menu eq 'nutrition'}">영양</c:when>
+								<c:otherwise>운동</c:otherwise>
+							</c:choose>
+						</p> --%>
 						<p>
+							
 							<span class="category">
 							<c:choose>
 								<c:when test="${newsVO.menu eq 'disease'}">질병</c:when>

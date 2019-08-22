@@ -60,13 +60,13 @@ public class ApiClient {
 			/** args[0] => accessKey, args[1] => secretKey, args[2] => IP, **/
 			System.out.println(args[0] + args[1] + args[2]);
 			final ApiClient apiClient = new ApiClient(args[0], args[1]);
-			apiClient.ApiClientRun(args[2]);
+			apiClient.run(args[2]);
 		} catch (final Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	public String ApiClientRun(final String ip) throws Exception {
+	public String run(final String ip) throws Exception {
 		final String requestMethod = "GET";
 		final String hostName = "https://geolocation.apigw.ntruss.com";
 		final String requestUrl= "/geolocation/v2/geoLocation";

@@ -57,7 +57,7 @@ public class MemberService {
 				final String accessKey = "DKXx0tuvpQ1rsg0r8YJq";
 			    final String secretKey = "2KfZA0P8lots5bvuoy5icbnAPKMCJmcNwVMe1IUF";
 			    ApiClient apiClient = new ApiClient(accessKey, secretKey);
-			    String msg = apiClient.ApiClientRun(ip);
+			    String msg = apiClient.run(ip);
 			    JSONParser jsonParser = new JSONParser();
 				JSONObject js = (JSONObject)jsonParser.parse(msg.toString());
 				try {

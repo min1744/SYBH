@@ -50,17 +50,11 @@ public class PharmacyService {
 		
 		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>();
 		HashMap<String, String> map = null;
-		//Primary Key
         NodeList rnumList = document.getElementsByTagName("rnum");
-        //주소
         NodeList dutyAddrList = document.getElementsByTagName("dutyAddr");
-        //기관명
         NodeList dutyNameList = document.getElementsByTagName("dutyName");
-        //대표전화
         NodeList dutyTelList = document.getElementsByTagName("dutyTel1");
-        //위도
         NodeList wgs84LatList = document.getElementsByTagName("wgs84Lat");
-        //경도
         NodeList wgs84LonList = document.getElementsByTagName("wgs84Lon");
         //System.out.println(dutyAddrList.getLength());
         //System.out.println(dutyNameList.getLength());
