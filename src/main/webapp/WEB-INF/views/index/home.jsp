@@ -121,8 +121,7 @@ $(function() {
 				<li><a href="./news/newsAll">건강뉴스</a></li>
 				<li><a href="./notice/noticeList">병원안내</a></li>
 				<li><a href="./qna/complaint">고객의 소리</a></li>
-				<li><a href="./community/communityList">커뮤니티</a></li>
-				<li id="last_menu"><a href="./pharmacy/pharmacyInfo">약국</a></li>			
+				<li id="last_menu"><a href="./community/communityList">커뮤니티</a></li>
 			</ul>
 		</div>
 		<!-- login / join -->
@@ -162,15 +161,15 @@ $(function() {
 		<c:when test="${not empty memberVO}">
 			<c:choose>
 				<c:when test="${memberVO.grade eq '2'}">
-					<div id="sub_nav_box" style="padding-left: 688px;">
+					<div id="sub_nav_box" style="padding-left: 808px;">
 				</c:when>
 				<c:otherwise>
-				<div id="sub_nav_box" style="padding-left: 702px;">
+				<div id="sub_nav_box" style="padding-left: 820px;">
 				</c:otherwise>
 			</c:choose>
 		</c:when>
 		<c:otherwise>
-			<div id="sub_nav_box" style="padding-left: 726px;">
+			<div id="sub_nav_box" style="padding-left: 846px;">
 		</c:otherwise>
 	</c:choose>
 		<ul id="ul_1">
