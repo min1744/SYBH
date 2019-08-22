@@ -231,7 +231,7 @@ $(function() {
 		tocplusFrameColor='#153f91';
 		tocplusFloatingWindow=true;
 		var tocplusHost = (("https:" == document.location.protocol) ? "https://" : "http://");
-		document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr03.tocplus007.com/chatLoader.do?userId=hospital' type='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
+		document.write(unescape("%"+"3Cscript src='" + tocplusHost + "kr03.tocplus007.com/chatLoader.do?userId=hospital'ztype='text/javascript'"+"%"+"3E"+"%"+"3C/script"+"%"+"3E"));
 	</script>
 </div>
 <div id="contents">
