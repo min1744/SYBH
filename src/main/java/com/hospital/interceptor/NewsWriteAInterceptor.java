@@ -28,6 +28,7 @@ public class NewsWriteAInterceptor extends HandlerInterceptorAdapter{
 			try {
 				writer = memberVO.getId();
 				grade = Integer.toString(memberVO.getGrade());
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
