@@ -115,7 +115,7 @@
   	select * from
   	(select rownum R, Q.* from
   	(select * from qna where ref in
-  	(select ref from qna
+  	(select num from qna
   	where menu=#{menu} and 
   	<choose>
 		<when test="pager.kind == 2">
