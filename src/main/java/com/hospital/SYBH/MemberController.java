@@ -199,7 +199,7 @@ public class MemberController {
 		memberVO = (MemberVO)map.get("memberVO");
 		int loginCheck = (Integer)map.get("loginCheck");
 		if(memberVO != null) {
-			if(loginCheck == 2) {
+			if(loginCheck == 1) {
 				session.setAttribute("memberVO", memberVO);
 				session.setAttribute("variety", "member");
 				mv.setViewName("redirect:../");

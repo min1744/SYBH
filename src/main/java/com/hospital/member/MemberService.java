@@ -182,8 +182,6 @@ public class MemberService {
 				throw new Exception();
 			}
 			String key = new TempKey().getKey(50, false); // 인증키 생성
-			System.out.println("key : "+key);
-			System.out.println("email : "+memberVO.getEmail());
 			memberVO.setAuthCode(key);
 			memberVO.setEmail(memberVO.getEmail());
 			result = memberDAO.createAuthKey(memberVO); // 인증키 DB저장
@@ -323,8 +321,6 @@ public class MemberService {
 		}
 		
 		String key = new TempKey().getKey(50, false); // 인증키 생성
-		System.out.println("key : "+key);
-		System.out.println("email : "+memberVO.getEmail());
 		memberVO.setAuthCode(key);
 		memberVO.setEmail(memberVO.getEmail());
 		result = memberDAO.createAuthKey(memberVO); // 인증키 DB저장
@@ -389,8 +385,6 @@ public class MemberService {
 		con = (HttpURLConnection)url.openConnection();
 		con.setRequestMethod("GET");
 		con.addRequestProperty("Authorization", header);
-		System.out.println(con.getResponseCode());
-		System.out.println(kakaoMemberVO.getAccess_token());
 	}
 
 	//로그아웃(token 해제)
