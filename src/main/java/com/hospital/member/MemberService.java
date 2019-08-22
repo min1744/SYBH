@@ -41,24 +41,27 @@ public class MemberService {
 	//일반회원 login
 	public HashMap<String, Object> login(MemberVO memberVO) throws Exception{
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		int loginCheck = memberDAO.loginCheck(memberVO.getId());
-		if(loginCheck > 0) {
+		int loginCheck = 0;
+		int result = 0;
+		if(memberVO != null) {
 			memberVO = memberDAO.login(memberVO);
 			if(memberVO != null) {
-				int result = memberDAO.setLoginStatus(memberVO.getId());
-				if(result < 1) {
-					throw new Exception();
+				loginCheck = memberDAO.loginCheck(memberVO.getId());
+				if(loginCheck == 1) {
+					result = memberDAO.setLoginStatus(memberVO.getId());
+					if(result < 1) {
+						throw new Exception();
+					}
 				}
 				AccessVO accessVO = new AccessVO();
 				accessVO.setId(memberVO.getId());
 				String ip = InetAddress.getLocalHost().getHostAddress();
 				accessVO.setIp(ip);
-				
 				final String accessKey = "DKXx0tuvpQ1rsg0r8YJq";
-			    final String secretKey = "2KfZA0P8lots5bvuoy5icbnAPKMCJmcNwVMe1IUF";
-			    ApiClient apiClient = new ApiClient(accessKey, secretKey);
-			    String msg = apiClient.ApiClientRun(ip);
-			    JSONParser jsonParser = new JSONParser();
+				final String secretKey = "2KfZA0P8lots5bvuoy5icbnAPKMCJmcNwVMe1IUF";
+				ApiClient apiClient = new ApiClient(accessKey, secretKey);
+				String msg = apiClient.ApiClientRun(ip);
+				JSONParser jsonParser = new JSONParser();
 				JSONObject js = (JSONObject)jsonParser.parse(msg.toString());
 				try {
 					if(((Long)js.get("returnCode")) == 0) {
@@ -85,11 +88,9 @@ public class MemberService {
 					throw new Exception();
 				}
 			}
-			map.put("memberVO", memberVO);
-			map.put("loginCheck", loginCheck);
-		} else {
-			throw new Exception();
 		}
+		map.put("memberVO", memberVO);
+		map.put("loginCheck", loginCheck);
 		
 		return map;
 	}
