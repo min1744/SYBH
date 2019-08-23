@@ -71,7 +71,6 @@ public class CommentsController {
 	@ResponseBody
 	public int commuSetDelete(int ref) throws Exception {
 	int result = communityCommentsService.setDelete(ref);
-	System.out.println(result);
 	return result;
 	}
 	
@@ -129,7 +128,6 @@ public class CommentsController {
 				
 		ModelAndView mv = new ModelAndView();
 		List<NewsCommentsVO> list = newsCommentsService.getList(num, pageMaker);
-		System.out.println(list);
 		int totalCount = newsCommentsService.getTotalCount(num);
 		mv.addObject("list", list);
 		mv.addObject("totalCount", totalCount);
@@ -152,9 +150,7 @@ public class CommentsController {
 	@RequestMapping(value = "newsCommentsDelete", method = RequestMethod.POST)
 	@ResponseBody
 	public int setDelete(int ref) throws Exception {
-		System.out.println(ref);
 		int result = newsCommentsService.setDelete(ref);
-		System.out.println(result);
 		return result;
 	}
 			

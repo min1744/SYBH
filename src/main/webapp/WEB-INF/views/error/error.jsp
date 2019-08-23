@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Insert title here</title>
 <link href="../resources/css/error.css" rel="stylesheet">
+<!-- 파비콘  -->
+<link rel="shortcut icon" href="./resources/images/favicon1.ico"/>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> 
 </head>

@@ -12,6 +12,8 @@
   <meta name="author" content="">
   <!-- Custom fonts for this template -->
   <link href="../resources/css/all.min.css" rel="stylesheet" type="text/css">
+  <!-- 파비콘  -->
+<link rel="shortcut icon" href="../resources/images/favicon1.ico"/>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="../resources/css/sb-admin-2.min.css" rel="stylesheet">

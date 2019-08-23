@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <title>쌍용백병원 - 병원 진료 예약 서비스</title>
+<!-- 파비콘  -->
+<link rel="shortcut icon" href="../resources/images/favicon1.ico"/>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="../resources/css/header.css"/>
 <link rel="stylesheet" type="text/css" href="../resources/css/footer.css"/>

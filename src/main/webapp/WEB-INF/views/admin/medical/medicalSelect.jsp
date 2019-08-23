@@ -23,6 +23,8 @@
 <!-- Custom styles for this page -->
 <link href="../resources/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet">
+	<!-- 파비콘  -->
+<link rel="shortcut icon" href="../resources/images/favicon1.ico"/>
 	<script type="text/javascript">
 	$(function(){
 		$('#delete_btn').click(function(){
