@@ -51,6 +51,14 @@ $(function() {
 		alert('Main내용을 입력해주세요.');
 		return false;
 	}
+	var check = $(".fdel").attr('title');
+	if(!check){
+	str = f.add.value;
+		if(!str){
+			alert('썸네일 이미지를 넣어주세요');
+			return false;
+		}
+	}
 	$("#frm").submit();
 	});
 	
@@ -72,7 +80,7 @@ $(function() {
 					if(data=='1'){
 						select.parent().remove();
 						select.remove();
-						var result = '<input type="file" name="multipartFile" class="form-control">';
+						var result = '<input type="file" name="multipartFile" class="form-control" id="add">';
 						$("#files").append(result);
 					}else {
 						alert("File Delete Fail");

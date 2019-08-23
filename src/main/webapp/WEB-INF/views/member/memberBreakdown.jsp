@@ -25,7 +25,7 @@
 		
 			<ul>
 				<li>조회 내역</li>
-				<li><a href="./memberUpdate">내정보 수정</a></li>
+				<li><a href="./memberReLogin">내정보 수정</a></li>
 				<li><a href="./memberNomal">진료예약 조회</a></li>
 				<li><a href="./memberMedical">건강검진 조회</a></li>
 				<li><a href="./memberDonation">후원내역 조회</a></li>
@@ -43,7 +43,7 @@
 		
 			<ul>
 				<li>조회 내역</li>
-				<li><a href="./memberUpdate">내정보 수정</a></li>
+				<li><a href="./memberReLogin">내정보 수정</a></li>
 				<li><a href="./memberNomal" style="color:#6BB5DB;">진료예약 조회</a></li>
 				<li><a href="./memberMedical">건강검진 조회</a></li>
 				<li><a href="./memberDonation">후원내역 조회</a></li>
@@ -60,7 +60,7 @@
 		<div id="board_nav">
 			<ul>
 				<li>조회 내역</li>
-				<li><a href="./memberUpdate">내정보 수정</a></li>
+				<li><a href="./memberReLogin">내정보 수정</a></li>
 				<li><a href="./memberNomal">진료예약 조회</a></li>
 				<li><a href="./memberMedical" style="color:#6BB5DB;">건강검진 조회</a></li>
 				<li><a href="./memberDonation">후원내역 조회</a></li>
@@ -77,7 +77,7 @@
 		<div id="board_nav">
 			<ul>
 				<li>조회 내역</li>
-				<li><a href="./memberUpdate">내정보 수정</a></li>
+				<li><a href="./memberReLogin">내정보 수정</a></li>
 				<li><a href="./memberNomal">진료예약 조회</a></li>
 				<li><a href="./memberMedical">건강검진 조회</a></li>
 				<li><a href="./memberDonation" style="color:#6BB5DB;">후원내역 조회</a></li>
