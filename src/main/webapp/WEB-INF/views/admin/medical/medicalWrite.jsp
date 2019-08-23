@@ -54,6 +54,11 @@
 			f.major_act.focus();
 			return false;
 		}
+		str = f.add.value;
+		if(!str){
+			alert('이미지를 넣으세요');
+			return false;
+		}
 		$("#frm").submit();
 		});
 		
@@ -115,7 +120,7 @@
 										name="major_act"></textarea>
 								</div>
 								<div class="form-group" id="box">
-								<input type="file" name="multipartFile" class="form-control f1">
+								<input type="file" name="multipartFile" class="form-control f1" id="add">
 								</div>
 
 								<div id="write_btn">
