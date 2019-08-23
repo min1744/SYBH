@@ -10,7 +10,6 @@
 
 	$(function() {
 		
-		// Add active class to the current button (highlight it)
 		var header = document.getElementById("floor_info");
 		var btns = header.getElementsByClassName("btn");
 		for (var i = 0; i < btns.length; i++) {
