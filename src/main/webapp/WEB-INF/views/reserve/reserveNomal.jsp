@@ -381,31 +381,10 @@
 				</div>   
 				
 	        </div>
-	        
-				<!-- 진료예약 버튼 -->
-				<div id="btn_box">
-				<button class="close reserve_btn" id="reserve_btn">진료예약</button>
-				</div>       
 	      </div>
     	</div>
  	 </div>
  	 </c:forEach>
- 	 <script type="text/javascript">
- 	 	$(function(){
- 	 		$('.reserve_btn').click(function(){
- 	 			var index = $(this).attr('data-num');
-				//의사 이름 불러오기
-				name = $("#name"+index).attr('title');
-				
-				$('#doc').html(name);
-				//진료과 불러오기
-				med_office = $('#med'+index).attr('title');
-				
-				$('#off').html(med_office);
-				$('#reserve_ok').show();
- 	 		});
- 	 	});
- 	 </script>
  	 <!-- ---------- -->
 
 <!-- footer 추가 -->
