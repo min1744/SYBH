@@ -123,7 +123,7 @@
 					<input type="hidden" name="num" value="${vo.ref}" id="qref">
 					<div class="title">${vo.title}</div>
 						<div id="qsub">
-							<ul style="width: 30%; float: left;">
+							<ul style="float: left;">
 								<li>작성자</li>
 								<li>${vo.writer}</li>
 								<li>│</li>
