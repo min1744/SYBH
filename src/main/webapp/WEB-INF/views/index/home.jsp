@@ -13,7 +13,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9963d068218228f27bdac8c9618c4a07"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9963d068218228f27bdac8c9618c4a07&libraries=clusterer"></script>
 <!-- 파비콘  -->
-<link rel="shortcut icon" href="./resources/images/favicon.ico"/>
+<link rel="shortcut icon" href="./resources/images/favicon1.ico"/>
 </head>
 <script type="text/javascript">
 

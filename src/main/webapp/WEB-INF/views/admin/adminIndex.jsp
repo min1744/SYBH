@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>쌍용백병원::관리자페이지::</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 파비콘  -->
+<link rel="shortcut icon" href="../resources/images/favicon1.ico"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">

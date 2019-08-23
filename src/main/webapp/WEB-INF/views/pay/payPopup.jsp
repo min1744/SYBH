@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>쌍용백병원::후원하기</title>
 <link href="../resources/css/donation.css" rel="stylesheet">
+<!-- 파비콘  -->
+<link rel="shortcut icon" href="../resources/images/favicon1.ico"/>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script> 
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean" rel="stylesheet">
 <!--재혁 후원  -->
