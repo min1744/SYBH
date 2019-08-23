@@ -8,13 +8,11 @@
 <link href="../resources/css/reserveNomal.css" rel="stylesheet">
 <c:import url="../temp/boot.jsp" />
 <link rel="stylesheet" href="../resources/css/bootstrap-material-datetimepicker.css" />
-<link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+<!--<link rel="stylesheet" href="../resources/css/bootstrap.min.css" />-->
 <!--<link rel="stylesheet" href="../resources/css/material.min.css" /> -->
 
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+<!-- <link href='http://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'> -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript" src="../resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../resources/js/material.min.js"></script>
 <script type="text/javascript" src="../resources/js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="../resources/js/bootstrap-material-datetimepicker.js"></script>
@@ -285,7 +283,7 @@
 					<p class="user_name">환자명 : </p><span>${memberVO.name}</span><br>
 					<p id="user_office">병원/진료과 : </p><span id="off"></span><br>
 					<p id="user_doctor">의료진 : </p><span id="doc"></span><br>
-					<p id="user_date">진료날짜 : </p><span id="day"><input type="text" id="date" class="floating-label" placeholder="날짜를 선택하세요" style="border: inherit; background: inherit; width: 130px;"></span><br>
+					<p id="user_date">진료날짜 : </p><span id="day"><input type="text" id="date" class="floating-label" placeholder="날짜를 선택하세요" style="border: inherit; background: inherit; width: 130px; color: inherit; font-size: inherit; font-weight: inherit"></span><br>
 					<p>진료시간 : </p><span id="ti"></span><br>
 					<input type="hidden" id="docnum">						
 				</div>
@@ -333,63 +331,7 @@
 <!-- 모달창 -->
 	<!-- 나중에 foreach로 id 뒤 숫자 varstatus 값으로 구분 -->
 	<!--한명 선택했을 때 모달창  -->
-	<c:choose>
-		<c:when test="${medic ne null }">
-		 <div class="modal fade" id="myModal_${medic.num}" role="dialog">
-	    <div class="modal-dialog">
-	    
-	      <!-- Modal content-->
-	      <div class="modal-content">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">의료진 소개</h4>
-	        </div>
-	        <div class="modal-body">
-	        	<div class="modal_title_box">
-		        	<p class="modal_med_office_title" id="med" id="med" title="${medic.med_office }">${medic.med_office}</p>
-		        	<h2 class="modal_med_office" id="name" title="${medic.name}" data-toggle="${medic.num }">${medic.name } 교수</h2>
-		        </div>
-	        		<hr>
-				
-				<div class="modal_profile">
-					<img alt="" src="../resources/file/${medic.doctorImagesVO.fname}">
-				</div>
-				
-				<div class="modal_info">
-					<h3 class="modal_pro_field_title">전문분야</h3>
-					<p class="modal_pro_field">${medic.pro_field }</p>
-				</div>	
-				
-				
-				<div class="modal_career">
-					
-					<div class="career">
-						<h3>경력</h3>
-						<ul>
-							<c:forTokens items="${medic.career }" delims="," var="item">
-								<li>· ${item }</li>
-							</c:forTokens>
-						</ul>
-					</div>
-					
-					<div class="major_act">
-						<h3>주요활동</h3>
-						<ul>
-							<c:forTokens items="${medic.major_act}" delims="," var="item2">
-								<li>· ${item2}</li>
-							</c:forTokens>
-						</ul>
-					</div>
-				
-				</div>          
-	          
-	          
-	        </div>
-	      </div>
-    	</div>
- 	 </div>
-		</c:when>
-	</c:choose>
+
 	<c:forEach items="${list}" var="list" varStatus="i">
 	  <div class="modal fade" id="myModal_${i.index+1}" role="dialog">
 	    <div class="modal-dialog">
@@ -442,7 +384,7 @@
 	        
 				<!-- 진료예약 버튼 -->
 				<div id="btn_box">
-				<a href="../reserve/reserveNomal?name=${list.name}" id="reserve_btn">진료예약</a>
+				<button class="close reserve_btn" id="reserve_btn">진료예약</button>
 				</div>       
 	      </div>
     	</div>
