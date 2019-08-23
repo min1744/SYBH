@@ -24,7 +24,7 @@
 			} else if (pw == '') {
 				alert('비밀번호를 입력해주세요.')
 			} else {
-				$.ajax({
+				/*$.ajax({
 					url : './VerifyRecaptcha',
 					type : 'POST',
 					data : {
@@ -32,7 +32,7 @@
 					},
 					success : function(data) {
 						data = data.trim();
-						if(data == '1'){
+						if(data == '1'){*/
 							//차단된 아이디인지 확인
 							$.ajax({
 								url : './checkUnserviceability',
@@ -49,14 +49,14 @@
 									}
 								}
 							});
-						} else if(data == '2') {
+						} /*else if(data == '2') {
 							alert("자동 가입 방지 봇을 확인 한 뒤 진행 해 주세요.");
 						} else {
 							alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다. [Error bot Code : " + Number(data) + "]");
 						}
 					}
 				});
-			}
+			}*/
 		});
 		
 		//kakaoLogin
