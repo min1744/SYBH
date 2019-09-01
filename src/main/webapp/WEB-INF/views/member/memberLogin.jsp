@@ -14,7 +14,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <script src="https://www.google.com/recaptcha/api.js"></script>
-<script type="text/javascript" src="../resources/js/member/memberLogin.js"></script>
+<!-- <script type="text/javascript" src="../resources/js/member/memberLogin.js"></script> -->
 </head>
 <body>
 	<!-- header 추가 -->
@@ -40,7 +40,7 @@
 				</form>
 				<button id="login">로그인</button>
 				<img id="kakaoLogin" src="../resources/images/kakao_account_login_btn_medium_narrow.png">
-				<div class="g-recaptcha" data-sitekey="6LeDI7EUAAAAAGkmcXlqsEb9zLw7i7ShMS0eAI8B"></div>
+				<!-- <div class="g-recaptcha" data-sitekey="6LeDI7EUAAAAAGkmcXlqsEb9zLw7i7ShMS0eAI8B"></div> -->
 				<ul>
 					<li><a href="./memberIdFind">아이디</a></li>
 					<li>/</li>
