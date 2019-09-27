@@ -38,8 +38,8 @@ public class MemberDAOTest extends AbstractTest {
 	//@Test
 	public void login() throws Exception{
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId("min1744");
-		memberVO.setPw("bong1017$$");
+		memberVO.setId("abc123");
+		memberVO.setPw("abc123!@#");
 		memberVO = memberDAO.login(memberVO);
 		System.out.println(memberVO.getId());
 		System.out.println(memberVO.getPw());
