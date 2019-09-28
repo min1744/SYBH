@@ -10,7 +10,7 @@
 	</select>
 	
 	<!-- 월 별 회원가입 수-->
-	<select id="getAnnualMemberCount" parameterType="String" resultType="Integer">
+	<select id="getAnnualMemberCount" parameterType="Integer" resultType="Integer">
 		SELECT COUNT(*) FROM MEMBER WHERE GRADE != 2 AND SUBSTR(REG_DATE, 1, 2) = #{year}
 	</select>
 	
@@ -30,17 +30,17 @@
 	</select>
 	
 	<!-- 가입 날짜 모두 select -->
-	<select id="getRegDate" parameterType="String" resultType="Date">
+	<select id="getRegDate" parameterType="Integer" resultType="LocalDate">
 		SELECT REG_DATE FROM MEMBER WHERE GRADE != 2 AND SUBSTR(REG_DATE, 1, 2) = #{year}
 	</select>
 	
 	<!-- 결제 날짜 모두 select -->
-	<select id="getPayDate" parameterType="String" resultType="PayVO">
+	<select id="getPayDate" parameterType="Integer" resultType="PayVO">
 		SELECT PAY_DATE, PRICE FROM PAY WHERE CATEGORY != 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
 	</select>
 	
 	<!-- 방문객들의 방문 날짜 모두 select -->
-	<select id="getAccessDate" parameterType="String" resultType="Date">
+	<select id="getAccessDate" parameterType="Integer" resultType="LocalDate">
 		SELECT A.REG_DATE FROM ACCESSINFO A INNER JOIN MEMBER M USING(ID) WHERE M.GRADE != 2 AND SUBSTR(A.REG_DATE, 1, 2) = #{year}
 	</select>
 	
@@ -107,12 +107,12 @@
 	</delete>
 	
 	<!-- 후원을 제외한 총 earnings 구하기 -->
-	<select id="getEarnings" parameterType="String" resultType="Integer">
+	<select id="getEarnings" parameterType="Integer" resultType="Integer">
 		SELECT PRICE FROM PAY WHERE CATEGORY != 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
 	</select>
 	
 	<!-- 총 후원 금액 구하기 -->
-	<select id="getDonations" parameterType="String" resultType="Integer">
+	<select id="getDonations" parameterType="Integer" resultType="Integer">
 		SELECT PRICE FROM PAY WHERE CATEGORY = 1 AND SUBSTR(PAY_DATE, 1, 2) = #{year}
 	</select>
 	

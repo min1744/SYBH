@@ -15,19 +15,25 @@ public class MemberDAOTest extends AbstractTest {
 
 	@Inject
 	private MemberDAO memberDAO;
+	@Inject
+	private MemberService memberService;
 	
-	//@Test
+	@Test
 	public void setWrite() throws Exception {
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId("admin");
-		memberVO.setPw("admin");
-		memberVO.setName("admin");
-		//memberVO.setRes_reg_num("941231-1234567");
-		//memberVO.setPhone("010-1234-5678");
-		//memberVO.setEmail("admin123@gmail.com");
+		memberVO.setId("admin123");
+		memberVO.setPw("bong1017$$");
+		memberVO.setName("관리자");
+		memberVO.setRes_reg_num1("941130");
+		memberVO.setRes_reg_num2("1201317");
+		memberVO.setPhone1("010");
+		memberVO.setPhone2("5410");
+		memberVO.setPhone3("1744");
+		memberVO.setEmail1("alsrms1744");
+		memberVO.setEmail2("gmail.com");
 		memberVO.setGender(1);
 		memberVO.setAge(26);
-		assertEquals(1, memberDAO.setWrite(memberVO));
+		assertEquals(1, memberService.setWrite(memberVO));
 	}
 	
 	//@Test
@@ -45,10 +51,8 @@ public class MemberDAOTest extends AbstractTest {
 		System.out.println(memberVO.getPw());
 	}
 	
-	@Test
+	//@Test
 	public void test() throws Exception{
-		List<Integer> test = new ArrayList<Integer>();
-		test.add(1);
-		assertEquals(1, (int)test.get(0));
+		
 	}
 }

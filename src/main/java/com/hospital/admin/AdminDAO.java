@@ -1,5 +1,6 @@
 package com.hospital.admin;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class AdminDAO {
 	}
 	
 	//관리자를 제외한 모든 회원들의 수
-	public int getAnnualMemberCount(String year) throws Exception{
+	public int getAnnualMemberCount(int year) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getAnnualMemberCount", year);
 	}
 	
@@ -46,17 +47,17 @@ public class AdminDAO {
 	}
 	
 	//가입 날짜 모두 select하기
-	public List<Date> getRegDate(String year) throws Exception{
+	public List<LocalDate> getRegDate(int year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getRegDate", year);
 	}
 	
 	//결제 날짜 모두 select하기
-	public List<PayVO> getPayDate(String year) throws Exception{
+	public List<PayVO> getPayDate(int year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getPayDate", year);
 	}
 	
 	//방문객들의 방문 날짜 모두 select하기
-	public List<Date> getAccessDate(String year) throws Exception{
+	public List<LocalDate> getAccessDate(int year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getAccessDate", year);
 	}
 	
@@ -96,12 +97,12 @@ public class AdminDAO {
 	}
 	
 	//후원을 제외한 earnings 구하기
-	public List<Integer> getEarnings(String year) throws Exception{
+	public List<Integer> getEarnings(int year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getEarnings", year);
 	}
 	
 	// 총 후원 금액 구하기 구하기
-	public List<Integer> getDonations(String year) throws Exception{
+	public List<Integer> getDonations(int year) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"getDonations", year);
 	}
 	
@@ -111,7 +112,7 @@ public class AdminDAO {
 	}
 	
 	//AccessInfo TotalCount
-	public int getAllAccessCounts(Map<String, String> map) throws Exception{
+	public int getAllAccessCounts(Map<String, Integer> map) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getAllAccessCounts", map);
 	}
 	

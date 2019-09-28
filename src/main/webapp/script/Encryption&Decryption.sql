@@ -19,7 +19,7 @@ IS
         FUNCTION DEC_AES(encrypted_raw IN VARCHAR2)
                 RETURN VARCHAR2;
 END CRYPTO_AES256;
-
+/
 /*Body 패키지를 선언 해 준다.*/
 create or replace PACKAGE BODY CRYPTO_AES256
 IS
@@ -66,7 +66,7 @@ IS
                 RETURN output_string;
         END DEC_AES;
 END CRYPTO_AES256;
-
+/
 commit;
 
 /*사용 방법*/

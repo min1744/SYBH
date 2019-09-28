@@ -10,6 +10,7 @@
 		<typeAlias type="java.util.List" alias="List" />
 		<typeAlias type="java.util.Date" alias="Date"/>
 		<typeAlias type="java.util.Map" alias="Map"/>
+		<typeAlias type="java.time.LocalDate" alias="LocalDate"/>
 		<typeAlias type="com.hospital.board.BoardVO" alias="BoardVO" />
 		<typeAlias type="com.hospital.board.FileBoardVO" alias="FileBoardVO" />
 		<typeAlias type="com.hospital.file.FileVO" alias="FileVO" />

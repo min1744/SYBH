@@ -1,13 +1,11 @@
 package com.hospital.admin;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -54,12 +52,10 @@ public class AdminService {
 	
 	//Data of adminIndex
 	public HashMap<String, Object> getData() throws Exception{
-		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
-		Date current = new Date();
-		String today = format.format(current);
-		String todayYear = today.substring(0, today.indexOf("년"));
-		String todayMonth = today.substring(today.indexOf("년")+2, today.indexOf("월"));
-		String todayDate = today.substring(today.indexOf("월")+2, today.indexOf("일"));
+		LocalDate currentDate = LocalDate.now();
+		int todayYear = currentDate.getYear()%100;
+		int todayMonth = currentDate.getMonthValue();
+		int todayDate = currentDate.getDayOfMonth();
 		DecimalFormat formatter = new DecimalFormat("###,###,###,###,###");
 		
 		//total membership, Doctor, Admin count
@@ -83,7 +79,7 @@ public class AdminService {
 		map.put("earningsNum", extendedPrice);
 		
 		//today access count
-		HashMap<String, String> map2 = new HashMap<String, String>();
+		HashMap<String, Integer> map2 = new HashMap<String, Integer>();
 		map2.put("year", todayYear);
 		map2.put("month", todayMonth);
 		map2.put("date", todayDate);
@@ -99,10 +95,9 @@ public class AdminService {
 		
 		//Annual earnings chart data
 		int [] monthMembershipData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		List<Date> reg_dateList = adminDAO.getRegDate(todayYear);
-		for(Date d:reg_dateList) {
-			String reg_date = format.format(d);
-			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
+		List<LocalDate> reg_dateList = adminDAO.getRegDate(todayYear);
+		for(LocalDate d:reg_dateList) {
+			int regMonth = d.getMonthValue();
 			for(int i = 0; i < 12; i++) {
 				if(regMonth == i+1) {
 					monthMembershipData[i] += 1;
@@ -215,18 +210,15 @@ public class AdminService {
 	
 	//getMemberData
 	public List<Integer> getMemberData() throws Exception{
-		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
-		Date current = new Date();
-		String today = format.format(current);
-		String todayYear = today.substring(0, today.indexOf("년"));
+		LocalDate currentDate = LocalDate.now();
+		int todayYear = currentDate.getYear()%100;
 		List<Integer> monthMembershipData = new ArrayList<Integer>();
-		List<Date> reg_dateList = adminDAO.getRegDate(todayYear);
+		List<LocalDate> reg_dateList = adminDAO.getRegDate(todayYear);
 		for(int i = 0; i < 12; i++) {
 			monthMembershipData.add(0);
 		}
-		for(int i = 0; i < reg_dateList.size(); i++) {
-			String reg_date = format.format(reg_dateList.get(i));
-			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
+		for(LocalDate d:reg_dateList) {
+			int regMonth = d.getMonthValue();
 			for(int j = 0; j < 12; j++) {
 				if(regMonth == j + 1) {
 					monthMembershipData.set(j, monthMembershipData.get(j) + 1);
@@ -240,21 +232,18 @@ public class AdminService {
 	
 	//getEarningsData
 	public List<Long> getEarningsData() throws Exception{
-		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
-		Date current = new Date();
-		String today = format.format(current);
-		String todayYear = today.substring(0, today.indexOf("년"));
+		LocalDate currentDate = LocalDate.now();
+		int todayYear = currentDate.getYear()%100;
 		List<Long> monthEarningsData = new ArrayList<Long>();
 		List<PayVO> list = adminDAO.getPayDate(todayYear);
 		for(int i = 0; i < 12; i++) {
 			monthEarningsData.add((long)0);
 		}
-		for(int i = 0; i < list.size(); i++) {
-			String reg_date = format.format(list.get(i).getPay_date());
-			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
+		for(PayVO payVO:list) {
+			int regMonth = payVO.getPay_date().getMonth();
 			for(int j = 0; j < 12; j++) {
 				if(regMonth == j + 1) {
-					monthEarningsData.set(j, monthEarningsData.get(j) + list.get(i).getPrice());
+					monthEarningsData.set(j, monthEarningsData.get(j) + payVO.getPrice());
 					break;
 				}
 			}
@@ -265,18 +254,15 @@ public class AdminService {
 	
 	//getVisitorsData
 	public List<Integer> getVisitorsData() throws Exception{
-		SimpleDateFormat format = new SimpleDateFormat("yy년 MM월 dd일");
-		Date current = new Date();
-		String today = format.format(current);
-		String todayYear = today.substring(0, today.indexOf("년"));
+		LocalDate currentDate = LocalDate.now();
+		int todayYear = currentDate.getYear()%100;
 		List<Integer> monthVisitorsData = new ArrayList<Integer>();
-		List<Date> reg_dateList = adminDAO.getAccessDate(todayYear);
+		List<LocalDate> reg_dateList = adminDAO.getAccessDate(todayYear);
 		for(int i = 0; i < 12; i++) {
 			monthVisitorsData.add(0);
 		}
-		for(int i = 0; i < reg_dateList.size(); i++) {
-			String reg_date = format.format(reg_dateList.get(i));
-			int regMonth = Integer.parseInt(reg_date.substring(reg_date.indexOf("년")+2, today.indexOf("월")));
+		for(LocalDate d:reg_dateList) {
+			int regMonth = d.getMonthValue();
 			for(int j = 0; j < 12; j++) {
 				if(regMonth == j + 1) {
 					monthVisitorsData.set(j, monthVisitorsData.get(j) + 1);
