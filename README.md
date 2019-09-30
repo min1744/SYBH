@@ -1,5 +1,5 @@
 # SYBH
-![index_page_img](./image/index_page_img.JPG)
+![index_page_img](https://user-images.githubusercontent.com/48780833/65881701-c175c600-e3ce-11e9-9dd5-cd16410c0da2.JPG)
 ### master에 merge할 때 다른 팀원들과 커뮤니케이션 꼭 하기!
 
 ### merge 방법
