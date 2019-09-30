@@ -4,24 +4,26 @@
 ---
 
 ### Front-End-Skill
+#### frontend technologies used in this project:
 - ##### JavaScript, HTML5, CSS3
 - ##### jQuery, Ajax, Bootstrap
 - ##### Chart.js, Summernote
-- ##### SweetAlert, FontAwesome
+
 
 ### Back-End-Skill
-- ##### Java(JDK 1.8)
+#### backend technologies used in this project:
+- ##### Java
 - ##### Spring, Apache Tomcat, REST API
-- ##### Oracle DB 11g, MyBatis, OJDBC6
+- ##### Oracle DB 11g, MyBatis, JDBC
 - ##### JUnit Test Case
 - ##### JSON-simple, Jackson
 - ##### Javax(Mail)
-- ##### Open API
-- ##### open api(REST) used in this project:
 - ##### validation, hibernate-validator
 - ##### commons-fileupload
 
-### API
+
+### Open API
+#### open api(REST) used in this project:
 - ##### NAVER CLOUD PLATFORM Geolocation
 - ##### KAKAO 사용자 관리, KAKAO Pay, KAKAO Map
 - ##### Google reCAPTCHA v2
