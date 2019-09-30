@@ -4,15 +4,15 @@
 ---
 
 ### Front-End-Skill
-##### JavaScript, HTML5, CSS3
-##### jQuery, Ajax, Bootstrap
-##### Chart.js, Summernote
+- ##### JavaScript, HTML5, CSS3
+* ##### jQuery, Ajax, Bootstrap
++ ##### Chart.js, Summernote
 ##### SweetAlert, FontAwesome
 
 ### Back-End-Skill
-##### Java(JDK 1.8)
-##### Spring, Apache Tomcat, REST API
-##### Oracle DB 11g, MyBatis, OJDBC6
+##### - Java(JDK 1.8)
+##### * Spring, Apache Tomcat, REST API
+##### + Oracle DB 11g, MyBatis, OJDBC6
 ##### JUnit Test Case
 ##### JSON-simple, Jackson
 ##### Javax(Mail)
