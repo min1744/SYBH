@@ -3,34 +3,34 @@
 ---
 ### Front-End-Skill
 #### frontend technologies used in this project:
-- ##### JavaScript, HTML5, CSS3
-- ##### jQuery, Ajax, JSP
-- ##### Chart.js, Summernote, Bootstrap
-
+- ###### JavaScript, HTML5, CSS3
+- ###### jQuery, Ajax, JSP
+- ###### Chart.js, Summernote, Bootstrap
+---
 ### Back-End-Skill
 #### backend technologies used in this project:
-- ##### Java
-- ##### Spring, Apache Tomcat, REST API
-- ##### Oracle DB 11g, MyBatis, JDBC
-- ##### JUnit Test Case
-- ##### JSON-simple, Jackson
-- ##### Javax(Mail)
-- ##### validation, hibernate-validator
-- ##### commons-fileupload
-
+- ###### Java
+- ###### Spring, Apache Tomcat, REST API
+- ###### Oracle DB 11g, MyBatis, JDBC
+- ###### JUnit Test Case
+- ###### JSON-simple, Jackson
+- ###### Javax(Mail)
+- ###### validation, hibernate-validator
+- ###### commons-fileupload
+---
 ### Open API
 #### open api(REST) used in this project:
-- ##### NAVER CLOUD PLATFORM Geolocation
-- ##### KAKAO 사용자 관리, KAKAO Pay, KAKAO Map
-- ##### Google reCAPTCHA v2
-- ##### I'mport 결제
-
+- ###### NAVER CLOUD PLATFORM Geolocation
+- ###### KAKAO 사용자 관리, KAKAO Pay, KAKAO Map
+- ###### Google reCAPTCHA v2
+- ###### I'mport 결제
+---
 ### UI Design Tool
 #### Design technologies used in this project:
-- ##### AdobeXD, Photoshop cc 2019
-
+- ###### AdobeXD, Photoshop cc 2019
+---
 ### Program
 #### Program used in this project:
-- ##### SQL Developer, Spring Tool Suit(STS)
-- ##### GitHub & GitHub Desktop
-- ##### AQUERY TOOL
+- ###### SQL Developer, Spring Tool Suit(STS)
+- ###### GitHub & GitHub Desktop
+- ###### AQUERY TOOL
