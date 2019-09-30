@@ -1,5 +1,5 @@
 # SYBH
-![index_page_img](./image/index_page_img.jsp)
+![index_page_img](./image/index_page_img.JPG)
 ### master에 merge할 때 다른 팀원들과 커뮤니케이션 꼭 하기!
 
 ### merge 방법
