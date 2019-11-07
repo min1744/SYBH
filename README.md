@@ -21,7 +21,7 @@
 ### Open API
 #### open api(REST) used in this project:
 - ###### NAVER CLOUD PLATFORM Geolocation
-- ###### KAKAO 사용자 관리, KAKAO Pay, KAKAO Map
+- ###### KAKAO 사용자 관리, KAKAO Map
 - ###### Google reCAPTCHA v2
 - ###### I'mport 결제
 - ###### Tocplus
