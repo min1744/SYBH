@@ -18,7 +18,7 @@ public class MemberDAOTest extends AbstractTest {
 	@Inject
 	private MemberService memberService;
 	
-	@Test
+	//@Test
 	public void setWrite() throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId("admin123");

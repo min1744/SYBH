@@ -97,8 +97,8 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<!-- myBatis 시작 : dao와 연결하는 mapper 사용하기 위한 라이브러리 -->
-		<!-- mybatis -->
+		<!-- MyBatis 시작 : dao와 연결하는 mapper 사용하기 위한 라이브러리 -->
+		<!-- MyBatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
